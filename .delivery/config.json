@@ -13,6 +13,8 @@
     "smoke",
     "syntax"
   ],
-  "build_nodes": {},
+  "build_nodes": {
+    "default": ["platform:ubuntu AND platform_version:15.04"]
+  },
   "dependencies": []
 }
