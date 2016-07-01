@@ -3,8 +3,8 @@ pkg_version=3.5.2
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Python-2.0')
-pkg_description="Python is a programming language that lets you work quickly
-and integrate systems more effectively."
+pkg_description="Python is a programming language that lets you work quickly \
+  and integrate systems more effectively."
 pkg_dirname=Python-${pkg_version}
 pkg_source=https://www.python.org/ftp/python/${pkg_version}/${pkg_dirname}.tgz
 pkg_filename=${pkg_dirname}.tgz
@@ -37,11 +37,18 @@ do_prepare() {
 }
 
 do_build() {
-  export CPPFLAGS=$CFLAGS
-  export LD_LIBRARY_PATH=$(pkg_path_for gcc)/lib
-  ./configure --prefix=${pkg_prefix} \
+  CPPFLAGS=$CFLAGS
+  LD_LIBRARY_PATH=$(pkg_path_for gcc)/lib
+  export CPPFLAGS LD_LIBRARY_PATH
+  ./configure "--prefix=${pkg_prefix}" \
     --enable-shared
   make
+}
+
+do_install() {
+  do_default_install
+  # Upgrade to the latest pip
+  "$pkg_prefix/bin/pip3" install --upgrade pip
 }
 
 do_check() {
