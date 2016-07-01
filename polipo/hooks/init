@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+
+mkdir {{pkg.svc_path}}/cache/
+mkdir {{pkg.svc_path}}/www/

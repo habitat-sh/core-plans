@@ -1,0 +1,7 @@
+name 'build-cookbook'
+maintainer 'Chef Software, Inc.'
+maintainer_email 'reset@chef.io'
+license 'apache2'
+description 'Build cookbook for bldr-plans'
+long_description 'Build cookbook for bldr-plans'
+version '0.1.0'
