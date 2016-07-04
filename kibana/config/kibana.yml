@@ -1,0 +1,42 @@
+server.port: {{cfg.server.port}}
+server.host: {{cfg.server.host}}
+
+{{~#if cfg.server.basePath}}
+server.basePath: {{cfg.server.basePath}}
+{{~/if}}
+
+server.maxPayloadBytes: {{cfg.server.maxPayloadBytes}}
+elasticsearch.url: {{cfg.elasticsearch.url}}
+elasticsearch.preserveHost: {{cfg.elasticsearch.preserveHost}}
+kibana.index: {{cfg.kibana.index}}
+kibana.defaultAppId: {{cfg.kibana.defaultAppId}}
+
+{{~#if cfg.elasticsearch.password }}
+elasticsearch.username: {{cfg.elasticsearch.username}}
+elasticsearch.password: {{cfg.elasticsearch.password}}
+{{~/if}}
+
+{{~#if cfg.server.ssl.key}}
+server.ssl.cert: {{cfg.server.ssl.cert}}
+server.ssl.key: {{cfg.server.ssl.key}}
+{{~/if}}
+
+{{~#if cfg.elasticsearch.ssl.key}}
+elasticsearch.ssl.cert: {{cfg.elasticsearch.ssl.cert}}
+elasticsearch.ssl.key: {{cfg.elasticsearch.ssl.key}}
+{{~/if}}
+
+{{~#if cfg.elasticsearch.ssl.ca}}
+elasticsearch.ssl.ca: {{cfg.elasticsearch.ssl.ca}}
+{{~/if}}
+
+elasticsearch.ssl.verify: {{cfg.elasticsearch.ssl.verify}}
+elasticsearch.pingTimeout: {{cfg.elasticsearch.pingTimeout}}
+elasticsearch.requestTimeout: {{cfg.elasticsearch.requestTimeout}}
+elasticsearch.shardTimeout: {{cfg.elasticsearch.shardTimeout}}
+elasticsearch.startupTimeout: {{cfg.elasticsearch.startupTimeout}}
+pid.file: {{cfg.pid.file}}
+logging.dest: {{cfg.logging.dest}}
+logging.silent: {{cfg.logging.silent}}
+logging.quiet: {{cfg.logging.quiet}}
+logging.verbose: {{cfg.logging.verbose}}
