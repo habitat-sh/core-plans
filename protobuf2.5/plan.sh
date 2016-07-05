@@ -1,0 +1,12 @@
+pkg_name=protobuf
+pkg_origin=core
+pkg_version=2.5.0
+pkg_license=('BSD-2-Clause')
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_source=https://github.com/google/${pkg_name}/releases/download/v${pkg_version}/${pkg_name}-${pkg_version}.tar.bz2
+pkg_shasum=13bfc5ae543cf3aa180ac2485c0bc89495e3ae711fc6fab4f8ffe90dfb4bb677
+pkg_deps=(core/gcc core/zlib)
+pkg_build_deps=(core/make)
+pkg_bin_dirs=(bin)
+pkg_lib_dirs=(lib)
+pkg_include_dirs=(include)

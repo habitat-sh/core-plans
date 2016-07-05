@@ -1,0 +1,12 @@
+diff -ur stringencoders-e0d6a9b294c9ab619c510c1f6317bb9ec7194d77.orig/configure stringencoders-e0d6a9b294c9ab619c510c1f6317bb9ec7194d77/configure
+--- stringencoders-e0d6a9b294c9ab619c510c1f6317bb9ec7194d77.orig/configure	2010-04-05 21:37:39.000000000 +0000
++++ stringencoders-e0d6a9b294c9ab619c510c1f6317bb9ec7194d77/configure	2016-06-30 21:20:56.725049585 +0000
+@@ -4197,7 +4197,7 @@
+   ac_status=$?
+   echo "$as_me:$LINENO: \$? = $ac_status" >&5
+   (exit $ac_status); }; then
+-    case `/usr/bin/file conftest.o` in
++    case `file conftest.o` in
+     *32-bit*)
+       case $host in
+         x86_64-*linux*)

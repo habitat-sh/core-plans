@@ -1,0 +1,18 @@
+diff -ur protobuf-c-ddabb041b38ce0ab1fa8e91734e79b206556a661.orig/Makefile.am protobuf-c-ddabb041b38ce0ab1fa8e91734e79b206556a661/Makefile.am
+--- protobuf-c-ddabb041b38ce0ab1fa8e91734e79b206556a661.orig/Makefile.am	2011-03-10 19:15:44.000000000 +0000
++++ protobuf-c-ddabb041b38ce0ab1fa8e91734e79b206556a661/Makefile.am	2016-07-01 14:53:35.083681970 +0000
+@@ -1,3 +1,4 @@
++ACLOCAL_AMFLAGS = -I m4
+ SUBDIRS = src
+ 
+ EXTRA_DIST = scripts pkgwriteinfo.in CMakeLists.txt
+diff -ur protobuf-c-ddabb041b38ce0ab1fa8e91734e79b206556a661.orig/configure.ac protobuf-c-ddabb041b38ce0ab1fa8e91734e79b206556a661/configure.ac
+--- protobuf-c-ddabb041b38ce0ab1fa8e91734e79b206556a661.orig/configure.ac	2011-03-10 19:15:44.000000000 +0000
++++ protobuf-c-ddabb041b38ce0ab1fa8e91734e79b206556a661/configure.ac	2016-07-01 14:53:05.487747957 +0000
+@@ -1,5 +1,6 @@
+ AC_INIT([protobuf-c], [0.15])
+ AM_INIT_AUTOMAKE([1.9 foreign])
++AC_CONFIG_MACRO_DIRS([m4])
+ PACKAGE=protobuf-c
+ AC_PROG_CC
+ AC_PROG_CXX
