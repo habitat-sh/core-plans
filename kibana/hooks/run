@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd {{pkg.svc_path}}
+
+exec node src/cli -c {{pkg.svc_config_path}}/kibana.yml 2>&1

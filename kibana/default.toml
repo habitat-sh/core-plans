@@ -1,0 +1,86 @@
+[server]
+# Kibana is served by a back end server. This controls which port to use.
+port = "5601"
+
+# The host to bind the server to.
+host = "0.0.0.0"
+
+# If you are running kibana behind a proxy, and want to mount it at a path,
+# specify that path here. The basePath can't end in a slash.
+basePath = ""
+
+# The maximum payload size in bytes on incoming server requests.
+maxPayloadBytes = "1048576"
+
+  [server.ssl]
+  # SSL for outgoing requests from the Kibana Server to the browser (PEM formatted)
+  cert = ""
+  key = ""
+
+[elasticsearch]
+# The Elasticsearch instance to use for all your queries.
+url = "http://localhost:9200"
+
+# preserve_elasticsearch_host true will send the hostname specified in `elasticsearch`. If you set it to false,
+# then the host you use to connect to *this* Kibana instance will be sent.
+preserveHost = "true"
+
+# If your Elasticsearch is protected with basic auth, these are the user credentials
+# used by the Kibana server to perform maintenance on the kibana_index at startup. Your Kibana
+# users will still need to authenticate with Elasticsearch (which is proxied through
+# the Kibana server)
+username = "user"
+password = "pass"
+
+# Time in milliseconds to wait for elasticsearch to respond to pings, defaults to
+# request_timeout setting
+pingTimeout = "1500"
+
+# Time in milliseconds to wait for responses from the back end or elasticsearch.
+# This must be > 0
+requestTimeout = "30000"
+
+# Time in milliseconds for Elasticsearch to wait for responses from shards.
+# Set to 0 to disable.
+shardTimeout = "0"
+
+# Time in milliseconds to wait for Elasticsearch at Kibana startup before retrying
+startupTimeout = "5000"
+
+  [elasticsearch.ssl]
+  # Optional setting to validate that your Elasticsearch backend uses the same key files (PEM formatted)
+  cert = ""
+  key = ""
+
+  # If you need to provide a CA certificate for your Elasticsearch instance, put
+  # the path of the pem file here.
+  ca = ""
+
+  # Set to false to have a complete disregard for the validity of the SSL
+  # certificate.
+  verify = "true"
+
+[kibana]
+# Kibana uses an index in Elasticsearch to store saved searches, visualizations
+# and dashboards. It will create a new index if it doesn't already exist.
+index = ".kibana"
+
+# The default application to load.
+defaultAppId = "discover"
+
+[pid]
+# Set the path to where you would like the process id file to be created.
+file = "/hab/svc/kibana/var/run/kibana.pid"
+
+[logging]
+# If you would like to send the log output to a file you can set the path below.
+dest = "stdout"
+
+# Set this to true to suppress all logging output.
+silent = "false"
+
+# Set this to true to suppress all logging output except for error messages.
+quiet = "false"
+
+# Set this to true to log all events, including system usage information and all requests.
+verbose = "false"
