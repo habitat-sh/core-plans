@@ -1,0 +1,8 @@
+branches:
+  only:
+  - auto
+  - master
+language: c # Not really, but makes it so we don't have to install Ruby
+notifications:
+  webhooks: https://habitat-homu.herokuapp.com/travis
+script: ./travis.sh
