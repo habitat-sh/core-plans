@@ -12,3 +12,10 @@
     hooks:
     -   id: shell-lint
         args: ["--exclude=SC2034,SC2148,SC2153,SC2154", "--external-sources"]
+-   repo: local
+    hooks:
+    -   id: check-default-variables
+        name: Check for Habitat default plan variables
+        entry: ./check-default-variables.sh
+        language: system
+        files: plan.sh$
