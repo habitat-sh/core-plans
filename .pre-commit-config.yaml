@@ -11,7 +11,7 @@
     sha: 28f9ecf7857d17ebd9d1715cb5bf208c9e8e2bdd
     hooks:
     -   id: shell-lint
-        args: ["--exclude=SC2034,SC2148,SC2153,SC2154", "--external-sources"]
+        args: ["--exclude=SC2034,SC2148,SC2153,SC2154"]
 -   repo: local
     hooks:
     -   id: check-default-variables
