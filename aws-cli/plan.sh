@@ -11,10 +11,7 @@ pkg_deps=(
   core/groff
   core/python
 )
-pkg_bin_dirs=(
-  $(pkg_path_for core/groff)/bin
-  bin
-)
+pkg_bin_dirs=(bin)
 
 do_download() {
   return 0
