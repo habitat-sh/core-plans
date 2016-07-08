@@ -2,7 +2,16 @@ branches:
   only:
   - auto
   - master
-language: c # Not really, but makes it so we don't have to install Ruby
+language: python
+cache: pip
+addons:
+  apt:
+    sources:
+    - debian-sid  # Grab shellcheck from the Debian repo (o_O)
+    packages:
+    - shellcheck
+install:
+  - pip install pre-commit
 notifications:
   webhooks: https://habitat-homu.herokuapp.com/travis
 script: ./travis.sh
