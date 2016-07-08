@@ -1,7 +1,10 @@
 pkg_name=ruby
 pkg_origin=core
 pkg_version=2.3.1
-pkg_license=('ruby')
+pkg_description="A dynamic, open source programming language with a focus on \
+  simplicity and productivity. It has an elegant syntax that is natural to \
+  read and easy to write."
+pkg_license=("Ruby")
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://cache.ruby-lang.org/pub/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz
 pkg_filename=${pkg_name}-${pkg_version}.tar.gz
@@ -16,16 +19,25 @@ pkg_interpreters=(bin/ruby)
 
 do_build() {
     CFLAGS="${CFLAGS} -O3 -g -pipe"
-    patch -p1 -i $PLAN_CONTEXT/patches/ruby-2_1_3-no-mkmf.patch
+    patch -p1 -i "$PLAN_CONTEXT/patches/ruby-2_1_3-no-mkmf.patch"
 
-    ./configure --prefix=${pkg_prefix} \
+    ./configure "--prefix=$pkg_prefix" \
                 --with-out-ext=dbm \
                 --enable-shared \
                 --enable-libedit \
                 --disable-install-doc \
                 --without-gmp \
                 --without-gdbm \
-                --with-openssl-dir=$(_resolve_dependency core/openssl) \
-                --with-libyaml-dir=$(_resolve_dependency core/libyaml)
+                "--with-openssl-dir=$(_resolve_dependency core/openssl)" \
+                "--with-libyaml-dir=$(_resolve_dependency core/libyaml)"
     make
+}
+
+do_install() {
+  do_default_install
+  gem update --system
+}
+
+do_check() {
+  make test
 }
