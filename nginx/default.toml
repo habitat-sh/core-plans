@@ -12,7 +12,8 @@
 # worker_processes: Number of NGINX processes. Default = 1
 worker_processes = 4
 
-
+static_site_conf = "static_site.conf"
+backend_conf = "backend.conf"
 
 #### Events Context Configuration
 [events]
