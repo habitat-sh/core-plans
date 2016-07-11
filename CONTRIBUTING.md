@@ -6,11 +6,27 @@ When contributing to the `core-plans` repository, follow these guidelines.
 
 A package should contain key elements:
 
-- `pkg_name`
-- `pkg_license` (in [SPDX format](http://spdx.org/licenses/))
 - `pkg_description`
+- `pkg_license` (in [SPDX format](http://spdx.org/licenses/))
 - `pkg_maintainer` in the format of "The Habitat Maintainers <humans@habitat.sh>"
+- `pkg_name`
+- `pkg_origin`
+- `pkg_source`
 - `pkg_upstream_url`
+- `pkg_version`
+
+## Linting Your Plans
+
+It is good it use a tool to lint your plans to ensure you are not making any
+easy-to-catch mistakes in your scripting. We recommend running
+[ShellCheck](https://www.shellcheck.net/) against your plans.
+
+Some default checks of ShellCheck can be turned off, since they aren't
+necessarily applicable in plans. The following options work well:
+
+```
+shellcheck --shell=bash --exclude=SC1091,SC2034,SC2039,SC2148,SC2153,SC2154
+```
 
 ## Pre-commit hooks
 
@@ -73,3 +89,27 @@ Git makes it easy to add this line to your commit messages.
 
 1. Make sure the `user.name` and `user.email` are set in your git configs.
 2. Use `-s` or `--signoff` to add the Signed-off-by line to the end of the commit message.
+
+## Pull Request Review and Merge Automation
+
+Habitat uses several bots to automate the review and merging of pull
+requests. Messages to and from the bots are brokered via the account
+@thesentinels. First, we use Facebook's [mention bot](https://github.com/facebook/mention-bot)
+to identify potential reviewers for a pull request based on the `blame`
+information in the relevant diff. @thesentinels can also receive
+incoming commands from reviewers to approve PRs. These commands are
+routed to a [homu](https://github.com/barosl/homu) bot that will
+automatically merge a PR when sufficient reviewers have provided a +1
+(or r+ in homu terminology).
+
+### Delegating pull request merge access
+
+A Habitat core maintainer can delegate pull request merge access to a contributor via
+
+    @thesentinels delegate=username
+
+If you've been given approval to merge, you can do so by appending a comment to the pull request containing the following text:
+
+    @thesentinels r+
+
+Note: **do not** click the Merge Pull Request button if it's enabled.
