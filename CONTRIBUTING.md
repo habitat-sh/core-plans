@@ -28,6 +28,14 @@ necessarily applicable in plans. The following options work well:
 shellcheck --shell=bash --exclude=SC1091,SC2034,SC2039,SC2148,SC2153,SC2154
 ```
 
+If ShellCheck is installed, you can run this (and other checks) locally with:
+
+```
+git add <your changes> && pre-commit run
+```
+
+See below for more about the pre-commit hooks.
+
 ## Pre-commit hooks
 
 Install [pre-commit](http://pre-commit.com/) to run prior to your commits.
