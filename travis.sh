@@ -2,6 +2,14 @@
 # Script to run when testing core-plans on Travis CI
 set -x
 
+# debug info
+echo "TRAVIS_COMMIT=$TRAVIS_COMMIT"
+echo "TRAVIS_COMMIT_RANGE=$TRAVIS_COMMIT_RANGE"
+
+PARENT_COMMIT=$(git log --pretty=%P -n 1 "$TRAVIS_COMMIT")
+echo "PARENT_COMMIT=$PARENT_COMMIT"
+## end debug
+
 pre-commit install
 
 # Retrieve the canonical range.
