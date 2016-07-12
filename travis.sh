@@ -16,7 +16,7 @@ pre-commit install
 # Retrieve the canonical range.
 # The TRAVIS_COMMIT env var is always a merge commit, so we want to test from
 # the original commit all the way up until HEAD.
-ORIGIN=$(echo "$TRAVIS_COMMIT_RANGE" | cut -f1 -d'.')
-SOURCE=$(echo "$TRAVIS_COMMIT_RANGE" | cut -f4 -d'.')
+SOURCE=$(echo "$TRAVIS_COMMIT_RANGE" | cut -f1 -d'.')
+ORIGIN=$(echo "$TRAVIS_COMMIT_RANGE" | cut -f4 -d'.')
 
 pre-commit run --origin "$ORIGIN" --source "$SOURCE"
