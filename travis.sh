@@ -1,8 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 # Script to run when testing core-plans on Travis CI
 set -x
 
 # debug info
+echo "TRAVIS_BRANCH=$TRAVIS_BRANCH"
 echo "TRAVIS_COMMIT=$TRAVIS_COMMIT"
 echo "TRAVIS_COMMIT_RANGE=$TRAVIS_COMMIT_RANGE"
 echo "HEAD=$(git rev-parse HEAD)"
@@ -14,9 +15,13 @@ echo "PARENT_COMMIT=$PARENT_COMMIT"
 pre-commit install
 
 # Retrieve the canonical range.
+# If we're on the auto branch, the origin should be auto
+if [[ "$TRAVIS_BRANCH" = "auto" ]]; then
+  ORIGIN=auto
 # The TRAVIS_COMMIT env var is always a merge commit, so we want to test from
 # the original commit all the way up until HEAD.
-ORIGIN=$(echo "$TRAVIS_COMMIT_RANGE" | cut -f1 -d'.')
-SOURCE=$(echo "$TRAVIS_COMMIT_RANGE" | cut -f4 -d'.')
+else
+  ORIGIN=$(echo "$TRAVIS_COMMIT_RANGE" | cut -f1 -d'.')
+fi
 
-pre-commit run --origin "$ORIGIN" --source "$SOURCE"
+pre-commit run --origin "$ORIGIN" --source HEAD
