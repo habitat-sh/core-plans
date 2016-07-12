@@ -17,11 +17,13 @@ pre-commit install
 # Retrieve the canonical range.
 # If we're on the auto branch, the origin should be auto
 if [[ "$TRAVIS_BRANCH" = "auto" ]]; then
-  ORIGIN=auto
+  ORIGIN=master
+  SOURCE=auto
 # The TRAVIS_COMMIT env var is always a merge commit, so we want to test from
 # the original commit all the way up until HEAD.
 else
   ORIGIN=$(echo "$TRAVIS_COMMIT_RANGE" | cut -f1 -d'.')
+  SOURCE=HEAD
 fi
 
-pre-commit run --origin "$ORIGIN" --source HEAD
+pre-commit run --origin "$ORIGIN" --source "$SOURCE"
