@@ -9,6 +9,7 @@
 required_variables=(
   pkg_description
   pkg_license
+  pkg_maintainer
   pkg_name
   pkg_origin
   pkg_source

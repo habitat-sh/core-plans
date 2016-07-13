@@ -14,4 +14,4 @@ install:
   - pip install pre-commit
 notifications:
   webhooks: https://habitat-homu.herokuapp.com/travis
-script: ./travis.sh
+script: ./bin/travis.sh

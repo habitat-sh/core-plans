@@ -11,11 +11,11 @@
     sha: 28f9ecf7857d17ebd9d1715cb5bf208c9e8e2bdd
     hooks:
     -   id: shell-lint
-        args: ["--exclude=SC2034,SC2148,SC2153,SC2154"]
+        args: ["--exclude=SC1091,SC2034,SC2039,SC2148,SC2153,SC2154"]
 -   repo: local
     hooks:
     -   id: check-default-variables
         name: Check for Habitat default plan variables
-        entry: ./check-default-variables.sh
+        entry: ./bin/check-default-variables.sh
         language: system
         files: plan.sh$
