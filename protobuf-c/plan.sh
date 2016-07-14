@@ -11,6 +11,8 @@ pkg_build_deps=(core/gcc core/make core/autoconf core/automake core/libtool core
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+pkg_upstream_url=https://github.com/protobuf-c/protobuf-c
+pkg_description="Protocol Buffers implementation in C"
 
 do_prepare () {
   patch -p1 -i "${PLAN_CONTEXT}/automake.patch"

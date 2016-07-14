@@ -12,6 +12,8 @@ pkg_build_deps=(core/gcc core/make core/diffutils)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+pkg_upstream_url=https://github.com/Cyan4973/lz4
+pkg_description="Extremely Fast Compression algorithm http://www.lz4.org"
 
 
 do_build () {

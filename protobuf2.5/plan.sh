@@ -10,3 +10,5 @@ pkg_build_deps=(core/make)
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
+pkg_upstream_url=https://github.com/google/protobuf
+pkg_description="Protocol Buffers - Google's data interchange format https://developers.google.com/protocol-buffers/"

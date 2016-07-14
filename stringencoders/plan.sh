@@ -11,6 +11,8 @@ pkg_build_deps=(core/gcc core/make core/perl core/patch core/gcc-libs core/file 
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+pkg_upstream_url=https://github.com/client9/stringencoders
+pkg_description="Fast c-string transformations"
 
 # The Git hash referenced above is the same as Debian / Ubuntu's 3.10.3 release. Tags seem to have
 # been lost after this moved from Google Code to Github.

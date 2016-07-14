@@ -11,6 +11,8 @@ pkg_build_deps=(core/gcc core/make core/autoconf core/automake core/pkg-config c
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+pkg_upstream_url=https://github.com/google/snappy
+pkg_description="A fast compressor/decompressor http://google.github.io/snappy/"
 
 do_build () {
  libtoolize --force

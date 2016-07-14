@@ -11,3 +11,5 @@ pkg_deps=(core/glibc)
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
+pkg_upstream_url=https://github.com/maxmind/geoip-api-c
+pkg_description="GeoIP Legacy C API"

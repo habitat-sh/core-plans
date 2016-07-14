@@ -10,6 +10,8 @@ pkg_build_deps=(core/gcc core/make)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib64)
+pkg_upstream_url=https://github.com/numactl/numactl
+pkg_description="NUMA support for Linux http://oss.sgi.com/projects/libnuma/"
 
 do_build () {
   make PREFIX="$pkg_prefix"
