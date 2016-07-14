@@ -1,0 +1,5 @@
+socks_bind_addr = "localhost"
+socks_bind_port = 9050
+socks_policy = "accept *"
+
+log_level = "notice"

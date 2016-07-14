@@ -1,0 +1,6 @@
+SOCKSPort {{cfg.socks_bind_addr}}:{{cfg.socks_bind_port}}
+SOCKSPolicy {{cfg.socks_policy}}
+
+Log {{cfg.log_level}} stdout
+DataDirectory {{pkg.svc_var_path}}
+
