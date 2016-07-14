@@ -1,0 +1,15 @@
+pkg_origin=core
+pkg_name=geoip
+pkg_version=1.6.0
+pkg_license=('LGPL-2.1')
+pkg_dirname=GeoIP-$pkg_version
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_source=https://github.com/maxmind/geoip-api-c/releases/download/v1.6.0/GeoIP-1.6.0.tar.gz
+pkg_shasum=443f46b89c3d626ae81463c2aac98300fff1e3b674faf06070843fbefedcf710
+pkg_build_deps=(core/gcc core/make core/diffutils)
+pkg_deps=(core/glibc)
+pkg_bin_dirs=(bin)
+pkg_lib_dirs=(lib)
+pkg_include_dirs=(include)
+pkg_upstream_url=https://github.com/maxmind/geoip-api-c
+pkg_description="GeoIP Legacy C API"

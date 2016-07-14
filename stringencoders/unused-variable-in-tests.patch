@@ -1,0 +1,38 @@
+diff -ur stringencoders-3.10.3.orig/test/modp_b64_test.c stringencoders-3.10.3/test/modp_b64_test.c
+--- stringencoders-v3.10.3.orig/test/modp_b64_test.c	2009-01-13 15:35:29.000000000 +0000
++++ stringencoders-v3.10.3/test/modp_b64_test.c	2016-06-20 21:30:37.039055438 +0000
+@@ -172,15 +172,11 @@
+     char ibuf[4];
+     char obuf[5];
+     char rbuf[4];
+-    char msg[100];
+-    msg[0] = 0; // make msg an empty string
+     unsigned int i,j,k;
+     int d = 0;
+     for (i = 0; i < 256; ++i) {
+         for (j = 0; j < 256; ++j) {
+             for (k= 0; k < 256; ++k) {
+-                // comment this out.. it really slows down the test
+-                // sprintf(msg, "(i,j,k) = (%d,%d,%d):", i,j,k);
+                 ibuf[0] = (char)((unsigned char) i);
+                 ibuf[1] = (char)((unsigned char) j);
+                 ibuf[2] = (char)((unsigned char) k);
+diff -ur stringencoders-3.10.3.orig/test/speedtest.c stringencoders-3.10.3/test/speedtest.c
+--- stringencoders-v3.10.3.orig/test/speedtest.c	2007-05-18 13:47:55.000000000 +0000
++++ stringencoders-v3.10.3/test/speedtest.c	2016-06-20 21:43:07.827709935 +0000
+@@ -37,7 +37,6 @@
+     int i, j;
+     clock_t c0, c1;
+     char teststr1[SZ];
+-    char teststr2[SZ];
+ 
+     /*
+       this contains the message sizes we'll test on
+@@ -47,7 +46,6 @@
+ 
+     for (i = 0; i < (int)sizeof(teststr1); ++i) {
+         teststr1[i] = 'A' + i % 26;
+-        teststr2[i] = 'A' + i % 26;
+     }
+ 
+     // over allocate result buffers

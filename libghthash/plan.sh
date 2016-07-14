@@ -1,0 +1,14 @@
+pkg_origin=core
+pkg_name=libghthash
+pkg_version=0.6.2
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_license=('LGPL-2.0')
+pkg_source=http://www.bth.se/people/ska/sim_home/filer/libghthash-0.6.2.tar.gz
+pkg_shasum=d1ccbb81f4c8afd7008f56ecb874f5cf497de480f49ee06929b4303d5852a7dd
+pkg_deps=(core/glibc)
+pkg_build_deps=(core/gcc core/make)
+pkg_bin_dirs=(bin)
+pkg_include_dirs=(include)
+pkg_lib_dirs=(lib)
+pkg_upstream_url=http://www.bth.se/people/ska/sim_home/libghthash.html
+pkg_description="Generic Hash Table which is meant to be easy to extend, portable, clear in its code and easy to use."
