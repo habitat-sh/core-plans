@@ -48,10 +48,10 @@ fi
 
 # The build command to execute. Defaults to `build`, but could be overridden if
 # a full path to `hab-plan-build` is required.
-: ${BUILD:=build}
+: "${BUILD:=build}"
 # The root path of the Habitat file system. If the `$HAB_ROOT_PATH` environment
 # variable is set, this value is overridden, otherwise it is set to its default
-: ${HAB_ROOT_PATH:=/hab}
+: "${HAB_ROOT_PATH:=/hab}"
 # Location containing installed packages.
 HAB_PKG_PATH="$HAB_ROOT_PATH/pkgs"
 # The default package origin which was used to in the base Plans
@@ -82,8 +82,8 @@ _on_exit() {
   fi
   local elapsed=$SECONDS
   elapsed=$(echo $elapsed | awk '{printf "%dm%ds", $1/60, $1%60}')
-  printf -- "\n$(basename $0) run time: $elapsed\n\n"
-  if [ $exit_status -ne 0 ]; then echo "Exiting on error"; fi
+  printf -- "\n$(basename "$0") run time: $elapsed\n\n"
+  if [ "$exit_status" -ne 0 ]; then echo "Exiting on error"; fi
   exit $?
 }
 # Call the `on_exit()` function above on the following signals:
@@ -114,10 +114,11 @@ _build() {
   # If the `$plan` value is a path/name combination like
   # `../components/foobar:hab-foobar` then split the token into its requisite
   # parts.
+  # shellcheck disable=SC2126
   case $(echo "$plan" | grep -o ':' | wc -l | sed 's,^[^0-9]*,,') in
     1)
-      plan_dir=$(echo $plan | cut -d ':' -f 1)
-      plan=$(echo $plan | cut -d ':' -f 2)
+      plan_dir=$(echo "$plan" | cut -d ':' -f 1)
+      plan=$(echo "$plan" | cut -d ':' -f 2)
       ;;
   esac
   if [ -n "${PRINT_IDENTS_ONLY:-}" ]; then
@@ -136,17 +137,17 @@ _build() {
   local manifest
   local ident
   local cmd
-  mkdir -p $(dirname $db)
-  touch $db
+  mkdir -p "$(dirname "$db")"
+  touch "$db"
 
   # Check if the requested Plan exists in the database, meaning that this
   # program has previously built it.
-  if grep -q "^$origin/$plan:$*$" $db > /dev/null; then
+  if grep -q "^$origin/$plan:$*$" "$db" > /dev/null; then
     # If a fully extracted/installed package exists on disk under
     # `$HAB_PKG_PATH`. We're using the `IDENT` metadata file as a sentinel
     # file stand-in for the package.
-    if ident=$(find $path -name IDENT -type f 2>&1); then
-      ident="$(echo $ident | tr ' ' '\n' | sort | tail -n 1)"
+    if ident=$(find "$path" -name IDENT -type f 2>&1); then
+      ident="$(echo "$ident" | tr ' ' '\n' | sort | tail -n 1)"
       # If the package's `IDENT` file is missing, something has gone wrong, die
       # early.
       if [ ! -f "$ident" ]; then
@@ -156,7 +157,7 @@ _build() {
       # If all else is good, we should be able to count on this previsouly
       # built and installed package, so we will early return from this
       # function.
-      echo "[$plan] Previous build found in db $db, skipping ($(cat $ident))"
+      echo "[$plan] Previous build found in db $db, skipping ($(cat "$ident"))"
       return 0
     else
       # If the entry exists in the database, but we can't find it installed on
@@ -174,10 +175,10 @@ _build() {
     cmd="$BUILD $plan_dir"
   fi
   echo "[$plan] Building with: $cmd"
-  eval $cmd
+  eval "$cmd"
   # Record the successful build into our simple database
   echo "[$plan] Recording build record in $db"
-  echo "$origin/$plan:$*" >> $db
+  echo "$origin/$plan:$*" >> "$db"
 }
 
 
@@ -186,7 +187,8 @@ _build() {
 # Read a list of tokens that are directories containing a `plan.sh` file. For
 # each token, invoke the `_build` function and pass the while line in. Simple,
 # no?
-cat <<_PLANS_ | while read plan; do _build $plan; done
+# shellcheck disable=SC2162
+cat <<_PLANS_ | while read plan; do _build "$plan"; done
   linux-headers
   glibc
   zlib

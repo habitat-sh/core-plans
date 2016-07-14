@@ -1,11 +1,11 @@
 pkg_name=wget
 pkg_distname=$pkg_name
 pkg_origin=core
-pkg_version=1.16.3
+pkg_version=1.18
 pkg_license=('gplv3+')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=http://ftp.gnu.org/gnu/$pkg_distname/${pkg_distname}-${pkg_version}.tar.xz
-pkg_shasum=67f7b7b0f5c14db633e3b18f53172786c001e153d545cfc85d82759c5c2ffb37
+pkg_shasum=b5b55b75726c04c06fe253daec9329a6f1a3c0c1878e3ea76ebfebc139ea9cc1
 pkg_deps=(core/glibc core/libidn core/zlib core/openssl core/cacerts)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed core/grep core/pkg-config)
 pkg_bin_dirs=(bin)
