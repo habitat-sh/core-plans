@@ -12,5 +12,5 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib64)
 
 do_build () {
-  make PREFIX=$pkg_prefix
+  make PREFIX="$pkg_prefix"
 }

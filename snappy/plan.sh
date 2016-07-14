@@ -15,7 +15,7 @@ pkg_lib_dirs=(lib)
 do_build () {
  libtoolize --force
  ACLOCAL_PATH=$(pkg_path_for core/pkg-config)/share/aclocal autoreconf -iv
- ./configure --prefix=$pkg_prefix
+ ./configure --prefix="$pkg_prefix"
  make
 }
 

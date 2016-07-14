@@ -16,8 +16,8 @@ pkg_lib_dirs=(lib)
 # been lost after this moved from Google Code to Github.
 
 do_prepare () {
-  patch -p1 < ${PLAN_CONTEXT}/remove-path-for-file.patch
-  patch -p1 < ${PLAN_CONTEXT}/unused-variable-in-tests.patch
+  patch -p1 -i "${PLAN_CONTEXT}/remove-path-for-file.patch"
+  patch -p1 -i "${PLAN_CONTEXT}/unused-variable-in-tests.patch"
 }
 
 do_check () {

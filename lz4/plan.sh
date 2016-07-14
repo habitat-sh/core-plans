@@ -15,7 +15,7 @@ pkg_lib_dirs=(lib)
 
 
 do_build () {
-  make PREFIX=$pkg_prefix
+  make PREFIX="$pkg_prefix"
 }
 
 # Tests will fail until valgrind is available.

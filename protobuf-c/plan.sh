@@ -13,13 +13,13 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare () {
-  patch -p1 < ${PLAN_CONTEXT}/automake.patch
+  patch -p1 -i "${PLAN_CONTEXT}/automake.patch"
 }
 
 do_build () {
   export CXXFLAGS=$CFLAGS
   # autogen runs ./configure with all flags passed to it.
-  ./autogen.sh --prefix=$pkg_prefix
+  ./autogen.sh --prefix="$pkg_prefix"
   make
 }
 
