@@ -13,5 +13,5 @@ addons:
 install:
   - pip install pre-commit
 notifications:
-  webhooks: https://habitat-homu.herokuapp.com/travis
+  webhooks: https://bots.habitat.sh:54856/travis
 script: ./bin/travis.sh
