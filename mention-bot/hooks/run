@@ -1,0 +1,23 @@
+#!/bin/sh
+
+export BABEL_DISABLE_CACHE=1
+export GHE_HOST="{{cfg.ghe_host}}"
+export GHE_API_HOST="{{cfg.ghe_api_host}}"
+export GHE_PROTOCOL="{{cfg.ghe_protocol}}"
+export GHE_PATH_PREFIX="{{cfg.ghe_path_prefix}}"
+export GHE_PORT="{{cfg.ghe_port}}"
+export GITHUB_USER="{{cfg.github_user}}"
+export GITHUB_PASSWORD="{{cfg.github_password}}"
+export GITHUB_TOKEN="{{cfg.github_token}}"
+export PORT="{{cfg.port}}"
+
+cd {{pkg.path}} || exit
+
+if [ "$(whoami)" = "root" ]; then
+  exec chpst \
+    -U hab:hab \
+    -u hab:hab \
+    "$(hab pkg path core/node)/bin/node" run-server.js 2>&1
+else
+  exec "$(hab pkg path core/node)/bin/node" run-server.js 2>&1
+fi

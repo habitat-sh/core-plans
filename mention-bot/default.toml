@@ -1,0 +1,27 @@
+# Host for GitHub (enterprise)
+ghe_host = "github.com"
+
+# API host for GitHub (enterprise)
+ghe_api_host = "api.github.com"
+
+# Protocol for GitHub (enterprise)
+ghe_protocol = "https"
+
+# Path prefix for GitHub (enterprise)
+ghe_path_prefix = ""
+
+# Path prefix for GitHub (enterprise)
+ghe_port = 443
+
+# GitHub user that makes comments. This is only necessary if using private
+# repositories
+github_user = ""
+
+# Password for the GitHub user. Only necessary if using private repositories.
+github_password = ""
+
+# Personal access token for the github_user
+github_token = ""
+
+# Port that the server runs on
+port = 5000
