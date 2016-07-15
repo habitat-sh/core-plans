@@ -4,16 +4,45 @@ When contributing to the `core-plans` repository, follow these guidelines.
 
 ## Package Metadata
 
-A package should contain key elements:
+Each package plan in this repository *must* contain a value adhering to the guidelines for each of the following elements:
 
 - `pkg_description`
 - `pkg_license` (in [SPDX format](http://spdx.org/licenses/))
 - `pkg_maintainer` in the format of "The Habitat Maintainers <humans@habitat.sh>"
-- `pkg_name`
-- `pkg_origin`
+- `pkg_name` see the section of this document on "Package Name Conventions"
+- `pkg_origin` must be set to `core`
 - `pkg_source`
 - `pkg_upstream_url`
-- `pkg_version`
+- `pkg_version` must be the complete version number of the software
+
+## Package Name Conventions
+
+Each package is identified by a unique string containing four sub-strings separated
+by a forward slash (`/`) called a [PackageIdent](https://www.habitat.sh/docs/concepts-packages/).
+
+    `origin`/`name`/`version`/`release`
+
+The `origin`, `name`, and `version` values of this identifier are user defined by
+setting their corresponding variable in your `plan.sh` file while the value of
+`release` is generated at build-time.
+
+The value of `name` should exactly match the name of the project it represents and the `plan.sh` file should be located within a directory of the same name in this repository.
+
+> Example: The plan for the [bison project](https://www.gnu.org/software/bison/) project contains setting `pkg_name=bison` and resides in `$root/bison/plan.sh`.
+
+There is one exception to this rule: Additional plans may be defined for projects for their past major versions by appending the major version number to its name. The `plan.sh` file for this new package should be located within a directory of the same name.
+
+> Example: the [bison project](https://www.gnu.org/software/bison/) maintains the 2.x line along with their current major version (at time of writing: 3.x). A second plan is created as `bison2` and placed within a directory of the same name in this repository.
+
+Packages meeting this exception will always have their latest major version found in the package sharing the exact name of their project. A new package will be created for the previous major version following these conventions.
+
+> Example: the [bison project](https://www.gnu.org/software/bison/) releases the 4.x line and is continuing to support Bison 3.x. The `bison` package is copied to `bison3` and the `bison` package is updated to build Bison 4.x.
+
+## Building Older Versions
+
+Sometimes you may need a version of software that we are packaging which was released before the project's corresponding Habitat package was created.
+
+Please *do not* issue a PR containing a new plan for the specific version of software that you need unless the software project it packages meets the exceptional cases outlined in the above section "Package Name Conventions". Instead [create an issue](https://github.com/habitat-sh/core-plans/issues/new) containing the name and version of the software that you want published to the public depot. A maintainer will run a one-off build and publish the generated artifact to the public depot and close your issue once the work is completed. Issues with an associated gist containing a working fork of our current plan which builds the version of the software will be attended to first.
 
 ## Linting Your Plans
 
