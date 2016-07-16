@@ -15,11 +15,10 @@ pkg_include_dirs=(include)
 pkg_bin_dirs=(bin)
 
 do_build() {
-   PKG_CONFIG_PATH="$(pkg_path_for openssl)/lib/pkgconfig"
-   PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:$(pkg_path_for protobuf)/lib/pkgconfig"
-   export PKG_CONFIG_PATH
-   build_line "Setting PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
-   ./configure --prefix=$pkg_prefix
-   make
+    PKG_CONFIG_PATH="$(pkg_path_for openssl)/lib/pkgconfig"
+    PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:$(pkg_path_for protobuf)/lib/pkgconfig"
+    export PKG_CONFIG_PATH
+    build_line "Setting PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
+    ./configure --prefix=$pkg_prefix
+    make
  }
-
