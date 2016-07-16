@@ -7,17 +7,19 @@ pkg_description="Remote Terminal application that allows roaming, supports inter
 editing of users keystrokes"
 pkg_upstream_url=https://mosh.mit.edu
 pkg_source=https://mosh.mit.edu/mosh-${pkg_version}.tar.gz
-pkg_shasum=637adb7f67406447e9264d30468fe69a6d5e8f97518ef133d794cdc65483fa54
-pkg_build_deps=(core/gcc core/make core/glibc)
-pkg_deps=(core/glibc)
+pkg_shasum=1af809e5d747c333a852fbf7acdbf4d354dc4bbc2839e3afe5cf798190074be3
+pkg_build_deps=(core/coreutils core/patch core/autoconf core/automake core/gcc core/make core/glibc core/protobuf core/zlib core/openssl core/pkg-config core/ncurses)
+pkg_deps=(core/glibc core/gcc-libs)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_bin_dirs=(bin)
 
 do_build() {
-     ./configure
+   PKG_CONFIG_PATH="$(pkg_path_for openssl)/lib/pkgconfig"
+   PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:$(pkg_path_for protobuf)/lib/pkgconfig"
+   export PKG_CONFIG_PATH
+     ./configure --prefix=$pkg_prefix
      make
-     make install
  }
 
 
