@@ -22,4 +22,8 @@ do_build() {
      make
  }
 
+ do_install() {
+      make install
+ }
+
 
