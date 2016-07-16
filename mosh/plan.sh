@@ -5,7 +5,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('OCB-An-Authenticated-Encryption-Scheme')
 pkg_description="Remote Terminal application that allows roaming, supports intermittent connectivity, and provides intelligent local echo and lines
 editing of users keystrokes"
-pkg_upstream_url=https://mosh.mit.edu
+pkg_upstream_url="https://mosh.mit.edu"
 pkg_source=https://mosh.mit.edu/mosh-${pkg_version}.tar.gz
 pkg_shasum=1af809e5d747c333a852fbf7acdbf4d354dc4bbc2839e3afe5cf798190074be3
 pkg_build_deps=(core/coreutils core/patch core/autoconf core/automake core/gcc core/make core/glibc core/protobuf core/zlib core/openssl core/pkg-config core/ncurses)
