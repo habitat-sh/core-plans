@@ -1,6 +1,6 @@
 pkg_name=ncurses
 pkg_origin=core
-pkg_version=6.0
+pkg_version=5.0
 pkg_license=('ncurses')
 pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz
 pkg_shasum=f551c24b30ce8bfb6e96d9f59b42fbea30fa3a6123384172f9e7284bcf647260
