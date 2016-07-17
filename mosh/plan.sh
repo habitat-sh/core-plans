@@ -2,7 +2,7 @@ pkg_name=mosh
 pkg_origin=core
 pkg_version=1.2.5
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('OCB-An-Authenticated-Encryption-Scheme')
+pkg_license=('GPL-3.0')
 pkg_description="Remote Terminal application that allows roaming, supports intermittent connectivity, and provides intelligent local echo and lines
 editing of users keystrokes"
 pkg_upstream_url="https://mosh.mit.edu"
