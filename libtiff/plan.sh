@@ -18,3 +18,7 @@ do_prepare() {
   _file_path="$(pkg_path_for file)/bin/file"
   sed -e "s#/usr/bin/file#${_file_path}#g" -i configure
 }
+
+do_check() {
+    make check
+}
