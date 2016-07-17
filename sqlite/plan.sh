@@ -1,11 +1,14 @@
 pkg_name=sqlite
-pkg_version=3110100
+pkg_version=3130000
 pkg_origin=core
-pkg_license=('sqlite')
+pkg_license=('Public Domain')
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="A software library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine."
+pkg_upstream_url=https://www.sqlite.org/
 pkg_source=https://www.sqlite.org/2016/${pkg_name}-autoconf-${pkg_version}.tar.gz
 pkg_filename=${pkg_name}-autoconf-${pkg_version}.tar.gz
 pkg_dirname=${pkg_name}-autoconf-${pkg_version}
-pkg_shasum=533ff1d0271c2e666f01591271cef01a31648563affa0c95e80ef735077d4377
+pkg_shasum=e2797026b3310c9d08bd472f6d430058c6dd139ff9d4e30289884ccd9744086b
 pkg_deps=(core/glibc core/readline)
 pkg_build_deps=(core/gcc core/make core/coreutils)
 pkg_lib_dirs=(lib)
