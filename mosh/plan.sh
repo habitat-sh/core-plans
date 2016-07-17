@@ -19,6 +19,6 @@ do_build() {
     PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:$(pkg_path_for protobuf)/lib/pkgconfig"
     export PKG_CONFIG_PATH
     build_line "Setting PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
-    ./configure --prefix=$pkg_prefix
+    ./configure --prefix="${pkg_prefix}"
     make
  }
