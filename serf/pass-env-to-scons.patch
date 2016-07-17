@@ -1,0 +1,12 @@
+--- SConstruct.orig	2016-07-15 14:13:44.447114953 +0000
++++ SConstruct	2016-07-15 14:14:54.744356018 +0000
+@@ -149,6 +149,9 @@
+ env = Environment(variables=opts,
+                   tools=('default', 'textfile',),
+                   CPPPATH=['.', ],
++                  ENV=os.environ,
++                  CFLAGS=os.environ['CFLAGS'],
++                  LINKFLAGS = os.environ['LDFLAGS'],
+                   )
+
+ env.Append(BUILDERS = {
