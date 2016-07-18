@@ -14,7 +14,7 @@ pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_bin_dirs=(bin)
 
-do_build() {
+do_prepare() {
     PKG_CONFIG_PATH="$(pkg_path_for openssl)/lib/pkgconfig"
     PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:$(pkg_path_for protobuf)/lib/pkgconfig"
     export PKG_CONFIG_PATH
