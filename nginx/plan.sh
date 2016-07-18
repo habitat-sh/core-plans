@@ -1,10 +1,12 @@
 pkg_name=nginx
 pkg_origin=core
-pkg_version=1.8.0
+pkg_version=1.10.1
+pkg_description="NGINX web server."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('bsd')
-pkg_source=http://nginx.org/download/nginx-1.8.0.tar.gz
-pkg_shasum=23cca1239990c818d8f6da118320c4979aadf5386deda691b1b7c2c96b9df3d5
+pkg_source=https://nginx.org/download/nginx-${pkg_version}.tar.gz
+pkg_upstream_url=https://nginx.org/
+pkg_shasum=1fd35846566485e03c0e318989561c135c598323ff349c503a6c14826487a801
 pkg_deps=(core/glibc core/libedit core/ncurses core/zlib core/bzip2 core/openssl core/pcre)
 pkg_build_deps=(core/gcc core/make core/coreutils)
 pkg_lib_dirs=(lib)
@@ -15,7 +17,7 @@ pkg_svc_user="root"
 pkg_expose=(80 443)
 
 do_build() {
-  ./configure --prefix=$pkg_prefix \
+  ./configure --prefix="$pkg_prefix" \
     --conf-path="$pkg_svc_config_path/nginx.conf" \
     --sbin-path="$pkg_prefix/bin/nginx" \
     --pid-path="$pkg_svc_var_path/nginx.pid" \
@@ -30,13 +32,15 @@ do_build() {
     --http-scgi-temp-path="$pkg_svc_var_path/scgi" \
     --http-uwsgi-temp-path="$pkg_svc_var_path/uwsgi" \
     --with-ipv6 \
+    --with-pcre \
     --with-pcre-jit \
     --with-file-aio \
-    --with-http_dav_module \
+    --with-stream=dynamic \
+    --with-mail=dynamic \
     --with-http_gunzip_module \
     --with-http_gzip_static_module \
     --with-http_realip_module \
-    --with-http_spdy_module \
+    --with-http_v2_module \
     --with-http_ssl_module \
     --with-http_stub_status_module \
     --with-http_addition_module \
@@ -45,6 +49,7 @@ do_build() {
     --with-http_mp4_module \
     --with-http_secure_link_module \
     --with-http_sub_module \
+    --with-http_slice_module \
     --with-cc-opt="$CFLAGS" \
     --with-ld-opt="$LDFLAGS"
 
@@ -52,7 +57,6 @@ do_build() {
 }
 
 do_install() {
-  mkdir -p $pkg_prefix/sbin
-  cp $HAB_CACHE_SRC_PATH/$pkg_dirname/objs/nginx $pkg_prefix/sbin
+  mkdir -p "$pkg_prefix/sbin"
+  cp "$HAB_CACHE_SRC_PATH/$pkg_dirname/objs/nginx" "$pkg_prefix/sbin"
 }
-
