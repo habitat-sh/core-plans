@@ -1,7 +1,9 @@
 pkg_name=dejagnu
 pkg_origin=core
 pkg_version=1.5.3
-pkg_license=('gplv2+')
+pkg_license=('GPL-2.0')
+pkg_upstream_url="https://www.gnu.org/software/dejagnu/"
+pkg_description="A framework for testing other programs."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz
 pkg_shasum=099b8e364ca1d6248f8e1d32168c4b12677abff4253bbbb4a8ac8cdd321e3f19
@@ -16,8 +18,7 @@ do_check() {
   #
   # Provide `runtest' with a log name, otherwise it tries to run `whoami`,
   # which fails when in a chroot.
-  LOGNAME="dejagnu-logger" make check \
-    LD_LIBRARY_PATH="$(pkg_path_for gcc)/lib" < /dev/zero
+  LOGNAME="dejagnu-logger" make check < /dev/zero
 }
 
 do_install() {
@@ -26,7 +27,7 @@ do_install() {
   # Set an absolute path `expect` in the `runtest` binary
   sed \
     -e "s,expectbin=expect,expectbin=$(pkg_path_for expect)/bin/expect,g" \
-    -i $pkg_prefix/bin/runtest
+    -i "$pkg_prefix/bin/runtest"
 }
 
 

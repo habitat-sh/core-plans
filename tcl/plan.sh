@@ -2,11 +2,13 @@ pkg_name=tcl
 pkg_origin=core
 pkg_version=8.6.4
 pkg_license=('custom')
+pkg_description="Tool Command Language -- A dynamic programming language."
+pkg_upstream_url="http://www.tcl.tk/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=http://heanet.dl.sourceforge.net/project/tcl/Tcl/${pkg_version}/${pkg_name}${pkg_version}-src.tar.gz
 pkg_shasum=9e6ed94c981c1d0c5f5fefb8112d06c6bf4d050a7327e95e71d417c416519c8d
 pkg_dirname=${pkg_name}${pkg_version}
-pkg_deps=(core/glibc core/zlib)
+pkg_deps=(core/glibc core/gcc-libs core/zlib)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
@@ -14,8 +16,9 @@ pkg_lib_dirs=(lib)
 
 do_build() {
   pushd unix > /dev/null
+    export LDFLAGS="-lgcc_s ${LDFLAGS}"
     ./configure \
-      --prefix=$pkg_prefix \
+      --prefix="$pkg_prefix" \
       --enable-threads \
       --enable-64bit
     make
@@ -27,7 +30,8 @@ do_build() {
     #
     # Thanks to: http://www.linuxfromscratch.org/blfs/view/stable/general/tcl.html
     # Thanks to: https://projects.archlinux.org/svntogit/packages.git/tree/trunk/PKGBUILD?h=packages/tcl
-    local srcdir=$(abspath ..)
+    local srcdir
+    srcdir=$(abspath ..)
     local tdbcver=tdbc1.0.3
     local itclver=itcl4.0.3
     sed \
@@ -54,13 +58,13 @@ do_install() {
     make install-private-headers
 
     # Many packages expect a file named tclsh, so create a symlink
-    ln -sfv tclsh${pkg_version%.?} $pkg_prefix/bin/tclsh
+    ln -sfv "tclsh${pkg_version%.?}" "$pkg_prefix/bin/tclsh"
 
-    chmod -v 755 $pkg_prefix/lib/libtcl${pkg_version%.?}.so
-    ln -sfv libtcl${pkg_version%.?}.so $pkg_prefix/lib/libtcl.so
+    chmod -v 755 "$pkg_prefix/lib/libtcl${pkg_version%.?}.so"
+    ln -sfv "libtcl${pkg_version%.?}.so" "$pkg_prefix/lib/libtcl.so"
 
     # Install license file
-    install -Dm644 ../license.terms ${pkg_prefix}/share/licenses/LICENSE
+    install -Dm644 ../license.terms "${pkg_prefix}/share/licenses/LICENSE"
   popd > /dev/null
 }
 
