@@ -13,5 +13,5 @@ addons:
 install:
   - pip install pre-commit
 notifications:
-  webhooks: https://bots.habitat.sh:54856/travis
+  webhooks: https://old-bots.habitat.sh:54856/travis
 script: ./bin/travis.sh
