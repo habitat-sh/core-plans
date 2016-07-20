@@ -2,7 +2,7 @@
 
 This Habitat Plan is one of potentially many plans that produce Habitat packages for Apache Tomcat.
 This particular plan focuses on the Tomcat 8 major release, specifically version 8.5.3.
-If a Habitat Plan is needed for Apache Tomcat 7.x or the upcoming 
+If a Habitat Plan is needed for Apache Tomcat 7.x or the upcoming
 Apache Tomcat 9, this plan can be forked and used as a starting point for those versions.
 
 This plan uses configuration templates from the Tomcat 8.5.x release and, as such, is exclusive to that release of Tomcat.
