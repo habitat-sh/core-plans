@@ -13,7 +13,7 @@ pkg_build_deps=(
   core/coreutils
   core/diffutils
   core/gcc
-  core/make
+  core/ninja
   core/python2
 )
 pkg_deps=(
@@ -54,16 +54,16 @@ do_unpack() {
 do_build() {
   mkdir -p build
   cd build || exit
-  cmake -DCMAKE_INSTALL_PREFIX:PATH="$pkg_prefix" -G "Unix Makefiles" ../
-  make
+  cmake -DCMAKE_INSTALL_PREFIX:PATH="$pkg_prefix" -G "Ninja" ../
+  ninja
 }
 
 do_check() {
   cd build || exit
-  make check
+  ninja check
 }
 
 do_install() {
   cd build || exit
-  make install
+  ninja install
 }
