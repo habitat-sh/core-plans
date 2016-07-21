@@ -7,16 +7,16 @@ pkg_license=('LGPL-3.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://ftp.gnu.org/pub/gnu/guile/guile-${pkg_version}.tar.xz"
 pkg_shasum=de8187736f9b260f2fa776ed39b52cb74dd389ccf7039c042f0606270196b7e9
-pkg_deps=(core/glibc
-          core/gcc-libs
-          core/libtool
-          core/gmp
-          core/libunistring
-          core/libffi
-          core/bdwgc
-          core/readline
-          core/libatomic_ops)
-pkg_build_deps=(core/gcc core/make core/diffutils core/pkg-config)
+pkg_deps=(core/bdwgc
+  core/gcc-libs
+  core/glibc
+  core/gmp
+  core/libatomic_ops
+  core/libffi
+  core/libtool
+  core/libunistring
+  core/readline)
+pkg_build_deps=(core/diffutils core/gcc core/make core/pkg-config)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_bin_dirs=(bin)
