@@ -26,7 +26,6 @@ do_unpack() {
   tar xz --strip-components=1 -f "$unpack_file"
 
   popd > /dev/null
-  return 0
 }
 
 # The default implementation is to update the prefix path for the configure script to

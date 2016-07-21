@@ -22,8 +22,8 @@ password = "password"
 roles = "manager-gui,manager-script,manager-jmx,manager-status" 
 
 [[userdbrealm.users]]
-username = "bmeyer"
-password = "habitat"
+username = "someuser"
+password = "somepassword"
 roles = "manager-gui"
 
 [host]
