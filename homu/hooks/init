@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Link the config file to the place where homu is looking for it
+ln -sf "{{pkg.svc_config_path}}/cfg.toml" "{{pkg.svc_path}}"
+
+# Create a file for the database, ensure permissions are correct, and symlink.
+touch "{{pkg.svc_data_path}}/main.db"
+chown hab:hab "{{pkg.svc_data_path}}/main.db"
+ln -sf "{{pkg.svc_data_path}}/main.db" "{{pkg.svc_path}}"
+
+# Create a path for the cache and link it into the path where homu expects it to
+# be.
+mkdir -p "{{pkg.svc_var_path}}/cache"
+chown hab:hab "{{pkg.svc_var_path}}/cache"
+ln -sf "{{pkg.svc_var_path}}/cache" "{{pkg.path}}//lib/python3.5/site-packages"
+
+# TODO: The authenticity of host 'github.com (192.30.253.112)' can't be established.
+# RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
