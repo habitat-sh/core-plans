@@ -2,6 +2,8 @@ pkg_name=expect
 pkg_origin=core
 pkg_version=5.45
 pkg_license=('custom')
+pkg_description="A tool for automating interactive applications"
+pkg_upstream_url="http://expect.sourceforge.net/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=http://downloads.sourceforge.net/project/$pkg_name/Expect/${pkg_version}/${pkg_name}${pkg_version}.tar.gz
 pkg_shasum=b28dca90428a3b30e650525cdc16255d76bb6ccd65d448be53e620d95d5cc040
@@ -21,24 +23,22 @@ do_prepare() {
 
 do_build() {
   ./configure \
-    --prefix=$pkg_prefix \
-    --exec-prefix=$pkg_prefix \
-    --with-tcl=$(pkg_path_for tcl)/lib \
-    --with-tclinclude=$(pkg_path_for tcl)/include
+    --prefix="$pkg_prefix" \
+    --exec-prefix="$pkg_prefix" \
+    --with-tcl="$(pkg_path_for tcl)/lib" \
+    --with-tclinclude="$(pkg_path_for tcl)/include"
   make
 }
 
 do_check() {
-  # The test suite looks for `libgcc_s`, so we'll add it to the
-  # `LD_LIBRARY_PATH`.
-  make test LD_LIBRARY_PATH="$(pkg_path_for gcc)/lib"
+  make test
 }
 
 do_install() {
-  make install LD_LIBRARY_PATH="$(pkg_path_for gcc)/lib"
+  make install
 
   # Add an absolute path to `tclsh` in each script binary
-  find $pkg_prefix/bin \
+  find "$pkg_prefix/bin" \
     -type f \
     -exec sed -e "s,exec tclsh,exec $(pkg_path_for tcl)/bin/tclsh,g" -i {} \;
 }
