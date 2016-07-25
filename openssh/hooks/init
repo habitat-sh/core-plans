@@ -1,0 +1,7 @@
+#!/bin/bash
+
+mkdir -p {{pkg.svc_var_path}}/empty
+ssh-keygen -t dsa -f {{pkg.svc_config_path}}/ssh_host_dsa_key -N ""
+ssh-keygen -t rsa -f {{pkg.svc_config_path}}/ssh_host_rsa_key -N ""
+ssh-keygen -t ed25519 -f {{pkg.svc_config_path}}/ssh_host_ed25519_key -N ""
+ssh-keygen -t ecdsa -f {{pkg.svc_config_path}}/ssh_host_ecdsa_key -N ""
