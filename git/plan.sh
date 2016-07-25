@@ -17,6 +17,7 @@ pkg_deps=(
   core/gettext
   core/gcc-libs
   core/glibc
+  core/openssh
   core/perl
   core/zlib
 )
