@@ -13,12 +13,12 @@ pkg_deps=(core/glibc core/openssl core/zlib)
 pkg_build_deps=(core/coreutils core/gcc core/make)
 
 do_build() {
-  ./configure --prefix=${pkg_prefix} \
-              --sysconfdir=${pkg_svc_path}/config \
-              --localstatedir=${pkg_svc_path}/var \
-              --datadir=${pkg_svc_data_path} \
+  ./configure --prefix="${pkg_prefix}" \
+              --sysconfdir="${pkg_svc_path}/config" \
+              --localstatedir="${pkg_svc_path}/var" \
+              --datadir="${pkg_svc_data_path}" \
               --with-privsep-user=hab \
-              --with-privsep-path=${pkg_svc_var_path}/empty
+              --with-privsep-path="${pkg_svc_var_path}/empty"
   make
 }
 
