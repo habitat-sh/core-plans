@@ -4,14 +4,16 @@
 built by the Habitat core maintainers for the [Habitat](https://www.habitat.sh/)
 ecosystem.
 
-See [MAINTAINERS.md](MAINTAINERS.md) for a list of maintainers of the core
-plans. To become a maintainer, open a pull request to that file.
-
 See [CONTRIBUTING.md](CONTRIBUTING.md) for information about how to contribute
 to this project.
 
 The code for Habitat itself is in the
 [habitat-sh/habitat](https://github.com/habitat-sh/habitat/) GitHub repository.
+
+## Maintainers
+
+Maintainers for the Habitat core plans are listed in the
+[Habitat Maintainers List](https://github.com/habitat-sh/habitat/blob/master/MAINTAINERS.md#core-plans).
 
 ## License
 
