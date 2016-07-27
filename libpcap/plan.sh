@@ -17,3 +17,7 @@ do_build() {
   ./configure --prefix="$pkg_prefix" --with-pcap=linux
   make -j "$(nproc)"
 }
+
+do_check() {
+  make tests
+}
