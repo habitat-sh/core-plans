@@ -41,9 +41,9 @@ do_build() {
     --build=x86_64-linux-gnu \
     --host=x86_64-linux-gnu \
     --prefix="${pkg_prefix}" \
-    --sysconfdir=/etc \
-    --localstatedir=/var \
-    --libexecdir="${prefix}/lib/gdb" \
+    --sysconfdir="${pkg_svc_config_path}" \
+    --localstatedir="${pkg_svc_var_path}" \
+    --libexecdir="${pkg_prefix}/lib/gdb" \
     --enable-tui \
     --disable-maintainer-mode \
     --disable-dependency-tracking \
