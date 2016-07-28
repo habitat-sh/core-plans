@@ -1,10 +1,12 @@
 pkg_name=make
 pkg_origin=core
-pkg_version=4.1
+pkg_version=4.2.1
+pkg_description="Make is a tool which controls the generation of executables and other non-source files of a program from the program's source files."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('gplv3+')
+pkg_upstream_url=https://www.gnu.org/software/make/
+pkg_license=('GPL-3.0')
 pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.bz2
-pkg_shasum=0bc7613389650ee6a24554b52572a272f7356164fd2c4132b0bcf13123e4fca5
+pkg_shasum=d6e262bf3601b42d2b1e4ef8310029e1dcf20083c5446b4b7aa67081fdffc589
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/bash core/gettext core/gzip core/perl core/binutils)
 pkg_bin_dirs=(bin)
@@ -15,7 +17,7 @@ do_prepare() {
 
   # Don't look for library dependencies in the root system (i.e. `/lib`,
   # `/usr/lib`, etc.)
-  patch -p1 -i $PLAN_CONTEXT/no-sys-dirs.patch
+  patch -p1 -i "$PLAN_CONTEXT/no-sys-dirs.patch"
 }
 
 do_check() {
