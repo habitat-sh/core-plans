@@ -1,0 +1,489 @@
+Submitted By:            Armin K. <krejzi at email dot com>
+Date:                    2016-04-28
+Initial Package Version: 2.23
+Upstream Status:         Committed
+Origin:                  Upstream
+Description:             Various fixes for issues identified upstream,
+                         including a fix for CVE-2016-3075
+
+--- a/elf/sln.c	2016-02-18 18:54:00.000000000 +0100
++++ b/elf/sln.c	2016-04-27 16:55:49.115749405 +0200
+@@ -164,11 +164,11 @@
+ static int
+ makesymlink (const char *src, const char *dest)
+ {
+-  struct stat stats;
++  struct stat64 stats;
+   const char *error;
+
+   /* Destination must not be a directory. */
+-  if (lstat (dest, &stats) == 0)
++  if (lstat64 (dest, &stats) == 0)
+     {
+       if (S_ISDIR (stats.st_mode))
+ 	{
+--- a/nis/nis_call.c	2016-02-18 18:54:00.000000000 +0100
++++ b/nis/nis_call.c	2016-04-27 16:54:03.132148493 +0200
+@@ -680,16 +680,18 @@
+   /* Choose which entry should be evicted from the cache.  */
+   loc = &nis_server_cache[0];
+   if (*loc != NULL)
+-    for (i = 1; i < 16; ++i)
+-      if (nis_server_cache[i] == NULL)
+-	{
++    {
++      for (i = 1; i < 16; ++i)
++	if (nis_server_cache[i] == NULL)
++	  {
++	    loc = &nis_server_cache[i];
++	    break;
++	  }
++	else if ((*loc)->uses > nis_server_cache[i]->uses
++		 || ((*loc)->uses == nis_server_cache[i]->uses
++		     && (*loc)->expires > nis_server_cache[i]->expires))
+ 	  loc = &nis_server_cache[i];
+-	  break;
+-	}
+-      else if ((*loc)->uses > nis_server_cache[i]->uses
+-	       || ((*loc)->uses == nis_server_cache[i]->uses
+-		   && (*loc)->expires > nis_server_cache[i]->expires))
+-	loc = &nis_server_cache[i];
++    }
+   old = *loc;
+   *loc = new;
+
+--- a/resolv/nss_dns/dns-network.c	2016-02-18 18:54:00.000000000 +0100
++++ b/resolv/nss_dns/dns-network.c	2016-04-27 16:54:18.844143281 +0200
+@@ -118,17 +118,14 @@
+   } net_buffer;
+   querybuf *orig_net_buffer;
+   int anslen;
+-  char *qbuf;
+   enum nss_status status;
+
+   if (__res_maybe_init (&_res, 0) == -1)
+     return NSS_STATUS_UNAVAIL;
+
+-  qbuf = strdupa (name);
+-
+   net_buffer.buf = orig_net_buffer = (querybuf *) alloca (1024);
+
+-  anslen = __libc_res_nsearch (&_res, qbuf, C_IN, T_PTR, net_buffer.buf->buf,
++  anslen = __libc_res_nsearch (&_res, name, C_IN, T_PTR, net_buffer.buf->buf,
+ 			       1024, &net_buffer.ptr, NULL, NULL, NULL, NULL);
+   if (anslen < 0)
+     {
+--- a/resolv/res_init.c	2016-02-18 18:54:00.000000000 +0100
++++ b/resolv/res_init.c	2016-04-27 16:54:55.047594514 +0200
+@@ -594,7 +594,7 @@
+ 		statp->_vcsock = -1;
+ 		statp->_flags &= ~(RES_F_VC | RES_F_CONN);
+ 	}
+-	for (ns = 0; ns < statp->_u._ext.nscount; ns++)
++	for (ns = 0; ns < statp->nscount; ns++)
+ 		if (statp->_u._ext.nsaddrs[ns]) {
+ 			if (statp->_u._ext.nssocks[ns] != -1) {
+ 				close_not_cancel_no_status(statp->_u._ext.nssocks[ns]);
+--- a/resolv/res_send.c	2016-02-18 18:54:00.000000000 +0100
++++ b/resolv/res_send.c	2016-04-27 16:54:35.368199379 +0200
+@@ -649,6 +649,18 @@
+     return (struct sockaddr *) (void *) &statp->nsaddr_list[n];
+ }
+
++/* Close the resolver structure, assign zero to *RESPLEN2 if RESPLEN2
++   is not NULL, and return zero.  */
++static int
++__attribute__ ((warn_unused_result))
++close_and_return_error (res_state statp, int *resplen2)
++{
++  __res_iclose(statp, false);
++  if (resplen2 != NULL)
++    *resplen2 = 0;
++  return 0;
++}
++
+ /* The send_vc function is responsible for sending a DNS query over TCP
+    to the nameserver numbered NS from the res_state STATP i.e.
+    EXT(statp).nssocks[ns].  The function supports sending both IPv4 and
+@@ -1114,7 +1126,11 @@
+  retry_reopen:
+ 	retval = reopen (statp, terrno, ns);
+ 	if (retval <= 0)
+-		return retval;
++	  {
++	    if (resplen2 != NULL)
++	      *resplen2 = 0;
++	    return retval;
++	  }
+  retry:
+ 	evNowTime(&now);
+ 	evConsTime(&timeout, seconds, 0);
+@@ -1127,8 +1143,6 @@
+ 	int recvresp2 = buf2 == NULL;
+ 	pfd[0].fd = EXT(statp).nssocks[ns];
+ 	pfd[0].events = POLLOUT;
+-	if (resplen2 != NULL)
+-	  *resplen2 = 0;
+  wait:
+ 	if (need_recompute) {
+ 	recompute_resend:
+@@ -1136,9 +1150,7 @@
+ 		if (evCmpTime(finish, now) <= 0) {
+ 		poll_err_out:
+ 			Perror(statp, stderr, "poll", errno);
+-		err_out:
+-			__res_iclose(statp, false);
+-			return (0);
++			return close_and_return_error (statp, resplen2);
+ 		}
+ 		evSubTime(&timeout, &finish, &now);
+ 		need_recompute = 0;
+@@ -1185,7 +1197,9 @@
+ 		  }
+
+ 		*gotsomewhere = 1;
+-		return (0);
++		if (resplen2 != NULL)
++		  *resplen2 = 0;
++		return 0;
+ 	}
+ 	if (n < 0) {
+ 		if (errno == EINTR)
+@@ -1253,7 +1267,7 @@
+
+ 		      fail_sendmmsg:
+ 			Perror(statp, stderr, "sendmmsg", errno);
+-			goto err_out;
++			return close_and_return_error (statp, resplen2);
+ 		      }
+ 		  }
+ 		else
+@@ -1271,7 +1285,7 @@
+ 		      if (errno == EINTR || errno == EAGAIN)
+ 			goto recompute_resend;
+ 		      Perror(statp, stderr, "send", errno);
+-		      goto err_out;
++		      return close_and_return_error (statp, resplen2);
+ 		    }
+ 		  just_one:
+ 		    if (nwritten != 0 || buf2 == NULL || single_request)
+@@ -1349,7 +1363,7 @@
+ 				goto wait;
+ 			}
+ 			Perror(statp, stderr, "recvfrom", errno);
+-			goto err_out;
++			return close_and_return_error (statp, resplen2);
+ 		}
+ 		*gotsomewhere = 1;
+ 		if (__glibc_unlikely (*thisresplenp < HFIXEDSZ))       {
+@@ -1360,7 +1374,7 @@
+ 			       (stdout, ";; undersized: %d\n",
+ 				*thisresplenp));
+ 			*terrno = EMSGSIZE;
+-			goto err_out;
++			return close_and_return_error (statp, resplen2);
+ 		}
+ 		if ((recvresp1 || hp->id != anhp->id)
+ 		    && (recvresp2 || hp2->id != anhp->id)) {
+@@ -1409,7 +1423,7 @@
+ 				? *thisanssizp : *thisresplenp);
+ 			/* record the error */
+ 			statp->_flags |= RES_F_EDNS0ERR;
+-			goto err_out;
++			return close_and_return_error (statp, resplen2);
+ 	}
+ #endif
+ 		if (!(statp->options & RES_INSECURE2)
+@@ -1461,10 +1475,10 @@
+ 			    goto wait;
+ 			  }
+
+-			__res_iclose(statp, false);
+ 			/* don't retry if called from dig */
+ 			if (!statp->pfcode)
+-				return (0);
++			  return close_and_return_error (statp, resplen2);
++			__res_iclose(statp, false);
+ 		}
+ 		if (anhp->rcode == NOERROR && anhp->ancount == 0
+ 		    && anhp->aa == 0 && anhp->ra == 0 && anhp->arcount == 0) {
+@@ -1486,6 +1500,8 @@
+ 			__res_iclose(statp, false);
+ 			// XXX if we have received one reply we could
+ 			// XXX use it and not repeat it over TCP...
++			if (resplen2 != NULL)
++			  *resplen2 = 0;
+ 			return (1);
+ 		}
+ 		/* Mark which reply we received.  */
+@@ -1501,21 +1517,22 @@
+ 					__res_iclose (statp, false);
+ 					retval = reopen (statp, terrno, ns);
+ 					if (retval <= 0)
+-						return retval;
++					  {
++					    if (resplen2 != NULL)
++					      *resplen2 = 0;
++					    return retval;
++					  }
+ 					pfd[0].fd = EXT(statp).nssocks[ns];
+ 				}
+ 			}
+ 			goto wait;
+ 		}
+-		/*
+-		 * All is well, or the error is fatal.  Signal that the
+-		 * next nameserver ought not be tried.
+-		 */
++		/* All is well.  We have received both responses (if
++		   two responses were requested).  */
+ 		return (resplen);
+-	} else if (pfd[0].revents & (POLLERR | POLLHUP | POLLNVAL)) {
+-		/* Something went wrong.  We can stop trying.  */
+-		goto err_out;
+-	}
++	} else if (pfd[0].revents & (POLLERR | POLLHUP | POLLNVAL))
++	  /* Something went wrong.  We can stop trying.  */
++	  return close_and_return_error (statp, resplen2);
+ 	else {
+ 		/* poll should not have returned > 0 in this case.  */
+ 		abort ();
+--- a/stdlib/setenv.c	2016-02-18 18:54:00.000000000 +0100
++++ b/stdlib/setenv.c	2016-04-27 16:54:03.132148493 +0200
+@@ -278,18 +278,20 @@
+   ep = __environ;
+   if (ep != NULL)
+     while (*ep != NULL)
+-      if (!strncmp (*ep, name, len) && (*ep)[len] == '=')
+-	{
+-	  /* Found it.  Remove this pointer by moving later ones back.  */
+-	  char **dp = ep;
++      {
++	if (!strncmp (*ep, name, len) && (*ep)[len] == '=')
++	  {
++	    /* Found it.  Remove this pointer by moving later ones back.  */
++	    char **dp = ep;
+
+-	  do
+-	    dp[0] = dp[1];
+-	  while (*dp++);
+-	  /* Continue the loop in case NAME appears again.  */
+-	}
+-      else
+-	++ep;
++	    do
++		dp[0] = dp[1];
++	    while (*dp++);
++	    /* Continue the loop in case NAME appears again.  */
++	  }
++	else
++	  ++ep;
++      }
+
+   UNLOCK;
+
+--- a/sysdeps/i386/i686/multiarch/bcopy.S	2016-02-18 18:54:00.000000000 +0100
++++ b/sysdeps/i386/i686/multiarch/bcopy.S	2016-04-27 16:55:36.725722535 +0200
+@@ -36,7 +36,7 @@
+ 	HAS_CPU_FEATURE (SSSE3)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX (__bcopy_ssse3)
+-	HAS_CPU_FEATURE (Fast_Rep_String)
++	HAS_ARCH_FEATURE (Fast_Rep_String)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX (__bcopy_ssse3_rep)
+ 2:	ret
+--- a/sysdeps/i386/i686/multiarch/bzero.S	2016-02-18 18:54:00.000000000 +0100
++++ b/sysdeps/i386/i686/multiarch/bzero.S	2016-04-27 16:55:36.725722535 +0200
+@@ -31,7 +31,7 @@
+ 	HAS_CPU_FEATURE (SSE2)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX ( __bzero_sse2)
+-	HAS_CPU_FEATURE (Fast_Rep_String)
++	HAS_ARCH_FEATURE (Fast_Rep_String)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX (__bzero_sse2_rep)
+ 2:	ret
+--- a/sysdeps/i386/i686/multiarch/memcpy_chk.S	2016-02-18 18:54:00.000000000 +0100
++++ b/sysdeps/i386/i686/multiarch/memcpy_chk.S	2016-04-27 16:55:36.725722535 +0200
+@@ -39,7 +39,7 @@
+ 	HAS_CPU_FEATURE (SSSE3)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX (__memcpy_chk_ssse3)
+-	HAS_CPU_FEATURE (Fast_Rep_String)
++	HAS_ARCH_FEATURE (Fast_Rep_String)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX (__memcpy_chk_ssse3_rep)
+ 2:	ret
+--- a/sysdeps/i386/i686/multiarch/memcpy.S	2016-02-18 18:54:00.000000000 +0100
++++ b/sysdeps/i386/i686/multiarch/memcpy.S	2016-04-27 16:55:36.725722535 +0200
+@@ -38,7 +38,7 @@
+ 	HAS_CPU_FEATURE (SSSE3)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX (__memcpy_ssse3)
+-	HAS_CPU_FEATURE (Fast_Rep_String)
++	HAS_ARCH_FEATURE (Fast_Rep_String)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX (__memcpy_ssse3_rep)
+ 2:	ret
+--- a/sysdeps/i386/i686/multiarch/memmove_chk.S	2016-02-18 18:54:00.000000000 +0100
++++ b/sysdeps/i386/i686/multiarch/memmove_chk.S	2016-04-27 16:55:36.725722535 +0200
+@@ -36,7 +36,7 @@
+ 	HAS_CPU_FEATURE (SSSE3)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX (__memmove_chk_ssse3)
+-	HAS_CPU_FEATURE (Fast_Rep_String)
++	HAS_ARCH_FEATURE (Fast_Rep_String)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX (__memmove_chk_ssse3_rep)
+ 2:	ret
+--- a/sysdeps/i386/i686/multiarch/mempcpy_chk.S	2016-02-18 18:54:00.000000000 +0100
++++ b/sysdeps/i386/i686/multiarch/mempcpy_chk.S	2016-04-27 16:55:36.725722535 +0200
+@@ -39,7 +39,7 @@
+ 	HAS_CPU_FEATURE (SSSE3)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX (__mempcpy_chk_ssse3)
+-	HAS_CPU_FEATURE (Fast_Rep_String)
++	HAS_ARCH_FEATURE (Fast_Rep_String)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX (__mempcpy_chk_ssse3_rep)
+ 2:	ret
+--- a/sysdeps/i386/i686/multiarch/mempcpy.S	2016-02-18 18:54:00.000000000 +0100
++++ b/sysdeps/i386/i686/multiarch/mempcpy.S	2016-04-27 16:55:36.725722535 +0200
+@@ -38,7 +38,7 @@
+ 	HAS_CPU_FEATURE (SSSE3)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX (__mempcpy_ssse3)
+-	HAS_CPU_FEATURE (Fast_Rep_String)
++	HAS_ARCH_FEATURE (Fast_Rep_String)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX (__mempcpy_ssse3_rep)
+ 2:	ret
+--- a/sysdeps/i386/i686/multiarch/memset_chk.S	2016-02-18 18:54:00.000000000 +0100
++++ b/sysdeps/i386/i686/multiarch/memset_chk.S	2016-04-27 16:55:36.725722535 +0200
+@@ -31,7 +31,7 @@
+ 	HAS_CPU_FEATURE (SSE2)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX (__memset_chk_sse2)
+-	HAS_CPU_FEATURE (Fast_Rep_String)
++	HAS_ARCH_FEATURE (Fast_Rep_String)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX (__memset_chk_sse2_rep)
+ 2:	ret
+--- a/sysdeps/i386/i686/multiarch/memset.S	2016-02-18 18:54:00.000000000 +0100
++++ b/sysdeps/i386/i686/multiarch/memset.S	2016-04-27 16:55:36.725722535 +0200
+@@ -31,7 +31,7 @@
+ 	HAS_CPU_FEATURE (SSE2)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX (__memset_sse2)
+-	HAS_CPU_FEATURE (Fast_Rep_String)
++	HAS_ARCH_FEATURE (Fast_Rep_String)
+ 	jz	2f
+ 	LOAD_FUNC_GOT_EAX (__memset_sse2_rep)
+ 2:	ret
+--- a/sysdeps/unix/sysv/linux/x86_64/64/dl-librecon.h	2016-02-18 18:54:00.000000000 +0100
++++ b/sysdeps/unix/sysv/linux/x86_64/64/dl-librecon.h	2016-04-27 16:55:09.392152302 +0200
+@@ -33,7 +33,7 @@
+   case 21:							      \
+     if (memcmp (envline, "PREFER_MAP_32BIT_EXEC", 21) == 0)	      \
+       GLRO(dl_x86_cpu_features).feature[index_Prefer_MAP_32BIT_EXEC]  \
+-	= bit_Prefer_MAP_32BIT_EXEC;				      \
++	|= bit_Prefer_MAP_32BIT_EXEC;				      \
+     break;
+
+ /* Extra unsecure variables.  The names are all stuffed in a single
+--- a/sysdeps/x86/bits/string.h	2016-02-18 18:54:00.000000000 +0100
++++ b/sysdeps/x86/bits/string.h	2016-04-27 16:55:24.429765840 +0200
+@@ -23,6 +23,9 @@
+ /* Use the unaligned string inline ABI.  */
+ #define _STRING_INLINE_unaligned 1
+
++/* Don't inline mempcpy into memcpy as x86 has an optimized mempcpy.  */
++#define _HAVE_STRING_ARCH_mempcpy 1
++
+ /* Enable inline functions only for i486 or better when compiling for
+    ia32.  */
+ #if !defined __x86_64__ && (defined __i486__ || defined __pentium__	      \
+--- a/sysdeps/x86_64/dl-trampoline.h	2016-02-18 18:54:00.000000000 +0100
++++ b/sysdeps/x86_64/dl-trampoline.h	2016-04-27 16:56:07.128466978 +0200
+@@ -30,7 +30,7 @@
+ #undef REGISTER_SAVE_AREA
+ #undef LOCAL_STORAGE_AREA
+ #undef BASE
+-#if DL_RUNIME_RESOLVE_REALIGN_STACK
++#if DL_RUNTIME_RESOLVE_REALIGN_STACK
+ # define REGISTER_SAVE_AREA	(REGISTER_SAVE_AREA_RAW + 8)
+ /* Local stack area before jumping to function address: RBX.  */
+ # define LOCAL_STORAGE_AREA	8
+@@ -57,7 +57,7 @@
+ 	cfi_startproc
+ _dl_runtime_resolve:
+ 	cfi_adjust_cfa_offset(16) # Incorporate PLT
+-#if DL_RUNIME_RESOLVE_REALIGN_STACK
++#if DL_RUNTIME_RESOLVE_REALIGN_STACK
+ # if LOCAL_STORAGE_AREA != 8
+ #  error LOCAL_STORAGE_AREA must be 8
+ # endif
+@@ -146,7 +146,7 @@
+ 	VMOV (REGISTER_SAVE_VEC_OFF + VEC_SIZE * 5)(%rsp), %VEC(5)
+ 	VMOV (REGISTER_SAVE_VEC_OFF + VEC_SIZE * 6)(%rsp), %VEC(6)
+ 	VMOV (REGISTER_SAVE_VEC_OFF + VEC_SIZE * 7)(%rsp), %VEC(7)
+-#if DL_RUNIME_RESOLVE_REALIGN_STACK
++#if DL_RUNTIME_RESOLVE_REALIGN_STACK
+ 	mov %RBX_LP, %RSP_LP
+ 	cfi_def_cfa_register(%rsp)
+ 	movq (%rsp), %rbx
+--- a/sysdeps/x86_64/dl-trampoline.S	2016-02-18 18:54:00.000000000 +0100
++++ b/sysdeps/x86_64/dl-trampoline.S	2016-04-27 16:56:07.128466978 +0200
+@@ -33,15 +33,19 @@
+ # define DL_STACK_ALIGNMENT 8
+ #endif
+
+-#ifndef DL_RUNIME_UNALIGNED_VEC_SIZE
+-/* The maximum size of unaligned vector load and store.  */
+-# define DL_RUNIME_UNALIGNED_VEC_SIZE 16
++#ifndef DL_RUNTIME_UNALIGNED_VEC_SIZE
++/* The maximum size in bytes of unaligned vector load and store in the
++   dynamic linker.  Since SSE optimized memory/string functions with
++   aligned SSE register load and store are used in the dynamic linker,
++   we must set this to 8 so that _dl_runtime_resolve_sse will align the
++   stack before calling _dl_fixup.  */
++# define DL_RUNTIME_UNALIGNED_VEC_SIZE 8
+ #endif
+
+ /* True if _dl_runtime_resolve should align stack to VEC_SIZE bytes.  */
+-#define DL_RUNIME_RESOLVE_REALIGN_STACK \
++#define DL_RUNTIME_RESOLVE_REALIGN_STACK \
+   (VEC_SIZE > DL_STACK_ALIGNMENT \
+-   && VEC_SIZE > DL_RUNIME_UNALIGNED_VEC_SIZE)
++   && VEC_SIZE > DL_RUNTIME_UNALIGNED_VEC_SIZE)
+
+ /* Align vector register save area to 16 bytes.  */
+ #define REGISTER_SAVE_VEC_OFF	0
+@@ -76,7 +80,7 @@
+ #ifdef HAVE_AVX512_ASM_SUPPORT
+ # define VEC_SIZE		64
+ # define VMOVA			vmovdqa64
+-# if DL_RUNIME_RESOLVE_REALIGN_STACK || VEC_SIZE <= DL_STACK_ALIGNMENT
++# if DL_RUNTIME_RESOLVE_REALIGN_STACK || VEC_SIZE <= DL_STACK_ALIGNMENT
+ #  define VMOV			vmovdqa64
+ # else
+ #  define VMOV			vmovdqu64
+@@ -100,7 +104,7 @@
+
+ #define VEC_SIZE		32
+ #define VMOVA			vmovdqa
+-#if DL_RUNIME_RESOLVE_REALIGN_STACK || VEC_SIZE <= DL_STACK_ALIGNMENT
++#if DL_RUNTIME_RESOLVE_REALIGN_STACK || VEC_SIZE <= DL_STACK_ALIGNMENT
+ # define VMOV			vmovdqa
+ #else
+ # define VMOV			vmovdqu
+@@ -119,7 +123,7 @@
+ /* movaps/movups is 1-byte shorter.  */
+ #define VEC_SIZE		16
+ #define VMOVA			movaps
+-#if DL_RUNIME_RESOLVE_REALIGN_STACK || VEC_SIZE <= DL_STACK_ALIGNMENT
++#if DL_RUNTIME_RESOLVE_REALIGN_STACK || VEC_SIZE <= DL_STACK_ALIGNMENT
+ # define VMOV			movaps
+ #else
+ # define VMOV			movups
