@@ -4,8 +4,8 @@ pkg_version=7.11.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-3.0')
 pkg_description="GDB, the GNU Project debugger, allows you to see what is going on 'inside' another program while it executes -- or what another program was doing at the moment it crashed."
-pkg_upstream_url=https://www.gnu.org/software/gdb/
-pkg_source=http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz
+pkg_upstream_url="https://www.gnu.org/software/gdb/"
+pkg_source="http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum=e9216da4e3755e9f414c1aa0026b626251dfc57ffe572a266e98da4f6988fc70
 pkg_deps=(
   core/glibc
@@ -57,7 +57,7 @@ do_build() {
     --with-expat \
     --without-guile \
     --without-babeltrace \
-    --with-system-gdbinit=/etc/gdb/gdbinit \
+    --with-system-gdbinit="${pkg_svc_config_path}/gdb/gdbinit" \
     --with-python=python3
 
   make -j "$(nproc)"
