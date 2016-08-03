@@ -1,5 +1,5 @@
 #!/bin/sh
 #
 
-mkdir {{pkg.svc_path}}/cache/
-mkdir {{pkg.svc_path}}/www/
+mkdir -p {{pkg.svc_path}}/cache/
+mkdir -p {{pkg.svc_path}}/www/
