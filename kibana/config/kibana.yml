@@ -6,7 +6,13 @@ server.basePath: {{cfg.server.basePath}}
 {{~/if}}
 
 server.maxPayloadBytes: {{cfg.server.maxPayloadBytes}}
+
+{{~#if bind.has_backend}}
+elasticsearch.url: "http://{{bind.backend.members.[0].ip}}:9200"
+{{else}}
 elasticsearch.url: {{cfg.elasticsearch.url}}
+{{~/if}}
+
 elasticsearch.preserveHost: {{cfg.elasticsearch.preserveHost}}
 kibana.index: {{cfg.kibana.index}}
 kibana.defaultAppId: {{cfg.kibana.defaultAppId}}
@@ -30,7 +36,10 @@ elasticsearch.ssl.key: {{cfg.elasticsearch.ssl.key}}
 elasticsearch.ssl.ca: {{cfg.elasticsearch.ssl.ca}}
 {{~/if}}
 
+{{~#if cfg.elasticsearch.ssl.verify}}
 elasticsearch.ssl.verify: {{cfg.elasticsearch.ssl.verify}}
+{{~/if}}
+
 elasticsearch.pingTimeout: {{cfg.elasticsearch.pingTimeout}}
 elasticsearch.requestTimeout: {{cfg.elasticsearch.requestTimeout}}
 elasticsearch.shardTimeout: {{cfg.elasticsearch.shardTimeout}}
