@@ -9,7 +9,7 @@ pkg_source=$_url_base/${pkg_name}-x86_64-unknown-linux-gnu.tar.gz
 pkg_upstream_url=https://github.com/rust-lang/cargo
 pkg_dirname=${pkg_name}-x86_64-unknown-linux-gnu
 pkg_bin_dirs=(bin)
-pkg_deps=(core/glibc core/gcc-libs core/zlib core/gcc core/cacerts)
+pkg_deps=(core/glibc core/gcc-libs core/zlib core/gcc core/cacerts core/busybox-static)
 pkg_build_deps=(core/patchelf core/coreutils)
 
 do_download() {
@@ -35,6 +35,22 @@ do_install() {
     --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" \
     --set-rpath "$LD_RUN_PATH" \
     "$pkg_prefix/bin/cargo"
+
+  # Add a wrapper for cargo to properly set SSL certificates
+  wrap_with_cert_path cargo
+}
+
+wrap_with_cert_path() {
+  local bin="$pkg_prefix/bin/$1"
+  build_line "Adding wrapper $bin to ${bin}.real"
+  mv -v "$bin" "${bin}.real"
+  cat <<EOF > "$bin"
+#!$(pkg_path_for busybox-static)/bin/sh
+set -e
+export SSL_CERT_FILE="$(pkg_path_for cacerts)/ssl/cert.pem"
+exec ${bin}.real \$@
+EOF
+  chmod -v 755 "$bin"
 }
 
 do_strip() {
