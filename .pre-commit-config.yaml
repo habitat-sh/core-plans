@@ -7,11 +7,13 @@
     -   id: check-yaml
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
+    exclude: config/.*$
 -   repo: git://github.com/detailyang/pre-commit-shell
     sha: 28f9ecf7857d17ebd9d1715cb5bf208c9e8e2bdd
     hooks:
     -   id: shell-lint
         args: ["--exclude=SC1090,SC1091,SC2034,SC2039,SC2148,SC2153,SC2154"]
+    exclude: config/.*$
 -   repo: local
     hooks:
     -   id: check-default-variables
