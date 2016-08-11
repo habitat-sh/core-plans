@@ -71,6 +71,7 @@ bash_prog.write(<<'EOF')
 set -e
 STUDIO_TYPE=stage1
 FIRST_PASS=true
+PLAN_CONTEXT=$(pwd)/$(dirname $1)
 
 cd $(dirname $1)
 source $(basename $1)
