@@ -1,6 +1,7 @@
 maxconn = 32
 mode = "http"
 bind = "*:80"
+httpchk = "GET /favicon.ico"
 
 stats_enable = false
 stats_bind = "*:8000"
