@@ -26,7 +26,7 @@ do_download() {
   # skip re-downloading if already present and verified
   for i in $(seq 0 $((${#_target_sources[@]} - 1))); do
     p="${_target_sources[$i]}"
-    download_file $p $(basename $p) ${_target_shasums[$i]}
+    download_file "$p" "$(basename "$p")" "${_target_shasums[$i]}"
   done; unset i p
 }
 
@@ -35,17 +35,17 @@ do_verify() {
 
   # Verify all target sources against their shasums
   for i in $(seq 0 $((${#_target_sources[@]} - 1))); do
-    verify_file $(basename ${_target_sources[$i]}) ${_target_shasums[$i]}
+    verify_file "$(basename "${_target_sources[$i]}")" "${_target_shasums[$i]}"
   done; unset i
 }
 
 do_unpack() {
   do_default_unpack
 
-  pushd $HAB_CACHE_SRC_PATH/$pkg_dirname > /dev/null
+  pushd "$HAB_CACHE_SRC_PATH/$pkg_dirname" > /dev/null
     # Unpack all targets inside the main source directory
     for i in $(seq 0 $((${#_target_sources[@]} - 1))); do
-      tar xf $HAB_CACHE_SRC_PATH/$(basename ${_target_sources[$i]})
+      tar xf "$HAB_CACHE_SRC_PATH/$(basename "${_target_sources[$i]}")"
     done; unset i
   popd > /dev/null
 }
@@ -55,7 +55,7 @@ do_build() {
 }
 
 do_install() {
-  ./install.sh --prefix=$pkg_prefix --disable-ldconfig
+  ./install.sh --prefix="$pkg_prefix" --disable-ldconfig
 
   # Update the dynamic linker & set `RUNPATH` for all ELF binaries under `bin/`
   for b in rustc cargo rustdoc; do
@@ -69,17 +69,18 @@ do_install() {
   #    SSL_CERT_FILE=$(pkg_path_for cacerts)/ssl/cert.pem \
 
     # Set `RUNPATH` for all shared libraries under `lib/`
-  find $pkg_prefix/lib -name *.so \
-    | xargs -I '%' patchelf \
+  find "$pkg_prefix/lib" -name "*.so" -print0 \
+    | xargs -0 -I '%' patchelf \
       --set-rpath "$LD_RUN_PATH" \
       %
 
   # Install all targets
+  local dir
   for i in $(seq 0 $((${#_target_sources[@]} - 1))); do
-    local dir="$(basename ${_target_sources[$i]/%.tar.gz/})"
-    pushd $HAB_CACHE_SRC_PATH/$pkg_dirname/$dir > /dev/null
+    dir="$(basename "${_target_sources[$i]/%.tar.gz/}")"
+    pushd "$HAB_CACHE_SRC_PATH/$pkg_dirname/$dir" > /dev/null
       build_line "Installing $dir target for Rust"
-      ./install.sh --prefix=$($pkg_prefix/bin/rustc --print sysroot)
+      ./install.sh --prefix="$("$pkg_prefix/bin/rustc" --print sysroot)"
     popd > /dev/null
   done; unset i
 
