@@ -1,13 +1,10 @@
 maxconn = 32
 mode = "http"
 bind = "*:80"
-
 stats_enabled = false
-stats_listen = ":8000"
-stats_mode = "http"
 stats_password = ""
 stats_realm = "haproxy_stats"
-stats_uri = "/haproxy?stats"
+stats_uri = "/haproxy_stats"
 stats_user = ""
 
 [[server]]
