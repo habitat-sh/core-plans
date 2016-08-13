@@ -1,6 +1,6 @@
 pkg_name=glibc
 pkg_origin=core
-pkg_version=2.23
+pkg_version=2.24
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0' 'LGPL-2.0')
 pkg_description="$(cat << EOF
@@ -12,7 +12,7 @@ pkg_description="$(cat << EOF
 EOF
 )"
 pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=94efeb00e4603c8546209cefb3e1a50a5315c86fa9b078b6fad758e187ce13e9
+pkg_shasum=99d4a3e8efd144d71488e478f62587578c0f4e1fa0b4eed47ee3d4975ebeb5d3
 pkg_upstream_url=https://www.gnu.org/software/libc
 pkg_deps=(core/linux-headers)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed core/perl)
@@ -67,11 +67,6 @@ do_prepare() {
   #
   # Source: https://lists.debian.org/debian-glibc/2013/11/msg00116.html
   patch -p1 < "$PLAN_CONTEXT/testsuite-fix.patch"
-
-  # Fix for CVE-2016-3075 and more
-  #
-  # Source: http://www.linuxfromscratch.org/patches/downloads/glibc/glibc-2.23-upstream_fixes-1.patch
-  patch -p1 < "$PLAN_CONTEXT/glibc-2.23-upstream_fixes-1.patch"
 
   # Adjust `scripts/test-installation.pl` to use our new dynamic linker
   sed -i "s|libs -o|libs -L${pkg_prefix}/lib -Wl,-dynamic-linker=${dynamic_linker} -o|" \
@@ -190,7 +185,7 @@ do_install() {
     # a multilib installation is assumed (i.e. 32-bit and 64-bit). We will
     # fool this check by symlinking a "32-bit" file to the real loader.
     mkdir -p "$pkg_prefix/lib"
-    ln -sv ld-2.23.so "$pkg_prefix/lib/ld-linux.so.2"
+    ln -sv ld-${pkg_version}.so "$pkg_prefix/lib/ld-linux.so.2"
 
     # Add a `lib64` -> `lib` symlink for `bin/ldd` to work correctly.
     #
