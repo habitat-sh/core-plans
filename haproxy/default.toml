@@ -1,6 +1,7 @@
 maxconn = 32
 mode = "http"
 bind = "*:80"
+httpchk = "GET /"
 
 [[server]]
 name = "first"
