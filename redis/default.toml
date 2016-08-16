@@ -23,6 +23,10 @@ tcp-backlog = 511
 # bind = [] - listen on all interfaces
 bind = []
 
+# By default, run Redis in protected mode.
+# Uncomment to disable.
+# protected-mode = "no"
+
 # Listen on a unix socket
 # unixsocket = "/tmp/redis.sock"
 # unixsocketperm = 700
