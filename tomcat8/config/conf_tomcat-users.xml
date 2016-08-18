@@ -41,12 +41,12 @@
   <user username="both" password="<must-be-changed>" roles="tomcat,role1"/>
   <user username="role1" password="<must-be-changed>" roles="role1"/>
 -->
-
-{{#each cfg.userdbrealm.roles}}
+{{~#each cfg.userdbrealm.roles}}
   <role rolename="{{this}}"/>
-{{/each}}
-{{#each cfg.userdbrealm.users}}
+{{~/each}}
+{{~#each cfg.userdbrealm.users}}
+  {{~#if password}}
   <user username="{{username}}" password="{{password}}" roles="{{roles}}"/>
-{{/each}}
-
+  {{~/if}}
+{{~/each}}
 </tomcat-users>
