@@ -1,10 +1,10 @@
 pkg_name=patchelf
 pkg_origin=core
-pkg_version=0.8
+pkg_version=0.9
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('gplv3')
 pkg_source=http://releases.nixos.org/$pkg_name/${pkg_name}-$pkg_version/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=14af06a2da688d577d64ff8dac065bb8903bbffbe01d30c62df7af9bf4ce72fe
+pkg_shasum=f2aa40a6148cb3b0ca807a1bf836b081793e55ec9e5540a5356d800132be7e0a
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
 pkg_bin_dirs=(bin)
 
