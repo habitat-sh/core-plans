@@ -1,4 +1,5 @@
 pkg_name=patchelf
+pkg_description="A small utility to modify the dynamic linker and RPATH of ELF executables"
 pkg_origin=core
 pkg_version=0.9
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
