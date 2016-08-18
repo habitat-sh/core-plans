@@ -53,4 +53,9 @@ do_install() {
     build_line "Performing install"
     mkdir -p "${pkg_prefix}/tc"
     cp -vR ./* "${pkg_prefix}/tc"
+
+    # default permissions included in the tarball don't give any world access
+    find "${pkg_prefix}/tc" -type d -exec chmod -v 755 {} +
+    find "${pkg_prefix}/tc" -type f -exec chmod -v 644 {} +
+    find "${pkg_prefix}/tc" -type f -name '*.sh' -exec chmod -v 755 {} +
 }
