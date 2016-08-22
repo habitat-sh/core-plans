@@ -1,4 +1,5 @@
 pkg_name=rngd
+pkg_description="Check and feed random data from hardware device to kernel"
 pkg_origin=core
 pkg_version=5
 pkg_license=('gplv2')
@@ -11,3 +12,4 @@ pkg_deps=(core/glibc)
 pkg_dirname=rng-tools-5
 pkg_svc_run="sbin/rngd -f -r /dev/urandom"
 pkg_svc_user=root
+pkg_svc_group=root
