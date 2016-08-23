@@ -9,4 +9,4 @@ export TOMCAT_HOME="{{pkg.svc_var_path}}/tc"
 export CATALINA_OPTS="{{cfg.server.catalina-opts}}"
 
 echo "Executing Tomcat here: ${TOMCAT_HOME}/bin/catalina.sh"
-exec chpst -u hab:hab ${TOMCAT_HOME}/bin/catalina.sh run
+exec ${TOMCAT_HOME}/bin/catalina.sh run
