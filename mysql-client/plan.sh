@@ -34,7 +34,6 @@ pkg_build_deps=(
   core/boost159
 )
 
-pkg_svc_user="hab"
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
