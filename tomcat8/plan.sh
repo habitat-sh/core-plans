@@ -15,9 +15,6 @@ pkg_deps=(
 )
 pkg_expose=(8080 8443)
 
-pkg_svc_user="root"
-pkg_svc_group="root"
-
 # The default implementation extracts your tarball source file into HAB_CACHE_SRC_PATH. The
 # supported archives are: .tar, .tar.bz2, .tar.gz, .tar.xz, .rar, .zip, .Z, .7z. If the file
 # archive could not be found or was not supported, then a message will be printed to stderr
@@ -53,4 +50,9 @@ do_install() {
     build_line "Performing install"
     mkdir -p "${pkg_prefix}/tc"
     cp -vR ./* "${pkg_prefix}/tc"
+
+    # default permissions included in the tarball don't give any world access
+    find "${pkg_prefix}/tc" -type d -exec chmod -v 755 {} +
+    find "${pkg_prefix}/tc" -type f -exec chmod -v 644 {} +
+    find "${pkg_prefix}/tc" -type f -name '*.sh' -exec chmod -v 755 {} +
 }
