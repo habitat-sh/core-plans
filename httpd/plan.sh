@@ -1,5 +1,5 @@
 pkg_name=httpd
-pkg_origin=myorigin
+pkg_origin=core
 pkg_version=2.4.23
 pkg_description="The Apache HTTP Server"
 pkg_upstream_url="http://httpd.apache.org/"
