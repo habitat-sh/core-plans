@@ -25,9 +25,6 @@ pkg_svc_user=root
 pkg_svc_group=root
 
 do_prepare() {
-    echo ""
-    echo "STARTING MONGODB BUILD PREPARATION"
-
     #WARNING:this build takes around 1 hour and 30 minutes to complete on
     #        a macbook pro with an i5 and 8 GB RAM
 
@@ -47,25 +44,14 @@ do_prepare() {
 }
 
 do_build() {
-    echo ""
-    echo "STARTING MONGODB BUILD"
     scons core --prefix="$pkg_prefix" --ssl
 }
 
 do_check() {
-    echo ""
-    echo "STARTING MONGODB CHECK"
     scons dbtest --prefix="$pkg_prefix" --ssl
     python buildscripts/resmoke.py --suites=dbtest
 }
 
 do_install() {
-    echo ""
-    echo "STARTING MONGODB INSTALL"
     scons install --prefix="$pkg_prefix" --ssl
-}
-
-do_end() {
-    echo ""
-    echo "ENDING MONGODB BUILD PROCESS"
 }
