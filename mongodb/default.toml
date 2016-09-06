@@ -1,0 +1,2 @@
+port = 27017
+replsetname = "rs1"
