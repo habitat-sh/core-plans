@@ -1,0 +1,5 @@
+#/bin/sh
+#
+
+mkdir -p {{pkg.svc_data_path}}/db
+mkdir -p {{pkg.svc_files_path}}/tmp

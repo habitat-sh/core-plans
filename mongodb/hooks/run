@@ -1,0 +1,4 @@
+#!/bin/sh
+#
+
+exec {{pkg.path}}/bin/mongod --config {{pkg.svc_config_path}}/mongod.conf 2>&1
