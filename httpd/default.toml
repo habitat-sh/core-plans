@@ -6,7 +6,7 @@ listen = ["80"]
 user = "hab"
 group = "hab"
 default_modules = [	"access_compat", "alias", "auth_basic", "authn_file", "authn_core", "authz_host",
-                    "authz_groupfile", "authz_user", "authz_core", "autoindex", "dir", "env", "filter",
+                    "authz_groupfile", "authz_user", "autoindex", "dir", "env", "filter",
                     "headers", "log_config", "mime", "reqtimeout", "setenvif", "ssl", "status", "version" ]
 
 #httpd-default settings

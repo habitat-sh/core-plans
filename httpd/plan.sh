@@ -12,6 +12,7 @@ pkg_build_deps=(core/patch core/make core/gcc)
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_expose=(80 443)
+pkg_svc_run="$pkg_prefix/bin/httpd -DFOREGROUND -f $pkg_svc_config_path/httpd.conf"
 pkg_svc_user="root"
 pkg_svc_group="root"
 
@@ -25,7 +26,7 @@ do_build() {
                 --with-z="$(pkg_path_for core/zlib)" \
                 --with-ssl="$(pkg_path_for core/openssl)" \
                 --enable-modules="none" \
-                --enable-mods-static="unixd" \
+                --enable-mods-static="unixd authz_core" \
                 --enable-mods-shared="reallyall" \
                 --enable-mpms-shared="prefork event worker"
     make

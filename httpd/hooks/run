@@ -1,4 +1,0 @@
-#!/bin/sh
-#
-
-exec {{pkg.path}}/bin/httpd -DFOREGROUND -f {{pkg.svc_config_path}}/httpd.conf 2>&1
