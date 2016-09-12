@@ -26,7 +26,7 @@ do_build() {
                 --with-z="$(pkg_path_for core/zlib)" \
                 --with-ssl="$(pkg_path_for core/openssl)" \
                 --enable-modules="none" \
-                --enable-mods-static="unixd authz_core" \
+                --enable-mods-static="none" \
                 --enable-mods-shared="reallyall" \
                 --enable-mpms-shared="prefork event worker"
     make
