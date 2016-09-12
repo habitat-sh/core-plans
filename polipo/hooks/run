@@ -2,4 +2,4 @@
 #
 
 cd {{pkg.svc_path}}
-polipo -c {{pkg.svc_path}}/config/polipo.config
+polipo -c {{pkg.svc_config_path}}/polipo.config
