@@ -1,7 +1,7 @@
 pkg_name=mongodb
 pkg_origin=core
 pkg_version=3.2.9
-pkg_maintainer="Some Maintainer <somemaintainer@example.com>"
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="High-performance, schema-free, document-oriented database"
 pkg_license=('AGPL-3.0')
 pkg_source=http://downloads.mongodb.org/src/${pkg_name}-src-r${pkg_version}.tar.gz
