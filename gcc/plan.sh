@@ -8,20 +8,20 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0')
 pkg_source=http://ftp.gnu.org/gnu/$pkg_distname/${pkg_distname}-${pkg_version}/${pkg_distname}-${pkg_version}.tar.bz2
 pkg_shasum=5f835b04b5f7dd4f4d2dc96190ec1621b8d89f2dc6f638f9f8bc1b1014ba8cad
-pkg_deps=(core/glibc core/zlib core/gmp core/mpfr core/libmpc core/binutils)
+pkg_deps=(core/bash core/glibc core/zlib core/gmp core/mpfr core/libmpc core/binutils)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/gawk core/m4 core/texinfo core/perl core/inetutils core/expect core/dejagnu)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
-  glibc="$(pkg_path_for glibc)"
-  binutils="$(pkg_path_for binutils)"
+  glibc="$(pkg_path_for core/glibc)"
+  binutils="$(pkg_path_for core/binutils)"
   headers="$glibc/include"
 
   # Add explicit linker instructions as the binutils we are using may have its
   # own dynamic linker defaults.
-  dynamic_linker="$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2"
+  dynamic_linker="$(pkg_path_for core/glibc)/lib/ld-linux-x86-64.so.2"
   LDFLAGS="$LDFLAGS -Wl,-rpath=${LD_RUN_PATH},--enable-new-dtags"
   LDFLAGS="$LDFLAGS -Wl,--dynamic-linker=$dynamic_linker"
   build_line "Updating LDFLAGS=$LDFLAGS"
@@ -43,18 +43,16 @@ do_prepare() {
   build_line "Setting CXXFLAGS=$CXXFLAGS"
 
   # Ensure gcc can find the headers for zlib
-  CPATH="$(pkg_path_for zlib)/include"
+  CPATH="$(pkg_path_for core/zlib)/include"
   export CPATH
   build_line "Setting CPATH=$CPATH"
 
   # Ensure gcc can find the shared libs for zlib
-  LIBRARY_PATH="$(pkg_path_for zlib)/lib"
+  LIBRARY_PATH="$(pkg_path_for core/zlib)/lib"
   export LIBRARY_PATH
   build_line "Setting LIBRARY_PATH=$LIBRARY_PATH"
 
-  # TODO: For the wrapper scripts to function correctly, we need the full
-  # path to bash. Until a bash plan is created, we're going to wing this...
-  bash=/bin/bash
+  bash="$(pkg_path_for core/bash)/bin/bash"
 
   # Tell gcc not to look under the default `/lib/` and `/usr/lib/` directories
   # for libraries
@@ -123,13 +121,13 @@ do_build() {
   mkdir "../${pkg_name}-build"
   pushd "../${pkg_name}-build" > /dev/null
     SED=sed \
-    LD="$(pkg_path_for binutils)/bin/ld" \
-    AS="$(pkg_path_for binutils)/bin/as" \
+    LD="$(pkg_path_for core/binutils)/bin/ld" \
+    AS="$(pkg_path_for core/binutils)/bin/as" \
     "../$pkg_dirname/configure" \
       --prefix="$pkg_prefix" \
-      --with-gmp="$(pkg_path_for gmp)" \
-      --with-mpfr="$(pkg_path_for mpfr)" \
-      --with-mpc="$(pkg_path_for libmpc)" \
+      --with-gmp="$(pkg_path_for core/gmp)" \
+      --with-mpfr="$(pkg_path_for core/mpfr)" \
+      --with-mpc="$(pkg_path_for core/libmpc)" \
       --with-native-system-header-dir="$headers" \
       --enable-languages=c,c++ \
       --enable-lto \
@@ -278,7 +276,6 @@ wrap_binary() {
     > "$bin"
   chmod 755 "$bin"
 }
-
 
 # ----------------------------------------------------------------------------
 # **NOTICE:** What follows are implementation details required for building a

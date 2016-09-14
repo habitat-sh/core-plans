@@ -5,8 +5,9 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('gpl')
 pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.bz2
 pkg_shasum=b5b14added7d78a8d1ca70b5cb75fef57ce2197264f4f5835326b0df22ac9f22
-pkg_deps=(core/glibc core/zlib)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/texinfo core/expect core/dejagnu)
+pkg_deps=(core/bash core/glibc core/zlib)
+pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/texinfo
+                core/expect core/dejagnu)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
@@ -16,7 +17,7 @@ do_prepare() {
 
   # Add explicit linker instructions as the binutils we are using may have its
   # own dynamic linker defaults.
-  dynamic_linker="$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2"
+  dynamic_linker="$(pkg_path_for core/glibc)/lib/ld-linux-x86-64.so.2"
   LDFLAGS="$LDFLAGS -Wl,-rpath=${LD_RUN_PATH},--enable-new-dtags"
   LDFLAGS="$LDFLAGS -Wl,--dynamic-linker=$dynamic_linker"
   export LDFLAGS
@@ -27,9 +28,7 @@ do_prepare() {
   export CFLAGS="$CFLAGS -static-libgcc"
   build_line "Updating CFLAGS=$CFLAGS"
 
-  # TODO: For the wrapper scripts to function correctly, we need the full
-  # path to bash. Until a bash plan is created, we're going to wing this...
-  bash=/bin/bash
+  bash="$(pkg_path_for core/bash)/bin/bash"
 
   # Make `--enable-new-dtags` the default so that the linker sets `RUNPATH`
   # instead of `RPATH` in ELF binaries. This is important as `RPATH` is
@@ -53,8 +52,8 @@ do_prepare() {
 
   cat $PLAN_CONTEXT/custom-libs.patch \
     | sed -e "s,@dynamic_linker@,$dynamic_linker,g" \
-      -e "s,@glibc_lib@,$(pkg_path_for glibc)/lib,g" \
-      -e "s,@zlib_lib@,$(pkg_path_for zlib)/lib,g" \
+      -e "s,@glibc_lib@,$(pkg_path_for core/glibc)/lib,g" \
+      -e "s,@zlib_lib@,$(pkg_path_for core/zlib)/lib,g" \
     | patch -p1
 
   # We don't want to search for libraries in system directories such as `/lib`,
@@ -91,7 +90,7 @@ do_check() {
     # This testsuite is pretty sensitive to its environment, especially when
     # libraries and headers are being flown in from non-standard locations.
     original_LD_RUN_PATH="$LD_RUN_PATH"
-    export LD_LIBRARY_PATH="$LD_RUN_PATH:$(pkg_path_for gcc)/lib"
+    export LD_LIBRARY_PATH="$LD_RUN_PATH:$(pkg_path_for core/gcc)/lib"
     unset LD_RUN_PATH
 
     make check LDFLAGS=""
@@ -145,7 +144,6 @@ _wrap_binary() {
     > "$bin"
   chmod 755 "$bin"
 }
-
 
 # ----------------------------------------------------------------------------
 # **NOTICE:** What follows are implementation details required for building a
