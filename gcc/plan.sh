@@ -129,7 +129,7 @@ do_build() {
       --with-mpfr="$(pkg_path_for core/mpfr)" \
       --with-mpc="$(pkg_path_for core/libmpc)" \
       --with-native-system-header-dir="$headers" \
-      --enable-languages=c,c++ \
+      --enable-languages=c,c++,fortran \
       --enable-lto \
       --enable-plugin \
       --enable-shared \
