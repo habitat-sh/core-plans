@@ -1,9 +1,10 @@
-pkg_name=ncurses
+pkg_name=ncurses5
 pkg_origin=core
 pkg_version=5.0
 pkg_license=('ncurses')
-pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=f551c24b30ce8bfb6e96d9f59b42fbea30fa3a6123384172f9e7284bcf647260
+pkg_source=http://ftp.gnu.org/gnu/ncurses/ncurses-${pkg_version}.tar.gz
+pkg_dirname=ncurses-$pkg_version
+pkg_shasum=a58bbcfd2a4fd82b2609cf3d700d1933df6140dad45b4af83fdc5d23a61c29df
 pkg_deps=(core/glibc core/gcc-libs)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
 pkg_bin_dirs=(bin)
@@ -12,7 +13,6 @@ pkg_lib_dirs=(lib)
 
 do_build() {
   ./configure --prefix=$pkg_prefix \
-    --with-shared \
     --with-termlib \
     --with-cxx-binding \
     --with-cxx-shared \
@@ -25,7 +25,7 @@ do_build() {
     --without-debug \
     --with-normal \
     --enable-overwrite \
-    --disable-rpath-hack
+    --disable-rpath-hack  
   make
 }
 
