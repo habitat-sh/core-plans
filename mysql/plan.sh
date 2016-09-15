@@ -15,7 +15,7 @@ Starts MySQL with a basic configuration. Configurable at run time:
 * app_password: the password for the app user
 * bind: the bind address to listen for connections, default 127.0.0.1
 
-Set the app_username and app_password at runtime to have that user created, it won't be otherwise.
+Set the app_username and app_password at runtime to have that user created, it will not be otherwise.
 EOF
 )
 
