@@ -1,0 +1,3 @@
+#!/bin/sh
+
+{{pkg.path}}/bin/mongod --noauth --rest --httpinterface --config {{pkg.svc_config_path}}/mongodb.conf
