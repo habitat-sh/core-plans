@@ -1,9 +1,9 @@
 pkg_name=mongodb
 pkg_origin=core
 pkg_version=3.2.9
-pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_maintainer="Some Maintainer <somemaintainer@example.com>"
 pkg_description="High-performance, schema-free, document-oriented database"
-pkg_license=('AGPL-3.0')
+pkg_license=('GPL-3.0')
 pkg_source=http://downloads.mongodb.org/src/${pkg_name}-src-r${pkg_version}.tar.gz
 pkg_shasum=25f8817762b784ce870edbeaef14141c7561eb6d7c14cd3197370c2f9790061b
 pkg_filename=${pkg_name}-src-r${pkg_version}.tar.gz
@@ -45,11 +45,6 @@ do_prepare() {
 
 do_build() {
     scons core --prefix="$pkg_prefix" --ssl
-}
-
-do_check() {
-    scons dbtest --prefix="$pkg_prefix" --ssl
-    python buildscripts/resmoke.py --suites=dbtest
 }
 
 do_install() {
