@@ -3,7 +3,7 @@ pkg_origin=core
 pkg_version=3.2.9
 pkg_maintainer="Some Maintainer <somemaintainer@example.com>"
 pkg_description="High-performance, schema-free, document-oriented database"
-pkg_license=('GPL-3.0')
+pkg_license=('AGPL-3.0')
 pkg_source=http://downloads.mongodb.org/src/${pkg_name}-src-r${pkg_version}.tar.gz
 pkg_shasum=25f8817762b784ce870edbeaef14141c7561eb6d7c14cd3197370c2f9790061b
 pkg_filename=${pkg_name}-src-r${pkg_version}.tar.gz
@@ -13,7 +13,6 @@ pkg_build_deps=(
   core/coreutils
   core/gcc
   core/glibc
-  core/patchelf
   core/python2
   core/scons
   core/openssl
@@ -29,8 +28,8 @@ do_prepare() {
     #        a macbook pro with an i5 and 8 GB RAM
 
     #created a variable for our compilers
-    export CC="$(pkg_path_for gcc)/bin/gcc"
-    export CXX="$(pkg_path_for gcc)/bin/g++"
+    export CC="$(pkg_path_for core/gcc)/bin/gcc"
+    export CXX="$(pkg_path_for core/gcc)/bin/g++"
 
     #create variables for our include and library pathes in a scons friendly format
     INCPATH=$(echo "$CFLAGS" | sed -e "s@-I@@g")
