@@ -13,7 +13,7 @@ pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_expose=(80 443)
-pkg_svc_run="$pkg_prefix/bin/httpd -DFOREGROUND -f $pkg_svc_config_path/httpd.conf"
+pkg_svc_run="httpd -DFOREGROUND -f $pkg_svc_config_path/httpd.conf"
 pkg_svc_user="root"
 pkg_svc_group="root"
 
