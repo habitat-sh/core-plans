@@ -10,7 +10,7 @@ pkg_shasum=674e9c38472e96491b7d4f7b42c38b71b5acbca945856e209cb428fbc6135f15
 pkg_bin_dirs=(bin)
 pkg_build_deps=(core/make core/gcc)
 pkg_deps=(core/glibc)
-pkg_svc_run="bin/redis-server $pkg_svc_config_path/redis.config"
+pkg_svc_run="redis-server $pkg_svc_config_path/redis.config"
 pkg_expose=(6379)
 
 do_build() {
