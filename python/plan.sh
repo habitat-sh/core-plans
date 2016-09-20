@@ -46,6 +46,8 @@ do_build() {
 }
 
 do_install() {
+  # link python3.5 to python for pkg_interpreters
+  ln -rs ${pkg_prefix}/bin/python3.5 ${pkg_prefix}/python
   do_default_install
   # Upgrade to the latest pip
   "$pkg_prefix/bin/pip3" install --upgrade pip
