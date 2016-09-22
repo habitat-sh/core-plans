@@ -1,13 +1,14 @@
 pkg_name=openssl
 pkg_distname=$pkg_name
 pkg_origin=core
-pkg_version=1.0.2h
+pkg_version=1.0.2i
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="OpenSSL is an open source project that provides a robust, commercial-grade, and full-featured toolkit for the Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols. It is also a general-purpose cryptography library."
 pkg_license=('OpenSSL')
+pkg_upstream_url="https://www.openssl.org"
 pkg_source=https://www.openssl.org/source/${pkg_distname}-${pkg_version}.tar.gz
-pkg_shasum=1d4007e53aad94a5b2002fe045ee7bb0b3d98f1a47f8b2bc851dcd1c74332919
-pkg_dirname=${pkg_distname}-${pkg_version}
+pkg_shasum=9287487d11c9545b6efb287cdb70535d4e9b284dd10d51441d9b9963d000de6f
+pkg_dirname="${pkg_distname}-${pkg_version}"
 pkg_deps=(core/glibc core/zlib core/cacerts)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed core/grep core/perl)
 pkg_bin_dirs=(bin)
@@ -20,14 +21,13 @@ _common_prepare() {
   # Set CA dir to `$pkg_prefix/ssl` by default and use the cacerts from the
   # `cacerts` package. Note that `patch(1)` is making backups because
   # we need an original for the test suite.
-  cat $PLAN_CONTEXT/ca-dir.patch \
-    | sed \
-      -e "s,@prefix@,$pkg_prefix,g" \
+  sed -e "s,@prefix@,$pkg_prefix,g" \
       -e "s,@cacerts_prefix@,$(pkg_path_for cacerts),g" \
-    | patch -p1 --backup
+      "$PLAN_CONTEXT/ca-dir.patch" \
+      | patch -p1 --backup
 
   # Purge the codebase (mostly tests) of the hardcoded reliance on `/bin/rm`.
-  grep -lr '/bin/rm' . | while read f; do
+  grep -lr '/bin/rm' . | while read -r f; do
     sed -e 's,/bin/rm,rm,g' -i "$f"
   done
 }
@@ -41,9 +41,11 @@ do_prepare() {
 
 do_build() {
   # Set PERL var for scripts in `do_check` that use Perl
-  export PERL=$(pkg_path_for core/perl)/bin/perl
+  PERL=$(pkg_path_for core/perl)/bin/perl
+  export PERL
+  # shellcheck disable=SC2086
   ./config \
-    --prefix=${pkg_prefix} \
+    --prefix="${pkg_prefix}" \
     --openssldir=ssl \
     no-idea \
     no-mdc2 \
@@ -77,7 +79,7 @@ do_install() {
   do_default_install
 
   # Remove dependency on Perl at runtime
-  rm -rfv $pkg_prefix/ssl/misc $pkg_prefix/bin/c_rehash
+  rm -rfv "$pkg_prefix/ssl/misc" "$pkg_prefix/bin/c_rehash"
 }
 
 
