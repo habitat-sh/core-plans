@@ -1,13 +1,13 @@
 pkg_name=openssl
 pkg_distname=$pkg_name
 pkg_origin=core
-pkg_version=1.0.2i
+pkg_version=1.0.2j
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="OpenSSL is an open source project that provides a robust, commercial-grade, and full-featured toolkit for the Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols. It is also a general-purpose cryptography library."
 pkg_license=('OpenSSL')
 pkg_upstream_url="https://www.openssl.org"
 pkg_source=https://www.openssl.org/source/${pkg_distname}-${pkg_version}.tar.gz
-pkg_shasum=9287487d11c9545b6efb287cdb70535d4e9b284dd10d51441d9b9963d000de6f
+pkg_shasum=e7aff292be21c259c6af26469c7a9b3ba26e9abaaffd325e3dccc9785256c431
 pkg_dirname="${pkg_distname}-${pkg_version}"
 pkg_deps=(core/glibc core/zlib core/cacerts)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed core/grep core/perl)
