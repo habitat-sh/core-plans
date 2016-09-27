@@ -1,0 +1,27 @@
+dn: cn=config
+objectClass: olcGlobal
+cn: config
+
+olcArgsFile: {{pkg.svc_var_path}}/run/slapd.args
+olcPidFile: {{pkg.svc_var_path}}/run/slapd.pid
+
+dn: cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: schema
+
+include: file://{{pkg.path}}/etc/openldap/schema/core.ldif
+
+dn: olcDatabase=frontend,cn=config
+objectClass: olcDatabaseConfig
+objectClass: olcFrontendConfig
+olcDatabase: frontend
+
+dn: olcDatabase=mdb,cn=config
+objectClass: olcDatabaseConfig
+objectClass: olcMdbConfig
+olcDatabase: mdb
+olcSuffix: {{cfg.suffix}}
+olcRootDN: {{cfg.rootdn}}
+olcRootPW: {{cfg.rootpw}}
+olcDbDirectory: {{pkg.svc_data_path}}/openldap-data
+olcDbIndex: objectClass eq

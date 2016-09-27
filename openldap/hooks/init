@@ -1,0 +1,13 @@
+#!/bin/sh
+
+exec 2>&1
+
+mkdir -p {{pkg.svc_var_path}}/run {{pkg.svc_data_path}}/openldap-data {{pkg.svc_data_path}}/openldap-config
+if [ ! -d {{pkg.svc_data_path}}/openldap-config/'cn=config' ]; then
+  {{pkg.path}}/sbin/slapadd -n0 -F {{pkg.svc_data_path}}/openldap-config -l {{pkg.svc_config_path}}/slapd.ldif
+  for schema in cosine nis inetorgperson; do
+    {{pkg.path}}/sbin/slapadd -n0 -F {{pkg.svc_data_path}}/openldap-config -l {{pkg.path}}/etc/openldap/schema/${schema}.ldif
+  done
+fi
+
+chown -R {{pkg.svc_user}}:{{pkg.svc_group}} {{pkg.svc_var_path}} {{pkg.svc_data_path}}
