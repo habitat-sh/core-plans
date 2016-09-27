@@ -14,10 +14,13 @@ pkg_deps=(
   core/xz
   core/ncurses
   core/expat
+  core/guile
+  core/bdwgc
   core/python
 )
 pkg_build_deps=(
   core/coreutils
+  core/pkg-config
   core/diffutils
   core/expect
   core/dejagnu
@@ -34,6 +37,9 @@ do_prepare() {
   export CXXFLAGS="${CXXFLAGS} -O2 -fstack-protector-strong -Wformat -Werror=format-security "
   export CPPFLAGS="${CPPFLAGS} -Wdate-time"
   export LDFLAGS="${LDFLAGS} -Wl,-Bsymbolic-functions -Wl,-z,relro"
+
+  export PKG_CONFIG_PATH
+  PKG_CONFIG_PATH="$(pkg_path_for guile)/lib/pkgconfig"
 }
 
 do_build() {
@@ -55,7 +61,7 @@ do_build() {
     --with-system-zlib \
     --with-lzma \
     --with-expat \
-    --without-guile \
+    --with-guile \
     --without-babeltrace \
     --with-system-gdbinit="${pkg_svc_config_path}/gdb/gdbinit" \
     --with-python=python3

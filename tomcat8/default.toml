@@ -4,7 +4,7 @@ shutdown-port = "8005"
 redirect-port = "8443"
 
 # Configuration for the AJP connector
-#enable-ajp-connector = "true"   # comment out line to disable AJP port
+enable-ajp-connector = false
 ajp-port = "8009"
 
 # Tomcat utilizes SecureRandom to provide random values for session ids.  When starting Tomcat under
@@ -13,24 +13,49 @@ ajp-port = "8009"
 # PRNG is passed to Tomcat for faster start up times.
 catalina-opts = "-Djava.security.egd=file:/dev/./urandom"
 
+# Per `config/conf_tomcat-users.xml`:
+# NOTE:  By default, no user is included in the "manager-gui" role required
+# to operate the "/manager/html" web application.  If you wish to use this app,
+# you must define such a user - the username and password are
+# arbitrary.
+#
+# The userdbrealm table contains roles and users. The users have their
+# roles defined which must exist in the toplevel roles list. There are
+# no roles or users defined in the default tomcat configuration that
+# ships with tomcat itself, so we don't define any by default. To
+# create roles and users at runtime, specify them in a user-supplied
+# TOML configuration like this:
+#
+# [userdbrealm]
+# roles = ["manager-gui", "manager-script", "manager-jmx", "manager-status"]
+#
+# [[userdbrealm.users]]
+# username = "admin"
+# password = "super-secret-password"
+# roles = "manager-gui,manager-script,manager-jmx,manager-status"
+
+# [[userdbrealm.users]]
+# username = "someuser"
+# password = false
+# roles = "manager-gui"
+#
+# This will be rendered in `conf_tomcat-users.xml` like this:
+#
+# <role rolename="manager-gui"/>
+# <role rolename="manager-script"/>
+# <role rolename="manager-jmx"/>
+# <role rolename="manager-status"/>
+# <user username="admin" password="super-secret-password" roles="manager-gui,manager-script,manager-jmx,manager-status"/>
 [userdbrealm]
-roles = ["sysadmin", "deployer", "auditor"]
+roles = []
 
 [[userdbrealm.users]]
-username = "admin"
-password = "password"
-roles = "manager-gui,manager-script,manager-jmx,manager-status" 
-
-[[userdbrealm.users]]
-username = "someuser"
-password = "somepassword"
-roles = "manager-gui"
 
 [host]
 
 [host.localhost]
-unpack-wars = "true"
-auto-deploy = "true"
+unpack-wars = true
+auto-deploy = true
 
 [host-manager]
-#localhost-only = "true" # comment out line to enable access from all
+localhost-only = false

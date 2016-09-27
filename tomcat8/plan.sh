@@ -1,16 +1,19 @@
 pkg_name=tomcat8
 pkg_description="An open source implementation of the Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies."
 pkg_origin=core
-pkg_version=8.5.4
+pkg_version=8.5.5
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
+pkg_description="The Apache Tomcat software is an open source implementation of the Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies."
 pkg_upstream_url="http://tomcat.apache.org/"
 pkg_source=http://apache.mirrors.pair.com/tomcat/tomcat-8/v${pkg_version}/bin/apache-tomcat-${pkg_version}.tar.gz
-pkg_shasum=155cf7f09e13c63b8301ddc8c37d90be64bc3d5e9ddf163c4f10a6406a49a191
-pkg_deps=(core/jdk8)
-pkg_expose=(8080 8443)
+pkg_shasum=123ba0c010267d54caf984872d3cb449ae29bbd956fa17467185e0c2b3ecae45
 
-pkg_svc_user="root"
+pkg_deps=(
+  core/jdk8
+  core/coreutils
+)
+pkg_expose=(8080 8443)
 
 # The default implementation extracts your tarball source file into HAB_CACHE_SRC_PATH. The
 # supported archives are: .tar, .tar.bz2, .tar.gz, .tar.xz, .rar, .zip, .Z, .7z. If the file
@@ -47,4 +50,9 @@ do_install() {
     build_line "Performing install"
     mkdir -p "${pkg_prefix}/tc"
     cp -vR ./* "${pkg_prefix}/tc"
+
+    # default permissions included in the tarball don't give any world access
+    find "${pkg_prefix}/tc" -type d -exec chmod -v 755 {} +
+    find "${pkg_prefix}/tc" -type f -exec chmod -v 644 {} +
+    find "${pkg_prefix}/tc" -type f -name '*.sh' -exec chmod -v 755 {} +
 }

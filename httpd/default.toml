@@ -1,1 +1,51 @@
-listen = [ "80" ]
+#httpd.conf settings
+serveradmin = "you@example.com"
+servername = "localhost"
+serverport = "80"
+listen = ["80"]
+user = "hab"
+group = "hab"
+default_modules = [	"access_compat", "alias", "auth_basic", "authn_file", "authn_core", "authz_host",
+                    "authz_groupfile", "authz_user", "autoindex", "dir", "env", "filter",
+                    "headers", "log_config", "mime", "reqtimeout", "setenvif", "ssl", "status", "version" ]
+
+#httpd-default settings
+timeout = 60
+keepalive = "On"
+keepaliverequests = 100
+keepalivetimeout = 5
+serversignature = "Off"
+servertokens = "Full"
+accessfilename = ".htaccess"
+canonicalname = "Off"
+hostnamelookups = "Off"
+
+#mpm settings
+[mpm]
+type = "prefork"
+startservers = 16
+minspareservers = 16
+maxspareservers = 32
+serverlimit = 256
+maxrequestworkers = 256
+maxconnectionsperchild = 10_000
+#define these if the mpm is threaded like mpm_event or mpm_worker
+threaded = false
+threadsperchild = 64
+threadlimit = 192
+
+#mod_status
+[mod_status]
+allow = "127.0.0.1"
+extended = "Off"
+
+#mod_info
+[mod_info]
+allow = "127.0.0.1"
+
+#mod_proxy settings
+[mod_proxy]
+require = "All Denied"
+order = "Deny, Allow"
+deny = "All"
+allow = "None"

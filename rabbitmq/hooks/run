@@ -1,0 +1,16 @@
+#!/bin/bash
+
+kill_rabbit() {
+  $(hab pkg path core/rabbitmq)/sbin/rabbitmqctl stop
+  exit
+}
+
+trap "kill_rabbit" INT TERM HUP ABRT QUIT
+
+export HOME={{pkg.svc_var_path}}
+export RABBITMQ_MNESIA_BASE={{pkg.svc_var_path}}/db
+export RABBITMQ_LOG_BASE={{pkg.svc_var_path}}/log
+export RABBITMQ_CONFIG_FILE={{pkg.svc_config_path}}/rabbitmq
+
+# We do NOT call exec here, as we trap signals and kill rabbit in this script
+{{pkg.path}}/sbin/rabbitmq-server 2>&1

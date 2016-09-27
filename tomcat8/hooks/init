@@ -1,6 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
-function debug { if [ ! -z "$DEBUG" ]; then echo "$*"; fi }
+debug() {
+  if [ ! -z "$DEBUG" ]; then
+    echo "$*"
+  fi
+}
 
 echo "Preparing TOMCAT_HOME..."
 
@@ -21,8 +25,7 @@ debug "pkg.svc_static_path   = {{pkg.svc_static_path}}"
 debug "pkg.svc_var_path      = {{pkg.svc_var_path}}"
 
 # Move directories that ship in the package into place
-
-cp -R {{pkg.path}}/tc {{pkg.svc_var_path}}/
+cp -a {{pkg.path}}/tc {{pkg.svc_var_path}}/
 
 # Symlink config files into $TOMCAT_HOME/conf
 for file in $(cd {{pkg.svc_config_path}}; ls -1)

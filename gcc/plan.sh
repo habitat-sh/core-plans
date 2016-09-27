@@ -2,8 +2,10 @@ pkg_name=gcc
 pkg_distname=$pkg_name
 pkg_origin=core
 pkg_version=5.2.0
+pkg_description="The GNU Compiler Collection"
+pkg_upstream_url="https://gcc.gnu.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('gpl')
+pkg_license=('GPL-2.0')
 pkg_source=http://ftp.gnu.org/gnu/$pkg_distname/${pkg_distname}-${pkg_version}/${pkg_distname}-${pkg_version}.tar.bz2
 pkg_shasum=5f835b04b5f7dd4f4d2dc96190ec1621b8d89f2dc6f638f9f8bc1b1014ba8cad
 pkg_deps=(core/glibc core/zlib core/gmp core/mpfr core/libmpc core/binutils)
@@ -41,11 +43,13 @@ do_prepare() {
   build_line "Setting CXXFLAGS=$CXXFLAGS"
 
   # Ensure gcc can find the headers for zlib
-  export CPATH="$(pkg_path_for zlib)/include"
+  CPATH="$(pkg_path_for zlib)/include"
+  export CPATH
   build_line "Setting CPATH=$CPATH"
 
   # Ensure gcc can find the shared libs for zlib
-  export LIBRARY_PATH="$(pkg_path_for zlib)/lib"
+  LIBRARY_PATH="$(pkg_path_for zlib)/lib"
+  export LIBRARY_PATH
   build_line "Setting LIBRARY_PATH=$LIBRARY_PATH"
 
   # TODO: For the wrapper scripts to function correctly, we need the full
@@ -56,7 +60,7 @@ do_prepare() {
   # for libraries
   #
   # Thanks to: https://github.com/NixOS/nixpkgs/blob/release-15.09/pkgs/development/compilers/gcc/no-sys-dirs.patch
-  patch -p1 < $PLAN_CONTEXT/no-sys-dirs.patch
+  patch -p1 < "$PLAN_CONTEXT/no-sys-dirs.patch"
 
   # Patch the configure script so it finds glibc headers
   #
@@ -74,7 +78,7 @@ do_prepare() {
     grep -q LIBC_DYNAMIC_LINKER "$header" || continue
     build_line "  Fixing $header"
     sed -i "$header" \
-      -e 's|define[[:blank:]]*\([UCG]\+\)LIBC_DYNAMIC_LINKER\([0-9]*\)[[:blank:]]"\([^\"]\+\)"$|define \1LIBC_DYNAMIC_LINKER\2 "'${headers}'\3"|g' \
+      -e 's|define[[:blank:]]*\([UCG]\+\)LIBC_DYNAMIC_LINKER\([0-9]*\)[[:blank:]]"\([^\"]\+\)"$|define \1LIBC_DYNAMIC_LINKER\2 "'"${glibc}"'\3"|g' \
       -e 's|/lib64/ld-linux-|/lib/ld-linux-|g'
   done
 
@@ -115,19 +119,19 @@ do_prepare() {
 }
 
 do_build() {
-  rm -rf ../${pkg_name}-build
-  mkdir ../${pkg_name}-build
-  pushd ../${pkg_name}-build > /dev/null
+  rm -rf "../${pkg_name}-build"
+  mkdir "../${pkg_name}-build"
+  pushd "../${pkg_name}-build" > /dev/null
     SED=sed \
-    LD=$(pkg_path_for binutils)/bin/ld \
-    AS=$(pkg_path_for binutils)/bin/as \
-    ../$pkg_dirname/configure \
-      --prefix=$pkg_prefix \
-      --with-gmp=$(pkg_path_for gmp) \
-      --with-mpfr=$(pkg_path_for mpfr) \
-      --with-mpc=$(pkg_path_for libmpc) \
-      --with-native-system-header-dir=$headers \
-      --enable-languages=c,c++ \
+    LD="$(pkg_path_for binutils)/bin/ld" \
+    AS="$(pkg_path_for binutils)/bin/as" \
+    "../$pkg_dirname/configure" \
+      --prefix="$pkg_prefix" \
+      --with-gmp="$(pkg_path_for gmp)" \
+      --with-mpfr="$(pkg_path_for mpfr)" \
+      --with-mpc="$(pkg_path_for libmpc)" \
+      --with-native-system-header-dir="$headers" \
+      --enable-languages=c,c++,fortran \
       --enable-lto \
       --enable-plugin \
       --enable-shared \
@@ -150,9 +154,9 @@ do_build() {
     #
     # Thanks to: https://github.com/NixOS/nixpkgs/blob/release-15.09/pkgs/development/compilers/gcc/builder.sh
     make \
-      -j$(nproc) \
-      NATIVE_SYSTEM_HEADER_DIR=$headers \
-      SYSTEM_HEADER_DIR=$headers \
+      -j"$(nproc)" \
+      NATIVE_SYSTEM_HEADER_DIR="$headers" \
+      SYSTEM_HEADER_DIR="$headers" \
       CFLAGS_FOR_BUILD="$build_cflags" \
       CXXFLAGS_FOR_BUILD="$build_cflags" \
       CFLAGS_FOR_TARGET="$build_cflags" \
@@ -168,7 +172,7 @@ do_build() {
 }
 
 do_check() {
-  pushd ../${pkg_name}-build > /dev/null
+  pushd "../${pkg_name}-build" > /dev/null
     # One set of tests in the GCC test suite is known to exhaust the stack,
     # so increase the stack size prior to running the tests
     ulimit -s 32768
@@ -176,19 +180,42 @@ do_check() {
     unset CPATH LIBRARY_PATH
     export LIBRARY_PATH="$LD_RUN_PATH"
     # Do not abort on error as some are "expected"
+    # Currently, the tests will report the following unexpected errors:
+    #
+    # gcc:
+    #
+    #  FAIL: c-c++-common/tsan/thread_leak1.c   -O0  output pattern test
+    #  FAIL: c-c++-common/tsan/thread_leak1.c   -O2  output pattern test
+    #
+    # g++:
+    #
+    #  XPASS: g++.dg/tls/thread_local-order2.C  -std=c++11 execution test
+    #  XPASS: g++.dg/tls/thread_local-order2.C  -std=c++14 execution test
+    #  FAIL: c-c++-common/tsan/thread_leak1.c   -O0  output pattern test
+    #  FAIL: c-c++-common/tsan/thread_leak1.c   -O2  output pattern test
+    #
+    # libstdc++:
+    #
+    #  FAIL: 22_locale/messages/13631.cc execution test
+    #  FAIL: 22_locale/messages/members/char/1.cc execution test
+    #  FAIL: 22_locale/messages/members/char/2.cc execution test
+    #  FAIL: 22_locale/messages/members/char/wrapped_env.cc execution test
+    #  FAIL: 22_locale/messages/members/char/wrapped_locale.cc execution test
+    #  FAIL: 22_locale/messages_byname/named_equivalence.cc execution test
+
     make -k check || true
     unset LIBRARY_PATH
 
     build_line "Displaying Test Summary"
-    ../$pkg_dirname/contrib/test_summary
+    "../$pkg_dirname/contrib/test_summary"
   popd > /dev/null
 }
 
 do_install() {
-  pushd ../${pkg_name}-build > /dev/null
+  pushd "../${pkg_name}-build" > /dev/null
     # Make 'lib64' a symlink to 'lib'
-    mkdir -pv $pkg_prefix/lib
-    ln -sv lib $pkg_prefix/lib64
+    mkdir -pv "$pkg_prefix/lib"
+    ln -sv lib "$pkg_prefix/lib64"
 
     make install
 
@@ -198,30 +225,30 @@ do_install() {
     # potentially install `libiberty.a` which was confusing as to the "owner").
     #
     # Thanks to: https://projects.archlinux.org/svntogit/packages.git/tree/trunk/PKGBUILD?h=packages/gcc
-    install -v -m644 libiberty/pic/libiberty.a $pkg_prefix/lib
+    install -v -m644 libiberty/pic/libiberty.a "$pkg_prefix/lib"
 
     # Install Runtime Library Exception
-    install -Dm644 ../$pkg_dirname/COPYING.RUNTIME \
-      $pkg_prefix/share/licenses/RUNTIME.LIBRARY.EXCEPTION
+    install -Dm644 "../$pkg_dirname/COPYING.RUNTIME" \
+      "$pkg_prefix/share/licenses/RUNTIME.LIBRARY.EXCEPTION"
 
     # Replace hard links for x86_64-unknown-linux-gnu etc. with symlinks
     #
     # Thanks to: https://github.com/NixOS/nixpkgs/blob/release-15.09/pkgs/development/compilers/gcc/builder.sh
-    for bin in $pkg_prefix/bin/*-gcc*; do
-      if cmp -s $pkg_prefix/bin/gcc $bin; then
-        ln -sfnv gcc $bin
+    for bin in "$pkg_prefix/bin/"*-gcc*; do
+      if cmp -s "$pkg_prefix/bin/gcc" "$bin"; then
+        ln -sfnv gcc "$bin"
       fi
     done
 
     # Replace hard links for x86_64-unknown-linux-g++ etc. with symlinks
-    for bin in $pkg_prefix/bin/c++ $pkg_prefix/bin/*-c++* $pkg_prefix/bin/*-g++*; do
-      if cmp -s $pkg_prefix/bin/g++ $bin; then
-        ln -sfn g++ $bin
+    for bin in "$pkg_prefix/bin/c++" "$pkg_prefix/bin/"*-c++* "$pkg_prefix/bin/"*-g++*; do
+      if cmp -s "$pkg_prefix/bin/g++" "$bin"; then
+        ln -sfn g++ "$bin"
       fi
     done
 
     # Many packages use the name cc to call the C compiler
-    ln -sv gcc $pkg_prefix/bin/cc
+    ln -sv gcc "$pkg_prefix/bin/cc"
 
     # Wrap key binaries so we can add some arguments and flags to the real
     # underlying binary. This should make Plan author's lives a bit easier
@@ -241,7 +268,7 @@ wrap_binary() {
   local bin="$pkg_prefix/bin/$1"
   build_line "Adding wrapper $bin to ${bin}.real"
   mv -v "$bin" "${bin}.real"
-  sed $PLAN_CONTEXT/cc-wrapper.sh \
+  sed "$PLAN_CONTEXT/cc-wrapper.sh" \
     -e "s^@shell@^${bash}^g" \
     -e "s^@glibc@^${glibc}^g" \
     -e "s^@binutils@^${binutils}^g" \

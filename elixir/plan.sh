@@ -1,10 +1,10 @@
 pkg_origin=core
 pkg_name=elixir
-pkg_version=1.3.0
+pkg_version=1.3.2
 pkg_maintainer="Shane Sveller <shane@shanesveller.com>"
 pkg_license=('apachev2')
-pkg_source=https://github.com/elixir-lang/elixir/archive/v1.3.0.tar.gz
-pkg_shasum=66cb8448dd60397cad11ba554c2613f732192c9026468cff55e8347a5ae4004a
+pkg_source=https://github.com/elixir-lang/elixir/archive/v1.3.2.tar.gz
+pkg_shasum=be24efee0655206063208c5bb4157638310ff7e063b7ebd9d79e1c77e8344c4b
 pkg_deps=(core/busybox core/cacerts core/coreutils core/openssl core/erlang/18.3)
 pkg_build_deps=(core/busybox core/cacerts core/coreutils core/make core/openssl core/erlang/18.3)
 pkg_bin_dirs=(bin)

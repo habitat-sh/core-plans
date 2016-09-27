@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Take the last build information and put it into a message that you can paste
 # into GitHub as a comment.
