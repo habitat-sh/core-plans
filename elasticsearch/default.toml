@@ -79,11 +79,11 @@
   #
   # Path to log files:
   #
-  logs =    "/hab/svc/elasticsearch/logs"
+  logs =    "/hab/svc/elasticsearch/var/logs"
   #
   # Path to plugins:
   #
-  plugins = "/hab/svc/elasticsearch/var"
+  plugins = "/hab/svc/elasticsearch/var/plugins"
   #
   # Path to scripts directory
   #
