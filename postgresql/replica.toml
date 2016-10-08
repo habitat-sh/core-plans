@@ -1,5 +1,9 @@
 standby_mode = "on"
-dynamic_shared_memory_type = "none"
+# uncomment the line below if working inside the habitat studio:
+# dynamic_shared_memory_type = "none"
+
+# set the value of 'primary_conninfo_host' to the ip or hostname of your
+# postgres primary:
 primary_conninfo_host = "172.17.0.7"
 
 # for development:
