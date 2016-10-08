@@ -2,4 +2,5 @@ standby_mode = "on"
 dynamic_shared_memory_type = "none"
 primary_conninfo_host = "172.17.0.7"
 
-# HAB_POSTGRESQL=$(cat replica.toml) hab start results/$(grep artifact results/last_build.env | cut -d= -f2)
+# for development:
+# HAB_POSTGRESQL=$(cat replica.toml) hab start results/$(grep artifact results/last_build.env | cut -d= -f2) --config-from /src

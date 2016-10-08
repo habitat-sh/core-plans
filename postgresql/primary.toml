@@ -1,3 +1,4 @@
 dynamic_shared_memory_type = "none"
 
-# HAB_POSTGRESQL=$(cat primary.toml) hab start results/$(grep artifact results/last_build.env | cut -d= -f2)
+# for development:
+# HAB_POSTGRESQL=$(cat primary.toml) hab start results/$(grep artifact results/last_build.env | cut -d= -f2) --config-from /src
