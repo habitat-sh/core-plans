@@ -25,7 +25,7 @@ if [[ "{{cfg.standby_mode}}" == "on" ]]; then
     -D {{pkg.svc_data_path}}/ \
     -P -U {{cfg.initdb_superuser_name}} --xlog-method=stream
 
-    cp {{pkg.svc_data_path}}/recovery.conf {{pkg.svc_config_path}}/recovery.conf
+    cp {{pkg.svc_config_path}}/recovery.conf {{pkg.svc_data_path}}/recovery.conf
   fi
 
 fi
