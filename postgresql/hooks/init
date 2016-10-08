@@ -1,12 +1,33 @@
 #!/bin/sh
 #
 
+set -x
+
 exec 2>&1
 
 mkdir -p {{pkg.svc_config_path}}/conf.d
 mkdir -p {{pkg.svc_var_path}}/pg_stat_tmp
 
 chown -R hab:hab {{pkg.svc_var_path}}
+
+if [[ "{{cfg.standby_mode}}" == "on" ]]; then
+  mkdir -p {{pkg.svc_data_path}}
+
+  if [[ ! -f "{{pkg.svc_data_path}}"/recovery.conf ]]; then
+    echo " Starting replication from primary with 'pg_base_backup'"
+    rm -rf {{pkg.svc_data_path}}/*
+
+    export PGPASSWORD={{cfg.initdb_superuser_password}}
+
+    {{pkg.path}}/bin/pg_basebackup \
+    -h {{cfg.primary_conninfo_host}} \
+    -D {{pkg.svc_data_path}}/ \
+    -P -U {{cfg.initdb_superuser_name}} --xlog-method=stream
+
+    cp {{pkg.svc_data_path}}/recovery.conf {{pkg.svc_config_path}}/recovery.conf
+  fi
+
+fi
 
 if [[ ! -f "{{pkg.svc_data_path}}/PG_VERSION" ]]; then
   echo " Database does not exist, creating with 'initdb'"

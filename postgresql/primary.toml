@@ -1,0 +1,5 @@
+dynamic_shared_memory_type = "none"
+initdb_superuser_name = "hab"
+initdb_superuser_password = "hab"
+
+# HAB_POSTGRESQL=$(cat primary.toml) hab start results/$(grep artifact results/last_build.env | cut -d= -f2)

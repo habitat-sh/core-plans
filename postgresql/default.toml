@@ -229,3 +229,12 @@ initdb_superuser_name = "hab"
 initdb_superuser_password = ""
 initdb_pwfile = "/hab/svc/postgresql/config/pwfile"
 initdb_encoding = "UTF8"
+
+# options for replication.
+#
+standby_mode = "off"
+primary_conninfo_host = ""
+primary_conninfo_port = 5432
+primary_conninfo_user = "replication"
+primary_conninfo_password = ""
+trigger_file = "/hab/svc/postgresql/data/failover_trigger_file"
