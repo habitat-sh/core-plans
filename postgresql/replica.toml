@@ -1,9 +1,5 @@
 standby_mode = "on"
 dynamic_shared_memory_type = "none"
 primary_conninfo_host = "172.17.0.7"
-primary_conninfo_port = 5432
-primary_conninfo_password = "hab"
-initdb_superuser_password = "hab"
-primary_conninfo_user = "replication"
 
 # HAB_POSTGRESQL=$(cat replica.toml) hab start results/$(grep artifact results/last_build.env | cut -d= -f2)
