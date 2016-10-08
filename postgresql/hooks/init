@@ -18,6 +18,7 @@ if [[ "{{cfg.standby_mode}}" == "on" ]]; then
     rm -rf {{pkg.svc_data_path}}/*
 
     export PGPASSWORD={{cfg.initdb_superuser_password}}
+    export PGPASSFILE={{pkg.svc_config_path}}/pwfile
 
     {{pkg.path}}/bin/pg_basebackup \
     -h {{cfg.primary_conninfo_host}} \
