@@ -33,11 +33,6 @@ EOF
 }
 
 _wget_common_prepare() {
-  PKG_CONFIG_PATH="$(pkg_path_for openssl)/lib/pkgconfig"
-  PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:$(pkg_path_for zlib)/lib/pkgconfig"
-  export PKG_CONFIG_PATH
-  build_line "Setting PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
-
   # Purge the codebase (mostly tests & build Perl scripts) of the hardcoded
   # reliance on `/usr/bin/env`.
   grep -lr '/usr/bin/env' . | while read f; do
