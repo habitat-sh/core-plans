@@ -1,9 +1,8 @@
 pkg_name=inspec
 pkg_origin=core
 pkg_version=0.27.0
-pkg_description="InSpec is an open-source testing framework for infrastructure
-  with a human- and machine-readable language for specifying compliance,
-  security and policy requirements."
+pkg_description="The core/inspec package has been deprecated in favor
+  of chef/inspec"
 pkg_upstream_url=https://github.com/chef/inspec
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
