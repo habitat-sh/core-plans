@@ -37,9 +37,6 @@ do_prepare() {
   export CXXFLAGS="${CXXFLAGS} -O2 -fstack-protector-strong -Wformat -Werror=format-security "
   export CPPFLAGS="${CPPFLAGS} -Wdate-time"
   export LDFLAGS="${LDFLAGS} -Wl,-Bsymbolic-functions -Wl,-z,relro"
-
-  export PKG_CONFIG_PATH
-  PKG_CONFIG_PATH="$(pkg_path_for guile)/lib/pkgconfig"
 }
 
 do_build() {

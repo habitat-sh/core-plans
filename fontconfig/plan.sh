@@ -18,14 +18,10 @@ pkg_build_deps=(core/gcc core/make core/coreutils core/python
                 core/pkg-config core/freetype core/expat
                 core/diffutils core/libtool core/m4 core/automake
                 core/autoconf core/file)
-pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
+pkg_lib_dirs=(lib)
 
 do_prepare() {
-  export PKG_CONFIG_PATH
-  PKG_CONFIG_PATH="$(pkg_path_for freetype)/lib/pkgconfig:$(pkg_path_for expat)/lib/pkgconfig"
-  build_line "Setting PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
-
   # Set freetype paths
   export FREETYPE_CFLAGS="$CFLAGS"
   build_line "Setting FREETYPE_CFLAGS=$FREETYPE_CFLAGS"

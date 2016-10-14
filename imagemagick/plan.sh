@@ -15,11 +15,6 @@ pkg_lib_dirs=(lib)
 pkg_dirname=ImageMagick-${pkg_version}
 
 do_build() {
-    PKG_CONFIG_PATH="$(pkg_path_for zlib)/lib/pkgconfig"
-    PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:$(pkg_path_for libpng)/lib/pkgconfig"
-    PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:$(pkg_path_for xz)/lib/pkgconfig"
-    export PKG_CONFIG_PATH
-    build_line "Setting PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
     CC="gcc -std=gnu99" ./configure --prefix=$pkg_prefix
     make
 }

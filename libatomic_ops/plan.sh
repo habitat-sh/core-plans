@@ -9,9 +9,9 @@ pkg_source="http://www.ivmaisoft.com/_bin/atomic_ops/libatomic_ops-${pkg_version
 pkg_shasum=bf210a600dd1becbf7936dd2914cf5f5d3356046904848dcfd27d0c8b12b6f8f
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/gcc core/make core/diffutils)
+pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
-pkg_bin_dirs=(bin)
 
 do_check() {
   make check

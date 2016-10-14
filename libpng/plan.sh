@@ -10,9 +10,9 @@ pkg_shasum=b36a3c124622c8e1647f360424371394284f4c6c4b384593e478666c59ff42d3
 pkg_deps=(core/glibc core/zlib)
 pkg_build_deps=(core/gcc core/make core/coreutils core/diffutils
                 core/autoconf core/automake)
-pkg_lib_dirs=(lib)
-pkg_include_dirs=(include)
 pkg_bin_dirs=(bin)
+pkg_include_dirs=(include)
+pkg_lib_dirs=(lib)
 
 do_build() {
   _zlib_dir=$(pkg_path_for zlib)
