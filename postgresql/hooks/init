@@ -1,8 +1,6 @@
 #!/bin/sh
 #
 
-set -x
-
 exec 2>&1
 
 mkdir -p {{pkg.svc_config_path}}/conf.d
