@@ -225,7 +225,8 @@ include_dir = "/hab/svc/postgresql/config/conf.d"
 #
 # We're using `hab` instead of `postgres` because the `hab` user is
 # created in our docker containers, the `postgres` user is not.
+# Setting the default password to `hab` you should change this.
 initdb_superuser_name = "hab"
-initdb_superuser_password = ""
+initdb_superuser_password = "hab"
 initdb_pwfile = "/hab/svc/postgresql/config/pwfile"
 initdb_encoding = "UTF8"
