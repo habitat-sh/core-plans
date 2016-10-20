@@ -22,8 +22,8 @@ pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_svc_run="mongod --config $pkg_svc_config_path/mongod.conf"
-pkg_svc_user=root
-pkg_svc_group=root
+pkg_svc_user=hab
+pkg_svc_group=hab
 pkg_expose=(27017)
 
 do_prepare() {
