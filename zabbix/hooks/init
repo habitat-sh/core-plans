@@ -1,0 +1,64 @@
+#!/bin/sh
+#
+
+exec 2>&1
+
+#edit the mysql config file
+MYSQLPATH=$(hab pkg path core/mysql)
+sed -i "s@basedir@basedir = $MYSQLPATH@" {{pkg.svc_config_path}}/my.cnf
+sed -i "s@lc-messages-dir@lc-messages-dir = $MYSQLPATH/share/mysql@" {{pkg.svc_config_path}}/my.cnf
+
+#kill all zabbix agent instances
+if pidof -x "zabbix_agentd" > /dev/null; then
+    kill $(pidof -x "zabbix_agentd")
+fi
+
+#kill all zabbix instances
+if pidof -x "zabbix_server" > /dev/null; then
+    kill $(pidof -x "zabbix_server")
+fi
+
+#kill all mysql instances
+if pidof -x "mysqld" > /dev/null; then
+    kill $(pidof -x "mysqld")
+    rm -f -r {{pkg.svc_data_path}}/*
+fi
+
+#start mysql
+echo "STARTING MYSQLD"
+mysqld --defaults-file={{pkg.svc_path}}/config/my.cnf \
+       --explicit-defaults-for-timestamp \
+       --datadir={{pkg.svc_data_path}} \
+       --init-file={{pkg.svc_config_path}}/init.sql \
+       --initialize \
+       --skip-external-locking \
+       --user={{pkg.svc_user}}
+
+mysqld_safe --defaults-file={{pkg.svc_config_path}}/my.cnf \
+            --datadir={{pkg.svc_data_path}} \
+            --user={{pkg.svc_user}} \
+            </dev/null &>/dev/null &
+
+#sleep for the mysql changes to occur
+sleep 3
+
+#create a zabbix database
+echo "CREATING ZABBIX DATABASE"
+mysql   --socket={{pkg.svc_var_path}}/mysqld.sock \
+        --user={{pkg.svc_user}} \
+        --execute="create database if not exists {{cfg.zabbix_server.zabbix_db}};"
+
+mysql   --socket={{pkg.svc_var_path}}/mysqld.sock \
+        --user={{pkg.svc_user}} \
+        --database={{cfg.zabbix_server.zabbix_db}} \
+        < {{pkg.path}}/database/mysql/schema.sql
+
+mysql   --socket={{pkg.svc_var_path}}/mysqld.sock \
+        --user={{pkg.svc_user}} \
+        --database={{cfg.zabbix_server.zabbix_db}} \
+        < {{pkg.path}}/database/mysql/images.sql
+
+mysql   --socket={{pkg.svc_var_path}}/mysqld.sock \
+        --user={{pkg.svc_user}}\
+        --database={{cfg.zabbix_server.zabbix_db}} \
+        < {{pkg.path}}/database/mysql/data.sql
