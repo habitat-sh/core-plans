@@ -3,10 +3,10 @@ pkg_origin=core
 pkg_version=1.3.1
 pkg_license=('apachev2')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source=https://jfrog.bintray.com/jfrog-cli-go/1.3.1/jfrog-cli-linux-amd64/jfrog
+pkg_source=https://jfrog.bintray.com/jfrog-cli-go/${pkg_version}/jfrog-cli-linux-amd64/jfrog
 pkg_shasum=81265ba5133ea7e735c6ec04f25f1ddcdba504dd41fce07a7ac44d012d993f21
 pkg_deps=(core/glibc core/busybox-static core/cacerts)
-pkg_build_deps=(core/coreutils core/patchelf)
+pkg_build_deps=(core/coreutils)
 pkg_bin_dirs=(bin)
 
 do_unpack() {
