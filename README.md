@@ -1,5 +1,9 @@
 # Habitat Plans
 
+[![Build Status](https://travis-ci.org/habitat-sh/core-plans.svg?branch=master)](https://travis-ci.org/habitat-sh/core-plans)
+[![Slack](http://slack.habitat.sh/badge.svg)](http://slack.habitat.sh/)
+[![GitHub issues](https://img.shields.io/github/issues/habitat-sh/core-plans.svg)](https://github.com/habitat-sh/core-plans/issues)
+
 [Habitat Plans](https://www.habitat.sh/docs/concepts-plans/) maintained and
 built by the Habitat core maintainers for the [Habitat](https://www.habitat.sh/)
 ecosystem.
