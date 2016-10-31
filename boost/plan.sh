@@ -1,5 +1,7 @@
 pkg_name=boost
 pkg_origin=core
+pkg_description='Boost provides free peer-reviewed portable C++ source libraries.'
+pkg_upstream_url='http://www.boost.org/'
 pkg_version=1.61.0
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=('Boost Software License')
@@ -25,15 +27,21 @@ pkg_build_deps=(
   core/libxslt
   core/openssl
   core/which
+  core/zlib
 )
 
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 
 do_build() {
-  ./bootstrap.sh --prefix=$pkg_prefix
+  ./bootstrap.sh --prefix="$pkg_prefix"
 }
 
 do_install() {
-  ./b2 install --prefix=$pkg_prefix -q --debug-configuration -s NO_BZIP2=1
+  export NO_BZIP2=1
+  export ZLIB_LIBPATH
+  ZLIB_LIBPATH="$(pkg_path_for core/zlib)/lib"
+  export ZLIB_INCLUDE
+  ZLIB_INCLUDE="$(pkg_path_for core/zlib)/include"
+  ./b2 install --prefix="$pkg_prefix" -q --debug-configuration
 }
