@@ -1,9 +1,9 @@
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_name=server-jre
-pkg_version=8u92
+pkg_version=8u111
 pkg_source=http://download.oracle.com/otn-pub/java/jdk/${pkg_version}-b14/${pkg_name}-${pkg_version}-linux-x64.tar.gz
-pkg_shasum=30608baff3bb3b09ea65fab603aae1c58f1381d7bb9d1b9af3dec9d499cabcc3
+pkg_shasum=53442420cd9534ded4beca16c32c1d109cf5add637db764c86660c6eea1d88d4
 pkg_filename=jdk-${pkg_version}-linux-x64.tar.gz
 pkg_license=('Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX')
 pkg_description=('Oracle Java Runtime Environment. This package is made available to you to allow you to run your applications as provided in and subject to the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html')
