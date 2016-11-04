@@ -4,7 +4,7 @@
 # Don't run if we're on the auto branch. Using the right range for pre-commit
 # has been problematic, so we're just going to skip it until somebody figures
 # it out.
-[[ "$TRAVIS_BRANCH" = "auto" ]] && exit 0;
+# [[ "$TRAVIS_BRANCH" = "auto" ]] && exit 0;
 
 pre-commit install
 

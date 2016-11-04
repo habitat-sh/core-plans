@@ -43,4 +43,5 @@ do_strip() {
 
 do_check() {
   make check
+  $pkg_prefix
 }
