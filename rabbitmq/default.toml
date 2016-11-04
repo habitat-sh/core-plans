@@ -4,3 +4,6 @@ listen_port=5672
 default_vhost="/"
 default_user="guest"
 default_pass="guest"
+
+[rabbitmq.management]
+enabled=false
