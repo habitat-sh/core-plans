@@ -33,3 +33,5 @@ tcp_nodelay = "on"
 
 # http.keepalive_timeout: Timeout on client connection keepalive, in seconds. Default = 75
 keepalive_timeout = 60
+
+www-data = "/hab/svc/nginx/data"
