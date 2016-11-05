@@ -4,6 +4,7 @@
  #  # #  #  ###     #    #  # #    ##
  #   ##  #    #     #    #   ##   #  #
  #    #   ####      #    #    #  #    #
+
  # For help with NGINX Config Tuning, 
  # refer to: http://nginx.org/en/docs/http/ngx_http_core_module.html
 
@@ -18,6 +19,7 @@ worker_processes = 4
 [events]
 # worker_connections: Connections per Worker Process.  Default = 1024
 worker_connections = 1024
+
 
 
 #### HTTP Context Configuration
@@ -35,3 +37,12 @@ tcp_nodelay = "on"
 keepalive_timeout = 60
 
 www-data = "/hab/svc/nginx/data"
+global_ssl_password_file = "# ssl_password_file /home/hab/.ssh/tls/global.pass;"
+
+
+#### Extended Configuration
+[include]
+additional_configuration_files = ""
+
+[http.include]
+additional_servers = ""
