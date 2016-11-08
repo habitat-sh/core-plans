@@ -10,6 +10,9 @@ pre-commit install
 
 # The TRAVIS_COMMIT env var is always a merge commit, so we want to test from
 # the original commit all the way up until HEAD.
+echo $TRAVIS_COMMIT_RANGE
 ORIGIN=$(echo "$TRAVIS_COMMIT_RANGE" | cut -f1 -d'.')
+echo "COMMIT RANGE STARTS AT $ORIGIN"
+
 
 pre-commit run --origin "$ORIGIN" --source HEAD
