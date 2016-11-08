@@ -1,0 +1,11 @@
+#!/bin/bash -xe
+
+exec 2>&1
+
+DEVMODE={{cfg.dev.mode}}
+
+if [ "$DEVMODE" = true ] ; then
+  exec consul agent -dev
+else
+  exec consul agent {{~#if cfg.website}} -ui {{~/if}} -server -data-dir={{cfg.server.data-dir}} -bootstrap-expect {{cfg.bootstrap.expect}} -client {{cfg.client.bind}}
+fi

@@ -1,0 +1,19 @@
+# If you would like the web gui on the agent
+website = false
+
+# switch this to false you want to start in DEVMODE
+# https://www.consul.io/docs/guides/bootstrapping.html
+[dev]
+mode = true
+
+# The options for consul are available here
+# https://www.consul.io/docs/agent/options.html
+[bootstrap]
+expect = "3"
+
+[server]
+bind = "127.0.0.1"
+data-dir = "/hab/svc/consul/data/consul"
+
+[client]
+bind = "127.0.0.1"
