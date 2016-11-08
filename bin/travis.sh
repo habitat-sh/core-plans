@@ -15,4 +15,4 @@ ORIGIN=$(echo "$TRAVIS_COMMIT_RANGE" | cut -f1 -d'.')
 echo "COMMIT RANGE STARTS AT $ORIGIN"
 
 
-pre-commit run --origin "$ORIGIN" --source HEAD
+pre-commit run #--origin "$ORIGIN" --source HEAD
