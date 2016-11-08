@@ -1,0 +1,5 @@
+#!/bin/bash -xe
+
+exec 2>&1
+
+exec vault server -dev-listen-address=0.0.0.0:8200 -dev
