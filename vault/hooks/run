@@ -2,4 +2,10 @@
 
 exec 2>&1
 
-exec vault server -dev-listen-address=0.0.0.0:8200 -dev
+DEVMODE={{cfg.dev.mode}}
+
+if [ "$DEVMODE" = true ] ; then
+  exec vault server -dev-listen-address=0.0.0.0:8200 -dev
+else
+  exec vault server -config=config/settings.hcl
+fi
