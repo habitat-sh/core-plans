@@ -15,4 +15,4 @@ ORIGIN=$(echo "$TRAVIS_COMMIT_RANGE" | cut -f1 -d'.')
 echo "COMMIT RANGE STARTS AT $ORIGIN"
 
 
-pre-commit run --files go/plan.sh #--origin "$ORIGIN" --source HEAD
+pre-commit run --origin HEAD --source "$ORIGIN"
