@@ -20,4 +20,7 @@ do_install() {
   export PYTHONPATH="$pkg_prefix/lib/python2.7/site-packages/"
   mkdir -p "$PYTHONPATH"
   python setup.py install --prefix="$pkg_prefix"
+
+  # Modify the command to have the correct PYTHONPATH
+  sed -i "2iimport sys; sys.path.append(\"$PYTHONPATH\")" "$pkg_prefix/bin/virtualenv"
 }
