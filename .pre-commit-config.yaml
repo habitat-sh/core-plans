@@ -12,7 +12,7 @@
     sha: 28f9ecf7857d17ebd9d1715cb5bf208c9e8e2bdd
     hooks:
     -   id: shell-lint
-        args: ["--exclude=SC1090,SC1091,SC2034,SC2039,SC2148,SC2153,SC2154"]
+        args: ["--exclude=SC1090,SC1091,SC2034,SC2039,SC2148,SC2153,SC2154,SC2140"]
         exclude: config/.*$
 -   repo: local
     hooks:
