@@ -1,7 +1,7 @@
 # switch this to false you want to start in DEVMODE
 # https://www.vaultproject.io/intro/getting-started/dev-server.html
 [dev]
-mode = false
+mode = true
 
 [backend]
 storage = "consul"
