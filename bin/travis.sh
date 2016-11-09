@@ -4,7 +4,6 @@
 # Don't run if we're on the auto branch. Using the right range for pre-commit
 # has been problematic, so we're just going to skip it until somebody figures
 # it out.
-[[ "$TRAVIS_BRANCH" = "auto" ]] && exit 0;
 
 pre-commit install
 
@@ -12,4 +11,4 @@ pre-commit install
 # the original commit all the way up until HEAD.
 ORIGIN=$(echo "$TRAVIS_COMMIT_RANGE" | cut -f1 -d'.')
 
-pre-commit run --origin "$ORIGIN" --source HEAD
+pre-commit run --origin HEAD --source "$ORIGIN"
