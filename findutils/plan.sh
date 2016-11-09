@@ -15,15 +15,15 @@ do_prepare() {
   # Fix a few hardcoded, absolute paths in the codebase.
   #
   # Thanks to: https://github.com/NixOS/nixpkgs/blob/release-15.09/pkgs/tools/misc/findutils/default.nix#L28
-  patch -p1 -i $PLAN_CONTEXT/updatedb-path.patch
-  patch -p1 -i $PLAN_CONTEXT/xargs-echo-path.patch
-  patch -p1 -i $PLAN_CONTEXT/disable-test-canonicalize.patch
+  patch -p1 -i "${PLAN_CONTEXT}/updatedb-path.patch"
+  patch -p1 -i "${PLAN_CONTEXT}/xargs-echo-path.patch"
+  patch -p1 -i "${PLAN_CONTEXT}/disable-test-canonicalize.patch"
 }
 
 do_build() {
   ./configure \
-    --prefix=$pkg_prefix \
-    --localstatedir=$pkg_svc_var_path/locate
+    --prefix="${pkg_prefix}" \
+    --localstatedir="${pkg_svc_var_path}/locate"
   make
 }
 

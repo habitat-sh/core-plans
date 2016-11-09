@@ -15,7 +15,7 @@ do_build() {
 }
 
 do_install() {
-  build_line "Copying files from $PWD"
-  mkdir -p $pkg_prefix
-  cp -R * $pkg_prefix/
+  build_line "Copying files from ${PWD}"
+  mkdir -p "${pkg_prefix}"
+  cp -R "./*" "${pkg_prefix}/"
 }

@@ -18,15 +18,17 @@ do_build() {
 }
 
 do_install() {
-  install -D $HAB_CACHE_SRC_PATH/$pkg_filename $pkg_prefix/bin/jfrog
+  install -D "${HAB_CACHE_SRC_PATH}/${pkg_filename}" "${pkg_prefix}/bin/jfrog"
   cgo_wrap_binary jfrog
 }
 
 cgo_wrap_binary() {
-  local bin="$pkg_prefix/bin/$1"
+  local bin
+  bin="${pkg_prefix}/bin/$1"
   build_line "Adding wrapper $bin to ${bin}.real"
   mv -v "$bin" "${bin}.real"
-  local certs="$(pkg_path_for cacerts)/ssl/cert.pem"
+  local certs
+  certs="$(pkg_path_for cacerts)/ssl/cert.pem"
   cat <<EOF > "$bin"
 #!$(pkg_path_for busybox-static)/bin/sh
 set -e
@@ -38,5 +40,5 @@ fi
 export LD_LIBRARY_PATH="$LD_RUN_PATH"
 exec $(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2 ${bin}.real \$@
 EOF
-  chmod -v 755 "$bin"
+  chmod -v 755 "${bin}"
 }

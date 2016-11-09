@@ -5,7 +5,7 @@ pkg_description="Make is a tool which controls the generation of executables and
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url=https://www.gnu.org/software/make/
 pkg_license=('GPL-3.0')
-pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.bz2
+pkg_source=http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.bz2
 pkg_shasum=d6e262bf3601b42d2b1e4ef8310029e1dcf20083c5446b4b7aa67081fdffc589
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/bash core/gettext core/gzip core/perl core/binutils)
@@ -17,7 +17,7 @@ do_prepare() {
 
   # Don't look for library dependencies in the root system (i.e. `/lib`,
   # `/usr/lib`, etc.)
-  patch -p1 -i "$PLAN_CONTEXT/no-sys-dirs.patch"
+  patch -p1 -i "${PLAN_CONTEXT}/no-sys-dirs.patch"
 }
 
 do_check() {
@@ -32,7 +32,7 @@ exec $(pkg_path_for binutils)/bin/ar U\$@
 EOF
   chmod -v 0744 wrappers/ar
 
-  env PATH="$(pwd)/wrappers:$PATH" make check
+  env PATH="$(pwd)/wrappers:${PATH}" make check
 }
 
 

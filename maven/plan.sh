@@ -12,9 +12,8 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_build() {
-  export JAVA_HOME=$(hab pkg path core/jdk8)
-  pushd $HAB_CACHE_SRC_PATH/apache-maven-$pkg_version
-  ant -Dmaven.home="${pkg_prefix}"
+  pushd "${HAB_CACHE_SRC_PATH}/apache-maven-${pkg_version}"
+  JAVA_HOME="$(hab pkg path core/jdk8)" ant -Dmaven.home="${pkg_prefix}"
 }
 
 

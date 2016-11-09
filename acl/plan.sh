@@ -21,7 +21,7 @@ do_prepare() {
 
 do_install() {
   make install install-dev install-lib
-  chmod -v 755 $pkg_prefix/lib/libacl.so
+  chmod -v 755 "${pkg_prefix}/lib/libacl.so"
 }
 
 

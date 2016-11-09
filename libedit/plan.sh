@@ -11,5 +11,5 @@ pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 
 do_build() {
-  ./configure --enable-widec --prefix=$pkg_prefix
+  ./configure --enable-widec --prefix="${pkg_prefix}"
 }

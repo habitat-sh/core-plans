@@ -13,7 +13,7 @@ pkg_lib_dirs=(lib)
 
 do_check() {
   # Set `LDFLAGS` for the c++ test code to find libstdc++
-  make check LDFLAGS="$LDFLAGS -lstdc++"
+  make check LDFLAGS="${LDFLAGS} -lstdc++"
 }
 
 do_install() {
@@ -21,7 +21,7 @@ do_install() {
 
   # A few programs do not know about `flex` yet and try to run its predecessor,
   # `lex`
-  ln -sv flex $pkg_prefix/bin/lex
+  ln -sv flex "${pkg_prefix}/bin/lex"
 }
 
 

@@ -24,7 +24,7 @@ do_prepare() {
 }
 
 do_build() {
-    ./configure --prefix=$pkg_prefix && make
+    ./configure --prefix="${pkg_prefix}" && make
 }
 
 do_install() {

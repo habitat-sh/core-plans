@@ -14,15 +14,15 @@ do_prepare() {
   do_default_prepare
 
   # Set RUNPATH for c++ compiled code
-  LDFLAGS="$LDFLAGS -Wl,-rpath=${LD_RUN_PATH},--enable-new-dtags"
-  build_line "Updating LDFLAGS=$LDFLAGS"
+  LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH},--enable-new-dtags"
+  build_line "Updating LDFLAGS=${LDFLAGS}"
 }
 
 do_build() {
   ./configure \
-    --prefix=$pkg_prefix \
+    --prefix="${pkg_prefix}" \
     --build=x86_64-unknown-linux-gnu
-  make -j$(nproc)
+  make -j"$(nproc)"
 }
 
 do_check() {

@@ -15,6 +15,6 @@ pkg_lib_dirs=(lib)
 pkg_dirname=ImageMagick-${pkg_version}
 
 do_build() {
-    CC="gcc -std=gnu99" ./configure --prefix=$pkg_prefix
+    CC="gcc -std=gnu99" ./configure --prefix="${pkg_prefix}"
     make
 }

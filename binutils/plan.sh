@@ -17,15 +17,15 @@ do_prepare() {
   # Add explicit linker instructions as the binutils we are using may have its
   # own dynamic linker defaults.
   dynamic_linker="$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2"
-  LDFLAGS="$LDFLAGS -Wl,-rpath=${LD_RUN_PATH},--enable-new-dtags"
-  LDFLAGS="$LDFLAGS -Wl,--dynamic-linker=$dynamic_linker"
+  LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH},--enable-new-dtags"
+  LDFLAGS="${LDFLAGS} -Wl,--dynamic-linker=${dynamic_linker}"
   export LDFLAGS
-  build_line "Updating LDFLAGS=$LDFLAGS"
+  build_line "Updating LDFLAGS=${LDFLAGS}"
 
   # Don't depend on dynamically linked libgcc, as we don't want it denpending
   # on our /tools install.
-  export CFLAGS="$CFLAGS -static-libgcc"
-  build_line "Updating CFLAGS=$CFLAGS"
+  export CFLAGS="${CFLAGS} -static-libgcc"
+  build_line "Updating CFLAGS=${CFLAGS}"
 
   # TODO: For the wrapper scripts to function correctly, we need the full
   # path to bash. Until a bash plan is created, we're going to wing this...
@@ -37,22 +37,23 @@ do_prepare() {
   #
   # Thanks to: https://github.com/NixOS/nixpkgs/blob/2524504/pkgs/development/tools/misc/binutils/new-dtags.patch
   # Thanks to: https://build.opensuse.org/package/view_file?file=ld-dtags.diff&package=binutils&project=devel%3Agcc&srcmd5=011dbdef56800d1cd2fa8c585b3dd7db
-  patch -p1 < $PLAN_CONTEXT/new-dtags.patch
+  patch -p1 < "${PLAN_CONTEXT}/new-dtags.patch"
 
   # Since binutils 2.22, DT_NEEDED flags aren't copied for dynamic outputs.
   # That requires upstream changes for things to work. So we can patch it to
   # get the old behaviour fo now.
   #
   # Thanks to: https://github.com/NixOS/nixpkgs/blob/d9f4b0a/pkgs/development/tools/misc/binutils/dtneeded.patch
-  patch -p1 < $PLAN_CONTEXT/dt-needed-true.patch
+  patch -p1 < "${PLAN_CONTEXT}/dt-needed-true.patch"
 
   # # Make binutils output deterministic by default.
   #
   # Thanks to: https://github.com/NixOS/nixpkgs/blob/0889bbe/pkgs/development/tools/misc/binutils/deterministic.patch
-  patch -p1 < $PLAN_CONTEXT/more-deterministic-output.patch
+  patch -p1 < "${PLAN_CONTEXT}/more-deterministic-output.patch"
 
-  cat $PLAN_CONTEXT/custom-libs.patch \
-    | sed -e "s,@dynamic_linker@,$dynamic_linker,g" \
+  #shellcheck disable=SC2002
+  cat "${PLAN_CONTEXT}/custom-libs.patch" \
+    | sed -e "s,@dynamic_linker@,${dynamic_linker},g" \
       -e "s,@glibc_lib@,$(pkg_path_for glibc)/lib,g" \
       -e "s,@zlib_lib@,$(pkg_path_for zlib)/lib,g" \
     | patch -p1
@@ -69,11 +70,11 @@ do_prepare() {
 }
 
 do_build() {
-  rm -rf ../${pkg_name}-build
-  mkdir ../${pkg_name}-build
-  pushd ../${pkg_name}-build > /dev/null
-    ../$pkg_dirname/configure \
-      --prefix=$pkg_prefix \
+  rm -rf "../${pkg_name}-build"
+  mkdir "../${pkg_name}-build"
+  pushd "../${pkg_name}-build" > /dev/null
+    "../$pkg_dirname/configure" \
+      --prefix="${pkg_prefix}" \
       --enable-shared \
       --enable-deterministic-archives \
       --enable-threads \
@@ -82,34 +83,35 @@ do_build() {
     # Check the environment to make sure all the necessary tools are available
     make configure-host
 
-    make -j$(nproc) tooldir=$pkg_prefix
+    make -j"$(nproc)" tooldir="${pkg_prefix}"
   popd > /dev/null
 }
 
 do_check() {
-  pushd ../${pkg_name}-build > /dev/null
+  pushd "../${pkg_name}-build" > /dev/null
     # This testsuite is pretty sensitive to its environment, especially when
     # libraries and headers are being flown in from non-standard locations.
-    original_LD_RUN_PATH="$LD_RUN_PATH"
-    export LD_LIBRARY_PATH="$LD_RUN_PATH:$(pkg_path_for gcc)/lib"
+    original_LD_RUN_PATH="${LD_RUN_PATH}"
+    export LD_LIBRARY_PATH
+    LD_LIBRARY_PATH="${LD_RUN_PATH}:$(pkg_path_for gcc)/lib"
     unset LD_RUN_PATH
 
     make check LDFLAGS=""
 
     unset LD_LIBRARY_PATH
-    export LD_RUN_PATH="$original_LD_RUN_PATH"
+    export LD_RUN_PATH="${original_LD_RUN_PATH}"
   popd > /dev/null
 }
 
 do_install() {
-  pushd ../${pkg_name}-build > /dev/null
-    make prefix=$pkg_prefix tooldir=$pkg_prefix install
+  pushd "../${pkg_name}-build" > /dev/null
+    make prefix="${pkg_prefix}" tooldir="${pkg_prefix}" install
 
     # Remove unneeded files
-    rm -fv ${pkg_prefix}/share/man/man1/{dlltool,nlmconv,windres,windmc}*
+    rm -fv "${pkg_prefix}/share/man/man1/{dlltool,nlmconv,windres,windmc}*"
 
     # No shared linking to these files outside binutils
-    rm -fv ${pkg_prefix}/lib/lib{bfd,opcodes}.so
+    rm -fv "${pkg_prefix}/lib/lib{bfd,opcodes}.so"
 
     # Wrap key binaries so we can add some arguments and flags to the real
     # underlying binary.
@@ -126,8 +128,8 @@ _verify_tty() {
   local expected='spawn ls'
   local cmd="expect -c 'spawn ls'"
   if actual=$(expect -c "spawn ls" | sed 's/\r$//'); then
-    if [[ $expected != $actual ]]; then
-      exit_with "Expected out from '$cmd' was: '$expected', actual: '$actual'" 1
+    if [[ $expected != "${actual}" ]]; then
+      exit_with "Expected out from '${cmd}' was: '${expected}', actual: '${actual}'" 1
     fi
   else
     exit_with "PTYs may not be working properly, aborting" 1
@@ -135,15 +137,15 @@ _verify_tty() {
 }
 
 _wrap_binary() {
-  local bin="$pkg_prefix/bin/$1"
+  local bin="${pkg_prefix}/bin/${1}"
   build_line "Adding wrapper $bin to ${bin}.real"
   mv -v "$bin" "${bin}.real"
-  sed $PLAN_CONTEXT/ld-wrapper.sh \
+  sed "${PLAN_CONTEXT}/ld-wrapper.sh" \
     -e "s^@shell@^${bash}^g" \
     -e "s^@dynamic_linker@^${dynamic_linker}^g" \
     -e "s^@program@^${bin}.real^g" \
-    > "$bin"
-  chmod 755 "$bin"
+    > "${bin}"
+  chmod 755 "${bin}"
 }
 
 

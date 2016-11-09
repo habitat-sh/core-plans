@@ -20,10 +20,11 @@ do_build() {
 
 do_install() {
   # Load local::lib into our current perl include chain
-  eval "$(perl -I$(pkg_path_for core/local-lib)/lib/perl5 -Mlocal::lib=$(pkg_path_for core/local-lib))"
+  eval "$(perl -I"$(pkg_path_for core/local-lib)/lib/perl5" -Mlocal::lib="$(pkg_path_for core/local-lib)")"
   # Create a new lib dir in our pacakge for cpanm to house all of its libs
-  eval $(perl -Mlocal::lib=${pkg_prefix})
+  eval "$(perl -Mlocal::lib="${pkg_prefix}")"
 
   # cpanm prioritizes the local::lib location for an install dir
+  # shellcheck disable=SC2002
   cat cpanm | perl - App::cpanminus
 }

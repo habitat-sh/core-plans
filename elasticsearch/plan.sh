@@ -20,10 +20,10 @@ do_install() {
   build_line "Copying files from $PWD"
   # Elasticsearch is greedy when grabbing config files from /bin/..
   # so we need to put the untemplated config dir out of reach
-  install -vDm644 README.textile $pkg_prefix/share/README.textile
-  install -vDm644 LICENSE.txt $pkg_prefix/share/licenses/LICENSE.txt
-  install -vDm644 NOTICE.txt $pkg_prefix/share/licenses/NOTICE.txt
+  install -vDm644 README.textile "${pkg_prefix}/share/README.textile"
+  install -vDm644 LICENSE.txt "${pkg_prefix}/share/licenses/LICENSE.txt"
+  install -vDm644 NOTICE.txt "${pkg_prefix}/share/licenses/NOTICE.txt"
 
-  mkdir -p $pkg_prefix/es
-  cp -a bin lib modules $pkg_prefix/es
+  mkdir -p "${pkg_prefix}/es"
+  cp -a bin lib modules "${pkg_prefix}/es"
 }

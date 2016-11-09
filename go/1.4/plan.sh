@@ -14,7 +14,8 @@ do_prepare() {
   export CGO_ENABLED=1
   build_line "Setting CGO_ENABLED=$CGO_ENABLED"
 
-  export GOROOT="$(pwd)"
+  export GOROOT
+  GOROOT="$(pwd)"
   build_line "Setting GOROOT=$GOROOT"
   export GOBIN="$GOROOT/bin"
   build_line "Setting GOBIN=$GOBIN"
@@ -25,7 +26,8 @@ do_prepare() {
   build_line "Updating PATH=$PATH"
 
   # Add `cacerts` to the SSL certificate lookup chain
-  cat $PLAN_CONTEXT/cacerts.patch \
+  # shellcheck disable=SC2002,SC2046
+  cat "${PLAN_CONTEXT}/cacerts.patch" \
     | sed -e "s,@cacerts@,$(pkg_path_for cacerts)/ssl/cert.pem,g" \
     | patch -p1
 

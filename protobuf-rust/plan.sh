@@ -8,9 +8,9 @@ pkg_deps=(core/glibc core/gcc)
 pkg_build_deps=(core/rust core/gcc core/cacerts core/protobuf)
 
 do_build() {
-  env SSL_CERT_FILE=$(pkg_path_for cacerts)/ssl/cert.pem \
-      PROTOBUF_PREFIX=$(pkg_path_for protobuf) \
-      cargo install protobuf --root $pkg_prefix --vers $pkg_version -j$(nproc) --verbose
+  env SSL_CERT_FILE="$(pkg_path_for cacerts)/ssl/cert.pem" \
+      PROTOBUF_PREFIX="$(pkg_path_for protobuf)" \
+      cargo install protobuf --root "${pkg_prefix}" --vers "${pkg_version}" -j"$(nproc)" --verbose
 }
 
 do_install() {

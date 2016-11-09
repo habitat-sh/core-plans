@@ -14,6 +14,6 @@ pkg_bin_dirs=(bin)
 pkg_shasum=5178c30b151d044aefb1b08bf54c3003a0ac55c59c866763997529d60770d5bc
 
 do_build() {
-  ./configure --prefix=${pkg_prefix} --without-python  --with-zlib=$(pkg_path_for zlib)
+  ./configure --prefix="${pkg_prefix}" --without-python  --with-zlib="$(pkg_path_for zlib)"
   make
 }

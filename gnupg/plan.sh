@@ -12,14 +12,14 @@ pkg_bin_dirs=(bin)
 
 do_build() {
   ./configure \
-    --prefix=${pkg_prefix} \
-    --sbindir=$pkg_prefix/bin
+    --prefix="${pkg_prefix}" \
+    --sbindir="${pkg_prefix}/bin"
   make
 }
 
 do_check() {
   find tests -type f \
-    | xargs sed -e "s,/bin/pwd,$(pkg_path_for coreutils)/bin/pwd,g" -i
+    -exec sed -e "s,/bin/pwd,$(pkg_path_for coreutils)/bin/pwd,g" -i {} \;
 
   make check
 }

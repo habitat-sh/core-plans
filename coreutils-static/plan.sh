@@ -15,9 +15,9 @@ do_build() {
   #
   # Thanks to: https://lists.gnu.org/archive/html/coreutils/2014-06/msg00036.html
   FORCE_UNSAFE_CONFIGURE=1 ./configure \
-    --prefix=$pkg_prefix \
+    --prefix="${pkg_prefix}" \
     --enable-single-binary \
-    LDFLAGS="-static $LDFLAGS"
+    LDFLAGS="-static ${LDFLAGS}"
   make
 }
 

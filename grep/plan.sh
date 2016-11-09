@@ -10,7 +10,7 @@ pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core
 pkg_bin_dirs=(bin)
 
 do_prepare() {
-  patch -p1 -i $PLAN_CONTEXT/disable-perf-related-test.patch
+  patch -p1 -i "${PLAN_CONTEXT}/disable-perf-related-test.patch"
 }
 
 do_check() {

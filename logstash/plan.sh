@@ -15,8 +15,8 @@ do_build() {
 }
 
 do_install() {
-  mkdir -p $pkg_prefix
-  cp -r * $pkg_prefix
-  rm -rf $pkg_prefix/vendor/jruby
+  mkdir -p "${pkg_prefix}"
+  cp -r "./*" "${pkg_prefix}"
+  rm -rf "${pkg_prefix}/vendor/jruby"
   fix_interpreter "${pkg_prefix}/bin/*" core/bash bin/sh
 }

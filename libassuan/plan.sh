@@ -13,8 +13,8 @@ pkg_lib_dirs=(lib)
 
 do_build() {
   ./configure \
-    --prefix=$pkg_prefix \
-    --with-libgpg-error-prefix=$(pkg_path_for libgpg-error) \
+    --prefix="${pkg_prefix}" \
+    --with-libgpg-error-prefix="$(pkg_path_for libgpg-error)" \
     --enable-static \
     --enable-shared
   make

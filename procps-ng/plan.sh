@@ -14,8 +14,8 @@ pkg_lib_dirs=(lib)
 do_build() {
   # The Util-linux package will provide the `kill` command
   ./configure \
-    --prefix=$pkg_prefix \
-    --sbindir=$pkg_prefix/bin \
+    --prefix="${pkg_prefix}" \
+    --sbindir="${pkg_prefix}/bin" \
     --disable-kill
   make
 }

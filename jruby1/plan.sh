@@ -13,14 +13,13 @@ pkg_lib_dirs=(lib)
 pkg_dirname=jruby-${pkg_version}
 
 do_build() {
-  export JAVA_HOME=$(pkg_path_for core/jdk8)
-  ./mvnw
+  JAVA_HOME="$(pkg_path_for core/jdk8)" ./mvnw
 }
 
 do_install() {
-  cp -R * $pkg_prefix/
+  cp -R "./*" "${pkg_prefix}/"
   for binstub in ${pkg_prefix}/bin/*; do
-    [[ -f $binstub ]] && sed -e "s#/usr/bin/env bash#$(pkg_path_for bash)/bin/bash#" -i $binstub
-    [[ -f $binstub ]] && sed -e "s#/usr/bin/env jruby#${pkg_prefix}/bin/jruby#" -i $binstub
+    [[ -f $binstub ]] && sed -e "s#/usr/bin/env bash#$(pkg_path_for bash)/bin/bash#" -i "${binstub}"
+    [[ -f $binstub ]] && sed -e "s#/usr/bin/env jruby#${pkg_prefix}/bin/jruby#" -i "${binstub}"
   done
 }

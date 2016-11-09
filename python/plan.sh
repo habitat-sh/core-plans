@@ -37,7 +37,7 @@ do_prepare() {
 }
 
 do_build() {
-  CPPFLAGS=$CFLAGS
+  CPPFLAGS="${CFLAGS}"
   LD_LIBRARY_PATH=$(pkg_path_for gcc)/lib
   export CPPFLAGS LD_LIBRARY_PATH
   ./configure "--prefix=${pkg_prefix}" \
@@ -49,10 +49,10 @@ do_install() {
   do_default_install
 
   # link python3.5 to python for pkg_interpreters
-  ln -rs ${pkg_prefix}/bin/python3.5 ${pkg_prefix}/bin/python
+  ln -rs "${pkg_prefix}/bin/python3.5" "${pkg_prefix}/bin/python"
 
   # Upgrade to the latest pip
-  "$pkg_prefix/bin/pip3" install --upgrade pip
+  "${pkg_prefix}/bin/pip3" install --upgrade pip
 }
 
 do_check() {

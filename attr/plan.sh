@@ -13,7 +13,7 @@ pkg_lib_dirs=(lib)
 
 do_install() {
   make install install-dev install-lib
-  chmod -v 755 $pkg_prefix/lib/libattr.so
+  chmod -v 755 "${pkg_prefix}/lib/libattr.so"
 }
 
 

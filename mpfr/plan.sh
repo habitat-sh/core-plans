@@ -13,16 +13,16 @@ pkg_lib_dirs=(lib)
 do_prepare() {
   do_default_prepare
 
-  LDFLAGS="$LDFLAGS -Wl,-rpath=${LD_RUN_PATH},--enable-new-dtags"
-  build_line "Updating LDFLAGS=$LDFLAGS"
+  LDFLAGS="${LDFLAGS} -Wl,-rpath=${LD_RUN_PATH},--enable-new-dtags"
+  build_line "Updating LDFLAGS=${LDFLAGS}"
 }
 
 do_build() {
   ./configure \
-    --prefix=$pkg_prefix \
-    --with-gmp=$(pkg_path_for gmp) \
+    --prefix="${pkg_prefix}" \
+    --with-gmp="$(pkg_path_for gmp)" \
     --enable-thread-safe
-  make -j$(nproc)
+  make -j"$(nproc)"
 }
 
 do_check() {

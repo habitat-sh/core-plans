@@ -13,13 +13,13 @@ pkg_include_dirs=(include)
 do_build() {
   make \
     ARCH=x86_64 \
-    prefix=$pkg_prefix
+    prefix="${pkg_prefix}"
 }
 
 do_install() {
   make \
     ARCH=x86_64 \
-    prefix=$pkg_prefix \
+    prefix="${pkg_prefix}" \
     install
 }
 

@@ -14,7 +14,7 @@ pkg_lib_dirs=(lib)
 
 do_build() {
     ./configure \
-      --prefix=$pkg_prefix \
+      --prefix="${pkg_prefix}" \
       --without-xml2 \
       --without-lzo2
   make

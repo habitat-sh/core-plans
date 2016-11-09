@@ -16,6 +16,6 @@ do_build() {
 }
 
 do_install() {
-  cp -R _build/default/* $pkg_prefix
-  chmod +x $pkg_prefix/bin/relx
+  cp -R _build/default/* "${pkg_prefix}"
+  chmod +x "${pkg_prefix}/bin/relx"
 }

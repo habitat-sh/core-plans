@@ -12,12 +12,12 @@ pkg_build_deps=(core/coreutils core/make core/gcc)
 pkg_bin_dirs=(bin)
 
 do_build() {
-  make -f unix/Makefile prefix=$pkg_prefix generic_gcc
+  make -f unix/Makefile prefix="${pkg_prefix}" generic_gcc
 }
 
 do_install() {
   make -f unix/Makefile \
-    prefix=$pkg_prefix \
-    MANDIR=${pkg_prefix}/share/man/man1 \
+    prefix="${pkg_prefix}" \
+    MANDIR="${pkg_prefix}/share/man/man1" \
     install
 }

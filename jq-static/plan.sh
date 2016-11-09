@@ -19,5 +19,5 @@ do_build() {
 }
 
 do_install() {
-  install -D $HAB_CACHE_SRC_PATH/$pkg_filename $pkg_prefix/bin/jq
+  install -D "${HAB_CACHE_SRC_PATH}/${pkg_filename}" "${pkg_prefix}/bin/jq"
 }

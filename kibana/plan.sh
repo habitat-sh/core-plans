@@ -15,7 +15,7 @@ pkg_expose=(5601)
 do_prepare() {
   # The `/usr/bin/env` path is hardcoded, so we'll add a symlink if needed.
   if [[ ! -r /usr/bin/env ]]; then
-    ln -sv $(pkg_path_for coreutils)/bin/env /usr/bin/env
+    ln -sv "$(pkg_path_for coreutils)/bin/env" /usr/bin/env
     _clean_env=true
   fi
 }
@@ -26,8 +26,8 @@ do_build () {
 }
 
 do_install() {
-  cp -R ./* $pkg_prefix/
-  mkdir -p ${pkg_prefix}/bin
+  cp -R "./*" "${pkg_prefix}/"
+  mkdir -p "${pkg_prefix}/bin"
 }
 
 do_end() {

@@ -21,7 +21,7 @@ do_download() {
 
 do_unpack() {
   do_default_unpack
-  tar -xzf "${HAB_CACHE_SRC_PATH}/libsass.tar.gz" -C $HAB_CACHE_SRC_PATH
+  tar -xzf "${HAB_CACHE_SRC_PATH}/libsass.tar.gz" -C "${HAB_CACHE_SRC_PATH}"
 }
 
 do_build() {

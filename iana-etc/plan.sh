@@ -13,7 +13,7 @@ do_build() {
 }
 
 do_install() {
-  make install PREFIX=$pkg_prefix
+  make install PREFIX="${pkg_prefix}"
 }
 
 
