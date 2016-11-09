@@ -1,10 +1,6 @@
 #!/bin/bash
 # Script to run when testing core-plans on Travis CI
 
-# Don't run if we're on the auto branch. Using the right range for pre-commit
-# has been problematic, so we're just going to skip it until somebody figures
-# it out.
-
 pre-commit install
 
 # The TRAVIS_COMMIT env var is always a merge commit, so we want to test from
