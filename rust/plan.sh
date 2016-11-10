@@ -1,11 +1,11 @@
 pkg_name=rust
 pkg_origin=core
-pkg_version=1.12.1
+pkg_version=1.13.0
 pkg_license=('Apache-2.0' 'MIT')
 _url_base=http://static.rust-lang.org/dist
 pkg_source=$_url_base/${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz
 pkg_dirname=${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu
-pkg_shasum=9e546aec13e389429ba2d86c8f4e67eba5af146c979e4faa16ffb40ddaf9984c
+pkg_shasum=95f4c372b1b81ac1038161e87e932dd7ab875d25c167a861c3949b0f6a65516d
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_deps=(core/glibc core/gcc-libs core/zlib core/gcc core/cacerts core/busybox-static)
@@ -16,7 +16,7 @@ _target_sources=(
 )
 
 _target_shasums=(
-  99bbc73d9396724ea8223fb577550bc332851b694425f5e8e3d1a29022343f02
+  921890bef0c4f1d20434faa7da22c10b2169057a1dc31f650a4a1491a88bc529
 )
 
 do_download() {
