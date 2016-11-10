@@ -18,7 +18,6 @@ pkg_svc_user=root
 do_unpack() {
   cd "${HAB_CACHE_SRC_PATH}" || exit
   unzip ${pkg_filename} -d "${pkg_name}-${pkg_version}"
-  rm ${pkg_filename}
 }
 
 do_build() {
