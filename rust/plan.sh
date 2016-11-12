@@ -1,6 +1,9 @@
 pkg_name=rust
 pkg_origin=core
 pkg_version=1.13.0
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="Safe, concurrent, practical language"
+pkg_upstream_url="https://www.rust-lang.org/"
 pkg_license=('Apache-2.0' 'MIT')
 _url_base=http://static.rust-lang.org/dist
 pkg_source=$_url_base/${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz
