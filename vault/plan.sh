@@ -2,8 +2,8 @@ pkg_origin=core
 pkg_name=vault
 pkg_version=0.6.2
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
-pkg_license=("Apache 2")
-pkg_upstream=https://www.vaultproject.io/
+pkg_license=("MPL-2.0")
+pkg_upstream_url=https://www.vaultproject.io/
 pkg_source=https://releases.hashicorp.com/vault/${pkg_version}/vault_${pkg_version}_linux_amd64.zip
 pkg_shasum=91432c812b1264306f8d1ecf7dd237c3d7a8b2b6aebf4f887e487c4e7f69338c
 pkg_filename=${pkg_name}-${pkg_version}_linux_amd64.zip
@@ -21,7 +21,7 @@ do_unpack() {
 }
 
 do_build() {
-    return 0
+  return 0
 }
 
 do_install() {
