@@ -9,17 +9,17 @@ pkg_deps=(core/glibc)
 pkg_bin_dirs=(bin)
 
 do_unpack() {
-  mkdir -p $HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_version}
-  tar zxf $HAB_CACHE_SRC_PATH/$pkg_filename -C $HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_version}
+  mkdir -p "${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}"
+  tar zxf "${HAB_CACHE_SRC_PATH}/${pkg_filename}" -C "${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}"
 }
 
 do_build() {
-  pushd admin/runit-${pkg_version}
+  pushd "admin/runit-${pkg_version}"
   ./package/compile
   popd
 }
 
 do_install() {
-  mkdir -p $pkg_prefix/bin
-  cp admin/runit-${pkg_version}/command/* $pkg_prefix/bin
+  mkdir -p "${pkg_prefix}/bin"
+  cp "admin/runit-${pkg_version}/command/*" "${pkg_prefix}/bin"
 }

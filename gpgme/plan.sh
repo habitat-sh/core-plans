@@ -12,8 +12,8 @@ pkg_deps=(core/glibc core/libassuan core/libgpg-error)
 
 do_build() {
   ./configure \
-    --prefix=$pkg_prefix \
-    --with-libgpg-error-prefix=$(pkg_path_for libgpg-error) \
-    --with-libassuan-prefix=$(pkg_path_for libassuan)
+    --prefix="${pkg_prefix}" \
+    --with-libgpg-error-prefix="$(pkg_path_for libgpg-error)" \
+    --with-libassuan-prefix="$(pkg_path_for libassuan)"
   make
 }

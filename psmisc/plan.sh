@@ -13,7 +13,7 @@ do_prepare() {
   do_default_prepare
 
   # Thanks to: https://raw.githubusercontent.com/NixOS/nixpkgs/release-15.09/pkgs/os-specific/linux/psmisc/0001-Typo-in-fuser-makes-M-on-all-the-time.patch
-  patch -p1 -i $PLAN_CONTEXT/0001-Typo-in-fuser-makes-M-on-all-the-time.patch
+  patch -p1 -i "${PLAN_CONTEXT}/0001-Typo-in-fuser-makes-M-on-all-the-time.patch"
 }
 
 

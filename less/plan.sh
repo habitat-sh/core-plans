@@ -11,7 +11,7 @@ pkg_bin_dirs=(bin)
 
 do_build() {
   ./configure \
-    --prefix=$pkg_prefix \
+    --prefix="${pkg_prefix}" \
     --sysconfdir=/etc \
     --with-regex=pcre
   make

@@ -15,7 +15,7 @@ pkg_lib_dirs=(lib)
 
 _common_prepare() {
   # Makes the symbolic links in installation relative vs. absolute
-  sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
+  sed -i "s@\(ln -s -f \)$(PREFIX)/bin/@\1@" Makefile
 
   # Ensure that the man pages are installed under share/man
   sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
@@ -25,12 +25,12 @@ do_prepare() {
   _common_prepare
 
   export CC=gcc
-  build_line "Setting CC=$CC"
+  build_line "Setting CC=${CC}"
 }
 
 do_build() {
-  make -f Makefile-libbz2_so PREFIX="$pkg_prefix" CC="$CC"
-  make bzip2 bzip2recover CC="$CC" LDFLAGS="$LDFLAGS"
+  make -f Makefile-libbz2_so PREFIX="${pkg_prefix}" CC="${CC}"
+  make bzip2 bzip2recover CC="${CC}" LDFLAGS="${LDFLAGS}"
 }
 
 do_check() {
@@ -38,21 +38,23 @@ do_check() {
 }
 
 do_install() {
-  local maj=$(echo $pkg_version | cut -d "." -f 1)
-  local maj_min=$(echo $pkg_version | cut -d "." -f 1-2)
+  local maj
+  maj="$(echo "${pkg_version}" | cut -d "." -f 1)"
+  local maj_min
+  maj_min="$(echo "${pkg_version}" | cut -d "." -f 1-2)"
 
-  make install PREFIX="$pkg_prefix"
+  make install PREFIX="${pkg_prefix}"
 
   # Replace some hard links with symlinks
-  rm -fv $pkg_prefix/bin/{bunzip2,bzcat}
-  ln -sv bzip2 $pkg_prefix/bin/bunzip2
-  ln -sv bzip2 $pkg_prefix/bin/bzcat
+  rm -fv "${pkg_prefix}/bin/{bunzip2,bzcat}"
+  ln -sv bzip2 "${pkg_prefix}/bin/bunzip2"
+  ln -sv bzip2 "${pkg_prefix}/bin/bzcat"
 
   # Install the shared library and its symlinks
-  cp -v $HAB_CACHE_SRC_PATH/$pkg_dirname/libbz2.so.$pkg_version $pkg_prefix/lib
-  ln -sv libbz2.so.$pkg_version $pkg_prefix/lib/libbz2.so
-  ln -sv libbz2.so.$pkg_version $pkg_prefix/lib/libbz2.so.$maj
-  ln -sv libbz2.so.$pkg_version $pkg_prefix/lib/libbz2.so.$maj_min
+  cp -v "${HAB_CACHE_SRC_PATH}/${pkg_dirname}/libbz2.so.${pkg_version}" "${pkg_prefix}/lib"
+  ln -sv "libbz2.so.${pkg_version}" "${pkg_prefix}/lib/libbz2.so"
+  ln -sv "libbz2.so.${pkg_version}" "${pkg_prefix}/lib/libbz2.so.${maj}"
+  ln -sv "libbz2.so.${pkg_version}" "${pkg_prefix}/lib/libbz2.so.${maj_min}"
 }
 
 

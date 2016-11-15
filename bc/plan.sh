@@ -15,12 +15,12 @@ do_prepare() {
   # Fix a memory leak.
   #
   # Thanks to: https://projects.archlinux.org/svntogit/packages.git/tree/trunk/bc-1.06.95-void_uninitialized.patch?h=packages/bc
-  patch -p0 -i $PLAN_CONTEXT/memory-leak.patch
+  patch -p0 -i "${PLAN_CONTEXT}/memory-leak.patch"
 }
 
 do_build() {
   ./configure \
-    --prefix=$pkg_prefix \
+    --prefix="${pkg_prefix}" \
     --with-readline
   make
 }

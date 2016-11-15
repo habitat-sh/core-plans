@@ -14,12 +14,12 @@ pkg_lib_dirs=(lib)
 do_build() {
   pushd build_unix > /dev/null
   ../dist/configure \
-    --prefix=$pkg_prefix \
+    --prefix="${pkg_prefix}" \
     --enable-compat185 \
     --enable-cxx \
     --enable-dbm \
     --enable-stl
-  make LIBSO_LIBS=-lpthread -j$(nproc)
+  make LIBSO_LIBS=-lpthread -j"$(nproc)"
   popd > /dev/null
 }
 
@@ -29,7 +29,7 @@ do_install() {
   popd > /dev/null
 
   # Install license file
-  install -Dm644 LICENSE "$pkg_prefix/share/licenses/LICENSE"
+  install -Dm644 LICENSE "${pkg_prefix}/share/licenses/LICENSE"
 }
 
 

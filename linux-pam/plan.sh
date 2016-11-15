@@ -1,7 +1,7 @@
 pkg_name=linux-pam
 pkg_origin=core
 pkg_version=1.2.1
-pkg_license=('MIT', 'GPL')
+pkg_license=('MIT' 'GPL')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=http://www.linux-pam.org/library/Linux-PAM-${pkg_version}.tar.gz
 pkg_filename=${pkg_name}-${pkg_version}.tar.gz

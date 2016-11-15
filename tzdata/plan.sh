@@ -24,9 +24,9 @@ timezones=(
 )
 
 do_unpack() {
-  mkdir -p "$HAB_CACHE_SRC_PATH/$pkg_dirname"
-  pushd "$HAB_CACHE_SRC_PATH/$pkg_dirname" > /dev/null
-    tar xf "$HAB_CACHE_SRC_PATH/$pkg_filename"
+  mkdir -p "${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
+  pushd "${HAB_CACHE_SRC_PATH}/${pkg_dirname}" > /dev/null
+    tar xzf "${HAB_CACHE_SRC_PATH}/${pkg_filename}"
   popd > /dev/null
 }
 

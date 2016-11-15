@@ -21,7 +21,7 @@ do_begin() {
 
   # Source a file containing an array of patch URLs and an array of patch file
   # shasums
-  source $PLAN_CONTEXT/readline-patches.sh
+  source "${PLAN_CONTEXT}/readline-patches.sh"
 }
 
 do_download() {
@@ -31,7 +31,7 @@ do_download() {
   # skip re-downloading if already present and verified
   for i in $(seq 0 $((${#_patch_files[@]} - 1))); do
     p="${_patch_files[$i]}"
-    download_file $p $(basename $p) ${_patch_shasums[$i]}
+    download_file "${p}" "$(basename "${p}")" "${_patch_shasums[$i]}"
   done; unset i p
 }
 
@@ -40,7 +40,7 @@ do_verify() {
 
   # Verify all patch files against their shasums
   for i in $(seq 0 $((${#_patch_files[@]} - 1))); do
-    verify_file $(basename ${_patch_files[$i]}) ${_patch_shasums[$i]}
+    verify_file "$(basename "${_patch_files[$i]}") ${_patch_shasums[$i]}"
   done; unset i
 }
 
@@ -49,8 +49,8 @@ do_prepare() {
 
   # Apply all patch files to the extracted source
   for p in "${_patch_files[@]}"; do
-    build_line "Applying patch $(basename $p)"
-    patch -p0 -i $HAB_CACHE_SRC_PATH/$(basename $p)
+    build_line "Applying patch $(basename "${p}")"
+    patch -p0 -i "${HAB_CACHE_SRC_PATH}/$(basename "${p}")"
   done
 
   # This patch is to make sure that `libncurses' is among the `NEEDED'
@@ -62,14 +62,15 @@ do_prepare() {
   # Thanks to:
   # https://github.com/NixOS/nixpkgs/blob/release-15.09/pkgs/development/libraries/readline/link-against-ncurses.patch
   build_line "Applying patch link-against-ncurses.patch"
-  patch -p1 -i $PLAN_CONTEXT/link-against-ncurses.patch
+  patch -p1 -i "${PLAN_CONTEXT}/link-against-ncurses.patch"
 }
 
 do_install() {
   do_default_install
 
   # An empty `bin/` directory gets made, which we don't need and is confusing
-  rm -rf $pkg_prefix/bin
+  # shellcheck disable=SC2115
+  rm -rf "${pkg_prefix}/bin"
 }
 
 

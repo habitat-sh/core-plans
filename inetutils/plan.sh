@@ -22,7 +22,7 @@ do_build() {
   #   this codebase, such as `telnetd`, `ftpd`, etc.--a dedicated Plan for
   #   any of these service components is much preferred
   ./configure \
-    --prefix=$pkg_prefix \
+    --prefix="${pkg_prefix}" \
     --disable-logger \
     --disable-whois \
     --disable-rcp \
@@ -37,7 +37,7 @@ do_install() {
   do_default_install
 
   # `libexec/` directory is not used
-  rm -rfv $pkg_prefix/libexec
+  rm -rfv "${pkg_prefix}/libexec"
 }
 
 

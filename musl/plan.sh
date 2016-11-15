@@ -14,23 +14,23 @@ pkg_lib_dirs=(lib)
 do_prepare() {
   stack_size="2097152"
   build_line "Setting default stack size to '$stack_size' from default of '81920'"
-  sed -i "s/#define DEFAULT_STACK_SIZE .*/#define DEFAULT_STACK_SIZE $stack_size/" \
+  sed -i "s/#define DEFAULT_STACK_SIZE .*/#define DEFAULT_STACK_SIZE ${stack_size}/" \
     src/internal/pthread_impl.h
   return 0
 }
 
 do_build() {
   ./configure \
-    --prefix=$pkg_prefix \
-    --syslibdir=$pkg_prefix/lib
-  make -j$(nproc)
+    --prefix="${pkg_prefix}" \
+    --syslibdir="${pkg_prefix}/lib"
+  make -j"$(nproc)"
 }
 
 do_install() {
   do_default_install
 
   # Install license
-  install -Dm0644 COPYRIGHT $pkg_prefix/share/licenses/COPYRIGHT
+  install -Dm0644 COPYRIGHT "${pkg_prefix}/share/licenses/COPYRIGHT"
 }
 
 

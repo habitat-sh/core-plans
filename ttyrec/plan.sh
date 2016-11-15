@@ -11,7 +11,7 @@ pkg_bin_dirs=(bin)
 
 do_prepare() {
   # Apply third party patch, originally designed for RHEL5
-  patch -p1 -i $PLAN_CONTEXT/ttyrec-1.0.8.RHEL5.patch
+  patch -p1 -i "${PLAN_CONTEXT}/ttyrec-1.0.8.RHEL5.patch"
 }
 
 do_build() {
@@ -20,6 +20,6 @@ do_build() {
 
 do_install() {
   for bin in ttyplay ttyrec ttytime; do
-    install -v -D $bin $pkg_prefix/bin/$bin
+    install -v -D "${bin}" "${pkg_prefix}/bin/${bin}"
   done
 }

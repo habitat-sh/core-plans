@@ -10,16 +10,17 @@ pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core
 pkg_bin_dirs=(bin)
 
 do_prepare() {
-  cat $PLAN_CONTEXT/cleanup.patch \
+  # shellcheck disable=SC2002
+  cat "${PLAN_CONTEXT}/cleanup.patch" \
     | sed \
-      -e "s,@prefix@,$pkg_prefix,g" \
+      -e "s,@prefix@,${pkg_prefix},g" \
       -e "s,@clens_prefix@,$(pkg_path_for clens),g" \
       -e "s,@libbsd_prefix@,$(pkg_path_for libbsd),g" \
     | patch -p1
 }
 do_build() {
   make \
-    prefix=$pkg_prefix \
+    prefix="${pkg_prefix}" \
     PKG_CONFIG=pkg-config \
     INSTALL=install \
     STRIP=strip
@@ -29,7 +30,7 @@ do_install() {
   do_default_install
 
   # Install license file from README
-  install -Dm644 README "$pkg_prefix/share/licenses/README"
+  install -Dm644 README "${pkg_prefix}/share/licenses/README"
 }
 
 

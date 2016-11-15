@@ -18,7 +18,7 @@ do_build() {
   # and the `--enable-no-install-program` flag skips installation of binaries
   # that are provided by other pacakges.
   FORCE_UNSAFE_CONFIGURE=1 ./configure \
-    --prefix="$pkg_prefix" \
+    --prefix="${pkg_prefix}" \
     --enable-no-install-program=kill,uptime
   make
 }

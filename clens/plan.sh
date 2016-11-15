@@ -12,11 +12,11 @@ pkg_lib_dirs=(lib)
 
 do_build() {
   mkdir -pv obj
-  make LOCALBASE=$pkg_prefix
+  make LOCALBASE="${pkg_prefix}"
 }
 
 do_install() {
-  make LOCALBASE=$pkg_prefix install
+  make LOCALBASE="${pkg_prefix}" install
 }
 
 

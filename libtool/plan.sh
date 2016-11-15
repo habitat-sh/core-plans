@@ -17,7 +17,7 @@ do_prepare() {
 
   # Drop the dependency on `help2man` by skipping the generation of a man page
   sed \
-    -e '/^dist_man1_MANS =/ s,^.*$,dist_man1_MANS = $(libtoolize_1),g' \
+    -e "/^dist_man1_MANS =/ s,^.*$,dist_man1_MANS = $(libtoolize_1),g" \
     -i Makefile.in
 }
 
@@ -25,7 +25,7 @@ do_build() {
   # * `lt_cv_sys_dlsearch_path` Makes the default library search path empty,
   # rather than `"/lib /usr/lib"`
   ./configure \
-    --prefix=$pkg_prefix \
+    --prefix="${pkg_prefix}" \
     lt_cv_sys_lib_dlsearch_path_spec="" \
     lt_cv_sys_lib_search_path_spec=""
   make

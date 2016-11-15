@@ -10,17 +10,17 @@ pkg_build_deps=("${pkg_deps[@]}" "${pkg_build_deps[@]}")
 pkg_deps=()
 
 do_begin() {
-  PLAN_CONTEXT=$(abspath ../bash)
+  PLAN_CONTEXT="$(abspath ../bash)"
 }
 
 do_build() {
   ./configure \
-    --prefix=$pkg_prefix \
+    --prefix="${pkg_prefix}" \
     --with-curses \
     --enable-readline \
     --without-bash-malloc \
-    --with-installed-readline=$(pkg_path_for core/readline) \
-    LDFLAGS="-static $LDFLAGS"
+    --with-installed-readline="$(pkg_path_for core/readline)" \
+    LDFLAGS="-static ${LDFLAGS}"
 
   # Link `-ltinfow` rather than `-lcurses` as some symbols appear to have moved
   # in ncurses 6.x codebase.
@@ -28,5 +28,5 @@ do_build() {
   # Thanks to: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=650349
   sed -e "s,^TERMCAP_LIB = -lcurses$,TERMCAP_LIB = -ltinfow," -i Makefile
 
-  make LDFLAGS="-static $LDFLAGS"
+  make LDFLAGS="-static ${LDFLAGS}"
 }

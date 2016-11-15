@@ -17,10 +17,10 @@ do_prepare() {
   # Do not look under `/usr` for dependencies.
   #
   # Thanks to: https://github.com/NixOS/nixpkgs/blob/release-15.09/pkgs/development/interpreters/perl/5.22/no-sys-dirs.patch
-  patch -p1 -i $PLAN_CONTEXT/no-sys-dirs.patch
+  patch -p1 -i "${PLAN_CONTEXT}/no-sys-dirs.patch"
 
   # Skip the only failing test in the suite--not bad, eh?
-  patch -p1 -i $PLAN_CONTEXT/skip-wide-character-test.patch
+  patch -p1 -i "${PLAN_CONTEXT}/skip-wide-character-test.patch"
 
   #  Make Cwd work with the `pwd` command from `coreutils` (we cannot rely
   #  on `/bin/pwd` exisiting in an environment)
@@ -33,7 +33,8 @@ do_prepare() {
   locincpth=""
   for i in $CFLAGS; do
     if echo "$i" | grep -q "^-I\/" > /dev/null; then
-      locincpth="$locincpth $(echo "$i" | sed 's,^-I,,')"
+      # shellcheck disable=SC2001
+      locincpth="${locincpth} $(echo "$i" | sed 's,^-I,,')"
     fi
   done
 
@@ -44,7 +45,8 @@ do_prepare() {
   loclibpth=""
   for i in $LDFLAGS; do
     if echo "$i" | grep -q "^-L\/" > /dev/null; then
-      loclibpth="$loclibpth $(echo "$i" | sed 's,^-L,,')"
+      # shellcheck disable=SC2001
+      loclibpth="${loclibpth} $(echo "$i" | sed 's,^-L,,')"
     fi
   done
 
@@ -54,7 +56,8 @@ do_prepare() {
   # build directory, which will contain the build shared Perl library.
   #
   # Thanks to: http://perl5.git.perl.org/perl.git/blob/c52cb8175c7c08890821789b4c7177b1e0e92558:/INSTALL#l478
-  export LD_LIBRARY_PATH="`pwd`:$LD_RUN_PATH"
+  export LD_LIBRARY_PATH
+  LD_LIBRARY_PATH="$(pwd):${LD_RUN_PATH}"
   build_line "Setting LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
 }
 
@@ -65,11 +68,11 @@ do_build() {
 
   sh Configure \
     -de \
-    -Dprefix=$pkg_prefix \
-    -Dman1dir=$pkg_prefix/share/man/man1 \
-    -Dman3dir=$pkg_prefix/share/man/man3 \
-    -Dlocincpth="$locincpth" \
-    -Dloclibpth="$loclibpth" \
+    -Dprefix="${pkg_prefix}" \
+    -Dman1dir="${pkg_prefix}/share/man/man1" \
+    -Dman3dir="${pkg_prefix}/share/man/man3" \
+    -Dlocincpth="${locincpth}" \
+    -Dloclibpth="${loclibpth}" \
     -Dpager="$(pkg_path_for less)/bin/less -isR" \
     -Dinstallstyle=lib/perl5 \
     -Uinstallusrbinperl \
@@ -78,7 +81,7 @@ do_build() {
     -Dinc_version_list=none \
     -Dlddlflags="-shared ${LDFLAGS}" \
     -Dldflags="${LDFLAGS}"
-  make -j$(nproc)
+  make -j"$(nproc)"
 
   # Clear temporary build time environment variables
   unset BUILD_ZLIB BUILD_BZIP2
@@ -89,11 +92,11 @@ do_check() {
   # versions from the `iana-etc` package. This is needed for several
   # network-related tests to pass.
   if [[ ! -f /etc/services ]]; then
-    cp -v $(pkg_path_for iana-etc)/etc/services /etc/services
+    cp -v "$(pkg_path_for iana-etc)/etc/services" /etc/services
     local clean_services=true
   fi
   if [[ ! -f /etc/protocols ]]; then
-    cp -v $(pkg_path_for iana-etc)/etc/protocols /etc/protocols
+    cp -v "$(pkg_path_for iana-etc)/etc/protocols" /etc/protocols
     local clean_protocols=true
   fi
 

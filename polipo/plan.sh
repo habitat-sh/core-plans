@@ -19,6 +19,6 @@ do_build() {
 }
 
 do_install() {
-  mkdir $pkg_prefix/bin/
-  cp polipo $pkg_prefix/bin/
+  mkdir "${pkg_prefix}/bin/"
+  cp polipo "${pkg_prefix}/bin/"
 }

@@ -14,9 +14,9 @@ pkg_lib_dirs=(lib)
 do_build() {
   ./configure \
     --disable-plugin-auth-pam \
-    --prefix=${pkg_prefix} \
-    --exec-prefix=${pkg_prefix} \
-    --sbindir=${pkg_prefix}/bin \
+    --prefix="${pkg_prefix}" \
+    --exec-prefix="${pkg_prefix}" \
+    --sbindir="${pkg_prefix}/bin" \
     --enable-iproute2
   make
 }

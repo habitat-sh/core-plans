@@ -13,26 +13,26 @@ do_prepare() {
   # Allow dots in usernames.
   #
   # Thanks to: http://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/sys-apps/shadow/files/shadow-4.1.3-dots-in-usernames.patch
-  patch -p1 -i $PLAN_CONTEXT/dots-in-usernames.patch
+  patch -p1 -i "${PLAN_CONTEXT}/dots-in-usernames.patch"
 
   # Disable the installation of the `groups` program as Coreutils provides a
   # better version.
   #
   # Thanks to: http://www.linuxfromscratch.org/lfs/view/stable/chapter06/shadow.html
-  sed -i 's/groups$(EXEEXT) //' src/Makefile.in
-  find man -name Makefile.in -exec sed -i 's/groups\.1 / /' {} \;
+  sed -i "s/groups$(EXEEXT) //" src/Makefile.in
+  find man -name Makefile.in -exec sed -i "s/groups\.1 / /" {} \;
 
   # Instead of using the default crypt method, use the more secure SHA-512
   # method of password encryption, which also allows passwords longer than 8
   # characters.
   #
   # Thanks to: http://www.linuxfromscratch.org/lfs/view/stable/chapter06/shadow.html
-  sed -i -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD SHA512@' etc/login.defs
+  sed -i -e "s@#ENCRYPT_METHOD DES@ENCRYPT_METHOD SHA512@" etc/login.defs
 }
 
 do_build() {
   ./configure \
-    --prefix=$pkg_prefix \
+    --prefix="${pkg_prefix}" \
     --with-acl \
     --with-attr \
     --with-group-name-max-length=32 \
@@ -46,11 +46,11 @@ do_install() {
 
   # Move all binaries in `sbin/` into `bin/` as this isn't handled by
   # `./configure`.
-  mv $pkg_prefix/sbin/* $pkg_prefix/bin/
-  rm -rf $pkg_prefix/sbin
+  mv "${pkg_prefix}/sbin/*" "${pkg_prefix}/bin/"
+  rm -rf "${pkg_prefix}/sbin"
 
   # Install the license
-  install -Dm644 COPYING $pkg_prefix/share/licenses/COPYING
+  install -Dm644 COPYING "${pkg_prefix}/share/licenses/COPYING"
 }
 
 

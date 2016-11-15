@@ -20,8 +20,8 @@ do_verify() {
 }
 
 do_unpack() {
-  mkdir -pv $HAB_CACHE_SRC_PATH/$pkg_dirname
-  cp -v $HAB_CACHE_SRC_PATH/$pkg_filename $HAB_CACHE_SRC_PATH/$pkg_dirname
+  mkdir -pv "${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
+  cp -v "${HAB_CACHE_SRC_PATH}/${pkg_filename}" "${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
 }
 
 do_build() {
@@ -29,24 +29,26 @@ do_build() {
 }
 
 do_install() {
-  mkdir -pv $pkg_prefix/ssl/certs
-  cp -v $pkg_filename $pkg_prefix/ssl/certs
-  ln -sv certs/cacert.pem $pkg_prefix/ssl/cert.pem
+  mkdir -pv "${pkg_prefix}/ssl/certs"
+  cp -v "${pkg_filename}" "${pkg_prefix}/ssl/certs"
+  ln -sv certs/cacert.pem "${pkg_prefix}/ssl/cert.pem"
 }
 
 update_pkg_version() {
   # Extract the build date of the certificates file
-  local build_date=$(cat $HAB_CACHE_SRC_PATH/$pkg_filename \
+  local build_date
+  # shellcheck disable=SC2002
+  build_date="$(cat "${HAB_CACHE_SRC_PATH}/${pkg_filename}" \
     | grep 'Certificate data from Mozilla' \
-    | sed 's/^## Certificate data from Mozilla as of: //')
+    | sed 's/^## Certificate data from Mozilla as of: //')"
 
   # Update the `$pkg_version` value with the build date
-  pkg_version=$(date --date="$build_date" "+%Y.%m.%d")
-  build_line "Version updated to $pkg_version from CA Certs file"
+  pkg_version="$(date --date="${build_date}" "+%Y.%m.%d")"
+  build_line "Version updated to ${pkg_version} from CA Certs file"
 
   # Several metadata values get their defaults from the value of `$pkg_version`
   # so we must update these as well
-  pkg_dirname=${pkg_name}-${pkg_version}
-  pkg_prefix=$HAB_PKG_PATH/${pkg_origin}/${pkg_name}/${pkg_version}/${pkg_release}
-  pkg_artifact="$HAB_CACHE_ARTIFACT_PATH/${pkg_origin}-${pkg_name}-${pkg_version}-${pkg_release}-${pkg_target}.${_artifact_ext}"
+  pkg_dirname="${pkg_name}-${pkg_version}"
+  pkg_prefix="${HAB_PKG_PATH}/${pkg_origin}/${pkg_name}/${pkg_version}/${pkg_release}"
+  pkg_artifact="${HAB_CACHE_ARTIFACT_PATH}/${pkg_origin}-${pkg_name}-${pkg_version}-${pkg_release}-${pkg_target}.${_artifact_ext}"
 }

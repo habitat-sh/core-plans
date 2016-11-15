@@ -17,19 +17,19 @@ do_prepare() {
   # Patch for CVE-2015-1283
   #
   # Thanks to: https://github.com/NixOS/nixpkgs/blob/release-15.09/pkgs/development/libraries/expat/default.nix
-  patch -p1 -i $PLAN_CONTEXT/CVE-2015-1283.patch
+  patch -p1 -i "${PLAN_CONTEXT}/CVE-2015-1283.patch"
 }
 
 do_check() {
   # Set `LDFLAGS` for the c++ test code to find libstdc++
-  make check LDFLAGS="$LDFLAGS -lstdc++"
+  make check LDFLAGS="${LDFLAGS} -lstdc++"
 }
 
 do_install() {
   do_default_install
 
   # Install license file
-  install -Dm644 COPYING "$pkgdir/share/licenses/COPYING"
+  install -Dm644 COPYING "${pkgdir}/share/licenses/COPYING"
 }
 
 
