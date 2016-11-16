@@ -27,15 +27,23 @@ pkg_svc_group=hab
 pkg_expose=(27017)
 
 do_prepare() {
-    # created a variable for our compilers
-    export CC="$(pkg_path_for core/gcc)/bin/gcc"
-    export CXX="$(pkg_path_for core/gcc)/bin/g++"
+
+    CC="$(pkg_path_for core/gcc)/bin/gcc"
+    CXX="$(pkg_path_for core/gcc)/bin/g++"
+    export CC
+    export CXX
 
     # create variables for our include and library pathes in a scons friendly format
-    INCPATH=$(echo "$CFLAGS" | sed -e "s@-I@@g")
-    export INCPATH=$(echo "$INCPATH" | sed -e "s@ @', '@g")
-    LIBPATH=$(echo "$LDFLAGS" | sed -e "s@-L@@g")
-    export LIBPATH=$(echo "$LIBPATH" | sed -e "s@ @', '@g")
+    # shellcheck disable=SC2001
+    INCPATH="$(echo "${CFLAGS}" | sed -e "s@-I@@g")"
+    # shellcheck disable=SC2001
+    INCPATH="$(echo "${INCPATH}" | sed -e "s@ @', '@g")"
+    # shellcheck disable=SC2001
+    LIBPATH="$(echo "${LDFLAGS}" | sed -e "s@-L@@g")"
+    # shellcheck disable=SC2001
+    LIBPATH="$(echo "${LIBPATH}" | sed -e "s@ @', '@g")"
+    export LIBPATH
+    export INCPATH
 
     # because scons dislikes saving our variables, we will save our
     # variables within the construct ourselves
@@ -43,7 +51,7 @@ do_prepare() {
 }
 
 do_build() {
-    scons core --prefix="$pkg_prefix" --ssl -j$(nproc)
+    scons core --prefix="$pkg_prefix" --ssl -j"$(nproc)"
 }
 
 do_install() {
