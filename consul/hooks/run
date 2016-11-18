@@ -2,10 +2,10 @@
 
 exec 2>&1
 
-DEVMODE={{cfg.dev.mode}}
+SERVERMODE={{cfg.server.mode}}
 
-if [ "$DEVMODE" = true ] ; then
-  exec consul agent -dev
+if [ "$SERVERMODE" = true ] ; then
+  exec consul agent {{~#if cfg.website}} -ui {{~/if}} -server -bootstrap-expect {{cfg.bootstrap.expect}} -client {{cfg.client.bind}} -config-file={{pkg.svc_config_path}}/basic_config.json
 else
-  exec consul agent {{~#if cfg.website}} -ui {{~/if}} -server -data-dir={{cfg.server.data-dir}} -bootstrap-expect {{cfg.bootstrap.expect}} -client {{cfg.client.bind}}
+  exec consul agent -dev
 fi
