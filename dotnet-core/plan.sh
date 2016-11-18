@@ -46,6 +46,7 @@ do_build() {
 
 do_install() {
   cp -a . "$pkg_prefix/bin"
+  chmod o+r -R "$pkg_prefix/bin"
 }
 
 do_check() {
