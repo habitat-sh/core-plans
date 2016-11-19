@@ -1,0 +1,7 @@
+#!/bin/sh
+
+exec 2>&1
+
+#start the mysql server
+mysqld_safe --defaults-file={{pkg.svc_config_path}}/my.cnf \
+            --user={{pkg.svc_user}}
