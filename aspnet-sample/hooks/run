@@ -1,0 +1,4 @@
+#!/bin/sh
+cd "{{pkg.svc_var_path}}/www" || exit
+export HAB_CONFIG_PATH="{{pkg.svc_config_path}}"
+exec dotnet {{pkg.name}}-{{pkg.version}}.dll 2>&1

@@ -1,0 +1,4 @@
+#!/bin/sh
+#
+ln -sf "{{pkg.path}}/www" "{{pkg.svc_var_path}}"
+chown -R {{pkg.svc_user}}:{{pkg.svc_group}} "{{pkg.svc_var_path}}"
