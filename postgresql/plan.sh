@@ -2,6 +2,8 @@ pkg_name=postgresql
 pkg_version=9.5.3
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="PostgreSQL is a powerful, open source object-relational database system."
+pkg_upstream_url="https://www.postgresql.org/"
 pkg_license=('PostgreSQL')
 pkg_source=https://ftp.postgresql.org/pub/source/v${pkg_version}/${pkg_name}-${pkg_version}.tar.bz2
 pkg_shasum=7385c01dc58acba8d7ac4e6ad42782bd7c0b59272862a3a3d5fe378d4503a0b4
@@ -12,6 +14,7 @@ pkg_deps=(
   core/perl
   core/readline
   core/zlib
+  core/libossp-uuid
 )
 
 pkg_build_deps=(
@@ -31,8 +34,11 @@ do_build() {
 	# will be used if it is defined"
 	./configure --disable-rpath \
               --with-openssl \
-              --prefix=${pkg_prefix} \
-              --sysconfdir=${pkg_svc_config_path} \
-              --localstatedir=${pkg_svc_var_path}
+              --prefix="$pkg_prefix" \
+              --with-uuid=ossp \
+              --with-includes="$LD_INCLUDE_PATH" \
+              --with-libraries="$LD_LIBRARY_PATH" \
+              --sysconfdir="$pkg_svc_config_path" \
+              --localstatedir="$pkg_svc_var_path"
 	make
 }
