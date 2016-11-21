@@ -40,5 +40,9 @@ do_build() {
               --with-libraries="$LD_LIBRARY_PATH" \
               --sysconfdir="$pkg_svc_config_path" \
               --localstatedir="$pkg_svc_var_path"
-	make
+	make world
+}
+
+do_install() {
+  make install-world
 }
