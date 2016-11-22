@@ -9,9 +9,10 @@ trap "kill_rabbit" INT TERM HUP ABRT QUIT
 
 export HOME={{pkg.svc_var_path}}
 export RABBITMQ_MNESIA_BASE={{pkg.svc_var_path}}/db
-export RABBITMQ_LOG_BASE={{pkg.svc_var_path}}/log
 export RABBITMQ_CONFIG_FILE={{pkg.svc_config_path}}/rabbitmq
 export RABBITMQ_ENABLED_PLUGINS_FILE={{pkg.svc_var_path}}/enabled_plugins
+export RABBITMQ_LOGS=-
+export RABBITMQ_SASL_LOGS=-
 
 # We do NOT call exec here, as we trap signals and kill rabbit in this script
 {{pkg.path}}/sbin/rabbitmq-server 2>&1

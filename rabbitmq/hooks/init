@@ -3,11 +3,12 @@
 echo 2>&1
 
 export RABBITMQ_MNESIA_BASE={{pkg.svc_var_path}}/db
-export RABBITMQ_LOG_BASE={{pkg.svc_var_path}}/log
 export RABBITMQ_CONFIG_FILE={{pkg.svc_config_path}}/rabbitmq
 export RABBITMQ_SCRIPTS_DIR=$(hab pkg path core/rabbitmq)/sbin
 export RABBITMQ_ENABLED_PLUGINS_FILE={{pkg.svc_var_path}}/enabled_plugins
 export HOME={{pkg.svc_var_path}}
+export RABBITMQ_LOGS=-
+export RABBITMQ_SASL_LOGS=-
 
 {{#if cfg.rabbitmq.management.enabled}}
 echo "Enabling management console"
