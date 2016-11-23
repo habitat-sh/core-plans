@@ -10,9 +10,8 @@ pkg_shasum=7f9ca62cfa1e4aedf29df9169aed0395fd1b90de254139996e554367db4d5a01
 pkg_deps=(core/glibc core/gcc-libs core/libxml2 core/libxslt core/zlib core/bzip2 core/openssl core/pcre core/coreutils core/perl core/which)
 pkg_build_deps=(core/gcc core/make)
 pkg_lib_dirs=(lib)
-pkg_bin_dirs=(sbin bin)
+pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
-pkg_svc_run="nginx"
 pkg_svc_user="root"
 pkg_expose=(80 443)
 
@@ -26,19 +25,10 @@ do_prepare() {
 
 do_build() {
   ./configure --prefix="$pkg_prefix" \
-    --conf-path="$pkg_svc_config_path/nginx.conf" \
-    --sbin-path="$pkg_prefix/sbin/nginx" \
-    --pid-path="$pkg_svc_var_path/nginx.pid" \
-    --lock-path="$pkg_svc_var_path/nginx.lock" \
     --user=hab \
     --group=hab \
     --http-log-path=/dev/stdout \
     --error-log-path=stderr \
-    --http-client-body-temp-path="$pkg_svc_var_path/client-body" \
-    --http-proxy-temp-path="$pkg_svc_var_path/proxy" \
-    --http-fastcgi-temp-path="$pkg_svc_var_path/fastcgi" \
-    --http-scgi-temp-path="$pkg_svc_var_path/scgi" \
-    --http-uwsgi-temp-path="$pkg_svc_var_path/uwsgi" \
     --with-ipv6 \
     --with-debug \
     --with-pcre \
@@ -46,6 +36,7 @@ do_build() {
     --with-pcre-jit \
     --with-sha1-asm \
     --with-file-aio \
+    --with-luajit \
     --with-stream=dynamic \
     --with-mail=dynamic \
     --with-http_gunzip_module \
@@ -74,8 +65,6 @@ do_build() {
 
 do_install() {
   make install
-  # remove broken symlink
-  rm "$pkg_prefix/bin/openresty"
   fix_interpreter "$pkg_prefix/bin/*" core/coreutils bin/env
 }
 
