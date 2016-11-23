@@ -1,8 +1,8 @@
 pkg_name=aspnet-sample
 pkg_origin=core
-pkg_version=0.1.9
+pkg_version=0.2.0
 pkg_source=https://github.com/mwrock/habitat-${pkg_name}/archive/v${pkg_version}.tar.gz
-pkg_shasum=50ffcbe1c0b49acb84365c2157445047b360345c7361e67827093f962852de4d
+pkg_shasum=cfc79dcbebb8c7baccc48e05277a7a4d96e36a26cfde87e42017ef6191692419
 pkg_upstream_url=https://github.com/mwrock/habitat-aspnet-sample
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
