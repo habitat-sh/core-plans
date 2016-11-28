@@ -53,9 +53,12 @@ bootstrap.mlockall: {{cfg.bootstrap.mlockall}}
 
 network.host: {{cfg.network.host}}
 http.port: {{cfg.network.port}}
-
 discovery.zen.ping.multicast.enabled: {{cfg.discovery.ping_multicast_enabled}}
+{{#if bind.has_elasticsearch ~}}
+discovery.zen.ping.unicast.hosts: [{{#each bind.elasticsearch.members ~}} "{{ip}}", {{/each ~}}]
+{{else ~}}
 discovery.zen.ping.unicast.hosts: {{cfg.discovery.ping_unicast_hosts}}
+{{/if ~}}
 discovery.zen.minimum_master_nodes: {{cfg.discovery.minimum_master_nodes}}
 
 gateway.recover_after_nodes: {{cfg.gateway.recover_after_nodes}}
@@ -67,4 +70,3 @@ gateway.recover_after_time: {{cfg.gateway.recover_after_time}}
 {{~/if}}
 
 action.destructive_requires_name: {{cfg.action.destructive_requires_name}}
-
