@@ -181,6 +181,7 @@
   # For more information, see the documentation at:
   # <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery.html>
   #
+  zen_fd_ping_timeout = "30s"
 
 #
 # ---------------------------------- Gateway -----------------------------------
@@ -231,3 +232,20 @@
 # ======================== Elasticsearch Logger Configuration =========================
 [logger]
   level = "INFO"
+
+# ======================== Elasticsearch Index Module Configuration =========================
+[index]
+  number_of_replicas = 1
+  number_of_shards = 5
+
+# ======================== Elasticsearch Plugins Configuration =========================
+[plugins]
+  cloud_aws_signer = ""
+
+# ======================== Runtime Configuration =========================
+[runtime]
+  max_open_files = ""
+  max_locked_memory = ""
+  es_startup_sleep_time = ""
+  es_java_opts = ""
+  heapsize = ""
