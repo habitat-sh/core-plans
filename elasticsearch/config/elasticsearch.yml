@@ -53,6 +53,7 @@ bootstrap.mlockall: {{cfg.bootstrap.mlockall}}
 
 network.host: {{cfg.network.host}}
 http.port: {{cfg.network.port}}
+discovery.zen.fd.ping_timeout: {{cfg.discovery.zen_fd_ping_timeout}}
 discovery.zen.ping.multicast.enabled: {{cfg.discovery.ping_multicast_enabled}}
 {{#if bind.has_elasticsearch ~}}
 discovery.zen.ping.unicast.hosts: [{{#each bind.elasticsearch.members ~}} "{{ip}}", {{/each ~}}]
@@ -70,3 +71,10 @@ gateway.recover_after_time: {{cfg.gateway.recover_after_time}}
 {{~/if}}
 
 action.destructive_requires_name: {{cfg.action.destructive_requires_name}}
+
+index.number_of_replicas: {{cfg.index.number_of_replicas}}
+index.number_of_shards: {{cfg.index.number_of_shards}}
+
+{{#if cfg.plugins.cloud_aws_signer ~}}
+cloud.aws.signer: {{cfg.plugins.cloud_aws_signer}}
+{{/if ~}}
