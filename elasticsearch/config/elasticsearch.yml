@@ -26,10 +26,10 @@ node.data: {{cfg.node.data}}
 {{~/if}}
 
 
-path.data: {{cfg.path.data}}
-path.logs: {{cfg.path.logs}}
-path.plugins: {{cfg.path.plugins}}
-path.scripts: {{cfg.path.scripts}}
+path.data: {{pkg.svc_data_path}}/{{cfg.path.data}}
+path.logs: {{pkg.svc_var_path}}/{{cfg.path.logs}}
+path.plugins: {{pkg.svc_var_path}}/{{cfg.path.plugins}}
+path.scripts: {{pkg.svc_config_path}}/{{cfg.path.scripts}}
 
 indices.recovery.concurrent_streams: {{cfg.indices.recovery.concurrent_streams}}
 indices.recovery.concurrent_small_file_streams: {{cfg.indices.recovery.concurrent_small_file_streams}}

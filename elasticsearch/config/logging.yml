@@ -44,7 +44,7 @@ appender:
 
   file:
     type: dailyRollingFile
-    file: {{cfg.path.logs}}/{{cfg.cluster.name}}.log
+    file: {{pkg.svc_var_path}}/{{cfg.path.logs}}/{{cfg.cluster.name}}.log
     datePattern: "'.'yyyy-MM-dd"
     layout:
       type: pattern
@@ -63,7 +63,7 @@ appender:
 
   deprecation_log_file:
     type: dailyRollingFile
-    file: {{cfg.path.logs}}/{{cfg.cluster.name}}_deprecation.log
+    file: {{pkg.svc_var_path}}/{{cfg.path.logs}}/{{cfg.cluster.name}}_deprecation.log
     datePattern: "'.'yyyy-MM-dd"
     layout:
       type: pattern
@@ -71,7 +71,7 @@ appender:
 
   index_search_slow_log_file:
     type: dailyRollingFile
-    file: {{cfg.path.logs}}/{{cfg.cluster.name}}_index_search_slowlog.log
+    file: {{pkg.svc_var_path}}/{{cfg.path.logs}}/{{cfg.cluster.name}}_index_search_slowlog.log
     datePattern: "'.'yyyy-MM-dd"
     layout:
       type: pattern
@@ -79,7 +79,7 @@ appender:
 
   index_indexing_slow_log_file:
     type: dailyRollingFile
-    file: {{cfg.path.logs}}/{{cfg.cluster.name}}_index_indexing_slowlog.log
+    file: {{pkg.svc_var_path}}/{{cfg.path.logs}}/{{cfg.cluster.name}}_index_indexing_slowlog.log
     datePattern: "'.'yyyy-MM-dd"
     layout:
       type: pattern
