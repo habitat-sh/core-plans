@@ -1,11 +1,11 @@
 #!/bin/sh
 
+exec 2>&1
+
 # Move directories that ship in the package into place
 for dir in config etc node_modules package.json src bin installedPlugins optimize tasks webpackShims
 do
-  ln -sf {{pkg.path}}/$dir {{pkg.svc_path}}/
+  cp -r {{pkg.path}}/$dir {{pkg.svc_static_path}}/
 done
 
 mkdir -p {{pkg.svc_var_path}}/run
-
-chown -R hab:hab {{pkg.svc_path}}/*
