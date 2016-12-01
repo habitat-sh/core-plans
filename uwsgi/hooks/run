@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# libpcre.so.1 is not found even though core/pcre is listed as a build **and**
+# runtime dependency. Without adding the pcre lib path to LD_LIBRARY_PATH the
+# error is:
+#     # hab start tvaughan/uwsgi
+#     [snip]
+#     uwsgi(O): /hab/pkgs/tvaughan/uwsgi/2.0.15/20170410165204/bin/uwsgi: error while loading shared libraries: libpcre.so.1: cannot open shared object file: No such file or directory
+# Please note:
+#     # ldd /hab/pkgs/tvaughan/uwsgi/2.0.15/20170410165204/bin/uwsgi | grep pcre
+#     libpcre.so.1 => not found
+LD_LIBRARY_PATH="$(hab pkg path core/pcre)/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH
+
+# For some reason uwsgi writes **everything** to stderr. Unless we rewrite
+# stderr to stdout there is no output. How does one tell hab to output stderr?
+exec 2>&1
+
+exec "$(hab pkg path core/uwsgi)/bin/uwsgi" "$@"
