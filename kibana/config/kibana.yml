@@ -8,7 +8,8 @@ server.basePath: {{cfg.server.basePath}}
 server.maxPayloadBytes: {{cfg.server.maxPayloadBytes}}
 
 {{~#if bind.has_elasticsearch}}
-elasticsearch.url: "http://{{bind.elasticsearch.members.[0].ip}}:9200"
+# Kibana only takes on ES host in it's config
+elasticsearch.url: "http://{{bind.elasticsearch.members.[0].ip}}:{{bind.elasticsearch.members.[0].port}}"
 {{else}}
 elasticsearch.url: {{cfg.elasticsearch.url}}
 {{~/if}}
