@@ -5,6 +5,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Python-2.0')
 pkg_description="Python is a programming language that lets you work quickly \
   and integrate systems more effectively."
+pkg_upstream_url="https://www.python.org"
 pkg_dirname=Python-${pkg_version}
 pkg_source=https://www.python.org/ftp/python/${pkg_version}/${pkg_dirname}.tgz
 pkg_filename=${pkg_dirname}.tgz
@@ -38,6 +39,7 @@ do_prepare() {
 
 do_build() {
   CPPFLAGS=$CFLAGS
+  LDFLAGS="${LDFLAGS} -lgcc_s"
   LD_LIBRARY_PATH=$(pkg_path_for gcc)/lib
   export CPPFLAGS LD_LIBRARY_PATH
   ./configure "--prefix=${pkg_prefix}" \
@@ -49,7 +51,7 @@ do_install() {
   do_default_install
 
   # link python3.5 to python for pkg_interpreters
-  ln -rs ${pkg_prefix}/bin/python3.5 ${pkg_prefix}/bin/python
+  ln -rs "${pkg_prefix}/bin/python3.5" "${pkg_prefix}/bin/python"
 
   # Upgrade to the latest pip
   "$pkg_prefix/bin/pip3" install --upgrade pip
