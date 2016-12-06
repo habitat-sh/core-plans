@@ -1,0 +1,19 @@
+#!/bin/bash
+
+exec 2>&1
+
+export GEM_HOME="{{pkg.path}}/vendor/bundle/ruby/2.3.0"
+export GEM_PATH="$(hab pkg path core/ruby)/lib/ruby/gems/2.3.0:$(hab pkg path core/bundler):$GEM_HOME"
+export LD_LIBRARY_PATH="$(hab pkg path core/gcc-libs)/lib:$(hab pkg path core/libffi)/lib"
+export CONFIG_DIR="{{pkg.svc_config_path}}"
+
+if [ "{{cfg.mode}}" == "client" ]
+then
+exec sensu-client -L {{cfg.log_level}}
+elif [ "{{cfg.mode}}" == "server" ]
+then
+exec sensu-server -L {{cfg.log_level}}
+else
+echo "{{cfg.mode}} is not supported."
+exit 1
+fi
