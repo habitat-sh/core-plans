@@ -23,4 +23,8 @@ do_install() {
     [[ -f $binstub ]] && sed -e "s#/usr/bin/env bash#$(pkg_path_for bash)/bin/bash#" -i $binstub
     [[ -f $binstub ]] && sed -e "s#/usr/bin/env jruby#${pkg_prefix}/bin/jruby#" -i $binstub
   done
+
+  # Remove *.so for other platforms...they cause `do_strip()' to fail
+  # with `Unable to recognise the format' errors
+  find $pkg_prefix/lib/jni/ -maxdepth 1 -mindepth 1 -type d -not -name "x86_64-Linux" -exec rm -rf "{}" \;
 }
