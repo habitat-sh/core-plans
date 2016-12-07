@@ -9,10 +9,10 @@ export CONFIG_DIR="{{pkg.svc_config_path}}"
 
 if [ "{{cfg.mode}}" == "client" ]
 then
-exec sensu-client -L {{cfg.log_level}}
+exec sensu-client -d "{{pkg.svc_config_path}}" -L {{cfg.log_level}}
 elif [ "{{cfg.mode}}" == "server" ]
 then
-exec sensu-server -L {{cfg.log_level}}
+exec sensu-server -d "{{pkg.svc_config_path}}" -L {{cfg.log_level}}
 else
 echo "{{cfg.mode}} is not supported."
 exit 1
