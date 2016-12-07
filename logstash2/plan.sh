@@ -1,6 +1,8 @@
 pkg_origin=core
 pkg_name=logstash2
 pkg_version=2.4.1
+pkg_description="Logstash is an open source, server-side data processing pipeline that ingests data from a multitude of sources simultaneously, transforms it, and then sends it to your favorite 'stash.'"
+pkg_upstream_url=https://github.com/elastic/logstash
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=(Apache-2.0)
 pkg_source=https://download.elastic.co/logstash/logstash/logstash-${pkg_version}.tar.gz
@@ -16,8 +18,8 @@ do_build() {
 }
 
 do_install() {
-  mkdir -p $pkg_prefix
-  cp -r * $pkg_prefix
-  rm -rf $pkg_prefix/vendor/jruby
+  mkdir -p "$pkg_prefix"
+  cp -r ./* "$pkg_prefix"
+  rm -rf "$pkg_prefix/vendor/jruby"
   fix_interpreter "${pkg_prefix}/bin/*" core/bash bin/sh
 }
