@@ -1,5 +1,11 @@
 #!/bin/sh
 
+exec 2>&1
+
 export USE_RUBY=1
 
-exec {{pkg.path}}/bin/logstash -f {{pkg.svc_config_path}} --log {{pkg.svc_var_path}}/log/logstash.log 2>&1
+exec {{pkg.path}}/bin/logstash \
+  --path.config {{pkg.svc_config_path}} \
+  --path.data {{pkg.svc_var_path}}/data \
+  --path.logs {{pkg.svc_var_path}}/log \
+  --path.settings {{pkg.path}}/settings
