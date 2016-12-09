@@ -26,4 +26,7 @@ do_install() {
   rm -rf "$pkg_prefix/data"
   rm -rf "$pkg_prefix/vendor/jruby"
   fix_interpreter "${pkg_prefix}/bin/*" core/bash bin/sh
+
+  # Ensure we only print to the console
+  cp "${PLAN_CONTEXT}/log4j2.properties" "$pkg_prefix/settings/"
 }
