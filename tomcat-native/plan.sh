@@ -1,4 +1,4 @@
-pkg_origin=origin
+pkg_origin=core
 pkg_name=tomcat-native
 pkg_description="The Apache Tomcat Native Library is an optional component for use with Apache Tomcat that allows Tomcat to use certain native resources for performance, compatibility, etc."
 pkg_version='1.2.8'
