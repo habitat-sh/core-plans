@@ -1,4 +1,4 @@
-pkg_origin=origin
+pkg_origin=core
 pkg_name=repo
 pkg_version='1.12.33'
 pkg_description="Repo is a tool that [Google] built on top of Git. Repo helps
