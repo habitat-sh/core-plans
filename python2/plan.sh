@@ -37,3 +37,14 @@ do_build() {
 do_check() {
   LD_LIBRARY_PATH=$PWD ./python -E -c 'import sqlite3'
 }
+
+do_install() {
+  do_default_install
+  SITE_PACKAGES="$pkg_prefix/lib/python2.7/site-packages"
+
+  # Disable manylinux wheel support
+  echo "manylinux1_compatible = False" > "$SITE_PACKAGES/_manylinux.py"
+
+  # Upgrade to the latest pip
+  "$pkg_prefix/bin/pip2" install --upgrade pip
+}
