@@ -14,7 +14,7 @@ pkg_deps=(
   core/curl
   core/gcc-libs
   core/glibc
-  core/icu/52.1
+  core/icu52
   core/krb5
   core/libunwind
   core/lttng-ust
