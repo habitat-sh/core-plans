@@ -1,0 +1,11 @@
+version: '2'
+services:
+  zookeeper:
+    image: core/zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    image: core/kafka
+    links:
+      - zookeeper
+    command: start core/kafka --peer zookeeper --bind zookeeper:zookeeper.default
