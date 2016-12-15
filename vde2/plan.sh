@@ -29,4 +29,3 @@ do_build() {
   ./configure --prefix="${pkg_prefix}" --enable-experimental
   make
 }
-  
