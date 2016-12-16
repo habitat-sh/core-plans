@@ -6,7 +6,7 @@ pkg_version=0.1.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_source=https://github.com/habitat-sh/core-plans
-pkg_deps=(core/gcc-libs core/glibc core/python)
+pkg_deps=(core/python)
 
 do_download() {
     return 0
