@@ -42,7 +42,7 @@ pkg_deps=(
 
 do_build() {
   mkdir build
-  cd build || exit
+  pushd build
 
   # QEMU uses its own CFLAGS, etc. so we need to inject our environment into
   #   those variables.
@@ -51,11 +51,13 @@ do_build() {
   ../configure --prefix="${pkg_prefix}" \
     --target-list=x86_64-softmmu
   make
+  popd
 }
 
 do_install() {
-  cd build || exit
+  pushd build
   make install
+  popd
 }
 
 do_strip() {
