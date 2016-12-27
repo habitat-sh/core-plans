@@ -1,6 +1,6 @@
 pkg_name=node
 pkg_origin=core
-pkg_version=5.6.0
+pkg_version=6.9.2
 pkg_description="Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine."
 pkg_upstream_url=https://nodejs.org/
 pkg_license=('MIT')
@@ -9,7 +9,7 @@ pkg_source=https://nodejs.org/dist/v${pkg_version}/${pkg_name}-v${pkg_version}.t
 # the archive contains a 'v' version # prefix, but the default value of
 # pkg_version is node-4.2.6 (without the v). This tweak makes build happy
 pkg_dirname=node-v${pkg_version}
-pkg_shasum=3af2cc5e5970afc83e59f2065fea2e2df846a544a100cd3c0527f0db05bec27f
+pkg_shasum=997121460f3b4757907c2d7ff68ebdbf87af92b85bf2d07db5a7cb7aa5dae7d9
 pkg_deps=(core/glibc core/gcc-libs)
 pkg_build_deps=(core/coreutils core/python2 core/gcc core/make)
 pkg_bin_dirs=(bin)
