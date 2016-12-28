@@ -1,0 +1,8 @@
+{
+  "datacenter": "{{cfg.server.datacenter}}",
+  "data_dir": "{{cfg.server.data-dir}}",
+  "log_level": "{{cfg.server.loglevel}}",
+  "client_addr": "{{cfg.client.bind}}",
+  "server": {{cfg.server.mode}}
+
+}

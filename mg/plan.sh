@@ -16,8 +16,6 @@ do_prepare() {
       -e "s,@clens_prefix@,$(pkg_path_for clens),g" \
       -e "s,@libbsd_prefix@,$(pkg_path_for libbsd),g" \
     | patch -p1
-
-  export PKG_CONFIG_PATH=$(pkg_path_for libbsd)/lib/pkgconfig
 }
 do_build() {
   make \

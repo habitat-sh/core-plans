@@ -1,6 +1,5 @@
 branches:
   only:
-  - auto
   - master
 language: python
 cache: pip

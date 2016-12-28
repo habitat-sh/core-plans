@@ -1,12 +1,12 @@
 pkg_name=gdb
 pkg_origin=core
-pkg_version=7.11.1
+pkg_version=7.12
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-3.0')
 pkg_description="GDB, the GNU Project debugger, allows you to see what is going on 'inside' another program while it executes -- or what another program was doing at the moment it crashed."
 pkg_upstream_url="https://www.gnu.org/software/gdb/"
 pkg_source="http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum=e9216da4e3755e9f414c1aa0026b626251dfc57ffe572a266e98da4f6988fc70
+pkg_shasum=834ff3c5948b30718343ea57b11cbc3235d7995c6a4f3a5cecec8c8114164f94
 pkg_deps=(
   core/glibc
   core/readline
@@ -37,9 +37,6 @@ do_prepare() {
   export CXXFLAGS="${CXXFLAGS} -O2 -fstack-protector-strong -Wformat -Werror=format-security "
   export CPPFLAGS="${CPPFLAGS} -Wdate-time"
   export LDFLAGS="${LDFLAGS} -Wl,-Bsymbolic-functions -Wl,-z,relro"
-
-  export PKG_CONFIG_PATH
-  PKG_CONFIG_PATH="$(pkg_path_for guile)/lib/pkgconfig"
 }
 
 do_build() {

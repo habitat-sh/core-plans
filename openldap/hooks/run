@@ -1,0 +1,4 @@
+#!/bin/bash
+
+exec 2>&1
+exec {{pkg.path}}/libexec/slapd -u {{pkg.svc_user}} -g {{pkg.svc_group}} -F {{pkg.svc_data_path}}/openldap-config -d 0 -h "{{cfg.url_list}}"

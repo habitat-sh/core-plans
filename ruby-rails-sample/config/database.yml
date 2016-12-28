@@ -8,12 +8,12 @@ production:
   database: {{cfg.database_name}}
   username: {{cfg.database_username}}
   password: {{cfg.database_password}}
-{{~#if bind.has_database}}
-{{~#each bind.database.members}}
+{{#if bind.has_database}}
+{{#each bind.database.members}}
   host: {{ip}}
   port: {{port}}
-{{~/each}}
-{{~else}}
+{{/each}}
+{{else}}
   host: {{cfg.database_host}}
   port: {{cfg.database_port}}
-{{~/if}}
+{{/if}}

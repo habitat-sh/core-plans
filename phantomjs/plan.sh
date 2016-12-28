@@ -9,12 +9,12 @@ pkg_shasum=86dd9a4bf4aee45f1a84c9f61cf1947c1d6dce9b9e8d2a907105da7852460d2f
 
 # Ensure we depend on all the libraries that the prebuilt phantomjs
 # links against here:
-pkg_deps=(core/glibc core/freetype core/fontconfig core/patchelf
+pkg_deps=(core/glibc core/freetype core/fontconfig
           core/zlib core/libpng core/expat core/gcc-libs)
 
 # We need curl instead of wget because wget doesn't work for
 # downloading from bitbucket URLs. Sometimes.
-pkg_build_deps=(core/curl core/cacerts)
+pkg_build_deps=(core/curl core/cacerts core/patchelf)
 
 pkg_bin_dirs=(bin)
 

@@ -17,15 +17,12 @@ pkg_deps=(core/bdwgc
   core/libunistring
   core/readline)
 pkg_build_deps=(core/diffutils core/gcc core/make core/pkg-config)
+pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
-pkg_bin_dirs=(bin)
 
 do_prepare() {
-  PKG_CONFIG_PATH="$(pkg_path_for libffi)/lib/pkgconfig"
-  PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:$(pkg_path_for bdwgc)/lib/pkgconfig"
   LDFLAGS="-lgcc_s ${LDFLAGS}"
-  export PKG_CONFIG_PATH
   export LDFLAGS
 }
 

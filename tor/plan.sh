@@ -19,7 +19,7 @@ pkg_build_deps=(core/gcc core/make core/pkg-config core/python)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_bin_dirs=(bin)
-pkg_svc_run="bin/tor -f $pkg_svc_config_path/torrc"
+pkg_svc_run="tor -f $pkg_svc_config_path/torrc"
 pkg_expose=(9050)
 
 do_build() {

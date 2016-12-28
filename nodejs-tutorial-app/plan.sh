@@ -17,7 +17,7 @@ do_build () {
 
 do_install() {
   # Copy our source files from HAB_CACHE_SRC_PATH to the nodejs-tutorial-app
-  # package.  This is so that when Habitat calls "npm start" at start-up, we
+  # package.  This is so that when Habitat calls "node server.js" at start-up, we
   # have the source files included in the package.
   cp package.json $pkg_prefix/
   cp server.js $pkg_prefix/

@@ -21,6 +21,16 @@ do_build() {
     CFLAGS="${CFLAGS} -O3 -g -pipe"
     patch -p1 -i "$PLAN_CONTEXT/patches/ruby-2_1_3-no-mkmf.patch"
 
+    # Resolves issue for older versions of RubyGems which require new trust
+    # authority SSL certificate required as of 2016-10-06.
+    #
+    # Most likely the next Ruby release will resolve this issue as the vendored
+    # version of RubyGems should be newer.
+    #
+    # For more details see:
+    # http://guides.rubygems.org/ssl-certificate-update/#manual-solution-to-ssl-issue
+    cp -v "$PLAN_CONTEXT/GlobalSignRootCA.pem" lib/rubygems/ssl_certs/
+
     ./configure "--prefix=$pkg_prefix" \
                 --enable-shared \
                 --disable-install-doc \

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+exec 2>&1
+
+#mariadb aria files folder
+mkdir -p {{pkg.svc_data_path}}/mysqld-aria
+
+#mariadb needs to create 'mysql' database
+if [ ! -f {{pkg.svc_files_path}}/db_installed ]; then
+    cd {{pkg.path}} && \
+    scripts/mysql_install_db --defaults-file={{pkg.svc_config_path}}/my.cnf \
+	                          --user={{pkg.svc_user}} > \
+    {{pkg.svc_files_path}}/db_installed
+fi
