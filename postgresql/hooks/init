@@ -13,6 +13,7 @@ if [[ ! -f "{{pkg.svc_data_path}}/PG_VERSION" ]]; then
   initdb -U {{cfg.initdb_superuser_name}} \
          -E {{cfg.initdb_encoding}} \
          -D {{pkg.svc_data_path}} \
-         --pwfile {{cfg.initdb_pwfile}} && \
+         --pwfile {{cfg.initdb_pwfile}} \
+         --no-locale && \
   rm {{pkg.svc_config_path}}/pwfile
 fi
