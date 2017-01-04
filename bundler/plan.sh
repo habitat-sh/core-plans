@@ -1,9 +1,12 @@
 pkg_name=bundler
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_version=1.13.3
+pkg_version=1.13.7
 pkg_origin=core
 pkg_license=('bundler')
 pkg_source=nosuchfile.tar.gz
+pkg_description="The Ruby language dependency manager"
+pkg_upstream_url=https://bundler.io/
+
 pkg_deps=(core/glibc core/ruby)
 pkg_build_deps=(core/ruby)
 pkg_lib_dirs=(lib)
