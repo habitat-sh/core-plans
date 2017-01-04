@@ -1,6 +1,7 @@
 pkg_name=haskell-stack
 pkg_origin=jarvus
 pkg_version=1.3.2
+pkg_description="Stack is a cross-platform program for developing Haskell projects."
 pkg_source=https://github.com/commercialhaskell/stack/releases/download/v${pkg_version}/stack-${pkg_version}-linux-x86_64-static.tar.gz
 pkg_shasum=ebeb76744c85b7cd5504b6e29f8912b920a247b7895a2d4a1fe9564f5c5ec164
 pkg_upstream_url=https://github.com/commercialhaskell/stack

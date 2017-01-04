@@ -1,6 +1,7 @@
 pkg_name=ghc
 pkg_origin=jarvus
 pkg_version=8.0.1
+pkg_description="The Glasgow Haskell Compiler, a compiler and interactive environment for the Haskell functional programming language."
 pkg_source=http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-x86_64-deb7-linux.tar.xz
 pkg_shasum=86a8109dfa4ec000e0048ed9d072c0d232affeb1069ca96b3995cb5cef2230a7
 pkg_upstream_url=https://github.com/ghc/ghc
