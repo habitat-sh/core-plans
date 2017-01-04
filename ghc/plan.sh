@@ -1,5 +1,5 @@
 pkg_name=ghc
-pkg_origin=jarvus
+pkg_origin=core
 pkg_version=8.0.1
 pkg_description="The Glasgow Haskell Compiler, a compiler and interactive environment for the Haskell functional programming language."
 pkg_source=http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-x86_64-deb7-linux.tar.xz
@@ -19,7 +19,7 @@ pkg_deps=(
   core/gcc
   core/make
   core/libffi
-  jarvus/ncurses5-compat-libs
+  core/ncurses5-compat-libs
 )
 
 ghc_patch_rpath() {
