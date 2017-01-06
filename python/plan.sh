@@ -41,6 +41,7 @@ do_prepare() {
 }
 
 do_build() {
+  export LDFLAGS="$LDFLAGS -lgcc_s"
   ./configure --prefix="$pkg_prefix" \
               --enable-loadable-sqlite-extensions \
               --enable-shared \
