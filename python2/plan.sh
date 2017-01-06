@@ -56,3 +56,13 @@ do_build() {
 do_check() {
   make test
 }
+
+do_install() {
+  do_default_install
+
+  platlib=$(python -c "import sysconfig;print(sysconfig.get_path('platlib'))")
+  cat <<EOF > "$platlib/_manylinux.py"
+# Disable binary manylinux1(CentOS 5) wheel support
+manylinux1_compatible = False
+EOF
+}
