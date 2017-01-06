@@ -24,8 +24,8 @@ pkg_deps=(
 
 ghc_patch_rpath() {
   RELATIVE_TO=$(dirname $1)
-  RELATIVE_PATHS=$((for LIB_PATH in ${@:2}; do echo '$ORIGIN/'$(realpath --relative-to="$RELATIVE_TO" "$LIB_PATH"); done) | paste -sd ':')
-  patchelf --set-rpath "${LD_RUN_PATH}:$RELATIVE_PATHS" $1
+  RELATIVE_PATHS=`(for LIB_PATH in "${@:2}"; do echo '$ORIGIN/'"$(realpath --relative-to="${RELATIVE_TO}" "${LIB_PATH}")"; done) | paste -sd ':'`
+  patchelf --set-rpath "${LD_RUN_PATH}:${RELATIVE_PATHS}" "$1"
 }
 export -f ghc_patch_rpath
 
@@ -39,13 +39,13 @@ do_build() {
 
   export LD_LIBRARY_PATH="$LD_RUN_PATH"
 
-  ./configure --prefix=${pkg_prefix}
+  ./configure --prefix="${pkg_prefix}"
 }
 
 do_install() {
   do_default_install
 
-  pushd ${pkg_prefix} > /dev/null
+  pushd "${pkg_prefix}" > /dev/null
 
   local GHC_LIB_PATHS=$(find . -name '*.so' -printf '%h\n' | uniq)
 

@@ -48,7 +48,7 @@ do_install() {
   cp -vr ./* "$pkg_prefix"
 
   # generate wrapper script to provide path to root certificates
-  mkdir $pkg_prefix/bin
+  mkdir "$pkg_prefix/bin"
 
   cat > "$pkg_prefix/bin/stack" <<- EOM
 #!/bin/sh
@@ -67,7 +67,7 @@ export LIBRARY_PATH="\$LIBRARY_PATH:${LD_RUN_PATH}"
 export LD_LIBRARY_PATH="\$LD_LIBRARY_PATH:${LD_RUN_PATH}"
 export LD_RUN_PATH="\$LD_RUN_PATH:${LD_RUN_PATH}"
 
-exec $pkg_prefix/stack \$@
+exec "$pkg_prefix/stack" \$@
 EOM
 
   chmod +x "$pkg_prefix/bin/stack"
