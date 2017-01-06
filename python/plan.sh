@@ -60,4 +60,10 @@ do_install() {
   ln -rs "$pkg_prefix/bin/pydoc3.6" "$pkg_prefix/bin/pydoc"
   ln -rs "$pkg_prefix/bin/python3.6" "$pkg_prefix/bin/python"
   ln -rs "$pkg_prefix/bin/python3.6-config" "$pkg_prefix/bin/python-config"
+
+  platlib=$(python -c "import sysconfig;print(sysconfig.get_path('platlib'))")
+  cat <<EOF > "$platlib/_manylinux.py"
+# Disable binary manylinux1(CentOS 5) wheel support
+manylinux1_compatible = False
+EOF
 }
