@@ -49,9 +49,13 @@ do_build() {
 
 do_install() {
   do_default_install
+  SITE_PACKAGES="$pkg_prefix/lib/python3.5/site-packages"
 
   # link python3.5 to python for pkg_interpreters
   ln -rs "${pkg_prefix}/bin/python3.5" "${pkg_prefix}/bin/python"
+
+  # Disable manylinux wheel support
+  echo "manylinux1_compatible = False" > "$SITE_PACKAGES/_manylinux.py"
 
   # Upgrade to the latest pip
   "$pkg_prefix/bin/pip3" install --upgrade pip
