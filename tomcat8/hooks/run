@@ -4,10 +4,10 @@ exec 2>&1
 
 echo "Starting Apache Tomcat"
 
-if `hab pkg path core/jdk8`; then
-  export JAVA_HOME=$(!!)
-elif `hab pkg path core/jdk7`; then
-  export JAVA_HOME=$(!!)
+if path=$(hab pkg path core/jdk8); then
+  export JAVA_HOME=$path
+elif path=$(hab pkg path core/jdk7); then
+  export JAVA_HOME=$path
 fi
 if [ -z ${JAVA_HOME+x} ]; then
   echo "Cannot start Tomcat without core/jdk8 or core/jdk7"
