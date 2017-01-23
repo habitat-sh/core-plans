@@ -15,6 +15,7 @@ To become a maintainer, open a pull request to this list.
 
 * [Seth Chisamore](https://github.com/schisamo)
 * [Elliott Davis](https://github.com/elliott-davis)
+* [Michael Ducy](https://github.com/mfdii)
 * [Mike Fiedler](https://github.com/miketheman)
 * [Fletcher Nichol](https://github.com/fnichol)
 * [Dave Parfitt](https://github.com/metadave)
