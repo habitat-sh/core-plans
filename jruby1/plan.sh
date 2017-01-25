@@ -6,9 +6,18 @@ pkg_description="A high performance, stable, fully threaded Java implementation 
 pkg_upstream_url=https://github.com/jruby/jruby
 pkg_source=https://github.com/jruby/jruby/archive/${pkg_version}.tar.gz
 pkg_shasum=4e17872bc38cf6c0ff238a365d2046e36e3149d0d381df2198fd949902602c9c
-pkg_license=('EPL 1.0, GPL 2 and LGPL 2.1')
-pkg_deps=(core/glibc core/jre8 core/bash)
-pkg_build_deps=(core/which core/make core/jdk8 core/coreutils)
+pkg_license=('EPL 1.0' 'GPL-2.0' 'LGPL-2.1')
+pkg_deps=(
+  core/bash
+  core/coreutils
+  core/glibc
+  core/jre8
+)
+pkg_build_deps=(
+  core/jdk8
+  core/make
+  core/which
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
@@ -22,10 +31,7 @@ do_build() {
 
 do_install() {
   cp -R ./* "$pkg_prefix/"
-  for binstub in ${pkg_prefix}/bin/*; do
-    [[ -f $binstub ]] && sed -e "s#/usr/bin/env bash#$(pkg_path_for bash)/bin/bash#" -i "$binstub"
-    [[ -f $binstub ]] && sed -e "s#/usr/bin/env jruby#${pkg_prefix}/bin/jruby#" -i "$binstub"
-  done
+  fix_interpreter "$pkg_prefix/bin/*" core/coreutils bin/env
 
   # Remove *.so for other platforms...they cause `do_strip()' to fail
   # with `Unable to recognise the format' errors
