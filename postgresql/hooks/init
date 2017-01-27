@@ -10,6 +10,7 @@ chown -R hab:hab {{pkg.svc_var_path}}
 
 if [[ ! -f "{{pkg.svc_data_path}}/PG_VERSION" ]]; then
   echo " Database does not exist, creating with 'initdb'"
+  export LC_ALL={{cfg.lc_all}}
   initdb -U {{cfg.initdb_superuser_name}} \
          -E {{cfg.initdb_encoding}} \
          -D {{pkg.svc_data_path}} \

@@ -195,6 +195,7 @@ timezone = "GMT"
 timezone_abbreviations = "Default"
 extra_float_digits = 0
 client_encoding = "sql_ascii"
+lc_all = "POSIX"
 lc_messages = "C"
 lc_monetary = "C"
 lc_numeric = "C"

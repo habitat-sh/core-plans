@@ -32,6 +32,5 @@ do_build() {
 }
 
 do_install() {
-  mkdir -p "$pkg_prefix"/bin
-  cp haproxy "$pkg_prefix"/bin
+  cp haproxy "$pkg_prefix"
 }

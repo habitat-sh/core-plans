@@ -1,7 +1,13 @@
 maxconn = 32
 mode = "http"
 bind = "*:80"
+stats_enable = false
+stats_password = ""
+stats_realm = "haproxy_stats"
+stats_uri = "/haproxy_stats"
+stats_user = ""
 httpchk = "GET /"
+
 
 [[server]]
 name = "first"
