@@ -23,6 +23,8 @@ pkg_version=25.3.19
 # required.
 pkg_source=http://github.com/codership/galera/archive/release_${pkg_version}.tar.gz
 
+pkg_upstream_url=https://github.com/codership/galera
+
 # Required if a valid URL is provided for pkg_source or unless do_verify() is overridden.
 # The value for pkg_shasum is a sha-256 sum of the downloaded pkg_source. If you
 # do not have the checksum, you can easily generate it by downloading the source
@@ -60,10 +62,10 @@ pkg_build_deps=(core/scons core/python2 core/gcc core/boost core/check core/open
 pkg_dirname="galera-release_${pkg_version}"
 
 do_build() {
-    scons strict_build_flags=0 tests=0 
+    scons strict_build_flags=0 tests=0
 }
 
 do_install() {
-    mkdir -p ${pkg_prefix}/lib
-    cp libgalera_smm.so ${pkg_prefix}/lib
+    mkdir -p "${pkg_prefix}/lib"
+    cp libgalera_smm.so "${pkg_prefix}/lib"
 }
