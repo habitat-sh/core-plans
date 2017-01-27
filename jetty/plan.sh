@@ -36,18 +36,18 @@ pkg_shasum=3fbce5530d8d9a66f43034782b0f249df3d98e3e97ef849e7f740eab612b963f
 
 # Optional.
 # The name and email address of the package maintainer.
-# pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 
 # Required for core plans, optional otherwise.
 # A short description of the package. It can be a simple string, or you can
 # create a multi-line description using markdown to provide a rich description
 # of your package.
-# pkg_description="Some description."
+pkg_description="Jetty webserver and Java container"
 
 # Optional.
 # An array of valid software licenses that relate to this package.
 # Please choose a license from http://spdx.org/licenses/
-# pkg_license=('Apache-2.0')
+pkg_license=('Apache-2.0')
 
 # Optional.
 # An array of paths, relative to the final install of the software, where
