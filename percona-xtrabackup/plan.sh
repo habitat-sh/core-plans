@@ -23,6 +23,8 @@ pkg_version=2.3.5
 # required.
 pkg_source=http://github.com/percona/percona-xtrabackup/archive/${pkg_name}-${pkg_version}.tar.gz
 
+pkg_upstream_url=https://www.percona.com/software/mysql-database/percona-xtrabackup
+
 # Required if a valid URL is provided for pkg_source or unless do_verify() is overridden.
 # The value for pkg_shasum is a sha-256 sum of the downloaded pkg_source. If you
 # do not have the checksum, you can easily generate it by downloading the source
@@ -72,15 +74,16 @@ do_prepare() {
 }
 
 do_build() {
-    export LD_LIBRARY_PATH="$(pkg_path_for core/libgcrypt)/lib"
-    export GCRYPT_INCLUDE_DIR=$(pkg_path_for core/libgcrypt)/lib
-    export GCRYPT_LIB=$(pkg_path_for core/libgcrypt)
+    export LD_LIBRARY_PATH GCRYPT_INCLUDE_DIR GCRYPT_LIB
+    LD_LIBRARY_PATH="$(pkg_path_for core/libgcrypt)/lib"
+    GCRYPT_INCLUDE_DIR=$(pkg_path_for core/libgcrypt)/lib
+    GCRYPT_LIB=$(pkg_path_for core/libgcrypt)
     cmake . -DCMAKE_PREFIX_PATH="$(pkg_path_for core/ncurses)" -DCMAKE_INSTALL_PREFIX="$pkg_prefix" \
-	    -DBUILD_CONFIG=xtrabackup_release -DWITH_MAN_PAGES=OFF -DWITH_BOOST=$(pkg_path_for core/boost159)/include \
-	    -DCURL_LIBRARY=$(pkg_path_for core/curl)/lib/libcurl.so -DCURL_INCLUDE_DIR=$(pkg_path_for core/curl)/include \
-	    -DLIBEV_INCLUDE_DIRS=$(pkg_path_for core/libev)/include	-DGCRYPT_LIB=$(pkg_path_for core/libgcrypt)/lib/libgcrypt.so \
-	    -DGCRYPT_INCLUDE_DIR=$(pkg_path_for core/libgcrypt)/include -DGPG_ERROR_LIB=$(pkg_path_for core/libgpg-error)/lib/libgpg-error.so \
-	    -DLIBEV_LIB=$(pkg_path_for core/libev)/lib/libev.so 
+	    -DBUILD_CONFIG=xtrabackup_release -DWITH_MAN_PAGES=OFF -DWITH_BOOST="$(pkg_path_for core/boost159)/include" \
+	    -DCURL_LIBRARY="$(pkg_path_for core/curl)/lib/libcurl.so" -DCURL_INCLUDE_DIR="$(pkg_path_for core/curl)/include" \
+	    -DLIBEV_INCLUDE_DIRS="$(pkg_path_for core/libev)/include"	-DGCRYPT_LIB="$(pkg_path_for core/libgcrypt)/lib/libgcrypt.so" \
+	    -DGCRYPT_INCLUDE_DIR="$(pkg_path_for core/libgcrypt)/include" -DGPG_ERROR_LIB="$(pkg_path_for core/libgpg-error)/lib/libgpg-error.so" \
+	    -DLIBEV_LIB="$(pkg_path_for core/libev)/lib/libev.so"
     make
 }
 
