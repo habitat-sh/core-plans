@@ -11,14 +11,14 @@ $pkg_build_deps=@("core/lessmsi")
 $pkg_bin_dirs=@("bin")
 
 function Invoke-Unpack {
+  write-host
   lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_filename").Path
   mkdir "$HAB_CACHE_SRC_PATH/$pkg_dirname"
   Move-Item "node-v$pkg_version-x64/SourceDir/nodejs" "$HAB_CACHE_SRC_PATH/$pkg_dirname"
 }
 
 function Invoke-Install {
-  Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/nodejs/*" "$pkg_prefix/bin"
-  Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/nodejs/node_modules" "$pkg_prefix/bin" -recurse
+  Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/nodejs/*" "$pkg_prefix/bin" -Recurse
 }
 
 function Invoke-Check() {
