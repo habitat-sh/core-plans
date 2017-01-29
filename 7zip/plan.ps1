@@ -11,7 +11,7 @@ $pkg_filename="7z$($pkg_version.Replace('.',''))-x64.exe"
 $pkg_bin_dirs=@("bin")
 
 function Invoke-Unpack {
-  Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -Verb runas -ArgumentList "/S /D=`"$(Resolve-Path $HAB_CACHE_SRC_PATH)/$pkg_dirname`""
+  Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList "/S /D=`"$(Resolve-Path $HAB_CACHE_SRC_PATH)/$pkg_dirname`""
 }
 
 function Invoke-Install {
