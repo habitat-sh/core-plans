@@ -3,6 +3,12 @@ mode = "http"
 bind = "*:80"
 httpchk = "GET /"
 
+status_page = false
+status_bind = "*:9000"
+status_user = "admin"
+status_password = "password"
+status_uri = "/haproxy-stats"
+
 [[server]]
 name = "first"
 host_or_ip = "172.17.0.3"
