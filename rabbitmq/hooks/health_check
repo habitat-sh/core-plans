@@ -1,0 +1,3 @@
+#!/bin/sh
+
+rabbitmqctl node_health_check > /dev/null

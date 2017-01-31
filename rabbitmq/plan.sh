@@ -9,12 +9,43 @@ pkg_upstream_url="https://www.rabbitmq.com"
 pkg_source=http://www.rabbitmq.com/releases/rabbitmq-server/v${pkg_version}/rabbitmq-server-${pkg_version}.tar.xz
 pkg_shasum=395689bcf57fd48aed452fcd43ff9a992de40067d3ea5c44e14680d69db7b78e
 pkg_dirname=${pkg_distname}-${pkg_version}
-pkg_deps=(core/glibc core/erlang)
-pkg_build_deps=(core/bash core/python2 core/zip core/unzip core/git core/coreutils core/make core/gcc core/erlang core/libxslt core/libxml2 core/gawk core/diffutils core/perl core/grep core/rsync)
-pkg_lib_dirs=(lib)
+pkg_deps=(
+  core/coreutils
+  core/glibc
+  core/erlang
+)
+pkg_build_deps=(
+  core/bash
+  core/diffutils
+  core/gawk
+  core/gcc
+  core/git
+  core/grep
+  core/libxml2
+  core/libxslt
+  core/make
+  core/perl
+  core/python2
+  core/rsync
+  core/unzip
+  core/zip
+)
 pkg_include_dirs=(include)
 pkg_bin_dirs=(sbin)
 pkg_exposes=(5672)
+
+do_prepare() {
+  export PREFIX="${pkg_prefix}"
+  build_line "Setting PREFIX=$PREFIX"
+  export DESTDIR="${PREFIX}"
+  build_line "Setting DESTDIR=$DESTDIR"
+  export RMQ_ROOTDIR=""
+  build_line "Setting RMQ_ROOTDIR=$RMQ_ROOTDIR"
+  export RMQ_LIBDIR=""
+  build_line "Setting RMQ_LIBDIR=$RMQ_LIBDIR"
+  export RMQ_ERLAPP_DIR=""
+  build_line "Setting RMQ_ERLAPP_DIR=$RMQ_ERLAPP_DIR"
+}
 
 do_build() {
   make
@@ -22,13 +53,4 @@ do_build() {
 
 do_check() {
   make tests
-}
-
-do_install() {
-  export PREFIX="${pkg_prefix}"
-  export DESTDIR="${PREFIX}"
-  export RMQ_ROOTDIR=""
-  export RMQ_LIBDIR=""
-  export RMQ_ERLAPP_DIR=""
-  make install
 }
