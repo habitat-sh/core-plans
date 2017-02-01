@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 export RABBITMQ_MNESIA_BASE="{{pkg.svc_var_path}}/db"
 export RABBITMQ_CONFIG_FILE="{{pkg.svc_config_path}}/rabbitmq"
