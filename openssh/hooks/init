@@ -1,7 +1,5 @@
 #!/bin/bash
 
-mkdir -p {{pkg.svc_var_path}}/empty
-
 # Generate the keys if they do not exist - restarting sshd would cause
 # this to fail, e.g., on package upgrade
 if [ ! -f {{pkg.svc_config_path}}/ssh_host_dsa_key ]; then
