@@ -18,7 +18,10 @@ function Invoke-Unpack {
 }
 
 function Invoke-Install {
-  Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/nodejs/*" "$pkg_prefix/bin" -Recurse
+  # the node directory tree can lead to filepaths longer than 260 characters
+  # depending on the file system base which can cause copy errors. Prefixing with 
+  # \\?\ avoids those errors
+  Copy-Item "\\?\$HAB_CACHE_SRC_PATH/$pkg_dirname/nodejs/*" "\\?\$pkg_prefix/bin" -Recurse
 }
 
 function Invoke-Check() {
