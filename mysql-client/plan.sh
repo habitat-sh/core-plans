@@ -53,7 +53,7 @@ do_install() {
   do_default_install
 
   # Remove things we don't need
-  rm "$pkg_prefix/lib/*.a" "$pkg_prefix/bin/mysqld_"*
+  rm "$pkg_prefix/lib/"*.a "$pkg_prefix/bin/mysqld_"*
 
   fix_interpreter "$pkg_prefix/bin/mysqldumpslow" core/perl bin/perl
 }
