@@ -10,7 +10,13 @@ pkg_shasum=58dc3f82cdd62708034169db64c342a48674065673e2115d410509f83fe59c9e
 pkg_filename=${pkg_name}-${pkg_version}.tar.gz
 pkg_deps=(core/node)
 pkg_build_deps=(core/node core/coreutils core/python2 core/make core/gcc core/git)
-pkg_expose=(5601)
+pkg_exports=(
+  [port]=server.port
+)
+pkg_exposes=(port)
+pkg_binds=(
+  [elasticsearch]="http-port"
+)
 
 do_prepare() {
   # The `/usr/bin/env` path is hardcoded, so we'll add a symlink if needed.

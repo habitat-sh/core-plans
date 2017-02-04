@@ -9,7 +9,7 @@ server.maxPayloadBytes: {{cfg.server.maxPayloadBytes}}
 
 {{~#if bind.has_elasticsearch}}
 # Kibana only takes on ES host in it's config
-elasticsearch.url: "http://{{bind.elasticsearch.members.[0].ip}}:{{cfg.elasticsearch.port}}"
+elasticsearch.url: "http://{{bind.elasticsearch.members.[0].sys.ip}}:{{bind.elasticsearch.members.[0].cfg.http-port}}"
 {{else}}
 elasticsearch.url: {{cfg.elasticsearch.url}}:{{cfg.elasticsearch.port}}
 {{~/if}}

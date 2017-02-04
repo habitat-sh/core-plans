@@ -11,7 +11,12 @@ pkg_filename=${pkg_name}-${pkg_version}_linux_amd64.zip
 pkg_deps=()
 pkg_build_deps=(core/unzip)
 pkg_bin_dirs=(bin)
-pkg_expose=(8400 8500 8600)
+pkg_exports=(
+  [port-dns]=ports.dns
+  [port-http]=ports.http
+  [port-rpc]=ports.rpc
+)
+pkg_exposes=(port-dns port-http port-rpc)
 pkg_svc_user=root
 
 do_unpack() {

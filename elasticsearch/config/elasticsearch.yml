@@ -53,10 +53,11 @@ bootstrap.mlockall: {{cfg.bootstrap.mlockall}}
 
 network.host: {{cfg.network.host}}
 http.port: {{cfg.network.port}}
+transport.tcp.port: {{cfg.transport.port}}
 discovery.zen.fd.ping_timeout: {{cfg.discovery.zen_fd_ping_timeout}}
 discovery.zen.ping.multicast.enabled: {{cfg.discovery.ping_multicast_enabled}}
 {{#if bind.has_elasticsearch ~}}
-discovery.zen.ping.unicast.hosts: [{{#each bind.elasticsearch.members ~}} "{{ip}}", {{/each ~}}]
+discovery.zen.ping.unicast.hosts: [{{#each bind.elasticsearch.members ~}} "{{sys.ip}}", {{/each ~}}]
 {{else ~}}
 discovery.zen.ping.unicast.hosts: {{cfg.discovery.ping_unicast_hosts}}
 {{/if ~}}

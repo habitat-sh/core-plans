@@ -9,7 +9,10 @@ pkg_upstream_url="http://tomcat.apache.org/"
 pkg_source=http://archive.apache.org/dist/tomcat/tomcat-7/v${pkg_version}/bin/apache-tomcat-${pkg_version}.tar.gz
 pkg_shasum=0e814d6ad7d5b90e29c79887137420d3bc413540f9faa60d98f11e6c8a8fea85
 pkg_deps=(core/coreutils)
-pkg_expose=(8080 8443)
+pkg_exports=(
+  [port]=server.port
+)
+pkg_exposes=(port)
 
 # The default implementation extracts your tarball source file into HAB_CACHE_SRC_PATH. The
 # supported archives are: .tar, .tar.bz2, .tar.gz, .tar.xz, .rar, .zip, .Z, .7z. If the file

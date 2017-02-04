@@ -10,8 +10,11 @@ pkg_filename=${pkg_name}-${pkg_version}_linux_amd64.zip
 pkg_deps=()
 pkg_build_deps=(core/unzip)
 pkg_bin_dirs=(bin)
-pkg_expose=(8200)
 pkg_svc_user=root
+pkg_exports=(
+  [port]=listener.port
+)
+pkg_exposes=(port)
 
 do_unpack() {
   cd "${HAB_CACHE_SRC_PATH}" || exit

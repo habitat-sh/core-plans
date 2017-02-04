@@ -32,7 +32,10 @@ pkg_build_deps=(
 )
 pkg_include_dirs=(include)
 pkg_bin_dirs=(sbin)
-pkg_exposes=(5672)
+pkg_exports=(
+  [port]=rabbitmq.listen_port
+)
+pkg_exposes=(port)
 
 do_prepare() {
   export PREFIX="${pkg_prefix}"

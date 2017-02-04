@@ -10,7 +10,10 @@ pkg_shasum=508557ba5aaa76a99d3218dd0d74f69aae36cc508bd79e06fbc2e38126a69b2c
 pkg_filename="mssql-server_${pkg_version}_amd64.deb"
 pkg_svc_user="root"
 pkg_svc_group="root"
-pkg_expose=(1433)
+pkg_exports=(
+  [port]=port
+)
+pkg_exposes=(port)
 
 pkg_deps=(
   core/libcxx

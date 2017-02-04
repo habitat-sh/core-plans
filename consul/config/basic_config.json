@@ -3,6 +3,14 @@
   "data_dir": "{{cfg.server.data-dir}}",
   "log_level": "{{cfg.server.loglevel}}",
   "client_addr": "{{cfg.client.bind}}",
-  "server": {{cfg.server.mode}}
-
+  "server": {{cfg.server.mode}},
+  "ports": {
+    "dns": {{cfg.ports.dns}},
+    "http": {{cfg.ports.http}},
+    "https": {{cfg.ports.https}},
+    "rpc": {{cfg.ports.rpc}},
+    "serf_lan": {{cfg.ports.serf_lan}},
+    "serf_wan": {{cfg.ports.serf_wan}},
+    "server": {{cfg.ports.server}}
+  }
 }

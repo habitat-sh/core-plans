@@ -9,6 +9,9 @@ pkg_description="A distributed streaming platform"
 pkg_license=('Apache-2.0')
 pkg_bin_dirs=(bin)
 pkg_deps=(core/jre8 core/coreutils core/bash-static)
+pkg_binds=(
+  [zookeeper]="port"
+)
 
 do_build() {
   fix_interpreter "./bin/*" core/bash-static bin/bash
