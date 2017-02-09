@@ -11,13 +11,14 @@ function Invoke-Build { }
 
 function Invoke-Unpack {
   Set-PackageVersion
-  mkdir "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+  mkdir "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Force
   Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_filename" "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Force
 }
 
 function Invoke-Install {
   mkdir "$pkg_prefix/ssl/certs"
   Copy-Item "$pkg_filename" "$pkg_prefix/ssl/certs" -Force
+  Copy-Item "$pkg_filename" "$pkg_prefix/ssl/cert.pem" -Force
 }
 
 function Set-PackageVersion {
