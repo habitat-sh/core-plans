@@ -8,7 +8,7 @@ pkg_description="Dependency Manager for PHP"
 pkg_source=https://getcomposer.org/download/${pkg_version}/${pkg_name}.phar
 pkg_filename=${pkg_name}.phar
 pkg_shasum=6a4f761aa34bb69fca86bc411a5e9836ca8246f0fcd29f3804b174fee9fb0569
-pkg_deps=(core/php5)
+pkg_deps=(core/php5 core/git)
 pkg_bin_dirs=(bin)
 
 do_unpack(){
