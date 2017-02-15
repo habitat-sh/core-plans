@@ -51,4 +51,3 @@ do_build() {
   ./configure --prefix="${pkg_prefix}"
   make
 }
-
