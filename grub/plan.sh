@@ -25,8 +25,10 @@ pkg_build_deps=(
 pkg_deps=(core/glibc)
 
 do_download() {
-  export GIT_SSL_CAINFO="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
-  pushd $HAB_CACHE_SRC_PATH
+  GIT_SSL_CAINFO="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+  export GIT_SSL_CAINFO
+
+  pushd "${HAB_CACHE_SRC_PATH}"
   if [[ ! -d ${pkg_name} ]]; then
     git clone $pkg_source ${pkg_name}
   fi
@@ -37,16 +39,16 @@ do_download() {
   popd
   pkg_filename=${pkg_name}-${pkg_version}.tar.bz2
 
-  tar -cjf $HAB_CACHE_SRC_PATH/${pkg_filename} \
-      --transform "s,^\./grub,grub-${pkg_version}," ./${pkg_name} \
+  tar -cjf "${HAB_CACHE_SRC_PATH}/${pkg_filename}" \
+      --transform "s,^\./grub,grub-${pkg_version}," "./${pkg_name}" \
       --exclude-vcs
-  pkg_shasum=$(trim $(sha256sum $HAB_CACHE_SRC_PATH/${pkg_filename} | cut -d " " -f 1))
+  pkg_shasum=$(trim "$(sha256sum "${HAB_CACHE_SRC_PATH}/${pkg_filename}" | cut -d " " -f 1)")
   popd
 }
 
 do_build() {
   ./autogen.sh
-  ./configure --prefix=${pkg_prefix}
+  ./configure --prefix="${pkg_prefix}"
   make
 }
 
