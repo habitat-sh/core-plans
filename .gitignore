@@ -1,5 +1,6 @@
 .DS_Store
 .tags*
+Dockerfile
 log/
 results/
 tmp/

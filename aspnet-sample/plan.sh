@@ -7,16 +7,12 @@ pkg_upstream_url=https://github.com/mwrock/habitat-aspnet-sample
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_description="A sample ASP.NET Core app for Linux"
-pkg_expose=(8090)
-
-pkg_deps=(
-  core/dotnet-core
+pkg_exports=(
+  [port]=port
 )
-
-pkg_build_deps=(
-  core/node
-  core/patchelf
-)
+pkg_exposes=(port)
+pkg_deps=(core/dotnet-core)
+pkg_build_deps=(core/node core/patchelf)
 
 do_prepare() {
   rm -rf "${HAB_CACHE_SRC_PATH:?}/${pkg_dirname:?}"

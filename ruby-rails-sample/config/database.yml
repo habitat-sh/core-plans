@@ -10,8 +10,8 @@ production:
   password: {{cfg.database_password}}
 {{#if bind.has_database}}
 {{#each bind.database.members}}
-  host: {{ip}}
-  port: {{port}}
+  host: {{sys.ip}}
+  port: {{cfg.port}}
 {{/each}}
 {{else}}
   host: {{cfg.database_host}}

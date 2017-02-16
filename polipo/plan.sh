@@ -10,8 +10,10 @@ pkg_build_deps=(core/gcc core/make)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
-pkg_expose=(8123)
-
+pkg_exports=(
+  [port]=port
+)
+pkg_exposes=(port)
 pkg_dirname="${pkg_name}-${pkg_name}-${pkg_version}"
 
 do_build() {
@@ -19,6 +21,5 @@ do_build() {
 }
 
 do_install() {
-  mkdir $pkg_prefix/bin/
-  cp polipo $pkg_prefix/bin/
+  cp polipo "$pkg_prefix/bin/"
 }

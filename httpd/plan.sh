@@ -12,7 +12,10 @@ pkg_build_deps=(core/patch core/make core/gcc)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
-pkg_expose=(80 443)
+pkg_exports=(
+  [port]=serverport
+)
+pkg_exposes=(port)
 pkg_svc_run="httpd -DFOREGROUND -f $pkg_svc_config_path/httpd.conf"
 pkg_svc_user="root"
 pkg_svc_group="root"

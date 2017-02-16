@@ -14,7 +14,11 @@ pkg_deps=(
 )
 pkg_bin_dirs=(es/bin)
 pkg_lib_dirs=(es/lib)
-pkg_expose=(9200 9300)
+pkg_exports=(
+  [http-port]=network.port
+  [transport-port]=transport.port
+)
+pkg_exposes=(http-port transport-port)
 
 do_build() {
   return 0

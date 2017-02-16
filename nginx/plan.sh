@@ -14,7 +14,10 @@ pkg_bin_dirs=(sbin)
 pkg_include_dirs=(include)
 pkg_svc_run="nginx"
 pkg_svc_user="root"
-pkg_expose=(80 443)
+pkg_exports=(
+  [port]=http.listen.port
+)
+pkg_exposes=(port)
 
 do_build() {
   ./configure --prefix="$pkg_prefix" \
