@@ -6,7 +6,7 @@ pkg_shasum=TODO
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="GNU GRUB is a Multiboot boot loader."
 pkg_upstream_url=https://www.gnu.org/software/grub/
-pkg_license=('Apache-2.0')
+pkg_license=('GPLv3')
 pkg_bin_dirs=(bin)
 pkg_build_deps=(
   core/make
