@@ -30,13 +30,13 @@ do_download() {
   export GIT_SSL_CAINFO
 
   pushd "${HAB_CACHE_SRC_PATH}"
-  
+
   if [[ ! -d ${pkg_name} ]]; then
     git clone --branch ${pkg_version} ${pkg_source} ${pkg_name}
-  else 
-    pushd ${pkg_name} 
+  else
+    pushd ${pkg_name}
     git checkout -f ${pkg_version}
-    popd 
+    popd
   fi
 
   sed -i "s/#! \/usr\/bin\/env bash/#!\/bin\/bash/" ${pkg_name}/autogen.sh
