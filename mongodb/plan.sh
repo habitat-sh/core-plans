@@ -23,7 +23,11 @@ pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_svc_user=hab
 pkg_svc_group=hab
-pkg_expose=(27017)
+pkg_exports=(
+  [port]=mongod.net.port
+  [address]=mongod.net.bind_ip
+)
+pkg_exposes=(port)
 
 do_prepare() {
 
