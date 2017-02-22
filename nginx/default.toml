@@ -4,7 +4,7 @@
  #  # #  #  ###     #    #  # #    ##
  #   ##  #    #     #    #   ##   #  #
  #    #   ####      #    #    #  #    #
- # For help with NGINX Config Tuning, 
+ # For help with NGINX Config Tuning,
  # refer to: http://nginx.org/en/docs/http/ngx_http_core_module.html
 
 
@@ -33,3 +33,6 @@ tcp_nodelay = "on"
 
 # http.keepalive_timeout: Timeout on client connection keepalive, in seconds. Default = 75
 keepalive_timeout = 60
+
+[http.listen]
+port = 80

@@ -11,6 +11,9 @@ pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_build_deps=()
 pkg_deps=(core/jre8 core/coreutils core/bash-static)
+pkg_exports=(
+  [port]=zookeeper.clientPort
+)
 
 do_build() {
   return 0

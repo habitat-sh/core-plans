@@ -11,7 +11,10 @@ pkg_build_deps=(core/gcc core/make core/coreutils core/cmake)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
-pkg_expose=(3306)
+pkg_exports=(
+  [port]=port
+)
+pkg_exposes=(port)
 pkg_svc_user="hab"
 
 do_prepare() {
@@ -25,8 +28,8 @@ do_prepare() {
 }
 
 do_build() {
-    cmake . -DCMAKE_INSTALL_PREFIX=${pkg_prefix} \
-            -DCMAKE_PREFIX_PATH=$(pkg_path_for core/ncurses) \
+    cmake . -DCMAKE_INSTALL_PREFIX="${pkg_prefix}" \
+            -DCMAKE_PREFIX_PATH="$(pkg_path_for core/ncurses)" \
             -DCMAKE_BUILD_TYPE=Release \
             -DWITH_READLINE=OFF
     make
@@ -34,7 +37,7 @@ do_build() {
 
 do_install() {
     make install
-    rm -rf ${pkg_prefix}/mysql-test
-    rm -rf ${pkg_prefix}/bin/mysql_client_test
-    rm -rf ${pkg_prefix}/bin/mysql_test
+    rm -rf "${pkg_prefix}/mysql-test"
+    rm -rf "${pkg_prefix}/bin/mysql_client_test"
+    rm -rf "${pkg_prefix}/bin/mysql_test"
 }

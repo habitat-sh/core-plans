@@ -1,10 +1,12 @@
 pkg_name=docker
+pkg_description="The Docker Engine"
 pkg_origin=core
-pkg_version=1.11.2
+pkg_version=1.13.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2')
 pkg_source=https://get.docker.com/builds/Linux/x86_64/${pkg_name}-${pkg_version}.tgz
-pkg_shasum=8c2e0c35e3cda11706f54b2d46c2521a6e9026a7b13c7d4b8ae1f3a706fc55e1
+pkg_upstream_url=https://docs.docker.com/engine/installation/binaries/
+pkg_shasum=97892375e756fd29a304bd8cd9ffb256c2e7c8fd759e12a55a6336e15100ad75
 pkg_dirname=docker
 pkg_deps=()
 pkg_build_deps=()
@@ -16,6 +18,6 @@ do_build() {
 
 do_install() {
   for bin in docker $(ls -1 docker-*); do
-    install -v -D $bin $pkg_prefix/bin/$bin
+    install -v -D "$bin" "$pkg_prefix/bin/$bin"
   done
 }

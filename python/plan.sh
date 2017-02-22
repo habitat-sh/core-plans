@@ -25,7 +25,6 @@ pkg_build_deps=(
   core/coreutils
   core/diffutils
   core/gcc
-  core/gdb
   core/linux-headers
   core/make
   core/util-linux

@@ -2,7 +2,7 @@
 #
 # Elasticsearch Health Check for Habitat
 
-status="$(wget -qO - "{{svc.me.ip}}:{{svc.me.port}}/_cat/health")"
+status="$(wget -qO - "{{svc.me.sys.ip}}:{{svc.me.cfg.http-port}}/_cat/health")"
 color="$(echo "$status" | awk '{print $4}')"
 
 case $color in

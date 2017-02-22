@@ -8,7 +8,10 @@ pkg_shasum=2ad73b78ef5e88e9e916873c0f762bbdf286e4de93e67cf211f9761a2876c7ef
 pkg_filename=${pkg_name}-${pkg_version}.tar.gz
 pkg_deps=(core/node)
 pkg_build_deps=()
-pkg_expose=(8080)
+pkg_exports=(
+  [port]=port
+)
+pkg_exposes=(port)
 
 do_build () {
   # This installs both npm as well as the nconf module we listed as a dependency in package.json.
@@ -19,10 +22,10 @@ do_install() {
   # Copy our source files from HAB_CACHE_SRC_PATH to the nodejs-tutorial-app
   # package.  This is so that when Habitat calls "node server.js" at start-up, we
   # have the source files included in the package.
-  cp package.json $pkg_prefix/
-  cp server.js $pkg_prefix/
+  cp package.json "$pkg_prefix/"
+  cp server.js "$pkg_prefix/"
 
   # Copy over the nconf module to the package that we installed in do_build().
-  mkdir -p ${pkg_prefix}/node_modules/
-  cp -vr node_modules/* ${pkg_prefix}/node_modules/
+  mkdir -p "${pkg_prefix}/node_modules/"
+  cp -vr node_modules/* "${pkg_prefix}/node_modules/"
 }

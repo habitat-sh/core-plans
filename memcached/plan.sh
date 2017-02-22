@@ -13,4 +13,7 @@ pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_svc_run="memcached"
-pkg_expose=(11211)
+pkg_exports=(
+  [port]=port
+)
+pkg_exposes=(port)

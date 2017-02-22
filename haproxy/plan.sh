@@ -8,7 +8,14 @@ pkg_source=http://www.haproxy.org/download/1.6/src/haproxy-${pkg_version}.tar.gz
 pkg_upstream_url="http://git.haproxy.org/git/haproxy-1.6.git/"
 pkg_shasum=62fe982edb102a9f55205792bc14b0d05745cc7993cd6bee5d73cd3c5ae16ace
 pkg_svc_run='haproxy -f config/haproxy.conf -db'
-pkg_expose=(80 9000)
+pkg_exports=(
+  [port]=front-end.port
+  [status-port]=status.port
+)
+pkg_exposes=(port status-port)
+pkg_binds=(
+  [backend]="port"
+)
 pkg_deps=(core/zlib core/pcre core/openssl)
 pkg_build_deps=(
   core/coreutils
@@ -18,7 +25,6 @@ pkg_build_deps=(
   core/openssl
   core/zlib
 )
-
 pkg_bin_dirs=(bin)
 
 do_build() {

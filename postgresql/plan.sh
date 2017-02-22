@@ -7,7 +7,6 @@ pkg_upstream_url="https://www.postgresql.org/"
 pkg_license=('PostgreSQL')
 pkg_source=https://ftp.postgresql.org/pub/source/v${pkg_version}/${pkg_name}-${pkg_version}.tar.bz2
 pkg_shasum=e5101e0a49141fc12a7018c6dad594694d3a3325f5ab71e93e0e51bd94e51fcd
-
 pkg_deps=(
   core/bash
   core/glibc
@@ -17,17 +16,18 @@ pkg_deps=(
   core/zlib
   core/libossp-uuid
 )
-
 pkg_build_deps=(
   core/coreutils
   core/gcc
   core/make
 )
-
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
-pkg_expose=(5432)
+pkg_exports=(
+  [port]=port
+)
+pkg_exposes=(port)
 
 do_build() {
 	# ld manpage: "If -rpath is not used when linking an ELF

@@ -11,7 +11,10 @@ pkg_bin_dirs=(bin)
 pkg_build_deps=(core/make core/gcc)
 pkg_deps=(core/glibc)
 pkg_svc_run="redis-server $pkg_svc_config_path/redis.config"
-pkg_expose=(6379)
+pkg_exports=(
+  [port]=port
+)
+pkg_exposes=(port)
 
 do_build() {
   make

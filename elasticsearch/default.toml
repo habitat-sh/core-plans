@@ -164,6 +164,9 @@
   # For more information, see the documentation at:
   # <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html>
 
+[transport]
+  port = 9300
+
 #
 # --------------------------------- Discovery ----------------------------------
 #
