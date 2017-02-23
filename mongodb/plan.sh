@@ -25,6 +25,7 @@ pkg_svc_user=hab
 pkg_svc_group=hab
 pkg_exports=(
   [port]=mongod.net.port
+  [address]=sys.ip
 )
 pkg_exposes=(port)
 
