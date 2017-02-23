@@ -34,5 +34,17 @@ tcp_nodelay = "on"
 # http.keepalive_timeout: Timeout on client connection keepalive, in seconds. Default = 75
 keepalive_timeout = 60
 
-[http.listen]
-port = 80
+# http.server_names_hash_bucket_size: Sets the bucket size for the server names hash tables.
+# The default value depends on the size of the processor’s cache line. Default = 32
+server_names_hash_bucket_size = 64
+
+www-data = "/hab/svc/nginx/data"
+global_ssl_password_file = "# ssl_password_file /home/hab/.ssh/tls/global.pass;"
+
+
+#### Extended Configuration
+[include]
+additional_configuration_files = ""
+
+[http.include]
+additional_servers = ""
