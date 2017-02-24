@@ -2,12 +2,11 @@ pkg_name=grub
 pkg_origin=core
 pkg_version=2.02-beta3
 pkg_source=https://git.savannah.gnu.org/cgit/${pkg_name}.git
-pkg_shasum=TODO
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="GNU GRUB is a Multiboot boot loader."
 pkg_upstream_url=https://www.gnu.org/software/grub/
 pkg_license=('GPL-3.0')
-pkg_bin_dirs=(bin)
+pkg_bin_dirs=(bin sbin)
 pkg_build_deps=(
   core/autoconf
   core/automake
