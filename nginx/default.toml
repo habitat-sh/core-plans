@@ -19,6 +19,12 @@ worker_processes = 4
 # worker_connections: Connections per Worker Process.  Default = 1024
 worker_connections = 1024
 
+[[include.additional_configuration_file]]
+config_file = "mime.types"
+
+[[include.additional_configuration_file]]
+config_file = "win-utf"
+
 
 #### HTTP Context Configuration
 [http]
@@ -42,9 +48,10 @@ www-data = "/hab/svc/nginx/data"
 global_ssl_password_file = "# ssl_password_file /home/hab/.ssh/tls/global.pass;"
 
 
-#### Extended Configuration
-[include]
-additional_configuration_files = ""
+[http.vhosts]
+additional_servers = true
+available = "/etc/nginx/sites-available"
+enabled = "/etc/nginx/sites-enabled"
 
-[http.include]
-additional_servers = ""
+[http.listen]
+port = 80
