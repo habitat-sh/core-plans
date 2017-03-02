@@ -1,8 +1,15 @@
-
 source ../curl/plan.sh
 
 pkg_name=curl-static-musl
 pkg_distname=curl
+pkg_origin=core
+pkg_version=7.51.0
+pkg_description="curl is an open source command line tool and library for
+  transferring data with URL syntax."
+pkg_upstream_url=https://curl.haxx.se/
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_license=('curl')
+pkg_source=https://curl.haxx.se/download/${pkg_name}-${pkg_version}.tar.gz
 pkg_dirname=${pkg_distname}-${pkg_version}
 pkg_deps=(
   core/cacerts
@@ -49,5 +56,5 @@ do_build() {
 do_install() {
   make install
   # remove extraneous files - saves about 200kb in the compressed .hart
-  rm -rf ${pkg_prefix:?}/bin/curl-config ${pkg_prefix:?}/include ${pkg_prefix:?}/lib ${pkg_prefix:?}/share
+  rm -rf "${pkg_prefix:?}/bin/curl-config" "${pkg_prefix:?}/include" "${pkg_prefix:?}/lib" "${pkg_prefix:?}/share"
 }
