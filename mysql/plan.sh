@@ -1,10 +1,10 @@
 pkg_name=mysql
 pkg_origin=core
-pkg_version=5.7.14
+pkg_version=5.7.17
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=('GPL-2.0')
 pkg_source=http://dev.mysql.com/get/Downloads/MySQL-5.7/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=f7415bdac2ca8bbccd77d4f22d8a0bdd7280b065bd646a71a506b77c7a8bd169
+pkg_shasum=cebf23e858aee11e354c57d30de7a079754bdc2ef85eb684782458332a4b9651
 pkg_upstream_url=https://www.mysql.com/
 pkg_description=$(cat << EOF
 Starts MySQL with a basic configuration. Configurable at run time:
@@ -52,7 +52,7 @@ do_build() {
           -DCURSES_INCLUDE_PATH="$(pkg_path_for core/ncurses)/include" \
           -DCURSES_LIBRARY="$(pkg_path_for core/ncurses)/lib/libcurses.so" \
           -DWITH_SSL=yes \
-          -DOPENSSL_INCLUDE_DIR="$(hab pkg path core/openssl)/include" \
+          -DOPENSSL_INCLUDE_DIR="$(pkg_path_for core/openssl)/include" \
           -DOPENSSL_LIBRARY="$(pkg_path_for core/openssl)/lib/libssl.so" \
           -DCRYPTO_LIBRARY="$(pkg_path_for core/openssl)/lib/libcrypto.so" \
           -DCMAKE_INSTALL_PREFIX="$pkg_prefix" \
