@@ -1,13 +1,14 @@
 # For postgresql.conf settings, see
 # http://www.postgresql.org/docs/9.5/static/config-setting.html
 #
-data_directory = "/hab/svc/postgresql/data"
-hba_file = "/hab/svc/postgresql/config/pg_hba.conf"
-ident_file = "/hab/svc/postgresql/config/pg_ident.conf"
-external_pid_file = "/hab/svc/postgresql/var/postgresql.pid"
+data_directory = "/hab/svc/postgresql94/data"
+hba_file = "/hab/svc/postgresql94/config/pg_hba.conf"
+ident_file = "/hab/svc/postgresql94/config/pg_ident.conf"
+external_pid_file = "/hab/svc/postgresql94/var/postgresql.pid"
 listen_addresses = "*"
 port = 5432
-max_connections = 100
+# max_connections = 100
+max_connections = 201
 superuser_reserved_connections = 3
 unix_socket_directories = "/tmp"
 unix_socket_group = ""
@@ -19,8 +20,8 @@ ssl = "off"
 ssl_ciphers = "HIGH:MEDIUM:+3DES:!aNULL"
 ssl_prefer_server_ciphers = "on"
 ssl_ecdh_curve = "prime256v1"
-ssl_cert_file = "/hab/svc/postgresql/config/server.crt"
-ssl_key_file = "/hab/svc/postgresql/config/server.key"
+ssl_cert_file = "/hab/svc/postgresql94/config/server.crt"
+ssl_key_file = "/hab/svc/postgresql94/config/server.key"
 ssl_ca_file = ""
 ssl_crl_file = ""
 password_encryption = "on"
@@ -39,7 +40,7 @@ work_mem = "4MB"
 maintenance_work_mem = "64MB"
 autovacuum_work_mem = "-1"
 max_stack_depth = "2MB"
-dynamic_shared_memory_type = "posix"
+dynamic_shared_memory_type = "none"
 temp_file_limit = "-1"
 max_files_per_process = 1000
 shared_preload_libraries = ""
@@ -117,7 +118,7 @@ from_collapse_limit = 8
 join_collapse_limit = 8
 log_destination = "stderr"
 logging_collector = "off"
-log_directory = "/hab/svc/postgresql/var/pg_log"
+log_directory = "/hab/svc/postgresql94/var/pg_log"
 log_filename = "postgresql-%Y-%m-%d_%H%M%S.log"
 log_file_mode = "0600"
 log_truncate_on_rotation = "off"
@@ -153,7 +154,7 @@ track_counts = "on"
 track_io_timing = "off"
 track_functions = "none"
 track_activity_query_size = 1024
-stats_temp_directory = "/hab/svc/postgresql/var/pg_stat_tmp"
+stats_temp_directory = "/hab/svc/postgresql94/var/pg_stat_tmp"
 log_parser_stats = "off"
 log_planner_stats = "off"
 log_executor_stats = "off"
@@ -219,15 +220,15 @@ synchronize_seqscans = "on"
 transform_null_equals = "off"
 exit_on_error = "off"
 restart_after_crash = "on"
-include_dir = "/hab/svc/postgresql/config/conf.d"
+include_dir = "/hab/svc/postgresql94/config/conf.d"
 
 # options for initdb.
 #
 # We're using `hab` instead of `postgres` because the `hab` user is
 # created in our docker containers, the `postgres` user is not.
 initdb_superuser_name = "hab"
-initdb_superuser_password = "verysecretpassword"
-initdb_pwfile = "/hab/svc/postgresql/config/pwfile"
+initdb_superuser_password = ""
+initdb_pwfile = "/hab/svc/postgresql94/config/pwfile"
 initdb_encoding = "UTF8"
 
 # options for replication.
@@ -236,5 +237,5 @@ standby_mode = "off"
 primary_conninfo_host = ""
 primary_conninfo_port = 5432
 primary_conninfo_user = "hab"
-primary_conninfo_password = "verysecretpassword"
-trigger_file = "/hab/svc/postgresql/data/failover_trigger_file"
+primary_conninfo_password = ""
+trigger_file = "/hab/svc/postgresql94/data/failover_trigger_file"

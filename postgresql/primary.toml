@@ -1,0 +1,6 @@
+# uncomment the line below if working inside the habitat studio:
+# dynamic_shared_memory_type = "none"
+
+# for development:
+# hab studio enter
+# HAB_POSTGRESQL=$(cat primary.toml) hab start results/$(grep artifact results/last_build.env | cut -d= -f2) --config-from /src

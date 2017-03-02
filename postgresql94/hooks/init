@@ -26,14 +26,11 @@ if [[ "{{cfg.standby_mode}}" == "on" ]]; then
     cp {{pkg.svc_config_path}}/recovery.conf {{pkg.svc_data_path}}/recovery.conf
   fi
 
-fi
-
-if [[ ! -f "{{pkg.svc_data_path}}/PG_VERSION" ]]; then
+elif [[ ! -f "{{pkg.svc_data_path}}/PG_VERSION" ]]; then
   echo " Database does not exist, creating with 'initdb'"
   initdb -U {{cfg.initdb_superuser_name}} \
          -E {{cfg.initdb_encoding}} \
          -D {{pkg.svc_data_path}} \
-         --pwfile {{cfg.initdb_pwfile}} \
-         --no-locale && \
+         --pwfile {{cfg.initdb_pwfile}} && \
   rm {{pkg.svc_config_path}}/pwfile
 fi
