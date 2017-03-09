@@ -9,7 +9,7 @@ pkg_description="curl is an open source command line tool and library for
 pkg_upstream_url=https://curl.haxx.se/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('curl')
-pkg_source=https://curl.haxx.se/download/${pkg_name}-${pkg_version}.tar.gz
+pkg_source=https://curl.haxx.se/download/${pkg_distname}-${pkg_version}.tar.gz
 pkg_dirname=${pkg_distname}-${pkg_version}
 pkg_deps=(
   core/cacerts
