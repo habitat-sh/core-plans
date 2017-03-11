@@ -2,6 +2,7 @@
   "datacenter": "{{cfg.server.datacenter}}",
   "data_dir": "{{cfg.server.data-dir}}",
   "log_level": "{{cfg.server.loglevel}}",
+  "bind_addr": "{{cfg.server.bind}}",
   "client_addr": "{{cfg.client.bind}}",
   "server": {{cfg.server.mode}},
   "ports": {
