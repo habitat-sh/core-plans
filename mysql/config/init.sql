@@ -1,4 +1,4 @@
-UPDATE mysql.user SET {{cfg.password_column_name}}=PASSWORD('{{cfg.root_password}}'), password_expired='N' WHERE user = 'root';
+UPDATE mysql.user SET {{cfg.password_column_name}}=PASSWORD('{{cfg.root_password}}'), password_expired='N', host='127.0.0.1' WHERE user = 'root';
 DELETE FROM mysql.user WHERE USER LIKE '';
 DELETE FROM mysql.user WHERE user = 'root' and host NOT IN ('127.0.0.1', 'localhost');
 {{#if cfg.app_username}}
