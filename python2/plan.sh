@@ -32,7 +32,7 @@ pkg_build_deps=(
 )
 pkg_lib_dirs=(lib)
 pkg_bin_dirs=(bin)
-pkg_include_dirs=(include)
+pkg_include_dirs=(include Include)
 pkg_interpreters=(bin/python bin/python2 bin/python2.7)
 
 do_prepare() {
