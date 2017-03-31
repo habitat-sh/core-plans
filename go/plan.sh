@@ -1,4 +1,4 @@
-pkg_name=go18
+pkg_name=go
 pkg_origin=core
 pkg_version=1.8
 pkg_description="Go is an open source programming language that makes it easy to
