@@ -1,5 +1,5 @@
-pkg_name=scaffolding-go18
-pkg_description="Scaffolding for Go 1.8 Applications"
+pkg_name=scaffolding-go
+pkg_description="Scaffolding for Go Applications"
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_version="0.1.0"
