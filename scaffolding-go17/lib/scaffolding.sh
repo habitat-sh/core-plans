@@ -16,6 +16,14 @@ _sanitize_pkg_source() {
   printf "%s" "${uri/$scheme/}"
 }
 
+# The default_begin phase is executed prior to loading the scaffolding. As such
+# we have a scaffolding specific callback to allow us to run anything we need
+# to execute before download and build. This callback executes immediately
+# after the scaffolding is loaded.
+_scaffolding_begin() {
+  return 0
+}
+
 #
 # Scaffolding Variables
 #
@@ -33,14 +41,6 @@ export scaffolding_go_src_path
 #
 # Scaffolding Callback Functions
 #
-
-# The default_begin phase is executed prior to loading the scaffolding. As such
-# we have a scaffolding specific callback to allow us to run anything we need
-# to execute before download and build. This callback executes immediately
-# while the scaffolding is being sourced/loaded.
-scaffolding_go_begin() {
-  return 0
-}
 
 scaffolding_go_get() {
   local deps
