@@ -89,11 +89,11 @@ scaffolding_go_build() {
 }
 
 scaffolding_go_install() {
+  pushd "$scaffolding_go_src_path"
+  go install
+  popd
   cp -r "${scaffolding_go_gopath:?}/bin" "${pkg_prefix}/${bin}"
 }
-
-
-scaffolding_go_begin
 
 do_default_download() {
   scaffolding_go_download
