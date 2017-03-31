@@ -1,16 +1,16 @@
-pkg_name=go18
+pkg_name=go17
 pkg_origin=core
-pkg_version=1.8
+pkg_version=1.7.5
 pkg_description="Go is an open source programming language that makes it easy to
   build simple, reliable, and efficient software."
 pkg_upstream_url=https://golang.org/
 pkg_license=('BSD')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://storage.googleapis.com/golang/go${pkg_version}.src.tar.gz
-pkg_shasum=406865f587b44be7092f206d73fc1de252600b79b3cacc587b74b5ef5c623596
+pkg_shasum=4e834513a2079f8cbbd357502cccaac9507fd00a1efe672375798858ff291815
 pkg_dirname=go
 pkg_deps=(core/glibc core/iana-etc core/cacerts)
-pkg_build_deps=(core/coreutils core/inetutils core/bash core/patch core/gcc core/go17 core/perl)
+pkg_build_deps=(core/coreutils core/inetutils core/bash core/patch core/gcc core/go14 core/perl)
 pkg_bin_dirs=(bin)
 
 do_prepare() {
@@ -33,10 +33,10 @@ do_prepare() {
   build_line "Updating PATH=$PATH"
 
   # Building Go after 1.5 requires a previous version of Go to bootstrap with.
-  # This environment variable tells the build system to use our 1.7.x release
+  # This environment variable tells the build system to use our 1.4.x release
   # as the bootstrapping Go.
   export GOROOT_BOOTSTRAP
-  GOROOT_BOOTSTRAP="$(pkg_path_for go17)"
+  GOROOT_BOOTSTRAP="$(pkg_path_for go14)"
   build_line "Setting GOROOT_BOOTSTRAP=$GOROOT_BOOTSTRAP"
 
   # Add `cacerts` to the SSL certificate lookup chain
