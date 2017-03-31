@@ -8,7 +8,7 @@ pkg_source=nosuchfile.tar.gz
 pkg_upstream_url="https://github.com/habitat-sh/core-plans"
 pkg_deps=(
   ${pkg_deps[@]}
-  core/go18
+  core/go
   core/git
   core/gcc
   core/make
