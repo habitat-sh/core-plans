@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -ex
+
+outdir=${PWD}/${OUT}
+
+cd ${PACKAGE_CONTEXT}
+
+cat <<EOF | hab origin key import
+${HAB_ORIGIN_KEY}
+EOF
+
+hab pkg build .
+
+mv results/* ${outdir}
+ls ${outdir}/${HAB_ORIGIN}* > ${outdir}/pkg_name

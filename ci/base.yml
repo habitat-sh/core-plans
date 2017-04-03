@@ -1,0 +1,16 @@
+---
+meta:
+  habitat:
+    origin_key: (( vault "secret/pipelines/habitat-plans/habitat:origin_key" ))
+    auth_token: (( vault "secret/pipelines/habitat-plans/habitat:auth_token" ))
+    origin: core
+
+groups:
+- name: packages
+  jobs: []
+
+resource_types:
+- name: hab-pkg
+  type: docker-image
+  source:
+    repository: starkandwayne/habitat-resource
