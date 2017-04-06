@@ -45,6 +45,12 @@ pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
+pkg_exports=(
+  [port]=port
+  [password]=app_password
+  [username]=app_username
+)
+
 do_build() {
   cmake . -DLOCAL_BOOST_DIR="$(pkg_path_for core/boost159)" \
           -DBOOST_INCLUDE_DIR="$(pkg_path_for core/boost159)/include" \
