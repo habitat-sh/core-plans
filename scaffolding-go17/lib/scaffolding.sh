@@ -59,7 +59,7 @@ scaffolding_go_download() {
 }
 
 # Recursively clean GOPATH and dependencies.
-do_default_clean() {
+scaffolding_go_clean() {
   local clean_args
   clean_args="-r -i"
   if [[ -n "$DEBUG" ]]; then
@@ -97,6 +97,10 @@ scaffolding_go_install() {
 
 do_default_download() {
   scaffolding_go_download
+}
+
+do_default_clean() {
+  scaffolding_go_clean
 }
 
 do_default_verify() {
