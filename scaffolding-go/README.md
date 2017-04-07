@@ -6,10 +6,10 @@ See https://www.habitat.sh/docs/concepts-scaffolding/ to learn how to get starte
 
 ## Variables
 | Variable | Type | Value | Default |
-| --------- | ----- | ------ |
-|`scaffolding_go_gopath`     | **String** | (Optional) Value for `GOPATH` | `"$HAB_CACHE_SRC_PATH/$pkg_dirname"` |
-|`scaffolding_go_src_path`   | **String** | (Optional) URL to Source in `go get` format. Eg: `github.com/myorg/myapp`| `$GOPATH/src/$pkg_src` ($pkg_src is sanitized to go get format) |
-|`scaffolding_go_build_deps` | **Array**  | (Optional) Array of URLs to `go get` | Undefined |
+| -------- | ---- | ----- | ------- |
+|`scaffolding_go_gopath`| String |_(Optional)_ Value for `GOPATH`|`"$HAB_CACHE_SRC_PATH/$pkg_dirname"`|
+|`scaffolding_go_src_path`| String | _(Optional)_ URL to Source in `go get` format. Eg: `github.com/myorg/myapp`| `$GOPATH/src/$pkg_src` ($pkg_src is sanitized to go get format) |
+|`scaffolding_go_build_deps`| Array  | _(Optional)_ Array of URLs to `go get` | Undefined |
 
 ## Callbacks
 ### Scaffolding
