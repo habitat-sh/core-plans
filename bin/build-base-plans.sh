@@ -108,8 +108,8 @@ trap _on_exit 1 2 3 15 ERR
 # _build coreutils EXTRA=vars FOR=command
 # ```
 _build() {
-  local plan="${1:-}"
-  local plan_dir="$plan"
+  local plan_dir="${1:-}"
+  local plan="$(basename "$plan_dir")"
   shift
   # If the `$plan` value is a path/name combination like
   # `../components/foobar:hab-foobar` then split the token into its requisite
@@ -117,7 +117,7 @@ _build() {
   # shellcheck disable=SC2126
   case $(echo "$plan" | grep -o ':' | wc -l | sed 's,^[^0-9]*,,') in
     1)
-      plan_dir=$(echo "$plan" | cut -d ':' -f 1)
+      plan_dir=$(echo "$plan_dir" | cut -d ':' -f 1)
       plan=$(echo "$plan" | cut -d ':' -f 2)
       ;;
   esac
@@ -189,85 +189,85 @@ _build() {
 # no?
 # shellcheck disable=SC2162
 cat <<_PLANS_ | while read plan; do _build "$plan"; done
-  linux-headers
-  glibc
-  zlib
-  file
-  binutils
-  m4
-  gmp
-  mpfr
-  libmpc
-  gcc
-  patchelf FIRST_PASS=true
-  gcc-libs
-  patchelf
-  bzip2
-  pkg-config
-  ncurses
-  attr
-  acl
-  libcap
-  sed
-  shadow
-  psmisc
-  procps-ng
-  coreutils
-  bison
-  flex
-  pcre
-  grep
-  readline
-  bash
-  bc
-  tar
-  gawk
-  libtool
-  gdbm
-  expat
-  db
-  inetutils
-  iana-etc
-  less
-  perl
-  diffutils
-  autoconf
-  automake
-  findutils
-  xz
-  gettext
-  gzip
-  make
-  patch
-  texinfo
-  util-linux
-  tcl
-  expect
-  dejagnu
-  check
-  libidn
-  cacerts
-  openssl
-  wget
-  unzip
-  rust
-  linux-headers-musl
-  musl
-  busybox-static
-  zlib-musl
-  bzip2-musl
-  xz-musl
-  libsodium-musl
-  openssl-musl
-  libarchive-musl
-  ../components/hab:hab
-  ../components/plan-build:hab-plan-build
-  vim
-  libbsd
-  clens
-  mg
-  hab-backline
-  ../components/studio:hab-studio
+  core-plans/linux-headers
+  core-plans/glibc
+  core-plans/zlib
+  core-plans/file
+  core-plans/binutils
+  core-plans/m4
+  core-plans/gmp
+  core-plans/mpfr
+  core-plans/libmpc
+  core-plans/gcc
+  core-plans/patchelf FIRST_PASS=true
+  core-plans/gcc-libs
+  core-plans/patchelf
+  core-plans/bzip2
+  core-plans/pkg-config
+  core-plans/ncurses
+  core-plans/attr
+  core-plans/acl
+  core-plans/libcap
+  core-plans/sed
+  core-plans/shadow
+  core-plans/psmisc
+  core-plans/procps-ng
+  core-plans/coreutils
+  core-plans/bison
+  core-plans/flex
+  core-plans/pcre
+  core-plans/grep
+  core-plans/readline
+  core-plans/bash
+  core-plans/bc
+  core-plans/tar
+  core-plans/gawk
+  core-plans/libtool
+  core-plans/gdbm
+  core-plans/expat
+  core-plans/db
+  core-plans/inetutils
+  core-plans/iana-etc
+  core-plans/less
+  core-plans/perl
+  core-plans/diffutils
+  core-plans/autoconf
+  core-plans/automake
+  core-plans/findutils
+  core-plans/xz
+  core-plans/gettext
+  core-plans/gzip
+  core-plans/make
+  core-plans/patch
+  core-plans/texinfo
+  core-plans/util-linux
+  core-plans/tcl
+  core-plans/expect
+  core-plans/dejagnu
+  core-plans/check
+  core-plans/libidn
+  core-plans/cacerts
+  core-plans/openssl
+  core-plans/wget
+  core-plans/unzip
+  core-plans/rust
+  core-plans/linux-headers-musl
+  core-plans/musl
+  core-plans/busybox-static
+  core-plans/zlib-musl
+  core-plans/bzip2-musl
+  core-plans/xz-musl
+  core-plans/libsodium-musl
+  core-plans/openssl-musl
+  core-plans/libarchive-musl
+  habitat/components/hab:hab
+  habitat/components/plan-build:hab-plan-build
+  core-plans/vim
+  core-plans/libbsd
+  core-plans/clens
+  core-plans/mg
+  habitat/components/backline:hab-backline
+  habitat/components/studio:hab-studio
 _PLANS_
 
 _on_exit 0
