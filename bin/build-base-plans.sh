@@ -188,7 +188,7 @@ _build() {
 # each token, invoke the `_build` function and pass the while line in. Simple,
 # no?
 # shellcheck disable=SC2162
-cat <<_PLANS_ | while read plan; do _build "$plan"; done
+cat <<_PLANS_ | while read plan; do _build $plan; done
   core-plans/linux-headers
   core-plans/glibc
   core-plans/zlib
