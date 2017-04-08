@@ -307,6 +307,10 @@ extract_src() {
   plan=$1
 
   (source $PLAN_CONTEXT/../$plan/plan.sh
+    # Re-override the defaults as this plan is sourced externally
+    pkg_filename="$(basename $pkg_source)"
+    pkg_dirname="${pkg_name}-${pkg_version}"
+
     build_line "Downloading $pkg_source"
     do_download
     build_line "Verifying $pkg_filename"
