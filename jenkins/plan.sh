@@ -1,4 +1,4 @@
-pkg_origin=core
+pkg_origin=endocode
 pkg_name=jenkins
 pkg_version=2.46.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
