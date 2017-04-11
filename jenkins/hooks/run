@@ -5,5 +5,6 @@ exec 2>&1
 export JAVA_HOME=$(hab pkg path core/jdk8)  
 export TOMCAT_HOME=$(hab pkg path core/tomcat8)/tc
 export JENKINS_HOME={{pkg.svc_config_path}}
+export JENKINS_SLAVE_AGENT_PORT={{jenkins.agent_port}}
 
 exec ${TOMCAT_HOME}/bin/catalina.sh run
