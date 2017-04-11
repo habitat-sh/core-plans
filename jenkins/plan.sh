@@ -8,7 +8,8 @@ pkg_upstream_url=https://jenkins.io/
 pkg_source=http://mirrors.jenkins.io/war-stable/${pkg_version}/jenkins.war
 pkg_shasum=33a3f4d983c6188a332291e1d974afa0a2ee96a0ae3cb6dd4f2098086525f9f1
 pkg_deps=(core/tomcat8 core/jdk8)
-pkg_exposes=(50000)
+pkg_exports=()
+pkg_exposes=()
 pkg_svc_user="root"
 
 do_clean() {
