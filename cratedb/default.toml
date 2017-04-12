@@ -94,9 +94,9 @@
 [plugin]
   mandatory = "mapper-attachments,lang-groovy"
 
-[memory]
-  [bootstrap]
-    mlockall = "false"
+
+[bootstrap]
+  mlockall = "false"
 
 [network]
   bind_host = "192.168.0.1"
