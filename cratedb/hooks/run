@@ -17,4 +17,4 @@ export MAX_LOCKED_MEMORY={{cfg.runtime.max_locked_memory}}
 export MAX_OPEN_FILES={{cfg.runtime.max_open_files}}
 {{/if ~}}
 
-exec crate -Cpath.conf={{{{pkg.svc_config_path}}}} 2>&1
+exec crate -Cpath.conf={{pkg.svc_config_path}} 2>&1
