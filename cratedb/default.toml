@@ -82,12 +82,9 @@
       enabled = "true"
 
 [path]
-  conf = "{{pkg.svc_config_path}}"
-  data = "{{pkg.svc_data_path}}"
-  work = "../work/"
-  logs = "../logs/"
   plugins = "../plugins/"
   repo = "../repo1/, ../repo2/"
+  work = "../work/"
 
 [plugin]
   mandatory = "mapper-attachments,lang-groovy"

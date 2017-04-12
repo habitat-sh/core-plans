@@ -24,7 +24,7 @@
 ## Table
 
 #index.number_of_replicas: {{cfg.index.number_of_replicas}}
-#index.refresh_interval: {{{cfg.index.refresh_interval}}
+#index.refresh_interval: {{cfg.index.refresh_interval}}
 
 #index.blocks.read_only: {{cfg.index.blocks.read_only}}
 #index.blocks.read: {{cfg.index.blocks.read}}
@@ -45,10 +45,9 @@
 
 ## Paths
 
-path.conf: {{cfg.path.conf}}
-path.data: {{cfg.path.data}}
+path.data: {{pkg.svc_var_path}}/data
+path.logs: {{pkg.svc_var_path}}/logs
 #path.work: {{cfg.path.work}}
-#path.logs: {{cfg.path.logs}}
 #path.plugins: {{cfg.path.plugins}}
 
 ## Plugin

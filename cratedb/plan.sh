@@ -20,6 +20,11 @@ do_build() {
 }
 
 do_install() {
+    install -vDm644 README.rst ${pkg_prefix}/README.rst
+    install -vDm644 LICENSE.txt ${pkg_prefix}/LICENSE.txt
+    install -vDm644 NOTICE ${pkg_prefix}/NOTICE
+    install -vDm644 CHANGES.txt ${pkg_prefix}/CHANGES.txt
+
     mkdir -p ${pkg_prefix}/crate
     cp -a bin lib plugins ${pkg_prefix}/crate
     rm ${pkg_prefix}/crate/bin/*.bat
