@@ -4,7 +4,7 @@ license.enterprise: {{cfg.enterprise.licence}}
 
 ## Cluster
 
-#cluster.name: {{cfg.cluster.name}}
+cluster.name: {{cfg.cluster.name}}
 
 #cluster.graceful_stop.min_availability: {{cfg.cluster.graceful_stop.min_availability}}
 #cluster.graceful_stop.reallocate: {{cfg.cluster.graceful_stop.reallocate}}
@@ -15,7 +15,7 @@ license.enterprise: {{cfg.enterprise.licence}}
 
 ## Node
 
-#node.name: {{cfg.node.name}}
+node.name: {{cfg.node.name}}
 #node.master: {{cfg.node.master}}
 #node.data: {{cfg.node.data}}
 #node.rack: {{cfg.node.rack}}
