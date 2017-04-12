@@ -1,3 +1,238 @@
-# Use this file to templatize your application's native configuration files.
-# See the docs at https://www.habitat.sh/docs/create-packages-configure/.
-# You can safely delete this file if you don't need it.
+[enterprise]
+  license = "false"
+
+[cluster]
+  name = "cratedb"
+  
+  [graceful_stop]
+    min_availability = "primaries"
+    reallocate = "true"
+    timeout = "2h"
+    force = "false"
+
+  [info]
+    [update]
+      interval = "30s"
+
+  [routing]
+    [allocation]
+      enable = "true"
+      node_initial_primaries_recoveries = "4"
+      node_concurrent_recoveries = "2"
+      allow_rebalance = "indices_all_active"
+      cluster_concurrent_rebalance = "2"
+      node_initial_primaries_recoveries = "4"
+      node_concurrent_recoveries = "2"
+
+      [awareness]
+        attributes = ""
+
+      [balance]
+	index = "0.5f"
+	primary = "0.05f"
+        shard = "0.45f"
+	threshold = "1.0f"
+
+      [disk]
+        threshold_enabled = "true"
+
+        [watermark]
+	  low = "85%"
+	  high = "90%"
+
+[node]
+  name = "Piz Buin"
+  master = "true"
+  data = "true"
+  rack = "rack314"
+  max_local_storage_nodes = "1"
+
+  [breaker]
+    [query]
+      limit = "60%"
+      overhead = "1.09"
+
+  [sql]
+    read_only = "false"
+
+[table]
+  [index]
+    number_of_replicas = "1"
+    refresh_interval = "1000"
+
+    [blocks]
+      read_only = "false"
+      read = "false"
+      write = "false"
+      metadata = "false"
+
+    [translog]
+      flush_threshold_ops = "unlimited"
+      flush_threshold_size = "200mb"
+      flush_threshold_period = "30m"
+      disable_flush = "false"
+
+    [routing]
+      [allocation]
+        enable = "true"
+	total_shards_per_node = "-1"
+
+    [recovery]
+      initial_shards = "quorum"
+
+    [warmer]
+      enabled = "true"
+
+[path]
+  conf = "../config/"
+  data = "../data/"
+  work = "../work/"
+  logs = "../logs/"
+  plugins = "../plugins/"
+  repo = "../repo1/, ../repo2/"
+
+[plugin]
+  mandatory = "mapper-attachments,lang-groovy"
+
+[memory]
+  [bootstrap]
+    mlockall = "false"
+
+[network]
+  bind_host = "192.168.0.1"
+  publish_host = "192.168.0.1"
+  host = "192.168.0.1"
+
+[transport]
+  [tcp]
+    port = "4300"
+    compress = "true"
+
+[http]
+  port = "4200"
+  max_content_length = "100mb"
+  enabled = "false
+
+[gateway]
+  recover_after_nodes = "2"
+  recover_after_time = "5m"
+  expected_nodes = "3"
+
+[indices]
+  [fielddata]
+    [breaker]
+      limit = "60%"
+      overhead = "1.0.3"
+
+  [recovery]
+    max_size_per_sec = "40mb"
+    concurrent_streams = "5"
+    file_chunk_size = "512kb"
+    translog_ops = "1000"
+    translog_size = "512kb"
+    compress = "true"
+    max_bytes_per_sec = "20mb"
+    retry_delay_state_sync = "500ms"
+    retry_delay_network = "5s"
+    retry_activity_timeout = "15m"
+    retry_internal_action_timeout = "15m"
+    retry_internal_long_action_timeout = "30m"
+
+  [store]
+    [throttle]
+      type = "merge"
+      max_bytes_per_sec = "20mb"
+
+[discovery]
+  type = "srv"
+
+  [ec2]
+    groups = "sg-example-1, sg-example-2"
+    any_group = "true"
+    availability_zones = ""
+    ping_timeout = "3s"
+
+  [srv]
+    query = "_crate._srv.example.com"
+
+  [zen]
+    minimum_master_nodes = "1"
+    publish_timeout = "30s"   
+
+    [ping]
+      timeout = "3s"
+
+      [multicast]
+        enabled = "false"
+
+      [unicast]
+        hosts = ""
+
+    [fd]
+      ping_timeout = "30s"
+      ping_retries = "3"
+      ping_interval = "1s"
+
+[cloud]
+  [aws]
+    [ec2]
+      endpint = "http://example.com/endpoint"
+
+  [azure]
+    method = "vnet"
+
+    [management]
+      [api]
+        id = "xxxxxxxxxx"
+	secret = "my_password"
+
+      [resourcegroup]
+        name = "myrg"
+
+      [subscrption]
+        id = "xxxxx.xxxx.xxx.xxx"
+
+      [tenant]
+        id = "xxxxxxxxxxx"
+
+[threadpool]
+  [index]
+    type = "fixed"
+    queue_size = "200"
+
+[monitor]
+  [jvm]
+    [gc]
+      [young]
+        warn = "1000ms"
+	info = "700ms"
+	debug = "400ms"
+
+      [old]
+        warn = "10s"
+        info = "5s"
+        debug = "2s"
+    
+[bulk]
+  request_timeout = "1m"
+
+[udc]
+  enabled = "true"
+  initial_delay = "10m"
+  interval = "24h"
+  url = "https://udc.crate.io/"
+
+[es]
+  [api]
+    enabled = "false"
+
+[blobs]
+  path = "/path/to/blobs"
+
+[repositories]
+  [url]
+    allowed_urls = "[\"http://example.org/root/*\", \"https://*.mydomain.com/*?*#*\"]"
+
+[psql]
+  enabled = "true"
+  port = "5432"

@@ -1,10 +1,7 @@
-# Crate uses log4j as internal logging abstraction.
-# Configure log4j as you need it to behave by setting the log4j prefixes in
-# this file.
-
 # Specify the log level and its appender for each logger as follows.
 # The appenders can be configured further down below.
-rootLogger: INFO, console, file
+
+rootLogger: {{cfg.logger.level}}, console, file
 
 logger:
 #  Log action execution errors for easier debugging
