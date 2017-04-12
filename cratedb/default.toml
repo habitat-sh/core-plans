@@ -21,8 +21,6 @@
       node_concurrent_recoveries = "2"
       allow_rebalance = "indices_all_active"
       cluster_concurrent_rebalance = "2"
-      node_initial_primaries_recoveries = "4"
-      node_concurrent_recoveries = "2"
 
       [cluster.routing.allocation.awareness]
         attributes = ""
