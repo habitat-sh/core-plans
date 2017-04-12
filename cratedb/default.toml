@@ -111,7 +111,7 @@
 [http]
   port = "4200"
   max_content_length = "100mb"
-  enabled = "false
+  enabled = "false"
 
 [gateway]
   recover_after_nodes = "2"
