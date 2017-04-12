@@ -1,6 +1,6 @@
 ## Enterprise
 
-#license.enterprise: {{cfg.enterprise.licence}}
+license.enterprise: {{cfg.enterprise.licence}}
 
 ## Cluster
 
@@ -217,5 +217,5 @@ path.logs: {{pkg.svc_var_path}}/logs
 
 ## POSTGRES WIRE PROTOCOL SUPPORT
 
-#psql.enabled: {{cfg.psql.enabled}}
-#psql.port: {{cfg.psql.port}}
+psql.enabled: {{cfg.psql.enabled}}
+psql.port: {{cfg.psql.port}}
