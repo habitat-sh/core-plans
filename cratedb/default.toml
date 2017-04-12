@@ -240,3 +240,34 @@
   crate_startup_sleep_time = ""
   crate_java_opts = ""
   heapsize = ""
+
+[logger]
+  level = "INFO"
+  action = "DEBUG"
+  discovery = "TRACE"
+
+  [logger.indices]
+    recovery = "DEBUG"
+
+  [logger.deprecation]
+    discovery = "DEBUG"
+
+  [logger.com]
+    amazonaws = "WARN"
+
+  [logger.appender]
+    [logger.appender.console]
+      type = "console"
+
+      [logger.appender.console.layout]
+        type = "consolePattern"
+	conversionPattern = "\"[%d{ISO8601}][%-5p][%-25c] %m%n\""
+
+    [logger.appender.file]
+      type = "dailyRollingFile"
+      file = "${path.logs}/${cluster.name}.log"
+      datePattern = "\"'.'yyyy-MM-dd\""
+
+      [logger.appender.file.layout]
+        type = "pattern"
+        conversionPattern = "\"[%d{ISO8601}][%-5p][%-25c] %m%n\""

@@ -1,44 +1,27 @@
-# Specify the log level and its appender for each logger as follows.
-# The appenders can be configured further down below.
-
 rootLogger: {{cfg.logger.level}}, console, file
 
 logger:
-#  Log action execution errors for easier debugging
-  action: DEBUG
+  action: {{cfg.logger.action}}
 
-#  Peer shard recovery
-# indices.recovery: DEBUG
+# indices.recovery: {{cfg.logger.indices.recovery}}
 
-#  Discovery
-#  Crate will discover the other nodes within its own cluster.
-#  If you want to log the discovery process, set the following:
-# discovery: TRACE
+# discovery: {{cfg.logger.discovery}}
 
-# Log deprecations in the discovery module
-  deprecation.discovery: DEBUG
+deprecation.discovery: {{cfg.logger.deprecation.discovery}}
 
-# mute amazon s3 client logging a bit
-  com.amazonaws: WARN
+com.amazonaws: {{cfg.logger.com.amazonaws}}
 
-# Define your appenders here.
-# Like mentioned above, use the log4j prefixes to configure for example the
-# type or layout.
-# For all available settings, take a look at the log4j documentation.
-# http://logging.apache.org/log4j/2.x/
-# http://logging.apache.org/log4j/2.x/manual/appenders.html
 appender:
   console:
-    type: console
+    type: {{cfg.logger.appender.console.type}}
     layout:
-      type: consolePattern
-      conversionPattern: "[%d{ISO8601}][%-5p][%-25c] %m%n"
+      type: {{cfg.logger.appender.console.layout.type}}
+      conversionPattern: {{cfg.logger.appender.console.layout.conversionPattern}}
 
   file:
-    type: dailyRollingFile
-    file: ${path.logs}/${cluster.name}.log
-    datePattern: "'.'yyyy-MM-dd"
+    type: {{cfg.logger.appender.file.type}}
+    file: {{cfg.logger.appender.file.file}}
+    datePattern: {{cfg.logger.appender.file.datePattern}}
     layout:
-      type: pattern
-      conversionPattern: "[%d{ISO8601}][%-5p][%-25c] %m%n"
-
+      type: {{cfg.logger.appender.file.layout.type}}
+      conversionPattern: {{cfg.logger.appender.file.layout.conversionPattern}}
