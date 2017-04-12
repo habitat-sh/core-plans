@@ -20,6 +20,7 @@ do_build() {
 }
 
 do_install() {
+    mkdir -p ${pkg_prefix}/crate
     cp -a bin lib plugins ${pkg_prefix}/crate
     rm ${pkg_prefix}/crate/bin/*.bat
 }

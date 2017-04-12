@@ -45,8 +45,8 @@
 
 ## Paths
 
-#path.conf: {{cfg.path.conf}}
-#path.data: {{cfg.path.data}}
+path.conf: {{cfg.path.conf}}
+path.data: {{cfg.path.data}}
 #path.work: {{cfg.path.work}}
 #path.logs: {{cfg.path.logs}}
 #path.plugins: {{cfg.path.plugins}}

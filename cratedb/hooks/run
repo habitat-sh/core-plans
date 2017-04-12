@@ -1,6 +1,4 @@
-#!/bin/bash
-
-exec 2>&1
+#!/bin/sh -xe
 
 export JAVA_HOME=$(hab pkg path core/jre8)
 {{#if cfg.runtime.heapsize ~}}
@@ -19,4 +17,4 @@ export MAX_LOCKED_MEMORY={{cfg.runtime.max_locked_memory}}
 export MAX_OPEN_FILES={{cfg.runtime.max_open_files}}
 {{/if ~}}
 
-exec crate -Cpath.conf={{pkg.svc_config_path}}
+exec crate 2>&1

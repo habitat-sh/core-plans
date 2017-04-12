@@ -82,8 +82,8 @@
       enabled = "true"
 
 [path]
-  conf = "../config/"
-  data = "../data/"
+  conf = "{{pkg.svc_config_path}}"
+  data = "{{pkg.svc_data_path}}"
   work = "../work/"
   logs = "../logs/"
   plugins = "../plugins/"
