@@ -236,3 +236,10 @@
 [psql]
   enabled = "true"
   port = "5432"
+
+[runtime]
+  max_open_files = ""
+  max_locked_memory = ""
+  crate_startup_sleep_time = ""
+  crate_java_opts = ""
+  heapsize = ""
