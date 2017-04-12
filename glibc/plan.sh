@@ -310,6 +310,7 @@ extract_src() {
     # Re-override the defaults as this plan is sourced externally
     pkg_filename="$(basename $pkg_source)"
     pkg_dirname="${pkg_name}-${pkg_version}"
+    CACHE_PATH="$HAB_CACHE_SRC_PATH/$pkg_dirname"
 
     build_line "Downloading $pkg_source"
     do_download
