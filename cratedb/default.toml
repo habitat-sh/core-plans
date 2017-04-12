@@ -4,18 +4,18 @@
 [cluster]
   name = "cratedb"
   
-  [graceful_stop]
+  [cluster.graceful_stop]
     min_availability = "primaries"
     reallocate = "true"
     timeout = "2h"
     force = "false"
 
-  [info]
-    [update]
+  [cluster.info]
+    [clsuter.info.update]
       interval = "30s"
 
-  [routing]
-    [allocation]
+  [cluster.routing]
+    [cluster.routing.allocation]
       enable = "true"
       node_initial_primaries_recoveries = "4"
       node_concurrent_recoveries = "2"
@@ -24,19 +24,19 @@
       node_initial_primaries_recoveries = "4"
       node_concurrent_recoveries = "2"
 
-      [awareness]
+      [cluster.routing.allocation.awareness]
         attributes = ""
 
-      [balance]
+      [cluster.routing.allocation.balance]
 	index = "0.5f"
 	primary = "0.05f"
         shard = "0.45f"
 	threshold = "1.0f"
 
-      [disk]
+      [cluster.routing.allocation.disk]
         threshold_enabled = "true"
 
-        [watermark]
+        [cluster.routing.allocation.disk.watermark]
 	  low = "85%"
 	  high = "90%"
 
@@ -47,40 +47,40 @@
   rack = "rack314"
   max_local_storage_nodes = "1"
 
-  [breaker]
-    [query]
+  [node.breaker]
+    [node.breaker.query]
       limit = "60%"
       overhead = "1.09"
 
-  [sql]
+  [node.sql]
     read_only = "false"
 
 [table]
-  [index]
+  [table.index]
     number_of_replicas = "1"
     refresh_interval = "1000"
 
-    [blocks]
+    [table.index.blocks]
       read_only = "false"
       read = "false"
       write = "false"
       metadata = "false"
 
-    [translog]
+    [table.index.translog]
       flush_threshold_ops = "unlimited"
       flush_threshold_size = "200mb"
       flush_threshold_period = "30m"
       disable_flush = "false"
 
-    [routing]
-      [allocation]
+    [table.index.routing]
+      [table.index.routing.allocation]
         enable = "true"
 	total_shards_per_node = "-1"
 
-    [recovery]
+    [table.index.recovery]
       initial_shards = "quorum"
 
-    [warmer]
+    [table.index.warmer]
       enabled = "true"
 
 [path]
@@ -94,7 +94,6 @@
 [plugin]
   mandatory = "mapper-attachments,lang-groovy"
 
-
 [bootstrap]
   mlockall = "false"
 
@@ -104,7 +103,7 @@
   host = "192.168.0.1"
 
 [transport]
-  [tcp]
+  [transport.tcp]
     port = "4300"
     compress = "true"
 
@@ -119,12 +118,12 @@
   expected_nodes = "3"
 
 [indices]
-  [fielddata]
-    [breaker]
+  [indices.fielddata]
+    [indicies.fielddata.breaker]
       limit = "60%"
       overhead = "1.0.3"
 
-  [recovery]
+  [indices.recovery]
     max_size_per_sec = "40mb"
     concurrent_streams = "5"
     file_chunk_size = "512kb"
@@ -138,77 +137,77 @@
     retry_internal_action_timeout = "15m"
     retry_internal_long_action_timeout = "30m"
 
-  [store]
-    [throttle]
+  [indices.store]
+    [indices.store.throttle]
       type = "merge"
       max_bytes_per_sec = "20mb"
 
 [discovery]
   type = "srv"
 
-  [ec2]
+  [discovery.ec2]
     groups = "sg-example-1, sg-example-2"
     any_group = "true"
     availability_zones = ""
     ping_timeout = "3s"
 
-  [srv]
+  [discovery.srv]
     query = "_crate._srv.example.com"
 
-  [zen]
+  [discovery.zen]
     minimum_master_nodes = "1"
     publish_timeout = "30s"   
 
-    [ping]
+    [discovery.zen.ping]
       timeout = "3s"
 
-      [multicast]
+      [discovery.zen.ping.multicast]
         enabled = "false"
 
-      [unicast]
+      [discovery.zen.ping.unicast]
         hosts = ""
 
-    [fd]
+    [discovery.zen.fd]
       ping_timeout = "30s"
       ping_retries = "3"
       ping_interval = "1s"
 
 [cloud]
-  [aws]
-    [ec2]
+  [cloud.aws]
+    [cloud.aws.ec2]
       endpint = "http://example.com/endpoint"
 
-  [azure]
+  [cloud.azure]
     method = "vnet"
 
-    [management]
-      [api]
+    [cloud.azure.management]
+      [cloud.azure.management.api]
         id = "xxxxxxxxxx"
 	secret = "my_password"
 
-      [resourcegroup]
+      [cloud.azure.management.resourcegroup]
         name = "myrg"
 
-      [subscrption]
+      [cloud.azure.management.subscrption]
         id = "xxxxx.xxxx.xxx.xxx"
 
-      [tenant]
+      [cloud.azure.management.tenant]
         id = "xxxxxxxxxxx"
 
 [threadpool]
-  [index]
+  [threadpool.index]
     type = "fixed"
     queue_size = "200"
 
 [monitor]
-  [jvm]
-    [gc]
-      [young]
+  [monitor.jvm]
+    [monitor.jvm.gc]
+      [monitor.jvm.gc.young]
         warn = "1000ms"
 	info = "700ms"
 	debug = "400ms"
 
-      [old]
+      [monitor.jvm.gc.old]
         warn = "10s"
         info = "5s"
         debug = "2s"
@@ -223,14 +222,14 @@
   url = "https://udc.crate.io/"
 
 [es]
-  [api]
+  [es.api]
     enabled = "false"
 
 [blobs]
   path = "/path/to/blobs"
 
 [repositories]
-  [url]
+  [repositories.url]
     allowed_urls = "[\"http://example.org/root/*\", \"https://*.mydomain.com/*?*#*\"]"
 
 [psql]
