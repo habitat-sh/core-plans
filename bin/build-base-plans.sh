@@ -250,7 +250,6 @@ cat <<_PLANS_ | while read plan; do _build $plan; done
   core-plans/openssl
   core-plans/wget
   core-plans/unzip
-  core-plans/rust
   core-plans/linux-headers-musl
   core-plans/musl
   core-plans/busybox-static
@@ -260,6 +259,7 @@ cat <<_PLANS_ | while read plan; do _build $plan; done
   core-plans/libsodium-musl
   core-plans/openssl-musl
   core-plans/libarchive-musl
+  core-plans/rust
   habitat/components/hab:hab
   habitat/components/plan-build:hab-plan-build
   core-plans/vim
