@@ -1,221 +1,276 @@
-## Enterprise
+###################### CrateDB Configuration ########################
+#
+# Notes: https://crate.io/docs/reference/en/latest/configuration.html
+#
+#####################################################################
+
+# Table Settings
+
+number_of_replicas: {{cfg.table.number_of_replicas}}
+refresh_interval: {{cfg.table.refresh_interval}}
+
+## Table: Blocks
+
+blocks.read_only: {{cfg.table.blocks.read_only}}
+blocks.read: {{cfg.table.blocks.read}}
+blocks.write: {{cfg.table.blocks.write}}
+blocks.metadata: {{cfg.table.blocks.metadata}}
+
+## Table: Translog
+
+translog.flush_threshold_ops: {{cfg.index.translog.flush_threshold_ops}}
+translog.flush_threshold_size: {{cfg.table.translog.flush_threshold_size}}
+translog.flush_threshold_period: {{cfg.index.translog.flush_threshold_period}}
+translog.disable_flush: {{cfg.index.translog.disable_flush}}
+translog.interval: {{cfg.index.translog.interval}}
+translog.sync_interval: {{cfg.table.translog.sync_interval}}
+
+## Table: Allocation
+
+routing.allocation.enable: {{cfg.table.routing.allocation.enable}}
+routing.allocation.total_shards_per_node: {{cfg.table.routing.allocation.total_shards_per_node}}
+
+## Table: Recovery
+
+recovery.initial_shards: {{cfg.table.recovery.initial_shards}}
+
+## Table: Warmer
+
+warmer.enabled: {{cfg.table.warmer.enabled}}
+
+## Table: Unassigned
+
+unassigned.node_left.delayed_timeout: {{cfg.table.unassigned.node_left.delayed_timeout}}
+
+## Table: Column Policy
+
+column_policy: {{cfg.table.column_policy}}
+
+# Node-Specific Settings
+
+cluster.name: {{cfg.cluster.name}}
+node.name: {{cfg.node.name}}
+
+## Node: Types
+
+node.master: {{cfg.node.master}}
+node.data: {{cfg.node.data}}
+node.client: {{cfg.node.client}}
+node.local: {{cfg.node.local}}
+
+## Node: Read-Only Nodes
+
+node.sql.read_only: {{cfg.node.sql.read_only}}
+
+## Node: Hosts
+
+network.host: {{cfg.network.host}}
+network.bind_host: {{cfg.network.bind_host}}
+network.publish_host: {{cfg.network.publish_host}}
+
+## Node: Ports
+
+# http.enabled: {{cfg.http.enabled}}
+# psql.enabled: {{cfg.psql.enabled}}
+
+http.port: {{cfg.http.port}}
+http.publish_port: {{cfg.http.publish_port}}
+transport.tcp.port: {{cfg.transport.tcp.port}}
+transport.publish_port: {{cfg.transport.publish_port}}
+psql.port: {{cfg.psql.port}}
+
+## Node: Paths
+
+path.conf: {{pkg.svc_conf_path}}
+path.data: {{pkg.svc_var_path}}/data
+path.work: {{pkg.svc_var_path}}/work
+path.logs: {{pkg.svc_var_path}}/logs
+path.repo: {{cfg.path.repo}}
+
+## Node: Plugins
+
+plugin.mandatory: {{cfg.plugin.mandatory}}
+
+## Node: Memory
+
+bootstrap.mlockall: {{cfg.bootstrap.mlockall}}
+
+## Node: Garbage Collection
+
+monitor.jvm.gc.young.warn: {{cfg.monitor.jvm.gc.young.warn}}
+monitor.jvm.gc.young.info: {{cfg.monitor.jvm.gc.young.info}} 
+monitor.jvm.gc.young.debug: {{cfg.monitor.jvm.gc.young.debug}}
+monitor.jvm.gc.old.warn: {{cfg.monitor.jvm.gc.old.warn}}
+monitor.jvm.gc.old.info: {{cfg.monitor.jvm.gc.old.info}}
+monitor.jvm.gc.old.debug: {{cfg.monitor.jvm.gc.old.debug}}
+
+## Node: ES API
+
+es.api.enabled: {{cfg.es.api.enabled}}
+
+## Node: CORS
+
+http.cors.enabled: {{cfg.http.cors.enabled}}
+http.cors.allow-origin: {{cfg.http.cors.allow-origin}}
+http.cors.max-age: {{cfg.http.cors.max-age}}
+http.cors.allow-methods: {{cfg.http.cors.allow-methods}}
+http.cors.allow-headers: {{cfg.http.cors.allow-headers}}
+http.cors.allow-credentials: {{cfg.http.cors.allow-credentials}}
+
+## Node: Blobs
+
+blobs.path: {{pkg.svc_var_path}}/data/blobs
+
+## Node: Repositories
+
+repositories.url.allowed_urls: {{cfg.repositories.url.allowed_urls}}
+repositories.url.supported_protocols: {{cfg.repositories.url.supported_protocols}}
+
+# Cluster-Wide Settings
+## Cluster: Stats
+
+stats.enabled: {{cfg.stats.enabled}}
+stats.jobs_log_size: {{cfg.stats.jobs_log_size}}
+stats.jobs_log_expiration: {{cfg.stats.jobs_log_expiration}}
+stats.operations_log_size: {{cfg.stats.operations_log_size}}
+stats.operations_log_expiration: {{cfg.stats.operations_log_expiration}}
+stats.service_interval: {{cfg.stats.service_interval}}
+stats.breaker.log.jobs.limit: {{cfg.stats.breaker.log.jobs.limit}}
+stats.breaker.log.operations.limit: {{cfg.stats.breaker.log.operations.limit}}
+
+## Cluster: UDC
+
+udc.enabled: {{cfg.udc.enabled}}
+udc.initial_delay: {{cfg.udc.initial_delay}}
+udc.interval: {{cfg.udc.interval}}
+udc.url: {{cfg.udc.url}}
+
+## Cluster: Graceful Stop
+
+cluster.graceful_stop.min_availability: {{cfg.cluster.graceful_stop.min_availability}}
+cluster.graceful_stop.reallocate: {{cfg.cluster.graceful_stop.reallocate}}
+cluster.graceful_stop.timeout: {{cfg.cluster.graceful_stop.timeout}}
+cluster.graceful_stop.force: {{cfg.cluster.graceful_stop.force}}
+
+## Cluster: Bulk Operations
+
+bulk.request_timeout: {{cfg.bulk.request_timeout}}
+
+## Cluster: Discovery
+
+discovery.zen.minimum_master_nodes: {{cfg.discovery.zen.minimum_master_nodes}}
+discovery.zen.ping.timeout: {{cfg.discovery.zen.ping.timeout}}
+discovery.zen.publish_timeout: {{cfg.discovery.zen.publish_timeout}}
+
+### Cluster: Discovery: Unicast Host Discovery
+
+discovery.zen.ping.unicast.hosts: {{cfg.discovery.zen.ping.unicast.hosts}}
+discovery.type: {{cfg.discovery.type}}
+
+### Cluster: Discovery: via DNS
+
+discovery.srv.query: {{cfg.discovery.srv.query}}
+discovery.srv.resolver: {{cfg.discovery.srv.resolver}}
+
+### Cluster: Discovery: Amazon EC2
+
+cloud.aws.access_key: {{cfg.cloud.aws.access_key}}
+cloud.aws.secret_key: {{cfg.cloud.aws.secret_key}}
+discovery.ec2.groups: {{cfg.discovery.ec2.groups}}
+discovery.ec2.any_group: {{cfg.discovery.ec2.any_group}}
+disocvery.ec2.host_type: {{cfg.disocvery.ec2.host_type}}
+discovery.ec2.availability_zones: {{cfg.discovery.ec2.availability_zones}}
+discovery.ec2.ping_timeout: {{cfg.discovery.ec2.ping_timeout}}
+cloud.aws.ec2.endpoint: {{cfg.cloud.aws.ec2.endpoint}}
+
+### Cluster: Discovery: Azure
+
+cloud.azure.management.resourcegroup.name: {{cfg.cloud.azure.management.resourcegroup.name}}
+cloud.azure.management.subscription.id: {{cfg.cloud.azure.management.subscription.id}}
+cloud.azure.management.tenant.id: {{cfg.cloud.azure.management.tenant.id}}
+cloud.azure.management.app.id: {{cfg.cloud.azure.management.app.id}}
+cloud.azure.management.app.secret: {{cfg.cloud.azure.management.app.secret}}
+discovery.azure.method: {{cfg.discovery.azure.method}}
+
+## Cluster: Routing Allocation
+
+cluster.routing.allocation.enable: {{cfg.cluster.routing.allocation.enable}}
+cluster.routing.allocation.allow_rebalance: {{cfg.cluster.routing.allocation.allow_rebalance}}
+cluster.routing.allocation.cluster_concurrent_rebalance: {{cfg.cluster_concurrent_rebalance}}
+cluster.routing.allocation.node_initial_primaries_recoveries: {{cfg.cluster.routing.allocation.node_initial_primaries_recoveries}}
+cluster.routing.allocation.node_concurrent_recoveries: {{cfg.cluster.routing.allocation.node_concurrent_recoveries}}
+
+### Cluster: Routing Allocation: Awareness
+
+cluster.routing.allocation.awareness.attributes: {{cfg.cluster.routing.allocation.awareness.attributes}}
+
+### Cluster: Routing Allocation: Balanced Shards
+
+cluster.routing.allocation.balance.shard: {{cfg.cluster.routing.allocation.balance.shard}}
+cluster.routing.allocation.balance.index: {{cfg.cluster.routing.allocation.balance.index}}
+cluster.routing.allocation.balance.primary: {{cfg.cluster.routing.allocation.balance.primary}}
+cluster.routing.allocation.balance.threshold: {{cfg.cluster.routing.allocation.balance.threshold}}
+
+### Cluster: Routing Allocation: Shard Allocation
+
+cluster.routing.allocation.disk.threshold_enabled: {{cfg.cluster.routing.allocation.disk.threshold_enabled}}
+cluster.routing.allocation.disk.watermark.low: {{cfg.cluster.routing.allocation.disk.watermark.low}}
+cluster.routing.allocation.disk.watermark.high: {{cfg.cluster.routing.allocation.disk.watermark.high}}
+
+## Cluster: Recovery
+
+indices.recovery.concurrent_streams: {{cfg.indices.recovery.concurrent_streams}}
+indices.recovery.file_chunk_size: {{cfg.indices.recovery.file_chunk_size}}
+indices.recovery.translog_ops: {{cfg.indices.recovery.translog_ops}}
+indices.recovery.translog_size: {{cfg.indices.recovery.translog_size}}
+indices.recovery.compress: {{cfg.indices.recovery.compress}}
+indices.recovery.max_bytes_per_sec: {{cfg.recovery.max_bytes_per_sec}}
+indices.recovery.retry_delay_state_sync: {{cfg.recovery.retry_delay_state_sync}}
+indices.recovery.retry_delay_network: {{cfg.recovery.retry_delay_network}}
+indices.recovery.retry_activity_timeout: {{cfg.recovery.retry_activity_timeout}}
+indices.recovery.retry_internal_action_timeout: {{cfg.recovery.retry_internal_action_timeout}}
+indices.recovery.retry_internal_long_action_timeout: {{cfg.recovery.retry_internal_long_action_timeout}}
+
+## Cluster: Store-Level Throttling
+
+indices.store.throttle.type: {{cfg.store.throttle.type}}
+indices.store.throttle.max_bytes_per_sec: {{cfg.store.throttle.max_bytes_per_sec}}
+
+## Cluster: Query Circuit Breaker
+
+node.breaker.query.limit: {{cfg.node.breaker.query.limit}}
+node.breaker.query.overhead: {{cfg.node.breaker.query.overhead}}
+
+## Cluster: Field Data Circuit Breaker
+
+indices.fielddata.breaker.limit: {{cfg.indices.fielddata.breaker.limit}}
+indices.fielddata.breaker.overhead: {{cfg.indices.fielddata.breaker.overhead}}
+
+## Cluster: Request Circuit Breaker
+
+indices.breaker.request.limit: {{cfg.indices.breaker.request.limit}}
+indices.breaker.request.overhead: {{cfg.indices.breaker.request.overhead}}
+
+## Cluster: Metadata
+
+gateway.info.update.interval: {{gateway.info.update.interval}}
+gateway.expected_nodes: {{cfg.gateway.expected_nodes}}
+gateway.recover_after_time: {{cfg.gateway.recover_after_time}}
+gateway.recover_after_nodes: {{cfg.gateway.recover_after_nodes}}
+
+# Enterprise
 
 license.enterprise: {{cfg.enterprise.licence}}
 
-## Cluster
-
-cluster.name: {{cfg.cluster.name}}
-
-#cluster.graceful_stop.min_availability: {{cfg.cluster.graceful_stop.min_availability}}
-#cluster.graceful_stop.reallocate: {{cfg.cluster.graceful_stop.reallocate}}
-#cluster.graceful_stop.timeout: {{cfg.cluster.graceful_stop.timeout}}
-#cluster.graceful_stop.force: {{cfg.cluster.graceful_stop.force}}
-
-#cluster.routing.allocation.enable = {{cfg.cluster.routing.allocation.enable}}
-
-## Node
-
-node.name: {{cfg.node.name}}
-#node.master: {{cfg.node.master}}
-#node.data: {{cfg.node.data}}
-#node.rack: {{cfg.node.rack}}
-#node.max_local_storage_nodes: {{cfg.node.max_local_storage_nodes}}
-
-## Table
-
-#index.number_of_replicas: {{cfg.index.number_of_replicas}}
-#index.refresh_interval: {{cfg.index.refresh_interval}}
-
-#index.blocks.read_only: {{cfg.index.blocks.read_only}}
-#index.blocks.read: {{cfg.index.blocks.read}}
-#index.blocks.write: {{cfg.index.blocks.write}}
-#index.blocks.metadata: {{cfg.index.blocks.metadata}}
-
-#index.translog.flush_threshold_ops: {{cfg.translog.flush_threshold_ops}}
-#index.translog.flush_threshold_size: {{cfg.translog.flush_threshold_size}}
-#index.translog.flush_threshold_period: {{cfg.translog.flush_threshold_period}}
-#index.translog.disable_flush: {{cfg.translog.disable_flush}}
-
-#index.routing.allocation.enable: {{cfg.routing.allocation.enable}}
-#index.routing.allocation.total_shards_per_node: {{cfg.routing.allocation.total_shards_per_node}}
-
-#index.recovery.initial_shards: {{cfg.index.recovery.initial_shards}}
-
-#index.warmer.enabled:{{cfg.warmer.enabled}}
-
-## Paths
-
-path.data: {{pkg.svc_var_path}}/data
-path.logs: {{pkg.svc_var_path}}/logs
-#path.work: {{cfg.path.work}}
-#path.plugins: {{cfg.path.plugins}}
-
-## Plugin
-
-#plugin.mandatory: {{cfg.plugin.mandatory}}
-
-## Memory
-
-#bootstrap.mlockall: {{cfg.bootstrap.mlockall}}
-
-## Network And HTTP
-
-#network.bind_host: {{cfg.network.bind_host}}
-#network.publish_host: {{cfg.network.publish_host}}
-#network.host: {{cfg.network.host}}
-
-#transport.tcp.port: {{cfg.transport.tcp.port}}
-#transport.tcp.compress: {{cfg.transport.tcp.compress}}
-
-#http.port: {{cfg.http.port}}
-#http.max_content_length: {{cfg.http.max_content_length}}
-#http.enabled: {{cfg.http.enabled}}
-
-## Gateway
-
-#gateway.recover_after_nodes: {{cfg.gateway.recover_after_nodes}}
-#gateway.recover_after_time: {{cfg.gateway.recover_after_time}}
-#gateway.expected_nodes: {{cfg.gateway.expected_nodes}}
-
-## Recovery Throttling
-
-#cluster.routing.allocation.node_initial_primaries_recoveries: {{cfg.cluster.routing.allocation.node_initial_primaries_recoveries}}
-#cluster.routing.allocation.node_concurrent_recoveries: {{cfg.cluster.routing.allocation.node_concurrent_recoveries}}
-
-#indices.recovery.max_size_per_sec: {{cfg.indices.recovery.max_size_per_sec}}
-#indices.recovery.concurrent_streams: {{cfg.indices.recovery.concurrent_streams}}
-#indices.recovery.file_chunk_size: {{cfg.recovery.file_chunk_size}}
-#indices.recovery.translog_ops: {{cfg.recovery.translog_ops}}
-#indices.recovery.translog_size: {{cfg.recovery.translog_size}}
-#indices.recovery.compress: {{cfg.recovery.compress}}
-#indices.recovery.max_bytes_per_sec: {{cfg.recovery.max_bytes_per_sec}}
-#indices.recovery.retry_delay_state_sync: {{cfg.recovery.retry_delay_state_sync}}
-#indices.recovery.retry_delay_network: {{cfg.recovery.retry_delay_network}}
-#indices.recovery.retry_activity_timeout: {{cfg.recovery.retry_activity_timeout}}
-#indices.recovery.retry_internal_action_timeout: {{cfg.recovery.retry_internal_action_timeout}}
-#indices.recovery.retry_internal_long_action_timeout: {{cfg.recovery.retry_internal_long_action_timeout}}
-
-## Store Level Throttling
-
-#indices.store.throttle.type: {{cfg.store.throttle.type}}
-#indices.store.throttle.max_bytes_per_sec: {{cfg.store.throttle.max_bytes_per_sec}}
-
-## Discovery
-
-#discovery.zen.minimum_master_nodes: {{cfg.discovery.zen.minimum_master_nodes}}
-
-#discovery.zen.ping.timeout: {{cfg.discovery.zen.ping.timeout}}
-#discovery.zen.ping.multicast.enabled: {{cfg.discovery.zen.ping.multicast.enabled}}
-#discovery.zen.ping.unicast.hosts: {{cfg.discovery.zen.ping.unicast.hosts}}
-
-#discovery.zen.publish_timeout: {{cfg.discovery.zen.publish_timeout}}
-
-#discovery.zen.fd.ping_timeout: {{cfg.discovery.zen.fd.ping_timeout}}
-#discovery.zen.fd.ping_retries: {{cfg.discovery.zen.fd.ping_retries}}
-#discovery.zen.fd.ping_interval: {{cfg.discovery.zen.fd.ping_interval}}
-
-## Discovery via DNS
-
-#discovery.type: {{cfg.discovery.type}}
-#discovery.srv.query: {{cfg.discovery.srv.query}}
-
-## EC2 Discovery
-
-#discovery.ec2.groups: {{cfg.discovery.ec2.groups}}
-#discovery.ec2.any_group: {{cfg.discovery.ec2.any_group}}
-#discovery.ec2.availability_zones: {{cfg.discovery.ec2.availability_zones}}
-#discovery.ec2.ping_timeout: {{cfg.discovery.ec2.ping_timeout}}
-
-#cloud.aws.ec2.endpoint: {{cfg.cloud.aws.ec2.endpoint}}
-
-## Azure Discovery
-
-#cloud.azure.management.resourcegroup.name: {{cfg.cloud.azure.management.resourcegroup.name}}
-#cloud.azure.management.subscription.id: {{cfg.cloud.azure.management.subscription.id}}
-#cloud.azure.management.tenant.id: {{cfg.cloud.azure.management.tenant.id}}
-#cloud.azure.management.app.id: {{cfg.cloud.azure.management.app.id}}
-#cloud.azure.management.app.secret: {{cfg.cloud.azure.management.app.secret}}
-
-## Routing Allocation
-
-#cluster.routing.allocation.allow_rebalance: {{cfg.cluster.routing.allocation.allow_rebalance}}
-#cluster.routing.allocation.cluster_concurrent_rebalance: {{cfg.cluster_concurrent_rebalance}}
-#cluster.routing.allocation.node_initial_primaries_recoveries: {{cfg.cluster.routing.allocation.node_initial_primaries_recoveries}}
-#cluster.routing.allocation.node_concurrent_recoveries: {{cfg.cluster.routing.allocation.node_concurrent_recoveries}}
-
-## Awareness
-
-#cluster.routing.allocation.awareness.attributes: {{cfg.cluster.routing.allocation.awareness.attributes}}
-
-## Balanced Shards
-
-#cluster.routing.allocation.balance.shard: {{cfg.cluster.routing.allocation.balance.shard}}
-#cluster.routing.allocation.balance.index: {{cfg.cluster.routing.allocation.balance.index}}
-#cluster.routing.allocation.balance.primary: {{cfg.cluster.routing.allocation.balance.primary}}
-#cluster.routing.allocation.balance.threshold: {{cfg.cluster.routing.allocation.balance.threshold}}
-
-## Disk-based Shard Allocation
-
-#cluster.routing.allocation.disk.threshold_enabled: {{cfg.cluster.routing.allocation.disk.threshold_enabled}}
-
-#cluster.routing.allocation.disk.watermark.low: {{cfg.cluster.routing.allocation.disk.watermark.low}}
-#cluster.routing.allocation.disk.watermark.high: {{cfg.cluster.routing.allocation.disk.watermark.high}}
-
-## Field Data Circuit Breaker
-
-#indices.fielddata.breaker.limit: {{cfg.indices.fielddata.breaker.limit}}
-#indices.fielddata.breaker.overhead: {{cfg.indices.fielddata.breaker.overhead}}
-
-## Threadpools
-
-#threadpool.index.type: {{cfg.threadpool.index.type}}
-#threadpool.index.queue_size: {{cfg.threadpool.index.queue_size}}
-
-## Metadata
-
-#cluster.info.update.interval: {{cfg.cluster.info.update.interval}}
-
-## GC Logging
-
-#monitor.jvm.gc.young.warn: {{cfg.monitor.jvm.gc.young.warn}}
-#monitor.jvm.gc.young.info: {{cfg.monitor.jvm.gc.young.info}} 
-#monitor.jvm.gc.young.debug: {{cfg.monitor.jvm.gc.young.debug}}
-
-#monitor.jvm.gc.old.warn: {{cfg.monitor.jvm.gc.old.warn}}
-#monitor.jvm.gc.old.info: {{cfg.monitor.jvm.gc.old.info}}
-#monitor.jvm.gc.old.debug: {{cfg.monitor.jvm.gc.old.debug}}
-
-## SQL
-
-#node.sql.read_only: {{cfg.node.sql.read_only}}
-#bulk.request_timeout: {{cfg.bulk.request_timeout}}
-
-## SQL Query Circuit Breaker
-
-#node.breaker.query.limit: {{cfg.node.breaker.query.limit}}
-#node.breaker.query.overhead: {{cfg.node.breaker.query.overhead}}
-
-## UDC
-
-#udc.enabled: {{cfg.udc.enabled}}
-#udc.initial_delay: {{cfg.udc.initial_delay}}
-#udc.interval: {{cfg.udc.interval}}
-#udc.url: {{cfg.udc.url}}
-
-## ELASTICSEARCH HTTP REST API
-
-#es.api.enabled: {{cfg.es.api.enabled}}
-
-## Blob
-
-#blobs.path: {{cfg.blobs.path}}
-
-## BACKUP / RESTORE
-
-#path.repo: {{cfg.path.repo}}
-#repositories.url.allowed_urls: {{cfg.repositories.url.allowed_urls}}
-
-## POSTGRES WIRE PROTOCOL SUPPORT
-
-psql.enabled: {{cfg.psql.enabled}}
-psql.port: {{cfg.psql.port}}
+# --- Cruft
+# node.rack: {{cfg.node.rack}}
+# node.max_local_storage_nodes: {{cfg.node.max_local_storage_nodes}}
+# transport.tcp.compress: {{cfg.transport.tcp.compress}}
+# http.max_content_length: {{cfg.http.max_content_length}}
+# discovery.zen.ping.multicast.enabled: {{cfg.discovery.zen.ping.multicast.enabled}}
+# discovery.zen.fd.ping_timeout: {{cfg.discovery.zen.fd.ping_timeout}}
+# discovery.zen.fd.ping_retries: {{cfg.discovery.zen.fd.ping_retries}}
+# discovery.zen.fd.ping_interval: {{cfg.discovery.zen.fd.ping_interval}}
+# cluster.info.update.interval: {{cfg.cluster.info.update.interval}}
+# path.repo: {{cfg.path.repo}}
+# path.plugins: {{pkg.svc_var_path}}/plugins

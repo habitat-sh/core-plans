@@ -1,8 +1,42 @@
 [enterprise]
   license = "false"
 
+[table]
+  number_of_replicas = "1"
+  refresh_interval = "1000ms"
+  column_policy = "dynamic"
+
+  [table.blocks]
+    read_only = "false"
+    read = "false"
+    write = "false"
+    metadata = "false"
+
+  [table.translog]
+    flush_threshold_ops = "unlimited"
+    flush_threshold_size = "200mb"
+    flush_threshold_period = "30m"
+    disable_flush = "false"
+    interval = "5s"
+    sync_interval = "5s"
+
+  [table.routing]
+    [index.routing.allocation]
+      enable = "all"
+      total_shards_per_node = "-1"
+
+  [table.recovery]
+    initial_shards = "quorum"
+
+  [table.warmer]
+    enabled = "true"
+
+  [table.unassigned]
+    [table.unassigned.node_left]
+      delayed_timeout = "1m"
+
 [cluster]
-  name = "cratedb"
+  name = "crate"
   
   [cluster.graceful_stop]
     min_availability = "primaries"
@@ -16,7 +50,7 @@
 
   [cluster.routing]
     [cluster.routing.allocation]
-      enable = "true"
+      enable = "all"
       node_initial_primaries_recoveries = "4"
       node_concurrent_recoveries = "2"
       allow_rebalance = "indices_all_active"
@@ -26,7 +60,7 @@
         attributes = ""
 
       [cluster.routing.allocation.balance]
-	index = "0.5f"
+	index = "0.55f"
 	primary = "0.05f"
         shard = "0.45f"
 	threshold = "1.0f"
@@ -39,11 +73,13 @@
 	  high = "90%"
 
 [node]
-  name = "Piz Buin"
+  name = ""
   master = "true"
   data = "true"
-  rack = "rack314"
-  max_local_storage_nodes = "1"
+  local = "false"
+  client = "false"
+  rack = ""
+  max_local_storage_nodes = ""
 
   [node.breaker]
     [node.breaker.query]
@@ -53,101 +89,94 @@
   [node.sql]
     read_only = "false"
 
-[table]
-  [table.index]
-    number_of_replicas = "1"
-    refresh_interval = "1000"
-
-    [table.index.blocks]
-      read_only = "false"
-      read = "false"
-      write = "false"
-      metadata = "false"
-
-    [table.index.translog]
-      flush_threshold_ops = "unlimited"
-      flush_threshold_size = "200mb"
-      flush_threshold_period = "30m"
-      disable_flush = "false"
-
-    [table.index.routing]
-      [table.index.routing.allocation]
-        enable = "true"
-	total_shards_per_node = "-1"
-
-    [table.index.recovery]
-      initial_shards = "quorum"
-
-    [table.index.warmer]
-      enabled = "true"
-
-[path]
-  plugins = "../plugins/"
-  repo = "../repo1/, ../repo2/"
-  work = "../work/"
 
 [plugin]
-  mandatory = "mapper-attachments,lang-groovy"
+  mandatory = ""
 
 [bootstrap]
   mlockall = "false"
 
 [network]
-  bind_host = "192.168.0.1"
-  publish_host = "192.168.0.1"
-  host = "192.168.0.1"
+  bind_host = "0.0.0.0"
+  publish_host = ""
+  host = "0.0.0.0"
 
 [transport]
+  publish_port = ""
+  
   [transport.tcp]
     port = "4300"
     compress = "true"
 
 [http]
   port = "4200"
+  publish_port = ""
   max_content_length = "100mb"
   enabled = "false"
 
+  [cors]
+    enabled = "false"
+    allow-origin = ""
+    max-age = "1728000"
+    allow-methods = "OPTIONS, HEAD, GET, POST, PUT, DELETE"
+    allow-headers = "X-Requested-With, Content-Type, Content-Length"
+    allow-credentials = "false"
+
 [gateway]
-  recover_after_nodes = "2"
+  expected_nodes = "-1"
   recover_after_time = "5m"
-  expected_nodes = "3"
+  recover_after_nodes = "-1"
 
 [indices]
+  [indices.breaker]
+    [indices.breaker.query]
+      limit = "60%"
+      overhead = "1.09"
+
+    [indices.breaker.request]
+      limit = "60%"
+      overhead = "1.0"
+
   [indices.fielddata]
     [indicies.fielddata.breaker]
       limit = "60%"
-      overhead = "1.0.3"
+      overhead = "1.03"
 
   [indices.recovery]
-    max_size_per_sec = "40mb"
-    concurrent_streams = "5"
+    concurrent_streams = "3"
     file_chunk_size = "512kb"
     translog_ops = "1000"
     translog_size = "512kb"
     compress = "true"
-    max_bytes_per_sec = "20mb"
+    max_bytes_per_sec = "40mb"
     retry_delay_state_sync = "500ms"
     retry_delay_network = "5s"
     retry_activity_timeout = "15m"
     retry_internal_action_timeout = "15m"
     retry_internal_long_action_timeout = "30m"
+    recovery_activity_timeout = "30m"
 
   [indices.store]
     [indices.store.throttle]
-      type = "merge"
-      max_bytes_per_sec = "20mb"
+      type = ""
+      max_bytes_per_sec = "0b"
 
 [discovery]
-  type = "srv"
+  type = ""
+
+  [discovery.azure]
+    method = "vnet"
 
   [discovery.ec2]
-    groups = "sg-example-1, sg-example-2"
+    groups = ""
     any_group = "true"
+    host_type = "private_ip"
     availability_zones = ""
     ping_timeout = "3s"
 
   [discovery.srv]
-    query = "_crate._srv.example.com"
+    query = ""
+    resolver = ""
 
   [discovery.zen]
     minimum_master_nodes = "1"
@@ -169,43 +198,39 @@
 
 [cloud]
   [cloud.aws]
+    access_key = ""
+    secret_key = ""
+
     [cloud.aws.ec2]
-      endpint = "http://example.com/endpoint"
+      endpint = ""
 
   [cloud.azure]
-    method = "vnet"
-
     [cloud.azure.management]
-      [cloud.azure.management.api]
-        id = "xxxxxxxxxx"
-	secret = "my_password"
+      [cloud.azure.management.app]
+        id = ""
+	secret = ""
 
       [cloud.azure.management.resourcegroup]
-        name = "myrg"
+        name = ""
 
       [cloud.azure.management.subscrption]
-        id = "xxxxx.xxxx.xxx.xxx"
+        id = ""
 
       [cloud.azure.management.tenant]
-        id = "xxxxxxxxxxx"
-
-[threadpool]
-  [threadpool.index]
-    type = "fixed"
-    queue_size = "200"
+        id = ""
 
 [monitor]
   [monitor.jvm]
     [monitor.jvm.gc]
       [monitor.jvm.gc.young]
         warn = "1000ms"
-	info = "700ms"
-	debug = "400ms"
+	info = "1000ms"
+	debug = "1000ms"
 
       [monitor.jvm.gc.old]
-        warn = "10s"
-        info = "5s"
-        debug = "2s"
+        warn = "1000ms"
+        info = "1000ms"
+        debug = "1000ms"
     
 [bulk]
   request_timeout = "1m"
@@ -214,18 +239,19 @@
   enabled = "true"
   initial_delay = "10m"
   interval = "24h"
-  url = "https://udc.crate.io/"
+  url = "https://udc.crate.io"
 
 [es]
   [es.api]
     enabled = "false"
 
-[blobs]
-  path = "/path/to/blobs"
-
 [repositories]
   [repositories.url]
-    allowed_urls = "[\"http://example.org/root/*\", \"https://*.mydomain.com/*?*#*\"]"
+    allowed_urls = ""
+    supported_protocols = "http, https, ftp, file, jar"
+
+[path]
+  repo = ""
 
 [psql]
   enabled = "true"
@@ -268,3 +294,21 @@
       [logger.appender.file.layout]
         type = "pattern"
         conversionPattern = "\"[%d{ISO8601}][%-5p][%-25c] %m%n\""
+
+[stats]
+  enabled = "false"
+  jobs_log_size = "10000"
+  jobs_log_expiration = "0s"
+  operations_log_size = "10000"
+  operations_log_expiration = "0s"
+
+  [stats.service]
+    interval = "1h"
+
+  [stats.breaker]
+    [stats.breaker.log]
+      [stats.breaker.log.jobs]
+        limit = "5%"
+
+      [stats.breaker.log.operations]
+        limit = "5%"
