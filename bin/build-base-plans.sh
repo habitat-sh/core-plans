@@ -250,6 +250,7 @@ cat <<_PLANS_ | while read plan; do _build $plan; done
   core-plans/openssl
   core-plans/wget
   core-plans/unzip
+  core-plans/rq
   core-plans/linux-headers-musl
   core-plans/musl
   core-plans/busybox-static
