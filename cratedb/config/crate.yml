@@ -18,11 +18,11 @@ blocks.metadata: {{cfg.table.blocks.metadata}}
 
 ## Table: Translog
 
-translog.flush_threshold_ops: {{cfg.index.translog.flush_threshold_ops}}
+translog.flush_threshold_ops: {{cfg.translog.translog.flush_threshold_ops}}
 translog.flush_threshold_size: {{cfg.table.translog.flush_threshold_size}}
-translog.flush_threshold_period: {{cfg.index.translog.flush_threshold_period}}
-translog.disable_flush: {{cfg.index.translog.disable_flush}}
-translog.interval: {{cfg.index.translog.interval}}
+translog.flush_threshold_period: {{cfg.table.translog.flush_threshold_period}}
+translog.disable_flush: {{cfg.table.translog.disable_flush}}
+translog.interval: {{cfg.table.translog.interval}}
 translog.sync_interval: {{cfg.table.translog.sync_interval}}
 
 ## Table: Allocation
