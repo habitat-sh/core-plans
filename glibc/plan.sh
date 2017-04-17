@@ -254,6 +254,7 @@ do_install() {
     localedef -i en_HK -f ISO-8859-1 en_HK
     localedef -i en_PH -f ISO-8859-1 en_PH
     localedef -i en_US -f ISO-8859-1 en_US
+    localedef -i en_US -f UTF-8 en_US
     localedef -i es_MX -f ISO-8859-1 es_MX
     localedef -i fa_IR -f UTF-8 fa_IR
     localedef -i fr_FR -f ISO-8859-1 fr_FR
