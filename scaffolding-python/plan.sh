@@ -11,28 +11,4 @@ pkg_deps=(
   core/python
   core/make
 )
-
-do_install() {
-  install -D -m 0644 "$PLAN_CONTEXT/lib/scaffolding.sh" "$pkg_prefix/lib/scaffolding.sh"
-}
-
-# Turn the remaining default phases into no-ops
-do_prepare() {
-  return 0
-}
-
-do_download() {
-  return 0
-}
-
-do_build() {
-  return 0
-}
-
-do_verify() {
-  return 0
-}
-
-do_unpack() {
-  return 0
-}
+pkg_scaffolding=core/scaffolding-base
