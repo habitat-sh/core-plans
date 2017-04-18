@@ -9,9 +9,10 @@ pkg_deps=(core/jre8)
 pkg_bin_dirs=(crate/bin)
 pkg_lib_dirs=(crate/lib)
 pkg_exports=(
-    [http]=network.port
-    [transport]=transport.port
-    [postgres]=postgres.port
+    [http]=http.port
+    [transport]=transport.tcp.port
+    [postgres]=psql.port
+)
 pkg_exposes=(http transport postgres)
 pkg_description="CrateDB is an open source SQL database with a ground-breaking distributed design."
 
