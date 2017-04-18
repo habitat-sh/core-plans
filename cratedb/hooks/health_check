@@ -1,7 +1,7 @@
 #!/bin/sh
 
-raw_data="$(wget -qO - "{{svc.me.sys.ip}}:{{svc.me.cfg.http-port}}" | grep "ok")"
-status="$(echo "${foo: : -1}" | awk '{print $3}')"
+raw_data="$(wget -qO - "{{svc.me.sys.ip}}:{{svc.me.cfg.http.port}}" | grep "ok")"
+status="$(echo "${raw_data: : -1}" | awk '{print $3}')"
 
 case $status in
     "true")
