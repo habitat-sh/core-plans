@@ -1,0 +1,15 @@
+#!/bin/sh
+
+raw_data="$(wget -qO - "{{svc.me.sys.ip}}:{{svc.me.cfg.http-port}}" | grep "ok")"
+status="$(echo "${foo: : -1}" | awk '{print $3}')"
+
+case $status in
+    "true")
+	rc=0 ;;
+    "false")
+	rc=2 ;;
+    *)
+	rc=3 ;;
+esac
+
+exit $rc
