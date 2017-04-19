@@ -1,4 +1,4 @@
-pkg_origin=core
+kg_origin=core
 pkg_name=acbuild
 pkg_version=0.3.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
