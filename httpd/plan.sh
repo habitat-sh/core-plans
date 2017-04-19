@@ -1,6 +1,6 @@
 pkg_name=httpd
 pkg_origin=core
-pkg_version=2.4.26
+pkg_version=2.4.25
 pkg_description="The Apache HTTP Server"
 pkg_upstream_url="http://httpd.apache.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
