@@ -53,7 +53,12 @@ node.name: {{cfg.node.name}}
 
 ## Node: Types
 
-node.master: {{cfg.node.master}}
+{{#if svc.me.leader ~}}
+  node.master: true
+{{else ~}}
+  node.master: false
+{{/if ~}}
+
 node.data: {{cfg.node.data}}
 node.client: {{cfg.node.client}}
 node.local: {{cfg.node.local}}
@@ -81,7 +86,6 @@ psql.port: {{cfg.psql.port}}
 
 ## Node: Paths
 
-path.conf: {{pkg.svc_conf_path}}
 path.data: {{pkg.svc_var_path}}/data
 path.work: {{pkg.svc_var_path}}/work
 path.logs: {{pkg.svc_var_path}}/logs
@@ -164,7 +168,12 @@ discovery.zen.publish_timeout: {{cfg.discovery.zen.publish_timeout}}
 
 ### Cluster: Discovery: Unicast Host Discovery
 
-discovery.zen.ping.unicast.hosts: {{cfg.discovery.zen.ping.unicast.hosts}}
+{{#if bind.has_crate ~}}
+  discovery.zen.ping.unicast.hosts: [{{#each bind.crate.members ~}} "{{sys.ip}}:{{cfg.transport.tcp.port}}", {{/each ~}}]
+{{else ~}}
+  discovery.zen.ping.unicast.hosts: {{cfg.discovery.zen.ping.unicast.hosts}}
+{{/if ~}}
+
 discovery.type: {{cfg.discovery.type}}
 
 ### Cluster: Discovery: via DNS
