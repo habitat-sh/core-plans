@@ -3,8 +3,17 @@ pkg_origin=core
 pkg_version=2.22
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('gplv2' 'lgplv2')
+pkg_description="$(cat << EOF
+  The GNU C Library project provides the core libraries for the GNU system and GNU/Linux systems,
+  as well as many other systems that use Linux as the kernel. These libraries provide critical
+  APIs including ISO C11, POSIX.1-2008, BSD, OS-specific APIs and more. These APIs include such
+  foundational facilities as open, read, write, malloc, printf, getaddrinfo, dlopen,
+  pthread_create, crypt, login, exit and more.
+EOF
+)"
 pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz
 pkg_shasum=eb731406903befef1d8f878a46be75ef862b9056ab0cde1626d08a7a05328948
+pkg_upstream_url=https://www.gnu.org/software/libc
 pkg_deps=(core/linux-headers)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed core/perl)
 pkg_bin_dirs=(bin)
@@ -256,6 +265,7 @@ do_install() {
     localedef -i en_HK -f ISO-8859-1 en_HK
     localedef -i en_PH -f ISO-8859-1 en_PH
     localedef -i en_US -f ISO-8859-1 en_US
+    localedef -i en_US -f UTF-8 en_US
     localedef -i es_MX -f ISO-8859-1 es_MX
     localedef -i fa_IR -f UTF-8 fa_IR
     localedef -i fr_FR -f ISO-8859-1 fr_FR
