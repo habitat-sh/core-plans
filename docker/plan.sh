@@ -17,7 +17,7 @@ do_build() {
 }
 
 do_install() {
-  for bin in docker $(ls -1 docker-*); do
+  for bin in docker dockerd $(ls -1 docker-*); do
     install -v -D "$bin" "$pkg_prefix/bin/$bin"
   done
 }
