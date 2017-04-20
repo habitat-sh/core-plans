@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+# -*- encoding: utf-8 -*-
+
+$:.unshift File.expand_path("../../lib", __FILE__)
+
+require "ruby_scaffolding/cli"
+
+$stdout.sync = true
+
+RubyScaffolding::CLI.run
