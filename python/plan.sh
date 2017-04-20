@@ -53,6 +53,8 @@ do_check() {
 }
 
 do_install() {
+  # link python3.5 to python for pkg_interpreters
+  ln -rs ${pkg_prefix}/bin/python3.5 ${pkg_prefix}/bin/python
   do_default_install
 
   # link python3.6 to python for pkg_interpreters
