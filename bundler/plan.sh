@@ -1,40 +1,48 @@
 pkg_name=bundler
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_version=1.13.7
+pkg_version=1.14.6
 pkg_origin=core
 pkg_license=('bundler')
-pkg_source=nosuchfile.tar.gz
 pkg_description="The Ruby language dependency manager"
 pkg_upstream_url=https://bundler.io/
-
-pkg_deps=(core/glibc core/ruby)
-pkg_build_deps=(core/ruby)
-pkg_lib_dirs=(lib)
-pkg_include_dirs=(include)
-pkg_bin_dirs=(bin vendor/bundle/bin)
-
-do_install() {
-  export GEM_HOME=$pkg_prefix
-  export GEM_PATH=$pkg_prefix
-  gem install bundler -v ${pkg_version} --no-ri --no-rdoc
-}
-
-do_download() {
-  return 0
-}
-
-do_verify() {
-  return 0
-}
-
-do_unpack() {
-  return 0
-}
+pkg_deps=(core/ruby core/busybox-static)
+pkg_build_deps=()
+pkg_bin_dirs=(bin)
 
 do_prepare() {
-  return 0
+  export GEM_HOME="$pkg_prefix"
+  build_line "Setting GEM_HOME='$GEM_HOME'"
+  export GEM_PATH="$GEM_HOME"
+  build_line "Setting GEM_PATH='$GEM_PATH'"
 }
 
 do_build() {
   return 0
+}
+
+do_install() {
+  build_line "Installing from RubyGems"
+  gem install "$pkg_name" -v "$pkg_version" --no-ri --no-rdoc
+  # Note: We are not cleaning the gem cache as this artifact
+  # is reused by other packages for speed.
+  wrap_ruby_bin "$pkg_prefix/bin/bundle"
+  wrap_ruby_bin "$pkg_prefix/bin/bundler"
+}
+
+wrap_ruby_bin() {
+  local bin="$1"
+  build_line "Adding wrapper $bin to ${bin}.real"
+  mv -v "$bin" "${bin}.real"
+  cat <<EOF > "$bin"
+#!$(pkg_path_for busybox-static)/bin/sh
+set -e
+if test -n "$DEBUG"; then set -x; fi
+
+export GEM_HOME="$GEM_HOME"
+export GEM_PATH="$GEM_PATH"
+unset RUBYOPT GEMRC
+
+exec $(pkg_path_for ruby)/bin/ruby ${bin}.real \$@
+EOF
+  chmod -v 755 "$bin"
 }
