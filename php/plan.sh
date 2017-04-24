@@ -1,7 +1,7 @@
 pkg_name=php
 pkg_distname=php
 pkg_origin=core
-pkg_version=7.1.2
+pkg_version=7.1.4
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('PHP-3.01')
 pkg_upstream_url=http://php.net/
@@ -9,7 +9,7 @@ pkg_description="PHP is a popular general-purpose scripting language that is esp
 pkg_source=https://php.net/get/${pkg_distname}-${pkg_version}.tar.bz2/from/this/mirror
 pkg_filename=${pkg_distname}-${pkg_version}.tar.bz2
 pkg_dirname=${pkg_distname}-${pkg_version}
-pkg_shasum=e0f2214e2366434ee231156ba70cfefd0c59790f050d8727a3f1dc2affa67004
+pkg_shasum=39bf697836e2760b3a44ea322e9e5f1f5b1f07abeb0111f6495eff7538e25805
 pkg_deps=(
   core/coreutils
   core/curl
