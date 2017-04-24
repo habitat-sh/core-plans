@@ -19,7 +19,7 @@ The code for Habitat itself is in the
 
 ## License
 
-Copyright (c) 2016 Chef Software Inc. and/or applicable contributors
+Copyright (c) 2016-2017 Chef Software Inc. and/or applicable contributors
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
