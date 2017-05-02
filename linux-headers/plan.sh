@@ -11,11 +11,11 @@ pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
 pkg_include_dirs=(include)
 
 do_build() {
-  make headers_install ARCH=x86 INSTALL_HDR_PATH=$pkg_prefix
+  make headers_install ARCH=x86 INSTALL_HDR_PATH="$pkg_prefix"
 }
 
 do_install() {
-  find $pkg_prefix/include \( -name ..install.cmd -o -name .install \) -print0 | xargs -0 rm -v
+  find "$pkg_prefix/include" \( -name ..install.cmd -o -name .install \) -print0 | xargs -0 rm -v
 }
 
 

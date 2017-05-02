@@ -19,11 +19,11 @@ do_prepare() {
 }
 
 do_build() {
-  make KERNEL_HEADERS=$(pkg_path_for linux-headers)/include LDFLAGS="$LDFLAGS"
+  make KERNEL_HEADERS="$(pkg_path_for linux-headers)/include" LDFLAGS="$LDFLAGS"
 }
 
 do_install() {
-  make prefix=$pkg_prefix lib=lib RAISE_SETFCAP=no install
+  make prefix="$pkg_prefix" lib=lib RAISE_SETFCAP=no install
 }
 
 

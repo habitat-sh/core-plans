@@ -82,7 +82,7 @@ _on_exit() {
   fi
   local elapsed=$SECONDS
   elapsed=$(echo $elapsed | awk '{printf "%dm%ds", $1/60, $1%60}')
-  printf -- "\n$(basename "$0") run time: $elapsed\n\n"
+  printf -- "\n%s run time: %s\n\n" "$(basename "$0")" "$elapsed"
   if [ "$exit_status" -ne 0 ]; then echo "Exiting on error"; fi
   exit $?
 }
@@ -109,7 +109,8 @@ trap _on_exit 1 2 3 15 ERR
 # ```
 _build() {
   local plan_dir="${1:-}"
-  local plan="$(basename "$plan_dir")"
+  local plan
+  plan="$(basename "$plan_dir")"
   shift
   # If the `$plan` value is a path/name combination like
   # `../components/foobar:hab-foobar` then split the token into its requisite
@@ -188,7 +189,7 @@ _build() {
 # each token, invoke the `_build` function and pass the while line in. Simple,
 # no?
 # shellcheck disable=SC2162
-cat <<_PLANS_ | while read plan; do _build $plan; done
+cat <<_PLANS_ | while read plan; do _build "$plan"; done
   core-plans/linux-headers
   core-plans/glibc
   core-plans/zlib
