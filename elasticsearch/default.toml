@@ -48,7 +48,7 @@
 [node]
   # Use a descriptive name for the node:
   #
-  name = ""
+  name = "${HOSTNAME}"
   #
   # Add custom attributes to the node:
   #
@@ -175,7 +175,6 @@
   # The default list of hosts is ["127.0.0.1", "[::1]"]
   #
   ping_multicast_enabled = "false"
-  ping_unicast_hosts = "[]"
   #
   # Prevent the "split brain" by configuring the majority of nodes (total number of nodes / 2 + 1):
   #

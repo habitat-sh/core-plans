@@ -56,11 +56,8 @@ http.port: {{cfg.network.port}}
 transport.tcp.port: {{cfg.transport.port}}
 discovery.zen.fd.ping_timeout: {{cfg.discovery.zen_fd_ping_timeout}}
 discovery.zen.ping.multicast.enabled: {{cfg.discovery.ping_multicast_enabled}}
-{{#if bind.has_elasticsearch ~}}
-discovery.zen.ping.unicast.hosts: [{{#each bind.elasticsearch.members ~}} "{{sys.ip}}", {{/each ~}}]
-{{else ~}}
-discovery.zen.ping.unicast.hosts: {{cfg.discovery.ping_unicast_hosts}}
-{{/if ~}}
+discovery.zen.ping.unicast.hosts: [{{#each svc.members ~}} "{{sys.ip}}", {{/each ~}}]
+
 discovery.zen.minimum_master_nodes: {{cfg.discovery.minimum_master_nodes}}
 
 gateway.recover_after_nodes: {{cfg.gateway.recover_after_nodes}}
