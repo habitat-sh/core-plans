@@ -12,9 +12,7 @@ required_variables=(
   pkg_maintainer
   pkg_name
   pkg_origin
-  pkg_source
   pkg_upstream_url
-  pkg_version
 )
 
 for var in "${required_variables[@]}"
