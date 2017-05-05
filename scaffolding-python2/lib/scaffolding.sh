@@ -24,7 +24,7 @@ scaffolding_python2_pkg="core/python2"
 # we have a scaffolding specific callback to allow us to run anything we need
 # to execute before download and build. This callback executes immediately
 # after the scaffolding is loaded.
-_scaffolding_begin() {
+scaffolding_load() {
   pkg_deps=(${pkg_deps[@]} $scaffolding_python2_pkg)
 }
 
