@@ -16,7 +16,9 @@ do_check() {
   # Thanks to: http://permalink.gmane.org/gmane.linux.lfs.devel/16285
   sed -i 's/copyright{/copyright\\{/' build-aux/update-copyright
 
-  make check
+  # Add ./src to PATH so that the test suite can use the just-build `cmp`
+  # program. Seems pretty meta to me...
+  make check PATH="$(pwd)/src:$PATH"
 }
 
 

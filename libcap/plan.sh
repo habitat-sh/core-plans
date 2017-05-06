@@ -3,7 +3,7 @@ pkg_origin=core
 pkg_version=2.24
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('gplv2')
-pkg_source=http://ftp.kernel.org/pub/linux/libs/security/linux-privs/libcap2/${pkg_name}-${pkg_version}.tar.xz
+pkg_source=https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/${pkg_name}-${pkg_version}.tar.xz
 pkg_shasum=cee4568f78dc851d726fc93f25f4ed91cc223b1fe8259daa4a77158d174e6c65
 pkg_deps=(core/glibc core/attr)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/linux-headers core/perl)
@@ -19,11 +19,11 @@ do_prepare() {
 }
 
 do_build() {
-  make KERNEL_HEADERS=$(pkg_path_for linux-headers)/include LDFLAGS="$LDFLAGS"
+  make KERNEL_HEADERS="$(pkg_path_for linux-headers)/include" LDFLAGS="$LDFLAGS"
 }
 
 do_install() {
-  make prefix=$pkg_prefix lib=lib RAISE_SETFCAP=no install
+  make prefix="$pkg_prefix" lib=lib RAISE_SETFCAP=no install
 }
 
 
