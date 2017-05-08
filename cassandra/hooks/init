@@ -1,0 +1,8 @@
+#!/bin/sh
+
+mkdir -p {{pkg.svc_var_path}}/logs
+mkdir -p {{pkg.svc_var_path}}/data
+mkdir -p {{pkg.svc_var_path}}/commitlog
+mkdir -p {{pkg.svc_var_path}}/saved_caches
+mkdir -p {{pkg.svc_var_path}}/hints
+mkdir -p {{pkg.svc_config_path}}/triggers

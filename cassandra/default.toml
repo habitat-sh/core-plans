@@ -1,0 +1,19 @@
+# ======================== Cassandra Configuration =========================
+#
+# NOTE: Cassandra comes with reasonable defaults for most settings.
+#       Before you set out to tweak and tune the configuration, make sure you
+#       understand what are you trying to accomplish and the consequences.
+#
+# The primary way of configuring a node is via this file. This template lists
+# the most important settings you may want to configure for a production cluster.
+#
+# Please see the documentation for further information on configuration options:
+# <http://wiki.apache.org/cassandra/StorageConfiguration>
+#
+# ---------------------------------- Cluster -----------------------------------
+#
+[cluster]
+  #
+  # Use a descriptive name for your cluster:
+  #
+  name = "cassandra"
