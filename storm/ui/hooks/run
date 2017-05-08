@@ -1,0 +1,12 @@
+#!/bin/bash
+
+exec 2>&1
+
+{{#if cfg.runtime.storm_java_opts}}
+export STORM_JAR_JVM_OPTS=""
+{{/if ~}}
+export STORM_CONF_DIR="{{pkg.svc_config_path}}"
+export JAVA_HOME="{{ pkgPathFor "core/jre7" }}"
+export PYTHON="{{ pkgPathFor "core/python" }}/bin/python"
+
+exec {{pkg.path}}/bin/storm ui
