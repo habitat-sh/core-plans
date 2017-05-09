@@ -17,7 +17,7 @@ do_install() {
   shebang="#!$(pkg_path_for core/node)/bin/node"
 
   mv "$CACHE_PATH/lib/node_modules/$pkg_name"/* "$pkg_prefix/"
-  
+
   find "$pkg_prefix/bin" -type f | while read -r bin; do
     build_line "Fixing Node shebang for $bin"
     sed -e "s|^#!.\{0,\}\$|${shebang}|" -i "${bin}"
