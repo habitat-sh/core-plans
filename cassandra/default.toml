@@ -12,8 +12,261 @@
 #
 # ---------------------------------- Cluster -----------------------------------
 #
-[cluster]
-  #
-  # Use a descriptive name for your cluster:
-  #
-  name = "cassandra"
+name = "cassandra"
+batchlog_replay_throttle_in_kb = 1024
+partitioner = "org.apache.cassandra.dht.Murmur3Partitioner"
+# buffer_pool_use_heap_if_exhausted = true
+# disk_optimization_strategy = ssd
+storage_port = 7000
+ssl_storage_port = 7001
+listen_address = "localhost"
+# listen_interface_prefer_ipv6 = false
+# broadcast_address = "1.2.3.4"
+# listen_on_broadcast_address = false
+thrift_framed_transport_size_in_mb = 15
+incremental_backups = false
+# concurrent_compactors = 1
+compaction_throughput_mb_per_sec = 16
+sstable_preemptive_open_interval_in_mb = 50
+# stream_throughput_outbound_megabits_per_sec = 200
+# inter_dc_stream_throughput_outbound_megabits_per_sec = 200
+slow_query_log_timeout_in_ms = 500
+cross_node_timeout = false
+# streaming_keep_alive_period_in_secs = 300
+# phi_convict_threshold = 8
+inter_dc_tcp_nodelay = false
+# gc_log_threshold_in_ms = 200
+enable_user_defined_functions = false
+enable_scripted_user_defined_functions = false
+windows_timer_interval = 1
+# max_value_size_in_mb = 256
+
+[tokens]
+num = 256
+# allocate_for_keyspace = "KEYSPACE"
+# initial =
+
+[hints]
+handoff_enabled = true
+handoff_disabled_datacenters = ["DC1", "DC2"]
+max_window_in_ms = 10800000 # 3 hours
+handoff_throttle_in_kb = 1024
+max_delivery_threads = 2
+flush_period_in_ms = 10000
+max_file_size_in_mb = 128
+
+# [[hints.compression]]
+#	class_name = "LZ4Compressor"
+#	parameters = ["arg1"]
+# [[hints.compression]]
+#	class_name = "Snappy"
+#	parameters = ["arg1"]
+
+[authentication]
+authenticator = "AllowAllAuthenticator"
+authorizer = "AllowAllAuthorizer"
+
+[roles]
+manager = "CassandraRoleManager"
+validity_in_ms = 2000
+# update_interval_in_ms = 2000
+
+[permissions]
+validity_in_ms = 2000
+# update_interval_in_ms = 2000
+
+[credentials]
+validity_in_ms = 2000
+# update_interval_in_ms = 2000
+
+[policy]
+disk_failure = "stop"
+commit_failure = "stop"
+
+[cache]
+
+[cache.prepared_statement]
+#size_mb =
+#thrift_size_mb =
+
+[cache.key]
+#size_mb =
+save_period = 14400
+#keys_to_save = 100
+
+[cache.row]
+# class_name = "org.apache.cassandra.cache.OHCProvider"
+size_in_mb = 0
+save_period = 0
+# keys_to_save = 100
+
+[cache.counter]
+# size_in_mb =
+save_period = 7200
+# keys_to_save = 100
+
+[cache.file]
+# size_in_mb = 512
+
+[commitlog]
+segment_size_in_mb = 32
+# total_space_in_mb = 8192
+
+[commitlog.sync]
+# BEWARE: you have to choose batch or period, both options can't be active at same time
+# batch_window_in_ms = 2
+period_in_ms = 10000
+
+# [[commitlog.compression]]
+#	class_name = "LZ4Compressor"
+#	parameters = ["arg1"]
+# [[commitlog.compression]]
+#	class_name = "Snappy"
+#	parameters = ["arg1"]
+
+[concurrent]
+reads = 32
+writes = 32
+counter_writes = 32
+materialized_view_writes = 32
+
+[memtable]
+# heap_space_in_mb = 2048
+# offheap_space_in_mb = 2048
+# cleanup_threshold = 0.11
+allocation_type = "heap_buffers"
+# memtable_flush_writers = 2
+
+[cdc]
+enabled = false
+# total_space_in_mb = 4096
+# free_space_check_interval_ms = 250
+
+[index_summary]
+# capacity_in_mb =
+resize_interval_in_minutes = 60
+
+[trickle_fsync]
+enable = false
+interval_in_kb = 10240
+
+[native_transport]
+start = true
+port = 9042
+# port_ssl = 9142
+# max_threads = 128
+# max_frame_size_in_mb = 256
+# max_concurrent_connections = -1
+# max_concurrent_connections_per_ip = -1
+
+[rpc]
+start = false
+address = "localhost"
+# interface = "eth1"
+# interface_prefer_ipv6 = false
+port = 9160
+# broadcast_address = "1.2.3.4"
+keepalive = true
+server_type = "sync"
+# min_threads = 16
+# max_threads = 2048
+# send_buff_size_in_bytes =
+# recv_buff_size_in_bytes =
+
+[internode]
+# authenticator = "org.apache.cassandra.auth.AllowAllInternodeAuthenticator"
+# send_buff_size_in_bytes =
+# recv_buff_size_in_bytes =
+compression = "dc"
+
+[snapshot]
+before_compaction = false
+auto = true
+
+[column_index]
+size_in_kb = 64
+cache_size_in_kb = 2
+
+[coordinator]
+read_request_timeout_in_ms = 5000
+range_request_timeout_in_ms = 10000
+write_request_timeout_in_ms = 2000
+counter_write_request_timeout_in_ms = 5000
+cas_contention_timeout_in_ms = 1000
+truncate_request_timeout_in_ms = 60000
+request_timeout_in_ms = 10000
+
+[snitch]
+endpoint = "SimpleSnitch"
+update_interval_in_ms = 100
+reset_interval_in_ms = 600000
+badness_threshold = 0.1
+
+[request_scheduler]
+class = "org.apache.cassandra.scheduler.NoScheduler"
+# id = "keyspace"
+
+[encryption]
+[encryption.server]
+internode_encryption = "none"
+keystore = "conf/.keystore"
+keystore_password = "cassandra"
+truststore = "conf/.truststore"
+truststore_password = "cassandra"
+# protocol = "TLS"
+# algorithm = "SunX509"
+# store_type = "JKS
+# cipher_suites = "[TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA]" # creepy but until join helper no better way
+# require_client_auth = false
+# require_endpoint_verification = false
+
+[encryption.client]
+enabled = false
+optional = false
+keystore = "conf/.keystore"
+keystore_password = "cassandra"
+# require_client_auth = false
+# truststore = "conf/.truststore"
+# truststore_password = "cassandra"
+# protocol = "TLS"
+# algorithm = "SunX509"
+# store_type = "JKS"
+# cipher_suites = "[TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA]"
+
+[encryption.transparent_data]
+enabled = false
+chunk_length_kb = 64
+cipher = "AES/CBC/PKCS5Padding"
+key_alias = "testing:1"
+# iv_length = 16
+
+[[encryption.transparent_data.key_provider]]
+class_name = "org.apache.cassandra.security.JKSKeyProvider"
+  [[encryption.transparent_data.key_provider.parameters]]
+    keystore = "conf/.keystore"
+    keystore_password = "cassandra"
+    store_type = "JCEKS"
+    key_password = "cassandra"
+
+
+[tracetype]
+query_ttl = 86400
+repair_ttl = 604800
+
+[threshold]
+tombstone_warn = 1000
+tombstone_failure = 100000
+batch_size_warn_in_kb = 5
+batch_size_fail_in_kb = 50
+unlogged_batch_across_partitions_warn = 10
+compaction_large_partition_warning_mb = 100
+gc_warn_in_ms = 1000
+
+[back_pressure]
+enabled = false
+[[back_pressure.strategies]]
+class_name = "org.apache.cassandra.net.RateBasedBackPressure"
+  [[back_pressure.strategies.parameters]]
+    high_ratio = 0.90
+    factor = 5
+    flow = "FAST"

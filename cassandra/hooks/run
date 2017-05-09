@@ -8,6 +8,5 @@ exec 2>&1
 export JAVA_HOME="$(hab pkg path core/jre8)"
 export CASSANDRA_CONF="file://{{pkg.svc_config_path}}"
 
-
 exec cassandra -f \
 	-Dcassandra.logdir="{{pkg.svc_var_path}}/logs"
