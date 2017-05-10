@@ -91,6 +91,13 @@ set -e
 export HOME="$pkg_svc_data_path"
 . '$pkg_svc_config_path/app_env.sh'
 
+# Create a directory for each app symlinked dir under $pkg_svc_var_path
+$(
+  for dir in "${scaffolding_symlinked_dirs[@]}"; do
+    echo "mkdir -pv '$pkg_svc_var_path/$dir'"
+  done
+)
+
 $(
   case "$_app_type" in
     (rails5|rails42|rails41)
@@ -132,13 +139,6 @@ if ! $pkg_prefix/libexec/is_db_connected; then
 fi
 _PG_
   fi
-)
-
-# Create a directory for each app symlinked dir under $pkg_svc_var_path
-$(
-  for dir in "${scaffolding_symlinked_dirs[@]}"; do
-    echo "mkdir -pv '$pkg_svc_var_path/$dir'"
-  done
 )
 EOT
     chmod 755 "$pkg_prefix/hooks/init"
