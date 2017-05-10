@@ -463,6 +463,16 @@ _detect_missing_gems() {
     e="$e run 'bundle update' to update the Gemfile.lock, and retry the build."
     exit_with "$e" 10
   fi
+
+  if _has_gem railties \
+      && _compare_gem railties --greater-than-eq 3.0.0 --less-than 5.0.0 \
+      && ! _has_gem rails_12factor; then
+    local e
+    e="A required gem 'rails_12factor' is missing from the Gemfile."
+    e="$e Add the gem to your Gemfile,"
+    e="$e run 'bundle install' to update the Gemfile.lock, and retry the build."
+    exit_with "$e" 10
+  fi
 }
 
 # shellcheck disable=SC2016
@@ -688,8 +698,6 @@ _detect_rails42_app() {
   if _has_gem railties && _compare_gem railties \
       --greater-than-eq 4.2.0 --less-than 5.0.0; then
     build_line "Detected Rails 4.2 app type"
-    warn "Rails 4.2 app types not yet supported with this Scaffolding"
-    exit_with "App type not supported" 2
     _app_type="rails42"
     return 0
   else
