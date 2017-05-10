@@ -207,39 +207,46 @@ scaffolding_fix_rubygems_shebangs() {
 }
 
 scaffolding_setup_app_config() {
-    # TODO fin: check with `rq` to see if these values have been set by
-    # Plan author
-    cat <<EOT >> "$CACHE_PATH/default.scaffolding.toml"
+  local t
+  t="$CACHE_PATH/default.scaffolding.toml"
 
-$(
-  if [[ -v "scaffolding_env[SECRET_KEY_BASE]" ]]; then
-    echo "# Rails' secret key base is required and must be non-empty"
-    echo "# You can run 'rails secret' in development to generate"
-    echo "# a random key string."
-    echo 'secret_key_base = ""'
-    echo ""
-  fi
-)
-lang = "en_US.UTF-8"
-$(
-  if [[ -v "scaffolding_env[RACK_ENV]" ]]; then
-    echo 'rack_env = "production"'
-  fi
-)
-$(
-  if [[ -v "scaffolding_env[RAILS_ENV]" ]]; then
-    echo 'rails_env = "production"'
-  fi
-)
+  echo "" >> "$t"
 
-[app]
-port = $scaffolding_app_port
-EOT
+  if _default_toml_has_no secret_key_base \
+      && [[ -v "scaffolding_env[SECRET_KEY_BASE]" ]]; then
+    { echo "# Rails' secret key base is required and must be non-empty"
+      echo "# You can run 'rails secret' in development to generate"
+      echo "# a random key string."
+      echo 'secret_key_base = ""'
+      echo ""
+    } >> "$t"
+  fi
+
+  if _default_toml_has_no lang; then
+    echo 'lang = "en_US.UTF-8"' >> "$t"
+  fi
+
+  if _default_toml_has_no rack_env \
+      && [[ -v "scaffolding_env[RACK_ENV]" ]]; then
+    echo 'rack_env = "production"' >> "$t"
+  fi
+  if _default_toml_has_no rails_env \
+      && [[ -v "scaffolding_env[RAILS_ENV]" ]]; then
+    echo 'rails_env = "production"' >> "$t"
+  fi
+
+  if _default_toml_has_no app; then
+    echo "" >> "$t"
+    echo '[app]' >> "$t"
+    if _default_toml_has_no app.port; then
+      echo "port = $scaffolding_app_port" >> "$t"
+    fi
+  fi
 }
 
 scaffolding_setup_database_config() {
   if [[ "${_uses_pg:-}" == "true" ]]; then
-    local db
+    local db t
     # TODO fin: handle leader selection vs. choosing the first in a service
     # group
     db="postgres://{{cfg.db.user}}:{{cfg.db.password}}"
@@ -251,15 +258,21 @@ scaffolding_setup_database_config() {
     # database
     _set_if_unset pkg_binds database "port"
 
-    # TODO fin: check with `rq` to see if these values have been set by
-    # Plan author
-    cat <<EOT >> "$CACHE_PATH/default.scaffolding.toml"
-
-[db]
-name = "${pkg_name}_production"
-user = "$pkg_name"
-password = "$pkg_name"
-EOT
+    t="$CACHE_PATH/default.scaffolding.toml"
+    if _default_toml_has_no db; then
+      { echo ""
+        echo "[db]"
+      } >> "$t"
+      if _default_toml_has_no db.name; then
+        echo "name = \"${pkg_name}_production\"" >> "$t"
+      fi
+      if _default_toml_has_no db.user; then
+        echo "user = \"${pkg_name}\"" >> "$t"
+      fi
+      if _default_toml_has_no db.password; then
+        echo "password = \"${pkg_name}\"" >> "$t"
+      fi
+    fi
   fi
 }
 
@@ -865,6 +878,22 @@ cd $scaffolding_app_prefix
 exec $cmd \$@
 EOF
   chmod -v 755 "$bin"
+}
+
+_default_toml_has_no() {
+  local key toml
+  key="$1"
+  toml="$PLAN_CONTEXT/default.toml"
+
+  if [[ ! -f "$toml" ]]; then
+    return 0
+  fi
+
+  if [[ "$(rq -t < "$toml" "at \"${key}\"")" == "null" ]]; then
+    return 0
+  else
+    return 1
+  fi
 }
 
 _has_gem() {
