@@ -339,7 +339,45 @@ The following default app environment variables will be created:
 
 The `RAILS_LOG_TO_STDOUT` is used to help [stream app logs][12factor_logs], which Rails honors by default.
 
-**Note:** all app environment variable values which use handlebars tempting will be computed and rendered by the Supervisor at run time.
+**Note:** all app environment variable values which use handlebars templating will be computed and rendered by the Supervisor at run time.
+
+#### Default Config Settings
+
+The following default config settings will be created:
+
+* `rails_env`: Used to set the `$RAILS_ENV` environment variable when the app runs. Defaults to `"production"`.
+* `rack_env`: Used to set the `$RACK_ENV` environment variable when the app runs. Defaults to `"production"`.
+
+### Rails 4.2.x Applications
+
+#### Detection
+
+A Rails 4.2.x app type will be detected if the app's `Gemfile.lock` contains a `railties` gem, and if that gem's version is greater than or equal to `4.2.0` but less than `5.0.0`.
+
+#### Additional Gems
+
+This app uses the `rails_12factor` gem to enable support for serving static files and logging to standard out. If this gem is not detected, the build will fail instructing you to add this gem to the app's `Gemfile`.
+
+#### Default Process Bins
+
+The following default process bins will be generated:
+
+* `web`: `bundle exec rails server -p $PORT`
+* `console`: `bundle exec rails console`
+
+#### Default App Environment Variables
+
+The following default app environment variables will be created:
+
+* `RAILS_ENV`: `{{cfg.rails_env}}`
+* `RACK_ENV`: `{{cfg.rack_env}}`
+* `RAILS_LOG_TO_STDOUT`: `enabled`
+* `RAILS_SERVE_STATIC_FILES`: `enabled`
+* `SECRET_KEY_BASE`: `{{cfg.secret_key_base}}`
+
+The `RAILS_LOG_TO_STDOUT` is used to help [stream app logs][12factor_logs], which Rails honors by default with help from the `rails_12factor` gem.
+
+**Note:** all app environment variable values which use handlebars templating will be computed and rendered by the Supervisor at run time.
 
 #### Default Config Settings
 
