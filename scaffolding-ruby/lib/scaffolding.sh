@@ -207,59 +207,72 @@ scaffolding_fix_rubygems_shebangs() {
 }
 
 scaffolding_setup_app_config() {
-    # TODO fin: check with `rq` to see if these values have been set by
-    # Plan author
-    cat <<EOT >> "$CACHE_PATH/default.scaffolding.toml"
+  local t
+  t="$CACHE_PATH/default.scaffolding.toml"
 
-$(
-  if [[ -v "scaffolding_env[SECRET_KEY_BASE]" ]]; then
-    echo "# Rails' secret key base is required and must be non-empty"
-    echo "# You can run 'rails secret' in development to generate"
-    echo "# a random key string."
-    echo 'secret_key_base = ""'
-    echo ""
-  fi
-)
-lang = "en_US.UTF-8"
-$(
-  if [[ -v "scaffolding_env[RACK_ENV]" ]]; then
-    echo 'rack_env = "production"'
-  fi
-)
-$(
-  if [[ -v "scaffolding_env[RAILS_ENV]" ]]; then
-    echo 'rails_env = "production"'
-  fi
-)
+  echo "" >> "$t"
 
-[app]
-port = $scaffolding_app_port
-EOT
+  if _default_toml_has_no secret_key_base \
+      && [[ -v "scaffolding_env[SECRET_KEY_BASE]" ]]; then
+    { echo "# Rails' secret key base is required and must be non-empty"
+      echo "# You can run 'rails secret' in development to generate"
+      echo "# a random key string."
+      echo 'secret_key_base = ""'
+      echo ""
+    } >> "$t"
+  fi
+
+  if _default_toml_has_no lang; then
+    echo 'lang = "en_US.UTF-8"' >> "$t"
+  fi
+
+  if _default_toml_has_no rack_env \
+      && [[ -v "scaffolding_env[RACK_ENV]" ]]; then
+    echo 'rack_env = "production"' >> "$t"
+  fi
+  if _default_toml_has_no rails_env \
+      && [[ -v "scaffolding_env[RAILS_ENV]" ]]; then
+    echo 'rails_env = "production"' >> "$t"
+  fi
+
+  if _default_toml_has_no app; then
+    echo "" >> "$t"
+    echo '[app]' >> "$t"
+    if _default_toml_has_no app.port; then
+      echo "port = $scaffolding_app_port" >> "$t"
+    fi
+  fi
 }
 
 scaffolding_setup_database_config() {
   if [[ "${_uses_pg:-}" == "true" ]]; then
-    local db
+    local db t
     # TODO fin: handle leader selection vs. choosing the first in a service
     # group
     db="postgres://{{cfg.db.user}}:{{cfg.db.password}}"
     db="${db}@{{bind.database.first.sys.ip}}:{{bind.database.first.cfg.port}}"
     db="${db}/{{cfg.db.name}}"
-    scaffolding_env[DATABASE_URL]="$db"
+    _set_if_unset scaffolding_env DATABASE_URL "$db"
 
     # Add a require binding called `database` which will be the PostgreSQL
     # database
-    pkg_binds[database]="port"
+    _set_if_unset pkg_binds database "port"
 
-    # TODO fin: check with `rq` to see if these values have been set by
-    # Plan author
-    cat <<EOT >> "$CACHE_PATH/default.scaffolding.toml"
-
-[db]
-name = "${pkg_name}_production"
-user = "$pkg_name"
-password = "$pkg_name"
-EOT
+    t="$CACHE_PATH/default.scaffolding.toml"
+    if _default_toml_has_no db; then
+      { echo ""
+        echo "[db]"
+      } >> "$t"
+      if _default_toml_has_no db.name; then
+        echo "name = \"${pkg_name}_production\"" >> "$t"
+      fi
+      if _default_toml_has_no db.user; then
+        echo "user = \"${pkg_name}\"" >> "$t"
+      fi
+      if _default_toml_has_no db.password; then
+        echo "password = \"${pkg_name}\"" >> "$t"
+      fi
+    fi
   fi
 }
 
@@ -490,32 +503,36 @@ _detect_process_bins() {
       else
         bin="${line%%:*}"
         cmd="${line#*:}"
-        _set_process_bin_if_empty "$(trim "$bin")" "$(trim "$cmd")"
+        _set_if_unset scaffolding_process_bins "$(trim "$bin")" "$(trim "$cmd")"
       fi
     done < Procfile
   fi
 
   case "$_app_type" in
     rails*)
-      _set_process_bin_if_empty "web" 'bundle exec rails server -p $PORT'
-      _set_process_bin_if_empty "console" 'bundle exec rails console'
+      _set_if_unset scaffolding_process_bins "web" \
+        'bundle exec rails server -p $PORT'
+      _set_if_unset scaffolding_process_bins "console" \
+        'bundle exec rails console'
       ;;
     rack)
-      _set_process_bin_if_empty "web" 'bundle exec rackup config.ru -p $PORT'
-      _set_process_bin_if_empty "console" 'bundle exec irb'
+      _set_if_unset scaffolding_process_bins "web" \
+        'bundle exec rackup config.ru -p $PORT'
+      _set_if_unset scaffolding_process_bins "console" \
+        'bundle exec irb'
       ;;
   esac
   if _has_gem rake && _has_rakefile; then
-    _set_process_bin_if_empty "rake" 'bundle exec rake'
+    _set_if_unset scaffolding_process_bins "rake" 'bundle exec rake'
   fi
-  _set_process_bin_if_empty "sh" 'sh'
+  _set_if_unset scaffolding_process_bins "sh" 'sh'
 }
 
 _update_vars() {
-  scaffolding_env[LANG]="{{cfg.lang}}"
-  scaffolding_env[PORT]="{{cfg.app.port}}"
+  _set_if_unset scaffolding_env LANG "{{cfg.lang}}"
+  _set_if_unset scaffolding_env PORT "{{cfg.app.port}}"
   # Export the app's listen port
-  pkg_exports[port]="app.port"
+  _set_if_unset pkg_exports port "app.port"
 
   case "$_app_type" in
     rails*)
@@ -524,20 +541,20 @@ _update_vars() {
         scaffolding_symlinked_files+=(config/secrets.yml)
       fi
 
-      scaffolding_env[RAILS_ENV]="{{cfg.rails_env}}"
-      scaffolding_env[RACK_ENV]="{{cfg.rack_env}}"
+      _set_if_unset scaffolding_env RAILS_ENV "{{cfg.rails_env}}"
+      _set_if_unset scaffolding_env RACK_ENV "{{cfg.rack_env}}"
       if _compare_gem railties --greater-than-eq 5.0.0; then
-        scaffolding_env[RAILS_LOG_TO_STDOUT]="enabled"
+        _set_if_unset scaffolding_env RAILS_LOG_TO_STDOUT "enabled"
       fi
       if _compare_gem railties --greater-than-eq 4.2.0; then
-        scaffolding_env[RAILS_SERVE_STATIC_FILES]="enabled"
+        _set_if_unset scaffolding_env RAILS_SERVE_STATIC_FILES "enabled"
       fi
       if _compare_gem railties --greater-than-eq 4.1.0; then
-        scaffolding_env[SECRET_KEY_BASE]="{{cfg.secret_key_base}}"
+        _set_if_unset scaffolding_env SECRET_KEY_BASE "{{cfg.secret_key_base}}"
       fi
       ;;
     rack)
-      scaffolding_env[RACK_ENV]="{{cfg.rack_env}}"
+      _set_if_unset scaffolding_env RACK_ENV "{{cfg.rack_env}}"
       ;;
   esac
 
@@ -863,6 +880,22 @@ EOF
   chmod -v 755 "$bin"
 }
 
+_default_toml_has_no() {
+  local key toml
+  key="$1"
+  toml="$PLAN_CONTEXT/default.toml"
+
+  if [[ ! -f "$toml" ]]; then
+    return 0
+  fi
+
+  if [[ "$(rq -t < "$toml" "at \"${key}\"")" == "null" ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
 _has_gem() {
   local result
   result="$($_gemfile_parser has-gem ./Gemfile.lock "$1" 2> /dev/null || true)"
@@ -898,13 +931,14 @@ _rename_function() {
   eval "$(echo "${new_name}()"; declare -f "$orig_name" | tail -n +2)"
 }
 
-_set_process_bin_if_empty() {
-  local bin cmd
-  bin="$1"
-  cmd="$2"
+_set_if_unset() {
+  local hash key val
+  hash="$1"
+  key="$2"
+  val="$3"
 
-  if [[ ! -v "scaffolding_process_bins[$bin]" ]]; then
-    scaffolding_process_bins[$bin]="$cmd"
+  if [[ ! -v "$hash[$key]" ]]; then
+    eval "$hash[$key]='$val'"
   fi
 }
 
