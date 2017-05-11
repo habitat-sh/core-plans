@@ -21,6 +21,66 @@ scaffolding_load() {
   _detect_node
 }
 
+do_default_prepare() {
+  scaffolding_node_prepare
+}
+
+do_default_build() {
+  return 0
+}
+
+do_default_install() {
+  scaffolding_node_install
+}
+
+# Strip doesn't do anything for us, but it does take longer when there are lots
+# of files, which, when we're using node, is always.
+do_default_strip() {
+  return 0
+}
+
+
+
+
+scaffolding_node_prepare() {
+  if [[ -n "$HAB_NONINTERACTIVE" ]]; then
+    export npm_config_progress=false
+    build_line "Setting npm_config_progress=$npm_config_progress"
+  fi
+
+  export npm_config_prefix="$pkg_prefix"
+  build_line "Setting npm_config_prefix=$npm_config_prefix"
+  export npm_config_global=true
+  build_line "Setting npm_config_global=$npm_config_global"
+
+  _get_package_json
+  _set_variables_from_package_json
+  _detect_run_hook
+}
+
+scaffolding_node_install() {
+  if [[ -n "$pkg_source" ]]; then
+    npm install "$pkg_source"
+  else
+    npm install "$SRC_PATH"
+  fi
+
+  # Since we're setting global (-g), instead of using `npm shrinkwrap`, we can
+  # list the global packages in the same format to an npm-list.json in the
+  # package so you can get a list of the transitive dependencies for reference.
+  npm list --json > "$pkg_prefix/npm-list.json"
+  build_line "Writing list of transitive Node package dependencies to $pkg_prefix/npm-list.json"
+
+  # Find everything in the package that starts with `#!/usr/bin/env node` and
+  # fix its interpreter.
+  grep -l -R ^\#\!/usr/bin/env "$pkg_prefix" | while IFS= read -r f; do
+    fix_interpreter "$(readlink -f "$f")" core/coreutils bin/env
+  done
+}
+
+
+
+
 # Set the node version based on the scaffolding_pkg_node or the contents of
 # .nvmrc.
 _detect_node () {
@@ -45,17 +105,6 @@ _detect_node () {
   fi
   pkg_deps=($node_pkg ${pkg_deps[@]})
   build_line "Setting pkg_deps=(${pkg_deps[*]})"
-}
-
-# The directory this script is running from
-_get_script_dir () {
-  SOURCE="${BASH_SOURCE[0]}"
-  while [ -h "$SOURCE" ]; do
-    DIR="$(cd -P "$( dirname "$SOURCE" )" && pwd)"
-    SOURCE="$(readlink "$SOURCE")"
-    [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
-  done
-  (cd -P "$(dirname "$SOURCE")" && pwd)
 }
 
 # Attempts to download or locate a package.json. If we think we're pulling from
@@ -95,11 +144,6 @@ _get_package_json() {
   else
     exit_with "No package.json found locally or remotely. Could not determine that this is a Node package." 1
   fi
-}
-
-# Use the included packageJsonParser.js to get a value from the package.json
-_package_json_value() {
-  node "$(_get_script_dir)/packageJsonParser.js" "$scaffolding_node_package_json_location" "$1"
 }
 
 # Use the package.json to populate some of the plan variables
@@ -181,6 +225,9 @@ _detect_run_hook() {
   _generate_run_hook "$run_hook_command"
 }
 
+
+
+
 # Generate a run hook, given a command
 _generate_run_hook() {
   local command pkg_name_from_package_json
@@ -204,74 +251,21 @@ fi
 cd "$pkg_prefix/lib/node_modules/$pkg_name_from_package_json"
 exec $command 2>&1
 EOF
-chmod 755 "$pkg_prefix/hooks/run"
+  chmod 755 "$pkg_prefix/hooks/run"
 }
 
-scaffolding_node_prepare() {
-  if [[ -n "$HAB_NONINTERACTIVE" ]]; then
-    export npm_config_progress=false
-    build_line "Setting npm_config_progress=$npm_config_progress"
-  fi
-
-  export npm_config_prefix="$pkg_prefix"
-  build_line "Setting npm_config_prefix=$npm_config_prefix"
-  export npm_config_global=true
-  build_line "Setting npm_config_global=$npm_config_global"
-
-  _get_package_json
-  _set_variables_from_package_json
-  _detect_run_hook
-}
-
-# These next 3 default callbacks are not required if you're not using
-# $pkg_source, but since we let that variable be used as an identifer for NPM, we
-# have to skip these steps to make sure they don't happen in a build.
-do_default_download() {
-  return 0
-}
-
-do_default_verify() {
-  return 0
-}
-
-do_default_unpack() {
-  return 0
-}
-
-do_default_prepare() {
-  scaffolding_node_prepare
-}
-
-do_default_build() {
-  return 0
-}
-
-scaffolding_node_install() {
-  if [[ -n "$pkg_source" ]]; then
-    npm install "$pkg_source"
-  else
-    npm install "$SRC_PATH"
-  fi
-
-  # Since we're setting global (-g), instead of using `npm shrinkwrap`, we can
-  # list the global packages in the same format to an npm-list.json in the
-  # package so you can get a list of the transitive dependencies for reference.
-  npm list --json > "$pkg_prefix/npm-list.json"
-  build_line "Writing list of transitive Node package dependencies to $pkg_prefix/npm-list.json"
-
-  # Find everything in the package that starts with `#!/usr/bin/env node` and
-  # fix its interpreter.
-  grep -l -R ^\#\!/usr/bin/env "$pkg_prefix" | while IFS= read -r f; do
-    fix_interpreter "$(readlink -f "$f")" core/coreutils bin/env
+# The directory this script is running from
+_get_script_dir () {
+  SOURCE="${BASH_SOURCE[0]}"
+  while [ -h "$SOURCE" ]; do
+    DIR="$(cd -P "$( dirname "$SOURCE" )" && pwd)"
+    SOURCE="$(readlink "$SOURCE")"
+    [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
   done
+  (cd -P "$(dirname "$SOURCE")" && pwd)
 }
 
-do_default_install() {
-  scaffolding_node_install
-}
-
-# Strip doesn't do anything for us, but it does take longer when there are lots
-# of files, which, when we're using node, is always.
-do_default_strip() {
-  return 0
+# Use the included packageJsonParser.js to get a value from the package.json
+_package_json_value() {
+  node "$(_get_script_dir)/packageJsonParser.js" "$scaffolding_node_package_json_location" "$1"
 }
