@@ -8,8 +8,17 @@ pkg_license=('LGPL-2.0')
 pkg_source="https://github.com/ocaml/camlp4/archive/${pkg_version}+1.tar.gz"
 pkg_dirname="${pkg_name}-${pkg_version}-1"
 pkg_shasum="6044f24a44053684d1260f19387e59359f59b0605cdbf7295e1de42783e48ff1"
-pkg_deps=(core/glibc)
-pkg_build_deps=(core/which core/ocamlbuild core/ocaml core/make core/gcc)
+pkg_deps=(
+  core/coreutils
+  core/glibc
+  core/ocaml
+)
+pkg_build_deps=(
+  core/gcc
+  core/make
+  core/ocamlbuild
+  core/which
+)
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 

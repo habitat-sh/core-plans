@@ -7,8 +7,16 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('LGPL')
 pkg_source="https://github.com/ocaml/ocamlbuild/archive/${pkg_version}.tar.gz"
 pkg_shasum="1717edc841c9b98072e410f1b0bc8b84444b4b35ed3b4949ce2bec17c60103ee"
-pkg_deps=(core/glibc core/ocaml core/make core/gcc)
-pkg_bin_dirs=(bin)
+pkg_deps=(
+  core/glibc
+  core/ocaml
+  core/coreutils
+  core/ncurses
+)
+pkg_build_deps=(
+  core/gcc
+  core/make
+)
 
 do_build() {
   make configure OCAMLBUILD_PREFIX="${pkg_prefix}" OCAMLBUILD_BINDIR="${pkg_prefix}/bin" OCAMLBUILD_LIBDIR="${pkg_prefix}/lib"
