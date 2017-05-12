@@ -19,7 +19,7 @@ partitioner = "org.apache.cassandra.dht.Murmur3Partitioner"
 # disk_optimization_strategy = ssd
 storage_port = 7000
 ssl_storage_port = 7001
-listen_address = "localhost"
+# listen_address = "localhost"
 # listen_interface_prefer_ipv6 = false
 # broadcast_address = "1.2.3.4"
 # listen_on_broadcast_address = false
@@ -123,6 +123,11 @@ period_in_ms = 10000
 # [[commitlog.compression]]
 #	class_name = "Snappy"
 #	parameters = ["arg1"]
+
+#[[seed_provider]]
+#	 class_name = "org.apache.cassandra.locator.SimpleSeedProvider"
+#	 [seed_provider.parameters]
+#    seeds = "127.0.0.1"
 
 [concurrent]
 reads = 32
