@@ -1,7 +1,0 @@
-{
-  "name": "local_service_node_config",
-  "version": "0.1.0",
-  "dependencies": {
-    "config": ">= 0"
-  }
-}
