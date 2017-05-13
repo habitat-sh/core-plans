@@ -20,8 +20,8 @@ do_verify() {
 }
 
 do_unpack() {
-  mkdir -pv $HAB_CACHE_SRC_PATH/$pkg_dirname
-  cp -v $HAB_CACHE_SRC_PATH/$pkg_filename $HAB_CACHE_SRC_PATH/$pkg_dirname
+  mkdir -pv "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+  cp -v "$HAB_CACHE_SRC_PATH/$pkg_filename" "$HAB_CACHE_SRC_PATH/$pkg_dirname"
 }
 
 do_build() {
@@ -29,16 +29,18 @@ do_build() {
 }
 
 do_install() {
-  mkdir -pv $pkg_prefix/ssl/certs
-  cp -v $pkg_filename $pkg_prefix/ssl/certs
-  ln -sv certs/cacert.pem $pkg_prefix/ssl/cert.pem
+  mkdir -pv "$pkg_prefix/ssl/certs"
+  cp -v "$pkg_filename" "$pkg_prefix/ssl/certs"
+  ln -sv certs/cacert.pem "$pkg_prefix/ssl/cert.pem"
 }
 
 update_pkg_version() {
+  local build_date
   # Extract the build date of the certificates file
-  local build_date=$(cat $HAB_CACHE_SRC_PATH/$pkg_filename \
+  # shellcheck disable=SC2002
+  build_date="$(cat "$HAB_CACHE_SRC_PATH/$pkg_filename" \
     | grep 'Certificate data from Mozilla' \
-    | sed 's/^## Certificate data from Mozilla as of: //')
+    | sed 's/^## Certificate data from Mozilla as of: //')"
 
   # Update the `$pkg_version` value with the build date
   pkg_version=$(date --date="$build_date" "+%Y.%m.%d")
