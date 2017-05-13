@@ -254,8 +254,8 @@ do_install() {
     #
     # Thanks to: https://github.com/NixOS/nixpkgs/blob/55b03266cfc25ae019af3cdd2cfcad0facdc68f2/pkgs/development/libraries/glibc/builder.sh#L25-L32
     pushd "$pkg_prefix/include" > /dev/null
-      # shellcheck disable=SC2010
-      ln -sv "$(ls -d "$(pkg_path_for linux-headers)/include"/* | grep -v 'scsi$')" .
+      # shellcheck disable=SC2010,SC2046
+      ln -sv $(ls -d $(pkg_path_for linux-headers)/include/* | grep -v 'scsi$') .
     popd > /dev/null
 
     mkdir -pv "$pkg_prefix/lib/locale"
