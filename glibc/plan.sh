@@ -14,7 +14,7 @@ pkg_lib_dirs=(lib)
 do_prepare() {
   # The `/bin/pwd` path is hardcoded, so we'll add a symlink if needed.
   if [[ ! -r /bin/pwd ]]; then
-    ln -sv $(pkg_path_for coreutils)/bin/pwd /bin/pwd
+    ln -sv "$(pkg_path_for coreutils)/bin/pwd" /bin/pwd
     _clean_pwd=true
   fi
 
@@ -40,14 +40,15 @@ do_prepare() {
 
   # Have `rpcgen(1)` look for `cpp(1)` in `$PATH`.
   # Thanks to https://github.com/NixOS/nixpkgs/blob/1b55b07/pkgs/development/libraries/glibc/rpcgen-path.patch
-  patch -p1 < $PLAN_CONTEXT/rpcgen-path.patch
+  patch -p1 < "$PLAN_CONTEXT/rpcgen-path.patch"
 
   # Don't use the system's `/etc/ld.so.cache` and `/etc/ld.so.preload`, but
   # rather the version under `$pkg_prefix/etc`.
   #
   # Thanks to https://github.com/NixOS/nixpkgs/blob/54fc2db/pkgs/development/libraries/glibc/dont-use-system-ld-so-cache.patch
   # and to https://github.com/NixOS/nixpkgs/blob/dac591a/pkgs/development/libraries/glibc/dont-use-system-ld-so-preload.patch
-  cat $PLAN_CONTEXT/dont-use-system-ld-so.patch \
+  # shellcheck disable=SC2002
+  cat "$PLAN_CONTEXT/dont-use-system-ld-so.patch" \
     | sed "s,@prefix@,$pkg_prefix,g" \
     | patch -p1
 
@@ -56,12 +57,12 @@ do_prepare() {
   # for the Linux Kernel headers.
   #
   # Source: https://lists.debian.org/debian-glibc/2013/11/msg00116.html
-  patch -p1 < $PLAN_CONTEXT/testsuite-fix.patch
+  patch -p1 < "$PLAN_CONTEXT/testsuite-fix.patch"
 
   # Fix for CVE-2015-7547 and more
   #
   # Source: http://www.linuxfromscratch.org/patches/downloads/glibc/glibc-2.22-upstream_fixes-1.patch
-  patch -p1 < $PLAN_CONTEXT/glibc-2.22-upstream_fixes-1.patch
+  patch -p1 < "$PLAN_CONTEXT/glibc-2.22-upstream_fixes-1.patch"
 
   # Adjust `scripts/test-installation.pl` to use our new dynamic linker
   sed -i "s|libs -o|libs -L${pkg_prefix}/lib -Wl,-dynamic-linker=${dynamic_linker} -o|" \
@@ -76,13 +77,13 @@ do_build() {
     echo "libc_cv_slibdir=$pkg_prefix/lib" >> config.cache
     echo "libc_cv_ssp=no" >> config.cache
 
-    ../$pkg_dirname/configure \
-      --prefix=$pkg_prefix \
-      --sbindir=$pkg_prefix/bin \
-      --with-headers=$(pkg_path_for linux-headers)/include \
-      --libdir=$pkg_prefix/lib \
-      --libexecdir=$pkg_prefix/lib/glibc \
-      --sysconfdir=$pkg_prefix/etc \
+    "../$pkg_dirname/configure" \
+      --prefix="$pkg_prefix" \
+      --sbindir="$pkg_prefix/bin" \
+      --with-headers="$(pkg_path_for linux-headers)/include" \
+      --libdir="$pkg_prefix/lib" \
+      --libexecdir="$pkg_prefix/lib/glibc" \
+      --sysconfdir="$pkg_prefix/etc" \
       --enable-obsolete-rpc \
       --disable-profile \
       --enable-kernel=2.6.32 \
@@ -139,13 +140,13 @@ do_check() {
     # One of the tests uses the hardcoded `bin/cat` path, so we'll add it, if
     # it doesn't exist.
     if [[ ! -r /bin/cat ]]; then
-      ln -sv $(pkg_path_for coreutils)/bin/cat /bin/cat
+      ln -sv "$(pkg_path_for coreutils)/bin/cat" /bin/cat
       _clean_cat=true
     fi
     # One of the tests uses the hardcoded `bin/echo` path, so we'll add it, if
     # it doesn't exist.
     if [[ ! -r /bin/echo ]]; then
-      ln -sv $(pkg_path_for coreutils)/bin/echo /bin/echo
+      ln -sv "$(pkg_path_for coreutils)/bin/echo" /bin/echo
       _clean_echo=true
     fi
 
@@ -161,8 +162,8 @@ do_check() {
       ln -sv /tools/lib/libgcc_s.so.1 .
       ln -sv /tools/lib/libstdc++.so.6 .
     else
-      ln -sv $(pkg_path_for gcc)/lib/libgcc_s.so.1 .
-      ln -sv $(pkg_path_for gcc)/lib/libstdc++.so.6 .
+      ln -sv "$(pkg_path_for gcc)/lib/libgcc_s.so.1" .
+      ln -sv "$(pkg_path_for gcc)/lib/libstdc++.so.6" .
     fi
 
     # It appears as though some tests *always* fail, but since the output (and
@@ -185,49 +186,49 @@ do_check() {
 do_install() {
   pushd ../${pkg_name}-build > /dev/null
     # Prevent a `make install` warning of a missing `ld.so.conf`.
-    mkdir -p $pkg_prefix/etc
-    touch $pkg_prefix/etc/ld.so.conf
+    mkdir -p "$pkg_prefix/etc"
+    touch "$pkg_prefix/etc/ld.so.conf"
 
     # To ensure the `make install` checks at the end succeed. Unfortunately,
     # a multilib installation is assumed (i.e. 32-bit and 64-bit). We will
     # fool this check by symlinking a "32-bit" file to the real loader.
-    mkdir -p $pkg_prefix/lib
-    ln -sv ld-2.22.so $pkg_prefix/lib/ld-linux.so.2
+    mkdir -p "$pkg_prefix/lib"
+    ln -sv ld-2.22.so "$pkg_prefix/lib/ld-linux.so.2"
 
     # Add a `lib64` -> `lib` symlink for `bin/ldd` to work correctly.
     #
     # Thanks to: https://github.com/NixOS/nixpkgs/blob/55b03266cfc25ae019af3cdd2cfcad0facdc68f2/pkgs/development/libraries/glibc/builder.sh#L43-L47
-    ln -sv lib $pkg_prefix/lib64
+    ln -sv lib "$pkg_prefix/lib64"
 
     if [[ "$STUDIO_TYPE" = "stage1" ]]; then
       # When building glibc using a build toolchain, we need libgcc_s at
       # `$RPATH` which gets us by until we can link against this for real
       if [ -f /tools/lib/libgcc_s.so.1 ]; then
-        cp -v /tools/lib/libgcc_s.so.1 $pkg_prefix/lib/
+        cp -v /tools/lib/libgcc_s.so.1 "$pkg_prefix/lib/"
         # the .so file used to be a symlink, but now it is a script
-        cp -av /tools/lib/libgcc_s.so $pkg_prefix/lib/
+        cp -av /tools/lib/libgcc_s.so "$pkg_prefix/lib/"
       fi
     fi
 
-    make install sysconfdir=$pkg_prefix/etc sbindir=$pkg_prefix/bin
+    make install sysconfdir="$pkg_prefix/etc" sbindir="$pkg_prefix/bin"
 
     # Move all remaining binaries in `sbin/` into `bin/`, namely `ldconfig`
-    mv $pkg_prefix/sbin/* $pkg_prefix/bin/
-    rm -rf $pkg_prefix/sbin
+    mv "$pkg_prefix/sbin"/* "$pkg_prefix/bin/"
+    rm -rf "$pkg_prefix/sbin"
 
     # Remove unneeded files from `include/rpcsvc`
-    rm -fv $pkg_prefix/include/rpcsvc/*.x
+    rm -fv "$pkg_prefix/include/rpcsvc"/*.x
 
     # Remove the `make install` check symlink
-    rm -fv $pkg_prefix/lib/ld-linux.so.2
+    rm -fv "$pkg_prefix/lib/ld-linux.so.2"
 
     # Remove `sln` (statically built ln)--not needed
-    rm -f $pkg_prefix/bin/sln
+    rm -f "$pkg_prefix/bin/sln"
 
     # Update the shebangs of a few shell scripts that have a fully-qualified
     # path to `/bin/sh` so they will work in a minimal busybox
     for b in ldd sotruss tzselect xtrace; do
-      sed -e 's,^#!.*$,#! /bin/sh,' -i $pkg_prefix/bin/$b
+      sed -e 's,^#!.*$,#! /bin/sh,' -i "$pkg_prefix/bin/$b"
     done
 
     # Include the Linux kernel headers in Glibc, except the `scsi/` directory,
@@ -243,11 +244,12 @@ do_install() {
     # sad, sad situation.
     #
     # Thanks to: https://github.com/NixOS/nixpkgs/blob/55b03266cfc25ae019af3cdd2cfcad0facdc68f2/pkgs/development/libraries/glibc/builder.sh#L25-L32
-    pushd $pkg_prefix/include > /dev/null
-      ln -sv $(ls -d $(pkg_path_for linux-headers)/include/* | grep -v 'scsi$') .
+    pushd "$pkg_prefix/include" > /dev/null
+      # shellcheck disable=SC2010
+      ln -sv "$(ls -d "$(pkg_path_for linux-headers)/include"/* | grep -v 'scsi$')" .
     popd > /dev/null
 
-    mkdir -pv $pkg_prefix/lib/locale
+    mkdir -pv "$pkg_prefix/lib/locale"
     localedef -i cs_CZ -f UTF-8 cs_CZ.UTF-8
     localedef -i de_DE -f ISO-8859-1 de_DE
     localedef -i de_DE@euro -f ISO-8859-15 de_DE@euro
@@ -261,9 +263,9 @@ do_install() {
     localedef -i it_IT -f ISO-8859-1 it_IT
     localedef -i ja_JP -f EUC-JP ja_JP
 
-    cp -v ../$pkg_dirname/nscd/nscd.conf $pkg_prefix/etc/
+    cp -v "../$pkg_dirname/nscd/nscd.conf" "$pkg_prefix/etc/"
 
-    cat > $pkg_prefix/etc/nsswitch.conf << "EOF"
+    cat > "$pkg_prefix/etc/nsswitch.conf" << "EOF"
 passwd: files
 group: files
 shadow: files
@@ -279,19 +281,19 @@ EOF
 
     extract_src tzdata
     pushd ./tzdata > /dev/null
-      ZONEINFO=$pkg_prefix/share/zoneinfo
-      mkdir -p $ZONEINFO/{posix,right}
+      ZONEINFO="$pkg_prefix/share/zoneinfo"
+      mkdir -p "$ZONEINFO"/{posix,right}
       for tz in etcetera southamerica northamerica europe africa antarctica \
           asia australasia backward pacificnew systemv; do
-        zic -L /dev/null -d $ZONEINFO -y "sh yearistype.sh" ${tz}
-        zic -L /dev/null -d $ZONEINFO/posix -y "sh yearistype.sh" ${tz}
-        zic -L leapseconds -d $ZONEINFO/right -y "sh yearistype.sh" ${tz}
+        zic -L /dev/null -d "$ZONEINFO" -y "sh yearistype.sh" ${tz}
+        zic -L /dev/null -d "$ZONEINFO/posix" -y "sh yearistype.sh" ${tz}
+        zic -L leapseconds -d "$ZONEINFO/right" -y "sh yearistype.sh" ${tz}
       done
-      cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
-      zic -d $ZONEINFO -p America/New_York
+      cp -v zone.tab zone1970.tab iso3166.tab "$ZONEINFO"
+      zic -d "$ZONEINFO" -p America/New_York
       unset ZONEINFO
     popd > /dev/null
-    cp -v $pkg_prefix/share/zoneinfo/UTC $pkg_prefix/etc/localtime
+    cp -v "$pkg_prefix/share/zoneinfo/UTC" "$pkg_prefix/etc/localtime"
   popd > /dev/null
 }
 
@@ -306,7 +308,7 @@ extract_src() {
   build_dirname=$pkg_dirname/../${pkg_name}-build
   plan=$1
 
-  (source $PLAN_CONTEXT/../$plan/plan.sh
+  (source "$PLAN_CONTEXT/../$plan/plan.sh"
     # Re-override the defaults as this plan is sourced externally
     pkg_filename="$(basename $pkg_source)"
     pkg_dirname="${pkg_name}-${pkg_version}"
@@ -320,7 +322,7 @@ extract_src() {
     do_clean
     build_line "Unpacking $pkg_filename"
     do_unpack
-    mv -v $HAB_CACHE_SRC_PATH/$pkg_dirname $HAB_CACHE_SRC_PATH/$build_dirname/$plan
+    mv -v "$HAB_CACHE_SRC_PATH/$pkg_dirname" "$HAB_CACHE_SRC_PATH/$build_dirname/$plan"
   )
 }
 
