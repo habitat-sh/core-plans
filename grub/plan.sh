@@ -1,7 +1,7 @@
 pkg_name=grub
 pkg_origin=core
 pkg_version=2.02-beta3
-pkg_source=https://git.savannah.gnu.org/cgit/${pkg_name}.git
+pkg_source=git://git.savannah.gnu.org/${pkg_name}.git
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="GNU GRUB is a Multiboot boot loader."
 pkg_upstream_url=https://www.gnu.org/software/grub/
