@@ -12,5 +12,5 @@ do_build() {
 }
 
 do_install() {
-  make install prefix=$pkg_prefix
+  make install prefix="$pkg_prefix"
 }
