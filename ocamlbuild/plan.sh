@@ -17,6 +17,7 @@ pkg_build_deps=(
   core/gcc
   core/make
 )
+pkg_bin_dirs=(bin)
 
 do_build() {
   make configure OCAMLBUILD_PREFIX="${pkg_prefix}" OCAMLBUILD_BINDIR="${pkg_prefix}/bin" OCAMLBUILD_LIBDIR="${pkg_prefix}/lib"
