@@ -21,12 +21,12 @@ do_prepare() {
 
 do_build() {
   ./configure \
-    --prefix=$pkg_prefix
+    --prefix="$pkg_prefix"
   # Prevent a hard dependency on the grep package
   make \
-    -j$(nproc) \
-    GREP=$(pkg_path_for grep)/bin/grep \
-    LESS=$(pkg_path_for less)/bin/less
+    -j"$(nproc)" \
+    GREP="$(pkg_path_for grep)/bin/grep" \
+    LESS="$(pkg_path_for less)/bin/less"
 }
 
 do_check() {
