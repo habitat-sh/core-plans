@@ -13,9 +13,9 @@ pkg_lib_dirs=(lib)
 
 do_build() {
   ./configure \
-    --prefix=$pkg_prefix \
-    --sbindir=$pkg_prefix/bin \
-    --localstatedir=$pkg_svc_var_path/run \
+    --prefix="$pkg_prefix" \
+    --sbindir="$pkg_prefix/bin" \
+    --localstatedir="$pkg_svc_var_path/run" \
     --without-python \
     --without-slang \
     --without-systemd \
@@ -32,7 +32,7 @@ do_build() {
 }
 
 do_install() {
-  make install usrsbin_execdir=$pkg_prefix/bin
+  make install usrsbin_execdir="$pkg_prefix/bin"
 }
 
 
