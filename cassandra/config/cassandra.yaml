@@ -220,7 +220,7 @@ partitioner: {{ cfg.partitioner}}
 # the configured compaction strategy.
 # If not set, the default directory is $CASSANDRA_HOME/data/data.
 data_file_directories:
-    - {{pkg.svc_var_path}}/data
+    - {{pkg.svc_data_path}}
 
 # commit log.  when running on magnetic HDD, this should be a
 # separate spindle than the data directories.
