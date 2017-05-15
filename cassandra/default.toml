@@ -214,9 +214,9 @@ class = "org.apache.cassandra.scheduler.NoScheduler"
 [encryption]
 [encryption.server]
 internode_encryption = "none"
-keystore = "conf/.keystore"
+# keystore = # defaults to {{pkg.svc_config_path}}/.keystore
 keystore_password = "cassandra"
-truststore = "conf/.truststore"
+# truststore = # defaults to {{pkg.svc_config_path}}/.truststore
 truststore_password = "cassandra"
 # protocol = "TLS"
 # algorithm = "SunX509"
@@ -228,10 +228,10 @@ truststore_password = "cassandra"
 [encryption.client]
 enabled = false
 optional = false
-keystore = "conf/.keystore"
+# keystore = # default to {{pkg.svc_config_path}}/.keystore
 keystore_password = "cassandra"
 # require_client_auth = false
-# truststore = "conf/.truststore"
+# truststore = # default to {{pkg.svc_config_path}}/.truststore
 # truststore_password = "cassandra"
 # protocol = "TLS"
 # algorithm = "SunX509"
@@ -248,7 +248,7 @@ key_alias = "testing:1"
 [[encryption.transparent_data.key_provider]]
 class_name = "org.apache.cassandra.security.JKSKeyProvider"
   [[encryption.transparent_data.key_provider.parameters]]
-    keystore = "conf/.keystore"
+    #keystore = # defaults to {{pkg.svc_config_path}}/.keystore
     keystore_password = "cassandra"
     store_type = "JCEKS"
     key_password = "cassandra"

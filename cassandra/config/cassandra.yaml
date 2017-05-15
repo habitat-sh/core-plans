@@ -1219,9 +1219,9 @@ request_scheduler_id: {{cfg.request_scheduler.id}}
 server_encryption_options:
     {{~#with cfg.encryption.server }}
     internode_encryption: {{internode_encryption}}
-    keystore: {{keystore}}
+    keystore: {{#if keystore }}{{keystore}}{{else}}{{../pkg.svc_config_path}}/.keystore{{/if}}
     keystore_password: {{keystore_password}}
-    truststore: {{truststore}}
+    truststore: {{#if truststore }}{{truststore}}{{else}}{{../pkg.svc_config_path}}/.truststore{{/if}}
     truststore_password: {{truststore_password}}
 
     # More advanced defaults below:
@@ -1257,11 +1257,11 @@ client_encryption_options:
     enabled: {{enabled}}
     # If enabled and optional is set to true encrypted and unencrypted connections are handled.
     optional: {{optional}}
-    keystore: {{keystore}}
+    keystore: {{#if keystore }}{{keystore}}{{else}}{{../pkg.svc_config_path}}/.keystore{{/if}}
     keystore_password: {{keystore_password}}
     # require_client_auth: false
     # Set trustore and truststore_password if require_client_auth is true
-    # truststore: conf/.truststore
+    # truststore: {{#if truststore }}{{truststore}}{{else}}{{../pkg.svc_config_path}}/.truststore{{/if}}
     # truststore_password: cassandra
     # More advanced defaults below:
     # protocol: TLS
@@ -1271,9 +1271,7 @@ client_encryption_options:
     {{~#if require_client_auth}}
     require_client_auth: {{require_client_auth}}
     {{~/if}}
-    {{~#if truststore}}
-    truststore: {{truststore}}
-    {{~/if}}
+    truststore: {{#if truststore }}{{truststore}}{{else}}{{../pkg.svc_config_path}}/.truststore{{/if}}
     {{~#if truststore_password}}
     truststore_password: {{truststore_password}}
     {{~/if}}
@@ -1372,7 +1370,7 @@ transparent_data_encryption_options:
         {{~#if parameters}}
         parameters:
           {{~#each parameters}}
-          - keystore: {{keystore}}
+          - keystore: {{#if keystore }}{{keystore}}{{else}}{{../pkg.svc_config_path}}/.keystore{{/if}}
             keystore_password: {{keystore_password}}
             store_type: {{store_type}}
             key_password: {{key_password}}
