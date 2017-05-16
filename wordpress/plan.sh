@@ -2,12 +2,13 @@
 # See full docs at https://www.habitat.sh/docs/reference/plan-syntax/
 
 pkg_name=wordpress
-pkg_origin=core
+pkg_origin=starkandwayne
 pkg_version="4.7.4"
-pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_maintainer="Ramon Makkelie <makkelie@starkandwayne.com>"
 pkg_license=('Apache-2.0')
 pkg_source="https://wordpress.org/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="c11ce7580f21dfbca70dd6f817d3376385be6d34cf4d86f233eae3acb5fd87fd"
+pkg_description="installs wordpress"
 
 source_dir=$HAB_CACHE_SRC_PATH/${pkg_name}
 
@@ -29,6 +30,5 @@ do_build(){
 }
 
 do_install() {
-  # mkdir $pkg_prefix/public_html
-  cp -r "$source_dir" $pkg_prefix/public_html/
+  cp -r "$source_dir" "$pkg_prefix/public_html/"
 }
