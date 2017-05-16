@@ -1,6 +1,6 @@
 pkg_name=aws-cli
 pkg_origin=core
-pkg_version=1.10.43
+pkg_version=1.11.76
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_description="The AWS Command Line Interface (CLI) is a unified tool to \
@@ -9,37 +9,8 @@ pkg_description="The AWS Command Line Interface (CLI) is a unified tool to \
   through scripts."
 pkg_upstream_url=https://aws.amazon.com/cli/
 pkg_source=nosuchfile.tgz
-pkg_build_deps=(core/python)
 pkg_deps=(
   core/groff
-  core/python
 )
-pkg_bin_dirs=(bin)
-
-do_download() {
-  return 0
-}
-
-do_verify() {
-  return 0
-}
-
-do_unpack() {
-  return 0
-}
-
-do_prepare() {
-  pyvenv "$pkg_prefix"
-  # shellcheck source=/dev/null
-  source "$pkg_prefix/bin/activate"
-}
-
-do_build() {
-  return 0
-}
-
-do_install() {
-  pip install "awscli==$pkg_version"
-  # Write out versions of all pip packages to package
-  pip freeze > "$pkg_prefix/requirements.txt"
-}
+pkg_scaffolding=core/scaffolding-python
+pkg_scaffolding_python_pip_name=awscli
