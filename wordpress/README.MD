@@ -50,3 +50,13 @@ EOF
 
 docker-compose up    
 ```
+
+## tests
+#### Dependencies
+- [delmo](https://github.com/bodymindarts/delmo)
+- [docker-compose](https://docs.docker.com/compose/)
+
+in the tests directory run
+`delmo`
+
+this will spawn the containers and will run the tests
