@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+path="--path=/hab/svc/wordpress/data/"
+# setup wordpress
+wp --allow-root $path core install --title="WP-CLI" --admin_user=wpcli --admin_password=wpcli --admin_email=info@wp-cli.org --url=localhost
+
+# generate 100 posts with dummy data
+wp --allow-root $path post generate
+
+# get the details of the 10th post
+wp --allow-root $path post get 10
+
+# import images so we can test permissions
+# wp --allow-root $path media import ../images/test.png
+
+# upload plugin
+wp --allow-root $path plugin install bbpress --activate
