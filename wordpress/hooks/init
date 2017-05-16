@@ -22,4 +22,4 @@ cp -n {{pkgPathFor "core/php"}}/etc/php-fpm.d/www.conf.default {{pkgPathFor "cor
 chmod +x {{pkg.svc_data_path}}
 chown -R hab:hab {{pkg.svc_data_path}}
 
-hab service load starkandwayne/wordpress-proxy --group {{svc.group}} --force
+hab service load core/wordpress-proxy --group {{svc.group}} --force
