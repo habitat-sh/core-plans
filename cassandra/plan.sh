@@ -17,13 +17,12 @@ pkg_lib_dirs=(lib)
 # thrift port is for legacy client connection, need to be enabled to be used
 pkg_exports=(
   [port]=native_transport.port
-  # [ssl-port]=native_transport.ssl_port
+  [ssl-port]=native_transport.ssl_port
   [thrift-port]=rpc.port
 )
 pkg_exposes=(
   port
-  #ssl-port
-  thrift-port
+  # don't expose "ssl-port", "thrift-port" as they may be non existent depending on config
 )
 
 do_build() {

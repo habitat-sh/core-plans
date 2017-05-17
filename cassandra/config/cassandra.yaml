@@ -765,7 +765,9 @@ native_transport_port: {{cfg.native_transport.port}}
 # keeping native_transport_port unencrypted.
 # native_transport_port_ssl: 9142
 {{~#if cfg.native_transport.port_ssl}}
+#{{~#if cfg.encryption.client}} # try to keep the logic of cassandra and habitat template happy
 native_transport_port_ssl: {{cfg.native_transport.port_ssl}}
+#{{~/if}}
 {{~/if}}
 
 # The maximum threads for handling requests when the native transport is used.
