@@ -165,7 +165,21 @@
   # <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html>
 
 [transport]
-  port = 9300
+# host =
+# bind_host =
+# publish_host =
+# ping_schedule =
+
+[transport.tcp]
+port = "9300-9400"
+# connect_timeout = "30s"
+# compress = false
+
+#[transport.profiles]
+#[transport.profiles.default]
+#port = "9300-9400"
+#bind_host = "10.0.0.1"
+
 
 #
 # --------------------------------- Discovery ----------------------------------

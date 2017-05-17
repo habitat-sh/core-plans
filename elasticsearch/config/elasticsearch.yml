@@ -53,7 +53,62 @@ bootstrap.mlockall: {{cfg.bootstrap.mlockall}}
 
 network.host: {{cfg.network.host}}
 http.port: {{cfg.network.port}}
-transport.tcp.port: {{cfg.transport.port}}
+
+{{~#with cfg.transport}}
+transport:
+  {{~#if host}}
+  host: {{host}}
+  {{~/if}}
+  {{~#if bind_host}}
+  bind_host: {{bind_host}}
+  {{~/if}}
+  {{~#if publish_host}}
+  publish_host: {{publish_host}}
+  {{~/if}}
+  {{~#if ping_schedule}}
+  ping_schedule: {{ping_schedule}}
+  {{~/if}}
+
+  {{~#with tcp}}
+  tcp:
+    port: {{port}}
+    {{~#if connect_timeout}}
+    connect_timeout: {{connect_timeout}}
+    {{~/if}}
+    {{~#if compress}}
+    compress: {{compress}}
+    {{~/if}}
+  {{~/with}}
+  {{~#with profiles}}
+  profiles:
+    {{~#each this }}
+    {{@key}}:
+      port: {{port}}
+      {{~#if bind_host}}
+      bind_host: {{bind_host}}
+      {{~/if}}
+      {{~#if publish_host }}
+      publish_host: {{publish_host}}
+      {{~/if}}
+      {{~#if tcp_no_delay}}
+      tcp_no_delay: {{tcp_no_delay}}
+      {{~/if}}
+      {{~#if tcp_keep_alive }}
+      tcp_keep_alive: {{tcp_keep_alive}}
+      {{~/if}}
+      {{~#if reuse_address }}
+      reuse_address: {{reuse_address}}
+      {{~/if}}
+      {{~#if tcp_send_buffer_size }}
+      tcp_send_buffer_size: {{tcp_send_buffer_size}}
+      {{~/if}}
+      {{~#if tcp_receive_buffer_size }}
+      tcp_receive_buffer_size: {{tcp_receive_buffer_size}}
+      {{~/if}}
+    {{~/each }}
+  {{~/with}}
+{{~/with}}
+
 discovery.zen.fd.ping_timeout: {{cfg.discovery.zen_fd_ping_timeout}}
 discovery.zen.ping.multicast.enabled: {{cfg.discovery.ping_multicast_enabled}}
 discovery.zen.ping.unicast.hosts: [{{#each svc.members ~}} "{{sys.ip}}", {{/each ~}}]
