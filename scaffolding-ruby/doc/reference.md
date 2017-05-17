@@ -35,7 +35,7 @@ A [`Gemfile`][] must be present for this Scaffolding to function correctly. If n
 
 ## Package Dependencies
 
-Most non-trivial apps need more than their own codebase to run correctly. Many have gem dependencies which require compiling native gem extensions. Others require certain software present for shell out to (for example: ImageMagick). This Scaffolding uses app detection logic to conditionally inject some common Habitat packages into your Plan. However, if more packages are required, it is generally easy to add these to your Plan to fully describe your app's [build and runtime dependencies][12factor_dependencies].
+Most non-trivial apps need more than their own codebase to run correctly. Many have gem dependencies which require compiling native gem extensions. Others require certain software present for shelling out to (for example: ImageMagick). This Scaffolding uses app detection logic to conditionally inject some common Habitat packages into your Plan. However, if more packages are required, it is generally easy to add these to your Plan to fully describe your app's [build and runtime dependencies][12factor_dependencies].
 
 ### Default Dependencies
 

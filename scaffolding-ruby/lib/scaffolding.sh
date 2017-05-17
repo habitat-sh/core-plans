@@ -386,7 +386,6 @@ scaffolding_create_files_symlinks() {
 scaffolding_create_process_bins() {
   local bin cmd
 
-  mkdir -pv "$CACHE_PATH/process_bins"
   for bin in "${!scaffolding_process_bins[@]}"; do
     cmd="${scaffolding_process_bins[$bin]}"
     _create_process_bin "$pkg_prefix/bin/${pkg_name}-${bin}" "$cmd"
