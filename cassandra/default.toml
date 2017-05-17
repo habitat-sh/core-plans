@@ -41,6 +41,11 @@ enable_scripted_user_defined_functions = false
 windows_timer_interval = 1
 # max_value_size_in_mb = 256
 
+[runtime] # runtime configuration passed to the JVM context
+# classpath = []
+[runtime.jvm_opts]
+#  Xmx = "1g"
+
 [tokens]
 num = 256
 # allocate_for_keyspace = "KEYSPACE"

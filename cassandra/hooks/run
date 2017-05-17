@@ -2,11 +2,16 @@
 
 exec 2>&1
 
-#{{#if cfg.runtime.cassandra_java_opts}}
-#   JVM_OPTS -- Additional arguments to the JVM for heap size, etc
-#{{~/if}}
+{{~#if cfg.runtime.jvm_opts}}
+   #JVM_OPTS -- Additional arguments to the JVM for heap size, etc
+#	export JVM_OPTS="{{~#each cfg.runtime.jvm_opts}} -{{@key}}={{this}}{{~/each}}"
+{{~/if}}
+{{~#if cfg.runtime.classpath}}
+   #CLASSPATH -- Optionnal JARS to pass to the JVM classpath
+   #export CLASSPATH={{~#each cfg.runtime.classpath}}{{~#if @index}}:{{~/if}}"{{this}}"{{~/each}}
+{{~/if}}
 
-export JAVA_HOME="$(hab pkg path core/jre8)"
+export JAVA_HOME={{pkgPathFor "core/jre8"}}
 export CASSANDRA_CONF="{{pkg.svc_config_path}}"
 
 exec cassandra -f \
