@@ -6,7 +6,7 @@ To install and setup Habitat on your system for development, follow the instruct
 
 This should leave you with a `hab` program on your system with a generated origin key for signing built packages.
 
-## Create Plan which uses the Ruby Scaffolding
+## Create a Plan which uses the Ruby Scaffolding
 
 Now, navigate to the directory at the root of your app and create a `habitat/` directory:
 

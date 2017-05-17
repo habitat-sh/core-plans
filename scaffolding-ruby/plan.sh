@@ -1,10 +1,10 @@
 pkg_name=scaffolding-ruby
 pkg_origin=core
-pkg_version=0.7.0
+pkg_version="0.7.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_description="Habitat Plan Scaffolding for Ruby Applications"
-pkg_upstream_url="https://github.com/habitat-sh/core-plans"
+pkg_upstream_url="https://github.com/habitat-sh/core-plans/tree/master/scaffolding-ruby"
 pkg_deps=(core/bundler core/ruby core/tar core/busybox-static core/rq core/gcc core/make core/pkg-config)
 pkg_build_deps=(core/coreutils core/sed)
 pkg_bin_dirs=(bin)
