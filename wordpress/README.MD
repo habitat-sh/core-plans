@@ -59,4 +59,4 @@ docker-compose up
 in the tests directory run
 `delmo`
 
-this will spawn the containers and will run the tests
+this will spawn the containers and will run the tests we provided in the delmo.yml
