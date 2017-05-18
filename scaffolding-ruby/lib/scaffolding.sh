@@ -123,16 +123,30 @@ _RAILS_
 # Confirm an initial database connection
 if ! $pkg_prefix/libexec/is_db_connected; then
   >&2 echo ""
-  >&2 echo "A database connection is require for this app to properly boot."
+  >&2 echo "A database connection is required for this app to properly boot."
   >&2 echo "Is the database not running or are the database connection"
   >&2 echo "credentials incorrect?"
   >&2 echo ""
-  >&2 echo "There are 3 config setting for this package which must be set"
-  >&2 echo "correctly:"
+{{~#if bind.database}}
+  >&2 echo "This app started with a database bind and will discovery the"
+  >&2 echo "hostname and port number in the Habitat ring."
   >&2 echo ""
-  >&2 echo " * db.user      - The database username"
-  >&2 echo " * db.password  - The database password"
-  >&2 echo " * db.name      - The database name"
+  >&2 echo "There are 3 remaining config settings which must be set correctly:"
+{{else}}
+  >&2 echo "This app started without a database bind meaning that the"
+  >&2 echo "database is assumed to be running outside of a Habitat ring."
+  >&2 echo "Therefore, you must provide all the database connection values."
+  >&2 echo ""
+  >&2 echo "There are 5 config settings which must be set correctly:"
+{{~/if}}
+  >&2 echo ""
+{{~#unless bind.database}}
+  >&2 echo " * db.host      - The database hostname or IP address (Current: {{#if cfg.db.host}}{{cfg.db.host}}{{else}}<unset>{{/if}})"
+  >&2 echo " * db.port      - The database listen port number (Current: {{#if cfg.db.port}}{{cfg.db.port}}{{else}}5432{{/if}})"
+{{~/unless}}
+  >&2 echo " * db.user      - The database username (Current: {{#if cfg.db.user}}{{cfg.db.user}}{{else}}<unset>{{/if}})"
+  >&2 echo " * db.password  - The database password (Current: {{#if cfg.db.password}}<set>{{else}}<unset>{{/if}})"
+  >&2 echo " * db.name      - The database name (Current: {{#if cfg.db.name}}{{cfg.db.name}}{{else}}<unset>{{/if}})"
   >&2 echo ""
   >&2 echo "Aborting..."
   exit 15
@@ -247,16 +261,15 @@ scaffolding_setup_app_config() {
 scaffolding_setup_database_config() {
   if [[ "${_uses_pg:-}" == "true" ]]; then
     local db t
-    # TODO fin: handle leader selection vs. choosing the first in a service
-    # group
     db="postgres://{{cfg.db.user}}:{{cfg.db.password}}"
-    db="${db}@{{bind.database.first.sys.ip}}:{{bind.database.first.cfg.port}}"
+    db="${db}@{{#if bind.database}}{{bind.database.first.sys.ip}}{{else}}{{#if cfg.db.host}}{{cfg.db.host}}{{else}}db.host.not.set{{/if}}{{/if}}"
+    db="${db}:{{#if bind.database}}{{bind.database.first.cfg.port}}{{else}}{{#if cfg.db.port}}{{cfg.db.port}}{{else}}5432{{/if}}{{/if}}"
     db="${db}/{{cfg.db.name}}"
     _set_if_unset scaffolding_env DATABASE_URL "$db"
 
-    # Add a require binding called `database` which will be the PostgreSQL
+    # Add an optional binding called `database` which will be the PostgreSQL
     # database
-    _set_if_unset pkg_binds database "port"
+    _set_if_unset pkg_binds_optional database "port"
 
     t="$CACHE_PATH/default.scaffolding.toml"
     if _default_toml_has_no db; then
