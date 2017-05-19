@@ -204,3 +204,10 @@
   expected_nodes = "-1"
   recover_after_time = "5m"
   recover_after_nodes = "-1"
+
+[runtime]
+  heapsize = ""
+  crate_java_opts = ""
+  crate_startup_sleep_time = ""
+  max_locked_memory = ""
+  max_open_files = ""
