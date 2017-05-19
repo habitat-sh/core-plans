@@ -11,4 +11,19 @@ kill_rabbit() {
 trap "kill_rabbit" INT TERM HUP ABRT QUIT
 
 # We do NOT call exec here, as we trap signals and kill rabbit in this script
-rabbitmq-server 2>&1
+if [ -z "{{cfg.rabbitmq.cluster_with}}" -o "{{cfg.rabbitmq.cluster_with}}" = "{{sys.hostname}}" ]; then
+  echo "Running as single server"
+  rabbitmq-server 2>&1
+else
+  echo "Running as clustered server"
+  export RABBITMQ_LOGS={{pkg.svc_var_path}}/logs
+  rabbitmq-server -detached
+  rabbitmqctl stop_app
+
+  echo "Joining cluster {{svc.rabbitmq.cluster_with}}"
+  rabbitmqctl join_cluster {{#if cfg.rabbitmq.ram}} --ram {{/if}} {{cfg.rabbitmq.name}}@{{cfg.rabbitmq.cluster_with}}
+
+  rabbitmqctl start_app
+
+  tail -f $RABBITMQ_LOGS
+fi

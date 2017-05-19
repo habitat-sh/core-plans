@@ -1,0 +1,17 @@
+suite:
+  name: starkandwayne-rabbitmq
+  system: docker-compose.yml
+  task_service: tests
+
+tests:
+- name: create-rabbitmq
+  spec:
+  - wait: rabbitmq-ready
+  # - assert:
+  #   - rabbitmq-setup
+  # - fail:
+  #   - rabbitmq-fail
+
+tasks:
+- name: rabbitmq-ready
+  command: /scripts/rabbitmq-ready

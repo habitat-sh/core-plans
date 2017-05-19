@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+# delmo is not fast enough to pickup the messages
+sleep 30
+
+RET=1
+# we need to do wonkey stuff because of bad json of rabbitmq
+# we request the cluster nodes | remove the first and last bracket | remove a comma | jq that stuff
+curl -s -u admin:admin http://standalone:15672/api/nodes | sed 's/^.\(.*\).$/\1/' | sed 's/,{"cluster_links/{"cluster_links/g' | jq -r '.name' | while read OUTPUT
+  do
+      # healthchecks give a okay even if node is down.
+      curl --fail -u admin:admin http://standalone:15672/api/healthchecks/node/$OUTPUT
+      echo $OUTPUT
+      RET=$?
+  done || exit $RET
