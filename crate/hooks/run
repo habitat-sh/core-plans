@@ -1,0 +1,22 @@
+#!/bin/sh -xe
+
+exec 2>&1
+
+export JAVA_HOME=$(hab pkg path core/jre8)
+{{#if cfg.runtime.heapsize ~}}
+export CRATE_HEAP_SIZE={{cfg.runtime.heapsize}}
+{{/if ~}}
+{{#if cfg.runtime.crate_java_opts}}
+export CRATE_JAVA_OPTS={{cfg.runtime.crate_java_opts}}
+{{/if ~}}
+{{#if cfg.runtime.crate_startup_sleep_time}}
+export CRATE_STARTUP_SLEEP_TIME={{cfg.runtime.crate_startup_sleep_time}}
+{{/if ~}}
+{{#if cfg.runtime.max_locked_memory}}
+export MAX_LOCKED_MEMORY={{cfg.runtime.max_locked_memory}}
+{{/if ~}}
+{{#if cfg.runtime.max_open_files}}
+export MAX_OPEN_FILES={{cfg.runtime.max_open_files}}
+{{/if ~}}
+
+exec crate -Cpath.conf={{pkg.svc_config_path}} 2>&1
