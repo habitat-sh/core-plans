@@ -39,7 +39,7 @@ do_verify() {
     
     # Now do the GPG-based verification
     build_line "Verifying crate-${pkg_version}.tar.gz signature"
-    export GNUPGHOME="$(mktemp -d -p $HAB_CACHE_SRC_PATH)"
+    export GNUPGHOME=$(mktemp -d -p "$HAB_CACHE_SRC_PATH")
     gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 90C23FC6585BC0717F8FBFC37FAAE51A06F6EAEB
     gpg --batch --verify "${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version}.tar.gz.asc \
         "${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version}.tar.gz
@@ -52,7 +52,7 @@ do_build() {
 }
 
 do_install() {
-    cd "${HAB_CACHE_SRC_PATH}"/"${pkg_name}"-"${pkg_version}"
+    cd "${HAB_CACHE_SRC_PATH}"/"${pkg_name}"-"${pkg_version}" || exit
     install -vDm644 README.rst "${pkg_prefix}"/README.rst
     install -vDm644 LICENSE.txt "${pkg_prefix}"/LICENSE.txt
     install -vDm644 NOTICE "${pkg_prefix}"/NOTICE
