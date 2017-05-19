@@ -65,5 +65,9 @@ do_install() {
 
 do_strip() {
     return 0
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> 940533805e8f63c1cebe61542de40c69122aeb3c
