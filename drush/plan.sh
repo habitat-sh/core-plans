@@ -28,7 +28,7 @@ do_build() {
 }
 
 do_install() {
-    cp -r "$HOME"/.composer/* $pkg_prefix/bin/
-    fix_interpreter $pkg_prefix/bin/vendor/bin/drush core/coreutils bin/env
-    fix_interpreter $pkg_prefix/bin/vendor/bin/drush.launcher core/coreutils bin/env
+    cp -r "$HOME"/.composer/* "$pkg_prefix"/bin/
+    fix_interpreter "$pkg_prefix"/bin/vendor/bin/drush core/coreutils bin/env
+    fix_interpreter "$pkg_prefix"/bin/vendor/bin/drush.launcher core/coreutils bin/env
 }
