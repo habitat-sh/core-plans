@@ -27,5 +27,5 @@ do_build() {
 }
 
 do_install() {
-    cp ${HAB_CACHE_SRC_PATH}/${pkg_filename} ${pkg_prefix}/jenkins.war
+    cp "${HAB_CACHE_SRC_PATH}"/"${pkg_filename}" "${pkg_prefix}"/jenkins.war
 }
