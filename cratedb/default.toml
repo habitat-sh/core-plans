@@ -1,119 +1,55 @@
-[enterprise]
-  license = "false"
-
-[table]
-  number_of_replicas = "1"
-  refresh_interval = "1000ms"
-  column_policy = "dynamic"
-
-  [table.blocks]
-    read_only = "false"
-    read = "false"
-    write = "false"
-    metadata = "false"
-
-  [table.translog]
-    flush_threshold_ops = "unlimited"
-    flush_threshold_size = "200mb"
-    flush_threshold_period = "30m"
-    disable_flush = "false"
-    interval = "5s"
-    sync_interval = "5s"
-
-  [table.routing]
-    [index.routing.allocation]
-      enable = "all"
-      total_shards_per_node = "-1"
-
-  [table.recovery]
-    initial_shards = "quorum"
-
-  [table.warmer]
-    enabled = "true"
-
-  [table.unassigned]
-    [table.unassigned.node_left]
-      delayed_timeout = "1m"
-
 [cluster]
   name = "crate"
-  
+
+  [cluster.info]
+    [cluster.info.update]
+      interval = "30s"
+
   [cluster.graceful_stop]
     min_availability = "primaries"
     reallocate = "true"
     timeout = "2h"
     force = "false"
 
-  [cluster.info]
-    [clsuter.info.update]
-      interval = "30s"
-
   [cluster.routing]
     [cluster.routing.allocation]
       enable = "all"
-      node_initial_primaries_recoveries = "4"
-      node_concurrent_recoveries = "2"
       allow_rebalance = "indices_all_active"
       cluster_concurrent_rebalance = "2"
+      node_initial_primaries_recoveries = "4"
+      node_concurrent_recoveries = "2"
 
-      [cluster.routing.allocation.awareness]
-        attributes = ""
+    [cluster.routing.allocation.balance]
+      shard = "0.45f"
+      index = "0.5f"
+      primary = "0.05f"
+      threshold = "1.0f"
 
-      [cluster.routing.allocation.balance]
-	index = "0.55f"
-	primary = "0.05f"
-        shard = "0.45f"
-	threshold = "1.0f"
+    [cluster.routing.allocation.disk]
+      threshold_enabled = "true"
 
-      [cluster.routing.allocation.disk]
-        threshold_enabled = "true"
-
-        [cluster.routing.allocation.disk.watermark]
-	  low = "85%"
-	  high = "90%"
+      [cluster.routing.allocation.disk.watermark]
+        low = "85%"
+	high = "90%"
 
 [node]
   name = ""
   data = "true"
-  local = "false"
   client = "false"
-  rack = ""
-  max_local_storage_nodes = ""
-
-  [node.breaker]
-    [node.breaker.query]
-      limit = "60%"
-      overhead = "1.09"
+  local = "false"
 
   [node.sql]
     read_only = "false"
 
-
-[plugin]
-  mandatory = ""
-
-[bootstrap]
-  mlockall = "false"
-
 [network]
-  bind_host = "0.0.0.0"
+  bind_host = ""
   publish_host = ""
-  host = "0.0.0.0"
-
-[transport]
-  publish_port = ""
-  
-  [transport.tcp]
-    port = "4300"
-    compress = "true"
 
 [http]
-  port = "4200"
+  port = 4200
   publish_port = ""
-  max_content_length = "100mb"
-  enabled = "false"
 
-  [cors]
+  [http.cors]
     enabled = "false"
     allow-origin = ""
     max-age = "1728000"
@@ -121,102 +57,23 @@
     allow-headers = "X-Requested-With, Content-Type, Content-Length"
     allow-credentials = "false"
 
-[gateway]
-  expected_nodes = "-1"
-  recover_after_time = "5m"
-  recover_after_nodes = "-1"
+[transport]
+  publish_port = ""
 
-[indices]
-  [indices.breaker]
-    [indices.breaker.query]
-      limit = "60%"
-      overhead = "1.09"
+  [transport.tcp]
+    port = 4300
 
-    [indices.breaker.request]
-      limit = "60%"
-      overhead = "1.0"
+[psql]
+  port = 5432
 
-  [indices.fielddata]
-    [indicies.fielddata.breaker]
-      limit = "60%"
-      overhead = "1.03"
+[path]
+  repo = ""
 
-  [indices.recovery]
-    concurrent_streams = "3"
-    file_chunk_size = "512kb"
-    translog_ops = "1000"
-    translog_size = "512kb"
-    compress = "true"
-    max_bytes_per_sec = "40mb"
-    retry_delay_state_sync = "500ms"
-    retry_delay_network = "5s"
-    retry_activity_timeout = "15m"
-    retry_internal_action_timeout = "15m"
-    retry_internal_long_action_timeout = "30m"
-    recovery_activity_timeout = "30m"
+[plugins]
+  mandatory = ""
 
-  [indices.store]
-    [indices.store.throttle]
-      type = ""
-      max_bytes_per_sec = "0b"
-
-[discovery]
-  type = ""
-
-  [discovery.azure]
-    method = "vnet"
-
-  [discovery.ec2]
-    groups = ""
-    any_group = "true"
-    host_type = "private_ip"
-    availability_zones = ""
-    ping_timeout = "3s"
-
-  [discovery.srv]
-    query = ""
-    resolver = ""
-
-  [discovery.zen]
-    minimum_master_nodes = "1"
-    publish_timeout = "30s"   
-
-    [discovery.zen.ping]
-      timeout = "3s"
-
-      [discovery.zen.ping.multicast]
-        enabled = "false"
-
-      [discovery.zen.ping.unicast]
-        hosts = ""
-
-    [discovery.zen.fd]
-      ping_timeout = "30s"
-      ping_retries = "3"
-      ping_interval = "1s"
-
-[cloud]
-  [cloud.aws]
-    access_key = ""
-    secret_key = ""
-
-    [cloud.aws.ec2]
-      endpint = ""
-
-  [cloud.azure]
-    [cloud.azure.management]
-      [cloud.azure.management.app]
-        id = ""
-	secret = ""
-
-      [cloud.azure.management.resourcegroup]
-        name = ""
-
-      [cloud.azure.management.subscrption]
-        id = ""
-
-      [cloud.azure.management.tenant]
-        id = ""
+[bootstrap]
+  mlockall = "false"
 
 [monitor]
   [monitor.jvm]
@@ -228,71 +85,20 @@
 
       [monitor.jvm.gc.old]
         warn = "1000ms"
-        info = "1000ms"
-        debug = "1000ms"
-    
-[bulk]
-  request_timeout = "1m"
-
-[udc]
-  enabled = "true"
-  initial_delay = "10m"
-  interval = "24h"
-  url = "https://udc.crate.io"
+	info = "1000ms"
+	debug = "1000ms"
 
 [es]
   [es.api]
     enabled = "false"
 
+[blobs]
+  path = ""
+
 [repositories]
   [repositories.url]
     allowed_urls = ""
     supported_protocols = "http, https, ftp, file, jar"
-
-[path]
-  repo = ""
-
-[psql]
-  enabled = "true"
-  port = "5432"
-
-[runtime]
-  max_open_files = ""
-  max_locked_memory = ""
-  crate_startup_sleep_time = ""
-  crate_java_opts = ""
-  heapsize = ""
-
-[logger]
-  level = "INFO"
-  action = "DEBUG"
-  discovery = "TRACE"
-
-  [logger.indices]
-    recovery = "DEBUG"
-
-  [logger.deprecation]
-    discovery = "DEBUG"
-
-  [logger.com]
-    amazonaws = "WARN"
-
-  [logger.appender]
-    [logger.appender.console]
-      type = "console"
-
-      [logger.appender.console.layout]
-        type = "consolePattern"
-	conversionPattern = "\"[%d{ISO8601}][%-5p][%-25c] %m%n\""
-
-    [logger.appender.file]
-      type = "dailyRollingFile"
-      file = "${path.logs}/${cluster.name}.log"
-      datePattern = "\"'.'yyyy-MM-dd\""
-
-      [logger.appender.file.layout]
-        type = "pattern"
-        conversionPattern = "\"[%d{ISO8601}][%-5p][%-25c] %m%n\""
 
 [stats]
   enabled = "false"
@@ -308,6 +114,93 @@
     [stats.breaker.log]
       [stats.breaker.log.jobs]
         limit = "5%"
-
+      
       [stats.breaker.log.operations]
         limit = "5%"
+
+[bulk]
+  request_timeout = "1m"
+
+[discovery]
+  type = ""
+
+  [discovery.azure]
+    method = "vnet"
+
+  [discovery.ec2]
+    groups = ""
+    any_group = "true"
+    host_type = "private_ip"
+    availability_zones = ""
+    ping_timeput = "3s"
+    endpoint = ""
+
+  [discovery.srv]
+    query = ""
+    resolver = ""
+
+  [discovery.zen]
+    minimum_master_nodes = "1"
+    ping_timeout = "3s"
+    publish_timeout = "30s"
+
+    [discovery.zen.ping]
+      [discovery.zen.ping.unicast]
+        hosts = ""
+
+[cloud]
+  [cloud.aws]
+    access_key = ""
+    secret_key = ""
+
+  [cloud.azure]
+    [cloud.azure.management]
+      [cloud.azure.management.resourcegroup]
+        name = ""
+
+      [cloud.azure.management.subscription]
+        id = ""
+
+      [cloud.azure.management.tenant]
+        id = ""
+
+      [cloud.azure.management.app]
+        id = ""
+	secret = ""
+
+[indices]
+  [indices.breaker]
+    [indices.breaker.query]
+      limit = "60%"
+      overhead = "1.09"
+
+    [indices.breaker.fielddata]
+      limit = "60%"
+      overhead = "1.03"
+
+    [indices.breaker.request]
+      limit = "40%"
+      overhead = "1.0"
+
+  [indices.recovery]
+    concurrent_streams = "3"
+    file_chunk_size = "512kb"
+    translog_ops = "1000"
+    translog_size = "512kb"
+    compress = "true"
+    max_bytes_per_sec = "40mb"
+    retry_delay_state_sync = "500ms"
+    retry_delay_network = "5s"
+    retry_activity_timeout = "15m"
+    retry_internal_action_timeout = "15m"
+    retry_internal_long_action_timeout = "30m"
+
+  [indices.store]
+    [indices.store.throttle]
+      type = "merge"
+      max_bytes_per_sec = "20mb"
+
+[gateway]
+  expected_nodes = "-1"
+  recover_after_time = "5m"
+  recover_after_nodes = "-1"

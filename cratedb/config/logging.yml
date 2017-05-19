@@ -1,27 +1,13 @@
-rootLogger: {{cfg.logger.level}}, console, file
+rootLogger: INFO, console
 
 logger:
-  action: {{cfg.logger.action}}
+  # log action execution errors for easier debugging
+  action: DEBUG
 
-# indices.recovery: {{cfg.logger.indices.recovery}}
-
-# discovery: {{cfg.logger.discovery}}
-
-deprecation.discovery: {{cfg.logger.deprecation.discovery}}
-
-com.amazonaws: {{cfg.logger.com.amazonaws}}
 
 appender:
   console:
-    type: {{cfg.logger.appender.console.type}}
+    type: console
     layout:
-      type: {{cfg.logger.appender.console.layout.type}}
-      conversionPattern: {{cfg.logger.appender.console.layout.conversionPattern}}
-
-  file:
-    type: {{cfg.logger.appender.file.type}}
-    file: {{cfg.logger.appender.file.file}}
-    datePattern: {{cfg.logger.appender.file.datePattern}}
-    layout:
-      type: {{cfg.logger.appender.file.layout.type}}
-      conversionPattern: {{cfg.logger.appender.file.layout.conversionPattern}}
+      type: consolePattern
+      conversionPattern: "[%d{ISO8601}][%-5p][%-25c] %m%n"

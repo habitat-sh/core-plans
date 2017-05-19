@@ -1,6 +1,6 @@
 #!/bin/sh
 
-raw_data="$(wget -qO - "{{sys.ip}}:{{cfg.http.port}}" | grep "ok")"
+raw_data="$(curl -o /dev/null --silent --head --write-out '%{http_code}\n' {{sys.ip}}:{{cfg.http.port}})"
 status="$(echo "${raw_data: : -1}" | awk '{print $3}')"
 
 case $status in
