@@ -1,7 +1,0 @@
-{
-  "name": "local_service_npm_script",
-  "version": "0.1.0",
-  "scripts": {
-    "start": "node custom.js"
-  }
-}
