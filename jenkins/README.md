@@ -1,28 +1,26 @@
-# Habitat Package: Crate
+# Habitat Package: core/jenkins
 The Habitat Maintainers <humans@habitat.sh>
 
 ## Description
 
-- [www](https://www.drupal.org)
-- [Docs](https://www.drupal.org/documentation)
+- [www](https://jenkins.io)
+- [Docs](https://jenkins.io/doc/)
 
-> Drupal is content management software. It's used to make many of the
-> websites and applications you use every day.
-
-Drupal has great standard features, like easy content authoring,
-reliable performance, and excellent security. But what sets it apart
-is its flexibility; modularity is one of its core principles. Its
-tools help you build the versatile, structured content that dynamic
-web experiences need.
+> Jenkins is a self-contained, open source automation server which can
+> be used to automate all sorts of tasks such as building, testing,
+> and deploying software. Jenkins can be installed through native
+> system packages, Docker, or even run standalone by any machine with
+> the Java Runtime Environment installed.
 
 ## Usage
 ### Starting
 ```
-hab sup start core/drupal
+hab sup start core/jenkins
 ```
 
-### Shutdown
-```
-hab sup stop core/drupal
-hab sup stop core/nginx
-```
+## Notes
+
+- By default, this package is configured for plain HTTP and is
+  intended for usage in secure environment.
+  - On first run, you will be asked for an initial admin password. Run
+  `slog` inside the studio to obtain this.
