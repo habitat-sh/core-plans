@@ -1,6 +1,4 @@
-# Habitat Package: Crate
-Endocode Habitat Maintainers <habitat@endocode.com>
-
+# Core Package: Crate
 ## Description
 
 - [www](https://crate.io)
