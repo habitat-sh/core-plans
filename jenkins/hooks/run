@@ -2,9 +2,10 @@
 
 exec 2>&1
 
-export JAVA_HOME=$(hab pkg path core/jdk8)  
-export TOMCAT_HOME=$(hab pkg path core/tomcat8)/tc
-export JENKINS_HOME={{pkg.svc_config_path}}
-export JENKINS_SLAVE_AGENT_PORT={{cfg.jenkins.agent_port}}
+export JAVA_HOME={{pkgPathFor "core/jre8"}}
+export JENKINS_HOME={{pkg.svc_data_path}}
 
-exec ${TOMCAT_HOME}/bin/catalina.sh run
+exec java -jar {{pkg.path}}/jenkins.war \
+     --httpPort={{cfg.jenkins.http.port}} \
+     --httpListenAddress={{sys.ip}} \
+     --ajp13Port=-1
