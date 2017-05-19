@@ -1,0 +1,5 @@
+#!/bin/bash
+
+redis-cli -a {{cfg.password}} -h localhost -p {{cfg.port}} INFO replication \
+  | grep slave_repl_offset \
+  | sed 's/slave_repl_offset://'

@@ -1,0 +1,80 @@
+#!/bin/bash
+
+source {{pkg.svc_config_path}}/environment.sh
+
+assert_shield_entity_exists() {
+  if [[ "${3}" == "" ]]; then
+    if [[ "{2}" == "" ]]; then
+      echo "Must define a ${1} in order to autoprovision shield"
+      exit 1
+    fi
+    shield ${1} ${2} >/dev/null
+    if [[ $? != 0 ]]; then
+      echo "Shield ${1} '${2}' doesn't exist! Not initializing"
+      exit 1
+    fi
+  fi
+}
+
+exec 2>&1
+
+{{ #unless svc.me.follower }}
+if [[ "${SHIELD_ENDPOINT}" != "" ]]; then
+  {{ #if cfg.shield_skip_ssl_verify }}
+  export SHIELD_SKIP_SSL_VERIFY=true
+  {{ /if }}
+  curl -skL ${SHIELD_ENDPOINT}/v1/ping >/dev/null
+  if [[ ${?} != 0 ]]; then
+    echo "The shield daemon is not running"
+    exit 1
+  fi
+
+  shield create-backend {{svc.group}} ${SHIELD_ENDPOINT} >/dev/null
+  export SHIELD_API_TOKEN
+
+  assert_shield_entity_exists schedule {{cfg.backups_schedule}} {{cfg.backups_schedule_value}}
+  assert_shield_entity_exists policy {{cfg.backups_retention}} {{cfg.backups_retention_value}}
+  assert_shield_entity_exists store {{cfg.backups_store}} ''
+
+  hab sup status | grep shield-agent
+  if [[ $? != 0 ]]; then
+    echo 'Starting shield-agent as side car'
+    mkdir -p /hab/svc/shield-agent
+    cp {{pkg.svc_config_path}}/shield-agent.toml /hab/svc/shield-agent/user.toml
+    hab service load starkandwayne/shield-agent --group {{svc.group}} && exit 1
+  fi
+
+  {{ #if cfg.bootstrap_from_backup }}
+  curl -s http://localhost:5444 >/dev/null
+  if [[ ${?} != 0 ]]; then
+    echo "Waiting until the local shield-agent is running"
+    exit 1
+  fi
+
+  if [[ -f {{pkg.svc_var_path}}/RESTORING ]]; then
+    task_uuid=$(cat {{pkg.svc_var_path}}/RESTORING)
+    task_status=$(shield task ${task_uuid} --raw | jq -r '.status')
+    if [[ ${task_status} == 'done' ]]; then
+      rm {{pkg.svc_var_path}}/RESTORING
+      echo 'Restore task completed'
+      exit 0
+    fi
+    echo "Waiting for restore to complete. Current status: '${task_status}'"
+    exit 1
+  else
+    tmp_dir=$(mktemp -d)
+    trap "rm -rf ${tmp_dir}" INT QUIT TERM EXIT
+    echo 1 | shield restore '{{svc.service}}-{{svc.group}}' | tee ${tmp_dir}/restore-out.txt
+    if cat ${tmp_dir}/restore-out.txt | grep -o 'shield task .*'; then
+      cat ${tmp_dir}/restore-out.txt | \
+        grep -o 'shield task .*' | \
+        awk '{ print $3 }' > {{pkg.svc_var_path}}/RESTORING
+      echo 'Restore task triggered'
+      exit 1
+    else
+      echo "Couldn't bootstrap from backup"
+    fi
+  fi
+  {{/if}}
+fi
+{{~/unless}}

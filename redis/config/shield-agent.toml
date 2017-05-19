@@ -1,0 +1,42 @@
+{{#if cfg.shield_agent_advertise_ip}}
+advertise_ip = '{{cfg.shield_agent_advertise_ip}}'
+{{/if}}
+{{#if cfg.shield_agent_advertise_port}}
+advertise_port = '{{cfg.shield_agent_advertise_port}}'
+{{/if}}
+
+port = '{{cfg.shield_agent_port}}'
+
+{{ #if bind.shield.first }}
+{{ #with bind.shield.first }}
+shield_endpoint = 'https://{{sys.ip}}:{{cfg.port}}'
+provisioning_key = '{{cfg.provisioning_key}}'
+{{~/with}}
+{{else}}
+shield_endpoint = '{{cfg.shield_endpoint}}'
+provisioning_key = '{{cfg.shield_provisioning_key}}'
+{{ /if }}
+skip_ssl_verify = '{{cfg.shield_skip_ssl_verify}}'
+
+[[targets]]
+name = '{{svc.service}}-{{svc.group}}'
+plugin = 'fs'
+[targets.config]
+base_dir = '{{pkg.svc_data_path}}'
+
+{{ #if cfg.backups_schedule_value }}
+[schedules]
+{{cfg.backups_schedule}} = '{{cfg.backups_schedule_value}}'
+{{ /if }}
+
+{{ #if cfg.backups_retention_value }}
+[retention-policies]
+{{cfg.backups_retention}} = '{{cfg.backups_retention_value}}'
+{{ /if }}
+
+[[jobs]]
+name = '{{svc.service}}-{{svc.group}}'
+target = '{{svc.service}}-{{svc.group}}'
+store = '{{cfg.backups_store}}'
+retention = '{{cfg.backups_retention}}'
+schedule = '{{cfg.backups_schedule}}'
