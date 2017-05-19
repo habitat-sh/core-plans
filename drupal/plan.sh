@@ -31,5 +31,5 @@ do_build() {
 }
 
 do_install() {
-    cp -r $HAB_CACHE_SRC_PATH/$pkg_dirname/drupal $pkg_prefix/drupal
+    cp -r "$HAB_CACHE_SRC_PATH"/"$pkg_dirname"/drupal "$pkg_prefix"/drupal
 }
