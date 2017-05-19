@@ -21,7 +21,7 @@ pkg_description="CrateDB is an open source SQL database with a ground-breaking d
 do_download() {
     # Download the source file, as usual
     do_default_download
-
+    
     # Now also grab the signature for the source
     # Provide the checksum so that file does not get downloaded with every build
     download_file "https://cdn.crate.io/downloads/releases/${pkg_name}-${pkg_version}.tar.gz.asc" \
@@ -32,7 +32,7 @@ do_download() {
 do_verify() {
     # Firstly perform the standard checksum-based verification
     do_default_verify
-
+    
     # Now verify the signature file
     verify_file "${pkg_name}-${pkg_version}.tar.gz.asc" \
     		"4e6007a35b99c0da75356cb6cd7aeafd7d380e1a5f5fa26b79a0dfa0a9898924"
@@ -57,7 +57,7 @@ do_install() {
     install -vDm644 LICENSE.txt "${pkg_prefix}"/LICENSE.txt
     install -vDm644 NOTICE "${pkg_prefix}"/NOTICE
     install -vDm644 CHANGES.txt "${pkg_prefix}"/CHANGES.txt
-
+    
     mkdir -p "${pkg_prefix}"/crate
     cp -a bin lib plugins "${pkg_prefix}"/crate
     rm "${pkg_prefix}"/crate/bin/*.bat
