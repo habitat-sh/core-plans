@@ -1,7 +1,7 @@
 pkg_name=crate
-pkg_origin=endocode
+pkg_origin=core
 pkg_version="1.1.2"
-pkg_maintainer="Endocode Habitat Team <habitat@endocode.com>"
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://cdn.crate.io/downloads/releases/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="8f22b6531b3d1c8602a880779bbe09e5295ef0959a30aff0986575835aadc937"
