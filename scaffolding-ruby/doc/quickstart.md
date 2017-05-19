@@ -24,8 +24,6 @@ $EDITOR habitat/plan.sh
 pkg_name=MY_APP
 pkg_origin=MY_ORIGIN
 pkg_version=MY_VERSION
-pkg_deps=()
-pkg_build_deps=()
 pkg_scaffolding=core/scaffolding-ruby
 ```
 
