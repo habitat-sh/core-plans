@@ -1,10 +1,10 @@
 pkg_name=drupal
-pkg_origin=baggerspion
+pkg_origin=core
 pkg_version="8.3.2"
 pkg_license=('gplv2+')
 pkg_source="N/A"
 pkg_shasum="N/A"
-pkg_deps=(core/mysql-client baggerspion/drush core/nginx core/php)
+pkg_deps=(core/mysql-client core/drush core/nginx core/php)
 pkg_binds=(
   [database]="port username password"
 )
@@ -12,6 +12,7 @@ pkg_svc_user="root"
 pkg_svc_run="php-fpm --nodaemonize"
 pkg_description="Drupal is a free and open source content-management framework written in PHP."
 pkg_upstream_url="https://www.drupal.org"
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 
 do_download() {
     return 0
