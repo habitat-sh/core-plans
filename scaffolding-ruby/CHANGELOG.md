@@ -2,6 +2,13 @@
 
 [Full history](https://github.com/habitat-sh/core-plans/commits/master/scaffolding-ruby)
 
+## 0.8.0 (05-18-2017)
+
+## Features & Enhancements
+
+- Support external database connection via optional bind. [\#535](https://github.com/habitat-sh/core-plans/pull/535)
+- Various documentation fixes and updates.
+
 ## 0.7.0 (05-11-2017)
 
 ## Features & Enhancements
