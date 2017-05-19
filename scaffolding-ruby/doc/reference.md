@@ -457,19 +457,21 @@ Your app's use of a [PostgreSQL][] database is detected by inspecting the `Gemfi
 
 ### Default App Environment Variables
 
-* `DATABASE_URL`: `postgres://{{cfg.db.user}}:{{cfg.db.password}}@{{bind.database.first.sys.ip}}:{{bind.database.first.cfg.port}}/{{cfg.db.name}}`
+* `DATABASE_URL`: `postgres://$user:$password@$host:$port/$name`
 
-**Note:** Currently PostgreSQL service groups running in the `leader` topology are not supported but future work will enable this more powerful mode.
+Where `$user`, `$password`, `$host`, `$port`, and `$name` will be determined at runtime.
 
 ### Default Config Settings
 
 * `db.name`: The database name on the database server for this app. Defaults to the value of `"${pkg_name}_production"`.
 * `db.user`: The connecting database user for this app. Defaults to the value of `"$pkg_name"`.
 * `db.password`: The connecting database password for this app. Defaults to the value of `"${pkg_name}"`. It is **strongly** recommended to use a different, randomly generated password when running your app in production.
+* `db.host`: (Only when bind is not used) The hostname/IP address of the database. There is no default.
+* `db.port`: (Only when bind is not used) The listen port of the database. The default will be `5432` if no value is provided.
 
 ### Default Service Bindings
 
-If a database requirement is detected, a **required** binding called `database` will be generated which requires the `port` configuration. This allows your app to [dynamically bind][12factor_backing_services] to the desired database service group at runtime.
+If a database requirement is detected, an **optional** binding called `database` will be generated which requires the `port` configuration. This allows your app to [dynamically bind][12factor_backing_services] to the desired database service group at runtime.
 
 * `pkg_binds[database]="port"`
 
@@ -483,6 +485,7 @@ Where `<SERVICE_GROUP>` is a service group running PostgreSQL exporting the `por
 hab start acmecorp/my_app --bind database:postgresql.default
 ```
 
+If your database is not currently running in a Habitat ring under a Supervisor, you may omit adding the `--bind database:...` option when loading and/or starting your app service. This means that you must provide at least one additional config setting: `db.host` (as explained above).
 
 [12factor_backing_services]: https://12factor.net/https://12factor.net/backing-services
 [12factor_build]: https://12factor.net/build-release-run
