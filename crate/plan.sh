@@ -41,8 +41,8 @@ do_verify() {
     build_line "Verifying crate-${pkg_version}.tar.gz signature"
     export GNUPGHOME="$(mktemp -d -p $HAB_CACHE_SRC_PATH)"
     gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 90C23FC6585BC0717F8FBFC37FAAE51A06F6EAEB
-    gpg --batch --verify ${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}.tar.gz.asc \
-        ${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}.tar.gz
+    gpg --batch --verify "${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version}.tar.gz.asc \
+        "${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version}.tar.gz
     rm -r "$GNUPGHOME"
     build_line "Signature verified for ${pkg_name}-${pkg_version}.tar.gz"
 }
@@ -52,15 +52,15 @@ do_build() {
 }
 
 do_install() {
-    cd ${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}
-    install -vDm644 README.rst ${pkg_prefix}/README.rst
-    install -vDm644 LICENSE.txt ${pkg_prefix}/LICENSE.txt
-    install -vDm644 NOTICE ${pkg_prefix}/NOTICE
-    install -vDm644 CHANGES.txt ${pkg_prefix}/CHANGES.txt
+    cd "${HAB_CACHE_SRC_PATH}"/"${pkg_name}"-"${pkg_version}"
+    install -vDm644 README.rst "${pkg_prefix}"/README.rst
+    install -vDm644 LICENSE.txt "${pkg_prefix}"/LICENSE.txt
+    install -vDm644 NOTICE "${pkg_prefix}"/NOTICE
+    install -vDm644 CHANGES.txt "${pkg_prefix}"/CHANGES.txt
 
-    mkdir -p ${pkg_prefix}/crate
-    cp -a bin lib plugins ${pkg_prefix}/crate
-    rm ${pkg_prefix}/crate/bin/*.bat
+    mkdir -p "${pkg_prefix}"/crate
+    cp -a bin lib plugins "${pkg_prefix}"/crate
+    rm "${pkg_prefix}"/crate/bin/*.bat
 }
 
 do_strip() {
