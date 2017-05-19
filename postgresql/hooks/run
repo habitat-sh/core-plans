@@ -1,8 +1,30 @@
-#!/bin/sh
-#
+#!{{pkgPathFor "core/bash"}}/bin/bash
 
-export PGDATA={{pkg.svc_data_path}}
+set -e
 
 exec 2>&1
-exec {{pkg.path}}/bin/postmaster \
-     -c config_file={{pkg.svc_path}}/config/postgresql.conf
+
+echo 'Executing run hook'
+
+source {{pkg.svc_config_path}}/functions.sh
+
+init_pgpass
+write_local_conf
+
+{{#if svc.me.follower }}
+if [[ ! -f "{{pkg.svc_data_path}}/PG_VERSION" ]]; then
+{{#if cfg.wal-e.enable }}
+  bootstrap_replica_via_wale
+{{else}}
+  bootstrap_replica_via_pg_basebackup
+{{/if}}
+  cp {{pkg.svc_config_path}}/recovery.conf {{pkg.svc_data_path}}/
+fi
+{{/if}}
+
+ensure_dir_ownership
+
+echo "Starting PostgreSQL"
+export PGDATA={{pkg.svc_data_path}}
+exec chpst -U hab:hab -u hab:hab postgres \
+  -c config_file={{pkg.svc_config_path}}/postgresql.conf

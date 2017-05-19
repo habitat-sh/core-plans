@@ -1,0 +1,11 @@
+#!{{pkgPathFor "core/bash"}}/bin/bash
+
+source {{pkg.svc_config_path}}/functions.sh
+
+stop_wale_service
+
+{{ #unless svc.me.follower }}
+{{ #if cfg.wal-e.enable }}
+start_wale_service
+{{ /if }}
+{{ /unless }}

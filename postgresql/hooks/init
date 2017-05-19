@@ -1,19 +1,33 @@
-#!/bin/sh
-#
+#!{{pkgPathFor "core/bash"}}/bin/bash
 
 exec 2>&1
 
-mkdir -p {{pkg.svc_config_path}}/conf.d
-mkdir -p {{pkg.svc_var_path}}/pg_stat_tmp
+echo 'Executing init hook'
+source {{pkg.svc_config_path}}/functions.sh
 
-chown -R hab:hab {{pkg.svc_var_path}}
+{{ #if cfg.wal-e.enable }}
+write_wale_env
+{{ /if }}
 
+init_pgpass
+ensure_dir_ownership
+
+{{#unless svc.me.follower ~}}
 if [[ ! -f "{{pkg.svc_data_path}}/PG_VERSION" ]]; then
   echo " Database does not exist, creating with 'initdb'"
-  initdb -U {{cfg.initdb_superuser_name}} \
-         -E {{cfg.initdb_encoding}} \
-         -D {{pkg.svc_data_path}} \
-         --pwfile {{cfg.initdb_pwfile}} \
-         --no-locale && \
-  rm {{pkg.svc_config_path}}/pwfile
+  chpst -U hab:hab -u hab:hab \
+    initdb -U {{cfg.superuser.name}} \
+    -E utf8 \
+    -D {{pkg.svc_data_path}} \
+    --pwfile {{pkg.svc_config_path}}/pwfile \
+    --locale POSIX \
+    --data-checksums
 fi
+{{~/unless}}
+{{#if svc.me.follower ~}}
+setup_replication_user_in_master
+if [ $? != 0 ]; then
+  echo 'Waiting for leader to become available before initializing'
+  exit 1
+fi
+{{~/if}}

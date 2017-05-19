@@ -1,5 +1,24 @@
-#!/bin/bash
+#!{{pkgPathFor "core/bash"}}/bin/bash
 
+{{#if svc.me.follower}}
+source {{pkg.svc_config_path}}/functions.sh
+
+init_pgpass
+if master_ready 2>&1 >/dev/null; then
+  echo "Master pg is available at {{svc.leader.sys.ip}}"
+  local_xlog=$(local_xlog_position)
+  master_xlog=$(master_xlog_position)
+  xlog_diff=$((master_xlog-local_xlog))
+  echo "Diff between master and local replica {{svc.me.sys.ip}} is ${xlog_diff}"
+  if [ "$xlog_diff" -gt "{{cfg.replication.lag_health_threshold}}" ];then
+    echo "Replica is lagging larger than allowed {{cfg.lag_health_threshold}}"
+    exit 2
+  fi
+else
+  echo "Master pg is unavailable at {{svc.leader.sys.ip}} ! Health State for follower is critical"
+  exit 2
+fi
+{{else}}
 # pg_isready returns 0 to the shell if the server is accepting connections
 # normally, 1 if the server is rejecting connections (for example during
 # startup), 2 if there was no response to the connection attempt, and 3 if no
@@ -8,3 +27,4 @@
 # The options --dbname and --username can be used to avoid gratuitous error
 # messages in the logs, but are not necessary for proper functionality.
 pg_isready --dbname=postgres --quiet
+{{/if}}
