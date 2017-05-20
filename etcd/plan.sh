@@ -44,11 +44,11 @@ do_verify() {
 
   # GPG verification
   build_line "Verifying ${pkg_name}-${pkg_version}-linux-amd64.tar.gz signature"
-  export GNUPGHOME="$(mktemp -d -p $HAB_CACHE_SRC_PATH)"
+  GNUPGHOME=$(mktemp -d -p "$HAB_CACHE_SRC_PATH")
   gpg --import --keyid-format LONG "${HAB_CACHE_SRC_PATH}/app-signing-pubkey.gpg"
   gpg --batch --verify \
-	${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}-linux-amd64.tar.gz.asc \
-        ${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}-linux-amd64.tar.gz
+	"${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version}-linux-amd64.tar.gz.asc \
+        "${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version}-linux-amd64.tar.gz
   rm -r "$GNUPGHOME"
   build_line "Signature verified for ${pkg_name}-${pkg_version}-linux-amd64.tar.gz"
 }
