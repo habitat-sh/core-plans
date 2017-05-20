@@ -29,11 +29,11 @@ write_env_var() {
 write_wale_env() {
   echo 'Writting environment variables required by wal-e'
   mkdir -p "{{pkg.svc_config_path}}/env"
-  {{#with cfg.wal-e.aws }}
-  write_env_var 's3://{{bucket}}/{{../../../svc.service}}-{{../../../svc.group}}' 'WALE_S3_PREFIX'
-  write_env_var '{{access_key_id}}' 'AWS_ACCESS_KEY_ID'
-  write_env_var '{{secret_access_key}}' 'AWS_SECRET_ACCESS_KEY'
-  write_env_var '{{region}}' 'AWS_REGION'
+  {{#with cfg.wal-e.aws as |aws| }}
+  write_env_var 's3://{{aws.bucket}}/{{../../../svc.service}}-{{../../../svc.group}}' 'WALE_S3_PREFIX'
+  write_env_var '{{aws.access_key_id}}' 'AWS_ACCESS_KEY_ID'
+  write_env_var '{{aws.secret_access_key}}' 'AWS_SECRET_ACCESS_KEY'
+  write_env_var '{{aws.region}}' 'AWS_REGION'
   {{/with}}
 
   write_env_var '{{cfg.superuser.name}}' 'PGUSER'

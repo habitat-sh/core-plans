@@ -1,8 +1,8 @@
-{{ #with cfg.wal-e.aws }}
-wale_s3_prefix='s3://{{bucket}}/{{../../../svc.service}}-{{../../../svc.group}}'
-aws_access_key_id='{{access_key_id}}'
-aws_secret_access_key='{{secret_access_key}}'
-aws_region='{{region}}'
+{{ #with cfg.wal-e.aws as |aws| }}
+wale_s3_prefix='s3://{{aws.bucket}}/{{../../../svc.service}}-{{../../../svc.group}}'
+aws_access_key_id='{{aws.access_key_id}}'
+aws_secret_access_key='{{aws.secret_access_key}}'
+aws_region='{{aws.region}}'
 {{/with}}
 
 [pg]
