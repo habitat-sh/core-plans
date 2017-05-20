@@ -28,4 +28,4 @@ chown -R hab:hab {{pkg.svc_data_path}}
 cp -r {{pkg.svc_config_path}}/nginx.conf \
       {{pkgPathFor "core/nginx"}}/config/nginx.conf
 
-hab service load core/nginx --group {{svc.group}} --force
+hab svc load core/nginx --group {{svc.group}} --force
