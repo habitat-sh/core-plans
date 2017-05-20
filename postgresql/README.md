@@ -16,7 +16,7 @@ if you want to bring up the pre-exported docker image.
 
 ## Cluster
 
-This plan supports running clustered PostgreSQL by utilizing habitats native leader election.
+This plan supports running clustered PostgreSQL by utilizing Habitat's native leader election.
 
 You can run an example cluster via docker-compose:
 ```
@@ -46,7 +46,7 @@ Currently due to issues in habitat core such as https://github.com/habitat-sh/ha
 Consuming services can bind to PostgreSQL via:
 
 ```
-hab start <origin>/<app> --bind database:PostgreSQL.default --peer <pg-host>
+hab start <origin>/<app> --bind database:postgresql.default --peer <pg-host>
 ```
 
 Superuser access is exposed to consumers when binding and we advise that required databases, schemas and roles be created and migrations get run in the init hook of the consuming service. The created roles (with restricted access) should then be exposed to the application code that will get run.
@@ -66,4 +66,4 @@ PGHOST={{sys.ip}}
 
 The `core/postgresql` plan packages `core/wal-e` as a dependency and supports running a side car process that will push regular backups to a cloud object store such as s3.
 
-When enabling wal-e continuous archiving is also turned on by default. Perticularly for running clustered PostgreSQL we highly recommend using this feature so that replicas will always be able to catch up to the master should they fall behind farther than the masters `wal_keep_segments` setting.
+When enabling wal-e continuous archiving is also turned on by default. Particularly for running clustered PostgreSQL we highly recommend using this feature so that replicas will always be able to catch up to the master should they fall behind further than the masters `wal_keep_segments` setting.
