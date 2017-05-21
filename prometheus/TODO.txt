@@ -1,0 +1,4 @@
+* template more of the config (most common sections)
+* add sd_files and dump config ring into it
+* to_yaml handler to model the whole prometheus.yml in default.toml
+

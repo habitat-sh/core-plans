@@ -1,0 +1,1 @@
+* add config to templated run hook such that we can enable or disable plugins beyond the default
