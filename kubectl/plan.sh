@@ -7,17 +7,18 @@ pkg_source="https://storage.googleapis.com/kubernetes-release/release/v${pkg_ver
 pkg_shasum="2e9872fe2409deee257434a8c45976a4e1cc3f2e4e2a972fd85e86127a1f7cbd"
 pkg_build_deps=(core/curl)
 pkg_bin_dirs=(bin)
+pkg_upstream="https://kubernetes.io/docs/tasks/tools/install-kubectl/"
 
 do_begin() {
   return 0
 }
 
 do_download() {
-    mkdir -p $HAB_CACHE_SRC_PATH/${pkg_dirname}
+    mkdir -p "$HAB_CACHE_SRC_PATH/${pkg_dirname}"
 
-    cd $HAB_CACHE_SRC_PATH/${pkg_dirname}
+    cd "$HAB_CACHE_SRC_PATH/${pkg_dirname}"
     
-    curl -o ${pkg_dirname} -s ${pkg_source}
+    curl -o "${pkg_dirname}" -s "${pkg_source}"
 }
 
 do_verify(){
@@ -45,9 +46,9 @@ do_check() {
 }
 
 do_install() {
-  mkdir -p ${pkg_prefix}/bin
-  cp ${HAB_CACHE_SRC_PATH}/${pkg_dirname}/${pkg_dirname} ${pkg_prefix}/bin/${pkg_name}
-  chmod 0755 ${pkg_prefix}/bin/${pkg_name}
+  mkdir -p "${pkg_prefix}/bin"
+  cp "${HAB_CACHE_SRC_PATH}/${pkg_dirname}/${pkg_dirname}" "${pkg_prefix}/bin/${pkg_name}"
+  chmod 0755 "${pkg_prefix}/bin/${pkg_name}"
 }
 
 do_strip() {
@@ -57,4 +58,3 @@ do_strip() {
 do_end() {
   return 0
 }
-
