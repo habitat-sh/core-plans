@@ -12,22 +12,10 @@ pkg_description="Drupal is a free and open source content-management framework w
 pkg_upstream_url="https://www.drupal.org"
 pkg_maintainers="The Habitat Maintainers <humans@habitat.sh>"
 
-do_download() {
-    return 0
-}
-
-do_verify() {
-    return 0
-}
-
-do_unpack() {
-    return 0
-}
-
 do_build() {
-    drush dl drupal-8.3.2 --drupal-project-rename=drupal
+  drush dl drupal-8.3.2 --destination="$CACHE_PATH" --drupal-project-rename=drupal 
 }
 
 do_install() {
-    cp -r "$HAB_CACHE_SRC_PATH/$pkg_dirname/drupal" "$pkg_prefix/drupal"
+  cp -r "$CACHE_PATH/drupal" "$pkg_prefix/drupal"
 }
