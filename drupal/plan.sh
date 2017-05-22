@@ -2,8 +2,6 @@ pkg_name=drupal
 pkg_origin=core
 pkg_version="8.3.2"
 pkg_license=('gplv2+')
-pkg_source="N/A"
-pkg_shasum="N/A"
 pkg_deps=(core/mysql-client core/drush core/nginx core/php)
 pkg_binds=(
   [database]="port username password"
@@ -31,5 +29,5 @@ do_build() {
 }
 
 do_install() {
-    cp -r "$HAB_CACHE_SRC_PATH"/"$pkg_dirname"/drupal "$pkg_prefix"/drupal
+    cp -r "$HAB_CACHE_SRC_PATH/$pkg_dirname/drupal" "$pkg_prefix/drupal"
 }
