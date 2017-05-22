@@ -9,12 +9,14 @@ pkg_source=https://ftp.postgresql.org/pub/source/v${pkg_version}/${pkg_name}-${p
 pkg_shasum=e5101e0a49141fc12a7018c6dad594694d3a3325f5ab71e93e0e51bd94e51fcd
 pkg_deps=(
   core/bash
+  core/envdir
   core/glibc
   core/openssl
   core/perl
   core/readline
   core/zlib
   core/libossp-uuid
+  core/wal-e
 )
 pkg_build_deps=(
   core/coreutils
@@ -26,8 +28,13 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_exports=(
   [port]=port
+  [superuser_name]=superuser.name
+  [superuser_password]=superuser.password
 )
 pkg_exposes=(port)
+
+pkg_svc_user=root
+pkg_svc_group=$pkg_svc_user
 
 do_build() {
 	# ld manpage: "If -rpath is not used when linking an ELF
