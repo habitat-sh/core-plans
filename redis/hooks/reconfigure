@@ -1,9 +1,9 @@
 #!/bin/bash
 
-hab service unload starkandwayne/shield-agent
+hab svc unload starkandwayne/shield-agent
 
 {{ #unless svc.me.follower }}
 mkdir -p /hab/svc/shield-agent
 cp {{pkg.svc_config_path}}/shield-agent.toml /hab/svc/shield-agent/user.toml
-hab service load starkandwayne/shield-agent --group {{svc.group}}
+hab svc load starkandwayne/shield-agent --group {{svc.group}}
 {{~/unless}}

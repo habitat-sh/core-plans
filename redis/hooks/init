@@ -41,7 +41,7 @@ if [[ "${SHIELD_ENDPOINT}" != "" ]]; then
     echo 'Starting shield-agent as side car'
     mkdir -p /hab/svc/shield-agent
     cp {{pkg.svc_config_path}}/shield-agent.toml /hab/svc/shield-agent/user.toml
-    hab service load starkandwayne/shield-agent --group {{svc.group}} && exit 1
+    hab svc load starkandwayne/shield-agent --group {{svc.group}} && exit 1
   fi
 
   {{ #if cfg.bootstrap_from_backup }}
