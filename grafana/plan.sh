@@ -34,14 +34,15 @@ do_build() {
 }
 
 do_install() {
-  mkdir -p {{pkg.svc_var_path}}/plugins
+  mkdir -p ${pkg_svc_var_path}/plugins
   cd $HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_version}
-  cp -r conf  public  scripts  vendor ${pkg_prefix}/
-  cp -r bin/* ${pkg_prefix}/bin/
+  cp -r conf  public  scripts  vendor "${pkg_prefix}/"
+  cp -r bin/* "${pkg_prefix}/bin/"
   patchelf --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" \
-         ${pkg_prefix}/bin/grafana-server
+         "${pkg_prefix}/bin/grafana-server"
   patchelf --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" \
-         ${pkg_prefix}/bin/grafana-cli
+         "${pkg_prefix}/bin/grafana-cli"
+  #install_cacerts
   return 0
 }
 
