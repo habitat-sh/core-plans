@@ -18,8 +18,9 @@ if [[ ! -f "{{pkg.svc_data_path}}/PG_VERSION" ]]; then
 {{else}}
   bootstrap_replica_via_pg_basebackup
 {{/if}}
-  cp {{pkg.svc_config_path}}/recovery.conf {{pkg.svc_data_path}}/
 fi
+
+cp {{pkg.svc_config_path}}/recovery.conf {{pkg.svc_data_path}}/
 {{/if}}
 
 ensure_dir_ownership
