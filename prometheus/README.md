@@ -1,7 +1,7 @@
 Habitat plan for Prometheus
 ======
 
-Build a named release branch of prometheus from git, 
+Build a named release branch of prometheus from git,
 leveraging the promu compile utility to generate binaries
 with the version number baked in.
 
@@ -10,9 +10,9 @@ Config
 
 If the prometheus service is launched with a binding of `targets` then the `from_hab_ring` job will be populated by the metric exporters in that bound service. (e.g. node_exporter)
 
-Jobs to scrape /federation targets are enabled if we are in a leader/follower topology. 
+Jobs to scrape /federation targets are enabled if we are in a leader/follower topology.
 
-Otherwise you can modify the included templated config as you see fit. 
+Otherwise you can modify the included templated config as you see fit.
 
 Topologies
 ---
@@ -25,7 +25,6 @@ Exports
 ---
 
 This prometheus package exports the http endpoint as `prom_ds_http` with the expectation that you might bind that to `core/grafana` with `--bind prom:<this_service_group>`
-
 
 multi node example
 ---
@@ -43,5 +42,4 @@ Discover targets using the hab ring
 The below command would start a single prometheus instance and add any node_exporter metric source that appears in the service group ```node_exporter.demo```
 ```
 docker run -ti --rm -P --name prom0 fastrobot/prometheus --topology standalone --peer 172.17.0.3 --group demo --bind targets:node_exporter.demo
-
 ```

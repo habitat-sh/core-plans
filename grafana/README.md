@@ -21,4 +21,3 @@ hab studio enter # stay in studio
  # exit studio
 docker run -p 3000:3000 --name my_grafana <yourOrg>/grafana
 ```
-

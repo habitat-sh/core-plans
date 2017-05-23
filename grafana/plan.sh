@@ -3,6 +3,7 @@ pkg_origin=core
 pkg_version="4.2.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
+pkg_upstream_url=https://grafana.com/
 pkg_source="https://s3-us-west-2.amazonaws.com/${pkg_name}-releases/release/${pkg_name}-${pkg_version}.linux-x64.tar.gz"
 pkg_filename="${pkg_name}-${pkg_version}.linux-x64.tar.gz"
 pkg_shasum="e9927baaaf6cbcab64892dedd11ccf509e4edea54670db4250b9e7568466ec61"
@@ -22,8 +23,8 @@ pkg_binds_optional=(
 )
 
 do_unpack() {
-  pushd "${HAB_CACHE_SRC_PATH}" 
-  tar zxf ${pkg_filename} 
+  pushd "${HAB_CACHE_SRC_PATH}"
+  tar zxf ${pkg_filename}
   popd
   return 0
 }
@@ -45,5 +46,3 @@ do_install() {
   #install_cacerts
   return 0
 }
-
-
