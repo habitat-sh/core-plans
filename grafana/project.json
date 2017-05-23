@@ -1,0 +1,8 @@
+{
+  "origin": "core",
+  "plan_path": "grafana/plan.sh",
+  "github": {
+    "organization": "habitat",
+    "repo": "core-plans"
+  }
+}

@@ -1,0 +1,4 @@
+
+listening_port = 3000
+admin_user = "admin"
+admin_pass = "password"
