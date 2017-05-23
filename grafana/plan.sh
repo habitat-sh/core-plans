@@ -34,8 +34,8 @@ do_build() {
 }
 
 do_install() {
-  mkdir -p ${pkg_svc_var_path}/plugins
-  cd $HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_version}
+  mkdir -p "${pkg_svc_var_path}/plugins"
+  cd "$HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_version}" || exit 1
   cp -r conf  public  scripts  vendor "${pkg_prefix}/"
   cp -r bin/* "${pkg_prefix}/bin/"
   patchelf --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" \

@@ -40,5 +40,5 @@ do_build() {
 }
 
 do_install() {
-  install node_exporter $pkg_prefix/bin/node_exporter
+  install node_exporter "$pkg_prefix/bin/node_exporter"
 }

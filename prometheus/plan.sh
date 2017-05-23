@@ -42,16 +42,16 @@ do_verify () {
 }
 
 do_unpack() {
-  mkdir -p $prom_pkg_dir/src/github.com/prometheus
-  pushd $prom_pkg_dir/src/github.com/prometheus
+  mkdir -p "$prom_pkg_dir/src/github.com/prometheus"
+  pushd "$prom_pkg_dir/src/github.com/prometheus"
   git clone --branch v${pkg_version} https://github.com/prometheus/prometheus.git
   popd
 }
 
 do_build() {
-  pushd ${prom_pkg_dir}/src/github.com/prometheus/prometheus
+  pushd "${prom_pkg_dir}/src/github.com/prometheus/prometheus"
   make build
-  $GOPATH/bin/promu build --prefix $pkg_prefix/bin
+  "$GOPATH/bin/promu" build --prefix "$pkg_prefix/bin"
   popd
   return 0
 }
