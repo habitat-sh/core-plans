@@ -1,9 +1,7 @@
 Habitat plan for Prometheus
 ======
 
-Build a named release branch of prometheus from git,
-leveraging the promu compile utility to generate binaries
-with the version number baked in.
+Build a named release branch of prometheus from git, leveraging the promu compile utility to generate binaries with the version number baked in.
 
 Config
 ---
@@ -19,7 +17,7 @@ Topologies
 
 Standalone - runs prometheus with a templated config
 
-Leader - self-federating. with only the leader performing checks. The follower(s) are responsible for longer term persistent data storage and/or serving queries.  
+Leader - self-federating. with only the leader performing checks. The follower(s) are responsible for longer term persistent data storage and/or serving queries.
 
 Exports
 ---
