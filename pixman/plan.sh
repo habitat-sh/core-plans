@@ -10,6 +10,7 @@ pkg_deps=(core/glibc core/gcc-libs core/libpng core/zlib)
 pkg_build_deps=(core/gcc core/make core/pkg-config core/diffutils core/file)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
+pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_prepare() {
     if [[ ! -r /usr/bin/file ]]; then
