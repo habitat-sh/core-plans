@@ -497,7 +497,7 @@ seed_provider:
       parameters:
           # seeds is actually a comma-delimited list of addresses.
           # Ex: "<ip1>,<ip2>,<ip3>"
-          - seeds: "{{#each svc.members}}{{#if @index}},{{/if}}{{sys.ip}}{{~/each}}"
+          - seeds: "{{#each bind.cassandra.members}}{{#if @index}},{{/if}}{{sys.ip}}{{~/each}}"
 {{~/if}}
 
 # For workloads with more data than can fit in memory, Cassandra's
