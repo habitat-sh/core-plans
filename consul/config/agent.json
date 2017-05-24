@@ -1,0 +1,47 @@
+{
+  "datacenter": "{{cfg.datacenter}}",
+  "node_name": "{{svc.service}}-{{svc.group}}-{{svc.me.member_id}}",
+  "data_dir": "{{pkg.svc_data_path}}",
+  "bind_addr": "0.0.0.0",
+  "client_addr": "0.0.0.0",
+  "advertise_addr": "{{sys.ip}}",
+  "leave_on_terminate": {{cfg.leave_on_terminate}},
+  "log_level": "INFO",
+  "domain": "{{cfg.domain}}",
+  "server": {{cfg.server}},
+  "rejoin_after_leave": true,
+  "disable_update_check": true,
+  "disable_anonymous_signature": true,
+
+  "ports": {
+    "dns": {{cfg.ports.dns}},
+    {{~#if cfg.tls.ssl_key cfg.tls.ssl_cert cfg.tls.ssl_ca}}
+    "https": {{cfg.ports.https}},
+    "http": -1,
+    {{~else}}
+    "http": {{cfg.ports.http}},
+    {{~/if}}
+    "serf_lan": {{cfg.ports.serf_lan}},
+    "serf_wan": {{cfg.ports.serf_wan}},
+    "server": {{cfg.ports.server}}
+  },
+
+  "start_join": [{{#each svc.members}}{{#if @index}},{{/if}}"{{sys.ip}}"{{/each}}],
+  "retry_join": [{{#each svc.members}}{{#if @index}},{{/if}}"{{sys.ip}}"{{/each}}],
+  "bootstrap_expect": {{cfg.bootstrap_expect}},
+
+  {{~#if cfg.tls.ssl_key cfg.tls.ssl_cert cfg.tls.ssl_ca }}
+  "ca_path": "{{pkg.path}}/cacerts",
+  "key_file": "{{pkg.svc_config_path}}/consul.key",
+  "cert_file": "{{pkg.svc_config_path}}/consul.cert",
+  "verify_incoming": {{cfg.tls.verify_incoming}},
+  "verify_outgoing": {{cfg.tls.verify_outgoing}},
+  "verify_incoming_rpc": {{cfg.tls.verify_incoming_rpc}},
+  "verify_server_hostname": {{cfg.tls.verify_server_hostname}},
+  {{~/if}}
+  {{~#if cfg.encrypt_key}}
+  "encrypt": "{{cfg.encrypt_key}}",
+  {{/if}}
+  "recursor": "{{cfg.recursor}}",
+  "ui": {{cfg.include_ui}}
+}

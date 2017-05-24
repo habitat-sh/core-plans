@@ -1,27 +1,21 @@
+datacenter = "dc1"
+leave_on_terminate = false
+domain = "consul"
+bootstrap_expect = "3"
+server = true
 # If you would like the web gui on the agent
-website = true
+include_ui = true
 
-# The options for consul are available here
-# https://www.consul.io/docs/agent/options.html
-[bootstrap]
-expect = "3"
-
-[server]
-bind = "127.0.0.1"
-data-dir = "/hab/svc/consul/data/consul"
-datacenter = "east-aws"
-loglevel = "INFO"
-# switch this to false you want to start in DEVMODE
-# https://www.consul.io/docs/guides/bootstrapping.html
-mode = true
+recursor = "8.8.8.8"
+encrypt_key = "pmsKacTdVOb4x8/Vtr9PWw=="
 
 [ports]
 # The DNS server, -1 to disable
-dns = 8600
+dns = 52
 # The HTTP API, -1 to disable
 http = 8500
 # The HTTPS API, -1 to disable
-https = -1
+https = 4443
 # The CLI RPC endpoint
 rpc = 8400
 # The Serf LAN port
@@ -31,5 +25,71 @@ serf_wan = 8302
 # Server RPC address
 server = 8300
 
-[client]
-bind = "127.0.0.1"
+
+[tls]
+ssl_key = """
+-----BEGIN PRIVATE KEY-----
+MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBANtvaiyDgAXVWwv6
+9Bpqw+39qkseFIaWIh9zlrBt/lE9SBQaTgc2bdMoLjWi5HnSsB7oxNoG+xkeD07b
+26pJlEYmy6cSk3xI+KOLIW6yo6E4YG48krvPenqG1lT8IgyMOiw24XPI09WkBRuN
+TAumjDpeEIp86DSyrSBtf2FqLIZ/AgMBAAECgYEAtShpFjDGC4rVrLFUv05vTNaD
+tZoyxd3CdAbAXA2izLzz+ayxyGCWEKJ2a898IlrfDdWLVpg2ysi3SJpX4mD2Z+BH
+HWFBHDRl+WeYvwyei88KmacH5DA1F7+6eaaNZ2ZI2MOMSMSfFi9cq2Fdzgt3Okev
+uo+C8uMswAWehHTKxGECQQD3B75kEoDdXtH62uYJ8kzvOV4A7Ge1Qcjrfvi1zIp1
+M1PwBOnsaV3FyBGMm4/jYnghvBg7RHlsbF/eTkkxkzhPAkEA42cpsi2MdpnQl0XT
+ZYozvUu4WKzWjO+zVHYy5uriFIb+X5CLM1Ie4ngYOvKuNDtAn/64FowJ8MBAiBUb
+cRoS0QJAEvmLTFCHiXmBE43A4b603iM/7z45cRjOgBhOrlg5wmrg5aza8wfc5hZK
+EszYLpUfuSejjNnjocppSsAkqyQtzQJBAJFgPUa8WcTkdnaO3CNY49TLWJHQBOVa
+xBFl8wqu9FNdLbeYZ3UqtbXgQtVEmduoWZsvMy6u3hf8QAT/QWjf21ECQQC8A/Wd
+MJ+DP2TL17gMyLJ2yWq04wUEo5cqefGRfeciSwg3UvPb2aaChdLBjdqCpAKTJJVC
+acCQZyOrk0QGLtBv
+-----END PRIVATE KEY-----
+"""
+ssl_cert = """
+-----BEGIN CERTIFICATE-----
+MIIDeTCCAmGgAwIBAgIBETANBgkqhkiG9w0BAQUFADBQMQswCQYDVQQGEwJVUzER
+MA8GA1UECAwITmV3IFlvcmsxCzAJBgNVBAcMAk5ZMSEwHwYDVQQKDBhJbnRlcm5l
+dCBXaWRnaXRzIFB0eSBMdGQwHhcNMTcwNTEwMjI1NzI2WhcNMTgwNTEwMjI1NzI2
+WjBFMRowGAYDVQQDDBEqLm5vZGUuZGMxLmNvbnN1bDELMAkGA1UECAwCQ0ExCzAJ
+BgNVBAYTAlVTMQ0wCwYDVQQKDARCbGFoMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCB
+iQKBgQDbb2osg4AF1VsL+vQaasPt/apLHhSGliIfc5awbf5RPUgUGk4HNm3TKC41
+ouR50rAe6MTaBvsZHg9O29uqSZRGJsunEpN8SPijiyFusqOhOGBuPJK7z3p6htZU
+/CIMjDosNuFzyNPVpAUbjUwLpow6XhCKfOg0sq0gbX9haiyGfwIDAQABo4HsMIHp
+MAkGA1UdEwQCMAAwHQYDVR0OBBYEFIqqE57+IuiTpzy0/jBhbJDsp7lQMB8GA1Ud
+IwQYMBaAFBkWyPQtDojPZ73ynWWLRebKf3WRMAsGA1UdDwQEAwIFoDAdBgNVHSUE
+FjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwLAYDVR0fBCUwIzAhoB+gHYYbaHR0cDov
+L3BhdGgudG8uY3JsL2RlbW8uY3JsMEIGA1UdEQQ7MDmCEXNlcnZlci5kYzEuY29u
+c3VsghFzZXJ2ZXIuZGMyLmNvbnN1bIIRc2VydmVyLmRjMy5jb25zdWwwDQYJKoZI
+hvcNAQEFBQADggEBABAbCjqGd1LKsD0sToRv9sSqSfTTACw2ai3xln+oW2K+NSYD
+jOQ6LjN872VGF/+WO7+t7fEup0sLWyc3HH6rOMOugOU5t74Z74MXQ++FT3RRScNO
+GhNzyCdQeRvzHXnvvLiT8pIABNP5Piz3Qamepqd6VeXHyWnZFvgTurNaMvqzL8T7
+HxwcrbNKrixg8/+aCJ7Y1AIBedE5wzrnSd75vkYEblaJISbwDkzwzwzuba3uzrs3
+wKDIyZWar/BCa/Wm7B6dpTo2zGpbWibtUn+uPU5yKfgXtqjP3VULKkCjYSVDse25
+Wht2qevG8U4haz5wWo/c8oM3lHon+kHBwbt1XwM=
+-----END CERTIFICATE-----"""
+ssl_ca = """
+-----BEGIN CERTIFICATE-----
+MIIDczCCAlugAwIBAgIJAI6EBbRLH15kMA0GCSqGSIb3DQEBCwUAMFAxCzAJBgNV
+BAYTAlVTMREwDwYDVQQIDAhOZXcgWW9yazELMAkGA1UEBwwCTlkxITAfBgNVBAoM
+GEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAeFw0xNzA1MDkyMTI5MDRaFw0yNzA1
+MDcyMTI5MDRaMFAxCzAJBgNVBAYTAlVTMREwDwYDVQQIDAhOZXcgWW9yazELMAkG
+A1UEBwwCTlkxITAfBgNVBAoMGEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDCCASIw
+DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALMnnU6WEJMzjsuzVCiz7NImAjI+
+yvLMYUPWWcmsqUxvG3y49L8y/b8HTOsMHAAjQGKHQS7RW758O5FsDs6tOADaFZve
+qq9Q70TKf5kxRb8/uAEhmYKr9V5iKySEh/AH0+dYWp2cH4QY9UC58k+O3tiDPBAP
+l4t4R9wT7awdNKfPXxCkPN4fFVA3Ou0smDamMi2LwPaSMjoZ2adR+5OKFN74Uxmv
+9rlpt8QdjcntIsVrjfHyY+tCIORzN9R/+1BwoMGCirb19gUNf0aPvKTXpf5Y909p
+2LEtHjb7tmyzYbWU0Q1wgsLxE/6JIBTrSwphL385VCYwXZjFFLuSRRjvxDECAwEA
+AaNQME4wHQYDVR0OBBYEFBkWyPQtDojPZ73ynWWLRebKf3WRMB8GA1UdIwQYMBaA
+FBkWyPQtDojPZ73ynWWLRebKf3WRMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEL
+BQADggEBAAoTNgbREqY11xQV7kZfyJS6/DSC/ePN4aTfdhpmMdDAODxRLkFgGHM5
+7SiXbcySmCnEauL4+zboI4gCF2qN3NlJUZ4s1VYurRo0nW8owDznuUNAX6eCRrKS
+VbmYbZxcV0VhGG6JsWoXh/3NuipkKQog5he10pxdp+FLHf0JpBC7nhOdZT0oYIxN
+EQyVOk1fUZXy/LxusPKLmLS3tqSlP9D5az/jXbQ0zouVNPXQLMeoa+CrLo/tafFL
+CV7Iq2IGn6fXsKgy8m4QRGl3Qh0yVf7mVwhAD+KkV53YApcGTq+kTK0x683Wf0P2
+s3lOg4qpXaxVkc3GI0n3tVSggwpsHu4=
+-----END CERTIFICATE-----"""
+verify_incoming = false
+verify_outgoing = true
+verify_incoming_rpc = true
+verify_server_hostname = true
