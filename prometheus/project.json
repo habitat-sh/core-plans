@@ -2,7 +2,7 @@
   "origin": "core",
   "plan_path": "prometheus/plan.sh",
   "github": {
-    "organization": "habitat",
+    "organization": "habitat-sh",
     "repo": "core-plans"
   }
 }
