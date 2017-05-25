@@ -1,14 +1,14 @@
 $pkg_name="dotnet-core"
 $pkg_origin="core"
-$pkg_version="1.1.1"
+$pkg_version="1.1.2"
 $pkg_license=('MIT')
 $pkg_upstream_url="https://www.microsoft.com/net/core"
 $pkg_description=".NET Core is a blazing fast, lightweight and modular platform
   for creating web applications and services that run on Windows,
   Linux and Mac."
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-$pkg_source="https://download.microsoft.com/download/9/5/6/9568826C-E3F6-44A7-9F75-DD8E6AB29543/dotnet-win-x64.$pkg_version.zip"
-$pkg_shasum="b0f7fc902308b98fa8e202081884d310a94a93264a1f5beeb4632acccf2c0bb2"
+$pkg_source="https://dotnetcli.blob.core.windows.net/dotnet/Runtime/$pkg_version/dotnet-win-x64.$pkg_version.zip"
+$pkg_shasum="a4ccb23a6cf2ddf9894cb178ce8e69b5788880a1e3d9d659f26fb914a4bc2988"
 $pkg_filename="dotnet-win-x64.$pkg_version.zip"
 $pkg_bin_dirs=@("bin")
 
@@ -18,12 +18,4 @@ function Invoke-Unpack {
 
 function Invoke-Install {
   Copy-Item * "$pkg_prefix/bin" -Recurse -Force
-}
-
-function Invoke-Check() {
-  mkdir dotnet-new
-  pushd dotnet-new
-  ../dotnet.exe new
-  popd
-  Remove-Item -Recurse -Force dotnet-new
 }
