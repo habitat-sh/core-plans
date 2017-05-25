@@ -12,11 +12,11 @@ pkg_build_deps=(core/make core/gcc core/perl core/elfutils core/bc core/diffutil
 do_build() {
   make defconfig INSTALL_PATH="$pkg_prefix"
   sed "s/=m/=y/" -i .config
-  make -j$(nproc)
+  make -j "$(nproc)"
 }
 
 do_install() {
   make INSTALL_MOD_PATH="$pkg_prefix" modules_install
-  mkdir -p ${pkg_prefix}/boot
-  cp -a arch/x86/boot/bzImage ${pkg_prefix}/boot/
+  mkdir -p "${pkg_prefix}/boot"
+  cp -a arch/x86/boot/bzImage "${pkg_prefix}/boot/"
 }
