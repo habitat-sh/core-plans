@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  wordpress:
+    image: starkandwayne/wordpress:edge
+    command: "start starkandwayne/wordpress --peer database --bind database:mysql.wordpress"
+    links:
+      - database
+    volumes:
+      - data-volume:/hab/svc/wordpress/data
+  database:
+    image: starkandwayne/mysql:edge
+    command: "start starkandwayne/mysql --group wordpress"
+    environment:
+      HAB_MYSQL: |
+        app_username='wordpress'
+        app_password='wordpress'
+        bind='0.0.0.0'
+  tests:
+    image: starkandwayne-wordpress-tests
+    build: ./
+    volumes:
+      - data-volume:/hab/svc/wordpress/data
+    environment:
+      WORDPRESS_HOST: wordpress
+      DATABASE_HOST: database
+    links:
+      - wordpress
+      - database
+
+volumes:
+  data-volume: {}

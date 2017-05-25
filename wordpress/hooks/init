@@ -1,0 +1,25 @@
+#!/bin/bash
+
+exec 2>&1
+
+# check if database exists
+mysql_ready() {
+    mysqladmin ping -h {{bind.database.first.sys.ip}} -u {{bind.database.first.cfg.username}} -p{{bind.database.first.cfg.password}} > /dev/null 2>&1
+}
+
+if !(mysql_ready) then
+   echo "waiting for mysql ..."
+   exit 1
+fi
+
+# create database
+mysql -h {{bind.database.first.sys.ip}} -u {{bind.database.first.cfg.username}} -p{{bind.database.first.cfg.password}} -e "create database IF NOT EXISTS {{bind.database.first.cfg.username}}"
+
+cp -r {{pkg.path}}/public_html/* {{pkg.svc_data_path}}
+cp -n {{pkg.svc_config_path}}/wp-config.php {{pkg.svc_data_path}}
+# rename file so we can use fpm default
+cp -n {{pkgPathFor "core/php"}}/etc/php-fpm.d/www.conf.default {{pkgPathFor "core/php"}}/etc/php-fpm.d/www.conf
+chmod +x {{pkg.svc_data_path}}
+chown -R hab:hab {{pkg.svc_data_path}}
+
+hab service load core/wordpress-proxy --group {{svc.group}} --force

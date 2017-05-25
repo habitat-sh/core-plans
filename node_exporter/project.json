@@ -1,0 +1,8 @@
+{
+  "origin": "core",
+  "plan_path": "node_exporter/plan.sh",
+  "github": {
+    "organization": "habitat",
+    "repo": "core-plans"
+  }
+}

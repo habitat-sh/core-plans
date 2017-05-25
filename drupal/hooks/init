@@ -1,0 +1,31 @@
+#!/bin/bash
+
+exec 2>&1
+
+if [ ! -d {{pkg.svc_data_path}}/drupal ]
+then
+    # Prepare Drupal
+    cd {{pkg.path}}/drupal
+    drush -y site-install standard \
+	--db-url="mysql://{{bind.database.first.cfg.username}}:{{bind.database.first.cfg.password}}@{{bind.database.first.sys.ip}}/{{cfg.drupal.db_name}}" \
+	--site-name={{cfg.drupal.site_name}} \
+	--account-name={{cfg.drupal.account_name}} \
+	--account-pass={{cfg.drupal.account_password}}
+
+    # Now drop Drupal in the correct location
+    cp -r {{pkg.path}}/drupal {{pkg.svc_data_path}}
+fi
+
+# Copy the php-fom config into position
+cp -n {{pkgPathFor "core/php"}}/etc/php-fpm.d/www.conf.default \
+      {{pkgPathFor "core/php"}}/etc/php-fpm.d/www.conf
+
+# Set the correct permissions
+chmod +x {{pkg.svc_data_path}}
+chown -R hab:hab {{pkg.svc_data_path}}
+
+# Deplay the nginx config and then launch it
+cp -r {{pkg.svc_config_path}}/nginx.conf \
+      {{pkgPathFor "core/nginx"}}/config/nginx.conf
+
+hab svc load core/nginx --group {{svc.group}} --force

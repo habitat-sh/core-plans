@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+
+curl -sL -o /dev/null -w '%{http_code}\n' "${WORDPRESS_HOST}"
