@@ -393,7 +393,16 @@ scaffolding_create_dir_symlinks() {
 }
 
 scaffolding_create_files_symlinks() {
-  return 0
+  local entry source_file target
+  
+  for entry in "${scaffolding_symlinked_files[@]}"; do
+    source_file="$scaffolding_app_prefix/$entry"
+    target="$pkg_svc_path/$entry"
+    build_line "Creating file symlink to '$target' for '$source_file'"
+    rm -rf "$source_file"
+    mkdir -p "$(dirname "$source_file")"
+    ln -sfv "$target" "$source_file"
+  done
 }
 
 scaffolding_create_process_bins() {
