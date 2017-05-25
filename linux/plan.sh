@@ -34,6 +34,7 @@ do_prepare() {
 
 do_build() {
   make defconfig INSTALL_PATH="$pkg_prefix"
+  sed "s/=m/=y/" -i .config
   make
 }
 
