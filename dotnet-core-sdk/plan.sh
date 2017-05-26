@@ -1,15 +1,15 @@
 pkg_name=dotnet-core-sdk
 pkg_origin=core
-pkg_version=1.0.1
+pkg_version=1.0.4
 pkg_license=('MIT')
 pkg_upstream_url=https://www.microsoft.com/net/core
 pkg_description=".NET Core is a blazing fast, lightweight and modular platform
   for creating web applications and services that run on Windows,
   Linux and Mac."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source="https://download.microsoft.com/download/F/D/5/FD52A2F7-65B6-4912-AEDD-4015DF6D8D22/dotnet-1.1.1-sdk-debian-x64.tar.gz"
-pkg_shasum=84601397f83adaf2028653b73f27093f66d4c763dae5c770743351975477ee1e
-pkg_filename="dotnet-1.1.1-sdk-debian-x64.tar.gz"
+pkg_source="https://dotnetcli.blob.core.windows.net/dotnet/Sdk/${pkg_version}/dotnet-dev-debian-x64.${pkg_version}.tar.gz"
+pkg_shasum=eeb1baff3999e48e725ad22d7fac800363acec56b122369c37979f87730961a5
+pkg_filename="dotnet-dev-debian-x64.${pkg_version}.tar.gz"
 pkg_deps=(
   core/coreutils
   core/curl
@@ -39,7 +39,7 @@ do_prepare() {
     -exec patchelf --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" --set-rpath "$LD_RUN_PATH" {} \;
   find -type f -name '*.so*' \
     -exec patchelf --set-rpath "$LD_RUN_PATH" {} \;
-  fix_interpreter "$HAB_CACHE_SRC_PATH/$pkg_dirname/sdk/1.0.1/Roslyn/RunCsc.sh" core/coreutils bin/env
+  fix_interpreter "$HAB_CACHE_SRC_PATH/$pkg_dirname/sdk/${pkg_version}/Roslyn/RunCsc.sh" core/coreutils bin/env
 }
 
 do_build() {
