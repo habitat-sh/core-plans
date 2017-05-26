@@ -22,9 +22,9 @@ do_prepare() {
 
 do_build() {
   ./configure \
-    --prefix=$pkg_prefix \
+    --prefix="$pkg_prefix" \
     --build=x86_64-unknown-linux-gnu
-  make -j$(nproc)
+  make -j"$(nproc)"
 }
 
 do_check() {
