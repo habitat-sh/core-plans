@@ -1,15 +1,15 @@
 $pkg_name="dotnet-core-sdk"
 $pkg_origin="core"
-$pkg_version="1.0.1"
+$pkg_version="1.0.4"
 $pkg_license=('MIT')
 $pkg_upstream_url="https://www.microsoft.com/net/core"
 $pkg_description=".NET Core is a blazing fast, lightweight and modular platform
   for creating web applications and services that run on Windows,
   Linux and Mac."
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-$pkg_source="https://download.microsoft.com/download/F/D/5/FD52A2F7-65B6-4912-AEDD-4015DF6D8D22/dotnet-1.1.1-sdk-win-x64.zip"
-$pkg_shasum="e729afcf3cc69f17ec7968468b399c843b8b8327523e62c03450e4653115cf76"
-$pkg_filename="dotnet-1.1.1-sdk-win-x64.zip"
+$pkg_source="https://dotnetcli.blob.core.windows.net/dotnet/Sdk/$pkg_version/dotnet-dev-win-x64.$pkg_version.zip"
+$pkg_shasum="82869baef9e010415583174b0b0be95a2cb326dfd36bb32ec270803a9c8196ec"
+$pkg_filename="dotnet-dev-win-x64.$pkg_version.zip"
 $pkg_bin_dirs=@("bin")
 
 function Invoke-Unpack {
