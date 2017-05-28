@@ -487,7 +487,7 @@ hab start acmecorp/my_app --bind database:postgresql.default
 
 If your database is not currently running in a Habitat ring under a Supervisor, you may omit adding the `--bind database:...` option when loading and/or starting your app service. This means that you must provide at least one additional config setting: `db.host` (as explained above).
 
-[12factor_backing_services]: https://12factor.net/https://12factor.net/backing-services
+[12factor_backing_services]: https://12factor.net/backing-services
 [12factor_build]: https://12factor.net/build-release-run
 [12factor_config]: https://12factor.net/config
 [12factor_dependencies]: https://12factor.net/dependencies
