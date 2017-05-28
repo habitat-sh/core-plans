@@ -12,7 +12,6 @@ pkg_build_deps=(core/gcc core/make core/coreutils)
 pkg_lib_dirs=(lib)
 pkg_bin_dirs=(sbin)
 pkg_include_dirs=(include)
-pkg_svc_run="nginx"
 pkg_svc_user="root"
 pkg_exports=(
   [port]=http.listen.port
@@ -21,19 +20,11 @@ pkg_exposes=(port)
 
 do_build() {
   ./configure --prefix="$pkg_prefix" \
-    --conf-path="$pkg_svc_config_path/nginx.conf" \
     --sbin-path="$pkg_prefix/bin/nginx" \
-    --pid-path="$pkg_svc_var_path/nginx.pid" \
-    --lock-path="$pkg_svc_var_path/nginx.lock" \
     --user=hab \
     --group=hab \
     --http-log-path=/dev/stdout \
     --error-log-path=stderr \
-    --http-client-body-temp-path="$pkg_svc_var_path/client-body" \
-    --http-proxy-temp-path="$pkg_svc_var_path/proxy" \
-    --http-fastcgi-temp-path="$pkg_svc_var_path/fastcgi" \
-    --http-scgi-temp-path="$pkg_svc_var_path/scgi" \
-    --http-uwsgi-temp-path="$pkg_svc_var_path/uwsgi" \
     --with-ipv6 \
     --with-pcre \
     --with-pcre-jit \
