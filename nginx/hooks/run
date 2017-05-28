@@ -2,4 +2,8 @@
 
 exec 2>&1
 
-exec nginx -c {{pkg.svc_config_path}}/nginx.conf
+{{#if cfg.config_path~}}
+    exec nginx -c {{cfg.config_path}}
+{{~else~}}
+    exec nginx -c {{pkg.svc_config_path}}/nginx.conf
+{{~/if}}

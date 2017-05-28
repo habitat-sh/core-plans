@@ -9,6 +9,9 @@
 
 
 #### General Configuration
+# a config file to entirely replace the built-in nginx.conf template
+config_path = false
+
 # worker_processes: Number of NGINX processes. Default = 1
 worker_processes = 4
 
