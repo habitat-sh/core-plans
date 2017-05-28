@@ -1,0 +1,6 @@
+worker_processes  {{cfg.worker_processes}};
+daemon off;
+
+events {
+    worker_connections  {{cfg.events.worker_connections}};
+}
