@@ -44,19 +44,6 @@ do_prepare() {
 }
 
 do_build() {
-  CAIRO_LIBS="-L$(pkg_path_for core/cairo)/lib -lcairo"
-  CAIRO_CFLAGS="-I$(pkg_path_for core/cairo)/include/cairo"
-  FONTCONFIG_LIBS="-L$(pkg_path_for core/fontconfig)/lib -lfontconfig"
-  FONTCONFIG_CFLAGS="-I$(pkg_path_for core/fontconfig)/include"
-  FREETYPE_LIBS="-L$(pkg_path_for core/freetype)/lib -lfreetype"
-  FREETYPE_CFLAGS="-I$(pkg_path_for core/freetype)/include/freetype2"
-  GLIB_LIBS="-L$(pkg_path_for core/glib)/lib -lglib-2.0 -lgobject-2.0 -lgio-2.0"
-  GLIB_CFLAGS="-I$(pkg_path_for core/glib)/include/glib-2.0 -I$(pkg_path_for core/glib)/include/glib-2.0/gobject -I$(pkg_path_for core/glib)/include/glib-2.0/glib -I$(pkg_path_for core/glib)/include/glib-2.0/gio -I$(pkg_path_for core/glib)/lib/glib-2.0/include"
-  HARFBUZZ_LIBS="-L$(pkg_path_for core/harfbuzz)/lib -lharfbuzz"
-  HARFBUZZ_CFLAGS="-I$(pkg_path_for core/harfbuzz)/include/harfbuzz"
-
-  export CAIRO_LIBS CAIRO_CFLAGS FONTCONFIG_LIBS FONTCONFIG_CFLAGS FREETYPE_LIBS FREETYPE_CFLAGS GLIB_LIBS GLIB_CFLAGS HARFBUZZ_LIBS HARFBUZZ_CFLAGS
-
   fix_interpreter "$(pkg_path_for core/glib)/bin/glib-mkenums" core/coreutils bin/env
 
   ./configure --prefix="$pkg_prefix"

@@ -13,6 +13,7 @@ pkg_deps=(
   core/glib
   core/glibc
   core/icu
+  core/pcre
 )
 pkg_build_deps=(
   core/gcc
@@ -24,21 +25,6 @@ pkg_include_dirs=(include/harfbuzz)
 pkg_lib_dirs=(lib)
 
 do_build() {
-  FREETYPE_LIBS="-L$(pkg_path_for core/freetype)/lib -lfreetype"
-  FREETYPE_CFLAGS="-I$(pkg_path_for core/freetype)/include/freetype2"
-  CAIRO_LIBS="-L$(pkg_path_for core/cairo)/lib"
-  CAIRO_CFLAGS="-I$(pkg_path_for core/cairo)/include/cairo"
-  CAIRO_FT_LIBS="-L$(pkg_path_for core/cairo)/lib -lcairo"
-  CAIRO_FT_CFLAGS="-I$(pkg_path_for core/cairo)/include/cairo"
-  GLIB_LIBS="-L$(pkg_path_for core/glib)/lib -lglib-2.0"
-  GLIB_CFLAGS="-I$(pkg_path_for core/glib)/include/glib-2.0 -I$(pkg_path_for core/glib)/lib/glib-2.0/include"
-  GOBJECT_LIBS="-L$(pkg_path_for core/glib)/lib -lgobject-2.0"
-  GOBJECT_CFLAGS="-I$(pkg_path_for core/glib)/include/glib-2.0 -I$(pkg_path_for core/glib)/include/glib-2.0/gobject -I$(pkg_path_for core/glib)/lib/glib-2.0/include"
-  FONTCONFIG_LIBS="-L$(pkg_path_for core/fontconfig)/lib -lfontconfig"
-  FONTCONFIG_CFLAGS="-I$(pkg_path_for core/fontconfig)/include"
-
-  export FREETYPE_LIBS FREETYPE_CFLAGS CAIRO_LIBS CAIRO_CFLAGS CAIRO_FT_LIBS CAIRO_FT_CFLAGS GLIB_LIBS GLIB_CFLAGS GOBJECT_LIBS GOBJECT_CFLAGS FONTCONFIG_LIBS FONTCONFIG_CFLAGS
-
   ./configure --prefix="$pkg_prefix" \
 	      --with-gobject=yes
   make
