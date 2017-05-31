@@ -5,6 +5,8 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('LGPL')
 pkg_source="http://ftp.gnome.org/pub/GNOME/sources/pango/1.40/$pkg_name-$pkg_version.tar.xz"
 pkg_shasum="ca152b7383a1e9f7fd74ae96023dc6770dc5043414793bfe768ff06b6759e573"
+pkg_upstream_url="http://www.pango.org"
+pkg_description="Pango is a library for laying out and rendering of text, with an emphasis on internationalization."
 pkg_deps=(
   core/cairo
   core/bzip2

@@ -8,6 +8,8 @@ pkg_license=(
 )
 pkg_source="https://www.cairographics.org/releases/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="d1f2d98ae9a4111564f6de4e013d639cf77155baf2556582295a0f00a9bc5e20"
+pkg_description="Cairo is a 2D graphics library with support for multiple output devices."
+pkg_upstream_url="https://www.cairographics.org"
 pkg_deps=(
   core/expat
   core/fontconfig
