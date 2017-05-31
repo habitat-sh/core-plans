@@ -35,7 +35,7 @@ do_build() {
 do_install() {
   install -D consul "${pkg_prefix}/bin/consul"
 
-  mkdir ${pkg_prefix}/cacerts
-  cp $(pkg_path_for core/cacerts)/ssl/certs/cacert.pem ${pkg_prefix}/cacerts/cacert.pem
-  ls -al ${pkg_prefix}/cacerts
+  mkdir "${pkg_prefix}/cacerts"
+  cp "$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem ${pkg_prefix}/cacerts/cacert.pem"
+  ls -al "${pkg_prefix}/cacerts"
 }
