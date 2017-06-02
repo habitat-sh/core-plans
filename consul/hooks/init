@@ -1,0 +1,10 @@
+#!/bin/bash -xe
+
+exec 2>&1
+
+if [[ ! -f "{{pkg.svc_var_path}}/NODE_UUID" ]]; then
+  cat /proc/sys/kernel/random/uuid > {{pkg.svc_var_path}}/NODE_UUID
+fi
+
+# copy ca to a ca_path directory
+cp {{pkg.svc_config_path}}/ca.cert {{pkg.path}}/cacerts/consul-ca.cert
