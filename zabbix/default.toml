@@ -1,0 +1,53 @@
+[zabbix_server]
+zabbix_db = "zabbix_db"
+listen_port = 10050
+listen_ip = "127.0.0.1"
+source_ip = ""
+log_size = 1
+debug_level = 3
+db_host = "localhost"
+start_pollers = 5
+start_trappers = 5
+start_pingers = 1
+start_discoverers = 1
+start_timers = 1
+start_escalators = 1
+housekeeping_frequency = 1
+max_housekeeper_delete = 5000
+sender_frequency = 30
+cache_size = "8M"
+cache_update_frequency = 60
+start_db_syncers = 4
+history_cache_size = "16M"
+history_index_cache_size = "4M"
+trend_cache_size = "4M"
+value_cache_size = "8M"
+timeout = 4
+trapper_timeout = 300
+unreachable_period = 45
+unavailable_delay = 60
+unreachable_delay = 15
+log_slow_queries = 3000
+
+[zabbix_agentd]
+source_ip = ""
+debug_level = 3
+listen_port=10051
+log_size = 1
+enable_remote_commands = 0
+log_remote_commands = 0
+start_agents = 3
+host_metadata = ""
+host_metadata_item = ""
+refresh_active_checks = 120
+buffer_send = 5
+buffer_size = 100
+max_lines_per_second = 20
+log_file_size = 1
+timeout = 3
+
+[mysql]
+port = 3306
+bind = "127.0.0.1"
+root_password = ""
+password_column_name = "authentication_string"

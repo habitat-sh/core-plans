@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+
+exec 2>&1
+#start zabbix server
+{{pkg.path}}/sbin/zabbix_server -c {{pkg.svc_config_path}}/zabbix_server.conf
+{{pkg.path}}/sbin/zabbix_agentd -c {{pkg.svc_config_path}}/zabbix_agentd.conf
+
+#habitat requires a hang when it is ending so just made a loop to hang
+while true
+do
+	sleep 1
+done
