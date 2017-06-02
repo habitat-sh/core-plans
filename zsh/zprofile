@@ -1,0 +1,4 @@
+# Habitat zsh base profile
+
+umask 022
+export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/bin"
