@@ -15,10 +15,14 @@ pkg_deps=(
   core/glib
   core/glibc
   core/icu
+  core/libpng
+  core/pixman
   core/pcre
+  core/zlib
 )
 pkg_build_deps=(
   core/gcc
+  core/perl
   core/pkg-config
   core/make
 )

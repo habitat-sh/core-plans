@@ -14,6 +14,7 @@ pkg_build_deps=(
   core/file
   core/gcc
   core/icu
+  core/liberation-fonts-ttf
   core/libjpeg-turbo
   core/libpng
   core/libtiff
