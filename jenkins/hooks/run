@@ -1,0 +1,11 @@
+#!/bin/bash
+
+exec 2>&1
+
+export JAVA_HOME={{pkgPathFor "core/jre8"}}
+export JENKINS_HOME={{pkg.svc_data_path}}
+
+exec java -jar {{pkg.path}}/jenkins.war \
+     --httpPort={{cfg.jenkins.http.port}} \
+     --httpListenAddress={{sys.ip}} \
+     --ajp13Port=-1
