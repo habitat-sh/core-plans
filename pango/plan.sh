@@ -31,7 +31,7 @@ pkg_build_deps=(
   core/patch
   core/perl
   core/pkg-config
-   core/util-linux
+  core/util-linux
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include/pango-1.0/pango)

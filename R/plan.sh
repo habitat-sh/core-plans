@@ -9,17 +9,13 @@ pkg_upstream_url="https://www.r-project.org"
 pkg_description="R is a free software environment for statistical computing and graphics."
 pkg_build_deps=(
   core/coreutils
-  core/texinfo
   core/diffutils
   core/file
   core/gcc
-  core/icu
-  core/liberation-fonts-ttf
-  core/libjpeg-turbo
-  core/libpng
-  core/libtiff
   core/make
+  core/perl
   core/pkg-config
+  core/texinfo
 )
 pkg_deps=(
   core/bzip2
@@ -27,21 +23,20 @@ pkg_deps=(
   core/curl
   core/harfbuzz
   core/icu
+  core/expat
+  core/fontconfig
+  core/freetype
+  core/glib
   core/libjpeg-turbo
+  core/liberation-fonts-ttf
   core/libpng
   core/libtiff
   core/pango
   core/pcre
-  core/perl
+  core/pixman
   core/readline
   core/xz
   core/zlib
-  core/gcc-libs
-  core/glib
-  core/expat
-  core/pixman
-  core/fontconfig
-  core/freetype
 )
 pkg_bin_dirs=(lib64/R/bin)
 pkg_include_dirs=(lib64/R/include)
@@ -50,9 +45,9 @@ pkg_lib_dirs=(lib64/R/lib)
 do_build() {
     sed -i '/#include.*<cairo-xlib.h>/d' ./configure
     ./configure --prefix="${pkg_prefix}" \
-		--with-x=no \
+		 --with-x=no \
                 --disable-java \
-	        --enable-memory-profiling
+	         --enable-memory-profiling
     make
 }
 

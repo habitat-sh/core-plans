@@ -2,7 +2,7 @@ pkg_name=harfbuzz
 pkg_origin=core
 pkg_version=1.3.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('mit')
+pkg_license=('MIT')
 pkg_upstream_url="https://www.freedesktop.org/wiki/Software/HarfBuzz/"
 pkg_description="HarfBuzz is an OpenType text shaping engine"
 pkg_source=http://www.freedesktop.org/software/harfbuzz/release/${pkg_name}-${pkg_version}.tar.bz2
@@ -32,7 +32,7 @@ pkg_lib_dirs=(lib)
 
 do_build() {
   ./configure --prefix="$pkg_prefix" \
-	      --with-gobject=yes
+	       --with-gobject=yes
   make
 }
 
