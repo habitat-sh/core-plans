@@ -455,14 +455,17 @@ Your app's use of a [PostgreSQL][] database is detected by inspecting the `Gemfi
 * `rjack-jdbc-postgres`
 * `tgbyte-activerecord-jdbcpostgresql-adapter`
 
+**NOTE:** If you are using `activerecord-postgis-adapter` you will need to set the `db.adapter` config option to `postgis` in order to access the `postgis` functions in `PostgreSQL`.
+
 ### Default App Environment Variables
 
-* `DATABASE_URL`: `postgres://$user:$password@$host:$port/$name`
+* `DATABASE_URL`: `$adapter://$user:$password@$host:$port/$name`
 
-Where `$user`, `$password`, `$host`, `$port`, and `$name` will be determined at runtime.
+Where `$adapter`, `$user`, `$password`, `$host`, `$port`, and `$name` will be determined at runtime.
 
 ### Default Config Settings
 
+* `db.adapter`: The connecting database adapter for this app.  Defaults to the value of `postgres` if no value is provided.
 * `db.name`: The database name on the database server for this app. Defaults to the value of `"${pkg_name}_production"`.
 * `db.user`: The connecting database user for this app. Defaults to the value of `"$pkg_name"`.
 * `db.password`: The connecting database password for this app. Defaults to the value of `"${pkg_name}"`. It is **strongly** recommended to use a different, randomly generated password when running your app in production.
