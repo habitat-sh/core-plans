@@ -18,7 +18,10 @@ pkg_exports=(
   [http-port]=network.port
   [transport-port]=transport.port
 )
-pkg_exposes=(http-port transport-port)
+
+pkg_binds=(
+  [elasticsearch]=""
+)
 
 do_build() {
   return 0

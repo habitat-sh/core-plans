@@ -111,7 +111,7 @@ transport:
 
 discovery.zen.fd.ping_timeout: {{cfg.discovery.zen_fd_ping_timeout}}
 discovery.zen.ping.multicast.enabled: {{cfg.discovery.ping_multicast_enabled}}
-discovery.zen.ping.unicast.hosts: [{{#each svc.members ~}} "{{sys.ip}}", {{/each ~}}]
+discovery.zen.ping.unicast.hosts: [{{#each bind.elasticsearch.members ~}} "{{sys.ip}}", {{/each ~}}]
 
 discovery.zen.minimum_master_nodes: {{cfg.discovery.minimum_master_nodes}}
 
