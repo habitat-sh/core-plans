@@ -12,7 +12,6 @@ pkg_build_deps=(core/gcc core/make core/coreutils)
 pkg_lib_dirs=(lib)
 pkg_bin_dirs=(sbin)
 pkg_include_dirs=(include)
-pkg_svc_run="nginx"
 pkg_svc_user="root"
 pkg_exports=(
   [port]=http.listen.port
