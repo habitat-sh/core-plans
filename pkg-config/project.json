@@ -1,6 +1,6 @@
 {
   "origin": "core",
-  "plan_path": "grafana/plan.sh",
+  "plan_path": "pkg-config/plan.sh",
   "github": {
     "organization": "habitat-sh",
     "repo": "core-plans"
