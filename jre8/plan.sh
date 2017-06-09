@@ -72,7 +72,7 @@ do_install() {
     -exec sh -c 'file -i "$1" | grep -q "x-executable; charset=binary"' _ {} \; \
     -exec patchelf --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" --set-rpath "${LD_RUN_PATH}" {} \;
 
-  find $pkg_prefix/lib/amd64/*.so -type f \
+  find "$pkg_prefix/lib/amd64" -type f -name "*.so" \
     -exec patchelf --set-rpath "${LD_RUN_PATH}" {} \;
 }
 
