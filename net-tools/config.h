@@ -28,7 +28,7 @@
  */
 #define HAVE_AFUNIX 1
 #define HAVE_AFINET 1
-#define HAVE_AFINET6 0
+#define HAVE_AFINET6 1
 #define HAVE_AFIPX 1
 #define HAVE_AFATALK 1
 #define HAVE_AFAX25 0
@@ -72,4 +72,3 @@
 #define HAVE_FW_MASQUERADE 0
 #define HAVE_IP_TOOLS 0
 #define HAVE_MII 0
-
