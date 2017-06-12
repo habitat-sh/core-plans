@@ -8,12 +8,30 @@ pkg_license=('ncurses')
 pkg_source=http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz
 pkg_shasum=f551c24b30ce8bfb6e96d9f59b42fbea30fa3a6123384172f9e7284bcf647260
 pkg_deps=(core/glibc core/gcc-libs)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
+pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/bzip2)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
+patch_date=20160910
+patch_source=http://invisible-mirror.net/archives/ncurses/${pkg_version}/ncurses-${pkg_version}-${patch_date}-patch.sh.bz2
+patch_checksum=f570bcfe3852567f877ee6f16a616ffc7faa56d21549ad37f6649022f8662538
+
+do_download() {
+  do_default_download
+
+  download_file ${patch_source} ncurses-${pkg_version}-${patch_date}-patch.sh.bz2 ${patch_checksum}
+}
+
+do_unpack() {
+  do_default_unpack
+
+  bunzip2 -c ncurses-${pkg_version}-${patch_date}-patch.sh.bz2 > "${pkg_dirname}/ncurses-${pkg_version}-${patch_date}-patch.sh"
+}
+
 do_build() {
+  sh ncurses-${pkg_version}-${patch_date}-patch.sh
+
   ./configure --prefix="$pkg_prefix" \
     --with-shared \
     --with-termlib \
@@ -22,6 +40,7 @@ do_build() {
     --without-ada \
     --enable-sigwinch \
     --enable-pc-files \
+    --with-pkg-config-libdir="$pkg_prefix/lib/pkgconfig" \
     --enable-symlinks \
     --enable-widec \
     --enable-ext-colors \
@@ -45,9 +64,10 @@ do_install() {
   maj=$(echo ${pkg_version} | cut -d "." -f 1)
   maj_min=$(echo ${pkg_version} | cut -d "." -f 1-2)
   for x in curses ncurses form panel menu tinfo; do
-    echo "INPUT(-l${x}w)" > "$pkg_prefix/lib/lib${x}.so"
+    ln -sv lib${x}w.so "$pkg_prefix/lib/lib${x}.so"
     ln -sv lib${x}w.so "$pkg_prefix/lib/lib${x}.so.$maj"
     ln -sv lib${x}w.so "$pkg_prefix/lib/lib${x}.so.$maj_min"
+    ln -sv ${x}w.pc "$pkg_prefix/lib/pkgconfig/${x}.pc"
   done
   ln -sfv libncursesw.so "$pkg_prefix/lib/libcursesw.so"
   ln -sfv libncursesw.a "$pkg_prefix/lib/libcursesw.a"
