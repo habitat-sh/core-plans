@@ -6,7 +6,7 @@ exec 2>&1
 export STORM_JAR_JVM_OPTS=""
 {{/if ~}}
 export STORM_CONF_DIR="{{pkg.svc_config_path}}"
-export JAVA_HOME="{{ pkgPathFor "core/jre7" }}"
+export JAVA_HOME="{{ pkgPathFor "core/jre8" }}"
 export PYTHON="{{ pkgPathFor "core/python" }}/bin/python"
 
 exec {{pkg.path}}/bin/storm ui

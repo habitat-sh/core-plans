@@ -8,13 +8,17 @@ pkg_license=("Apache-2.0")
 pkg_source=http://apache.40b.nl/storm/apache-storm-${pkg_version}/apache-storm-${pkg_version}.tar.gz
 pkg_shasum=6f584b45ec7f8d0cfd2fa78deb5de392bece07a09158a948b0ed3016ef689142
 pkg_deps=(
-  core/jre7
+  core/jre8
   core/python
   core/bash
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_dirname=apache-storm-${pkg_version}
+pkg_binds=(
+	[zookeeper]=""
+	[storm]=""
+)
 
 pkg_exports=()
 pkg_exposes=()
@@ -29,5 +33,5 @@ do_install() {
   install -vDm644 LICENSE "$pkg_prefix/LICENSE.txt"
   install -vDm644 NOTICE "$pkg_prefix/NOTICE.txt"
 
-  cp -a bin lib log4j2 "$pkg_prefix"
+  cp -a bin lib log4j2 public "$pkg_prefix"
 }
