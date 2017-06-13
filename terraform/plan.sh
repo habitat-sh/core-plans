@@ -1,6 +1,6 @@
 pkg_name=terraform
 pkg_origin=core
-pkg_version=0.8.1
+pkg_version=0.9.8
 pkg_license=('MPL-2.0')
 pkg_description="Terraform is a tool for building, changing, and combining infrastructure safely and efficiently"
 pkg_upstream_url="http://www.terraform.io/"
