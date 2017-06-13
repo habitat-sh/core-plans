@@ -27,57 +27,244 @@ storm.log.dir: "{{pkg.svc_var_path}}/logs"
 
 nimbus.seeds: [{{#each bind.storm.members}}{{#if @index}},{{/if}}"{{sys.ip}}"{{/each}}]
 
-#
-#
-# ##### These may optionally be filled in:
-#
-## List of custom serializations
-# topology.kryo.register:
-#     - org.mycompany.MyType
-#     - org.mycompany.MyType2: org.mycompany.MyType2Serializer
-#
-## List of custom kryo decorators
-# topology.kryo.decorators:
-#     - org.mycompany.MyDecorator
-#
-## Locations of the drpc servers
-# drpc.servers:
-#     - "server1"
-#     - "server2"
+{{#with cfg.ui ~}}
+### ui.* configs are for the master
+ui.host: {{host}}
+ui.port: {{port}}
+ui.childopts: {{childopts}}
+ui.actions.enabled: {{actions-enabled}}
+ui.filter: {{filter}}
+ui.filter.params: {{filter-params}}
+ui.users: {{users}}
+ui.header.buffer.bytes: {{header-buffer-bytes}}
+ui.http.creds.plugin: {{http-creds-plugin}}
+ui.http.x-frame-options: {{http-x-frame-options}}
+{{~/with}}
 
-## Metrics Consumers
-## max.retain.metric.tuples
-## - task queue will be unbounded when max.retain.metric.tuples is equal or less than 0.
-## whitelist / blacklist
-## - when none of configuration for metric filter are specified, it'll be treated as 'pass all'.
-## - you need to specify either whitelist or blacklist, or none of them. You can't specify both of them.
-## - you can specify multiple whitelist / blacklist with regular expression
-## expandMapType: expand metric with map type as value to multiple metrics
-## - set to true when you would like to apply filter to expanded metrics
-## - default value is false which is backward compatible value
-## metricNameSeparator: separator between origin metric name and key of entry from map
-## - only effective when expandMapType is set to true
-# topology.metrics.consumer.register:
-#   - class: "org.apache.storm.metric.LoggingMetricsConsumer"
-#     max.retain.metric.tuples: 100
-#     parallelism.hint: 1
-#   - class: "org.mycompany.MyMetricsConsumer"
-#     max.retain.metric.tuples: 100
-#     whitelist:
-#       - "execute.*"
-#       - "^__complete-latency$"
-#     parallelism.hint: 1
-#     argument:
-#       - endpoint: "metrics-collector.mycompany.org"
-#     expandMapType: true
-#     metricNameSeparator: "."
+########### These all have default values as shown
+########### retrieved from https://raw.githubusercontent.com/apache/storm/v1.0.0/conf/defaults.yaml
 
-## Cluster Metrics Consumers
-# storm.cluster.metrics.consumer.register:
-#   - class: "org.apache.storm.metric.LoggingClusterMetricsConsumer"
-#   - class: "org.mycompany.MyMetricsConsumer"
-#     argument:
-#       - endpoint: "metrics-collector.mycompany.org"
-#
-# storm.cluster.metrics.consumer.publish.interval.secs: 60
-#
+java.library.path: {{java-library-path}}
+logs.users: {{logs-users}}
+dev.zookeeper.path: {{dev-zookeeper-path}}
+client.blobstore.class: {{client-blobstore-class}}
+
+{{#with cfg.storm-daemon-metrics-reporter-plugins ~}}
+#default storm daemon metrics reporter plugins
+storm.daemon.metrics.reporter.plugins:
+     {{#each this ~}}
+     - {{this}}
+     {{~/each}}
+{{~/with}}
+
+# Default plugin to use for automatic network topology discovery
+storm.network.topography.plugin: {{cfg.storm-network-topography-plugin}}
+
+# default number of seconds group mapping service will cache user group
+storm.group.mapping.service.cache.duration.secs: {{cfg.storm-group-mapping-service-cache-duration-secs}}
+
+# configuration of cluster metrics consumer
+storm.cluster.metrics.consumer.publish.interval.secs: {{cfg.storm-cluster-metrics-consumer-publish-interval-secs}}
+
+resource.aware.scheduler.eviction.strategy: {{cfg.resource-aware-scheduler-eviction-strategy}}
+resource.aware.scheduler.priority.strategy: {{cfg.resource-aware-scheduler-priority-strategy}}
+
+# now should be null by default
+topology.backpressure.enable: {{cfg.topology-backpressure-enable}}
+backpressure.disruptor.high.watermark: {{cfg.backpressure-disruptor-low-watermark}}
+backpressure.disruptor.low.watermark: {{cfg.backpressure-disruptor-high-watermark}}
+
+topology.min.replication.count: {{cfg.topology-min-replication-count}}
+topology.max.replication.wait.time.sec: {{cfg.topology-max-replication-wait-time-sec}}
+scheduler.display.resource: {{cfg.scheduler-display-resource}}
+
+
+{{#with cfg.storm ~}}
+### storm.* configs are general configurations
+# the local dir is where jars are kept
+{{~#if local-dir}}
+storm.local.dir: {{local-dir}}
+{{~/if}}
+storm.log4j2.conf.dir: {{log4j2-conf-dir}}
+
+{{#with zookeeper ~}}
+storm.zookeeper.port: {{port}}
+storm.zookeeper.root: {{root}}
+storm.zookeeper.session.timeout: {{session-timeout}}
+storm.zookeeper.connection.timeout: {{connection-timeout}}
+storm.zookeeper.retry.times: {{retry-times}}
+storm.zookeeper.retry.interval: {{retry-interval}}
+storm.zookeeper.retry.intervalceiling.millis: {{retry-intervalceiling-millis}}
+storm.zookeeper.auth.user: {{auth-user}}
+storm.zookeeper.auth.password: {{auth-password}}
+{{~/with }}
+
+{{#with blobstore ~}}
+storm.blobstore.inputstream.buffer.size.bytes: {{inputstream-buffer-size-bytes}}
+storm.blobstore.replication.factor: {{replication-factor}}
+# For secure mode we would want to change this config to true
+storm.blobstore.acl.validation.enabled: {{acl-validation-enabled}}
+{{~/with}}
+
+storm.exhibitor.port: {{exhibitor-port}}
+storm.exhibitor.poll.uripath: {{exhibitor-poll-uripath}}
+storm.cluster.mode: {{cluster-mode}}
+storm.local.mode.zmq: {{local-mode-zmq}}
+storm.thrift.transport: {{thrift-transport}}
+storm.thrift.socket.timeout.ms: {{thrift-socket-timeout-ms}}
+storm.principal.tolocal: {{principal-tolocal}}
+storm.group.mapping.service: {{group-mapping-service}}
+storm.group.mapping.service.params: {{group-mapping-service-params}}
+storm.messaging.transport: {{messaging-transport}}
+storm.nimbus.retry.times: {{nimbus-retry-times}}
+storm.nimbus.retry.interval.millis: {{nimbus-retry-interval-millis}}
+storm.nimbus.retry.intervalceiling.millis: {{nimbus-retry-intervalceiling-millis}}
+storm.auth.simple-white-list.users: {{auth-simple-white-list-users}}
+storm.auth.simple-acl.users: {{auth-simple-acl-users}}
+storm.auth.simple-acl.users.commands: {{auth-simple-acl-users-commands}}
+storm.auth.simple-acl.admins: {{auth-simple-acl-admins}}
+storm.cluster.state.store: {{cluster-state-store}}
+storm.meta.serialization.delegate: {{meta-serialization-delegate}}
+storm.codedistributor.class: {{codedistributor-class}}
+storm.workers.artifacts.dir: {{workers-artifacts-dir}}
+storm.health.check.dir: {{health-check-dir}}
+storm.health.check.timeout.ms: {{health-check-timeout-ms}}
+storm.disable.symlinks: {{disable-symlinks}}
+{{/with ~}}
+
+{{#with logviewer ~}}
+logviewer.port: {{port}}
+logviewer.childopts: {{childopts}}
+logviewer.cleanup.age.mins: {{cleanup-age-mins}}
+logviewer.appender.name: {{appender-name}}
+logviewer.max.sum.worker.logs.size.mb: {{max-sum-worker-logs-size-mb}}
+logviewer.max.per.worker.logs.size.mb: {{max-per-worker-logs-size-mb}}
+{{/with ~}}
+
+{{~#with cfg.drpc}}
+drpc.port: {{port}}
+drpc.worker.threads: {{worker-threads}}
+drpc.max_buffer_size: {{max_buffer_size}}
+drpc.queue.size: {{queue-size}}
+drpc.invocations.port: {{invocations-port}}
+drpc.invocations.threads: {{invocations-threads}}
+drpc.request.timeout.secs: {{request-timeout-secs}}
+drpc.childopts: {{childopts}}
+drpc.http.port: {{http-port}}
+drpc.https.port: {{https-port}}
+drpc.https.keystore.password: {{https-keystore-password}}
+drpc.https.keystore.type: {{https-keystore-type}}
+drpc.http.creds.plugin: {{http-creds-plugin}}
+drpc.authorizer.acl.filename: {{authorizer-acl-filename}}
+drpc.authorizer.acl.strict: {{authorizer-acl-strict}}
+{{~/with}}
+
+{{~#with cfg.transactional}}
+transactional.zookeeper.root: {{zookeeper-root}}
+transactional.zookeeper.servers: {{zookeeper-servers}}
+transactional.zookeeper.port: {{zookeeper-port}}
+{{~/with}}
+
+
+
+{{#with cfg.task ~}}
+task.heartbeat.frequency.secs: {{heartbeat-frequency-secs}}
+task.refresh.poll.secs: {{refresh-poll-secs}}
+task.credentials.poll.secs: {{credentials-poll-secs}}
+task.backpressure.poll.secs: {{backpressure-poll-secs}}
+{{~/with}}
+
+{{~#with cfg.zmq}}
+zmq.threads: {{threads}}
+zmq.linger.millis: {{linger-millis}}
+zmq.hwm: {{hwm}}
+{{~/with}}
+
+{{#with cfg.storm.messaging.netty}}
+storm.messaging.netty.client_worker_threads: {{client_worker_threads}}
+storm.messaging.netty.buffer_size: {{buffer_size}}
+
+# Since nimbus.task.launch.secs and supervisor.worker.start.timeout.secs are 120, other workers should also wait at least that long before giving up on connecting to the other worker. The reconnection period need also be bigger than storm.zookeeper.session.timeout(default is 20s), so that we can abort the reconnection when the target worker is dead.
+storm.messaging.netty.max_retries: {{max_retries}}
+storm.messaging.netty.max_wait_ms: {{max_wait_ms}}
+storm.messaging.netty.min_wait_ms: {{min_wait_ms}}
+
+# If the Netty messaging layer is busy(netty internal buffer not writable), the Netty client will try to batch message as more as possible up to the size of storm.messaging.netty.transfer.batch.size bytes, otherwise it will try to flush message as soon as possible to reduce latency.
+storm.messaging.netty.transfer.batch.size: {{transfer-batch-size}}
+
+# Sets the backlog value to specify when the channel binds to a local address
+storm.messaging.netty.socket.backlog: {{socket-backlog}}
+
+# By default, the Netty SASL authentication is set to false.  Users can override and set it true for a specific topology.
+storm.messaging.netty.authentication: {{authentication}}
+storm.messaging.netty.server_worker_threads: {{server_worker_threads}}
+{{/with ~}}
+
+
+### topology.* configs are for specific executing storms
+{{~#with cfg.topology}}
+topology.enable.message.timeouts: {{enable-message-timeouts}}
+topology.debug: {{debug}}
+topology.workers: {{workers}}
+topology.acker.executors: {{acker-executors}}
+topology.eventlogger.executors: {{eventlogger-executors}}
+topology.tasks: {{tasks}}
+# maximum amount of time a message has to complete before it's considered failed
+topology.message.timeout.secs: {{message-timeout-secs}}
+topology.multilang.serializer: {{multilang-serializer}}
+topology.shellbolt.max.pending: {{shellbolt-max-pending}}
+topology.skip.missing.kryo.registrations: {{skip-missing-kryo-registrations}}
+topology.max.task.parallelism: {{max-task-parallelism}}
+topology.max.spout.pending: {{max-spout-pending}}
+topology.state.synchronization.timeout.secs: {{state-synchronization-timeout-secs}}
+topology.stats.sample.rate: {{stats-sample-rate}}
+topology.builtin.metrics.bucket.size.secs: {{builtin-metrics-bucket-size-secs}}
+topology.fall.back.on.java.serialization: {{fall-back-on-java-serialization}}
+topology.worker.childopts: {{worker-childopts}}
+topology.worker.logwriter.childopts: {{worker-logwriter-childopts}}
+topology.executor.receive.buffer.size: {{executor-receive-buffer-size}}
+topology.executor.send.buffer.size: {{executor-send-buffer-size}}
+topology.transfer.buffer.size: {{transfer-buffer-size}}
+topology.tick.tuple.freq.secs: {{tick-tuple-freq-secs}}
+topology.worker.shared.thread.pool.size: {{worker-shared-thread-pool-size}}
+topology.spout.wait.strategy: {{spout-wait-strategy}}
+topology.sleep.spout.wait.strategy.time.ms: {{sleep-spout-wait-strategy-time-ms}}
+topology.error.throttle.interval.secs: {{error-throttle-interval-secs}}
+topology.max.error.report.per.interval: {{max-error-report-per-interval}}
+topology.kryo.factory: {{kryo-factory}}
+topology.tuple.serializer: {{tuple-serializer}}
+topology.trident.batch.emit.interval.millis: {{trident-batch-emit-interval-millis}}
+topology.testing.always.try.serialize: {{testing-always-try-serialize}}
+topology.classpath: {{classpath}}
+topology.environment: {{environment}}
+topology.bolts.outgoing.overflow.buffer.enable: {{bolts-outgoing-overflow-buffer-enable}}
+topology.disruptor.wait.timeout.millis: {{disruptor-wait-timeout-millis}}
+topology.disruptor.batch.size: {{disruptor-batch-size}}
+topology.disruptor.batch.timeout.millis: {{disruptor-batch-timeout-millis}}
+topology.disable.loadaware.messaging: {{disable-loadaware-messaging}}
+topology.state.checkpoint.interval.ms: {{state-checkpoint-interval-ms}}
+
+# Configs for Resource Aware Scheduler
+# topology priority describing the importance of the topology in decreasing importance starting from 0 (i.e. 0 is the highest priority and the priority importance decreases as the priority number increases).
+# Recommended range of 0-29 but no hard limit set.
+topology.priority: {{priority}}
+topology.component.resources.onheap.memory.mb: {{component-resources-onheap-memory-mb}}
+topology.component.resources.offheap.memory.mb: {{component-resources-offheap-memory-mb}}
+topology.component.cpu.pcore.percent: {{component-cpu-pcore-percent}}
+topology.worker.max.heap.size.mb: {{worker-max-heap-size-mb}}
+topology.scheduler.strategy: {{scheduler-strategy}}
+
+topology.worker.receiver.thread.count: {{worker-receiver-thread-count}}
+{{~/with}}
+
+
+{{~#with with cfg.pacemaker}}
+pacemaker.host: {{host}}
+pacemaker.port: {{port}}
+pacemaker.base.threads: {{base-threads}}
+pacemaker.max.threads: {{max-threads}}
+pacemaker.thread.timeout: {{thread-timeout}}
+pacemaker.childopts: {{childopts}}
+pacemaker.auth.method: {{auth-method}}
+pacemaker.kerberos.users: {{kerberos-users}}
+{{~/with}}
