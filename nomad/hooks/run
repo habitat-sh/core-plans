@@ -1,0 +1,6 @@
+#!/bin/bash -xe
+
+exec 2>&1
+
+su hab -c "exec nomad agent -config {{pkg.svc_config_path}}/settings.hcl"
+

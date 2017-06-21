@@ -1,0 +1,10 @@
+log_level = "DEBUG"
+
+bind_addr = "0.0.0.0"
+
+bootstrap_expect = 1
+
+[[ports]]
+  http = 4646
+  rpc  = 4647
+  serf = 4648 

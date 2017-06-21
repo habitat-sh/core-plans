@@ -1,0 +1,10 @@
+#!/bin/bash -xe
+
+exec 2>&1
+
+if [ ! -f /sbin/ip ]
+then
+    ln -s $(hab pkg path core/busybox-static)/bin/ip /sbin/ip
+fi
+
+source "{{pkg.svc_path}}/hooks/reconfigure"
