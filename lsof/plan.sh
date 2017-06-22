@@ -20,6 +20,8 @@ do_unpack() {
 do_build() {
   export DESTDIR="$PREFIX"
   export LSOF_CFLAGS_OVERRIDE=1
+  LSOF_INCLUDE="$(pkg_path_for glibc)/include/"
+  export LSOF_INCLUDE
   pushd "$SRC_PATH" > /dev/null
   chmod +x ./Configure
   ./Configure linux -n
