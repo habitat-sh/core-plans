@@ -1,0 +1,32 @@
+#!/bin/sh
+
+exec 2>&1
+
+proto="{{cfg.etcd-http-proto}}"
+
+cd {{pkg.svc_path}}
+
+if [ "{{cfg.etcd-auto-tls}}" = "true" ] ; then
+	export ETCD_AUTO_TLS="true"
+	export ETCD_PEER_AUTO_TLS="true"
+fi
+
+listen_ip="{{sys.ip}}"
+
+if [[ "{{cfg.listen-host-ip}}" ]] ; then
+        listen_ip="{{cfg.listen-host-ip}}"
+fi
+
+nodes="{{#each svc.members ~}}{{sys.ip}}=${proto}://{{sys.ip}}:{{cfg.etcd-server-end}},{{/each ~}}"
+
+export ETCD_NAME="{{sys.ip}}"
+export ETCD_DATA_DIR="{{pkg.svc_data_path}}"
+export ETCD_LISTEN_CLIENT_URLS="${proto}://${listen_ip}:{{cfg.etcd-client-end}}"
+export ETCD_LISTEN_PEER_URLS="${proto}://${listen_ip}:{{cfg.etcd-server-end}}"
+export ETCD_ADVERTISE_CLIENT_URLS="${proto}://${listen_ip}:{{cfg.etcd-client-end}}"
+export ETCD_INITIAL_ADVERTISE_PEER_URLS="${proto}://${listen_ip}:{{cfg.etcd-server-end}}"
+export ETCD_INITIAL_CLUSTER_TOKEN="{{cfg.etcd-initial-cluster-token}}"
+export ETCD_INITIAL_CLUSTER_STATE="{{cfg.etcd-initial-cluster-state}}"
+export ETCD_INITIAL_CLUSTER="$nodes"
+
+exec etcd
