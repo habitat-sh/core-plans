@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  varnish:
+    image: starkandwayne/varnish:edge
+    command: "start starkandwayne/varnish --peer webserver --group varnish"
+    environment:
+      HAB_VARNISH: |
+        [backend]
+        host="webserver"
+        port="3000"
+        max_connections=300
+  webserver:
+    image: starkandwayne/varnish:edge
+    command: "echo 'Hello Varnish' > index.html && python -m SimpleHTTPServer 3000"
+  tests:
+    image: starkandwayne-varnish-tests
+    build: ./
+    environment:
+      VARNISH_HOST: varnish
