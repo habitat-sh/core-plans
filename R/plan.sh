@@ -11,7 +11,6 @@ pkg_build_deps=(
   core/coreutils
   core/diffutils
   core/file
-  core/gcc
   core/make
   core/perl
   core/pkg-config
@@ -21,6 +20,7 @@ pkg_deps=(
   core/bzip2
   core/cairo
   core/curl
+  core/gcc
   core/harfbuzz
   core/icu
   core/expat
