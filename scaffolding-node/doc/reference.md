@@ -359,7 +359,7 @@ pkg_binds[elasticsearch]="http-port transport-port"
 This allows your app to [dynamically bind][12factor_backing_services] to the desired Elasticsearch service group at runtime. For example, if your app's target Elasticsearch service group was `"es.my_app"`, then you would start it with:
 
 ```sh
-hab start acmecorp/my_app --bind elastic search:es.my_app
+hab start acmecorp/my_app --bind elasticsearch:es.my_app
 ```
 
 ## App Type Detection
