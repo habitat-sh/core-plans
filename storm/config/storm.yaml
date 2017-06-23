@@ -27,6 +27,97 @@ storm.log.dir: "{{pkg.svc_var_path}}/logs"
 
 nimbus.seeds: [{{#each bind.storm.members}}{{#if @index}},{{/if}}"{{sys.ip}}"{{/each}}]
 
+{{~#with cfg.nimbus}}
+### nimbus.* configs are for the master
+{{#with thrift ~}}
+nimbus.thrift.port: {{port}}
+nimbus.thrift.threads: {{threads}}
+nimbus.thrift.max_buffer_size: {{max_buffer_size}}
+{{~/with}}
+
+nimbus.childopts: {{childopts}}
+nimbus.task.timeout.secs: {{task-timeout-secs}}
+nimbus.supervisor.timeout.secs: {{supervisor-timeout-secs}}
+nimbus.monitor.freq.secs: {{monitor-freq-secs}}
+nimbus.cleanup.inbox.freq.secs: {{cleanup-inbox-freq-secs}}
+nimbus.inbox.jar.expiration.secs: {{inbox-jar-expiration-secs}}
+nimbus.code.sync.freq.secs: {{code-sync-freq-secs}}
+nimbus.task.launch.secs: {{task-launch-secs}}
+nimbus.file.copy.expiration.secs: {{file-copy-expiration-secs}}
+nimbus.topology.validator: {{topology-validator}}
+
+
+nimbus.credential.renewers.freq.secs: {{credential-renewers-freq-secs}}
+nimbus.queue.size: {{queue-size}}
+
+{{#with blobstore ~}}
+nimbus.blobstore.class: {{class}}
+nimbus.blobstore.expiration.secs: {{expiration-secs}}
+{{~/with}}
+{{~/with}}
+
+{{#with cfg.supervisor ~}}
+
+{{~#with blobstore}}
+## blobstore configs
+supervisor.blobstore.class: {{class}}
+supervisor.blobstore.download.thread.count: {{download-thread-count}}
+supervisor.blobstore.download.max_retries: {{download-max_retries}}
+{{~/with}}
+
+{{~#with localizer}}
+supervisor.localizer.cache.target.size.mb: {{cache-target-size-mb}}
+supervisor.localizer.cleanup.interval.ms: {{cleanup-interval-ms}}
+{{~/with}}
+
+{{~#with worker}}
+supervisor.worker.start.timeout.secs: {{start-timeout-secs}}
+supervisor.worker.timeout.secs: {{timeout-secs}}
+#how many seconds to sleep for before shutting down threads on worker
+supervisor.worker.shutdown.sleep.secs: {{shutdown-sleep-secs}}
+{{~/with}}
+
+#how frequently the supervisor checks on the status of the processes it's monitoring and restarts if necessary
+supervisor.childopts: {{childopts}}
+supervisor.run.worker.as.user: {{run-worker-as-user}}
+
+supervisor.monitor.frequency.secs: {{monitor-frequency-secs}}
+#how frequently the supervisor heartbeats to the cluster state (for nimbus)
+supervisor.heartbeat.frequency.secs: {{heartbeat-frequency-secs}}
+supervisor.enable: {{enable}}
+supervisor.supervisors: {{supervisors}}
+supervisor.supervisors.commands: {{supervisors-commands}}
+supervisor.memory.capacity.mb: {{memory-capacity-mb}}
+#By convention 1 cpu core should be about 100, but this can be adjusted if needed
+# using 100 makes it simple to set the desired value to the capacity measurement
+# for single threaded bolts
+supervisor.cpu.capacity: {{cpu-capacity}}
+{{~/with}}
+
+
+### worker.* configs are for task workers
+{{~#with cfg.worker}}
+supervisor.slots.ports:
+  {{~#each ports  }}
+    - {{this}}
+  {{~/each}}
+
+worker.heap.memory.mb: {{heap-memory-mb}}
+worker.childopts: {{childopts}}
+worker.gc.childopts: {{gc-childopts}}
+
+# Unlocking commercial features requires a special license from Oracle.
+# See http://www.oracle.com/technetwork/java/javase/terms/products/index.html
+# For this reason, profiler features are disabled by default.
+worker.profiler.enabled: {{profiler-enabled}}
+worker.profiler.childopts: {{profiler-childopts}}
+worker.profiler.command: {{profiler-command}}
+worker.heartbeat.frequency.secs: {{heartbeat-frequency-secs}}
+
+# check whether dynamic log levels can be reset from DEBUG to INFO in workers
+worker.log.level.reset.poll.secs: {{log-level-reset-poll-secs}}
+{{~/with}}
+
 {{#with cfg.ui ~}}
 ### ui.* configs are for the master
 ui.host: {{host}}
@@ -40,6 +131,7 @@ ui.header.buffer.bytes: {{header-buffer-bytes}}
 ui.http.creds.plugin: {{http-creds-plugin}}
 ui.http.x-frame-options: {{http-x-frame-options}}
 {{~/with}}
+
 
 ########### These all have default values as shown
 ########### retrieved from https://raw.githubusercontent.com/apache/storm/v1.0.0/conf/defaults.yaml

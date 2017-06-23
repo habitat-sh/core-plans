@@ -1,5 +1,8 @@
 ### Default config
 
+# run_as accepts a string of supervisor, nimbus or ui
+run_as = "nimbus"
+
 java-library-path = "/usr/local/lib:/opt/local/lib:/usr/lib"
 logs-users = "null"
 dev-zookeeper-path = "/tmp/dev-storm-zookeeper"
@@ -29,6 +32,33 @@ scheduler-display-resource = false
 topology-min-replication-count = 1
 topology-max-replication-wait-time-sec = 60
 
+### nimbus.* configs are for the master
+### Specific config for nimbus
+[nimbus]
+childopts = "-Xmx1024m"
+task-timeout-secs = 30
+supervisor-timeout-secs = 60
+monitor-freq-secs = 10
+cleanup-inbox-freq-secs = 600
+inbox-jar-expiration-secs = 3600
+code-sync-freq-secs = 120
+task-launch-secs = 120
+file-copy-expiration-secs = 600
+topology-validator = "org.apache.storm.nimbus.DefaultTopologyValidator"
+
+credential-renewers-freq-secs = 600
+queue-size = 100000
+
+[nimbus.thrift]
+port = 6627
+threads = 64
+max_buffer_size = 1048576
+
+[nimbus.blobstore]
+class = "org.apache.storm.blobstore.LocalFsBlobStore"
+expiration-secs = 600
+
+
 [supervisor]
 ## blobstore configs
 childopts = "-Xmx256m"
@@ -53,8 +83,6 @@ start-timeout-secs = 120
 timeout-secs = 30
 #how many seconds to sleep for before shutting down threads on worker
 shutdown-sleep-secs = 3
-
-
 
 [supervisor.blobstore]
 class = "org.apache.storm.blobstore.NimbusBlobStore"
@@ -83,6 +111,20 @@ heartbeat-frequency-secs = 1
 
 # check whether dynamic log levels can be reset from DEBUG to INFO in workers
 log-level-reset-poll-secs = 30
+
+
+[ui]
+host = "0.0.0.0"
+port = 8080
+childopts = "-Xmx768m"
+actions-enabled = true
+filter = "null"
+filter-params = "null"
+users = "null"
+header-buffer-bytes = 4096
+http-creds-plugin = "org.apache.storm.security.auth.DefaultHttpCredentialsPlugin"
+http-x-frame-options = "DENY"
+
 
 [storm]
 ### storm.* configs are general configurations
