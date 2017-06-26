@@ -67,6 +67,37 @@ num_partitions=1
 # The number of threads per data directory to be used for log recovery at startup and flushing at shutdown.
 # This value is recommended to be increased for installations with data dirs located in RAID array.
 num_recovery_threads_per_data_dir=1
+flush_offset_checkpoint_interval_ms=60000
+flush_scheduler_interval_ms=9223372036854775807
+
+# Conflicts with log.retention.hours!
+#retention_minutes=
+#retention_ms=
+
+roll_hours=168
+#roll_ms=
+jitter_hours=0
+#jitter_ms=
+
+segment_delete_delay_ms=60000
+cleaner_backoff_ms=15000
+cleaner_dedupe_buffer_size=134217728
+cleaner_delete_retention_ms=86400000
+cleaner_enable=true
+cleaner_io_buffer_load_factor=0.9
+cleaner_io_buffer_size=524288
+# cleaner_io_max_bytes_per_second=
+cleaner_min_cleanable_ratio=0.5
+cleaner_min_compaction_lag_ms=0
+cleaner_threads=1
+cleanup_policy="delete"
+index_interval_bytes=4096
+index_size_max_bytes=10485760
+message_format_version="0.10.1"
+# message_timestamp_difference_max_ms=9223372036854775807
+message_timestamp_type="CreateTime"
+preallocate=false
+
 
 ############################# Log Flush Policy #############################
 [log.flush]
@@ -121,6 +152,59 @@ session_timeout_ms=6000
 set_acl=false
 sync_time_ms=2000
 
+############################### SASL ###############################
+[sasl]
+enabled_mechanisms="GSSAPI"
+kerberos_kinit_cmd="/usr/bin/kinit"
+kerberos_min_time_before_relogin=60000
+kerberos_principal_to_local_rules="DEFAULT"
+kerberos_service_name="null"
+kerberos_ticket_renew_jitter=0.05
+kerberos_ticket_renew_window_factor=0.8
+mechanism_inter_broker_protocol="GSSAPI"
+
+############################## Replica #############################
+[replica]
+fetch_min_bytes=1
+fetch_wait_max_ms=500
+high_watermark_checkpoint_interval_ms=5000
+lag_time_max_ms=10000
+socket_receive_buffer_bytes=65536
+socket_timeout_ms=30000
+fetch_backoff_ms=1000
+fetch_max_bytes=1048576
+fetch_response_max_bytes=10485760
+
+############################### SSL ################################
+[ssl]
+cipher_suites="null"
+client_auth="none"
+enabled_protocols="TLSv1.2,TLSv1.1,TLSv1"
+key_password="null"
+keymanager_algorithm="SunX509"
+keystore_location="null"
+keystore_password="null"
+keystore_type="JKS"
+protocol="TLS"
+provider="null"
+trustmanager_algorithm="PKIX"
+truststore_location="null"
+truststore_password="null"
+truststore_type="JKS"
+endpoint_identification_algorithm="null"
+secure_random_implementation="null"
+
+############################## Offsets #############################
+[offsets]
+commit_required_acks=-1
+commit_timeout_ms=5000
+load_buffer_size=5242880
+retention_check_interval_ms=600000
+retention_minutes=1440
+topic_compression_codec=0
+topic_num_partitions=50
+topic_replication_factor=3
+topic_segment_bytes=104857600
 
 ############################# Advanced #############################
 
@@ -132,39 +216,14 @@ background_threads=10
 compression_type="producer"
 leader_imbalance_check_interval_seconds=300
 leader_imbalance_per_broker_percentage=10
-log_flush_offset_checkpoint_interval_ms=60000
-log_flush_scheduler_interval_ms=9223372036854775807
 
-# Conflicts with log.retention.hours!
-#log_retention_minutes=
-#log_retention_ms=
-
-log_roll_hours=168
-#log_roll_ms=
-log_jitter_hours=0
-#log_jitter_ms=
-
-log_segment_delete_delay_ms=60000
 message_max_bytes=1000012
 min_insync_replicas=1
 num_replica_fetchers=1
 offset_metadata_max_bytes=4096
-offsets_commit_required_acks=-1
-offsets_commit_timeout_ms=5000
-offsets_load_buffer_size=5242880
-offsets_retention_check_interval_ms=600000
-offsets_retention_minutes=1440
-offsets_topic_compression_codec=0
-offsets_topic_num_partitions=50
-offsets_topic_replication_factor=3
-offsets_topic_segment_bytes=104857600
+
 queued_max_requests=500
-replica_fetch_min_bytes=1
-replica_fetch_wait_max_ms=500
-replica_high_watermark_checkpoint_interval_ms=5000
-replica_lag_time_max_ms=10000
-replica_socket_receive_buffer_bytes=65536
-replica_socket_timeout_ms=30000
+
 request_timeout_ms=30000
 unclean_leader_election_enable=true
 broker_id_generation_enable=true
@@ -180,54 +239,16 @@ group_max_session_timeout_ms=300000
 group_min_session_timeout_ms=6000
 inter_broker_listener_name="null"
 inter_broker_protocol_version="0.10.1"
-log_cleaner_backoff_ms=15000
-log_cleaner_dedupe_buffer_size=134217728
-log_cleaner_delete_retention_ms=86400000
-log_cleaner_enable=true
-log_cleaner_io_buffer_load_factor=0.9
-log_cleaner_io_buffer_size=524288
-# log_cleaner_io_max_bytes_per_second=
-log_cleaner_min_cleanable_ratio=0.5
-log_cleaner_min_compaction_lag_ms=0
-log_cleaner_threads=1
-log_cleanup_policy="delete"
-log_index_interval_bytes=4096
-log_index_size_max_bytes=10485760
-log_message_format_version="0.10.1"
-# log_message_timestamp_difference_max_ms=9223372036854775807
-log_message_timestamp_type="CreateTime"
-log_preallocate=false
+
 max_connections_per_ip=2147483647
 max_connections_per_ip_overrides=""
 principal_builder_class="org.apache.kafka.common.security.auth.DefaultPrincipalBuilder"
 producer_purgatory_purge_interval_requests=1000
-replica_fetch_backoff_ms=1000
-replica_fetch_max_bytes=1048576
-replica_fetch_response_max_bytes=10485760
+
 reserved_broker_max_id=1000
-sasl_enabled_mechanisms="GSSAPI"
-sasl_kerberos_kinit_cmd="/usr/bin/kinit"
-sasl_kerberos_min_time_before_relogin=60000
-sasl_kerberos_principal_to_local_rules="DEFAULT"
-sasl_kerberos_service_name="null"
-sasl_kerberos_ticket_renew_jitter=0.05
-sasl_kerberos_ticket_renew_window_factor=0.8
-sasl_mechanism_inter_broker_protocol="GSSAPI"
+
 security_inter_broker_protocol="PLAINTEXT"
-ssl_cipher_suites="null"
-ssl_client_auth="none"
-ssl_enabled_protocols="TLSv1.2,TLSv1.1,TLSv1"
-ssl_key_password="null"
-ssl_keymanager_algorithm="SunX509"
-ssl_keystore_location="null"
-ssl_keystore_password="null"
-ssl_keystore_type="JKS"
-ssl_protocol="TLS"
-ssl_provider="null"
-ssl_trustmanager_algorithm="PKIX"
-ssl_truststore_location="null"
-ssl_truststore_password="null"
-ssl_truststore_type="JKS"
+
 authorizer_class_name=""
 create_topic_policy_class_name="null"
 listener_security_protocol_map="SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,TRACE:TRACE,SASL_SSL:SASL_SSL,PLAINTEXT:PLAINTEXT"
@@ -239,5 +260,3 @@ quota_window_num=11
 quota_window_size_seconds=1
 replication_quota_window_num=11
 replication_quota_window_size_seconds=1
-ssl_endpoint_identification_algorithm="null"
-ssl_secure_random_implementation="null"
