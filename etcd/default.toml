@@ -1,0 +1,23 @@
+# Use this file to templatize your application's native configuration files.
+# See the docs at https://www.habitat.sh/docs/create-packages-configure/.
+# You can safely delete this file if you don't need it.
+etcd-name = "default"
+etcd-data-dir = "/var/lib/etcd"
+
+etcd-client-end = 2379
+etcd-server-end = 2380
+
+etcd-auto-tls = "true"
+etcd-http-proto = "https"
+
+etcd-discovery = ""
+
+etcd-listen-host-ip = ""
+
+etcd-listen-client-urls = "http://0.0.0.0"
+etcd-listen-peer-urls = "http://0.0.0.0"
+etcd-advertise-client-urls = "http://0.0.0.0"
+etcd-initial-advertise-peer-urls = "http://0.0.0.0"
+
+etcd-initial-cluster-state = "new"
+etcd-initial-cluster-token = "etcd-cluster-1"

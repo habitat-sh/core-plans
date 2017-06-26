@@ -25,6 +25,7 @@ pkg_build_deps=(
   core/gcc
   core/make
   core/re2c
+  core/readline
 )
 pkg_bin_dirs=(bin sbin)
 pkg_lib_dirs=(lib)
@@ -42,6 +43,7 @@ do_build() {
     --with-mysql=mysqlnd \
     --with-mysqli=mysqlnd \
     --with-pdo-mysql=mysqlnd \
+    --with-readline="$(pkg_path_for readline)" \
     --with-curl="$(pkg_path_for curl)" \
     --with-gd \
     --with-jpeg-dir="$(pkg_path_for libjpeg-turbo)" \

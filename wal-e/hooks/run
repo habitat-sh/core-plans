@@ -4,7 +4,13 @@ exec 2>&1
 
 mkdir -p "{{pkg.svc_config_path}}/env"
 
-export PATH=$PATH:$(dirname $(find /hab/pkgs -name 'psql' | head -n 1))
+psql_dir=$(dirname $(find /hab/pkgs -name 'psql' | head -n 1))
+if [[ "${psql_dir}" == "" ]]; then
+  echo "Postgres binaries not found! Please install core/postgresql"
+  exit 1
+fi
+
+export PATH=$PATH:${psql_dir}
 
 write_env_var() {
   echo "$1" > "{{pkg.svc_config_path}}/env/$2"

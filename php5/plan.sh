@@ -23,6 +23,7 @@ pkg_build_deps=(
   core/gcc
   core/make
   core/re2c
+  core/readline
 )
 pkg_bin_dirs=(bin sbin)
 pkg_lib_dirs=(lib)
@@ -35,6 +36,7 @@ do_build() {
     --enable-fpm \
     --enable-mbstring \
     --enable-opcache \
+    --with-readline="$(pkg_path_for readline)" \
     --with-curl="$(pkg_path_for curl)" \
     --with-libxml-dir="$(pkg_path_for libxml2)" \
     --with-openssl="$(pkg_path_for openssl)" \

@@ -1,0 +1,20 @@
+#!{{pkgPathFor "core/bash"}}/bin/bash
+
+set -xe
+
+# GCC build chain hardcodes bash as /bin/bash, therefore we need to ensure that
+# we get real 'bash' for GCC toolchain, not 'busybox' bash compatibility mode...
+ln -fs {{pkgPathFor "core/bash"}}/bin/bash /bin/bash
+
+cat {{pkg.svc_config_path}}/{{cfg.files.vcl}}
+
+args=(
+  -F 
+  -a {{cfg.frontend.host}}:{{cfg.frontend.port}} 
+  -f {{pkg.svc_config_path}}/{{cfg.files.vcl}} 
+  -s malloc,{{cfg.system.malloc}} 
+  -p vcc_allow_inline_c=on 
+)
+
+exec varnishd "${args[@]}" 2>&1
+
