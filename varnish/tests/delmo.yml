@@ -1,0 +1,17 @@
+suite:
+  name: starkandwayne-varnish
+  system: docker-compose.yml
+  task_service: tests
+
+tests:
+- name: varnish-is-up
+  spec:
+  - wait: varnish-ready
+  - fail:
+    - varnish-fail
+
+tasks:
+- name: varnish-ready
+  command: /scripts/varnish-ready
+- name: varnish-fail
+  command: /scripts/varnish-fail
