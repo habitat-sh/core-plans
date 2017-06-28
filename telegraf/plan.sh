@@ -37,7 +37,7 @@ do_prepare() {
 
 do_build() {
     go get github.com/influxdata/telegraf
-    cd $GOPATH/src/github.com/influxdata/telegraf
+    cd "$GOPATH"/src/github.com/influxdata/telegraf || exit
     make
 }
 
@@ -46,8 +46,8 @@ do_check() {
 }
 
 do_install() {
-    mkdir -p ${pkg_prefix}/bin
-    cp /bin/telegraf ${pkg_prefix}/bin
+    mkdir -p "${pkg_prefix}"/bin
+    cp /bin/telegraf "${pkg_prefix}"/bin
 }
 
 do_strip() {
