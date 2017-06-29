@@ -2,4 +2,4 @@
 
 exec 2>&1
 
-exec sshd -D -f {{pkg.svc_config_path}}/sshd_config
+exec {{pkg.path}}/sbin/sshd -D -f {{pkg.svc_config_path}}/sshd_config
