@@ -12,9 +12,9 @@ pkg_bin_dirs=(bin sbin)
 pkg_lib_dirs=(jars)
 pkg_build_deps=()
 pkg_deps=(
-	core/procps-ng
-	core/jre8
-	core/bash
+  core/bash
+  core/jre8
+  core/procps-ng
 )
 pkg_exports=(
   [port]=port
