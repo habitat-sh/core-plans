@@ -8,8 +8,29 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0')
 pkg_source=http://ftp.gnu.org/gnu/$pkg_distname/${pkg_distname}-${pkg_version}/${pkg_distname}-${pkg_version}.tar.bz2
 pkg_shasum=5f835b04b5f7dd4f4d2dc96190ec1621b8d89f2dc6f638f9f8bc1b1014ba8cad
-pkg_deps=(core/glibc core/zlib core/gmp core/mpfr core/libmpc core/binutils)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/gawk core/m4 core/texinfo core/perl core/inetutils core/expect core/dejagnu)
+pkg_deps=(
+  core/bash
+  core/binutils
+  core/coreutils
+  core/glibc
+  core/gmp
+  core/libmpc
+  core/mpfr
+  core/zlib
+)
+pkg_build_deps=(
+  core/dejagnu
+  core/diffutils
+  core/expect
+  core/gawk
+  core/gcc
+  core/inetutils
+  core/m4
+  core/make
+  core/patch
+  core/perl
+  core/texinfo
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
@@ -54,7 +75,7 @@ do_prepare() {
 
   # TODO: For the wrapper scripts to function correctly, we need the full
   # path to bash. Until a bash plan is created, we're going to wing this...
-  bash=/bin/bash
+  bash="$(pkg_path_for bash)/bin/bash"
 
   # Tell gcc not to look under the default `/lib/` and `/usr/lib/` directories
   # for libraries
