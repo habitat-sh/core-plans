@@ -1,0 +1,19 @@
+#!{{pkgPathFor "core/bash"}}/bin/bash
+
+exec 2>&1
+
+# if the properties contain ssl.key & ssl.crt
+# the two files below will contain key & cert, then copy them to
+# the certificates dir
+if [[ -n $(cat {{pkg.svc_config_path}}/ssl_key) && -n $(cat {{pkg.svc_config_path}}/ssl_crt) ]]; then
+  cp {{pkg.svc_config_path}}/ssl_key {{pkg.svc_static_path}}
+  cp {{pkg.svc_config_path}}/ssl_crt {{pkg.svc_static_path}}
+# otherwise, if the key or cert doesn't exist create new ones
+elif [[ ! -f {{pkg.svc_static_path}}/ssl_key || ! -f {{pkg.svc_static_path}}/ssl_crt ]]; then
+  openssl req -nodes -new -newkey rsa:2048 -out {{pkg.svc_static_path}}/ssl.csr \
+    -keyout {{pkg.svc_static_path}}/ssl_key -subj '/O=Shield/CN=*'
+  openssl x509 -req -days 3650 -in {{pkg.svc_static_path}}/ssl.csr \
+    -signkey {{pkg.svc_static_path}}/ssl_key -out {{pkg.svc_static_path}}/ssl_crt
+fi
+
+exec nginx -c {{pkg.svc_config_path}}/nginx.conf

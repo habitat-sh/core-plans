@@ -1,0 +1,2 @@
+port = {{cfg.port}}
+http_port = {{cfg.http_port}}
