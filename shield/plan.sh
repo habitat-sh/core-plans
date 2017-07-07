@@ -44,20 +44,20 @@ do_prepare() {
 
   git config --global url."git://github.com/".insteadOf "https://github.com/"
   go get github.com/tools/godep
-  cd "${SHIELD_SRC_PATH}"
+  cd "${SHIELD_SRC_PATH}" || exit
   make restore-deps
 }
 
 do_build() {
   export VERSION="${pkg_version}"
-  cd "${SHIELD_SRC_PATH}"
+  cd "${SHIELD_SRC_PATH}" || exit
   make release
 }
 
 do_install() {
-  cd "${SHIELD_SRC_PATH}/artifacts"
+  cd "${SHIELD_SRC_PATH}/artifacts" || exit
   tar -xvzf shield-server-linux-amd64.tar.gz
-  cd shield-server-linux-amd64
+  cd shield-server-linux-amd64 || exit
 
   cp cli/shield           "${pkg_prefix}/bin"
   cp daemon/shieldd       "${pkg_prefix}/bin"
