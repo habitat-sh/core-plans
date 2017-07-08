@@ -59,6 +59,7 @@ do_default_build() {
   scaffolding_fix_rubygems_shebangs
   scaffolding_setup_app_config
   scaffolding_setup_database_config
+  scaffolding_setup_cacerts_config
 }
 
 do_default_install() {
@@ -289,6 +290,12 @@ scaffolding_setup_database_config() {
   fi
 }
 
+scaffolding_setup_cacerts_config() {
+  if [[ "${_uses_cacerts:-}" == "true" ]]; then
+    _set_if_unset scaffolding_env SSL_CERT_FILE "$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+  fi
+}
+
 scaffolding_install_app() {
   build_line "Installing app codebase to $scaffolding_app_prefix"
   mkdir -pv "$scaffolding_app_prefix"
@@ -426,6 +433,8 @@ _setup_vars() {
   _pg_gems=(pg activerecord-jdbcpostgresql-adapter jdbc-postgres
     jdbc-postgresql jruby-pg rjack-jdbc-postgres
     tgbyte-activerecord-jdbcpostgresql-adapter)
+  # list of HTTP client gems
+  _http_client_gems=(faraday)
   # The version of Bundler in use
   _bundler_version="$("$(pkg_path_for bundler)/bin/bundle" --version \
     | awk '{print $NF}')"
@@ -588,6 +597,7 @@ _update_pkg_deps() {
   # should be called last.
 
   _add_busybox
+  _detect_http_clients
   _detect_sqlite3
   _detect_pg
   _detect_nokogiri
@@ -638,6 +648,17 @@ _detect_git() {
     debug "Updating pkg_build_deps=(${pkg_build_deps[*]}) from Scaffolding detection"
     _uses_git=true
   fi
+}
+
+_detect_http_clients() {
+  for gem in "${_http_client_gems[@]}"; do
+    if _has_gem "$gem"; then
+      build_line "Detected a Ruby http client '$gem', adding cacerts"
+      pkg_deps=(core/cacerts ${pkg_deps[@]})
+      debug "Updating pkg_deps=(${pkg_deps[*]}) from Scaffolding detection"
+      _uses_cacerts=true
+    fi
+  done
 }
 
 _detect_nokogiri() {
