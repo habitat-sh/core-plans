@@ -68,6 +68,7 @@ do_default_build() {
   scaffolding_fix_rubygems_shebangs
   scaffolding_setup_app_config
   scaffolding_setup_database_config
+  scaffolding_setup_redis_config
 }
 
 do_default_install() {
@@ -162,6 +163,42 @@ if ! $pkg_prefix/libexec/is_db_connected; then
   exit 15
 fi
 _PG_
+  fi
+
+  if [[ "${_uses_redis:-}" == "true" ]]; then
+      cat <<_REDIS_
+
+# Confirm an initial redis connection
+if ! $pkg_prefix/libexec/is_redis_connected; then
+  >&2 echo ""
+  >&2 echo "A redis connection is required for this app to properly boot."
+  >&2 echo "Is redis not running or are the redis connection"
+  >&2 echo "credentials incorrect?"
+  >&2 echo ""
+{{~#if bind.redis}}
+  >&2 echo "This app started with a redis bind and will discover the"
+  >&2 echo "hostname and port number in the Habitat ring."
+  >&2 echo ""
+  >&2 echo "There are 2 remaining config settings which must be set correctly:"
+{{else}}
+  >&2 echo "This app started without a redis bind meaning that"
+  >&2 echo "redis is assumed to be running outside of a Habitat ring."
+  >&2 echo "Therefore, you must provide all the redis connection values."
+  >&2 echo ""
+  >&2 echo "There are 4 config settings which must be set correctly:"
+{{~/if}}
+  >&2 echo ""
+{{~#unless bind.redis}}
+  >&2 echo " * redis.host      - The redis hostname or IP address (Current: {{#if cfg.redis.host}}{{cfg.redis.host}}{{else}}<unset>{{/if}})"
+  >&2 echo " * redis.port      - The redis listen port number (Current: {{#if cfg.redis.port}}{{cfg.redis.port}}{{else}}6379{{/if}})"
+{{~/unless}}
+  >&2 echo " * redis.db        - The redis db id (Current: {{#if cfg.redis.db}}{{cfg.redis.db}}{{else}}<unset>{{/if}})"
+  >&2 echo " * redis.password  - The redis password (Current: {{#if cfg.redis.password}}<set>{{else}}<unset>{{/if}})"
+  >&2 echo ""
+  >&2 echo "Aborting..."
+  exit 15
+fi
+_REDIS_
   fi
 )
 EOT
@@ -308,6 +345,33 @@ scaffolding_setup_database_config() {
   fi
 }
 
+scaffolding_setup_redis_config() {
+  if [[ "${_uses_redis:-}" == "true" ]]; then
+    local redis t
+    redis="redis://:{{cfg.redis.password}}"
+    redis="${redis}@{{#if bind.redis}}{{bind.redis.first.sys.ip}}{{else}}{{#if cfg.redis.host}}{{cfg.redis.host}}{{else}}redis.host.not.set{{/if}}{{/if}}"
+    redis="${redis}:{{#if bind.redis}}{{bind.redis.first.cfg.port}}{{else}}{{#if cfg.redis.port}}{{cfg.redis.port}}{{else}}6379{{/if}}{{/if}}"
+    redis="${redis}/{{cfg.redis.db}}"
+    _set_if_unset scaffolding_env REDIS_URL "$redis"
+
+    # Add an optional binding called `redis` which will be the Redis service
+    _set_if_unset pkg_binds_optional redis "port"
+
+    t="$CACHE_PATH/default.scaffolding.toml"
+    if _default_toml_has_no redis; then
+      { echo ""
+        echo "[redis]"
+      } >> "$t"
+      if _default_toml_has_no redis.db; then
+        echo "db = \"0\"" >> "$t"
+      fi
+      if _default_toml_has_no redis.password; then
+        echo "password = \"${pkg_name}\"" >> "$t"
+      fi
+    fi
+  fi
+}
+
 scaffolding_install_app() {
   build_line "Installing app codebase to $scaffolding_app_prefix"
   mkdir -pv "$scaffolding_app_prefix"
@@ -445,6 +509,9 @@ _setup_vars() {
   _pg_gems=(pg activerecord-jdbcpostgresql-adapter jdbc-postgres
     jdbc-postgresql jruby-pg rjack-jdbc-postgres
     tgbyte-activerecord-jdbcpostgresql-adapter)
+  # list of Redis-related gems
+  _redis_gems=(redis redis-activesupport redis-actionpack redis-rack
+    redis-rails redis-store)
   # The version of Bundler in use
   _bundler_version="$("$(pkg_path_for bundler)/bin/bundle" --version \
     | awk '{print $NF}')"
@@ -609,6 +676,7 @@ _update_pkg_deps() {
   _add_busybox
   _detect_sqlite3
   _detect_pg
+  _detect_redis
   _detect_nokogiri
   _detect_execjs
   _detect_webpacker
@@ -675,6 +743,16 @@ _detect_pg() {
       pkg_deps=(core/postgresql ${pkg_deps[@]})
       debug "Updating pkg_deps=(${pkg_deps[*]}) from Scaffolding detection"
       _uses_pg=true
+      return 0
+    fi
+  done
+}
+
+_detect_redis() {
+  for gem in "${_redis_gems[@]}"; do
+    if _has_gem "$gem"; then
+      build_line "Detected '$gem' gem in Gemfile.lock, setting redis config"
+      _uses_redis=true
       return 0
     fi
   done
