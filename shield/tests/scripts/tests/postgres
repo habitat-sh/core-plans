@@ -1,0 +1,180 @@
+#!/bin/bash
+
+source /scripts/lib/functions postgres
+
+rc=0
+cat <<EOF
+########   #######   ######  ########  ######   ########  ########  ######
+##     ## ##     ## ##    ##    ##    ##    ##  ##     ## ##       ##    ##
+##     ## ##     ## ##          ##    ##        ##     ## ##       ##
+########  ##     ##  ######     ##    ##   #### ########  ######    ######
+##        ##     ##       ##    ##    ##    ##  ##   ##   ##             ##
+##        ##     ## ##    ##    ##    ##    ##  ##    ##  ##       ##    ##
+##         #######   ######     ##     ######   ##     ## ########  ######
+EOF
+
+echo "> Postgres - All Databases"
+echo ">> setting up test data"
+psql postgres <$ROOT/init.sql
+psql db1 -c 'SELECT * FROM t_vals ORDER BY ID ASC' >$TMP/db1.dat
+psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' >$TMP/db2.dat
+echo "   db1.t_vals contains:"
+sed -e 's/^/    /' <$TMP/db1.dat
+echo
+echo "   db2.t_keys contains:"
+sed -e 's/^/    /' <$TMP/db2.dat
+echo
+
+echo ">> configuring SHIELD"
+shield create-target <<EOF | jq -r .
+{
+  "name"     : "postgres-all",
+  "summary"  : "Postgres All Databases",
+  "plugin"   : "postgres",
+  "endpoint" : "{\"pg_host\":\"${PGHOST}\",\"pg_user\":\"${PGUSER}\",\"pg_password\":\"${PGPASSWORD}\"}",
+  "agent"    : "$AGENT_ENDPOINT:5444"
+}
+EOF
+shield create-job <<EOF | jq -r .
+{
+  "name"      : "postgres-all-daily",
+  "summary"   : "Postgres All Databases",
+  "paused"    : true,
+  "retention" : "$RETENTION_UUID",
+  "schedule"  : "$SCHEDULE_UUID",
+  "store"     : "$STORE_UUID",
+  "target"    : "$(shield target postgres-all | jq -r '.uuid')"
+}
+EOF
+echo
+
+echo ">> running backup job"
+wait_for_task $(shield run $(shield job postgres-all-daily | jq -r '.uuid') | jq -r '.task_uuid')
+echo
+
+
+echo ">> trashing the data"
+echo "   deleting all db1.t_vals records with id's greater than 2"
+psql db1 -c 'DELETE FROM t_vals WHERE id > 2'
+echo "   db1.t_vals contains:"
+psql db1 -c 'SELECT * FROM t_vals ORDER BY ID ASC' | sed -e 's/^/    /';
+
+echo "   dropping the db2 databse outright"
+psql postgres -c 'DROP DATABASE db2'
+echo "   current databases:"
+psql db1 -c '\l' | sed -e 's/^/    /';
+echo
+
+echo ">> restoring from backups"
+wait_for_task $(shield restore $(shield archives -t $(shield target postgres-all | jq -r '.uuid') | jq -r '.[0].uuid') | jq -r '.task_uuid')
+echo
+
+echo ">> verifying data, post-restore"
+echo "   contents of db1.t_vals:"
+psql db1 -c 'SELECT * FROM t_vals ORDER BY ID ASC' | sed -e 's/^/    /'
+
+echo "   contents of db2.t_keys:"
+psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' | sed -e 's/^/    /'
+echo
+
+psql db1 -c 'SELECT * FROM t_vals ORDER BY ID ASC' >$TMP/db1.post
+psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' >$TMP/db2.post
+
+if ! diff -u $TMP/db1.dat $TMP/db1.post &>/dev/null; then
+  echo "!! db1 was not properly restored!"
+  echo
+  diff -u $TMP/db1.dat $TMP/db1.post || true
+  echo
+  rc=1
+fi
+
+if ! diff -u $TMP/db2.dat $TMP/db2.post &>/dev/null; then
+  echo "!! db2 was not properly restored!"
+  echo
+  diff -u $TMP/db2.dat $TMP/db2.post || true
+  echo
+  rc=1
+fi
+
+echo "> Postgres - Single Databases"
+echo ">> setting up test data"
+psql postgres <$ROOT/init.sql
+psql db1 -c 'SELECT * FROM t_vals ORDER BY ID ASC' >$TMP/db1.dat
+psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' >$TMP/db2.dat
+echo "   db1.t_vals contains:"
+sed -e 's/^/    /' <$TMP/db1.dat
+echo
+echo "   db2.t_keys contains:"
+sed -e 's/^/    /' <$TMP/db2.dat
+echo
+
+echo ">> configuring SHIELD"
+shield create-target <<EOF | jq -r .
+{
+  "name"     : "postgres-single",
+  "summary"  : "Postgres Single Database",
+  "plugin"   : "postgres",
+  "endpoint" : "{\"pg_host\":\"${PGHOST}\",\"pg_user\":\"${PGUSER}\",\"pg_password\":\"${PGPASSWORD}\",\"pg_database\":\"db1\"}",
+  "agent"    : "${AGENT_ENDPOINT}:5444"
+}
+EOF
+shield create-job <<EOF | jq -r .
+{
+  "name"      : "postgres-single-daily",
+  "summary"   : "Postgres Single Database",
+  "paused"    : true,
+  "retention" : "$RETENTION_UUID",
+  "schedule"  : "$SCHEDULE_UUID",
+  "store"     : "$STORE_UUID",
+  "target"    : "$(shield target postgres-single | jq -r '.uuid')"
+}
+EOF
+echo
+
+echo ">> running backup job"
+wait_for_task $(shield run $(shield job postgres-single-daily | jq -r '.uuid') | jq -r '.task_uuid')
+echo
+
+echo ">> trashing the data"
+echo "   deleting all db1.t_vals records with id's greater than 2"
+psql db1 -c 'DELETE FROM t_vals WHERE id > 2'
+echo "   db1.t_vals contains:"
+psql db1 -c 'SELECT * FROM t_vals ORDER BY ID ASC' | sed -e 's/^/    /';
+echo
+echo "   truncating the db2.t_keys table altogether"
+psql db2 -c 'TRUNCATE TABLE t_keys'
+echo "   db2.t_keys contains:"
+psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' | sed -e 's/^/    /';
+echo
+
+echo ">> restoring from backups"
+wait_for_task $(shield restore $(shield archives -t $(shield target postgres-single | jq -r '.uuid') | jq -r '.[0].uuid') | jq -r '.task_uuid')
+echo
+
+echo ">> verifying data, post-restore"
+echo "   contents of db1.t_vals:"
+psql db1 -c 'SELECT * FROM t_vals ORDER BY ID ASC' | sed -e 's/^/    /'
+
+echo "   contents of db2.t_keys:"
+psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' | sed -e 's/^/    /'
+echo
+
+psql db1 -c 'SELECT * FROM t_vals ORDER BY ID ASC' >$TMP/db1.post
+psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' >$TMP/db2.post
+
+if ! diff -u $TMP/db1.dat $TMP/db1.post &>/dev/null; then
+  echo "!! db1 was not properly restored!"
+  echo
+  diff -u $TMP/db1.dat $TMP/db1.post || true
+  echo
+  rc=1
+fi
+
+if diff -u $TMP/db2.dat $TMP/db2.post &>/dev/null; then
+  echo "!! db2 should have been left alone, but was not..."
+  echo "   (pre- and post- dumps are IDENTICAL, even though we didn't restore db2)"
+  echo
+  rc=1
+fi
+
+exit $rc;

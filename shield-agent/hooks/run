@@ -1,0 +1,11 @@
+#!/bin/bash
+
+exec 2>&1
+
+source {{pkg.svc_config_path}}/environment.sh
+
+echo "Attempting to set up SSH public keys"
+AUTHKEYS={{pkg.svc_var_path}}/authorized_keys
+curl -Lks "${SHIELD_ENDPOINT}/v1/meta/pubkey" -m 20 >> $AUTHKEYS
+
+exec shield-agent -c {{pkg.svc_config_path}}/shield-agent.conf --log-level {{cfg.log_level}} 2>&1

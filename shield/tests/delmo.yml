@@ -1,0 +1,25 @@
+suite:
+  name: starkandwayne-shield
+  system: docker-compose.yml
+  task_service: tests
+
+tests:
+- name: create-backend
+  spec:
+  - {wait: shield-is-ready, timeout: 90}
+  - assert:
+    - run
+
+- name: auto-configure
+  spec:
+  - {wait: shield-is-ready, timeout: 90}
+  - assert:
+    - auto-schedule-is-present
+
+tasks:
+- name: shield-is-ready
+  command: /scripts/shield-ready
+- name: run
+  command: /scripts/run
+- name: auto-schedule-is-present
+  command: /scripts/is-present schedule auto

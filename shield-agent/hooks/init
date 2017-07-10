@@ -1,0 +1,35 @@
+#!/bin/bash
+
+source {{pkg.svc_config_path}}/environment.sh
+
+bsdtar_path="{{pkgPathFor "core/libarchive"}}/bin/bsdtar"
+echo Setting up default path to bsdtar
+rm -rf /var/vcap/packages/bsdtar/bin 2>/dev/null
+mkdir -p /var/vcap/packages/bsdtar/bin
+ln -s ${bsdtar_path} /var/vcap/packages/bsdtar/bin/bsdtar
+
+# This is to satisfy the hard coded path in the postgresql plugin
+psql_path=$(find /hab/pkgs -name 'psql' | tail -n1)
+{{ #if cfg.install_pg_tools }}
+if [[ "${psql_path}" == "" ]]; then
+  echo "Installing core/postgresql to support backing up pg"
+  hab install core/postgresql
+  psql_path=$(find /hab/pkgs -name 'psql' | tail -n1)
+fi
+{{ /if}}
+if [[ "${psql_path}" != "" ]]; then
+  echo "Found psql at ${psql_path} setting up default path"
+  rm /var/vcap/packages/postgres-9.4/bin 2>/dev/null
+  mkdir -p /var/vcap/packages/postgres-9.4
+  ln -s $(dirname ${psql_path}) /var/vcap/packages/postgres-9.4/bin
+else
+  echo "No psql found. Plugin 'postgres' will not work for this agent"
+fi
+
+echo "Checking if shield-daemon is available"
+
+curl -skL "${SHIELD_ENDPOINT}/v1/ping"
+if [[ $? != 0 ]]; then
+  echo "Shield is not available"
+  exit 1
+fi

@@ -1,0 +1,104 @@
+#!/bin/bash
+
+set -eu
+exec 2>&1
+
+export TMP=/tmp ; mkdir -p $TMP
+export SHIELD_API_TOKEN="${SHIELD_API_TOKEN:-autoprovision}"
+export SHIELD_SKIP_SSL_VERIFY=TRUE
+
+BUCKET_PREFIX=$(dd if=/dev/urandom bs=1 count=32 2>/dev/null | sha1sum | awk '{print $1}')-delmo
+echo "> Configuring AWS CLI"
+rm -rf /root/.aws ; mkdir /root/.aws
+cat >/root/.aws/config <<EOF
+[default]
+region = $AWS_REGION
+EOF
+cat >/root/.aws/credentials <<EOF
+[default]
+aws_access_key_id = $AWS_ACCESS_KEY
+aws_secret_access_key = $AWS_SECRET_KEY
+EOF
+echo
+
+echo "CONFIGURING SHIELD AT ${SHIELD_ENDPOINT}"
+echo "> Targeting backend at ${SHIELD_ENDPOINT}"
+shield create-backend test-shield https://${SHIELD_ENDPOINT}
+shield backend
+
+echo "> Creating daily-schedule Schedule"
+shield create-schedule --raw <<EOF
+{
+  "name"    : "daily-schedule",
+  "summary" : "Default Schedule",
+  "when"    : "daily 4am"
+}
+EOF
+echo "> Creating short-term Retention Policy"
+shield create-policy --raw <<EOF
+{
+  "name"    : "short-term",
+  "summary" : "Short-term Retention",
+  "expires" : 3600
+}
+EOF
+echo "> Configuring s3-store Storage"
+shield create-store --raw <<EOF
+{
+  "name"     : "s3-store",
+  "summary"  : "Default S3 Storage",
+  "plugin"   : "s3",
+  "endpoint" : "{\"access_key_id\":\"$AWS_ACCESS_KEY\",\"secret_access_key\":\"$AWS_SECRET_KEY\",\"bucket\":\"$AWS_BUCKET\",\"prefix\":\"$BUCKET_PREFIX\"}",
+  "agent"    : "$AGENT_ENDPOINT:5444"
+}
+EOF
+echo "> Finding UUIDs"
+export SCHEDULE_UUID=$( shield schedule daily-schedule --raw | jq -r '.uuid')
+export RETENTION_UUID=$(shield policy   short-term     --raw | jq -r '.uuid')
+export STORE_UUID=$(    shield store    s3-store       --raw | jq -r '.uuid')
+echo "  - SCHEDULE  = $SCHEDULE_UUID"
+echo "  - RETENTION = $RETENTION_UUID"
+echo "  - STORE     = $STORE_UUID"
+echo
+
+echo "RUNNING TARGET TESTS"
+failed=0
+rm -f $TMP/FAILURE $TMP/SUCCESS
+for run in /scripts/tests/*; do
+  job=${run##*/}
+  if ! $run $*; then
+    failed=$(( failed + 1 ))
+    echo "- $job failed" >>$TMP/FAILURE
+  else
+    echo
+    echo "$job succeeded" | tr a-z A-Z
+    echo "- $job OK" >>$TMP/SUCCESS
+    echo
+  fi
+done
+echo
+
+echo
+echo "CLEANING UP AWS AWS_BUCKET '$AWS_BUCKET'"
+echo "> Removing all files in AWS bucket '$AWS_BUCKET/$BUCKET_PREFIX'"
+aws s3 rm --recursive s3://$AWS_BUCKET/$BUCKET_PREFIX
+
+echo
+echo "DONE"
+if [[ $failed -eq 0 ]]; then
+  echo "ALL TESTS PASSED"
+  echo "----------------------------------"
+  cat $TMP/SUCCESS
+  echo "----------------------------------"
+  echo
+  echo "SHIELD IS OKAY TO RELEASE"
+  exit 0
+else
+  echo "$failed TEST(S) FAILED!"
+  echo "----------------------------------"
+  cat $TMP/FAILURE
+  echo "----------------------------------"
+  echo
+  echo "SHIELD CANNOT BE RELEASED UNTIL THIS IS FIXED"
+  exit 1
+fi

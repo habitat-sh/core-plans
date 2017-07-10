@@ -1,0 +1,34 @@
+#!/bin/bash
+
+exec 2>&1
+
+source {{pkg.svc_config_path}}/environment.sh
+
+echo "Testing if pg is ready"
+set -e
+pg_isready -d "${PG_SUPERUSER_URI}"
+set +e
+
+{{#with cfg.db}}
+echo "Trying to create role '{{username}}'..."
+
+psql -d "${PG_SUPERUSER_URI}" \
+  -c "CREATE ROLE \"{{username}}\""
+
+echo "Setting password for role '{{username}}'..."
+psql -d "${PG_SUPERUSER_URI}" \
+  -c "ALTER ROLE \"{{username}}\" \
+  WITH LOGIN PASSWORD '{{password}}'"
+
+echo "Trying to create database '{{name}}'..."
+PGPASSWORD="${PG_SUPERUSER_PASSWORD}" createdb -U "${PG_SUPERUSER}" -h "${PGHOST}" -p "${PGPORT}" "{{name}}"
+
+echo "Trying to install citext..."
+PGPASSWORD="${PG_SUPERUSER_PASSWORD}" psql -U "${PG_SUPERUSER}" -h "${PGHOST}" -p "${PGPORT}" -d "{{name}}" \
+  -c "CREATE EXTENSION citext"
+
+DATABASE_DSN="postgres://{{username}}:{{password}}@${PGHOST}:${PGPORT}/{{name}}?sslmode=disable"
+{{/with}}
+
+set -e
+shield-schema -t postgres -d "${DATABASE_DSN}"

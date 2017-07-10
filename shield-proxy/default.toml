@@ -1,0 +1,16 @@
+port = 443
+http_port = 80
+
+worker_processes = 2
+worker_connections = 8192
+
+keepalive_timeout = "75 20"
+proxy_connect_timeout = 300
+proxy_read_timeout = 120
+proxy_send_timeout = 120
+
+enable_ssl = true
+ssl_timeout = 7200
+
+ssl_key = ""
+ssl_crt = ""

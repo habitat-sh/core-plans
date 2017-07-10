@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  shield:
+    image: starkandwayne/shield:edge
+    command: "start starkandwayne/shield --peer database --bind database:postgresql.shield"
+    links:
+    - database
+  database:
+    image: starkandwayne/postgresql:latest
+    command: "start starkandwayne/postgresql --group shield"
+  agent:
+    image: starkandwayne/shield-agent:edge
+    environment:
+      HAB_SHIELD_AGENT: |
+        install_pg_tools=true
+        shield_endpoint="https://shield"
+        provisioning_key="autoprovision"
+    command: "start starkandwayne/shield-agent --peer shield"
+    links:
+    - shield
+  autoagent:
+    image: starkandwayne/shield-agent:edge
+    command: "start starkandwayne/shield-agent --peer shield --bind daemon:shield.default"
+    environment:
+      HAB_SHIELD_AGENT: |
+        [schedules]
+        auto = "daily 4am"
+    links:
+    - shield
+  target:
+    image: starkandwayne/postgresql:latest
+    command: "start starkandwayne/postgresql --group target"
+  tests:
+    image: starkandwayne-shield-tests
+    build: ./
+    environment:
+      AWS_ACCESS_KEY:
+      AWS_SECRET_KEY:
+      AWS_REGION:
+      AWS_BUCKET:
+      SHIELD_ENDPOINT: shield
+      AGENT_ENDPOINT: agent
+      PGHOST: target
+      PGUSER: admin
+      PGPASSWORD: admin
+    links:
+    - shield
+    - target

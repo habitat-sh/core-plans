@@ -1,0 +1,70 @@
+install_pg_tools = false
+
+shield_endpoint = ''
+skip_ssl_verify = true
+provisioning_key = 'autoprovision'
+
+log_level = "info"
+port = "5444"
+
+advertize_ip = ""
+advertize_port = ""
+
+ssh_private_key = """
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAxbcPzc+Yt3VrTaF6JPGGOIfEkWPMQ+qihwtxswjt1DxF7qpN
+LK8uCR02Wm+SAv25ebstmbsH0w8jHItMiS/HAs/cUX80/rI4YjcZRcuw4n/TG3+5
+Pb3RWh4SqOh/h9PvrNJZ4GAlrZ/EmF/rTG5XBmbviwzcrmgtOfSQZvHonZxSlbpF
+gd+ORMPR/inwayTWHIsOlgXSOzAX41R+pBTFuyd1BKt7iDkdYFQamE+V2gJ6IlC1
+44/mTUwbYMW7FK5qWiDP1gSI4C19EYoC4HYFZ5AZT8ff1YW1gUMAcekWO+gfjH46
+3yGzYiI2GJhthnftFGzL9klMuwpbYif8jHB4BwIDAQABAoIBAHS+9ZwHmxupP+Ul
+FmS+IQ08TfuzvCfWYoXvYgHfod+Sf5DACrX58ur6zt9zxfnyLBUPS4vc/m/IHml6
+b4UKKy8j4epVfMtwHQ8RjeDCt/3mkJdKQe2NKhNWcpo+Px/LK1kXFG8DFvyAvKtk
+6CHHfaeQHJ40yBJL/XidSq8e5MY7QCtSc3o74aMdcqpCPaD6BF62hwjQ4QJc7lOw
+mqhXSzbAkq79+eobZWLVpTdlb1tXJLnkR6gMP9qXf2N0X1mqUG2G936CWOcihlnd
+7g88taInoWq4VHKadO5Z7aDkFtNNBjHzSTrNjIw8c9/co/GLGOfTew6OLxMhgU/j
+gNrufMECgYEA60a9V3MEO61jbOKFOCZ1Rb/Ajd4OmCFGCRlhpGpKJfrF/fwq5D45
+cvoIn0LpUfTjNPA4EdSB1626A3/jh0frwW/DCFWQjw24cYODXfYN27dajN5/rpY4
+rOZvj3IRPw8d/1P92En/5XmPE1djv1cpqsyiteBitflP8lxa704Fk9cCgYEA1yFZ
+8wqdKnTFbPtvHCNz5eFvh80mCcZPZmlRqTnzWdcjjJogtzNrJECezuDYpwpZk84v
+VZywkefT3O34Zedy56E+ln+2kdUiMrppt0JEP8O6sQlDpYMaIAfrlmWkRPDGuppR
+tnbeTkl4LyZWaBnMiuW8BChjlNRhKqGB2AAyt1ECgYEA4xhCxlgUa+3unDkBUbN9
+Wre9irId8CWdzkabgvG9ZG9sEL4IQIr3NM226NLTFvKDJKQB2uP9+EqN07brzbZU
+D0BrRm4gvJQHxjmk4VsRAVU3p+VT5RbG2c0LPbBiiTV0RPGzgcPbponw2kBt3VCq
+vVwMafWOEgv1aQBQHdB3fb0CgYA9yo6TiJDsCO5MB0w6wNQhS0dFsl8in5texxF1
+kfeb7nd/gyWyeUpk90qmEV8pW4evNKHT7VWqEvR/mLqoSnpunZnkkHpYGOfhujlz
+Mc14ozeUchzEBYwTdzLr1/X+90mdf4XI6wufYOrsYA6hiAeAPcxrRU6VCQt/uzQY
+XrYygQKBgQDeK/j0hOEvGAx4vWw8fwfKmgOcGAW13Lp129rOB1kJFsQxdI0fnfVq
+30q3HbH0WPUi4l5r3OnRZfXYmxIVG61ZllOFEMyRJnS17EzlhA8pF0aNqKMk1BTN
+ZBosXArGz8Tid1YpaRSq3vZwc9iMgEErFHJdaAxyCa1MwLZi9Qk55g==
+-----END RSA PRIVATE KEY-----"""
+
+# [schedules]
+# daily = "daily 4am"
+#
+# [retention-policies]
+# shortterm = '86400'
+# longterm = '864000'
+#
+# [[stores]]
+# name = 'amazon'
+# plugin = 's3'
+# [stores.config]
+# access_key_id = 'foo'
+# secret_access_key = 'foo'
+# bucket = 'my-backups'
+# prefix = 'my-backups'
+#
+# [[targets]]
+# name = 'localdb'
+# plugin = 'postgres'
+# [targets.config]
+# pg_host = '10.0.0.6'
+# pg_port = '5524'
+#
+# [[jobs]]
+# name = 'my-backups'
+# target = 'localdb'
+# store = 'amazon'
+# retention = 'longterm'
+# schedule = 'daily'
