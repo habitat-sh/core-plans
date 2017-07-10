@@ -102,10 +102,10 @@ scaffolding_go_clean() {
 
   build_line "Clean the cache"
 
-  pushd "$scaffolding_go_pkg_path"
+  pushd "$scaffolding_go_pkg_path" >/dev/null
   # shellcheck disable=SC2086
   go clean $clean_args
-  popd
+  popd >/dev/null
 }
 
 # Assume a automake/autoconf build script if the go project uses one.
@@ -113,19 +113,19 @@ scaffolding_go_clean() {
 scaffolding_go_build() {
   export PATH="$PATH:$GOPATH/bin"
 
-  pushd "$scaffolding_go_pkg_path"
+  pushd "$scaffolding_go_pkg_path" >/dev/null
   if [[ -f "$scaffolding_go_pkg_path/Makefile" ]]; then
     make
   else
     go build
   fi
-  popd
+  popd >/dev/null
 }
 
 scaffolding_go_install() {
-  pushd "$scaffolding_go_pkg_path"
+  pushd "$scaffolding_go_pkg_path" >/dev/null
   go install
-  popd
+  popd >/dev/null
   cp -r "${scaffolding_go_gopath:?}/bin" "${pkg_prefix}/${bin}"
 }
 
