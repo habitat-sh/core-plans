@@ -10,6 +10,7 @@ pkg_svc_run="bin/telegraf"
 pkg_bin_dirs=(bin)
 
 do_begin() {
+    set -x
     export GOBIN="${GOPATH}/bin"
 }
 
@@ -19,30 +20,10 @@ do_download() {
         git pull origin $pkg_version
 }
 
-do_verify() {
-    do_default_verify
-}
-
-do_clean() {
-    return 0
-}
-
-do_unpack() {
-    do_default_unpack
-}
-
-do_prepare() {
-    return 0
-}
-
 do_build() {
     go get github.com/influxdata/telegraf
     cd "$GOPATH"/src/github.com/influxdata/telegraf || exit
     make
-}
-
-do_check() {
-    return 0
 }
 
 do_install() {
@@ -50,10 +31,6 @@ do_install() {
     cp /bin/telegraf "${pkg_prefix}"/bin
 }
 
-do_strip() {
-    do_default_strip
-}
-
-do_end() {
+do_clean() {
     return 0
 }
