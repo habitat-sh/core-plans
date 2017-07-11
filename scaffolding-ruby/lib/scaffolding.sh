@@ -165,6 +165,7 @@ EOT
 
   env_sh="$pkg_prefix/config/app_env.sh"
   mkdir -p "$(dirname "$env_sh")"
+  echo "export SSL_CERT_FILE='$(pkg_path_for core/cacerts)/ssl/cert.pem'" >> "$env_sh"
   for key in "${!scaffolding_env[@]}"; do
     echo "export $key='${scaffolding_env[$key]}'" >> "$env_sh"
   done
