@@ -1,0 +1,269 @@
+port = 7077
+
+# https://spark.apache.org/docs/latest/configuration.html
+# app-name =
+
+# extraListeners =
+local-dir = "/tmp"
+logConf	= false
+# master =
+# submit-deployMode =
+
+# Comma-separated list of files to be placed in the working directory of each executor.
+# files =
+
+# Compression and Serialization
+rdd-compress = false
+serializer = "org.apache.spark.serializer.JavaSerializer"
+serializer-objectStreamReset = 100
+
+# Memory Management
+shuffle-memoryFraction  = 0.2   # (deprecated)
+
+# parallelism =
+# blockManager-port =  # (random)
+network-timeout = "120s"
+port-maxRetries = 16
+# cores-max =
+
+
+[executorEnv]
+# EnvironmentVariableName =
+
+[driver]
+# extraClassPath =
+# extraJavaOptions =
+# extraLibraryPath =
+userClassPathFirst = false
+cores = 1
+maxResultSize = "1g"
+memory = "1g"
+# blockManager-port =  # (value of spark.blockManager.port)
+# bindAddress =  # (value of spark.driver.host)
+# host =  # (local hostname)
+# port =  # (random)
+
+[executor]
+#extraClassPath =
+#extraJavaOptions =
+#extraLibraryPath =
+heartbeatInterval = "10s"
+memory = "1g"
+cores = 1
+
+[executor.logs]
+# maxRetainedFiles =
+enableCompression = false
+# maxSize =
+# strategy =
+time-interval = "daily"
+
+[python]
+profile  = false
+# profile-dump =
+worker-memory = "512m"
+worker-reuse = true
+
+[jars]
+# list =
+# packages =
+# excludes =
+# ivy =
+
+[pyspark]
+# driver-python =
+# python =
+
+[reducer]
+maxSizeInFlight = "48m"
+maxReqsInFlight = "Int.MaxValue"
+
+[shuffle]
+compress = true
+file-buffer = "32k"
+io-maxRetries = 3
+io-numConnectionsPerPeer = 1
+io-preferDirectBufs = true
+service-enabled = false
+service-port = 7337
+service-index-cache-entries = 1024
+sort-bypassMergeThreshold = 200
+spill-compress = true
+
+[io]
+enabled = false
+keySizeBits = 128
+keygen-algorithm = "HmacSHA1"
+
+[eventLog]
+compress = false
+dir	= "file:///tmp/spark-events"
+enabled	= false
+
+[ui]
+enabled	= true
+killEnabled	= true
+port = 4040
+retainedJobs = 1000
+retainedStages = 1000
+retainedTasks	= 100000
+reverseProxy = false
+# reverseProxyUrl =
+retainedDeadExecutors	= 100
+
+worker-retainedExecutors = 1000
+worker-retainedDrivers = 1000
+sql-retainedExecutions = 1000
+streaming-retainedBatches = 1000
+# filters	=
+# view-acls	=
+# view-acls-groups =
+
+[compression]
+codec = "lz4"
+lz4-blockSize = "32k"
+snappy-blockSize = "32k"
+
+[kryo]
+# classesToRegister =
+referenceTracking = true
+registrationRequired = false
+# registrator =
+
+[memory]
+fraction = 0.6
+storageFraction = 0.5
+offHeap-enabled = false
+offHeap-size = 0
+useLegacyMode = false
+
+[storage]
+# memoryFraction =
+# unrollFraction =
+memoryFraction = 0.6   # (deprecated)
+unrollFraction = 0.2   # (deprecated)
+memoryMapThreshold = "2m"
+
+[broadcast]
+compress = true
+blockSize = "4m"
+
+[files]
+fetchTimeout = "60s"
+useFetchCache = true
+overwrite = false
+maxPartitionBytes = 134217728 # (128 MB)
+openCostInBytes = 4194304 # (4 MB)
+
+[hadoop]
+cloneConf = false
+validateOutputSpecs = true
+
+[rpc]
+message-maxSize = 128
+numRetries = 3
+retry-wait = "3s"
+# askTimeout =  # spark.network.timeout
+lookupTimeout = "120s"
+
+
+[locality]
+wait = "3s"
+# node  =  # wait
+# process   =  # wait
+# rack  =  # wait
+
+[scheduler]
+maxRegisteredResourcesWaitingTime = "30s"
+minRegisteredResourcesRatio = 0.8
+mode = "FIFO"
+revive-interval = "1s"
+
+[blacklist]
+enabled = false
+task-maxTaskAttemptsPerExecutor = 1 #  (Experimental)
+task-maxTaskAttemptsPerNode = 2 #  (Experimental)
+stage-maxFailedTasksPerExecutor = 2 #  (Experimental)
+stage-maxFailedExecutorsPerNode = 2 #  (Experimental)
+
+[speculation]
+speculation = false
+interval = "100ms"
+multiplier = 1.5
+quantile = 0.75
+
+[task]
+cpus = 1
+maxFailures = 4
+
+[task.reaper]
+enabled = false
+pollingInterval = "10s"
+threadDump = true
+killTimeout =  -1
+
+[dynamicAllocation]
+enabled = false
+executorIdleTimeout = "60s"
+cachedExecutorIdleTimeout = "infinity"
+# initialExecutors =  # spark.dynamicAllocation.minExecutors
+maxExecutors = "infinity"
+minExecutors = 0
+schedulerBacklogTimeout = "1s"
+# sustainedSchedulerBacklogTimeout =  # spark.dynamicAllocation.schedulerBacklogTimeout
+
+[authenticate]
+authenticate = false
+# secret	=
+enableSaslEncryption	= false
+
+acls-enable	= false
+# admin-acls =
+# admin-acls-groups =
+user-groups-mapping	= "org.apache.spark.security.ShellBasedGroupsMappingProvider"
+
+network-sasl-serverAlwaysEncrypt = false
+core-connection-ack-wait-timeout = "spark.network.timeout"
+core-connection-auth-wait-timeout = "30s"
+# modify-acls	=
+# modify-acls-groups =
+
+[ssl]
+enabled	= false
+# enabledAlgorithms	=
+# keyPassword	=
+# keyStore =
+# keyStorePassword =
+keyStoreType = "JKS"
+# protocol =
+needClientAuth = false
+# trustStore =
+# trustStorePassword =
+trustStoreType = "JKS"
+
+[streaming]
+backpressure-enabled = false
+# backpressure-initialRate =
+blockInterval = "200ms"
+# receiver-maxRate =
+receiver-writeAheadLog-enable = false
+unpersist = true
+stopGracefullyOnShutdown = false
+# kafka-maxRatePerPartition  =
+kafka-maxRetries = 1
+ui-retainedBatches = 1000
+driver-writeAheadLog-closeFileAfterWrite = false
+receiver-writeAheadLog-closeFileAfterWrite = false
+
+[r]
+numRBackendThreads = 2
+command = "Rscript"
+driver-command  = "spark.r.command"
+shell-command = "R"
+backendConnectionTimeout = 6000
+heartBeatInterval = 100
+
+[deploy]
+# recoveryMode =
+# zookeeper-url =
+# zookeeper-dir =

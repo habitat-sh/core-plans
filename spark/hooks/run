@@ -1,0 +1,17 @@
+#!/bin/bash
+
+exec 2>&1
+
+export JAVA_HOME="{{ pkgPathFor "core/jre8" }}"
+export SPARK_CONF_DIR="{{pkg.svc_config_path}}"
+export SPARK_LOG_DIR="{{pkg.svc_var_path}}/logs"
+export SPARK_WORKER_DIR="{{pkg.svc_var_path}}/work"
+export SPARK_NO_DAEMONIZE=1
+
+{{~#if svc.me.leader}}
+exec start-master.sh
+{{else}}
+{{~#with svc.leader}}
+exec start-slave.sh "spark://{{sys.ip}}:{{cfg.port}}"
+{{~/with}}
+{{~/if}}
