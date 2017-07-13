@@ -29,23 +29,57 @@ scaffolding_load() {
 #
 
 # Path constuctor for GOPATH
-scaffolding_go_gopath=${scaffolding_go_gopath:-"$HAB_CACHE_SRC_PATH/$pkg_dirname"}
-export scaffolding_go_gopath
+export scaffolding_go_gopath=${scaffolding_go_gopath:-"$SRC_PATH"}
+
 # Set GOPATH
-GOPATH="$scaffolding_go_gopath"
-export GOPATH
-# Path string used by go get without preceeding URI notation.
-scaffolding_go_src_path="${GOPATH:?}/src/$(_sanitize_pkg_source "$pkg_source")"
-export scaffolding_go_src_path
+#
+# The GOPATH is very important to develop go applications, it has a very strict directory
+# structure that we need to follow.
+#
+# => Read more about it at: https://golang.org/doc/code.html#Workspaces
+export GOPATH="$scaffolding_go_gopath"
+
+# Path to the Workspace src/ directory
+export scaffolding_go_workspace_src="$GOPATH/src"
+
+# Base path
+#
+# When you start having sub-packages or dependencies you are going to need to choose a
+# unique base_path, if you don't specify one, we will use the default localhost/user.
+#
+# => Read more about it at: https://golang.org/doc/code.html#ImportPaths
+export scaffolding_go_base_path=${scaffolding_go_base_path:-"localhost/user"}
+
+# If $pkg_source is set, it means that we are building a packages from source.
+# Otherwise we will try to build the package from the local /src. To do that we
+# need to check if $scaffolding_go_base_path is set, if not we will use the
+# default `localhost/user` since Go looks at this path structure to create
+# the directory structure inside the Go Workspace.
+if [[ $pkg_source ]]; then
+  scaffolding_go_pkg_path="$scaffolding_go_workspace_src/$(_sanitize_pkg_source "$pkg_source")"
+else
+  scaffolding_go_pkg_path="$scaffolding_go_workspace_src/$scaffolding_go_base_path/$pkg_name"
+fi
+
+export scaffolding_go_pkg_path
 
 #
 # Scaffolding Callback Functions
 #
 
+scaffolding_go_before() {
+  # Initialize the Go Workspace package path if we are tryng to build the
+  # package from local /src, that is when there is no $pkg_source set.
+  if [[ ! $pkg_source ]]; then
+    mkdir -p "$scaffolding_go_pkg_path"
+    cp -r /src/* "$scaffolding_go_pkg_path"
+  fi
+}
+
 scaffolding_go_get() {
   local deps
   deps=($pkg_source ${scaffolding_go_build_deps[@]})
-  build_line "Running go get"
+  build_line "Downloading Go build dependencies"
   if [[ "${#deps[@]}" -gt 0 ]] ; then
     for dependency in "${deps[@]}" ; do
       go get "$(_sanitize_pkg_source "$dependency")"
@@ -68,10 +102,10 @@ scaffolding_go_clean() {
 
   build_line "Clean the cache"
 
-  pushd "$scaffolding_go_src_path"
+  pushd "$scaffolding_go_pkg_path" >/dev/null
   # shellcheck disable=SC2086
   go clean $clean_args
-  popd
+  popd >/dev/null
 }
 
 # Assume a automake/autoconf build script if the go project uses one.
@@ -79,22 +113,25 @@ scaffolding_go_clean() {
 scaffolding_go_build() {
   export PATH="$PATH:$GOPATH/bin"
 
-  pushd "${GOPATH:?}/src/$(_sanitize_pkg_source "$pkg_source")"
-  if [[ -f "$scaffolding_go_src_path/Makefile" ]]; then
+  pushd "$scaffolding_go_pkg_path" >/dev/null
+  if [[ -f "$scaffolding_go_pkg_path/Makefile" ]]; then
     make
   else
     go build
   fi
-  popd
+  popd >/dev/null
 }
 
 scaffolding_go_install() {
-  pushd "$scaffolding_go_src_path"
+  pushd "$scaffolding_go_pkg_path" >/dev/null
   go install
-  popd
+  popd >/dev/null
   cp -r "${scaffolding_go_gopath:?}/bin" "${pkg_prefix}/${bin}"
 }
 
+do_default_before() {
+  scaffolding_go_before
+}
 
 do_default_download() {
   scaffolding_go_download

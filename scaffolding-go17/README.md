@@ -1,5 +1,31 @@
 # Go Scaffolding
-The go scaffolding automatically configures the $GOPATH environment variable, downloads the code via `go get`, builds, and packages you application into a habitat package.
+The go scaffolding can be use to package application from a remote repository or from local source. It automatically configures the `GOPATH` environment variable and can download Go dependendencies via `go get`.
+
+### From a remote repository
+By adding the `pkg_source` variable you will be telling the go scaffolding to package the application from a remote repository.
+
+An example of a `plan.sh`:
+```
+pkg_name=hello-go
+pkg_origin=afiune
+pkg_version="0.1.0"
+pkg_scaffolding=core/scaffolding-go17
+pkg_source="http://github.com/afiune/hello-go"
+```
+
+### From local source
+If you are building an application from local source, you have to avoid defining the `pkg_source` variable, this way the go scaffolding will prapare the Go Workspace to build and package your local application.
+
+Optionally, you can define the `scaffolding_go_base_path` if you are planning to keep your code in a source repository somewhere.
+
+An example of a `plan.sh`:
+```
+pkg_name=hello-go
+pkg_origin=afiune
+pkg_version="0.1.0"
+pkg_scaffolding=core/scaffolding-go17
+scaffolding_go_base_path=github.com/afiune
+```
 
 ## Getting Started with Scaffolding
 See https://www.habitat.sh/docs/concepts-scaffolding/ to learn how to get started with Scaffolding.
@@ -7,14 +33,16 @@ See https://www.habitat.sh/docs/concepts-scaffolding/ to learn how to get starte
 ## Variables
 | Variable | Type | Value | Default |
 | -------- | ---- | ----- | ------- |
-|`scaffolding_go_gopath`| String |_(Optional)_ Value for `GOPATH`|`"$HAB_CACHE_SRC_PATH/$pkg_dirname"`|
-|`scaffolding_go_src_path`| String | _(Optional)_ URL to Source in `go get` format. Eg: `github.com/myorg/myapp`| `$GOPATH/src/$pkg_src` ($pkg_src is sanitized to go get format) |
+|`scaffolding_go_gopath`| String |_(Optional)_ Value for `GOPATH`|`"$SRC_PATH"`|
+|`scaffolding_go_base_path`| String | _(Optional)_  The base path that will be used in the import path construction. Eg: `github.com/myorg`| `localhost/user`|
 |`scaffolding_go_build_deps`| Array  | _(Optional)_ Array of URLs to `go get` | Undefined |
 
 ## Callbacks
 ### Scaffolding
 #### scaffolding_go_get
 Executes `go get` against the `pkg_source` and the contents of the `scaffolding_go_build_deps` array to install any additional dependencies which would not otherwise be resolved.
+#### scaffolding_go_before
+Initialize the Go Workspace package path only if no `pkg_source` was specified.
 #### scaffolding_go_download
 Calls [scaffolding_go_get](#scaffolding_go_get) by default. This callback adds a callback you can use to override download behaviors.
 #### scaffolding_go_clean
@@ -26,9 +54,9 @@ Installs the application and runtime deps into `"${pkg_prefix}/${bin}"`
 
 ### Default Overrides
 The following default callbacks have overrides:
-* `do_default_download`Calls [scaffolding_go_download](#scaffolding_go_download)
+* `do_default_before` - Calls [scaffolding_go_before](#scaffolding_go_before)
+* `do_default_download` - Calls [scaffolding_go_download](#scaffolding_go_download)
 * `do_default_clean` - Calls [scaffolding_go_clean](#scaffolding_go_clean)
 * `do_default_verify` - NOP -- Returns 0
 * `do_default_unpack` - NOP -- Returns 0
 * `do_default_build`- Calls [scaffolding_go_build](#scaffolding_go_build)
-* `do_default_install` Calls [scaffolding_go_install](#scaffolding_go_install)
