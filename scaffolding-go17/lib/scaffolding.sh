@@ -29,7 +29,7 @@ scaffolding_load() {
 #
 
 # Path constuctor for GOPATH
-export scaffolding_go_gopath=${scaffolding_go_gopath:-"$HAB_CACHE_SRC_PATH/$pkg_dirname"}
+export scaffolding_go_gopath=${scaffolding_go_gopath:-"$SRC_PATH"}
 
 # Set GOPATH
 #

@@ -33,7 +33,7 @@ See https://www.habitat.sh/docs/concepts-scaffolding/ to learn how to get starte
 ## Variables
 | Variable | Type | Value | Default |
 | -------- | ---- | ----- | ------- |
-|`scaffolding_go_gopath`| String |_(Optional)_ Value for `GOPATH`|`"$HAB_CACHE_SRC_PATH/$pkg_dirname"`|
+|`scaffolding_go_gopath`| String |_(Optional)_ Value for `GOPATH`|`"$SRC_PATH"`|
 |`scaffolding_go_base_path`| String | _(Optional)_  The base path that will be used in the import path construction. Eg: `github.com/myorg`| `localhost/user`|
 |`scaffolding_go_build_deps`| Array  | _(Optional)_ Array of URLs to `go get` | Undefined |
 
