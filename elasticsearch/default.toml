@@ -38,17 +38,41 @@
     # setting only applies if multiple nodes are started on the same machine.
     #
     same_shard-host = "false"
+
+    allow_rebalance = "indices_all_active"
+    cluster_concurrent_rebalance = 2
+
+  [cluster.routing.allocation.awareness]
     #
     # https://www.elastic.co/guide/en/elasticsearch/reference/2.3/allocation-awareness.html
     #
-    awareness-attributes = ""
+    attributes = ""
+  [cluster.routing.allocation.awareness.force.zone]
+    # values = ""
+
+  [cluster.routing.allocation.balance]
+    shard = "0.45f"
+    index = "0.55f"
+    threshold = "1.0f"
+  [cluster.routing.allocation.disk]
+    threshold_enabled = true
+    include_relocations = true
+  [cluster.routing.allocation.disk.watermark]
+    low = "85%"
+    high = "90%"
+  [cluster.routing.rebalance]
+    enable = "all"
+  [cluster.info.update]
+    interval = "30s"
+
+
 #
 # ------------------------------------ Node ------------------------------------
 #
 [node]
   # Use a descriptive name for the node:
   #
-  name = ""
+  name = "${HOSTNAME}"
   #
   # Add custom attributes to the node:
   #
@@ -67,6 +91,7 @@
   #
   master = "true"
   data   = "true"
+  #client = "true"
 
 #
 # ----------------------------------- Paths ------------------------------------
@@ -93,6 +118,7 @@
 # ----------------------------------- Indices ----------------------------------
 #
 [indices]
+  queries-cache-size = "10%"
   [indices.recovery]
     concurrent_streams =            "3"
     concurrent_small_file_streams = "2"
@@ -132,6 +158,14 @@
     # final estimation. Defaults to 1.
     #
     request-overhead =               "1"
+  [indices.memory]
+    index_buffer_size = "10%"
+    min_index_buffer_size = "48mb"
+    max_index_buffer_size = ""
+    min_shard_index_buffer_size = "4mb"
+  [indices.ttl]
+    interval = "60s"
+		bulk_size = 10000
 
 #
 # ----------------------------------- Memory -----------------------------------
@@ -156,16 +190,65 @@
   # Set the bind address to a specific IP (IPv4 or IPv6):
   #
   host =  "_site_"
-  #
+  # bind_host =
+  # publish_host =
+  [network.breaker]
+  inflight_requests-limit = "100%"
+  inflight_requests-overhead = 1
+
+	[network.tcp]
+ 	no_delay = true
+	keep_alive = true
+	reuse_address = true
+	# send_buffer_size =
+	# receive_buffer_size =
+
+[http]
   # Set a custom port for HTTP:
   #
+  enabled = true
   port = 9200
-  #
+  # publish_port =
+  # bind_host =
+  # publish_host =
+  # host =
+  max_content_length = "100mb"
+  max_initial_line_length = "4kb"
+  max_header_size = "8kB"
+  compression = false
+  compression_level = 6
+  detailed_errors-enabled = true
+  pipelining = true
+  max_events = 10000
+  [http.cors]
+  enabled = false
+  allow-origin = ""
+  max-age = 1728000
+  allow-methods = "OPTIONS, HEAD, GET, POST, PUT, DELETE"
+  allow-headers = "X-Requested-With, Content-Type, Content-Length"
+  allow-credentials = false
+
+
+
   # For more information, see the documentation at:
   # <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html>
 
 [transport]
-  port = 9300
+# host =
+# bind_host =
+# publish_host =
+# ping_schedule =
+
+[transport.tcp]
+port = "9300-9400"
+# connect_timeout = "30s"
+# compress = false
+
+#[transport.profiles]
+#[transport.profiles.default]
+#port = "9300-9400"
+#bind_host = "10.0.0.1"
+
 
 #
 # --------------------------------- Discovery ----------------------------------
@@ -175,7 +258,6 @@
   # The default list of hosts is ["127.0.0.1", "[::1]"]
   #
   ping_multicast_enabled = "false"
-  ping_unicast_hosts = "[]"
   #
   # Prevent the "split brain" by configuring the majority of nodes (total number of nodes / 2 + 1):
   #
@@ -184,7 +266,20 @@
   # For more information, see the documentation at:
   # <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery.html>
   #
-  zen_fd_ping_timeout = "30s"
+  [discovery.zen]
+    ping_timeout = "3s"
+    join_timeout = "60s"
+    publish_timeout = "30s"
+    no_master_block = "write"
+  [discovery.zen.fd]
+    ping_timeout = "30s"
+    ping_interval = "1s"
+    ping_retries = 3
+
+  [discovery.zen.master_election]
+    filter_client = true
+    filter_data = false
+
 
 #
 # ---------------------------------- Gateway -----------------------------------
@@ -194,6 +289,9 @@
   # Block initial recovery after a full cluster restart until N nodes are started:
   #
   recover_after_nodes   = ""
+  #recover_after_master_nodes = ""
+  #recover_after_data_nodes = ""
+
   #
   # The number of (data or master) nodes that are expected to be in the cluster.
   # Recovery of local shards will start as soon as the expected number of nodes

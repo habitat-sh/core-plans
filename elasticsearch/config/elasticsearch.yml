@@ -1,29 +1,57 @@
 
 cluster.name: {{cfg.cluster.name}}
 
-cluster.routing.allocation.node_concurrent_recoveries: {{cfg.cluster.routing.allocation.node_concurrent_recoveries}}
-cluster.routing.allocation.node_initial_primaries_recoveries: {{cfg.cluster.routing.allocation.node_initial_primaries_recoveries}}
-cluster.routing.allocation.same_shard.host: {{cfg.cluster.routing.allocation.same_shard-host}}
+cluster.routing.rebalance.enable: {{cfg.cluster.routing.rebalance.enable}}
 
-{{~#if cfg.cluster.routing.allocation.awareness-attributes}}
-cluster.routing.allocation.awareness.attributes: {{cfg.cluster.routing.allocation.awareness-attributes}}
+cluster.info.update.interval: {{cfg.cluster.info.update.interval}}
+
+{{~#with cfg.cluster.routing.allocation}}
+cluster.routing.allocation.node_concurrent_recoveries: {{node_concurrent_recoveries}}
+cluster.routing.allocation.node_initial_primaries_recoveries: {{node_initial_primaries_recoveries}}
+cluster.routing.allocation.same_shard.host: {{same_shard-host}}
+
+{{~#if awareness.attributes}}
+cluster.routing.allocation.awareness.attributes: {{awareness.attributes}}
+{{~/if}}
+{{~#if awareness.force.zone.values}}
+cluster.routing.allocation.awareness.force.zone.values: {{awareness.force.zone.values}}
 {{~/if}}
 
-node.name: {{cfg.node.name}}
-node.max_local_storage_nodes: {{cfg.node.max_local_storage_nodes}}
+cluster.routing.allocation.allow_rebalance: {{allow_rebalance}}
+cluster.routing.allocation.cluster_concurrent_rebalance: {{cluster_concurrent_rebalance}}
 
-{{~#if cfg.node.rack_id}}
-node.rack_id: {{cfg.node.rack_id}}
+cluster.routing.allocation.balance.shard: {{balance.shard}}
+cluster.routing.allocation.balance.index: {{balance.index}}
+cluster.routing.allocation.balance.threshold: {{balance.threshold}}
+
+cluster.routing.allocation.disk.threshold_enabled: {{disk.threshold_enabled}}
+cluster.routing.allocation.disk.include_relocations: {{disk.include_relocations}}
+
+cluster.routing.allocation.disk.watermark.low: {{disk.watermark.low}}
+cluster.routing.allocation.disk.watermark.high: {{disk.watermark.high}}
+{{~/with}}
+
+
+{{~#with cfg.node}}
+node.name: {{name}}
+node.max_local_storage_nodes: {{max_local_storage_nodes}}
+
+{{~#if rack_id}}
+node.rack_id: {{rack_id}}
 {{~/if}}
-{{~#if cfg.node.zone}}
-node.zone: {{cfg.node.zone}}
+{{~#if zone}}
+node.zone: {{zone}}
 {{~/if}}
-{{~#if cfg.node.master}}
-node.master: {{cfg.node.master}}
+{{~#if master}}
+node.master: {{master}}
 {{~/if}}
-{{~#if cfg.node.data}}
-node.data: {{cfg.node.data}}
+{{~#if data}}
+node.data: {{data}}
 {{~/if}}
+{{~#if client}}
+node.client: {{client}}
+{{~/if}}
+{{~/with}}
 
 
 path.data: {{pkg.svc_data_path}}/{{cfg.path.data}}
@@ -31,13 +59,32 @@ path.logs: {{pkg.svc_var_path}}/{{cfg.path.logs}}
 path.plugins: {{pkg.svc_var_path}}/{{cfg.path.plugins}}
 path.scripts: {{pkg.svc_config_path}}/{{cfg.path.scripts}}
 
-indices.recovery.concurrent_streams: {{cfg.indices.recovery.concurrent_streams}}
-indices.recovery.concurrent_small_file_streams: {{cfg.indices.recovery.concurrent_small_file_streams}}
-indices.recovery.file_chunk_size: {{cfg.indices.recovery.file_chunk_size}}
-indices.recovery.translog_ops: {{cfg.indices.recovery.translog_ops}}
-indices.recovery.translog_size: {{cfg.indices.recovery.translog_size}}
-indices.recovery.compress: {{cfg.indices.recovery.compress}}
-indices.recovery.max_bytes_per_sec: {{cfg.indices.recovery.max_bytes_per_sec}}
+{{~#with cfg.indices}}
+indices:
+  queries.cache.size : {{queries-cache-size}}
+  {{~#with recovery}}
+  recovery:
+    concurrent_streams: {{concurrent_streams}}
+    concurrent_small_file_streams: {{concurrent_small_file_streams}}
+    file_chunk_size: {{file_chunk_size}}
+    translog_ops: {{translog_ops}}
+    translog_size: {{translog_size}}
+    compress: {{compress}}
+    max_bytes_per_sec: {{max_bytes_per_sec}}
+  {{~/with}}
+  {{~#with memory}}
+  memory:
+    index_buffer_size: {{index_buffer_size}}
+    min_index_buffer_size: {{min_index_buffer_size}}
+    max_index_buffer_size: {{max_index_buffer_size}}
+    min_shard_index_buffer_size: {{min_shard_index_buffer_size}}
+  {{~/with}}
+  {{~#with ttl}}
+  ttl:
+    interval: {{interval}}
+    bulk_size: {{bulk_size}}
+  {{~/with}}
+{{~/with}}
 
 {{~#if cfg.indices.fielddata.cache-size}}
 indices.fielddata.cache.size: {{cfg.indices.fielddata.cache-size}}
@@ -51,22 +98,162 @@ indices.breaker.request.overhead: {{cfg.indices.breaker.request-overhead}}
 
 bootstrap.mlockall: {{cfg.bootstrap.mlockall}}
 
-network.host: {{cfg.network.host}}
-http.port: {{cfg.network.port}}
-transport.tcp.port: {{cfg.transport.port}}
-discovery.zen.fd.ping_timeout: {{cfg.discovery.zen_fd_ping_timeout}}
+{{~#with cfg.network}}
+network:
+  host: {{host}}
+  {{~#if publish_port}}
+  publish_port: {{publish_port}}
+  {{~/if}}
+  {{~#if bind_host}}
+  bind_host: {{bind_host}}
+  {{~/if}}
+  {{~#with breaker}}
+  breaker:
+    inflight_requests.limit: {{inflight_requests-limit}}
+    inflight_requests.overhead: {{inflight_requests-overhead}}
+  {{~/with}}
+
+  {{~#with tcp}}
+  tcp:
+    no_delay: {{no_delay}}
+    keep_alive: {{keep_alive}}
+    reuse_address: {{reuse_address}}
+    {{~#if send_buffer_size}}
+    send_buffer_size: {{send_buffer_size}}
+    {{~/if}}
+    {{~#if receive_buffer_size}}
+    receive_buffer_size: {{receive_buffer_size}}
+    {{~/if}}
+  {{~/with}}
+
+{{~/with}}
+
+{{~#with cfg.http}}
+http:
+  enabled: {{enabled}}
+  port: {{port}}
+  {{~#if publish_port}}
+  publish_port: {{publish_port}}
+  {{~/if}}
+  {{~#if bind_host}}
+  bind_host: {{bind_host}}
+  {{~/if}}
+  {{~#if publish_host}}
+  publish_host: {{publish_host}}
+  {{~/if}}
+  {{~#if host}}
+  host: {{host}}
+  {{~/if}}
+  max_content_length: {{max_content_length}}
+  max_initial_line_length: {{max_initial_line_length}}
+  max_header_size: {{max_header_size}}
+  compression: {{compression}}
+  compression_level: {{compression_level}}
+  detailed_errors-enabled: {{detailed_errors-enabled}}
+  pipelining: {{pipelining}}
+  max_events: {{max_events}}
+  {{~#with cors}}
+  cors:
+    enabled: {{enabled}}
+    allow-origin: {{allow-origin}}
+    max-age: {{max-age}}
+    allow-methods: {{allow-methods}}
+    allow-headers: {{allow-headers}}
+    allow-credentials: {{allow-credentials}}
+  {{~/with}}
+
+{{~/with}}
+
+{{~#with cfg.transport}}
+transport:
+  {{~#if host}}
+  host: {{host}}
+  {{~/if}}
+  {{~#if bind_host}}
+  bind_host: {{bind_host}}
+  {{~/if}}
+  {{~#if publish_host}}
+  publish_host: {{publish_host}}
+  {{~/if}}
+  {{~#if ping_schedule}}
+  ping_schedule: {{ping_schedule}}
+  {{~/if}}
+
+  {{~#with tcp}}
+  tcp:
+    port: {{port}}
+    {{~#if connect_timeout}}
+    connect_timeout: {{connect_timeout}}
+    {{~/if}}
+    {{~#if compress}}
+    compress: {{compress}}
+    {{~/if}}
+  {{~/with}}
+  {{~#with profiles}}
+  profiles:
+    {{~#each this }}
+    {{@key}}:
+      port: {{port}}
+      {{~#if bind_host}}
+      bind_host: {{bind_host}}
+      {{~/if}}
+      {{~#if publish_host }}
+      publish_host: {{publish_host}}
+      {{~/if}}
+      {{~#if tcp_no_delay}}
+      tcp_no_delay: {{tcp_no_delay}}
+      {{~/if}}
+      {{~#if tcp_keep_alive }}
+      tcp_keep_alive: {{tcp_keep_alive}}
+      {{~/if}}
+      {{~#if reuse_address }}
+      reuse_address: {{reuse_address}}
+      {{~/if}}
+      {{~#if tcp_send_buffer_size }}
+      tcp_send_buffer_size: {{tcp_send_buffer_size}}
+      {{~/if}}
+      {{~#if tcp_receive_buffer_size }}
+      tcp_receive_buffer_size: {{tcp_receive_buffer_size}}
+      {{~/if}}
+    {{~/each }}
+  {{~/with}}
+{{~/with}}
+
+
+{{~#with cfg.discovery.zen.fd}}
+discovery.zen.fd.ping_timeout: {{ping_timeout}}
+discovery.zen.fd.ping_interval: {{ping_interval}}
+discovery.zen.fd.ping_retries: {{ping_retries}}
+{{~/with}}
+
+
 discovery.zen.ping.multicast.enabled: {{cfg.discovery.ping_multicast_enabled}}
-{{#if bind.has_elasticsearch ~}}
 discovery.zen.ping.unicast.hosts: [{{#each bind.elasticsearch.members ~}} "{{sys.ip}}", {{/each ~}}]
-{{else ~}}
-discovery.zen.ping.unicast.hosts: {{cfg.discovery.ping_unicast_hosts}}
-{{/if ~}}
+
+{{~#with cfg.discovery.zen}}
+discovery.zen.ping_timeout: {{ping_timeout}}
+discovery.zen.join_timeout: {{join_timeout}}
+discovery.zen.publish_timeout: {{publish_timeout}}
+discovery.zen.no_master_block: {{no_master_block}}
+{{~/with}}
+
+discovery.zen.master_election.filter_client: {{cfg.discovery.zen.master_election.filter_client}}
+discovery.zen.master_election.filter_data: {{cfg.discovery.zen.master_election.filter_data}}
+
 discovery.zen.minimum_master_nodes: {{cfg.discovery.minimum_master_nodes}}
 
 gateway.recover_after_nodes: {{cfg.gateway.recover_after_nodes}}
+{{~#if cfg.gateway.recover_after_master_nodes}}
+gateway.recover_after_master_nodes: {{cfg.gateway.recover_after_master_nodes}}
+{{~/if}}
+{{~#if cfg.gateway.recover_after_data_nodes}}
+gateway.recover_after_data_nodes: {{cfg.gateway.recover_after_data_nodes}}
+{{~/if}}
+
 gateway.expected_nodes: {{cfg.gateway.expected_nodes}}
 gateway.expected_master_nodes: {{cfg.gateway.expected_master_nodes}}
 gateway.expected_data_nodes: {{cfg.gateway.expected_data_nodes}}
+
 {{~#if cfg.gateway.recover_after_time}}
 gateway.recover_after_time: {{cfg.gateway.recover_after_time}}
 {{~/if}}
