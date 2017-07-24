@@ -1,0 +1,6 @@
+#!/bin/bash
+
+{{#unless cfg.dd_api_key}}
+echo "You must set your Datadog API key."
+exit 1
+{{/unless}}
