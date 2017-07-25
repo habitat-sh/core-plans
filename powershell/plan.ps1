@@ -1,21 +1,127 @@
 $pkg_name="powershell"
 $pkg_origin="core"
-$pkg_version="6.0.0-alpha.17"
+$pkg_version="6.0.0-alpha.18"
 $pkg_license=@("MIT")
 $pkg_upstream_url="https://msdn.microsoft.com/powershell"
 $pkg_description="PowerShell is a cross-platform (Windows, Linux, and macOS) automation and configuration tool/framework that works well with your existing tools and is optimized for dealing with structured data (e.g. JSON, CSV, XML, etc.), REST APIs, and object models. It includes a command-line shell, an associated scripting language and a framework for processing cmdlets."
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-$pkg_source="https://github.com/PowerShell/PowerShell/releases/download/v$pkg_version/PowerShell_$pkg_version-win7-win2008r2-x64.zip"
-$pkg_shasum="13b573e8352d1106378fe67bacbead5e9b6159fe89a287662f87e6f3be9035dd"
+$pkg_source="https://github.com/PowerShell/PowerShell/archive/v$pkg_version.zip"
+$pkg_shasum="2fe95a87973f8e1f29d436ae6637ca57533935e31c59dc449f44181ca8bf3b42"
 $pkg_filename="powershell-$pkg_version-win7-win2k8r2-x64.zip"
+$pkg_build_deps=@("core/visual-cpp-build-tools-2015", "core/dotnet-core-sdk", "core/cmake")
 $pkg_bin_dirs=@("bin")
 
 function Invoke-Unpack {
   Expand-Archive -Path "$HAB_CACHE_SRC_PATH/$pkg_filename" -DestinationPath "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+  
+  # This can be removed when https://github.com/PowerShell/PowerShell/pull/4283
+  # is merged and released. It keeps powershell from entering a debug prompt when
+  # sent a ctrl+break from the supervisor
+  $hostSrc = "$HAB_CACHE_SRC_PATH/$pkg_dirname/$pkg_dirname/src/Microsoft.PowerShell.ConsoleHost/host/msh/ConsoleHost.cs"
+  (Get-Content $hostSrc).replace('BreakIntoDebugger();', 'SpinUpBreakHandlerThread(shouldEndSession: true);') | Set-Content $hostSrc
+}
+
+function invoke-Build() {
+  ################################################################################
+  # These are all needed for the MSBUILD native compilation
+  $env:VCTargetsPath="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Program Files\MSBuild\Microsoft.Cpp\v4.0\v140"
+  $ENV:WindowsSdkDir_81="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Windows Kits\8.1\"
+  
+  $env:CLTrackerSdkPath="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Program Files\MSBuild\14.0\bin\amd64"
+  $env:CLTrackerFrameworkPath="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Program Files\MSBuild\14.0\bin\amd64"
+  $env:LinkTrackerSdkPath="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Program Files\MSBuild\14.0\bin\amd64"
+  $env:LinkTrackerFrameworkPath="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Program Files\MSBuild\14.0\bin\amd64"
+  $env:LibTrackerSdkPath="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Program Files\MSBuild\14.0\bin\amd64"
+  $env:LibTrackerFrameworkPath="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Program Files\MSBuild\14.0\bin\amd64"
+  $env:RCTrackerSdkPath="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Program Files\MSBuild\14.0\bin\amd64"
+  $env:RCTrackerFrameworkPath="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Program Files\MSBuild\14.0\bin\amd64"
+  
+  $env:LibraryPath = $env:LIB
+  $env:IncludePath = $env:INCLUDE
+  ################################################################################
+
+  $build_root = "$HAB_CACHE_SRC_PATH/$pkg_dirname/$pkg_dirname"
+  $pkg_version > "$build_root/powershell.version"
+  $null = new-item -force -type file "$build_root/DELETE_ME_TO_DISABLE_CONSOLEHOST_TELEMETRY"
+
+  Write-BuildLine "running dotnet restore"
+  $srcProjectDirs = @("$build_root/src/powershell-win-core", "$build_root/src/TypeCatalogGen", "$build_root/src/ResGen")
+  $testProjectDirs = Get-ChildItem "$build_root/test/*.csproj" -Recurse | ForEach-Object { [System.IO.Path]::GetDirectoryName($_) }
+  ($srcProjectDirs + $testProjectDirs) | ForEach-Object { dotnet restore $_ }
+
+  Push-Location "$build_root/src/ResGen"
+  try {
+      Write-BuildLine "building resgen"
+      dotnet run
+  } finally {
+      Pop-Location
+  }
+
+  Push-Location "$build_root/src/powershell-native"
+  try {
+      Write-BuildLine "building native binaries"
+      Get-ChildItem "nativemsh/pwrshplugin" -Filter "*.mc" | ForEach-Object {
+        Write-BuildLine "calling mc"
+        & "$(Get-HabPackagePath visual-cpp-build-tools-2015)\Windows Kits\8.1\bin\x64\mc.exe" -o -d -c -U "$($_.FullName)" -h "nativemsh/pwrshplugin" -r "nativemsh/pwrshplugin"
+        Write-BuildLine "mc called"
+      }
+
+      Write-BuildLine "calling cmake"
+      & cmake -DBUILD_ONECORE=ON -DBUILD_TARGET_ARCH=x64 -G "Visual Studio 14 2015 Win64" .
+      Write-BuildLine "calling msbuild with inc $env:include"
+      & msbuild ALL_BUILD.vcxproj /p:Configuration=Release
+      @('pwrshplugin.dll', 'pwrshplugin.pdb') | % {
+        $dstPath = "$build_root/src/powershell-win-core"
+        $srcPath = Join-Path (Join-Path (Join-Path (Get-Location) "bin") "Release") "CoreClr/$_"
+        Write-BuildLine "Copying $srcPath to $dstPath"
+        Copy-Item $srcPath $dstPath
+      }
+
+      Copy-Item .\Install-PowerShellRemoting.ps1 "$build_root/src/powershell-win-core"
+  } finally {
+      Pop-Location
+  }
+
+  Write-BuildLine "building typegen"
+  $GetDependenciesTargetPath = "$build_root/src/Microsoft.PowerShell.SDK/obj/Microsoft.PowerShell.SDK.csproj.TypeCatalog.targets"
+  $GetDependenciesTargetValue = @'
+<Project>
+    <Target Name="_GetDependencies"
+            DependsOnTargets="ResolvePackageDependenciesDesignTime">
+        <ItemGroup>
+            <_DependentAssemblyPath Include="%(_DependenciesDesignTime.Path)%3B" Condition=" '%(_DependenciesDesignTime.Type)' == 'Assembly' And '%(_DependenciesDesignTime.Name)' != 'Microsoft.Management.Infrastructure.Native.dll' And '%(_DependenciesDesignTime.Name)' != 'Microsoft.Management.Infrastructure.dll' " />
+        </ItemGroup>
+        <WriteLinesToFile File="$(_DependencyFile)" Lines="@(_DependentAssemblyPath)" Overwrite="true" />
+    </Target>
+</Project>
+'@
+  Set-Content -Path $GetDependenciesTargetPath -Value $GetDependenciesTargetValue -Force -Encoding Ascii
+
+  Push-Location "$build_root/src/Microsoft.PowerShell.SDK"
+  try {
+      $ps_inc_file = "$build_root/src/TypeCatalogGen/powershell.inc"
+      dotnet msbuild .\Microsoft.PowerShell.SDK.csproj /t:_GetDependencies "/property:DesignTimeBuild=true;_DependencyFile=$ps_inc_file" /nologo
+  } finally {
+      Pop-Location
+  }
+
+  Push-Location "$build_root/src/TypeCatalogGen"
+  try {
+
+      dotnet run ../Microsoft.PowerShell.CoreCLR.AssemblyLoadContext/CorePsTypeCatalog.cs powershell.inc
+  } finally {
+      Pop-Location
+  }
 }
 
 function Invoke-Install {
-  Copy-Item * "$pkg_prefix/bin" -Recurse -Force
+  try {
+    Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname/$pkg_dirname/src/powershell-win-core"
+    dotnet publish --configuration Release --framework netcoreapp1.1 --runtime win10-x64 --output "$pkg_prefix/bin"
+  }
+  finally {
+    Pop-Location
+  }
 }
 
 function Invoke-Check() {
