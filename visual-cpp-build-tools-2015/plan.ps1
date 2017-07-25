@@ -11,18 +11,24 @@ $pkg_build_deps=@("core/lessmsi")
 
 $pkg_bin_dirs=@(
   "Program Files\Microsoft Visual Studio 14.0\VC\bin\amd64",
-  "Program Files\Microsoft Visual Studio 14.0\VC\redist\x64\Microsoft.VC140.CRT"
+  "Program Files\Microsoft Visual Studio 14.0\VC\redist\x64\Microsoft.VC140.CRT",
+  "Program Files\MSBuild\14.0\bin\amd64",
+  "Windows Kits\8.1\bin\x64"
 )
 $pkg_lib_dirs=@(
+  "Windows Kits\10\Lib\10.0.10240.0\um\x64",
   "Windows Kits\10\Lib\10.0.10240.0\ucrt\x64",
+  "Program Files\Microsoft Visual Studio 14.0\VC\atlmfc\lib\amd64",
   "Program Files\Microsoft Visual Studio 14.0\VC\lib\amd64",
   "Windows Kits\8.1\Lib\winv6.3\um\x64"
 )
 $pkg_include_dirs=@(
   "Windows Kits\10\Include\10.0.10240.0\ucrt",
+  "Program Files\Microsoft Visual Studio 14.0\VC\atlmfc\include",
   "Program Files\Microsoft Visual Studio 14.0\VC\include",
   "Windows Kits\8.1\Include\shared",
-  "Windows Kits\8.1\Include\um"
+  "Windows Kits\8.1\Include\um",
+  "Windows Kits\NETFXSDK\4.6\Include\um"
 )
 
 function Invoke-Unpack {
@@ -35,7 +41,8 @@ function Invoke-Unpack {
     Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname/packages/*SDK" -Include *.msi -Recurse | % {
       lessmsi x $_
     }
-
+    lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_dirname/OfflineCache/installers/Win10SDK_Hidden_10.0.10240/en/0/Redistributable/4.6.00079/sdk_tools46.msi")
+    lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_dirname/OfflineCache/installers/Win10SDK_Hidden_10.0.10240/en/0/installers/Windows SDK for Windows Store Apps Headers Libs-x86_en-us.msi")
   }
   finally { Pop-Location }
 }
@@ -47,4 +54,6 @@ function Invoke-Install {
   Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include "Windows Kits" -Recurse | % {
     Copy-Item $_ "$pkg_prefix" -Exclude "*.duplicate*" -Recurse -Force
   }
+
+  Copy-Item "$pkg_prefix\Program Files\Microsoft Visual Studio 14.0\Common7\IDE\FromGAC\*" "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64" -Force
 }
