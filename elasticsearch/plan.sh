@@ -1,12 +1,12 @@
 pkg_name=elasticsearch
 pkg_origin=core
-pkg_version=2.4.1
+pkg_version=5.5.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Open Source, Distributed, RESTful Search Engine"
 pkg_upstream_url="https://elastic.co"
 pkg_license=('Revised BSD')
-pkg_source=https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/${pkg_version}/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=23a369ef42955c19aaaf9e34891eea3a055ed217d7fbe76da0998a7a54bbe167
+pkg_source=https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${pkg_version}.tar.gz
+pkg_shasum=aa316b8a46b1daef9189090f41e4226794b4e4e8f361caa1be5ad6c4ed753f2e
 pkg_deps=(
   core/busybox-static
   core/glibc
@@ -32,6 +32,12 @@ do_install() {
   # Elasticsearch is greedy when grabbing config files from /bin/..
   # so we need to put the untemplated config dir out of reach
   mkdir -p "$pkg_prefix/es"
-  cp -a bin lib modules "$pkg_prefix/es"
+  cp -a ./* "$pkg_prefix/es"
+
+  # jvm.options needs to live relative to the binary.
+  # mkdir -p mkdir -p "$pkg_prefix/es/config"
+  # install -vDm644 config/jvm.options "$pkg_prefix/es/config/jvm.options"
+
+  # Delete unused binaries to save space
   rm "$pkg_prefix/es/bin/"*.bat "$pkg_prefix/es/bin/"*.exe
 }

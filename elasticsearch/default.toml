@@ -80,26 +80,12 @@
   # Path to log files:
   #
   logs =    "logs"
-  #
-  # Path to plugins:
-  #
-  plugins = "plugins"
-  #
-  # Path to scripts directory
-  #
-  scripts = "scripts"
 
 #
 # ----------------------------------- Indices ----------------------------------
 #
 [indices]
   [indices.recovery]
-    concurrent_streams =            "3"
-    concurrent_small_file_streams = "2"
-    file_chunk_size =               "512kb"
-    translog_ops =                  "1000"
-    translog_size =                 "512kb"
-    compress =                      "true"
     max_bytes_per_sec  =            "20mb"
 
   [indices.fielddata]
@@ -139,7 +125,7 @@
 [bootstrap]
   # Lock the memory on startup:
   #
-  mlockall = "true"
+  memory_lock = "false"
   #
   # Make sure that the heap size is set to about half the memory available
   # on the system and that the owner of the process is allowed to use this
@@ -174,7 +160,6 @@
   # Pass an initial list of hosts to perform discovery when new node is started:
   # The default list of hosts is ["127.0.0.1", "[::1]"]
   #
-  ping_multicast_enabled = "false"
   ping_unicast_hosts = "[]"
   #
   # Prevent the "split brain" by configuring the majority of nodes (total number of nodes / 2 + 1):
@@ -234,12 +219,7 @@
 
 # ======================== Elasticsearch Logger Configuration =========================
 [logger]
-  level = "INFO"
-
-# ======================== Elasticsearch Index Module Configuration =========================
-[index]
-  number_of_replicas = 1
-  number_of_shards = 5
+  level = "info"
 
 # ======================== Elasticsearch Plugins Configuration =========================
 [plugins]
@@ -251,4 +231,4 @@
   max_locked_memory = ""
   es_startup_sleep_time = ""
   es_java_opts = ""
-  heapsize = ""
+  heapsize = "1g"
