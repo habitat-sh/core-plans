@@ -20,9 +20,9 @@ pkg_deps=(
   # for postgis
   core/gcc # postgis-*.so really only need gcc-libs in runtime, but since gcc is needed during build the libraries end up using the gcc paths
   core/libxml2
-  jarvus/geos
-  jarvus/proj
-  jarvus/gdal
+  core/geos
+  core/proj
+  core/gdal
 )
 
 pkg_build_deps=(
