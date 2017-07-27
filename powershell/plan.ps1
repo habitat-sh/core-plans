@@ -122,6 +122,18 @@ function Invoke-Install {
   finally {
     Pop-Location
   }
+
+  Write-BuildLine "restoring modules"
+  $modulesDir = "$pkg_prefix/bin/Modules"
+  Restore-PSModule -Destination $modulesDir -Name @(
+      # PowerShellGet depends on PackageManagement module, so PackageManagement module will be installed with the PowerShellGet module.
+      'PowerShellGet'
+  )
+
+  # Restore modules from powershellgallery feed
+  Restore-PSModule -Destination $modulesDir -Name @(
+      'Microsoft.PowerShell.Archive'
+  ) -SourceLocation "https://www.powershellgallery.com/api/v2/"
 }
 
 function Invoke-Check() {
@@ -137,4 +149,102 @@ function Invoke-Check() {
   if(!$passed) {
     Write-Error "Check failed to confirm powershell version as $pkg_version"
   }
+}
+
+# Install PowerShell modules such as PackageManagement, PowerShellGet
+function Restore-PSModule
+{
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string[]]$Name,
+
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string]$Destination,
+
+        [string]$SourceLocation="https://powershell.myget.org/F/powershellmodule/api/v2/",
+
+        [string]$RequiredVersion
+        )
+
+    $needRegister = $true
+    $RepositoryName = "mygetpsmodule"
+
+    # Check if the PackageManagement works in the base-oS or PowerShellCore
+    Get-PackageProvider -Name NuGet -ForceBootstrap -Verbose:$VerbosePreference
+    Get-PackageProvider -Name PowerShellGet -Verbose:$VerbosePreference
+
+    # Get the existing registered PowerShellGet repositories
+    $psrepos = PowerShellGet\Get-PSRepository
+
+    foreach ($repo in $psrepos)
+    {
+        if(($repo.SourceLocation -eq $SourceLocation) -or ($repo.SourceLocation.TrimEnd("/") -eq $SourceLocation.TrimEnd("/")))
+        {
+            # found a registered repository that matches the source location
+            $needRegister = $false
+            $RepositoryName = $repo.Name
+            break
+        }
+    }
+
+    if($needRegister)
+    {
+        $regVar = PowerShellGet\Get-PSRepository -Name $RepositoryName -ErrorAction SilentlyContinue
+        if($regVar)
+        {
+            PowerShellGet\UnRegister-PSRepository -Name $RepositoryName
+        }
+
+        Write-BuildLine "Registering PSRepository with name: $RepositoryName and sourcelocation: $SourceLocation"
+        PowerShellGet\Register-PSRepository -Name $RepositoryName -SourceLocation $SourceLocation -ErrorVariable ev -verbose
+        if($ev)
+        {
+            throw ("Failed to register repository '{0}'" -f $RepositoryName)
+        }
+
+        $regVar = PowerShellGet\Get-PSRepository -Name $RepositoryName
+        if(-not $regVar)
+        {
+            throw ("'{0}' is not registered" -f $RepositoryName)
+        }
+    }
+
+    # do not output progress
+    $ProgressPreference = "SilentlyContinue"
+    $Name | ForEach-Object {
+
+        $command = @{
+                        Name=$_
+                        Path = $Destination
+                        Repository =$RepositoryName
+                    }
+
+        if($RequiredVersion)
+        {
+            $command.Add("RequiredVersion", $RequiredVersion)
+        }
+
+        # pull down the module
+        Write-BuildLine "running save-module $_"
+        PowerShellGet\Save-Module @command -Force
+
+        # Remove PSGetModuleInfo.xml file
+        Find-Module -Name $_ -Repository $RepositoryName -IncludeDependencies | ForEach-Object {
+            Remove-Item -Path $Destination\$($_.Name)\*\PSGetModuleInfo.xml -Force
+        }
+    }
+
+    # Clean up
+    if($needRegister)
+    {
+        $regVar = PowerShellGet\Get-PSRepository -Name $RepositoryName -ErrorAction SilentlyContinue
+        if($regVar)
+        {
+            Write-BuildLine "Unregistering PSRepository with name: $RepositoryName"
+            PowerShellGet\UnRegister-PSRepository -Name $RepositoryName
+        }
+    }
 }
