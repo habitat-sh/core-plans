@@ -2,6 +2,24 @@
 
 echo 2>&1
 
+#echo "ERLANG COOKIE!"
+# cp {{pkg.svc_config_path}}/.erlang.cookie  {{pkg.svc_var_path}}
+# chmod 600 {{pkg.svc_var_path}}/.erlang.cookie
+
+if [ "{{cfg.erlang.cookie}}" ]; then
+    cookieFile="{{pkg.svc_var_path}}/.erlang.cookie"
+    if [ -e "$cookieFile" ]; then
+        if [ "$(cat "$cookieFile" 2>/dev/null)" != "{{cfg.erlang.cookie}}" ]; then
+            echo >&2
+            echo >&2 "warning: $cookieFile contents do not match ERLANG_COOKIE"
+            echo >&2
+        fi
+    else
+        echo "{{cfg.erlang.cookie}}" > "$cookieFile"
+        chmod 600 "$cookieFile"
+    fi
+fi
+
 source "{{pkg.svc_config_path}}/env"
 
 {{#if cfg.rabbitmq.management.enabled}}

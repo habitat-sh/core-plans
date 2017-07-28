@@ -1,5 +1,4 @@
 [rabbitmq]
-
 # Host on which to listen. An empty string means "listen on all interfaces."
 listen_host=""
 
@@ -11,12 +10,22 @@ listen_port=5672
 default_vhost="/"
 
 # User name to create when RabbitMQ creates a new database from scratch.
-default_user="guest"
+default_user="admin"
 
 # Password for the default user.
-default_pass="guest"
+default_pass="admin"
+
+# give our default user the proper permissions
+default_user_tags = ["administrator", "management"]
+
+cluster_with=""
+name="rabbit"
+ram=false
 
 [rabbitmq.management]
 
 # Whether to enable the rabbitmq management plugin.
-enabled=false
+enabled=true
+
+[erlang]
+cookie="Gm0+QGpGcsEcxjJPEBY/Tg=="
