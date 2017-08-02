@@ -1,10 +1,24 @@
+[nomad]
 log_level = "DEBUG"
-
 bind_addr = "0.0.0.0"
-
 bootstrap_expect = 1
+datacenter = ""
+region = "global"
+server = false
+agent = false
 
-[[ports]]
+[extras]
+disable_anonymous_signature = false
+disable_update_check = false
+enable_debug = false
+enable_syslog = false
+leave_on_interrupt = false
+leave_on_terminate = false
+
+[ports]
   http = 4646
   rpc  = 4647
   serf = 4648 
+
+[client]
+[client.options]
