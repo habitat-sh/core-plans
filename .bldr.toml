@@ -700,6 +700,8 @@ plan_path = "raml2html"
 plan_path = "re2c"
 [readline]
 plan_path = "readline"
+[rebar]
+plan_path = "rebar"
 [rebar3]
 plan_path = "rebar3"
 [recordproto]
