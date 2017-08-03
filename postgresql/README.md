@@ -39,7 +39,7 @@ docker-compose up
 ```
 
 We intend to support a prod ready clustering solution similar to [patroni](https://github.com/zalando/patroni) and are working on getting there quickly.
-Currently due to issues in habitat core such as https://github.com/habitat-sh/habitat/issues/2315 and https://github.com/habitat-sh/habitat/issues/1994 we however recommend only to use the clustering features for demo purposes.
+Currently due to issues in habitat core such as https://github.com/habitat-sh/habitat/issues/2315 we however recommend only to use the clustering features for demo purposes.
 
 ## Binding
 
