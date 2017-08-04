@@ -488,7 +488,7 @@ else
   exit 1
 fi
 
-cd $scaffolding_app_prefix
+cd $pkg_svc_var_path
 
 exec $cmd \$@
 EOF
