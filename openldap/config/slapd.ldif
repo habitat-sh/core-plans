@@ -1,7 +1,6 @@
 dn: cn=config
 objectClass: olcGlobal
 cn: config
-
 olcArgsFile: {{pkg.svc_var_path}}/run/slapd.args
 olcPidFile: {{pkg.svc_var_path}}/run/slapd.pid
 
