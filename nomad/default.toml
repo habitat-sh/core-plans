@@ -1,4 +1,3 @@
-[nomad]
 log_level = "DEBUG"
 bind_addr = "0.0.0.0"
 bootstrap_expect = 1

@@ -6,10 +6,10 @@
     name = "{{sys.member_id}}"
 
 # Set bind address
-    bind_addr = "{{cfg.nomad.bind_addr}}"
+    bind_addr = "{{cfg.bind_addr}}"
 
 # Set log verbosity
-    log_level = "{{cfg.nomad.log_level}}"
+    log_level = "{{cfg.log_level}}"
 
 # Setup data dir
     data_dir = "{{pkg.svc_data_path}}"
