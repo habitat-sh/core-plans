@@ -1,24 +1,18 @@
 $pkg_name="powershell"
 $pkg_origin="core"
-$pkg_version="6.0.0-alpha.18"
+$pkg_version="6.0.0-beta.5"
 $pkg_license=@("MIT")
 $pkg_upstream_url="https://msdn.microsoft.com/powershell"
 $pkg_description="PowerShell is a cross-platform (Windows, Linux, and macOS) automation and configuration tool/framework that works well with your existing tools and is optimized for dealing with structured data (e.g. JSON, CSV, XML, etc.), REST APIs, and object models. It includes a command-line shell, an associated scripting language and a framework for processing cmdlets."
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_source="https://github.com/PowerShell/PowerShell/archive/v$pkg_version.zip"
-$pkg_shasum="2fe95a87973f8e1f29d436ae6637ca57533935e31c59dc449f44181ca8bf3b42"
+$pkg_shasum="cdfa8da4f05310b78e09dedaa455770508c30ec9e5992b838046b1869085fb75"
 $pkg_filename="powershell-$pkg_version-win7-win2k8r2-x64.zip"
-$pkg_build_deps=@("core/visual-cpp-build-tools-2015", "core/dotnet-core-sdk", "core/cmake")
+$pkg_build_deps=@("core/visual-cpp-build-tools-2015", "core/dotnet-core-sdk-preview", "core/cmake")
 $pkg_bin_dirs=@("bin")
 
 function Invoke-Unpack {
   Expand-Archive -Path "$HAB_CACHE_SRC_PATH/$pkg_filename" -DestinationPath "$HAB_CACHE_SRC_PATH/$pkg_dirname"
-  
-  # This can be removed when https://github.com/PowerShell/PowerShell/pull/4283
-  # is merged and released. It keeps powershell from entering a debug prompt when
-  # sent a ctrl+break from the supervisor
-  $hostSrc = "$HAB_CACHE_SRC_PATH/$pkg_dirname/$pkg_dirname/src/Microsoft.PowerShell.ConsoleHost/host/msh/ConsoleHost.cs"
-  (Get-Content $hostSrc).replace('BreakIntoDebugger();', 'SpinUpBreakHandlerThread(shouldEndSession: true);') | Set-Content $hostSrc
 }
 
 function invoke-Build() {
@@ -87,11 +81,11 @@ function invoke-Build() {
   $GetDependenciesTargetValue = @'
 <Project>
     <Target Name="_GetDependencies"
-            DependsOnTargets="ResolvePackageDependenciesDesignTime">
+            DependsOnTargets="ResolveAssemblyReferencesDesignTime">
         <ItemGroup>
-            <_DependentAssemblyPath Include="%(_DependenciesDesignTime.Path)%3B" Condition=" '%(_DependenciesDesignTime.Type)' == 'Assembly' And '%(_DependenciesDesignTime.Name)' != 'Microsoft.Management.Infrastructure.Native.dll' And '%(_DependenciesDesignTime.Name)' != 'Microsoft.Management.Infrastructure.dll' " />
+            <_RefAssemblyPath Include="%(_ReferencesFromRAR.ResolvedPath)%3B" Condition=" '%(_ReferencesFromRAR.Type)' == 'assembly' And '%(_ReferencesFromRAR.PackageName)' != 'Microsoft.Management.Infrastructure' " />
         </ItemGroup>
-        <WriteLinesToFile File="$(_DependencyFile)" Lines="@(_DependentAssemblyPath)" Overwrite="true" />
+        <WriteLinesToFile File="$(_DependencyFile)" Lines="@(_RefAssemblyPath)" Overwrite="true" />
     </Target>
 </Project>
 '@
@@ -117,7 +111,7 @@ function invoke-Build() {
 function Invoke-Install {
   try {
     Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname/$pkg_dirname/src/powershell-win-core"
-    dotnet publish --configuration Release --framework netcoreapp1.1 --runtime win7-x64 --output "$pkg_prefix/bin"
+    dotnet publish --configuration Release --framework netcoreapp2.0 --runtime win7-x64 --output "$pkg_prefix/bin"
   }
   finally {
     Pop-Location
