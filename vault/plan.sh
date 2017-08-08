@@ -1,6 +1,6 @@
 pkg_origin=core
 pkg_name=vault
-pkg_version=0.7.2
+pkg_version=0.7.3
 pkg_description="A tool for managing secrets."
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=("MPL-2.0")
