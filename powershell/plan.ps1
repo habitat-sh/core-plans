@@ -117,7 +117,7 @@ function invoke-Build() {
 function Invoke-Install {
   try {
     Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname/$pkg_dirname/src/powershell-win-core"
-    dotnet publish --configuration Release --framework netcoreapp1.1 --runtime win10-x64 --output "$pkg_prefix/bin"
+    dotnet publish --configuration Release --framework netcoreapp1.1 --runtime win7-x64 --output "$pkg_prefix/bin"
   }
   finally {
     Pop-Location
