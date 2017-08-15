@@ -1,0 +1,10 @@
+worker_rlimit_nofile = 8192
+worker_processes = "auto"
+client_max_body_size = "300M"
+
+[events]
+worker_connections = 1024
+
+[server]
+listen = 80
+server_name = "localhost.localdomain"

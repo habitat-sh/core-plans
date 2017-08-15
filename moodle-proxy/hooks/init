@@ -1,0 +1,8 @@
+#!{{pkgPathFor "core/bash"}}/bin/bash
+set -e
+exec 2>&1
+
+_nginx_dir="{{pkg.svc_path}}/nginx"
+echo "Make writable directory, '${_nginx_dir}', for nginx running as user 'hab'"
+mkdir -p $_nginx_dir
+chown hab:hab $_nginx_dir

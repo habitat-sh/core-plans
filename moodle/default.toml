@@ -1,0 +1,12 @@
+dbname = "moodle"
+adminuser = "admin"
+adminpass = "S3cret"
+adminemail = "admin@example.com"
+wwwroot = "http://localhost"
+SMTP = "localhost"
+output_buffering = 65000
+post_max_size = "300M"
+upload_max_filesize = "300M"
+opcache_memory_consumption = 64
+opcache_max_accelerated_files = 1000
+opcache_revalidate_freq = 60
