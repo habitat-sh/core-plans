@@ -144,6 +144,7 @@ if ! $pkg_prefix/libexec/is_db_connected; then
   >&2 echo " * db.host      - The database hostname or IP address (Current: {{#if cfg.db.host}}{{cfg.db.host}}{{else}}<unset>{{/if}})"
   >&2 echo " * db.port      - The database listen port number (Current: {{#if cfg.db.port}}{{cfg.db.port}}{{else}}5432{{/if}})"
 {{~/unless}}
+  >&2 echo " * db.adapter   - The database adapter (Current: {{#if cfg.db.adapter}}{{cfg.db.adapter}}{{else}}postgres{{/if}})"
   >&2 echo " * db.user      - The database username (Current: {{#if cfg.db.user}}{{cfg.db.user}}{{else}}<unset>{{/if}})"
   >&2 echo " * db.password  - The database password (Current: {{#if cfg.db.password}}<set>{{else}}<unset>{{/if}})"
   >&2 echo " * db.name      - The database name (Current: {{#if cfg.db.name}}{{cfg.db.name}}{{else}}<unset>{{/if}})"
@@ -261,7 +262,7 @@ scaffolding_setup_app_config() {
 scaffolding_setup_database_config() {
   if [[ "${_uses_pg:-}" == "true" ]]; then
     local db t
-    db="postgres://{{cfg.db.user}}:{{cfg.db.password}}"
+    db="{{#if cfg.db.adapter}}{{cfg.db.adapter}}{{else}}postgres{{/if}}://{{cfg.db.user}}:{{cfg.db.password}}"
     db="${db}@{{#if bind.database}}{{bind.database.first.sys.ip}}{{else}}{{#if cfg.db.host}}{{cfg.db.host}}{{else}}db.host.not.set{{/if}}{{/if}}"
     db="${db}:{{#if bind.database}}{{bind.database.first.cfg.port}}{{else}}{{#if cfg.db.port}}{{cfg.db.port}}{{else}}5432{{/if}}{{/if}}"
     db="${db}/{{cfg.db.name}}"
@@ -276,6 +277,9 @@ scaffolding_setup_database_config() {
       { echo ""
         echo "[db]"
       } >> "$t"
+      if _default_toml_has_no db.adapter; then
+        echo "adapter = \"postgres\"" >> "$t"
+      fi
       if _default_toml_has_no db.name; then
         echo "name = \"${pkg_name}_production\"" >> "$t"
       fi
