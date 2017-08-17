@@ -20,7 +20,7 @@ function invoke-Build() {
   # These are all needed for the MSBUILD native compilation
   $env:VCTargetsPath="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Program Files\MSBuild\Microsoft.Cpp\v4.0\v140"
   $ENV:WindowsSdkDir_81="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Windows Kits\8.1\"
-  
+
   $env:CLTrackerSdkPath="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Program Files\MSBuild\14.0\bin\amd64"
   $env:CLTrackerFrameworkPath="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Program Files\MSBuild\14.0\bin\amd64"
   $env:LinkTrackerSdkPath="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Program Files\MSBuild\14.0\bin\amd64"
@@ -29,7 +29,7 @@ function invoke-Build() {
   $env:LibTrackerFrameworkPath="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Program Files\MSBuild\14.0\bin\amd64"
   $env:RCTrackerSdkPath="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Program Files\MSBuild\14.0\bin\amd64"
   $env:RCTrackerFrameworkPath="$(Get-HabPackagePath visual-cpp-build-tools-2015)\Program Files\MSBuild\14.0\bin\amd64"
-  
+
   $env:LibraryPath = $env:LIB
   $env:IncludePath = $env:INCLUDE
   ################################################################################
