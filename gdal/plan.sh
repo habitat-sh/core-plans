@@ -10,6 +10,7 @@ pkg_shasum=61837706abfa3e493f3550236efc2c14bd6b24650232f9107db50a944abf8b2f
 pkg_build_deps=(
   core/gcc
   core/make
+  core/pkg-config
 )
 pkg_deps=(
   core/glibc
