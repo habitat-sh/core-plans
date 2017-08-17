@@ -18,7 +18,6 @@ pkg_deps=(
   core/libossp-uuid
 
   # for postgis
-  core/gcc # postgis-*.so really only need gcc-libs in runtime, but since gcc is needed during build the libraries end up using the gcc paths
   core/libxml2
   core/geos
   core/proj
@@ -27,6 +26,7 @@ pkg_deps=(
 
 pkg_build_deps=(
   core/coreutils
+  core/gcc
   core/make
 
   # for postgis
