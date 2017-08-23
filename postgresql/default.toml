@@ -18,7 +18,8 @@ lag_health_threshold = 1048576
 [wal-e]
 enable = false
 [wal-e.aws]
-prefix = ''
+bucket = ''
 access_key_id = ''
 secret_access_key = ''
 region = ''
+
