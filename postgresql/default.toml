@@ -16,10 +16,10 @@ password = 'replication'
 lag_health_threshold = 1048576
 
 [wal-e]
-enable = true
+enable = false
 [wal-e.aws]
-bucket = 'jirotech-postgresql'
-access_key_id = 'AKIAJ5XJU7F7BIMMPJ7Q'
-secret_access_key = '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'
-region = 'ap-southeast-2'
+bucket = ''
+access_key_id = ''
+secret_access_key = ''
+region = ''
 
