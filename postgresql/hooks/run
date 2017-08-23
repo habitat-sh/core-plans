@@ -25,6 +25,14 @@ cp {{pkg.svc_config_path}}/recovery.conf {{pkg.svc_data_path}}/
 
 ensure_dir_ownership
 
+stop_wale_service
+
+{{ #unless svc.me.follower }}
+{{ #if cfg.wal-e.enable }}
+start_wale_service
+{{ /if }}
+{{ /unless }}
+
 echo "Starting PostgreSQL"
 export PGDATA={{pkg.svc_data_path}}
 exec chpst -U hab:hab -u hab:hab postgres \

@@ -4,15 +4,8 @@ exec 2>&1
 
 mkdir -p "{{pkg.svc_config_path}}/env"
 
-psql_dir=$(dirname $(find /hab/pkgs -name 'psql' | head -n 1))
-if [[ "${psql_dir}" == "" ]]; then
-  echo "Postgres binaries not found! Please install core/postgresql"
-  exit 1
-fi
-
-export PATH=$PATH:${psql_dir}
-
 write_env_var() {
+  echo $1 = $2
   echo "$1" > "{{pkg.svc_config_path}}/env/$2"
 }
 
@@ -26,7 +19,11 @@ write_env_var 'postgres' 'PGDATABASE'
 
 while true; do
 {{ #if cfg.pg.data_dir }}
-  envdir {{pkg.svc_config_path}}/env wal-e backup-push {{cfg.pg.data_dir}}
+  if pg_isready --dbname=postgres --quiet; then
+    envdir {{pkg.svc_config_path}}/env wal-e backup-push {{cfg.pg.data_dir}}
+  else 
+    echo "WAL-E waiting for local database to be available"
+  fi
 {{/if}}
   sleep {{cfg.backup_interval}}
 done
