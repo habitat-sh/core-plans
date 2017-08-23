@@ -18,13 +18,13 @@ write_env_var '{{cfg.pg.superuser_password}}' 'PGPASSWORD'
 write_env_var 'postgres' 'PGDATABASE'
 
 while true; do
-{{ #if cfg.pg.data_dir }}
   if pg_isready --dbname=postgres --quiet; then
+{{ #if cfg.pg.data_dir }}
     envdir {{pkg.svc_config_path}}/env wal-e backup-push {{cfg.pg.data_dir}}
+{{/if}}
     sleep {{cfg.backup_interval}}
   else 
     echo "WAL-E waiting for local database to be available"
     sleep 10
   fi
-{{/if}}
 done
