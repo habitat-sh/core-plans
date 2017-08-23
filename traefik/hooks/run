@@ -1,0 +1,4 @@
+#!/bin/sh
+
+exec 2>&1
+exec traefik --configfile={{pkg.svc_config_path}}/traefik.toml
