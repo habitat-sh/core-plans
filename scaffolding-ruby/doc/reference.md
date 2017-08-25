@@ -465,7 +465,7 @@ Where `$adapter`, `$user`, `$password`, `$host`, `$port`, and `$name` will be de
 
 ### Default Config Settings
 
-* `db.adapter`: The connecting database adapter for this app.  Defaults to the value of `postgres` if no value is provided.
+* `db.adapter`: The connecting database adapter for this app.  Defaults to the value of `postgresql` if no value is provided.
 * `db.name`: The database name on the database server for this app. Defaults to the value of `"${pkg_name}_production"`.
 * `db.user`: The connecting database user for this app. Defaults to the value of `"$pkg_name"`.
 * `db.password`: The connecting database password for this app. Defaults to the value of `"${pkg_name}"`. It is **strongly** recommended to use a different, randomly generated password when running your app in production.
