@@ -1,7 +1,7 @@
 #!{{pkgPathFor "core/bash"}}/bin/bash
+#
 
 set -e
-
 exec 2>&1
 
 echo 'Executing run hook'
@@ -13,11 +13,7 @@ write_local_conf
 
 {{#if svc.me.follower }}
 if [[ ! -f "{{pkg.svc_data_path}}/PG_VERSION" ]]; then
-{{#if cfg.wal-e.enable }}
-  bootstrap_replica_via_wale
-{{else}}
   bootstrap_replica_via_pg_basebackup
-{{/if}}
 fi
 
 cp {{pkg.svc_config_path}}/recovery.conf {{pkg.svc_data_path}}/

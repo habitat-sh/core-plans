@@ -1,13 +1,13 @@
 #!{{pkgPathFor "core/bash"}}/bin/bash
+#
 
 exec 2>&1
 
-echo 'Executing init hook'
 source {{pkg.svc_config_path}}/functions.sh
 
-{{ #if cfg.wal-e.enable }}
-write_wale_env
-{{ /if }}
+mkdir -p {{pkg.svc_config_path}}/conf.d
+mkdir -p {{pkg.svc_var_path}}/pg_stat_tmp
+mkdir -p {{pkg.svc_path}}/archive
 
 init_pgpass
 ensure_dir_ownership
