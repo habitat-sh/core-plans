@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+
+exec 2>&1
+
+echo 'Executing run hook'
+
+source {{pkg.svc_config_path}}/functions.sh
+
+init_pgpass
+write_local_conf
+
+{{#if svc.me.follower }}
+if [[ ! -f "{{pkg.svc_data_path}}/PG_VERSION" ]]; then
+  bootstrap_replica_via_pg_basebackup
+fi
+
+cp {{pkg.svc_config_path}}/recovery.conf {{pkg.svc_data_path}}/
+{{/if}}
+
+ensure_dir_ownership
+
+echo "Starting PostgreSQL"
+export PGDATA={{pkg.svc_data_path}}
+exec chpst -U hab:hab -u hab:hab postgres \
+  -c config_file={{pkg.svc_config_path}}/postgresql.conf
