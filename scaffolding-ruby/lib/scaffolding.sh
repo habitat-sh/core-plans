@@ -4,6 +4,15 @@ scaffolding_load() {
   _setup_funcs
   _setup_vars
 
+# /src is the default value for $SRC_PATH
+# if it is set to something else
+# this scaffolding will not work
+if [ "$SRC_PATH" != "/src" ]
+then
+    e="Please do not use pkg_source in your plan when using the ruby scaffolding."
+    exit_with "$e" 10
+fi
+
   pushd "$SRC_PATH" > /dev/null
   _detect_gemfile
   _detect_app_type
