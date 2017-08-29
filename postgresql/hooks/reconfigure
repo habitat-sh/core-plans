@@ -4,8 +4,6 @@ source {{pkg.svc_config_path}}/functions.sh
 
 init_pgpass
 
-stop_wale_service
-
 {{ #unless svc.me.follower }}
 if [ -f {{pkg.svc_data_path}}/recovery.conf ]; then
   echo "Promoting database"
@@ -17,7 +15,4 @@ if [ -f {{pkg.svc_data_path}}/recovery.conf ]; then
   chpst -U hab:hab -u hab:hab pg_ctl promote -D {{pkg.svc_data_path}}
 fi
 
-{{ #if cfg.wal-e.enable }}
-start_wale_service
-{{ /if }}
 {{~/unless}}

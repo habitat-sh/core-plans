@@ -2,6 +2,8 @@
 
 This PostgreSQL plan supports standalone and clustered modes as well as continuous archiving via wal-e integration.
 
+*NOTE:* The current version of this plan is an intterim version of the package that cannot be considered production ready. It can be used however archiving (by default) copies data in `{{pkg.svc_path}}/archive` which cannot be guaranteed as persisted between failures. That being said, the archive location is tunable in the default.toml.
+
 ## Standalone
 
 To run a standalone PostgreSQL instance simply run
@@ -18,28 +20,34 @@ if you want to bring up the pre-exported docker image.
 
 This plan supports running clustered PostgreSQL by utilizing Habitat's native leader election.
 
-You can run an example cluster via docker-compose:
+You can run an example cluster via docker-compose after exporting a docker container from this plan:
+```
+$ hab pkg export docker core/postgresql
+```
+
+The docker post-process should create a docker image named `core/postgresql` and it should be available on your local machine
+
 ```
 cat <<EOF > docker-compose.yml
 version: '3'
 
 services:
   pg1:
-    image: starkandwayne/postgresql
-    command: "start starkandwayne/postgresql --group cluster --topology leader"
+    image: core/postgresql
+    command: "start core/postgresql --group cluster --topology leader"
   pg2:
-    image: starkandwayne/postgresql
-    command: "start starkandwayne/postgresql --group cluster --topology leader --peer pg1"
+    image: core/postgresql
+    command: "start core/postgresql --group cluster --topology leader --peer pg1"
   pg3:
-    image: starkandwayne/postgresql
-    command: "start starkandwayne/postgresql --group cluster --topology leader --peer pg1"
+    image: core/postgresql
+    command: "start core/postgresql --group cluster --topology leader --peer pg1"
 EOF
 
 docker-compose up
 ```
 
 We intend to support a prod ready clustering solution similar to [patroni](https://github.com/zalando/patroni) and are working on getting there quickly.
-Currently due to issues in habitat core such as https://github.com/habitat-sh/habitat/issues/2315 and https://github.com/habitat-sh/habitat/issues/1994 we however recommend only to use the clustering features for demo purposes.
+
 
 ## Binding
 
@@ -61,9 +69,3 @@ PGHOST={{pg.sys.ip}}
 ```
 
 `.first` will always point to the leader when present.
-
-## Wal-e
-
-The `core/postgresql` plan packages `core/wal-e` as a dependency and supports running a side car process that will push regular backups to a cloud object store such as s3.
-
-When enabling wal-e continuous archiving is also turned on by default. Particularly for running clustered PostgreSQL we highly recommend using this feature so that replicas will always be able to catch up to the master should they fall behind further than the masters `wal_keep_segments` setting.
