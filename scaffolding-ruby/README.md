@@ -25,6 +25,6 @@ You can bypass it by adding these lines to your plan.sh
 ```bash
 do_prepare() {
     do_default_prepare
-	  _bundler_version="1.15.1"
+    _bundler_version="1.15.1"
 }
 ```
