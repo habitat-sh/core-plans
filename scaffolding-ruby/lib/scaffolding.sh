@@ -196,18 +196,24 @@ scaffolding_bundle_install() {
 
   build_line "Installing dependencies using $(_bundle --version)"
   start_sec="$SECONDS"
-  _bundle_install \
-    "$CACHE_PATH/vendor/bundle" \
-    --retry 5
+
+  {
+    _bundle_install \
+      "$CACHE_PATH/vendor/bundle" \
+      --retry 5
+  } || {
+      _restore_bundle_config
+      e="bundler returned an error"
+      exit_with "$e" 10
+  }
+
   elapsed=$((SECONDS - start_sec))
   elapsed=$(echo $elapsed | awk '{printf "%dm%ds", $1/60, $1%60}')
   build_line "Bundle completed ($elapsed)"
 
   # If we preserved the original Bundler config, move it back into place
   if [[ -f .bundle/config.prehab ]]; then
-    rm -f .bundle/config
-    mv .bundle/config.prehab .bundle/config
-    rm -f .bundle/config.prehab
+    _restore_bundle_config
   fi
   # If not `.bundle/` directory existed before, then clear it out now
   if [[ -z "${dot_bundle:-}" ]]; then
@@ -1015,4 +1021,10 @@ unset RUBYOPT GEMRC
 exec $(pkg_path_for $_ruby_pkg)/bin/ruby ${bin}.real \$@
 EOF
   chmod -v 755 "$bin"
+}
+
+_restore_bundle_config() {
+  rm -f .bundle/config
+  mv .bundle/config.prehab .bundle/config
+  rm -f .bundle/config.prehab
 }
