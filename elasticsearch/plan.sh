@@ -13,6 +13,9 @@ pkg_deps=(
   core/jre8
 )
 pkg_bin_dirs=(es/bin)
+pkg_binds_optional=(
+  [elasticsearch]="http-port transport-port"
+)
 pkg_lib_dirs=(es/lib)
 pkg_exports=(
   [http-port]=network.port
