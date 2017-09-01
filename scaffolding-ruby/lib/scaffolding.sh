@@ -4,10 +4,8 @@ scaffolding_load() {
   _setup_funcs
   _setup_vars
 
-# /src is the default value for $SRC_PATH
-# if it is set to something else
-# this scaffolding will not work
-if [ "$SRC_PATH" != "/src" ]
+# this scaffolding will not work if $pkg_source is set
+if [[ -n "${pkg_source:-}" ]]
 then
     e="Please do not use pkg_source in your plan when using the ruby scaffolding."
     exit_with "$e" 10
