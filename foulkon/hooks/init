@@ -1,0 +1,27 @@
+#!/bin/sh
+
+exec 2>&1
+
+source {{pkg.svc_config_path}}/environment.sh
+
+echo "Testing if pg is ready"
+pg_isready -d "${PG_SUPERUSER_URI}" || exit 1
+
+{{#with cfg.storage}}
+echo "Trying to create role '{{user}}'..."
+
+psql -d "${PG_SUPERUSER_URI}" \
+  -c "CREATE ROLE \"{{user}}\""
+
+echo "Setting password for role '{{user}}'..."
+psql -d "${PG_SUPERUSER_URI}" \
+  -c "ALTER ROLE \"{{user}}\" WITH LOGIN PASSWORD '{{password}}'"
+
+echo "Trying to create database '{{database}}'..."
+PGPASSWORD="${PG_SUPERUSER_PASSWORD}" createdb -U "${PG_SUPERUSER}" -h "${PGHOST}" -p "${PGPORT}" "{{database}}"
+{{/with}}
+
+# TODO this script is not beautiful -- if the init hook has been run before, this
+# will output errors. However, it's quicker to ignore the errors, and `exit 0`
+# here, than to first check if the user exists, and not create it if it does, etc
+exit 0
