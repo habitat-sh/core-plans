@@ -19,4 +19,4 @@ export CATALINA_OPTS="{{cfg.server.catalina-opts}}"
 
 cd {{pkg.svc_var_path}}
 echo "Executing Tomcat here: {{pkg.svc_var_path}}/bin/catalina.sh"
-exec {{pkg.svc_var_path}}/tc/bin/catalina.sh run
+exec {{pkg.svc_var_path}}/bin/catalina.sh run
