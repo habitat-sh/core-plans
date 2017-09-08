@@ -1,0 +1,6 @@
+#!/bin/bash
+
+wget \
+  --quiet \
+  https://raw.githubusercontent.com/logzio/public-certificates/master/COMODORSADomainValidationSecureServerCA.crt \
+  --output-document={{pkg.svc_config_path}}/certificate.crt
