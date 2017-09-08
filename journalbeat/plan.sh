@@ -8,12 +8,13 @@ pkg_source="https://github.com/mheese/$pkg_name/archive/v$pkg_version.tar.gz"
 pkg_shasum="3cc431a199226b14e318610ee5cfd08d2f3109dc9850591f73a28219c56753c9"
 pkg_deps=(
   core/lz4
-  smartb/systemd/233/20170908092956
+  smartb/systemd
 )
 pkg_build_deps=(
   core/go
   core/git
   core/gcc
+  smartb/systemd
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
