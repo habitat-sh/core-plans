@@ -1,6 +1,6 @@
 pkg_svc_user="root"
 pkg_name="journalbeat"
-pkg_origin="smartb"
+pkg_origin="core"
 pkg_version="5.5.2"
 pkg_maintainer="smartB Engineering <dev@smartb.eu>"
 pkg_license=('Apache 2')
