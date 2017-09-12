@@ -5,8 +5,8 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="The open-source database for the realtime web."
 pkg_upstream_url="https://rethinkdb.com"
 pkg_license=('Apache-2.0')
-pkg_source="https://github.com/${pkg_name}/${pkg_name}/archive/v${pkg_version}.tar.gz"
-pkg_shasum=2bd97303c127885cb7a424a2f1fc3eab62a1afb0b7e5503653d988150151d320
+pkg_source="https://download.${pkg_name}.com/dist/${pkg_name}-${pkg_version}.tgz"
+pkg_shasum=dd8aeee169b177179bfe080725f0560443e0f26dae875b32ae25d90cf2f8ee10
 pkg_build_deps=(
   core/gcc
   core/make
