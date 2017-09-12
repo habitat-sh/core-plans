@@ -1,12 +1,12 @@
 pkg_name=apr
 pkg_origin=core
-pkg_version=1.5.2
+pkg_version=1.6.2
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Apache Portable Runtime"
 pkg_upstream_url="https://apr.apache.org/"
 pkg_license=('Apache-2.0')
 pkg_source=http://www.us.apache.org/dist/apr/${pkg_name}-${pkg_version}.tar.bz2
-pkg_shasum=7d03ed29c22a7152be45b8e50431063736df9e1daa1ddf93f6a547ba7a28f67a
+pkg_shasum=09109cea377bab0028bba19a92b5b0e89603df9eab05c0f7dbd4dd83d48dcebd
 pkg_build_deps=(core/diffutils core/file core/gcc core/iana-etc core/make)
 pkg_deps=(core/gcc-libs core/glibc core/grep core/sed core/binutils)
 pkg_bin_dirs=(bin)
