@@ -1,0 +1,19 @@
+[server]
+host = "{{cfg.service.host}}"
+port = "{{cfg.service.port}}"
+worker-host = "{{cfg.worker-host}}"
+
+[logger]
+level = "{{cfg.log_level}}"
+
+[database]
+type = "postgres"
+
+[database.postgres]
+{{#if bind.database}}
+{{~#eachAlive bind.backend.members as |database|}}
+datasourcename = "postgres://{{cfg.storage.user}}:{{cfg.storage.password}}@{{database.sys.ip}}:{{database.cfg.port}}/{{cfg.storage.database}}?sslmode={{cfg.storage.ssl_mode}}"
+{{~/eachAlive}}
+{{else}}
+datasourcename = "postgres://{{cfg.storage.user}}:{{cfg.storage.password}}@{{cfg.storage.host}}:{{cfg.storage.port}}/{{cfg.storage.database}}?sslmode={{cfg.storage.ssl_mode}}"
+{{/if}}
