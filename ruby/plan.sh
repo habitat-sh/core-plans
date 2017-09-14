@@ -1,6 +1,6 @@
 pkg_name=ruby
 pkg_origin=core
-pkg_version=2.4.1
+pkg_version=2.4.2
 pkg_description="A dynamic, open source programming language with a focus on \
   simplicity and productivity. It has an elegant syntax that is natural to \
   read and easy to write."
