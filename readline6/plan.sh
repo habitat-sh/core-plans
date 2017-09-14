@@ -1,4 +1,4 @@
-source "${PLAN_CONTEXT}/../base/plan.sh"
+source "${PLAN_CONTEXT}/../readline/plan.sh"
 
 # We want to change the `pkg_source` link to the correct version
 _base_version=6.3
