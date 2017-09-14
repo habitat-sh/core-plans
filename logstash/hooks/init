@@ -1,1 +1,5 @@
-mkdir -p {{pkg.svc_var_path}}/log
+#!/bin/sh
+
+exec 2>&1
+
+mkdir -p {{pkg.svc_var_path}}/data

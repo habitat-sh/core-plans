@@ -75,31 +75,17 @@
   #
   # Path to directory where to store the data (separate multiple locations by comma):
   #
-  data =    "/hab/svc/elasticsearch/data"
+  data =    ""
   #
   # Path to log files:
   #
-  logs =    "/hab/svc/elasticsearch/var/logs"
-  #
-  # Path to plugins:
-  #
-  plugins = "/hab/svc/elasticsearch/var/plugins"
-  #
-  # Path to scripts directory
-  #
-  scripts = "/hab/svc/elasticsearch/config/scripts"
+  logs =    "logs"
 
 #
 # ----------------------------------- Indices ----------------------------------
 #
 [indices]
   [indices.recovery]
-    concurrent_streams =            "3"
-    concurrent_small_file_streams = "2"
-    file_chunk_size =               "512kb"
-    translog_ops =                  "1000"
-    translog_size =                 "512kb"
-    compress =                      "true"
     max_bytes_per_sec  =            "20mb"
 
   [indices.fielddata]
@@ -139,7 +125,7 @@
 [bootstrap]
   # Lock the memory on startup:
   #
-  mlockall = "true"
+  memory_lock = "false"
   #
   # Make sure that the heap size is set to about half the memory available
   # on the system and that the owner of the process is allowed to use this
@@ -164,6 +150,9 @@
   # For more information, see the documentation at:
   # <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html>
 
+[transport]
+  port = 9300
+
 #
 # --------------------------------- Discovery ----------------------------------
 #
@@ -171,7 +160,6 @@
   # Pass an initial list of hosts to perform discovery when new node is started:
   # The default list of hosts is ["127.0.0.1", "[::1]"]
   #
-  ping_multicast_enabled = "false"
   ping_unicast_hosts = "[]"
   #
   # Prevent the "split brain" by configuring the majority of nodes (total number of nodes / 2 + 1):
@@ -181,6 +169,7 @@
   # For more information, see the documentation at:
   # <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery.html>
   #
+  zen_fd_ping_timeout = "30s"
 
 #
 # ---------------------------------- Gateway -----------------------------------
@@ -230,4 +219,16 @@
 
 # ======================== Elasticsearch Logger Configuration =========================
 [logger]
-  level = "INFO"
+  level = "info"
+
+# ======================== Elasticsearch Plugins Configuration =========================
+[plugins]
+  cloud_aws_signer = ""
+
+# ======================== Runtime Configuration =========================
+[runtime]
+  max_open_files = ""
+  max_locked_memory = ""
+  es_startup_sleep_time = ""
+  es_java_opts = ""
+  heapsize = "1g"

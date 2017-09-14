@@ -7,7 +7,9 @@
 #                                                    __/ |
 #                                                   |___/
 
+#A valid license key is needed for this application to start correctly
 license = ""
+port = 8081
 
 [database]
 

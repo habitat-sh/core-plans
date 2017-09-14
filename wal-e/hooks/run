@@ -1,0 +1,32 @@
+#!/bin/bash
+
+exec 2>&1
+
+mkdir -p "{{pkg.svc_config_path}}/env"
+
+psql_dir=$(dirname $(find /hab/pkgs -name 'psql' | head -n 1))
+if [[ "${psql_dir}" == "" ]]; then
+  echo "Postgres binaries not found! Please install core/postgresql"
+  exit 1
+fi
+
+export PATH=$PATH:${psql_dir}
+
+write_env_var() {
+  echo "$1" > "{{pkg.svc_config_path}}/env/$2"
+}
+
+write_env_var '{{cfg.wale_s3_prefix}}' 'WALE_S3_PREFIX'
+write_env_var '{{cfg.aws_access_key_id}}' 'AWS_ACCESS_KEY_ID'
+write_env_var '{{cfg.aws_secret_access_key}}' 'AWS_SECRET_ACCESS_KEY'
+write_env_var '{{cfg.aws_region}}' 'AWS_REGION'
+write_env_var '{{cfg.pg.superuser_name}}' 'PGUSER'
+write_env_var '{{cfg.pg.superuser_password}}' 'PGPASSWORD'
+write_env_var 'postgres' 'PGDATABASE'
+
+while true; do
+{{ #if cfg.pg.data_dir }}
+  envdir {{pkg.svc_config_path}}/env wal-e backup-push {{cfg.pg.data_dir}}
+{{/if}}
+  sleep {{cfg.backup_interval}}
+done

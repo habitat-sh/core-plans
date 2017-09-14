@@ -1,0 +1,24 @@
+# Host
+etcd-name: {{cfg.etcd-name}}
+etcd-data-dir: {{pkg.svc_data_path}}
+
+etcd-host-ip: {{sys.ip}}
+
+etcd-client-end: {{cfg.etcd-client-end}}
+etcd-server-end: {{cfg.etcd-server-end}}
+
+etcd-auto-tls: {{cfg.etcd-auto-tls}}
+
+{{#if cfg.etcd-auto-tls ~}}
+etcd-http-proto: "https"
+{{else ~}}
+etcd-http-proto: "http"
+{{/if ~}}
+
+etcd-listen-client-urls: {{cfg.etcd-listen-client-urls}}
+etcd-listen-peer-urls: {{cfg.etcd-listen-peer-urls}}
+etcd-advertise-client-urls: {{cfg.etcd-advertise-client-urls}}
+etcd-initial-advertise-peer-urls: {{cfg.etcd-initial-advertise-peer-urls}}
+
+etcd-discovery: {{cfg.etcd-discovery}}
+etcd-initial-cluster-state: {{cfg.etcd-initial-cluster-state}}

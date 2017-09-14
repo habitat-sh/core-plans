@@ -1,0 +1,15 @@
+#!/bin/sh
+exec  2>&1
+
+cd {{pkg.path}} || exit
+jemalloc_path="$(readlink -f "$(find ../../../../core/jemalloc -type f -name libjemalloc.so.2)")"
+ln -sf $jemalloc_path "$(dirname $jemalloc_path)/libjemalloc.so.1"
+
+if [ ! -f /var/opt/mssql/data/master.mdf ]; then
+  SQLSERVR_SA_PASSWORD="{{cfg.sa_password}}" {{pkg.path}}/bin/sqlservr --setup
+fi
+
+{{pkg.path}}/bin/mssql-conf accept-eula
+{{pkg.path}}/bin/mssql-conf set defaultdatadir {{pkg.svc_data_path}}
+{{pkg.path}}/bin/mssql-conf set defaultlogdir {{pkg.svc_data_path}}
+{{pkg.path}}/bin/mssql-conf set tcpport {{cfg.port}}

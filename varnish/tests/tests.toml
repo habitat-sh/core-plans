@@ -1,0 +1,4 @@
+[backend]
+host="webserver"
+port="3000"
+max_connections="10"

@@ -1,8 +1,11 @@
 pkg_name=ncurses
 pkg_origin=core
 pkg_version=6.0
+pkg_description="The ncurses (new curses) library"
+pkg_upstream_url=https://www.gnu.org/software/ncurses/
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('ncurses')
-pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz
+pkg_source=http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz
 pkg_shasum=f551c24b30ce8bfb6e96d9f59b42fbea30fa3a6123384172f9e7284bcf647260
 pkg_deps=(core/glibc core/gcc-libs)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
@@ -11,7 +14,7 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_build() {
-  ./configure --prefix=$pkg_prefix \
+  ./configure --prefix="$pkg_prefix" \
     --with-shared \
     --with-termlib \
     --with-cxx-binding \
@@ -38,20 +41,22 @@ do_install() {
   # properly
   #
   # Thanks to: http://clfs.org/view/sysvinit/x86_64-64/final-system/ncurses.html
-  local maj=$(echo $pkg_version | cut -d "." -f 1)
-  local maj_min=$(echo $pkg_version | cut -d "." -f 1-2)
+  local maj maj_min
+  maj=$(echo ${pkg_version} | cut -d "." -f 1)
+  maj_min=$(echo ${pkg_version} | cut -d "." -f 1-2)
   for x in curses ncurses form panel menu tinfo; do
-    echo "INPUT(-l${x}w)" > $pkg_prefix/lib/lib${x}.so
-    ln -sv lib${x}w.so $pkg_prefix/lib/lib${x}.so.$maj
-    ln -sv lib${x}w.so $pkg_prefix/lib/lib${x}.so.$maj_min
+    echo "INPUT(-l${x}w)" > "$pkg_prefix/lib/lib${x}.so"
+    ln -sv lib${x}w.so "$pkg_prefix/lib/lib${x}.so.$maj"
+    ln -sv lib${x}w.so "$pkg_prefix/lib/lib${x}.so.$maj_min"
   done
-  ln -sfv libncursesw.so $pkg_prefix/lib/libcursesw.so
-  ln -sfv libncursesw.a $pkg_prefix/lib/libcursesw.a
-  ln -sfv libncursesw.a $pkg_prefix/lib/libcurses.a
+  ln -sfv libncursesw.so "$pkg_prefix/lib/libcursesw.so"
+  ln -sfv libncursesw.a "$pkg_prefix/lib/libcursesw.a"
+  ln -sfv libncursesw.a "$pkg_prefix/lib/libcurses.a"
 
   # Install the license, which comes from the README
-  install -dv $pkg_prefix/share/licenses
-  grep -B 100 '$Id' README > $pkg_prefix/share/licenses/LICENSE
+  install -dv "$pkg_prefix/share/licenses"
+  # shellcheck disable=SC2016
+  grep -B 100 '$Id' README > "$pkg_prefix/share/licenses/LICENSE"
 }
 
 

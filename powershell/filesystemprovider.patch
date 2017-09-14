@@ -1,0 +1,15 @@
+--- src/System.Management.Automation/namespaces/FileSystemProvider.cs
++++ src/System.Management.Automation/namespaces/FileSystemProvider.cs
+@@ -940,8 +940,9 @@
+                         // add the filesystem with the root "/" to the initial drive list,
+                         // otherwise path handling will not work correctly because there
+                         // is no : available to separate the filesystems from each other
+-                        if (root != StringLiterals.DefaultPathSeparatorString)
+-                            continue;
++                        if (root != StringLiterals.DefaultPathSeparatorString
++                            && newDriveName == StringLiterals.DefaultPathSeparatorString)
++                            root = StringLiterals.DefaultPathSeparatorString;
+ #endif
+ 
+                         // Porting notes: On non-windows platforms .net can report two
+

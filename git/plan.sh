@@ -23,7 +23,6 @@ pkg_deps=(
 )
 pkg_build_deps=(core/make core/gcc)
 pkg_lib_dirs=(lib)
-pkg_include_dirs=(include)
 pkg_bin_dirs=(bin)
 
 do_prepare() {

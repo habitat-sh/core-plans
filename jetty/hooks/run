@@ -1,0 +1,13 @@
+#!/bin/bash
+
+exec 2>&1
+
+export JETTY_HOME="{{pkg.svc_var_path}}/jetty"
+
+if path=$(hab pkg path core/jdk7); then
+  export JAVA_HOME=$path
+elif path=$(hab pkg path core/jdk8); then
+  export JAVA_HOME=$path
+fi
+
+exec ${JETTY_HOME}/bin/jetty.sh run

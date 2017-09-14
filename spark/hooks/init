@@ -1,0 +1,4 @@
+#!/bin/sh
+
+mkdir -p {{pkg.svc_var_path}}/logs
+mkdir -p {{pkg.svc_var_path}}/work

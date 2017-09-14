@@ -1,20 +1,20 @@
 pkg_name=python
-pkg_version=3.5.2
+pkg_distname=Python
+pkg_version=3.6.0
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Python-2.0')
 pkg_description="Python is a programming language that lets you work quickly \
   and integrate systems more effectively."
-pkg_dirname=Python-${pkg_version}
+pkg_upstream_url="https://www.python.org"
+pkg_dirname=${pkg_distname}-${pkg_version}
 pkg_source=https://www.python.org/ftp/python/${pkg_version}/${pkg_dirname}.tgz
-pkg_filename=${pkg_dirname}.tgz
-pkg_shasum=1524b840e42cf3b909e8f8df67c1724012c7dc7f9d076d4feef2d3eff031e8a0
+pkg_shasum=aa472515800d25a3739833f76ca3735d9f4b2fe77c3cb21f69275e0cce30cb2b
 pkg_deps=(
   core/bzip2
-  core/coreutils
   core/gcc-libs
+  core/gdbm
   core/glibc
-  core/make
   core/ncurses
   core/openssl
   core/readline
@@ -22,13 +22,16 @@ pkg_deps=(
   core/zlib
 )
 pkg_build_deps=(
+  core/coreutils
+  core/diffutils
   core/gcc
   core/linux-headers
-  core/sqlite
+  core/make
+  core/util-linux
 )
 pkg_lib_dirs=(lib)
 pkg_bin_dirs=(bin)
-pkg_include_dirs=(include Include)
+pkg_include_dirs=(include)
 pkg_interpreters=(bin/python bin/python3 bin/python3.5)
 
 do_prepare() {
@@ -37,24 +40,30 @@ do_prepare() {
 }
 
 do_build() {
-  CPPFLAGS=$CFLAGS
-  LD_LIBRARY_PATH=$(pkg_path_for gcc)/lib
-  export CPPFLAGS LD_LIBRARY_PATH
-  ./configure "--prefix=${pkg_prefix}" \
-    --enable-shared
+  export LDFLAGS="$LDFLAGS -lgcc_s"
+  ./configure --prefix="$pkg_prefix" \
+              --enable-loadable-sqlite-extensions \
+              --enable-shared \
+              --with-ensurepip
   make
+}
+
+do_check() {
+  make test
 }
 
 do_install() {
   do_default_install
 
-  # link python3.5 to python for pkg_interpreters
-  ln -rs ${pkg_prefix}/bin/python3.5 ${pkg_prefix}/bin/python
+  # link python3.6 to python for pkg_interpreters
+  ln -rs "$pkg_prefix/bin/pip3.6" "$pkg_prefix/bin/pip"
+  ln -rs "$pkg_prefix/bin/pydoc3.6" "$pkg_prefix/bin/pydoc"
+  ln -rs "$pkg_prefix/bin/python3.6" "$pkg_prefix/bin/python"
+  ln -rs "$pkg_prefix/bin/python3.6-config" "$pkg_prefix/bin/python-config"
 
-  # Upgrade to the latest pip
-  "$pkg_prefix/bin/pip3" install --upgrade pip
-}
-
-do_check() {
-  make test
+  platlib=$(python -c "import sysconfig;print(sysconfig.get_path('platlib'))")
+  cat <<EOF > "$platlib/_manylinux.py"
+# Disable binary manylinux1(CentOS 5) wheel support
+manylinux1_compatible = False
+EOF
 }

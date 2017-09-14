@@ -1,0 +1,21 @@
+suite:
+  name: starkandwayne-wordpress
+  system: docker-compose.yml
+  task_service: tests
+
+tests:
+- name: create-wordpress
+  spec:
+  - wait: wordpress-ready
+  - assert:
+    - wordpress-setup
+  - fail:
+    - wordpress-fail
+
+tasks:
+- name: wordpress-ready
+  command: /scripts/wordpress-ready
+- name: wordpress-setup
+  command: /scripts/wordpress-setup
+- name: wordpress-fail
+  command: /scripts/wordpress-fail

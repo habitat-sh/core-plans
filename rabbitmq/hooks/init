@@ -1,18 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
 echo 2>&1
 
-export RABBITMQ_MNESIA_BASE={{pkg.svc_var_path}}/db
-export RABBITMQ_LOG_BASE={{pkg.svc_var_path}}/log
-export RABBITMQ_CONFIG_FILE={{pkg.svc_config_path}}/rabbitmq
-export RABBITMQ_SCRIPTS_DIR=$(hab pkg path core/rabbitmq)/sbin
-export RABBITMQ_ENABLED_PLUGINS_FILE={{pkg.svc_var_path}}/enabled_plugins
-export HOME={{pkg.svc_var_path}}
+source "{{pkg.svc_config_path}}/env"
 
 {{#if cfg.rabbitmq.management.enabled}}
 echo "Enabling management console"
-$(hab pkg path core/rabbitmq)/sbin/rabbitmq-plugins --offline enable rabbitmq_management
+rabbitmq-plugins --offline enable rabbitmq_management
 {{else}}
 echo "Disabling management console"
-$(hab pkg path core/rabbitmq)/sbin/rabbitmq-plugins --offline disable rabbitmq_management
+rabbitmq-plugins --offline disable rabbitmq_management
 {{/if}}

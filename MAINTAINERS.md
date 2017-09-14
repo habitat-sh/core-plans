@@ -13,10 +13,15 @@ To become a maintainer, open a pull request to this list.
 
 ## Maintainers
 
+* [Seth Chisamore](https://github.com/schisamo)
 * [Elliott Davis](https://github.com/elliott-davis)
+* [Mike Fiedler](https://github.com/miketheman)
+* [Scott Macfarlane](https://github.com/smacfarlane)
 * [Fletcher Nichol](https://github.com/fnichol)
 * [Dave Parfitt](https://github.com/metadave)
+* [Nell Shamrell-Harrington](https://github.com/nellshamrell)
 * [Nathan L Smith](https://github.com/smith)
 * [Joshua Timberman](https://github.com/jtimberman)
 * [Jamie Winsor](https://github.com/reset)
-* [Mike Fiedler](https://github.com/miketheman)
+* [Salim Afiune](https://github.com/afiune)
+* [John Jelinek IV](https://github.com/johnjelinek)

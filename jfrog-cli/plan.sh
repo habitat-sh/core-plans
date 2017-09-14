@@ -1,13 +1,15 @@
 pkg_name=jfrog-cli
+pkg_description="jfrog CLI"
 pkg_origin=core
-pkg_version=1.3.1
+pkg_version=1.7.1
 pkg_license=('apachev2')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://jfrog.bintray.com/jfrog-cli-go/${pkg_version}/jfrog-cli-linux-amd64/jfrog
-pkg_shasum=81265ba5133ea7e735c6ec04f25f1ddcdba504dd41fce07a7ac44d012d993f21
+pkg_shasum=172afbfe482c48bea347318bd27ad4ac3d2f2d6a152aa51e1ca94629faff7e6c
 pkg_deps=(core/glibc core/busybox-static core/cacerts)
 pkg_build_deps=(core/coreutils)
 pkg_bin_dirs=(bin)
+pkg_upstream_url="https://github.com/JFrogDev/jfrog-cli-go"
 
 do_unpack() {
   return 0
@@ -18,7 +20,7 @@ do_build() {
 }
 
 do_install() {
-  install -D $HAB_CACHE_SRC_PATH/$pkg_filename $pkg_prefix/bin/jfrog
+  install -D "$HAB_CACHE_SRC_PATH/$pkg_filename" "$pkg_prefix/bin/jfrog"
   cgo_wrap_binary jfrog
 }
 
@@ -26,7 +28,8 @@ cgo_wrap_binary() {
   local bin="$pkg_prefix/bin/$1"
   build_line "Adding wrapper $bin to ${bin}.real"
   mv -v "$bin" "${bin}.real"
-  local certs="$(pkg_path_for cacerts)/ssl/cert.pem"
+  local certs
+  certs="$(pkg_path_for cacerts)/ssl/cert.pem"
   cat <<EOF > "$bin"
 #!$(pkg_path_for busybox-static)/bin/sh
 set -e

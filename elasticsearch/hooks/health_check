@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# Elasticsearch Health Check for Habitat
+
+status="$(wget -qO - "{{svc.me.sys.ip}}:{{svc.me.cfg.http-port}}/_cat/health")"
+color="$(echo "$status" | awk '{print $4}')"
+
+case $color in
+  "green")
+    rc=0 ;;
+  "orange")
+    rc=1 ;;
+  "red")
+    rc=2 ;;
+  *)
+    rc=3 ;;
+esac
+
+exit $rc

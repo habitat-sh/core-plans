@@ -31,7 +31,9 @@ do_build() {
   build_line "Setting libiconv flags..."
   export CXXFLAGS="-liconv $CXXFLAGS"
   build_line "CXXFLAGS are now: $CXXFLAGS"
-  cmake -DCMAKE_INSTALL_PREFIX:PATH="$pkg_prefix" -G "Unix Makefiles" ../
+  cmake -DCMAKE_INSTALL_PREFIX:PATH="$pkg_prefix" \
+    -DICONV_INCLUDE_DIR="$(hab pkg path core/libiconv)/include" \
+    -G "Unix Makefiles" ../
   make
 }
 

@@ -2,4 +2,3 @@
 
 mkdir -p {{pkg.svc_var_path}}/logs
 mkdir -p {{pkg.svc_var_path}}/plugins
-mkdir -p {{pkg.svc_config_path}}/scripts

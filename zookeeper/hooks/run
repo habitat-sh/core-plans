@@ -1,0 +1,11 @@
+#!/bin/bash
+
+exec 2>&1
+
+export ZOOBINDIR="{{pkg.path}}/bin/"
+export ZOOCFGDIR="{{pkg.svc_config_path}}"
+export JAVA_HOME="$(hab pkg path core/jre8)"
+
+{{pkg.path}}/bin/zkEnv.sh
+
+exec {{pkg.path}}/bin/zkServer.sh start-foreground

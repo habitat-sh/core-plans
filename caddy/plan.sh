@@ -1,0 +1,12 @@
+pkg_name=caddy
+pkg_description="Fast, cross-platform HTTP/2 web server with automatic HTTPS"
+pkg_upstream_url="https://caddyserver.com"
+pkg_origin=core
+pkg_version="v0.10.9"
+pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
+pkg_license=("Apache-2.0")
+pkg_source="https://github.com/mholt/caddy/caddy"
+pkg_bin_dirs=(bin)
+pkg_scaffolding=core/scaffolding-go
+scaffolding_go_base_path=github.com/mholt/caddy/caddy
+scaffolding_go_build_deps=()

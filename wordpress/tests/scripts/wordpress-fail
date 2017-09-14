@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+
+wp --allow-root --path=/hab/svc/wordpress/data/ post get 200

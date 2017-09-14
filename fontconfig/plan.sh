@@ -13,13 +13,17 @@ pkg_deps=(
   core/bzip2
   core/glibc
   core/zlib
+  core/freetype
+  core/libpng
+  core/expat
+  core/gcc-libs
 )
 pkg_build_deps=(core/gcc core/make core/coreutils core/python
-                core/pkg-config core/freetype core/expat
-                core/diffutils core/libtool core/m4 core/automake
-                core/autoconf core/file)
+                core/pkg-config core/diffutils core/libtool
+                core/m4 core/automake core/autoconf core/file)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+pkg_bin_dirs=(bin)
 
 do_prepare() {
   # Set freetype paths

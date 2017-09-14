@@ -1,0 +1,7 @@
+#!/bin/sh
+
+exec 2>&1
+exec worker -config-file {{pkg.svc_config_path}}/worker.toml
+
+# To use the proxy, exec this in your wrapper's run hook:
+# exec proxy -proxy-file {{pkg.svc_config_path}}/proxy.toml

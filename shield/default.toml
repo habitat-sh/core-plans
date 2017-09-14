@@ -1,0 +1,45 @@
+name = "(none)"
+log_level = "info"
+port = 443
+http_port = 80
+
+ssh_private_key = """
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEAu6syloBqOSglqJ6RYYWchWkfaw239sqUNgM41k+B3GRTnAeO
+xwzW8wT5007nh185UAAAucv6CNuiwnoH0BdI9cIvrRXC4nlKBrzRI5bRR0ixAmxb
+QPZFrX0ajfD2Y/l2Nv1YtJda2dWMk2eu7U68H9v0zZEUCj8ZVeyxUDa7/o7YASpa
+Mejtc09nn5n9RmhICiXo3zBhQhxFs7FE62puOy7kmiXSZeNWIpwi3Xxq80o2jhmY
+rKTYsgX+VESA+9StI5H65n7mHhhMdKy0uB02Ux5FS6Yg4a/azpG3Wcu/87SjQsVd
+oF6v/HPVcsbpsDXL0fHRC46wERtjOECKFCnL/QIDAQABAoIBAFYcJJcoDxVw1W68
+a2q6+unAJXlijxG/PChYbCDx1F1C75Y9ZYbx3kMd+l+56cSUreCGT87wyCZ+WP0x
+LxqNRJ33XxblUEnIa24R/0h8MESsFwRMocZ5+diz+ZY9hWC0G0j6EFS0yiv/r4QH
+ZB1hLjLUI0ybj/1vnHlvpKBwrOwM54E58fBoFlO6sdnVUX1d5m97iLzs+PZii8k2
+hxxEgP7ejKsJzFWSaZvsnlta414YBsqJnZjZ6dcFWhSzj6ZzWqkEP3D3yS3t4zhL
+Ih4NDA3+7+VjPwLKLjdJiBRiw6PTQCY9Onv3upadT5iD4WuEQ5HVo12cdW+wJxKP
+tAuht4UCgYEA6cpRwfnwFmrR0uVkydkAbuRE1KbZkrBu1jhdKQOaH2sFEIbL4Wq+
+IxyyMpA8AJd9KtjPFu97NS9185c9EehwffE+2MhC9O8QG7qOEwywzc5y7ZiJNH1e
+AAjE5Hhe1n4+80SyZxmtYPAtZJ9t+DHjWL1dQiUYxAKgPzoUBb0K+WcCgYEAzX84
+qhxAvHCFgHYkuaHEVlBnIC+J9q4dnutVd+aXUYAIW8d+sIh3YlHKN1YEo2N5+8rP
+FNwcvD/4jIer43wlY+Gr7i+S1b+GlZb3OHHw6BaEa9Sg0JZmtAz7IeI1wTqgQxrL
+WjjubcCIwbPLI8cHAURLgT4y8s5n4JaAkivgHPsCgYEAtEjKZ1U/6WmSSJmQ8X6f
+sOPimEHaQh5AOn3YiUo3zcaPb0Ejc78GxLjaSdekDajEYwgyGjOuxULGKIQWGfsu
+1E/28ODtkUfRGjDwYoxEw1BSnBompA2RMWGRw8V3DNzp2lq9YHgSlVBhENlIyj5e
+XQ4aHmnRAUYtINS+n/Y5wj0CgYBIgqym8cMx+u5Qjt+UlO0nm8VXyQ6AeZ3AFsAY
+x8f7HRdV80XT2sNtcPjOn86RLKe9XinF7YlCL7xvMexIH+U9okK9kBHa1HMT06o2
+Q5ZC/rcJKYT5NSjWPYJbyWs4XIxyQUEh+9a96WMYHm3+mNry6ntOBnmJzaU/zTte
+2JaDAwKBgHK1OJS2rHpwdgAtm/GfOjeTWDfOpxg/JVpnVX5i7wfoN0CAUAtd2+eJ
+zJ4cjPzP6kAaHpdHMlkyjRtnKssxj8dn4oXT2d88UYsohN6BcPplSbXX3rXwtRhr
+fkJlK83kBN1qiFBAcxdapE3ac1XFEA4jyQDdOIDjy3oV05su7gRN
+-----END RSA PRIVATE KEY-----"""
+
+[auth]
+basic_user = 'admin'
+basic_password = 'admin'
+provisioning_key='autoprovision'
+
+[auth.api_keys]
+
+[db]
+name = 'shielddb'
+username = 'shield'
+password = 'shield'
