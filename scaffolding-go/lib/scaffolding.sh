@@ -71,9 +71,11 @@ scaffolding_go_before() {
   # Initialize the Go Workspace package path if we are tryng to build the
   # package from local /src, that is when there is no $pkg_source set.
   if [[ ! $pkg_source ]]; then
-    mkdir -p "/tmp/srctmp/${scaffolding_go_base_path}"
-    cp -r /src "/tmp/srctmp/${scaffolding_go_base_path}/${pkg_name}"
-    mv /tmp/srctmp /src/src
+    local tmp_src
+    tmp_src="${HAB_CACHE_SRC_PATH}/${pkg_name}_src"
+    mkdir -p "${tmp_src}/${scaffolding_go_base_path}"
+    cp -r "${scaffolding_go_gopath}" "${tmp_src}/${scaffolding_go_base_path}/${pkg_name}"
+    mv "${tmp_src}" "${scaffolding_go_workspace_src}"
   fi
 }
 
