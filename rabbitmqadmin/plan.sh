@@ -14,10 +14,10 @@ pkg_deps=(
 pkg_bin_dirs=(bin)
 
 do_unpack() {
-  cd "${HAB_CACHE_SRC_PATH}" || exit
+  pushd "${HAB_CACHE_SRC_PATH}"
   mkdir "${pkg_name}-${pkg_version}"
   mv rabbitmqadmin "${pkg_name}-${pkg_version}/"
-  chmod +x "${pkg_name}-${pkg_version}/rabbitmqadmin"
+  popd
 }
 
 do_build() {
@@ -26,4 +26,5 @@ do_build() {
 
 do_install() {
   install -D rabbitmqadmin "${pkg_prefix}/bin/rabbitmqadmin"
+  chmod +x "${pkg_prefix}/bin/rabbitmqadmin"
 }
