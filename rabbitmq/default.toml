@@ -16,11 +16,15 @@ default_user="guest"
 # Password for the default user.
 default_pass="guest"
 
-[rabbitmq.management]
-
 # Whether to enable the rabbitmq management plugin.
+[rabbitmq.management]
 enabled=false
 
-[erlang]
+# Clustering configuration
 
-cookie="secure_cookie"
+# Enable the cluster with `enabled = true`. Set a nice long random
+# string for the cookie to have it get put into place. See the
+# README.md for more information.
+[rabbitmq.cluster]
+enabled=false
+erlang_cookie=false
