@@ -1,1 +1,1 @@
-{{cfg.erlang.cookie}}
+{{cfg.erlang.cookie ~}}
