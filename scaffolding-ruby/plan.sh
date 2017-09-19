@@ -1,6 +1,6 @@
 pkg_name=scaffolding-ruby
 pkg_origin=core
-pkg_version="0.8.5"
+pkg_version="0.8.6"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_description="Habitat Plan Scaffolding for Ruby Applications"
