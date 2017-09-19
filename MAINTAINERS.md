@@ -25,3 +25,4 @@ To become a maintainer, open a pull request to this list.
 * [Jamie Winsor](https://github.com/reset)
 * [Salim Afiune](https://github.com/afiune)
 * [John Jelinek IV](https://github.com/johnjelinek)
+* [Robb Kidd](https://github.com/robbkidd)
