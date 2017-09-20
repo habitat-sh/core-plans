@@ -1,1 +1,1 @@
-{{cfg.erlang.cookie}}
+{{cfg.rabbitmq.cluster.erlang_cookie ~}}

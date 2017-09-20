@@ -1,0 +1,21 @@
+#!/bin/bash
+
+exec 2>&1
+
+source "{{pkg.svc_config_path}}/env"
+
+{{#if cfg.rabbitmq.cluster.erlang_cookie ~}}
+echo "Creating Erlang Cookie from configuration"
+rm -v {{pkg.svc_var_path}}/.erlang.cookie
+cp -v {{pkg.svc_config_path}}/.erlang.cookie {{pkg.svc_var_path}}/.erlang.cookie
+chmod 0400 {{pkg.svc_var_path}}/.erlang.cookie
+{{/if ~}}
+{{#if cfg.rabbitmq.cluster.enabled ~}}
+{{#if svc.me.follower ~}}
+{{#with svc.leader ~}}
+rabbitmqctl stop_app
+rabbitmqctl join_cluster rabbit@{{sys.hostname}}
+rabbitmqctl start_app
+{{/with ~}}
+{{/if ~}}
+{{/if ~}}
