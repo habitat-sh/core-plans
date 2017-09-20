@@ -1,4 +1,4 @@
 #!/bin/bash
 
-source "{{pkg.svc_config_path}}/env"
+export HOME="{{pkg.svc_var_path}}"
 rabbitmqctl node_health_check
