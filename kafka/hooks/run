@@ -2,7 +2,7 @@
 
 exec 2>&1
 
-export JAVA_HOME="$(hab pkg path core/jre8)"
+export JAVA_HOME="{{pkgPathFor "core/jre8"}}"
 export KAFKA_LOG4J_OPTS="-Dlog4j.configuration=file:{{pkg.svc_config_path}}/log4j.properties"
 export EXTRA_ARGS="-name kafkaServer"
 
