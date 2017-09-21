@@ -70,7 +70,7 @@ Issues with an associated gist containing a working fork of our current plan whi
 
 ## Plan syntax 
 
-You can review the entire [plan syntax guide here](https://www.habitat.sh/docs/reference/plan-syntax/). There you can find information about , [](), [](), 
+You can review the entire [plan syntax guide here](https://www.habitat.sh/docs/reference/plan-syntax/). 
 
 Please note that the following conditions must be observed for any plan to be merged into core plans (and are important best practices for any plan): 
 
@@ -129,8 +129,9 @@ All plans should have a ReadMe. In core plans, it is a hard requirement. Your Re
 	- What are some configuration updates a user can make, or do they always need to do a full rebuild?
 - Strongly recommended: 
 	- Documentation on how to scale the service.
-	- Instructions on how to monitor the health of the service at the application layer 
-	-  Can a user simply call it as a dependency of their application? How does it integrate into their developer workflow (for jenkins)? How do they scale up and scale down? 
+	- Instructions on how to monitor the health of the service at the application layer. 
+	- Can a user simply call the package as a dependency of their application? 
+	- How does the package integrate into their developer workflow? 
 
 ## Linting Your Plans
 
@@ -233,4 +234,4 @@ Note: **do not** click the Merge Pull Request button if it's enabled.
 
 ## Add yourself to core plans maintainers
 
-You can add yourself to [core plans maintainers](MAINTAINERS.md) to take a greater role and responsibility in the care, feeding, and maintainence of core plans.
+You can add yourself to [core plans maintainers](MAINTAINERS.md) to take a greater role and responsibility in the care, feeding, and maintenance of core plans.
