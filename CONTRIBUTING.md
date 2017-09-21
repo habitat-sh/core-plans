@@ -1,6 +1,28 @@
 # Contributing
 
-When contributing to the `core-plans` repository, follow these guidelines.
+# When to add a plan to core plans 
+
+[Habitat Plans](https://www.habitat.sh/docs/concepts-plans/) are packages in the Habitat Core Origin. They are maintained and built by the core maintainers to provide the fundamental base tier of packages used by the [Habitat](https://www.habitat.sh/) ecosystem.
+
+Participation in the Habitat community is governed by the [code of conduct](https://github.com/habitat-sh/habitat/blob/master/CODE_OF_CONDUCT.md).
+
+You can browse all available packages that you can leverage and use, including packages built and maintained by community members both inside and outside of this core origin, in [Habitat Builder](https://bldr.habitat.sh/#/explore).
+
+Keep in mind that a core plan must by definition be abstracted to serve a wide array of users in service of their applications. If you are building a plan that is tailor made for your own unique application or specific use case, it is better suited to your own origin. Packages can be made public in your own origin too. Community and external project owned origins are an awesome way to make, share, and use functionality that lives outside of and extends core plans.
+
+# Requirements to add a plan to core plans
+
+In order for a package to be accepted as a core package, the following requirements must be met: 
+
+- [Package Metadata](#package-metadata)
+- [Package Name Conventions](#package-name-conventions)
+- [Adding an older version of a core package](#adding-an-older-version-of-a-core-package)
+- [Plan syntax](#plan-syntax)
+- [Linting your plans](#linting-your-plans)
+- [Pre-commit hooks](#pre-commit-hooks)
+- [Signing your commits](#signing-your-commits)
+- [Pull request review and merge automation](#pull-request-review-and-merge-automation)
+- [Add yourself to core plans maintainers](#add-yourself-to-core-plans-maintainers)
 
 ## Package Metadata
 
@@ -38,11 +60,78 @@ Packages meeting this exception will always have their latest major version foun
 
 > Example: the [bison project](https://www.gnu.org/software/bison/) releases the 4.x line and is continuing to support Bison 3.x. The `bison` package is copied to `bison3` and the `bison` package is updated to build Bison 4.x.
 
-## Building Older Versions
+## Adding an older version of a core package
 
-Sometimes you may need a version of software that we are packaging which was released before the project's corresponding Habitat package was created.
+Sometimes you may need a version of software that we are packaging which was released before the project's corresponding Habitat core package was created.
 
-Please *do not* issue a PR containing a new plan for the specific version of software that you need unless the software project it packages meets the exceptional cases outlined in the above section "Package Name Conventions". Instead [create an issue](https://github.com/habitat-sh/core-plans/issues/new) containing the name and version of the software that you want published to the public depot. A maintainer will run a one-off build and publish the generated artifact to the public depot and close your issue once the work is completed. Issues with an associated gist containing a working fork of our current plan which builds the version of the software will be attended to first.
+Please *do not* issue a PR containing a new plan for the specific version of software that you need unless the software project it packages meets the exceptional cases outlined in the above section "Package Name Conventions". Instead [create an issue](https://github.com/habitat-sh/core-plans/issues/new) containing the name and version of the software that you want published to [Habitat Builder](https://bldr.habitat.sh). A maintainer will run a one-off build and publish the generated artifact to the public depot and close your issue once the work is completed. 
+
+Issues with an associated gist containing a working fork of our current plan which builds the version of the software will be attended to first.
+
+## Plan syntax 
+
+You can review the entire [plan syntax guide here](https://www.habitat.sh/docs/reference/plan-syntax/). 
+
+Please note that the following conditions must be observed for any plan to be merged into core plans (and are important best practices for any plan): 
+
+
+### Plan basic settings
+
+You can read more about [basic plan settings](https://www.habitat.sh/docs/reference/basic-settings/) here. The minimum requirements for a core plan are: 
+
+- pkg_name is set
+- pkg_origin is set 
+- pkg_shasum is set 
+- pkg_description is set 
+
+### Callbacks
+
+You can read more about [callbacks](https://www.habitat.sh/docs/reference/callbacks/) here. The minimum requirement for a core plan are: 
+
+####Do's
+
+- `do_prepare()` is a good place to set environment variables and set the table to build the software. Think of it as a good place to do patches. 
+
+####Don't's
+
+- You should never call `exit` within a build phase. You should instead return an exit code such as `return 1` for failure, and `return 0` for success.  
+- If you clone a repo from git, you must override `do_verify()` to `return 0`.
+- Never use `pkg_source` unless you are downloading something as a third party.  
+- You should never shell out to `hab` from within a callback. If you think you want to, you should use a [utility function](https://www.habitat.sh/docs/reference/utility-functions/) instead.
+- You should not call any function or helper that begin with an underscore, for example `_dont_call_this_function()`. Those are internal only functions that are not supported for external use and will break your plan if you call them.
+- Don't run any code or run anything outside of a build phase or bash function.
+
+### Hooks
+
+The supervisor dynamically invokes hooks at run-time, triggered by an application lifecycle event. You can read more about [hooks](https://www.habitat.sh/docs/reference/hooks/) here. 
+
+- You cannot block the thread in a hook unless it is in the `run` hook. Never call `hab` or `sleep` in a hook that is not the `run` hook.
+- You should never shell out to `hab` from within a hook. If you think you want to, you should use a [runtime configuration setting](https://www.habitat.sh/docs/reference/runtime-settings/) instead. If none of those will solve your problem, open an issue and tell the core team why. 
+- Run hooks should: 
+	- Redirect `stderr` to `stdout` (e.g. with `exec 2>&1` at the start of the hook)
+	- Call the command to execute with `exec <command> <options>` rather than running the command directly. This ensures the command is executed in the same process and that the service will restart correctly on configuration changes. 
+	- If you are running something with a pipe `exec` won't work. 
+- Attempting to execute commands as a `root` user or trying to do `sudo hab install` are not good practice.
+- Don't edit any of the Supervisor rendered templates. 
+	- You can only write to: `/var/`, `/static/`, `/data/` directories. You should only access these with your `runtime configuration setting` variable. 
+	- No one should ever edit anything in `/hab/` directly.  
+	- No one should write to anything in `/hab/` directly. 
+
+### ReadMe 
+
+All plans should have a ReadMe. In core plans, it is a hard requirement. Your ReadMe at a bare minimum should include: 
+
+- Your name as maintainer and supporter of this plan. 
+- Absolutely required: 
+	- What habitat topology it uses (and the plan should have the correct topology for the technology).
+	- Clear, step by step instructions as to how to use the package successfully.
+	- What is the best update strategy for different deployments? 
+	- What are some configuration updates a user can make, or do they always need to do a full rebuild?
+- Strongly recommended: 
+	- Documentation on how to scale the service.
+	- Instructions on how to monitor the health of the service at the application layer. 
+	- Can a user simply call the package as a dependency of their application? 
+	- How does the package integrate into their developer workflow? 
 
 ## Linting Your Plans
 
@@ -129,15 +218,7 @@ Git makes it easy to add this line to your commit messages.
 
 ## Pull Request Review and Merge Automation
 
-Habitat uses several bots to automate the review and merging of pull
-requests. Messages to and from the bots are brokered via the account
-@thesentinels. First, we use Facebook's [mention bot](https://github.com/facebook/mention-bot)
-to identify potential reviewers for a pull request based on the `blame`
-information in the relevant diff. @thesentinels can also receive
-incoming commands from reviewers to approve PRs. These commands are
-routed to a [homu](https://github.com/barosl/homu) bot that will
-automatically merge a PR when sufficient reviewers have provided a +1
-(or r+ in homu terminology).
+Habitat uses several bots to automate the review and merging of pull requests. Messages to and from the bots are brokered via the account @thesentinels. First, we use Facebook's [mention bot](https://github.com/facebook/mention-bot) to identify potential reviewers for a pull request based on the `blame` information in the relevant diff. @thesentinels can also receive incoming commands from reviewers to approve PRs. These commands are routed to a [homu](https://github.com/barosl/homu) bot that will automatically merge a PR when sufficient reviewers have provided a +1 (or r+ in homu terminology).
 
 ### Delegating pull request merge access
 
@@ -150,3 +231,7 @@ If you've been given approval to merge, you can do so by appending a comment to 
     @thesentinels r+
 
 Note: **do not** click the Merge Pull Request button if it's enabled.
+
+## Add yourself to core plans maintainers
+
+You can add yourself to [core plans maintainers](MAINTAINERS.md) to take a greater role and responsibility in the care, feeding, and maintenance of core plans.
