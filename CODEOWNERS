@@ -1,0 +1,11 @@
+gcc-libs @reset
+glibc @reset
+libarchive @reset
+libsodium @reset
+nginx @reset
+openssl @reset
+postgresql @reset
+protobuf @reset
+protobuf-rust @reset
+rust @reset
+zeromq @reset
