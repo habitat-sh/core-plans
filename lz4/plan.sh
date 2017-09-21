@@ -1,10 +1,10 @@
 pkg_origin=core
 pkg_name=lz4
-pkg_version=1.7.3
+pkg_version=1.8.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('BSD-2 Clause' 'GPL-2.0')
 pkg_source=https://github.com/${pkg_name}/${pkg_name}/archive/v${pkg_version}.tar.gz
-pkg_shasum=6cc36e8971baf443dd66a334867402601efb55eec5ebde60d5c9021230cef1aa
+pkg_shasum=2ca482ea7a9bb103603108b5a7510b7592b90158c151ff50a28f1ca8389fccf6
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/gcc core/make core/diffutils core/valgrind)
 pkg_bin_dirs=(bin)
