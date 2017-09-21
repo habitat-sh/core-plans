@@ -17,7 +17,7 @@ if [ "$(whoami)" = "root" ]; then
   exec chpst \
     -U hab:hab \
     -u hab:hab \
-    "$(hab pkg path core/node)/bin/node" run-server.js 2>&1
+    "{{pkgPathFor "core/node"}}/bin/node" run-server.js 2>&1
 else
-  exec "$(hab pkg path core/node)/bin/node" run-server.js 2>&1
+  exec "{{pkgPathFor "core/node"}}/bin/node" run-server.js 2>&1
 fi
