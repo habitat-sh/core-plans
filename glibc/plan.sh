@@ -1,6 +1,6 @@
 pkg_name=glibc
 pkg_origin=core
-pkg_version=2.24
+pkg_version=2.26
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0' 'LGPL-2.0')
 pkg_description="$(cat << EOF
@@ -12,7 +12,7 @@ pkg_description="$(cat << EOF
 EOF
 )"
 pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=99d4a3e8efd144d71488e478f62587578c0f4e1fa0b4eed47ee3d4975ebeb5d3
+pkg_shasum=e54e0a934cd2bc94429be79da5e9385898d2306b9eaf3c92d5a77af96190f6bd
 pkg_upstream_url=https://www.gnu.org/software/libc
 pkg_deps=(core/linux-headers)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed core/perl)
