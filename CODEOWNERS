@@ -13,7 +13,7 @@ zeromq @reset @fnichol
 # accepting changes, updating versions, etc.
 
 linux-headers @fnichol
-glibc @fnichol @resset
+glibc @fnichol @reset
 zlib @fnichol
 file @fnichol
 binutils @fnichol
