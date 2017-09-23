@@ -1,11 +1,89 @@
-gcc-libs @reset
-glibc @reset
-libarchive @reset
-libsodium @reset
-nginx @reset
-openssl @reset
-postgresql @reset
-protobuf @reset
-protobuf-rust @reset
-rust @reset
-zeromq @reset
+libarchive @reset @fnichol
+libsodium @reset @fnichol
+nginx @reset @fnichol
+postgresql @reset @fnichol
+protobuf @reset @fnichol
+protobuf-rust @reset @fnichol
+zeromq @reset @fnichol
+
+# # Base Plans
+#
+# These plans are known as "base" plans which are used to build Habitat from
+# nothing and are in build order. Consequently, these need a closer look when
+# accepting changes, updating versions, etc.
+
+linux-headers @fnichol
+glibc @fnichol @resset
+zlib @fnichol
+file @fnichol
+binutils @fnichol
+m4 @fnichol
+gmp @fnichol
+mpfr @fnichol
+libmpc @fnichol
+gcc @fnichol
+gcc-libs @fnichol @reset
+patchelf @fnichol
+bzip2 @fnichol
+pkg-config @fnichol
+ncurses @fnichol
+attr @fnichol
+acl @fnichol
+libcap @fnichol
+sed @fnichol
+shadow @fnichol
+psmisc @fnichol
+procps-ng @fnichol
+coreutils @fnichol
+bison @fnichol
+flex @fnichol
+pcre @fnichol
+grep @fnichol
+readline @fnichol
+bash @fnichol
+bc @fnichol
+tar @fnichol
+gawk @fnichol
+libtool @fnichol
+gdbm @fnichol
+expat @fnichol
+db @fnichol
+inetutils @fnichol
+iana-etc @fnichol
+less @fnichol
+perl @fnichol
+diffutils @fnichol
+autoconf @fnichol
+automake @fnichol
+findutils @fnichol
+xz @fnichol
+gettext @fnichol
+gzip @fnichol
+make @fnichol
+patch @fnichol
+texinfo @fnichol
+util-linux @fnichol
+tcl @fnichol
+expect @fnichol
+dejagnu @fnichol
+check @fnichol
+libidn @fnichol
+cacerts @fnichol
+openssl @fnichol @reset
+wget @fnichol
+unzip @fnichol
+rq @fnichol
+linux-headers-musl @fnichol
+musl @fnichol
+busybox-static @fnichol
+zlib-musl @fnichol
+bzip2-musl @fnichol
+xz-musl @fnichol
+libsodium-musl @fnichol @reset
+openssl-musl @fnichol
+libarchive-musl @fnichol @reset
+rust @fnichol @reset
+vim @fnichol
+libbsd @fnichol
+clens @fnichol
+mg @fnichol
