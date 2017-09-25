@@ -19,7 +19,7 @@ pkg_bin_dirs=(bin)
 
 pkg_version() {
   export LC_ALL=en_US LANG=en_US
-  pip search --disable-pip-version-check awscli | grep "awscli (" | awk -F"[()]" '{print $2}'
+  pip search --disable-pip-version-check awscli | grep '^awscli (' | awk -F'[()]' '{print $2}'
 }
 
 do_before() {
