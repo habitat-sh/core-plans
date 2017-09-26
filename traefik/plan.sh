@@ -74,5 +74,5 @@ do_build() {
 
 do_install() {
   build_line "copying traefik binary"
-  cp "${scaffolding_go_gopath:?}/dist/traefik" "${pkg_prefix}/bin"
+  cp "${scaffolding_go_gopath:?}/src/github.com/containous/traefik/dist/traefik" "${pkg_prefix}/bin"
 }
