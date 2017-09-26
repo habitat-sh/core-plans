@@ -1,3 +1,11 @@
+* @habitat-sh/habitat-core-plans-maintainers
+
+scaffolding-* @habitat-sh/scaffolding-maintainers
+
+# Builder Plans
+#
+# All of these plans are critical for Builder's operation and build
+
 libarchive @reset @fnichol
 libsodium @reset @fnichol
 nginx @reset @fnichol
