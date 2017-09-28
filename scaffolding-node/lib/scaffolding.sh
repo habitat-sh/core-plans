@@ -412,6 +412,7 @@ _add_busybox() {
   debug "Updating pkg_deps=(${pkg_deps[*]}) from Scaffolding detection"
 }
 
+
 _detect_git() {
   if [[ -d ".git" ]]; then
     build_line "Detected '.git' directory, adding git packages as build deps"
@@ -422,6 +423,7 @@ _detect_git() {
 }
 
 _detect_node() {
+
   if [[ -n "$scaffolding_node_pkg" ]]; then
     _node_pkg="$scaffolding_node_pkg"
     build_line "Detected Node.js version in Plan, using '$_node_pkg'"
@@ -429,12 +431,20 @@ _detect_node() {
     local val
     val="$(_json_val package.json .engines.node)"
     if [[ -n "$val" ]]; then
+
       # TODO fin: Add more robust packages.json to Habitat package matching
       case "$val" in
         *)
-          local version_num
-          version_num=$(_extracted_version_number "$val")
-          _node_pkg="core/node/$version_num"
+          nearest_version_string=$(_nearest_version_on_builder "$val")
+
+#          nearest_version=$([[ $nearest_version_string =~ ([0-9]\.[0-9]\.[0-9]) ]] && echo "${BASH_REMATCH[1]}")
+          nearest_version="${nearest_version_string//\"}"
+
+          if [[ $nearest_version =~ (.*No compatible version of node found.*) ]]; then
+              echo "$nearest_version"
+              return 1
+          fi
+          _node_pkg="core/node/$nearest_version"
           ;;
       esac
       build_line "Detected Node.js version '$val' in package.json, using '$_node_pkg'"
@@ -595,3 +605,269 @@ _full_version_digits() {
         echo "$1.0.0"
     fi
 }
+
+remove_single_chars() {
+	[[ $1 =~ ([0-9].*) ]] && echo "${BASH_REMATCH[1]}"
+}
+
+stable_versions_list() {
+	versions_list=$(hab pkg exec core/jq-static jq '.data[].version' < "${1}")
+	versions_str=${versions_list[0]}
+
+	versions_array=()
+
+	versions_array=($versions_str)
+	sorted_versions_array=($(for l in "${versions_array[@]}"; do echo "$l"; done | sort))
+	echo "${sorted_versions_array[@]}"
+}
+
+
+_nearest_version_on_builder() {
+	local original_version_string=$1
+
+	if ! [[ $1 =~ ((v|=|>|>=|<=)?[0-9]) ]]; then
+        echo "incompatible version string"
+        return
+    fi
+
+    local bare_version
+	bare_version=$(remove_single_chars "$1")
+
+    local full_version_number
+	full_version_number=$(_full_version_digits "$bare_version")
+
+    hab pkg exec core/curl curl https://bldr.habitat.sh/v1/depot/channels/core/stable/pkgs/node | hab pkg exec core/jq-static jq . > data.json
+
+	builder_versions_list=$(stable_versions_list data.json)
+
+    rm data.json
+
+	builder_versions_array=($builder_versions_list)
+
+	for i in "${builder_versions_array[@]}"
+	do
+		# necessary to convert this to an integer
+		# in order to compare it to the full version number
+		# with semver
+        local parsed_i
+		parsed_i=$(echo "$i" | hab pkg exec core/bc bc)
+        comparison_result=1
+
+        if [[ $original_version_string =~ (^=?[0-9])  ]]; then
+			if semverEQ "$parsed_i" "$full_version_number"; then
+				comparison_result=0
+            fi
+		elif [[ $original_version_string =~ (^<[0-9]) ]]; then
+			if semverLT "$parsed_i" "$full_version_number"; then
+				comparison_result=0
+            fi
+		elif [[ $original_version_string =~ (^>[0-9]) ]]; then
+			if semverGT "$parsed_i" "$full_version_number"; then
+				comparison_result=0
+            fi
+		elif [[ $original_version_string =~ (^<=[0-9]) ]]; then
+			if semverLE "$parsed_i" "$full_version_number"; then
+				comparison_result=0
+            fi
+		elif [[ $original_version_string =~ (^>=[0-9]) ]]; then
+			if semverGE "$parsed_i" "$full_version_number"; then
+				comparison_result=0
+            fi
+		fi
+		if [ $comparison_result != 1 ];
+		then
+			local contender=$i
+		fi
+	done
+
+	if [ -z "${contender+x}" ];
+	then
+		echo "No compatible version of node found in the core origin on Habitat Builder"
+	else
+		echo "$contender"
+	fi
+}
+
+#Copyright (c) 2013, Ray Bejjani
+#All rights reserved.
+
+#Redistribution and use in source and binary forms, with or without
+#modification, are permitted provided that the following conditions are met:
+
+#1. Redistributions of source code must retain the above copyright notice, this
+#list of conditions and the following disclaimer.
+#2. Redistributions in binary form must reproduce the above copyright notice,
+#this list of conditions and the following disclaimer in the documentation
+#and/or other materials provided with the distribution.
+
+#THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+#ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+#WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+#DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+#ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+#(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+#LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+#ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+#(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+#SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#The views and conclusions contained in the software and documentation are those
+#of the authors and should not be interpreted as representing official policies,
+#either expressed or implied, of the FreeBSD Project.
+
+function semverParseInto() {
+	local RE='[^0-9]*\([0-9]*\)[.]\([0-9]*\)[.]\([0-9]*\)\([0-9A-Za-z-]*\)'
+	#MAJOR
+    # shellcheck disable=SC2001
+	eval "$2"="$(echo "$1" | sed -e "s#$RE#\1#")"
+	#MINOR
+    # shellcheck disable=SC2001
+	eval "$3"="$(echo "$1" | sed -e "s#$RE#\2#")"
+	#MINOR
+    # shellcheck disable=SC2001
+	eval "$4"="$(echo "$1" | sed -e "s#$RE#\3#")"
+	#SPECIAL
+    # shellcheck disable=SC2001
+	eval "$5"="$(echo "$1" | sed -e "s#$RE#\4#")"
+}
+
+function semverEQ() {
+	local MAJOR_A=0
+	local MINOR_A=0
+	local PATCH_A=0
+	local SPECIAL_A=0
+
+	local MAJOR_B=0
+	local MINOR_B=0
+	local PATCH_B=0
+	local SPECIAL_B=0
+
+	semverParseInto "$1" MAJOR_A MINOR_A PATCH_A SPECIAL_A
+	semverParseInto "$2" MAJOR_B MINOR_B PATCH_B SPECIAL_B
+
+	if [ $MAJOR_A -ne $MAJOR_B ]; then
+		return 1
+	fi
+
+	if [ $MINOR_A -ne $MINOR_B ]; then
+		return 1
+	fi
+
+	if [ $PATCH_A -ne $PATCH_B ]; then
+		return 1
+	fi
+
+	if [[ "_$SPECIAL_A" != "_$SPECIAL_B" ]]; then
+		return 1
+	fi
+
+
+	return 0
+
+}
+
+function semverLT() {
+	local MAJOR_A=0
+	local MINOR_A=0
+	local PATCH_A=0
+	local SPECIAL_A=0
+
+	local MAJOR_B=0
+	local MINOR_B=0
+	local PATCH_B=0
+	local SPECIAL_B=0
+
+	semverParseInto "$1" MAJOR_A MINOR_A PATCH_A SPECIAL_A
+	semverParseInto "$2" MAJOR_B MINOR_B PATCH_B SPECIAL_B
+
+	if [ $MAJOR_A -lt $MAJOR_B ]; then
+		return 0
+	fi
+
+	if [[ $MAJOR_A -le $MAJOR_B  && $MINOR_A -lt $MINOR_B ]]; then
+		return 0
+	fi
+
+	if [[ $MAJOR_A -le $MAJOR_B  && $MINOR_A -le $MINOR_B && $PATCH_A -lt $PATCH_B ]]; then
+		return 0
+	fi
+
+	if [[ "_$SPECIAL_A"  == "_" ]] && [[ "_$SPECIAL_B"  == "_" ]] ; then
+		return 1
+	fi
+	if [[ "_$SPECIAL_A"  == "_" ]] && [[ "_$SPECIAL_B"  != "_" ]] ; then
+		return 1
+	fi
+	if [[ "_$SPECIAL_A"  != "_" ]] && [[ "_$SPECIAL_B"  == "_" ]] ; then
+		return 0
+	fi
+
+	if [[ "_$SPECIAL_A" < "_$SPECIAL_B" ]]; then
+		return 0
+	fi
+
+	return 1
+
+}
+
+function semverGT() {
+	semverEQ "$1" "$2"
+	local EQ=$?
+
+	semverLT "$1" "$2"
+	local LT=$?
+
+	if [ $EQ -ne 0 ] && [ $LT -ne 0 ]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+#https://github.com/cloudflare/semver_bash/pull/10/files
+
+function semverGE() {
+	semverLT "$1" "$2"
+	local LT=$?
+
+	if [ $LT -ne 0 ]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+function semverLE() {
+	semverGT "$1" "$2"
+	local GT=$?
+
+	if [ $GT -ne 0 ]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+if [ "___semver.sh" == "___$(basename "$0")" ]; then
+
+	MAJOR=0
+	MINOR=0
+	PATCH=0
+	SPECIAL=""
+
+	semverParseInto "$1" MAJOR MINOR PATCH SPECIAL
+	echo "$1 -> M: $MAJOR m:$MINOR p:$PATCH s:$SPECIAL"
+
+	semverParseInto "$2" MAJOR MINOR PATCH SPECIAL
+	echo "$2 -> M: $MAJOR m:$MINOR p:$PATCH s:$SPECIAL"
+
+	semverEQ "$1" "$2"
+	echo "$1 == $2 -> $?."
+
+	semverLT "$1" "$2"
+	echo "$1 < $2 -> $?."
+
+	semverGT "$1" "$2"
+	echo "$1 > $2 -> $?."
+
+fi
