@@ -73,6 +73,7 @@ scaffolding_go_before() {
   if [[ ! $pkg_source ]]; then
     local tmp_src
     tmp_src="${HAB_CACHE_SRC_PATH}/${pkg_name}_src"
+    rm -rf "${scaffolding_go_workspace_src}"
     mkdir -p "${tmp_src}/${scaffolding_go_base_path}"
     cp -r "${scaffolding_go_gopath}" "${tmp_src}/${scaffolding_go_base_path}/${pkg_name}"
     mv "${tmp_src}" "${scaffolding_go_workspace_src}"
