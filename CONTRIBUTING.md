@@ -2,7 +2,7 @@
 
 # When to add a plan to core plans
 
-[Habitat Plans](https://www.habitat.sh/docs/concepts-plans/) are packages in the Habitat Core Origin. They are maintained and built by the core maintainers to provide the fundamental base tier of packages used by the [Habitat](https://www.habitat.sh/) ecosystem.
+[Habitat Plans](https://www.habitat.sh/docs/glossary/#glossary-packages) are packages in the Habitat Core Origin. They are maintained and built by the core maintainers to provide the fundamental base tier of packages used by the [Habitat](https://www.habitat.sh/) ecosystem.
 
 Participation in the Habitat community is governed by the [code of conduct](https://github.com/habitat-sh/habitat/blob/master/CODE_OF_CONDUCT.md).
 
@@ -41,7 +41,7 @@ Each package plan in this repository *must* contain a value adhering to the guid
 ## Package Name Conventions
 
 Each package is identified by a unique string containing four sub-strings separated
-by a forward slash (`/`) called a [PackageIdent](https://www.habitat.sh/docs/concepts-packages/).
+by a forward slash (`/`) called a [PackageIdent](https://www.habitat.sh/docs/glossary/#glossary-packages).
 
     `origin`/`name`/`version`/`release`
 
@@ -71,13 +71,13 @@ Issues with an associated gist containing a working fork of our current plan whi
 
 ## Plan syntax
 
-You can review the entire [plan syntax guide here](https://www.habitat.sh/docs/reference/plan-syntax/).
+You can review the entire [plan syntax guide here](https://www.habitat.sh/docs/developing-packages/).
 
 Please note that the following conditions must be observed for any plan to be merged into core plans (and are important best practices for any plan):
 
 ### Plan basic settings
 
-You can read more about [basic plan settings](https://www.habitat.sh/docs/reference/basic-settings/) here. The minimum requirements for a core plan are:
+You can read more about [basic plan settings](https://www.habitat.sh/docs/developing-packages/#write-plans) here. The minimum requirements for a core plan are:
 
 - pkg_name is set
 - pkg_origin is set
@@ -86,7 +86,7 @@ You can read more about [basic plan settings](https://www.habitat.sh/docs/refere
 
 ### Callbacks
 
-You can read more about [callbacks](https://www.habitat.sh/docs/reference/callbacks/) here. The minimum requirement for a core plan are:
+You can read more about [callbacks](https://www.habitat.sh/docs/reference/#reference-callbacks) here. The minimum requirement for a core plan are:
 
 #### Do's
 
@@ -97,16 +97,16 @@ You can read more about [callbacks](https://www.habitat.sh/docs/reference/callba
 - You should never call `exit` within a build phase. You should instead return an exit code such as `return 1` for failure, and `return 0` for success.  
 - If you clone a repo from git, you must override `do_verify()` to `return 0`.
 - Never use `pkg_source` unless you are downloading something as a third party.  
-- You should never shell out to `hab` from within a callback. If you think you want to, you should use a [utility function](https://www.habitat.sh/docs/reference/utility-functions/) instead.
+- You should never shell out to `hab` from within a callback. If you think you want to, you should use a [utility function](https://www.habitat.sh/docs/reference/#utility-functions) instead.
 - You should not call any function or helper that begin with an underscore, for example `_dont_call_this_function()`. Those are internal only functions that are not supported for external use and will break your plan if you call them.
 - Don't run any code or run anything outside of a build phase or bash function.
 
 ### Hooks
 
-The supervisor dynamically invokes hooks at run-time, triggered by an application lifecycle event. You can read more about [hooks](https://www.habitat.sh/docs/reference/hooks/) here.
+The supervisor dynamically invokes hooks at run-time, triggered by an application lifecycle event. You can read more about [hooks](https://www.habitat.sh/docs/reference/#reference-hooks) here.
 
 - You cannot block the thread in a hook unless it is in the `run` hook. Never call `hab` or `sleep` in a hook that is not the `run` hook.
-- You should never shell out to `hab` from within a hook. If you think you want to, you should use a [runtime configuration setting](https://www.habitat.sh/docs/reference/runtime-settings/) instead. If none of those will solve your problem, open an issue and tell the core team why.
+- You should never shell out to `hab` from within a hook. If you think you want to, you should use a [runtime configuration setting](https://www.habitat.sh/docs/reference/#template-data) instead. If none of those will solve your problem, open an issue and tell the core team why.
 - Run hooks should:
   - Redirect `stderr` to `stdout` (e.g. with `exec 2>&1` at the start of the hook)
   - Call the command to execute with `exec <command> <options>` rather than running the command directly. This ensures the command is executed in the same process and that the service will restart correctly on configuration changes.
