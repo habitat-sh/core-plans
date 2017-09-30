@@ -432,7 +432,9 @@ _detect_node() {
       # TODO fin: Add more robust packages.json to Habitat package matching
       case "$val" in
         *)
-          _node_pkg="core/node/$val"
+          local version_num
+          version_num=$(_extracted_version_number "$val")
+          _node_pkg="core/node/$version_num"
           ;;
       esac
       build_line "Detected Node.js version '$val' in package.json, using '$_node_pkg'"
@@ -576,4 +578,20 @@ _tar_pipe_app_cp_to() {
   | "$tar" -x \
       -C "$dst_path" \
       -f -
+}
+
+_extracted_version_number() {
+	local result
+    result=$([[ $1 =~ ([0-9].*) ]] && echo "${BASH_REMATCH[1]}")
+    _full_version_digits "$result"
+}
+
+_full_version_digits() {
+    if [[ $1 =~ ([0-9]\.[0-9]\.[0-9]$) ]]; then
+        echo "$1"
+    elif [[ $1 =~ ([0-9]\.[0-9]$) ]]; then
+        echo "$1.0"
+    else
+        echo "$1.0.0"
+    fi
 }
