@@ -7,7 +7,6 @@ pkg_description="Habitat Plan Scaffolding for Node.js Applications"
 pkg_upstream_url="https://github.com/habitat-sh/core-plans/tree/master/scaffolding-node"
 pkg_deps=(core/tar core/rq core/jq-static core/gawk core/curl core/bc)
 pkg_build_deps=(core/node core/coreutils)
-pkg_bin_dirs=(bin)
 
 do_build() {
   return 0
