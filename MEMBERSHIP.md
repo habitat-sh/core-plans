@@ -19,7 +19,7 @@ help maintain the set of core plans.
 
 ## Contributor
 
-We welcome anyone to contribute Pull Requests to plans, write new plans, and review Pull Requests. 
+We welcome anyone to contribute Pull Requests to plans, write new plans, and review Pull Requests.
 
 ## Owner
 

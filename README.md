@@ -14,13 +14,13 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for information about how to contribute t
 
 The code for the core components of Habitat itself is in the [habitat-sh/habitat](https://github.com/habitat-sh/habitat/) GitHub repository.
 
-See [MAINTAINERS.md](MAINTAINERS.md) for a list of core plans maintainers. 
+See [MAINTAINERS.md](MAINTAINERS.md) for a list of core plans maintainers.
 
 ## Documentation
 
 Get started with the [Habitat tutorials](https://www.habitat.sh/tutorials/) or plunge into the [complete documentation](https://www.habitat.sh/docs/).
 
-## Community and support 
+## Community and support
 
 * [Habitat Slack](https://slack.habitat.sh)
 * [Forums]()
