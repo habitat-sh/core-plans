@@ -633,7 +633,7 @@ _nearest_version_on_builder() {
     local full_version_number
 	full_version_number=$(_full_version_digits "$bare_version")
 
-    $(pkg_path_for core/curl)/bin/curl https://bldr.habitat.sh/v1/depot/channels/core/stable/pkgs/node | $_jq . > data.json
+    "$(pkg_path_for core/curl)"/bin/curl https://bldr.habitat.sh/v1/depot/channels/core/stable/pkgs/node | $_jq . > data.json
 
 	builder_versions_list=$(stable_versions_list data.json)
 
@@ -647,7 +647,7 @@ _nearest_version_on_builder() {
 		# in order to compare it to the full version number
 		# with semver
         local parsed_i
-		parsed_i=$(echo "$i" | $(pkg_path_for core/bc)/bin/bc)
+		parsed_i=$(echo "$i" | "$(pkg_path_for core/bc)"/bin/bc)
         comparison_result=1
 
         if [[ $original_version_string =~ (^=?[0-9])  ]]; then
