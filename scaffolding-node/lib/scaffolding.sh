@@ -439,7 +439,7 @@ _detect_node() {
           nearest_version="${nearest_version_string//\"}"
 
           if [[ $nearest_version =~ (.*No compatible version of node found.*) ]]; then
-              exit_with "$nearest_version"
+              exit_with "$nearest_version" 1
           fi
           _node_pkg="core/node/$nearest_version"
           ;;
