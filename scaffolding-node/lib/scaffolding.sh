@@ -436,13 +436,10 @@ _detect_node() {
       case "$val" in
         *)
           nearest_version_string=$(_nearest_version_on_builder "$val")
-
-#          nearest_version=$([[ $nearest_version_string =~ ([0-9]\.[0-9]\.[0-9]) ]] && echo "${BASH_REMATCH[1]}")
           nearest_version="${nearest_version_string//\"}"
 
           if [[ $nearest_version =~ (.*No compatible version of node found.*) ]]; then
-              echo "$nearest_version"
-              return 1
+              exit_with "$nearest_version"
           fi
           _node_pkg="core/node/$nearest_version"
           ;;
@@ -611,7 +608,7 @@ remove_single_chars() {
 }
 
 stable_versions_list() {
-	versions_list=$(hab pkg exec core/jq-static jq '.data[].version' < "${1}")
+	versions_list=$($_jq '.data[].version' < "${1}")
 	versions_str=${versions_list[0]}
 
 	versions_array=()
@@ -636,11 +633,11 @@ _nearest_version_on_builder() {
     local full_version_number
 	full_version_number=$(_full_version_digits "$bare_version")
 
-    hab pkg exec core/curl curl https://bldr.habitat.sh/v1/depot/channels/core/stable/pkgs/node | hab pkg exec core/jq-static jq . > data.json
+    $(pkg_path_for core/curl)/bin/curl https://bldr.habitat.sh/v1/depot/channels/core/stable/pkgs/node | $_jq . > data.json
 
 	builder_versions_list=$(stable_versions_list data.json)
 
-    rm data.json
+    rm -f data.json
 
 	builder_versions_array=($builder_versions_list)
 
@@ -650,7 +647,7 @@ _nearest_version_on_builder() {
 		# in order to compare it to the full version number
 		# with semver
         local parsed_i
-		parsed_i=$(echo "$i" | hab pkg exec core/bc bc)
+		parsed_i=$(echo "$i" | $(pkg_path_for core/bc)/bin/bc)
         comparison_result=1
 
         if [[ $original_version_string =~ (^=?[0-9])  ]]; then
@@ -688,6 +685,7 @@ _nearest_version_on_builder() {
 	fi
 }
 
+# Source: https://github.com/cloudflare/semver_bash
 #Copyright (c) 2013, Ray Bejjani
 #All rights reserved.
 
