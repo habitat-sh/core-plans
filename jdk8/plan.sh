@@ -11,7 +11,7 @@ pkg_upstream_url=http://www.oracle.com/technetwork/java/javase/overview/index.ht
 pkg_deps=(core/glibc core/gcc-libs)
 pkg_build_deps=(core/patchelf core/file)
 pkg_bin_dirs=(bin jre/bin)
-pkg_lib_dirs=(lib)
+pkg_lib_dirs=(lib lib/amd64)
 pkg_include_dirs=(include)
 
 source_dir=$HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_version}
