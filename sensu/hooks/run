@@ -4,7 +4,7 @@ exec 2>&1
 
 export GEM_HOME="{{pkg.path}}/vendor/bundle/ruby/2.3.0"
 export GEM_PATH="{{pkgPathFor "core/ruby"}}/lib/ruby/gems/2.3.0:{{pkgPathFor "core/bundler"}}:$GEM_HOME"
-export LD_LIBRARY_PATH="{{pkgPathFor "core/gcc-libs"}}/lib:{{pkgPathFor "core/libffi"}}/lib"
+export LD_LIBRARY_PATH="{{pkgPathFor "core/gcc-libs"}}/lib:{{pkgPathFor "core/libffi"}}/lib:{{pkgPathFor "core/openssl"}}/lib"
 export CONFIG_DIR="{{pkg.svc_config_path}}"
 
 if [ "{{cfg.mode}}" == "client" ]
