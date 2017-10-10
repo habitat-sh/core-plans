@@ -2,6 +2,8 @@
 
 exec 2>&1
 
+set -e
+
 if [ ! -d {{pkg.svc_data_path}}/mysql ]; then
   mysqld --defaults-file={{pkg.svc_path}}/config/my.cnf \
          --explicit-defaults-for-timestamp \
