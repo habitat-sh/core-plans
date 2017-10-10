@@ -20,7 +20,8 @@ do_build() {
 }
 
 do_check() {
-  return 0 # makes no sense here…
+  attach
+  $(pkg_path_for core/php)/bin/php "../${pkg_filename}" --version 2>&1 | grep -q ${pkg_version}
 }
 
 do_install() {
@@ -31,8 +32,4 @@ do_install() {
 $(pkg_path_for core/php)/bin/php "$pkg_prefix/bin/$pkg_filename" "\$@"
 EOF
   chmod +x "$pkg_prefix/bin/composer"
-
-  # here's our custom do_check()
-  set -eo pipefail
-  "$pkg_prefix/bin/composer" --version 2>/dev/null | grep -q $pkg_version
 }
