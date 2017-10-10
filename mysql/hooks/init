@@ -2,7 +2,7 @@
 
 exec 2>&1
 
-set -eo pipefail
+set -e
 
 if [ ! -d {{pkg.svc_data_path}}/mysql ]; then
   mysqld --defaults-file={{pkg.svc_path}}/config/my.cnf \
@@ -10,5 +10,5 @@ if [ ! -d {{pkg.svc_data_path}}/mysql ]; then
          --datadir={{pkg.svc_data_path}} \
          --init-file={{pkg.svc_config_path}}/init.sql \
          --initialize \
-         --user=hab
+         --user={{pkg.svc_user}}
 fi
