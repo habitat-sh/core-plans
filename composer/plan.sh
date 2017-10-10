@@ -20,15 +20,15 @@ do_build() {
 }
 
 do_check() {
-  $(pkg_path_for core/php)/bin/php "../${pkg_filename}" --version 2>&1 | grep -q ${pkg_version}
+  "$(pkg_path_for core/php)"/bin/php "../${pkg_filename}" --version 2>&1 | grep -q ${pkg_version}
 }
 
 do_install() {
-  install -vDm755 "../$pkg_filename" "$pkg_prefix/bin/$pkg_filename"
+  install -vDm755 "../${pkg_filename}" "${pkg_prefix}/bin/${pkg_filename}"
 
-  cat<<EOF > "$pkg_prefix/bin/composer"
+  cat<<EOF > "${pkg_prefix}/bin/composer"
 #!/bin/sh
-$(pkg_path_for core/php)/bin/php "$pkg_prefix/bin/$pkg_filename" "\$@"
+"$(pkg_path_for core/php)"/bin/php "${pkg_prefix}/bin/${pkg_filename}" "\$@"
 EOF
-  chmod +x "$pkg_prefix/bin/composer"
+  chmod +x "${pkg_prefix}/bin/composer"
 }
