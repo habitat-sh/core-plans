@@ -20,7 +20,6 @@ do_build() {
 }
 
 do_check() {
-  attach
   $(pkg_path_for core/php)/bin/php "../${pkg_filename}" --version 2>&1 | grep -q ${pkg_version}
 }
 
