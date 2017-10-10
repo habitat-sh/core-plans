@@ -1,10 +1,10 @@
 pkg_name=R
 pkg_origin=core
-pkg_version="3.4.0"
+pkg_version="3.4.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0+')
 pkg_source="https://cran.r-project.org/src/base/R-3/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="288e9ed42457c47720780433b3d5c3c20983048b789291cc6a7baa11f9428b91"
+pkg_shasum="971e30c2436cf645f58552905105d75788bd9733bddbcb7c4fbff4c1a6d80c64"
 pkg_upstream_url="https://www.r-project.org"
 pkg_description="R is a free software environment for statistical computing and graphics."
 pkg_build_deps=(
