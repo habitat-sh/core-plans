@@ -579,6 +579,7 @@ _tar_pipe_app_cp_to() {
       --exclude-backups \
       --exclude-vcs \
       --exclude='habitat' \
+      --exclude='results' \
       --exclude='node_modules' \
       --files-from=- \
       -f - \
