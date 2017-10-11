@@ -2,8 +2,8 @@
 {
   {{#if bind.rabbitmq ~}}
   "rabbitmq": {
-    "host": "{{bind.rabbitmq.members.[0].sys.ip}}",
-    "port": {{bind.rabbitmq.members.[0].cfg.port}},
+    "host": "{{bind.rabbitmq.first.sys.ip}}",
+    "port": {{bind.rabbitmq.first.cfg.port}},
     "user": "{{cfg.rabbitmq.user}}",
     "password": "{{cfg.rabbitmq.password}}",
     "vhost": "{{cfg.rabbitmq.vhost}}"
