@@ -14,10 +14,10 @@ do_build() {
 }
 
 do_install() {
-  install -v -D $HAB_CACHE_SRC_PATH/acbuild $pkg_prefix/bin/acbuild
+  install -v -D "${HAB_CACHE_SRC_PATH}/acbuild" "${pkg_prefix}/bin/acbuild"
 
   patchelf \
       --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" \
-      --set-rpath "$LD_RUN_PATH" \
-      "$pkg_prefix/bin/acbuild"
+      --set-rpath "${LD_RUN_PATH}" \
+      "${pkg_prefix}/bin/acbuild"
 }

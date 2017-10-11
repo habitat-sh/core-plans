@@ -7,21 +7,21 @@ echo "Preparing ARTIFACTORY_HOME..."
 # Move directories that ship in the package into place
 for dir in bin etc tomcat webapps
 do
-  cp -R {{pkg.path}}/$dir {{pkg.svc_var_path}}/
+  cp -R "{{pkg.path}}/${dir}" "{{pkg.svc_var_path}}/"
 done
 
 # Create required ephemeral directories
 for dir in backup data logs
 do
-  mkdir -p {{pkg.svc_var_path}}/$dir
+  mkdir -p "{{pkg.svc_var_path}}/${dir}"
 done
 
 # Set license data
-echo {{cfg.license}} > {{pkg.svc_var_path}}/etc/artifactory.lic
+echo {{cfg.license}} > "{{pkg.svc_var_path}}/etc/artifactory.lic"
 
 # Symlink config files into $ARTIFACTORY_HOME/etc
 for config in storage.properties
 do
-  echo "Linking $config"
-  ln -sf {{pkg.svc_config_path}}/$config {{pkg.svc_var_path}}/etc/$config
+  echo "Linking ${config}"
+  ln -sf "{{pkg.svc_config_path}}/${config}" "{{pkg.svc_var_path}}/etc/${config}"
 done

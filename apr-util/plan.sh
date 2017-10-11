@@ -9,6 +9,6 @@ pkg_build_deps=(core/gcc core/make)
 pkg_bin_dirs=(bin)
 
 do_build() {
-	./configure --prefix=${pkg_prefix} --with-apr=$(pkg_path_for core/apr)
-	make
+  ./configure --prefix="${pkg_prefix}" --with-apr="$(pkg_path_for core/apr)"
+  make
 }

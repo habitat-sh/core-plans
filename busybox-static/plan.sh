@@ -9,9 +9,9 @@ pkg_build_deps=(core/linux-headers-musl core/musl "${pkg_build_deps[@]}")
 
 do_prepare() {
   CFLAGS="-I$(pkg_path_for linux-headers-musl)/include -I$(pkg_path_for musl)/include"
-  build_line "Overriding CFLAGS=$CFLAGS"
+  build_line "Overriding CFLAGS=${CFLAGS}"
 
-  PLAN_CONTEXT=$PLAN_CONTEXT/../busybox create_config
+  PLAN_CONTEXT=${PLAN_CONTEXT}/../busybox create_config
   sed \
     -e '/CONFIG_STATIC/ s,^.*$,CONFIG_STATIC=y,' \
     -e '/CONFIG_FEATURE_UTMP/ s,^.*$,CONFIG_FEATURE_UTMP=n,' \
@@ -23,5 +23,5 @@ do_prepare() {
 }
 
 do_build() {
-  make -j$(nproc) CC=musl-gcc
+  make -j"$(nproc)" CC=musl-gcc
 }
