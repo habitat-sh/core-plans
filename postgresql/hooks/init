@@ -23,11 +23,11 @@ if [[ ! -f "{{pkg.svc_data_path}}/PG_VERSION" ]]; then
     --locale POSIX \
     --data-checksums
 fi
-{{~/unless}}
+{{/unless ~}}
 {{#if svc.me.follower ~}}
 setup_replication_user_in_master
 if [ $? != 0 ]; then
   echo 'Waiting for leader to become available before initializing'
   exit 1
 fi
-{{~/if}}
+{{/if ~}}
