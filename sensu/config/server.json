@@ -1,5 +1,5 @@
 {
-  {{#if bind.has_rabbitmq ~}}
+  {{#if bind.rabbitmq ~}}
   "rabbitmq": {
     "host": "{{bind.rabbitmq.members.[0].sys.ip}}",
     "port": {{bind.rabbitmq.members.[0].cfg.port}},
@@ -16,10 +16,10 @@
     "vhost": "{{cfg.rabbitmq.vhost}}"
   },
   {{/if ~}}
-  {{#if bind.has_redis ~}}
+  {{#if bind.redis ~}}
   "redis": {
     "host": "{{bind.redis.members.[0].sys.ip}}",
-    "port": {{bind.redis.members.[0].cfg.port}},
+    "port": {{bind.redis.members.[0].cfg.port}}
   },
   {{else ~}}
   "redis": {
