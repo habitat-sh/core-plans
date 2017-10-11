@@ -1,778 +1,778 @@
 [7zip]
-plan_path = ["7zip"]
+plan_path = "7zip"
 [acbuild]
-plan_path = ["acbuild"]
+plan_path = "acbuild"
 [acl]
-plan_path = ["acl"]
+plan_path = "acl"
 [ant]
-plan_path = ["ant"]
+plan_path = "ant"
 [apr]
-plan_path = ["apr"]
+plan_path = "apr"
 [apr-util]
-plan_path = ["apr-util"]
+plan_path = "apr-util"
 [artifactory-pro]
-plan_path = ["artifactory-pro"]
+plan_path = "artifactory-pro"
 [aspcud]
-plan_path = ["aspcud"]
+plan_path = "aspcud"
 [attr]
-plan_path = ["attr"]
+plan_path = "attr"
 [autoconf]
-plan_path = ["autoconf"]
+plan_path = "autoconf"
 [autogen]
-plan_path = ["autogen"]
+plan_path = "autogen"
 [automake]
-plan_path = ["automake"]
+plan_path = "automake"
 [aws-cli]
-plan_path = ["aws-cli"]
+plan_path = "aws-cli"
 [bash]
-plan_path = ["bash"]
+plan_path = "bash"
 [bash-completion]
-plan_path = ["bash-completion"]
+plan_path = "bash-completion"
 [bash-static]
-plan_path = ["bash-static"]
+plan_path = "bash-static"
 [bats]
-plan_path = ["bats"]
+plan_path = "bats"
 [bc]
-plan_path = ["bc"]
+plan_path = "bc"
 [bdwgc]
-plan_path = ["bdwgc"]
+plan_path = "bdwgc"
 [binutils]
-plan_path = ["binutils"]
+plan_path = "binutils"
 [bison]
-plan_path = ["bison"]
+plan_path = "bison"
 [bison2]
-plan_path = ["bison2"]
+plan_path = "bison2"
 [boost]
-plan_path = ["boost"]
+plan_path = "boost"
 [bundler]
-plan_path = ["bundler"]
+plan_path = "bundler"
 [busybox]
-plan_path = ["busybox"]
+plan_path = "busybox"
 [busybox-static]
-plan_path = ["busybox-static"]
+plan_path = "busybox-static"
 [bzip2]
-plan_path = ["bzip2"]
+plan_path = "bzip2"
 [bzip2-musl]
-plan_path = ["bzip2-musl"]
+plan_path = "bzip2-musl"
 [cacerts]
-plan_path = ["cacerts"]
+plan_path = "cacerts"
 [caddy]
-plan_path = ["caddy"]
+plan_path = "caddy"
 [cairo]
-plan_path = ["cairo"]
+plan_path = "cairo"
 [camlp4]
-plan_path = ["camlp4"]
+plan_path = "camlp4"
 [cargo-nightly]
-plan_path = ["cargo-nightly"]
+plan_path = "cargo-nightly"
 [ccache]
-plan_path = ["ccache"]
+plan_path = "ccache"
 [check]
-plan_path = ["check"]
+plan_path = "check"
 [clens]
-plan_path = ["clens"]
+plan_path = "clens"
 [clingo]
-plan_path = ["clingo"]
+plan_path = "clingo"
 [cmake]
-plan_path = ["cmake"]
+plan_path = "cmake"
 [composer]
-plan_path = ["composer"]
+plan_path = "composer"
 [consul]
-plan_path = ["consul"]
+plan_path = "consul"
 [coreutils]
-plan_path = ["coreutils"]
+plan_path = "coreutils"
 [coreutils-static]
-plan_path = ["coreutils-static"]
+plan_path = "coreutils-static"
 [cpanminus]
-plan_path = ["cpanminus"]
+plan_path = "cpanminus"
 [cpio]
-plan_path = ["cpio"]
+plan_path = "cpio"
 [cppunit]
-plan_path = ["cppunit"]
+plan_path = "cppunit"
 [curator]
-plan_path = ["curator"]
+plan_path = "curator"
 [curl]
-plan_path = ["curl"]
+plan_path = "curl"
 [curl-static-musl]
-plan_path = ["curl-static-musl"]
+plan_path = "curl-static-musl"
 [cyrus-sasl]
-plan_path = ["cyrus-sasl"]
+plan_path = "cyrus-sasl"
 [db]
-plan_path = ["db"]
+plan_path = "db"
 [dbus]
-plan_path = ["dbus"]
+plan_path = "dbus"
 [dd-agent]
-plan_path = ["dd-agent"]
+plan_path = "dd-agent"
 [dejagnu]
-plan_path = ["dejagnu"]
+plan_path = "dejagnu"
 [dep]
-plan_path = ["dep"]
+plan_path = "dep"
 [devicemapper]
-plan_path = ["devicemapper"]
+plan_path = "devicemapper"
 [dex]
-plan_path = ["dex"]
+plan_path = "dex"
 [diffutils]
-plan_path = ["diffutils"]
+plan_path = "diffutils"
 [docker]
-plan_path = ["docker"]
+plan_path = "docker"
 [docutils]
-plan_path = ["docutils"]
+plan_path = "docutils"
 [dosfstools]
-plan_path = ["dosfstools"]
+plan_path = "dosfstools"
 [dotnet-core]
-plan_path = ["dotnet-core"]
+plan_path = "dotnet-core"
 [dotnet-core-lts]
-plan_path = ["dotnet-core-lts"]
+plan_path = "dotnet-core-lts"
 [dotnet-core-sdk]
-plan_path = ["dotnet-core-sdk"]
+plan_path = "dotnet-core-sdk"
 [dotnet-core-sdk-lts]
-plan_path = ["dotnet-core-sdk-lts"]
+plan_path = "dotnet-core-sdk-lts"
 [doxygen]
-plan_path = ["doxygen"]
+plan_path = "doxygen"
 [dpkg]
-plan_path = ["dpkg"]
+plan_path = "dpkg"
 [drupal]
-plan_path = ["drupal"]
+plan_path = "drupal"
 [drush]
-plan_path = ["drush"]
+plan_path = "drush"
 [e2fsprogs]
-plan_path = ["e2fsprogs"]
+plan_path = "e2fsprogs"
 [ed]
-plan_path = ["ed"]
+plan_path = "ed"
 [elasticsearch]
-plan_path = ["elasticsearch"]
+plan_path = "elasticsearch"
 [elfutils]
-plan_path = ["elfutils"]
+plan_path = "elfutils"
 [elixir]
-plan_path = ["elixir"]
+plan_path = "elixir"
 [envdir]
-plan_path = ["envdir"]
+plan_path = "envdir"
 [erlang]
-plan_path = ["erlang"]
+plan_path = "erlang"
 [erlang16]
-plan_path = ["erlang16"]
+plan_path = "erlang16"
 [erlang18]
-plan_path = ["erlang18"]
+plan_path = "erlang18"
 [erlang19]
-plan_path = ["erlang19"]
+plan_path = "erlang19"
 [etcd]
-plan_path = ["etcd"]
+plan_path = "etcd"
 [eudev]
-plan_path = ["eudev"]
+plan_path = "eudev"
 [expat]
-plan_path = ["expat"]
+plan_path = "expat"
 [expect]
-plan_path = ["expect"]
+plan_path = "expect"
 [ffmpeg]
-plan_path = ["ffmpeg"]
+plan_path = "ffmpeg"
 [file]
-plan_path = ["file"]
+plan_path = "file"
 [findutils]
-plan_path = ["findutils"]
+plan_path = "findutils"
 [fish]
-plan_path = ["fish"]
+plan_path = "fish"
 [flatbuffers]
-plan_path = ["flatbuffers"]
+plan_path = "flatbuffers"
 [flex]
-plan_path = ["flex"]
+plan_path = "flex"
 [fontconfig]
-plan_path = ["fontconfig"]
+plan_path = "fontconfig"
 [foulkon]
-plan_path = ["foulkon"]
+plan_path = "foulkon"
 [freetype]
-plan_path = ["freetype"]
+plan_path = "freetype"
 [galera]
-plan_path = ["galera"]
+plan_path = "galera"
 [gawk]
-plan_path = ["gawk"]
+plan_path = "gawk"
 [gcc]
-plan_path = ["gcc"]
+plan_path = "gcc"
 [gcc-libs]
-plan_path = ["gcc-libs"]
+plan_path = "gcc-libs"
 [gdb]
-plan_path = ["gdb"]
+plan_path = "gdb"
 [gdbm]
-plan_path = ["gdbm"]
+plan_path = "gdbm"
 [gecode]
-plan_path = ["gecode"]
+plan_path = "gecode"
 [geoip]
-plan_path = ["geoip"]
+plan_path = "geoip"
 [gettext]
-plan_path = ["gettext"]
+plan_path = "gettext"
 [giflib]
-plan_path = ["giflib"]
+plan_path = "giflib"
 [gifsicle]
-plan_path = ["gifsicle"]
+plan_path = "gifsicle"
 [git]
-plan_path = ["git"]
+plan_path = "git"
 [github_changelog_generator]
-plan_path = ["github_changelog_generator"]
+plan_path = "github_changelog_generator"
 [glib]
-plan_path = ["glib"]
+plan_path = "glib"
 [glibc]
-plan_path = ["glibc"]
+plan_path = "glibc"
 [gmp]
-plan_path = ["gmp"]
+plan_path = "gmp"
 [gnatsd]
-plan_path = ["gnatsd"]
+plan_path = "gnatsd"
 [gnupg]
-plan_path = ["gnupg"]
+plan_path = "gnupg"
 [gnupg-static]
-plan_path = ["gnupg-static"]
+plan_path = "gnupg-static"
 [go]
-plan_path = ["go"]
+plan_path = "go"
 [go14]
-plan_path = ["go14"]
+plan_path = "go14"
 [go17]
-plan_path = ["go17"]
+plan_path = "go17"
 [gox]
-plan_path = ["gox"]
+plan_path = "gox"
 [gperf]
-plan_path = ["gperf"]
+plan_path = "gperf"
 [gpgme]
-plan_path = ["gpgme"]
+plan_path = "gpgme"
 [gradle]
-plan_path = ["gradle"]
+plan_path = "gradle"
 [grafana]
-plan_path = ["grafana"]
+plan_path = "grafana"
 [graphviz]
-plan_path = ["graphviz"]
+plan_path = "graphviz"
 [grep]
-plan_path = ["grep"]
+plan_path = "grep"
 [groff]
-plan_path = ["groff"]
+plan_path = "groff"
 [grub]
-plan_path = ["grub"]
+plan_path = "grub"
 [gsl]
-plan_path = ["gsl"]
+plan_path = "gsl"
 [guile]
-plan_path = ["guile"]
+plan_path = "guile"
 [gzip]
-plan_path = ["gzip"]
+plan_path = "gzip"
 [handlebars-cmd]
-plan_path = ["handlebars-cmd"]
+plan_path = "handlebars-cmd"
 [haproxy]
-plan_path = ["haproxy"]
+plan_path = "haproxy"
 [harfbuzz]
-plan_path = ["harfbuzz"]
+plan_path = "harfbuzz"
 [htop]
-plan_path = ["htop"]
+plan_path = "htop"
 [httpd]
-plan_path = ["httpd"]
+plan_path = "httpd"
 [iana-etc]
-plan_path = ["iana-etc"]
+plan_path = "iana-etc"
 [icu]
-plan_path = ["icu"]
+plan_path = "icu"
 [icu52]
-plan_path = ["icu52"]
+plan_path = "icu52"
 [icu56]
-plan_path = ["icu56"]
+plan_path = "icu56"
 [imagemagick]
-plan_path = ["imagemagick"]
+plan_path = "imagemagick"
 [inetutils]
-plan_path = ["inetutils"]
+plan_path = "inetutils"
 [intltool]
-plan_path = ["intltool"]
+plan_path = "intltool"
 [iproute2]
-plan_path = ["iproute2"]
+plan_path = "iproute2"
 [iptables]
-plan_path = ["iptables"]
+plan_path = "iptables"
 [jbigkit]
-plan_path = ["jbigkit"]
+plan_path = "jbigkit"
 [jdk7]
-plan_path = ["jdk7"]
+plan_path = "jdk7"
 [jdk8]
-plan_path = ["jdk8"]
+plan_path = "jdk8"
 [jemalloc]
-plan_path = ["jemalloc"]
+plan_path = "jemalloc"
 [jenkins]
-plan_path = ["jenkins"]
+plan_path = "jenkins"
 [jetty]
-plan_path = ["jetty"]
+plan_path = "jetty"
 [jffi]
-plan_path = ["jffi"]
+plan_path = "jffi"
 [jfrog-cli]
-plan_path = ["jfrog-cli"]
+plan_path = "jfrog-cli"
 [jo]
-plan_path = ["jo"]
+plan_path = "jo"
 [jq-static]
-plan_path = ["jq-static"]
+plan_path = "jq-static"
 [jre7]
-plan_path = ["jre7"]
+plan_path = "jre7"
 [jre8]
-plan_path = ["jre8"]
+plan_path = "jre8"
 [jruby]
-plan_path = ["jruby"]
+plan_path = "jruby"
 [jruby1]
-plan_path = ["jruby1"]
+plan_path = "jruby1"
 [kafka]
-plan_path = ["kafka"]
+plan_path = "kafka"
 [kibana]
-plan_path = ["kibana"]
+plan_path = "kibana"
 [kmod]
-plan_path = ["kmod"]
+plan_path = "kmod"
 [krb5]
-plan_path = ["krb5"]
+plan_path = "krb5"
 [lcms2]
-plan_path = ["lcms2"]
+plan_path = "lcms2"
 [less]
-plan_path = ["less"]
+plan_path = "less"
 [leveldb]
-plan_path = ["leveldb"]
+plan_path = "leveldb"
 [libaio]
-plan_path = ["libaio"]
+plan_path = "libaio"
 [libarchive]
-plan_path = ["libarchive"]
+plan_path = "libarchive"
 [libarchive-musl]
-plan_path = ["libarchive-musl"]
+plan_path = "libarchive-musl"
 [libassuan]
-plan_path = ["libassuan"]
+plan_path = "libassuan"
 [libatomic_ops]
-plan_path = ["libatomic_ops"]
+plan_path = "libatomic_ops"
 [libbsd]
-plan_path = ["libbsd"]
+plan_path = "libbsd"
 [libcap]
-plan_path = ["libcap"]
+plan_path = "libcap"
 [libcap-ng]
-plan_path = ["libcap-ng"]
+plan_path = "libcap-ng"
 [libcxx]
-plan_path = ["libcxx"]
+plan_path = "libcxx"
 [libedit]
-plan_path = ["libedit"]
+plan_path = "libedit"
 [liberation-fonts-ttf]
-plan_path = ["liberation-fonts-ttf"]
+plan_path = "liberation-fonts-ttf"
 [libev]
-plan_path = ["libev"]
+plan_path = "libev"
 [libevent]
-plan_path = ["libevent"]
+plan_path = "libevent"
 [libffi]
-plan_path = ["libffi"]
+plan_path = "libffi"
 [libgcrypt]
-plan_path = ["libgcrypt"]
+plan_path = "libgcrypt"
 [libghthash]
-plan_path = ["libghthash"]
+plan_path = "libghthash"
 [libgpg-error]
-plan_path = ["libgpg-error"]
+plan_path = "libgpg-error"
 [libiconv]
-plan_path = ["libiconv"]
+plan_path = "libiconv"
 [libidn]
-plan_path = ["libidn"]
+plan_path = "libidn"
 [libjpeg-turbo]
-plan_path = ["libjpeg-turbo"]
+plan_path = "libjpeg-turbo"
 [libksba]
-plan_path = ["libksba"]
+plan_path = "libksba"
 [libmpc]
-plan_path = ["libmpc"]
+plan_path = "libmpc"
 [libossp-uuid]
-plan_path = ["libossp-uuid"]
+plan_path = "libossp-uuid"
 [libpcap]
-plan_path = ["libpcap"]
+plan_path = "libpcap"
 [libpipeline]
-plan_path = ["libpipeline"]
+plan_path = "libpipeline"
 [libpng]
-plan_path = ["libpng"]
+plan_path = "libpng"
 [libressl]
-plan_path = ["libressl"]
+plan_path = "libressl"
 [libressl-musl]
-plan_path = ["libressl-musl"]
+plan_path = "libressl-musl"
 [libscrypt]
-plan_path = ["libscrypt"]
+plan_path = "libscrypt"
 [libseccomp]
-plan_path = ["libseccomp"]
+plan_path = "libseccomp"
 [libsodium]
-plan_path = ["libsodium"]
+plan_path = "libsodium"
 [libsodium-musl]
-plan_path = ["libsodium-musl"]
+plan_path = "libsodium-musl"
 [libtermkey]
-plan_path = ["libtermkey"]
+plan_path = "libtermkey"
 [libtiff]
-plan_path = ["libtiff"]
+plan_path = "libtiff"
 [libtool]
-plan_path = ["libtool"]
+plan_path = "libtool"
 [libunistring]
-plan_path = ["libunistring"]
+plan_path = "libunistring"
 [libunwind]
-plan_path = ["libunwind"]
+plan_path = "libunwind"
 [libvterm]
-plan_path = ["libvterm"]
+plan_path = "libvterm"
 [libwebp]
-plan_path = ["libwebp"]
+plan_path = "libwebp"
 [libxml2]
-plan_path = ["libxml2"]
+plan_path = "libxml2"
 [libxslt]
-plan_path = ["libxslt"]
+plan_path = "libxslt"
 [libyajl2]
-plan_path = ["libyajl2"]
+plan_path = "libyajl2"
 [libyaml]
-plan_path = ["libyaml"]
+plan_path = "libyaml"
 [linux]
-plan_path = ["linux"]
+plan_path = "linux"
 [linux-headers]
-plan_path = ["linux-headers"]
+plan_path = "linux-headers"
 [linux-headers-musl]
-plan_path = ["linux-headers-musl"]
+plan_path = "linux-headers-musl"
 [linux-pam]
-plan_path = ["linux-pam"]
+plan_path = "linux-pam"
 [llvm]
-plan_path = ["llvm"]
+plan_path = "llvm"
 [local-lib]
-plan_path = ["local-lib"]
+plan_path = "local-lib"
 [logback]
-plan_path = ["logback"]
+plan_path = "logback"
 [logstash]
-plan_path = ["logstash"]
+plan_path = "logstash"
 [logstash2]
-plan_path = ["logstash2"]
+plan_path = "logstash2"
 [lsof]
-plan_path = ["lsof"]
+plan_path = "lsof"
 [lsyncd]
-plan_path = ["lsyncd"]
+plan_path = "lsyncd"
 [lttng-ust]
-plan_path = ["lttng-ust"]
+plan_path = "lttng-ust"
 [lua]
-plan_path = ["lua"]
+plan_path = "lua"
 [lynx]
-plan_path = ["lynx"]
+plan_path = "lynx"
 [lz4]
-plan_path = ["lz4"]
+plan_path = "lz4"
 [lzip]
-plan_path = ["lzip"]
+plan_path = "lzip"
 [lzo]
-plan_path = ["lzo"]
+plan_path = "lzo"
 [lzop]
-plan_path = ["lzop"]
+plan_path = "lzop"
 [m4]
-plan_path = ["m4"]
+plan_path = "m4"
 [make]
-plan_path = ["make"]
+plan_path = "make"
 [man-db]
-plan_path = ["man-db"]
+plan_path = "man-db"
 [man-pages]
-plan_path = ["man-pages"]
+plan_path = "man-pages"
 [mariadb]
-plan_path = ["mariadb"]
+plan_path = "mariadb"
 [maven]
-plan_path = ["maven"]
+plan_path = "maven"
 [mc]
-plan_path = ["mc"]
+plan_path = "mc"
 [memcached]
-plan_path = ["memcached"]
+plan_path = "memcached"
 [mention-bot]
-plan_path = ["mention-bot"]
+plan_path = "mention-bot"
 [mercurial]
-plan_path = ["mercurial"]
+plan_path = "mercurial"
 [mg]
-plan_path = ["mg"]
+plan_path = "mg"
 [mongo-tools]
-plan_path = ["mongo-tools"]
+plan_path = "mongo-tools"
 [mongodb]
-plan_path = ["mongodb"]
+plan_path = "mongodb"
 [mpfr]
-plan_path = ["mpfr"]
+plan_path = "mpfr"
 [mssql]
-plan_path = ["mssql"]
+plan_path = "mssql"
 [musl]
-plan_path = ["musl"]
+plan_path = "musl"
 [mysql]
-plan_path = ["mysql"]
+plan_path = "mysql"
 [mysql-client]
-plan_path = ["mysql-client"]
+plan_path = "mysql-client"
 [nasm]
-plan_path = ["nasm"]
+plan_path = "nasm"
 [nats-streaming-server]
-plan_path = ["nats-streaming-server"]
+plan_path = "nats-streaming-server"
 [nats-top]
-plan_path = ["nats-top"]
+plan_path = "nats-top"
 [ncdu]
-plan_path = ["ncdu"]
+plan_path = "ncdu"
 [ncurses]
-plan_path = ["ncurses"]
+plan_path = "ncurses"
 [net-tools]
-plan_path = ["net-tools"]
+plan_path = "net-tools"
 [netcat]
-plan_path = ["netcat"]
+plan_path = "netcat"
 [netcat-openbsd]
-plan_path = ["netcat-openbsd"]
+plan_path = "netcat-openbsd"
 [nghttp2]
-plan_path = ["nghttp2"]
+plan_path = "nghttp2"
 [nginx]
-plan_path = ["nginx"]
+plan_path = "nginx"
 [ninja]
-plan_path = ["ninja"]
+plan_path = "ninja"
 [node]
-plan_path = ["node"]
+plan_path = "node"
 [node8]
-plan_path = ["node8"]
+plan_path = "node8"
 [node_exporter]
-plan_path = ["node_exporter"]
+plan_path = "node_exporter"
 [npth]
-plan_path = ["npth"]
+plan_path = "npth"
 [nspr]
-plan_path = ["nspr"]
+plan_path = "nspr"
 [nss]
-plan_path = ["nss"]
+plan_path = "nss"
 [numactl]
-plan_path = ["numactl"]
+plan_path = "numactl"
 [ocaml]
-plan_path = ["ocaml"]
+plan_path = "ocaml"
 [ocamlbuild]
-plan_path = ["ocamlbuild"]
+plan_path = "ocamlbuild"
 [omniORB]
-plan_path = ["omniORB"]
+plan_path = "omniORB"
 [opam]
-plan_path = ["opam"]
+plan_path = "opam"
 [openjpeg]
-plan_path = ["openjpeg"]
+plan_path = "openjpeg"
 [openldap]
-plan_path = ["openldap"]
+plan_path = "openldap"
 [openresty]
-plan_path = ["openresty"]
+plan_path = "openresty"
 [openssh]
-plan_path = ["openssh"]
+plan_path = "openssh"
 [openssl]
-plan_path = ["openssl"]
+plan_path = "openssl"
 [openssl-musl]
-plan_path = ["openssl-musl"]
+plan_path = "openssl-musl"
 [openvpn]
-plan_path = ["openvpn"]
+plan_path = "openvpn"
 [packer]
-plan_path = ["packer"]
+plan_path = "packer"
 [pango]
-plan_path = ["pango"]
+plan_path = "pango"
 [patch]
-plan_path = ["patch"]
+plan_path = "patch"
 [patchelf]
-plan_path = ["patchelf"]
+plan_path = "patchelf"
 [pax-utils]
-plan_path = ["pax-utils"]
+plan_path = "pax-utils"
 [pcre]
-plan_path = ["pcre"]
+plan_path = "pcre"
 [percona-xtrabackup]
-plan_path = ["percona-xtrabackup"]
+plan_path = "percona-xtrabackup"
 [perl]
-plan_path = ["perl"]
+plan_path = "perl"
 [phantomjs]
-plan_path = ["phantomjs"]
+plan_path = "phantomjs"
 [php]
-plan_path = ["php"]
+plan_path = "php"
 [php5]
-plan_path = ["php5"]
+plan_path = "php5"
 [pixman]
-plan_path = ["pixman"]
+plan_path = "pixman"
 [pkg-config]
-plan_path = ["pkg-config"]
+plan_path = "pkg-config"
 [polipo]
-plan_path = ["polipo"]
+plan_path = "polipo"
 [ponysay]
-plan_path = ["ponysay"]
+plan_path = "ponysay"
 [popt]
-plan_path = ["popt"]
+plan_path = "popt"
 [postgresql]
-plan_path = ["postgresql"]
+plan_path = "postgresql"
 [postgresql93]
-plan_path = ["postgresql93"]
+plan_path = "postgresql93"
 [postgresql94]
-plan_path = ["postgresql94"]
+plan_path = "postgresql94"
 [postgresql95]
-plan_path = ["postgresql95"]
+plan_path = "postgresql95"
 [powershell]
-plan_path = ["powershell"]
+plan_path = "powershell"
 [procps-ng]
-plan_path = ["procps-ng"]
+plan_path = "procps-ng"
 [prometheus]
-plan_path = ["prometheus"]
+plan_path = "prometheus"
 [protobuf]
-plan_path = ["protobuf"]
+plan_path = "protobuf"
 [protobuf-c]
-plan_path = ["protobuf-c"]
+plan_path = "protobuf-c"
 [protobuf-cpp]
-plan_path = ["protobuf-cpp"]
+plan_path = "protobuf-cpp"
 [protobuf-rust]
-plan_path = ["protobuf-rust"]
+plan_path = "protobuf-rust"
 [psmisc]
-plan_path = ["psmisc"]
+plan_path = "psmisc"
 [pv]
-plan_path = ["pv"]
+plan_path = "pv"
 [python]
-plan_path = ["python"]
+plan_path = "python"
 [python2]
-plan_path = ["python2"]
+plan_path = "python2"
 [qemu]
-plan_path = ["qemu"]
+plan_path = "qemu"
 [R]
-plan_path = ["R"]
+plan_path = "R"
 [rabbitmq]
-plan_path = ["rabbitmq"]
+plan_path = "rabbitmq"
 [rabbitmqadmin]
-plan_path = ["rabbitmqadmin"]
+plan_path = "rabbitmqadmin"
 [raml2html]
-plan_path = ["raml2html"]
+plan_path = "raml2html"
 [re2c]
-plan_path = ["re2c"]
+plan_path = "re2c"
 [readline]
-plan_path = ["readline"]
+plan_path = "readline"
 [rebar3]
-plan_path = ["rebar3"]
+plan_path = "rebar3"
 [redis]
-plan_path = ["redis"]
+plan_path = "redis"
 [relx]
-plan_path = ["relx"]
+plan_path = "relx"
 [repo]
-plan_path = ["repo"]
+plan_path = "repo"
 [rethinkdb]
-plan_path = ["rethinkdb"]
+plan_path = "rethinkdb"
 [rngd]
-plan_path = ["rngd"]
+plan_path = "rngd"
 [rpm]
-plan_path = ["rpm"]
+plan_path = "rpm"
 [rq]
-plan_path = ["rq"]
+plan_path = "rq"
 [rsync]
-plan_path = ["rsync"]
+plan_path = "rsync"
 [ruby]
-plan_path = ["ruby"]
+plan_path = "ruby"
 [runit]
-plan_path = ["runit"]
+plan_path = "runit"
 [rust]
-plan_path = ["rust"]
+plan_path = "rust"
 [sassc]
-plan_path = ["sassc"]
+plan_path = "sassc"
 [scaffolding-base]
-plan_path = ["scaffolding-base"]
+plan_path = "scaffolding-base"
 [scaffolding-go]
-plan_path = ["scaffolding-go"]
+plan_path = "scaffolding-go"
 [scaffolding-go17]
-plan_path = ["scaffolding-go17"]
+plan_path = "scaffolding-go17"
 [scaffolding-gradle]
-plan_path = ["scaffolding-gradle"]
+plan_path = "scaffolding-gradle"
 [scaffolding-node]
-plan_path = ["scaffolding-node"]
+plan_path = "scaffolding-node"
 [scaffolding-ruby]
-plan_path = ["scaffolding-ruby"]
+plan_path = "scaffolding-ruby"
 [scons]
-plan_path = ["scons"]
+plan_path = "scons"
 [sed]
-plan_path = ["sed"]
+plan_path = "sed"
 [sensu]
-plan_path = ["sensu"]
+plan_path = "sensu"
 [serf]
-plan_path = ["serf"]
+plan_path = "serf"
 [shadow]
-plan_path = ["shadow"]
+plan_path = "shadow"
 [shield]
-plan_path = ["shield"]
+plan_path = "shield"
 [shield-agent]
-plan_path = ["shield-agent"]
+plan_path = "shield-agent"
 [shield-proxy]
-plan_path = ["shield-proxy"]
+plan_path = "shield-proxy"
 [snappy]
-plan_path = ["snappy"]
+plan_path = "snappy"
 [socat]
-plan_path = ["socat"]
+plan_path = "socat"
 [spark]
-plan_path = ["spark"]
+plan_path = "spark"
 [sqitch]
-plan_path = ["sqitch"]
+plan_path = "sqitch"
 [sqlite]
-plan_path = ["sqlite"]
+plan_path = "sqlite"
 [storm]
-plan_path = ["storm"]
+plan_path = "storm"
 [strace]
-plan_path = ["strace"]
+plan_path = "strace"
 [stringencoders]
-plan_path = ["stringencoders"]
+plan_path = "stringencoders"
 [subversion]
-plan_path = ["subversion"]
+plan_path = "subversion"
 [sudo]
-plan_path = ["sudo"]
+plan_path = "sudo"
 [swig]
-plan_path = ["swig"]
+plan_path = "swig"
 [sysstat]
-plan_path = ["sysstat"]
+plan_path = "sysstat"
 [systemd]
-plan_path = ["systemd"]
+plan_path = "systemd"
 [tar]
-plan_path = ["tar"]
+plan_path = "tar"
 [tcl]
-plan_path = ["tcl"]
+plan_path = "tcl"
 [tcpdump]
-plan_path = ["tcpdump"]
+plan_path = "tcpdump"
 [telegraf]
-plan_path = ["telegraf"]
+plan_path = "telegraf"
 [terraform]
-plan_path = ["terraform"]
+plan_path = "terraform"
 [texinfo]
-plan_path = ["texinfo"]
+plan_path = "texinfo"
 [tmux]
-plan_path = ["tmux"]
+plan_path = "tmux"
 [tomcat-native]
-plan_path = ["tomcat-native"]
+plan_path = "tomcat-native"
 [tomcat7]
-plan_path = ["tomcat7"]
+plan_path = "tomcat7"
 [tomcat8]
-plan_path = ["tomcat8"]
+plan_path = "tomcat8"
 [tor]
-plan_path = ["tor"]
+plan_path = "tor"
 [traefik]
-plan_path = ["traefik"]
+plan_path = "traefik"
 [tree]
-plan_path = ["tree"]
+plan_path = "tree"
 [ttyrec]
-plan_path = ["ttyrec"]
+plan_path = "ttyrec"
 [tzdata]
-plan_path = ["tzdata"]
+plan_path = "tzdata"
 [unzip]
-plan_path = ["unzip"]
+plan_path = "unzip"
 [userspace-rcu]
-plan_path = ["userspace-rcu"]
+plan_path = "userspace-rcu"
 [util-linux]
-plan_path = ["util-linux"]
+plan_path = "util-linux"
 [valgrind]
-plan_path = ["valgrind"]
+plan_path = "valgrind"
 [varnish]
-plan_path = ["varnish"]
+plan_path = "varnish"
 [vault]
-plan_path = ["vault"]
+plan_path = "vault"
 [vde2]
-plan_path = ["vde2"]
+plan_path = "vde2"
 [vim]
-plan_path = ["vim"]
+plan_path = "vim"
 [virtualenv]
-plan_path = ["virtualenv"]
+plan_path = "virtualenv"
 [vmtouch]
-plan_path = ["vmtouch"]
+plan_path = "vmtouch"
 [wal-e]
-plan_path = ["wal-e"]
+plan_path = "wal-e"
 [wget]
-plan_path = ["wget"]
+plan_path = "wget"
 [wget-static]
-plan_path = ["wget-static"]
+plan_path = "wget-static"
 [which]
-plan_path = ["which"]
+plan_path = "which"
 [wordpress]
-plan_path = ["wordpress"]
+plan_path = "wordpress"
 [wordpress-proxy]
-plan_path = ["wordpress-proxy"]
+plan_path = "wordpress-proxy"
 [wrk]
-plan_path = ["wrk"]
+plan_path = "wrk"
 [xz]
-plan_path = ["xz"]
+plan_path = "xz"
 [xz-musl]
-plan_path = ["xz-musl"]
+plan_path = "xz-musl"
 [yarn]
-plan_path = ["yarn"]
+plan_path = "yarn"
 [yasm]
-plan_path = ["yasm"]
+plan_path = "yasm"
 [zeromq]
-plan_path = ["zeromq"]
+plan_path = "zeromq"
 [zip]
-plan_path = ["zip"]
+plan_path = "zip"
 [zlib]
-plan_path = ["zlib"]
+plan_path = "zlib"
 [zlib-musl]
-plan_path = ["zlib-musl"]
+plan_path = "zlib-musl"
 [zookeeper]
-plan_path = ["zookeeper"]
+plan_path = "zookeeper"
 [zsh]
-plan_path = ["zsh"]
+plan_path = "zsh"
 [zstd]
-plan_path = ["zstd"]
+plan_path = "zstd"
