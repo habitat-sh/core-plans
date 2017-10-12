@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration debug="false"
+                     xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+  <!-- ========== Appenders ============================================ -->
+
+  <appender name="Application"
+            class="org.apache.log4j.ConsoleAppender">
+    <param name="Threshold" value="DEBUG"/>
+    <param name="MaxBackupIndex" value="10"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS ZZZZ} [%t] %-5p %c - %m%n"/>
+    </layout>
+  </appender>
+
+  <appender name="trigger"
+            class="org.apache.log4j.ConsoleAppender">
+    <param name="Threshold" value="INFO"/>
+    <param name="MaxBackupIndex" value="10"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS ZZZZ} [%t] %-5p %c - %m%n"/>
+    </layout>
+  </appender>
+
+  <appender name="metrics-reporter"
+            class="org.apache.log4j.ConsoleAppender">
+    <param name="Threshold" value="DEBUG"/>
+    <param name="MaxBackupIndex" value="10"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS ZZZZ} [%t] %-5p %c - %m%n"/>
+    </layout>
+  </appender>
+
+  <appender name="JInterop" class="org.apache.log4j.ConsoleAppender">
+    <param name="Threshold" value="TRACE"/>
+    <param name="MaxBackupIndex" value="10"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS ZZZZ} [%t] %-5p %c - %m%n"/>
+    </layout>
+  </appender>
+
+  <appender name="collector-usage" class="org.apache.log4j.ConsoleAppender">
+    <param name="Threshold" value="TRACE"/>
+    <param name="MaxBackupIndex" value="10"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS ZZZZ} [%t] %-5p %c - %m%n"/>
+    </layout>
+  </appender>
+
+  <!-- ======== Loggers ================================================ -->
+
+  <!-- Keep the trigger stuff out of the main logs. -->
+  <logger name="com.sumologic.util.Trigger" additivity="false">
+    <level value="INFO"/>
+    <appender-ref ref="trigger"/>
+  </logger>
+
+  <logger name="com.sumologic.util.scala.MetricsReporter" additivity="false">
+    <level value="INFO"/>
+    <appender-ref ref="metrics-reporter"/>
+  </logger>
+
+  <logger name="com.sumologic.scala.collector.monitoring.CollectorUsageLogger$" additivity="false">
+    <level value="INFO"/>
+    <appender-ref ref="collector-usage"/>
+  </logger>
+
+  <!-- Disable all bug failures by default -->
+  <logger name="org.jinterop" additivity="false">
+
+<!--  To enable trace logging to Jinterop.log from collector, uncomment these lines.
+
+      <level value="TRACE"/>
+      <appender-ref ref="JInterop"/>
+-->
+    <level value="ERROR"/>
+    <appender-ref ref="Application"/>
+  </logger>
+
+  <!--  The root logger. -->
+  <root>
+    <level value="INFO"/>
+    <appender-ref ref="Application"/>
+  </root>
+
+</log4j:configuration>

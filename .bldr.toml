@@ -684,6 +684,8 @@ plan_path = "stringencoders"
 plan_path = "subversion"
 [sudo]
 plan_path = "sudo"
+[sumologic]
+plan_path = "sumologic"
 [swig]
 plan_path = "swig"
 [sysstat]
