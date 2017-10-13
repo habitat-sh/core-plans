@@ -53,6 +53,7 @@ do_prepare() {
 
   # Apply all patch files to the extracted source
   for p in "${_patch_files[@]}"; do
+    # shellcheck disable=SC2086
     build_line "Applying patch $(basename ${p})"
     # shellcheck disable=SC2086
     patch -p0 -i "${HAB_CACHE_SRC_PATH}/$(basename ${p})"
