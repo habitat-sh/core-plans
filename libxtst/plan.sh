@@ -13,7 +13,8 @@ pkg_build_deps=(core/gcc core/make core/pkg-config core/xproto core/kbproto core
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
+pkg_dirname="${pkg_distname}-${pkg_version}"
 
 do_check() {
-    make check
+  make check
 }
