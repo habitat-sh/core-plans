@@ -47,7 +47,7 @@ network.host: {{cfg.network.host}}
 http.port: {{cfg.network.port}}
 transport.tcp.port: {{cfg.transport.port}}
 discovery.zen.fd.ping_timeout: {{cfg.discovery.zen_fd_ping_timeout}}
-{{#if bind.has_elasticsearch ~}}
+{{#if bind.elasticsearch ~}}
 discovery.zen.ping.unicast.hosts: [{{#each bind.elasticsearch.members ~}} "{{sys.ip}}", {{/each ~}}]
 {{else ~}}
 discovery.zen.ping.unicast.hosts: {{cfg.discovery.ping_unicast_hosts}}
