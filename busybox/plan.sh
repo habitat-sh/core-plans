@@ -45,7 +45,7 @@ do_install() {
   install -Dm755 busybox "${pkg_prefix}/bin/busybox"
 
   # Generate the symlinks back to the `busybox` executable
-  for l in $(${pkg_prefix}/bin/busybox --list); do
+  for l in $("${pkg_prefix}"/bin/busybox --list); do
     ln -sv busybox "${pkg_prefix}/bin/${l}"
   done
 }
@@ -54,13 +54,13 @@ create_config() {
   # To update to a new version, run `make defconfig` to generate a new
   # `.config` file and add the following replacement tokens below.
   build_line "Customizing busybox configuration..."
-  cat "${PLAN_CONTEXT}/config" \
-    | sed \
+  sed \
       -e "s,@pkg_prefix@,${pkg_prefix},g" \
       -e "s,@pkg_svc_var@,${pkg_svc_var_path},g" \
       -e "s,@cflags@,${CFLAGS},g" \
       -e "s,@ldflags@,${LDFLAGS},g" \
       -e "s,@osname@,Habitat,g" \
       -e "s,@bash_is_ash@,y,g" \
+      "${PLAN_CONTEXT}/config" \
     > .config
 }

@@ -33,6 +33,7 @@ do_download() {
   # skip re-downloading if already present and verified
   for i in $(seq 0 $((${#_patch_files[@]} - 1))); do
     p="${_patch_files[$i]}"
+    # shellcheck disable=SC2086
     download_file "${p}" "$(basename ${p})" "${_patch_shasums[$i]}"
   done; unset i p
 }
@@ -42,6 +43,7 @@ do_verify() {
 
   # Verify all patch files against their shasums
   for i in $(seq 0 $((${#_patch_files[@]} - 1))); do
+    # shellcheck disable=SC2086
     verify_file "$(basename ${_patch_files[$i]})" "${_patch_shasums[$i]}"
   done; unset i
 }
@@ -52,6 +54,7 @@ do_prepare() {
   # Apply all patch files to the extracted source
   for p in "${_patch_files[@]}"; do
     build_line "Applying patch $(basename ${p})"
+    # shellcheck disable=SC2086
     patch -p0 -i "${HAB_CACHE_SRC_PATH}/$(basename ${p})"
   done
 }

@@ -15,6 +15,7 @@ pkg_lib_dirs=(lib)
 
 _common_prepare() {
   # Makes the symbolic links in installation relative vs. absolute
+  # shellcheck disable=SC2016
   sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
 
   # Ensure that the man pages are installed under share/man
