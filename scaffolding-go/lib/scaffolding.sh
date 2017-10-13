@@ -72,7 +72,7 @@ scaffolding_go_before() {
   # package from local /src, that is when there is no $pkg_source set.
   if [[ ! $pkg_source ]]; then
     mkdir -p "$scaffolding_go_workspace_src/$scaffolding_go_base_path"
-    ln -sf /src "$scaffolding_go_pkg_path"
+    ln -sf "${SRC_PATH:-/src}" "$scaffolding_go_pkg_path"
   fi
 }
 
