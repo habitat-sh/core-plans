@@ -170,6 +170,8 @@ plan_path = "file"
 plan_path = "findutils"
 [fish]
 plan_path = "fish"
+[fixesproto]
+plan_path = "fixesproto"
 [flatbuffers]
 plan_path = "flatbuffers"
 [flex]
@@ -270,6 +272,8 @@ plan_path = "icu56"
 plan_path = "imagemagick"
 [inetutils]
 plan_path = "inetutils"
+[inputproto]
+plan_path = "inputproto"
 [intltool]
 plan_path = "intltool"
 [iproute2]
@@ -306,6 +310,8 @@ plan_path = "jruby"
 plan_path = "jruby1"
 [kafka]
 plan_path = "kafka"
+[kbproto]
+plan_path = "kbproto"
 [kibana]
 plan_path = "kibana"
 [kmod]
@@ -352,6 +358,8 @@ plan_path = "libgcrypt"
 plan_path = "libghthash"
 [libgpg-error]
 plan_path = "libgpg-error"
+[libice]
+plan_path = "libice"
 [libiconv]
 plan_path = "libiconv"
 [libidn]
@@ -370,6 +378,8 @@ plan_path = "libpcap"
 plan_path = "libpipeline"
 [libpng]
 plan_path = "libpng"
+[libpthread-stubs]
+plan_path = "libpthread-stubs"
 [libressl]
 plan_path = "libressl"
 [libressl-musl]
@@ -378,6 +388,8 @@ plan_path = "libressl-musl"
 plan_path = "libscrypt"
 [libseccomp]
 plan_path = "libseccomp"
+[libsm]
+plan_path = "libsm"
 [libsodium]
 plan_path = "libsodium"
 [libsodium-musl]
@@ -396,10 +408,30 @@ plan_path = "libunwind"
 plan_path = "libvterm"
 [libwebp]
 plan_path = "libwebp"
+[libxau]
+plan_path = "libxau"
+[libxcb]
+plan_path = "libxcb"
+[libxdmcp]
+plan_path = "libxdmcp"
+[libxext]
+plan_path = "libxext"
+[libxfixes]
+plan_path = "libxfixes"
+[libxi]
+plan_path = "libxi"
 [libxml2]
 plan_path = "libxml2"
+[libxmu]
+plan_path = "libxmu"
+[libxrender]
+plan_path = "libxrender"
 [libxslt]
 plan_path = "libxslt"
+[libxt]
+plan_path = "libxt"
+[libxtst]
+plan_path = "libxtst"
 [libyajl2]
 plan_path = "libyajl2"
 [libyaml]
@@ -612,10 +644,14 @@ plan_path = "re2c"
 plan_path = "readline"
 [rebar3]
 plan_path = "rebar3"
+[recordproto]
+plan_path = "recordproto"
 [redis]
 plan_path = "redis"
 [relx]
 plan_path = "relx"
+[renderproto]
+plan_path = "renderproto"
 [repo]
 plan_path = "repo"
 [rethinkdb]
@@ -728,6 +764,8 @@ plan_path = "unzip"
 plan_path = "userspace-rcu"
 [util-linux]
 plan_path = "util-linux"
+[util-macros]
+plan_path = "util-macros"
 [valgrind]
 plan_path = "valgrind"
 [varnish]
@@ -756,6 +794,18 @@ plan_path = "wordpress"
 plan_path = "wordpress-proxy"
 [wrk]
 plan_path = "wrk"
+[xcb-proto]
+plan_path = "xcb-proto"
+[xextproto]
+plan_path = "xextproto"
+[xeyes]
+plan_path = "xeyes"
+[xlib]
+plan_path = "xlib"
+[xproto]
+plan_path = "xproto"
+[xtrans]
+plan_path = "xtrans"
 [xz]
 plan_path = "xz"
 [xz-musl]
