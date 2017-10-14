@@ -23,5 +23,5 @@ do_build() {
 }
 
 do_install() {
-  make DEST_HOME="$pkg_prefix" install
+  make DEST_HOME="${pkg_prefix}" install
 }

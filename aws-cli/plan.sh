@@ -27,9 +27,9 @@ do_before() {
 }
 
 do_prepare() {
-  python -m venv "$pkg_prefix"
+  python -m venv "${pkg_prefix}"
   # shellcheck source=/dev/null
-  source "$pkg_prefix/bin/activate"
+  source "${pkg_prefix}/bin/activate"
 }
 
 do_build() {
@@ -37,9 +37,9 @@ do_build() {
 }
 
 do_install() {
-  pip install "awscli==$pkg_version"
+  pip install "awscli==${pkg_version}"
   # Write out versions of all pip packages to package
-  pip freeze > "$pkg_prefix/requirements.txt"
+  pip freeze > "${pkg_prefix}/requirements.txt"
 }
 
 do_strip() {

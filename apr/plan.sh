@@ -32,13 +32,13 @@ do_check() {
 
   make test
 
-  if [[ -n "$clean_services" ]]; then
+  if [[ -n "${clean_services}" ]]; then
     rm -fv /etc/services
   fi
 }
 
 do_end() {
-  if [[ -n "$_clean_file" ]]; then
+  if [[ -n "${_clean_file}" ]]; then
     rm -fv /usr/bin/file
   fi
 }

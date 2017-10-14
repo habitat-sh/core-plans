@@ -34,7 +34,7 @@ pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 
 do_build() {
-  ./bootstrap.sh --prefix="$pkg_prefix"
+  ./bootstrap.sh --prefix="${pkg_prefix}"
 }
 
 do_install() {
@@ -43,5 +43,5 @@ do_install() {
   ZLIB_LIBPATH="$(pkg_path_for core/zlib)/lib"
   export ZLIB_INCLUDE
   ZLIB_INCLUDE="$(pkg_path_for core/zlib)/include"
-  ./b2 install --prefix="$pkg_prefix" -q --debug-configuration
+  ./b2 install --prefix="${pkg_prefix}" -q --debug-configuration
 }
