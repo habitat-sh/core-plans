@@ -13,13 +13,3 @@ port = 9000
 user = "admin"
 password = "password"
 uri = "/haproxy-stats"
-
-[[server]]
-name = "first"
-host_or_ip = "172.17.0.3"
-port = "8000"
-
-[[server]]
-name = "second"
-host_or_ip = "172.17.0.4"
-port = "8000"
