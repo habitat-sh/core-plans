@@ -1,12 +1,12 @@
 pkg_name=mongo-tools
 pkg_origin=core
-pkg_version=3.2.10
+pkg_version=3.4.2
 pkg_description="MongoDB Tools"
 pkg_upstream_url=https://github.com/mongodb/mongo-tools
 pkg_license=('MIT')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://github.com/mongodb/mongo-tools/archive/r${pkg_version}.tar.gz
-pkg_shasum=98a5ff97c2744a3a20e5c88b88cfa02d5b98cf6f7701d6ce9214c178f90af4c4
+pkg_shasum=3679576153ab1a9e1a7fe9811cb6d7c32c6d9320f07be9a94d064d6904618b5a
 pkg_dirname=${pkg_name}-r${pkg_version}
 pkg_filename=${pkg_name}-${pkg_version}.tar.gz
 pkg_deps=(core/glibc)
