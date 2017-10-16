@@ -484,6 +484,8 @@ plan_path = "man-pages"
 plan_path = "mariadb"
 [maven]
 plan_path = "maven"
+[mawk]
+plan_path = "mawk"
 [mc]
 plan_path = "mc"
 [memcached]
