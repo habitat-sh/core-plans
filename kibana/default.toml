@@ -14,7 +14,8 @@
 
     [server.ssl]
     # SSL for outgoing requests from the Kibana Server to the browser (PEM formatted)
-    cert = ""
+    enabled = false
+    certificate = ""
     key = ""
 
 [elasticsearch]
@@ -49,16 +50,16 @@
 
     [elasticsearch.ssl]
     # Optional setting to validate that your Elasticsearch backend uses the same key files (PEM formatted)
-    cert = ""
+    certficate = ""
     key = ""
 
     # If you need to provide a CA certificate for your Elasticsearch instance, put
     # the path of the pem file here.
-    ca = ""
+    certificateAuthorities = [""]
 
     # Set to false to have a complete disregard for the validity of the SSL
     # certificate.
-    verify = true
+    verificationMode = "full"
 
 [kibana]
   # Kibana uses an index in Elasticsearch to store saved searches, visualizations
