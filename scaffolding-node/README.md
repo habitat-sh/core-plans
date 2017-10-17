@@ -6,4 +6,12 @@ Node Scaffolding is a Habitat package which helps you build your  [Node.js][node
 * [Node Scaffolding Quickstart Guide](doc/quickstart.md)
 * [Node Scaffolding Documentation](doc/reference.md)
 
+# Pre-build, build, and post-build steps}
+
+This scaffolding does support running build scripts, etc. that are defined in package.json. However, due to a [known issue](https://github.com/habitat-sh/habitat/issues/1547), you will need to run the Habitat services as "root" rather than the default "hab" user.  You can do this by adding this line to your plan.sh
+
+```
+pkg_svc_user=root
+```
+
 [node]: https://nodejs.org/en/

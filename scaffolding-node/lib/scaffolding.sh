@@ -17,7 +17,11 @@ scaffolding_load() {
 }
 
 do_default_prepare() {
-  export NODE_ENV=production
+  # The NODE_ENV must be development in order to
+  # install the dev dependencies that are
+  # required to run build scripts
+  export NODE_ENV=development
+
   # The install prefix path for the app
   scaffolding_app_prefix="$pkg_prefix/$app_prefix"
   build_line "Setting NODE_ENV=$NODE_ENV"
@@ -82,9 +86,6 @@ EOT
   done
 }
 
-
-
-
 scaffolding_modules_install() {
   if [[ -n "${_uses_git:-}" ]]; then
     if ! git check-ignore node_modules && [[ -d node_modules ]]; then
@@ -97,6 +98,14 @@ scaffolding_modules_install() {
   fi
 
   build_line "Installing dependencies using $_pkg_manager $("$_pkg_manager" --version)"
+
+  # Many node dependencies require /usr/bin/env
+  # This directory is not created with Habitat by design
+  # Instead, we use core/coreutils for this functionality
+  # This sets up a symlink to simulate a /usr/bin/env,
+  # But still use coreutils
+  ln -svf "$(pkg_path_for coreutils)/bin/env" /usr/bin/env
+
   start_sec="$SECONDS"
   case "$_pkg_manager" in
     npm)
@@ -112,7 +121,6 @@ scaffolding_modules_install() {
       pushd "$CACHE_PATH" > /dev/null
       npm install \
         --unsafe-perm \
-        --production \
         --loglevel error \
         --fetch-retries 5 \
         --userconfig "$CACHE_PATH/.npmrc"
@@ -124,12 +132,17 @@ scaffolding_modules_install() {
       if [[ -n "$HAB_NONINTERACTIVE" ]]; then
         extra_args="--no-progress"
       fi
+
       yarn install $extra_args \
         --pure-lockfile \
         --ignore-engines \
-        --production \
-        --modules-folder "$CACHE_PATH/node_modules" \
         --cache-folder "$CACHE_PATH/yarn_cache"
+
+      # We need to first install node_modules here,
+      # rather than in $CACHE_PATH/node_modules
+      # so we can run build scripts
+      # then we can copy node_modules to $CACHE_PATH
+      cp -a "./node_modules" "$CACHE_PATH/node_modules"
       ;;
     *)
       local e
@@ -408,7 +421,9 @@ _update_svc_run() {
 
 _add_busybox() {
   build_line "Adding Busybox package to run dependencies"
-  pkg_deps=(core/busybox-static ${pkg_deps[@]})
+  # Need to specify core/busybox-static last
+  # So that it does not override the paths of core/coreutils
+  pkg_deps=(${pkg_deps[@]} core/busybox-static)
   debug "Updating pkg_deps=(${pkg_deps[*]}) from Scaffolding detection"
 }
 

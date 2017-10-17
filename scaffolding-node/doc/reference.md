@@ -179,6 +179,10 @@ scaffolding_pkg_manager=yarn
 
 This would force the Scaffolding code to use Yarn over npm, even if no `yarn.lock` file was present.
 
+## Build and Post-Build scripts
+
+This scaffolding does support running build scripts, etc. that are defined in package.json. However, due to a [known issue](https://github.com/habitat-sh/habitat/issues/1547), you will need to run the Habitat services as "root" rather than the default "hab" user.  You can do this by adding this line to your plan.sh
+
 ## Process Bins
 
 Your app may have one or more top-level processes which map to a [running service or ephemeral task][12factor_processes]. Each of these processes will be wrapped up in a small script which sets up a suitable app environment and invokes a command. By convention the main process bin which the package's `run` hook will invoke is the `web` process.
