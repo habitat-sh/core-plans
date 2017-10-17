@@ -6,7 +6,7 @@ pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_version=1.7.5
 pkg_source=https://github.com/kubernetes/kubernetes/archive/v${pkg_version}.tar.gz
-pkg_shasum=5fe434de8b17ef951d156f7cee24b24a0c5a071a85a612bba4890603541e1ff1
+pkg_shasum=eeb8e6fa45bdbf4974d3d20b50b753544e576b96b5ad731c88a4e16ebe357fd6
 
 pkg_bin_dirs=(bin)
 
