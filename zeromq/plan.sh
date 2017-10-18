@@ -14,5 +14,6 @@ pkg_lib_dirs=(lib)
 
 do_install() {
   do_default_install
-  find "$pkg_prefix/lib" -print0 -name "*.so" | xargs -I '%' patchelf --set-rpath "$LD_RUN_PATH" %
+    # shellcheck disable=SC2038
+  find "$pkg_prefix/lib" -name "*.so" | xargs -I '%' patchelf --set-rpath "$LD_RUN_PATH" %
 }
