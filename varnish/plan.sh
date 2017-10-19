@@ -6,7 +6,6 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url="http://varnish-cache.org/"
 pkg_license=('bsd')
 pkg_version="5.1.3"
-http://varnish-cache.org/_downloads/varnish-5.1.3.tgz
 pkg_source="http://varnish-cache.org/_downloads/${pkg_name}-${pkg_version}.tgz"
 pkg_shasum="7439c93ca581340f3722b8c790160f46dc6c5328188e4c0bc233c42f3f04a54e"
 pkg_deps=(core/glibc core/ncurses core/docutils core/pcre core/gcc core/bash )
