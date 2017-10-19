@@ -2,6 +2,10 @@
 
 [Full history](https://github.com/habitat-sh/core-plans/commits/master/scaffolding-node)
 
+## 0.6.6 (10-18-2017)
+
+- support prebuild and postbuild scripts
+
 ## 0.6.5 (10-11-2017)
 
 - Exclude the results/ directory from inclusion in a package [#854]
