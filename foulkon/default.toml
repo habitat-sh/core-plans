@@ -1,0 +1,22 @@
+log_level = "info"
+
+[service]
+host = "localhost"
+port = 8000
+
+[admin]
+username = "admin"
+password = "admin"
+
+[authenticator]
+type = "oidc"
+
+[storage]
+host = "postgres"
+port = 5432
+superuser_name = "superuser"
+superuser_password = "replaceme"
+database = "foulkon"
+user = "foulkon"
+password = "foulkon"
+ssl_mode = "disable"

@@ -1,24 +1,17 @@
 pkg_name=expat
 pkg_origin=core
-pkg_version=2.1.0
+pkg_version=2.2.2
+pkg_description="Expat library: Fast XML parser in C"
+pkg_upstream_url="https://libexpat.github.io/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('mit')
-pkg_source=http://downloads.sourceforge.net/sourceforge/expat/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=823705472f816df21c8f6aa026dd162b280806838bb55b3432b0fb1fcca7eb86
+pkg_license=('MIT')
+pkg_source="https://downloads.sourceforge.net/project/${pkg_name}/${pkg_name}/${pkg_version}/${pkg_name}-${pkg_version}.tar.bz2"
+pkg_shasum=4376911fcf81a23ebd821bbabc26fd933f3ac74833f74924342c29aad2c86046
 pkg_deps=(core/glibc core/gcc-libs)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
-
-do_prepare() {
-  do_default_prepare
-
-  # Patch for CVE-2015-1283
-  #
-  # Thanks to: https://github.com/NixOS/nixpkgs/blob/release-15.09/pkgs/development/libraries/expat/default.nix
-  patch -p1 -i $PLAN_CONTEXT/CVE-2015-1283.patch
-}
 
 do_check() {
   # Set `LDFLAGS` for the c++ test code to find libstdc++

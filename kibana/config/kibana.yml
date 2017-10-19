@@ -7,7 +7,7 @@ server.basePath: {{cfg.server.basePath}}
 
 server.maxPayloadBytes: {{cfg.server.maxPayloadBytes}}
 
-{{~#if bind.has_elasticsearch}}
+{{~#if bind.elasticsearch}}
 # Kibana only takes on ES host in it's config
 elasticsearch.url: "http://{{bind.elasticsearch.members.[0].sys.ip}}:{{bind.elasticsearch.members.[0].cfg.http-port}}"
 {{else}}
@@ -24,12 +24,13 @@ elasticsearch.password: {{cfg.elasticsearch.password}}
 {{~/if}}
 
 {{~#if cfg.server.ssl.key}}
-server.ssl.cert: {{cfg.server.ssl.cert}}
+server.ssl.enabled: {{cfg.server.ssl.enabled}}
+server.ssl.certificate: {{cfg.server.ssl.certificate}}
 server.ssl.key: {{cfg.server.ssl.key}}
 {{~/if}}
 
 {{~#if cfg.elasticsearch.ssl.key}}
-elasticsearch.ssl.cert: {{cfg.elasticsearch.ssl.cert}}
+elasticsearch.ssl.certificate: {{cfg.elasticsearch.ssl.certficate}}
 elasticsearch.ssl.key: {{cfg.elasticsearch.ssl.key}}
 {{~/if}}
 
@@ -37,8 +38,8 @@ elasticsearch.ssl.key: {{cfg.elasticsearch.ssl.key}}
 elasticsearch.ssl.ca: {{cfg.elasticsearch.ssl.ca}}
 {{~/if}}
 
-{{~#if cfg.elasticsearch.ssl.verify}}
-elasticsearch.ssl.verify: {{cfg.elasticsearch.ssl.verify}}
+{{~#if cfg.elasticsearch.ssl.verificationMode}}
+elasticsearch.ssl.verificationMode: {{cfg.elasticsearch.ssl.verificationMode}}
 {{~/if}}
 
 elasticsearch.pingTimeout: {{cfg.elasticsearch.pingTimeout}}

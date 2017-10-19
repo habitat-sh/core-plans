@@ -2,13 +2,13 @@
 
 exec 2>&1
 
-{{#if cfg.runtime.es_startup_sleep_time}}
+{{#if cfg.runtime.es_startup_sleep_time ~}}
 export ES_STARTUP_SLEEP_TIME={{cfg.runtime.es_startup_sleep_time}}
 {{/if ~}}
-{{#if cfg.runtime.max_locked_memory}}
+{{#if cfg.runtime.max_locked_memory ~}}
 ulimit -l {{cfg.runtime.max_locked_memory}}
 {{/if ~}}
-{{#if cfg.runtime.max_open_files}}
+{{#if cfg.runtime.max_open_files ~}}
 ulimit -n {{cfg.runtime.max_open_files}}
 {{/if ~}}
 

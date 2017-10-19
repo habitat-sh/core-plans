@@ -1,12 +1,12 @@
 pkg_name=docker
 pkg_description="The Docker Engine"
 pkg_origin=core
-pkg_version=1.13.1
+pkg_version=17.09.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2')
-pkg_source=https://get.docker.com/builds/Linux/x86_64/${pkg_name}-${pkg_version}.tgz
+pkg_source=https://download.docker.com/linux/static/stable/x86_64/${pkg_name}-${pkg_version}-ce.tgz
 pkg_upstream_url=https://docs.docker.com/engine/installation/binaries/
-pkg_shasum=97892375e756fd29a304bd8cd9ffb256c2e7c8fd759e12a55a6336e15100ad75
+pkg_shasum=a9e90a73c3cdfbf238f148e1ec0eaff5eb181f92f35bdd938fd7dab18e1c4647
 pkg_dirname=docker
 pkg_deps=()
 pkg_build_deps=()
@@ -20,4 +20,9 @@ do_install() {
   for bin in docker dockerd $(ls -1 docker-*); do
     install -v -D "$bin" "$pkg_prefix/bin/$bin"
   done
+}
+
+# Skip stripping down the Go binaries
+do_strip() {
+  return 0
 }

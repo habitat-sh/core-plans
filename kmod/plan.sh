@@ -26,6 +26,16 @@ do_build() {
   make
 }
 
+do_install() {
+  do_default_install
+
+  pushd "${pkg_prefix}/bin" >/dev/null
+  for bin in {depmod,insmod,lsmod,modinfo,modprobe,rmmod}; do
+    ln -s kmod "$bin"
+  done
+  popd >/dev/null
+}
+
 do_end() {
   if [[ -n "${_clean_file}" ]]; then
     rm -f /usr/bin/file

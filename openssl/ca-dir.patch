@@ -43,3 +43,16 @@ diff -ur openssl-1.0.2e.orig/apps/openssl.cnf openssl-1.0.2e/apps/openssl.cnf
  serial		= $dir/serial 		# The current serial number
  crlnumber	= $dir/crlnumber	# the current crl number
  					# must be commented out to leave a V1 CRL
+--- openssl-1.0.2j.orig/crypto/cryptlib.h	2016-09-26 09:49:07.000000000 +0000
++++ openssl-1.0.2j/crypto/cryptlib.h	2017-07-11 15:59:45.444998911 +0000
+@@ -81,8 +81,8 @@
+ 
+ # ifndef OPENSSL_SYS_VMS
+ #  define X509_CERT_AREA          OPENSSLDIR
+-#  define X509_CERT_DIR           OPENSSLDIR "/certs"
+-#  define X509_CERT_FILE          OPENSSLDIR "/cert.pem"
++#  define X509_CERT_DIR           "@cacerts_prefix@/ssl/certs"
++#  define X509_CERT_FILE          "@cacerts_prefix@/ssl/cert.pem"
+ #  define X509_PRIVATE_DIR        OPENSSLDIR "/private"
+ # else
+ #  define X509_CERT_AREA          "SSLROOT:[000000]"

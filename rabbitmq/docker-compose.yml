@@ -1,0 +1,9 @@
+version: '2'
+services:
+  rabbitmq:
+    image: core/rabbitmq
+  rabbitmq2:
+    image: core/rabbitmq
+    links:
+      - rabbitmq
+    command: start core/rabbitmq --peer rabbitmq --bind rabbitmq:rabbitmq.default
