@@ -2,6 +2,9 @@
 
 [Full history](https://github.com/habitat-sh/core-plans/commits/master/scaffolding-ruby)
 
+# 0.8.7 (10-20-2017)
+- provide a default database config for asset compilation
+
 ## 0.8.0 (05-18-2017)
 
 ## Features & Enhancements
