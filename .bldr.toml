@@ -180,6 +180,8 @@ plan_path = "flex"
 plan_path = "fontconfig"
 [foulkon]
 plan_path = "foulkon"
+[fping]
+plan_path = "fping"
 [freetype]
 plan_path = "freetype"
 [galera]
