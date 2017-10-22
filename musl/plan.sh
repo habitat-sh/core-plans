@@ -1,10 +1,12 @@
 pkg_name=musl
 pkg_origin=core
-pkg_version=1.1.14
+pkg_version=1.1.17
 pkg_license=('mit')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=http://www.musl-libc.org/releases/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=35f6c00c84a6091bd5dab29eedde7508dae755ead92dcc0239f3677d1055b9b5
+pkg_description="musl is a new standard library to power a new generation of Linux-based devices. musl is lightweight, fast, simple, free, and strives to be correct in the sense of standards-conformance and safety."
+pkg_upstream_url=https://www.musl-libc.org/
+pkg_shasum=c8aa51c747a600704bed169340bf3e03742ceee027ea0051dd4b6cc3c5f51464
 pkg_deps=()
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed)
 pkg_bin_dirs=(bin)
@@ -21,16 +23,16 @@ do_prepare() {
 
 do_build() {
   ./configure \
-    --prefix=$pkg_prefix \
-    --syslibdir=$pkg_prefix/lib
-  make -j$(nproc)
+    --prefix="$pkg_prefix" \
+    --syslibdir="$pkg_prefix/lib"
+  make -j "$(nproc)"
 }
 
 do_install() {
   do_default_install
 
   # Install license
-  install -Dm0644 COPYRIGHT $pkg_prefix/share/licenses/COPYRIGHT
+  install -Dm0644 COPYRIGHT "$pkg_prefix/share/licenses/COPYRIGHT"
 }
 
 
