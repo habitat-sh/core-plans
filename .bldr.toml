@@ -1,0 +1,840 @@
+[7zip]
+plan_path = "7zip"
+[acbuild]
+plan_path = "acbuild"
+[acl]
+plan_path = "acl"
+[ant]
+plan_path = "ant"
+[apr]
+plan_path = "apr"
+[apr-util]
+plan_path = "apr-util"
+[artifactory-pro]
+plan_path = "artifactory-pro"
+[aspcud]
+plan_path = "aspcud"
+[attr]
+plan_path = "attr"
+[autoconf]
+plan_path = "autoconf"
+[autogen]
+plan_path = "autogen"
+[automake]
+plan_path = "automake"
+[aws-cli]
+plan_path = "aws-cli"
+[bash]
+plan_path = "bash"
+[bash-completion]
+plan_path = "bash-completion"
+[bash-static]
+plan_path = "bash-static"
+[bats]
+plan_path = "bats"
+[bc]
+plan_path = "bc"
+[bdwgc]
+plan_path = "bdwgc"
+[binutils]
+plan_path = "binutils"
+[bison]
+plan_path = "bison"
+[bison2]
+plan_path = "bison2"
+[boost]
+plan_path = "boost"
+[bundler]
+plan_path = "bundler"
+[busybox]
+plan_path = "busybox"
+[busybox-static]
+plan_path = "busybox-static"
+[bzip2]
+plan_path = "bzip2"
+[bzip2-musl]
+plan_path = "bzip2-musl"
+[cacerts]
+plan_path = "cacerts"
+[caddy]
+plan_path = "caddy"
+[cairo]
+plan_path = "cairo"
+[camlp4]
+plan_path = "camlp4"
+[cargo-nightly]
+plan_path = "cargo-nightly"
+[ccache]
+plan_path = "ccache"
+[check]
+plan_path = "check"
+[clens]
+plan_path = "clens"
+[clingo]
+plan_path = "clingo"
+[cmake]
+plan_path = "cmake"
+[composer]
+plan_path = "composer"
+[consul]
+plan_path = "consul"
+[coreutils]
+plan_path = "coreutils"
+[coreutils-static]
+plan_path = "coreutils-static"
+[cpanminus]
+plan_path = "cpanminus"
+[cpio]
+plan_path = "cpio"
+[cppunit]
+plan_path = "cppunit"
+[cpputest]
+plan_path = "cpputest"
+[curator]
+plan_path = "curator"
+[curl]
+plan_path = "curl"
+[curl-static-musl]
+plan_path = "curl-static-musl"
+[cyrus-sasl]
+plan_path = "cyrus-sasl"
+[db]
+plan_path = "db"
+[dbus]
+plan_path = "dbus"
+[dd-agent]
+plan_path = "dd-agent"
+[dejagnu]
+plan_path = "dejagnu"
+[dep]
+plan_path = "dep"
+[devicemapper]
+plan_path = "devicemapper"
+[dex]
+plan_path = "dex"
+[diffutils]
+plan_path = "diffutils"
+[docker]
+plan_path = "docker"
+[docutils]
+plan_path = "docutils"
+[dosfstools]
+plan_path = "dosfstools"
+[dotnet-core]
+plan_path = "dotnet-core"
+[dotnet-core-lts]
+plan_path = "dotnet-core-lts"
+[dotnet-core-sdk]
+plan_path = "dotnet-core-sdk"
+[dotnet-core-sdk-lts]
+plan_path = "dotnet-core-sdk-lts"
+[doxygen]
+plan_path = "doxygen"
+[dpkg]
+plan_path = "dpkg"
+[drupal]
+plan_path = "drupal"
+[drush]
+plan_path = "drush"
+[e2fsprogs]
+plan_path = "e2fsprogs"
+[ed]
+plan_path = "ed"
+[elasticsearch]
+plan_path = "elasticsearch"
+[elfutils]
+plan_path = "elfutils"
+[elixir]
+plan_path = "elixir"
+[envdir]
+plan_path = "envdir"
+[erlang]
+plan_path = "erlang"
+[erlang16]
+plan_path = "erlang16"
+[erlang18]
+plan_path = "erlang18"
+[erlang19]
+plan_path = "erlang19"
+[etcd]
+plan_path = "etcd"
+[eudev]
+plan_path = "eudev"
+[expat]
+plan_path = "expat"
+[expect]
+plan_path = "expect"
+[ffmpeg]
+plan_path = "ffmpeg"
+[file]
+plan_path = "file"
+[findutils]
+plan_path = "findutils"
+[fish]
+plan_path = "fish"
+[fixesproto]
+plan_path = "fixesproto"
+[flatbuffers]
+plan_path = "flatbuffers"
+[flex]
+plan_path = "flex"
+[fontconfig]
+plan_path = "fontconfig"
+[foulkon]
+plan_path = "foulkon"
+[fping]
+plan_path = "fping"
+[freetype]
+plan_path = "freetype"
+[galera]
+plan_path = "galera"
+[gawk]
+plan_path = "gawk"
+[gcc]
+plan_path = "gcc"
+[gcc-libs]
+plan_path = "gcc-libs"
+[gdb]
+plan_path = "gdb"
+[gdbm]
+plan_path = "gdbm"
+[gecode]
+plan_path = "gecode"
+[geoip]
+plan_path = "geoip"
+[gettext]
+plan_path = "gettext"
+[giflib]
+plan_path = "giflib"
+[gifsicle]
+plan_path = "gifsicle"
+[git]
+plan_path = "git"
+[github_changelog_generator]
+plan_path = "github_changelog_generator"
+[glib]
+plan_path = "glib"
+[glibc]
+plan_path = "glibc"
+[gmp]
+plan_path = "gmp"
+[gnatsd]
+plan_path = "gnatsd"
+[gnupg]
+plan_path = "gnupg"
+[gnupg-static]
+plan_path = "gnupg-static"
+[go]
+plan_path = "go"
+[go14]
+plan_path = "go14"
+[go17]
+plan_path = "go17"
+[gox]
+plan_path = "gox"
+[gperf]
+plan_path = "gperf"
+[gpgme]
+plan_path = "gpgme"
+[gradle]
+plan_path = "gradle"
+[grafana]
+plan_path = "grafana"
+[graphviz]
+plan_path = "graphviz"
+[grep]
+plan_path = "grep"
+[groff]
+plan_path = "groff"
+[grub]
+plan_path = "grub"
+[gsl]
+plan_path = "gsl"
+[guile]
+plan_path = "guile"
+[gzip]
+plan_path = "gzip"
+[handlebars-cmd]
+plan_path = "handlebars-cmd"
+[haproxy]
+plan_path = "haproxy"
+[harfbuzz]
+plan_path = "harfbuzz"
+[htop]
+plan_path = "htop"
+[httpd]
+plan_path = "httpd"
+[iana-etc]
+plan_path = "iana-etc"
+[icu]
+plan_path = "icu"
+[icu52]
+plan_path = "icu52"
+[icu56]
+plan_path = "icu56"
+[imagemagick]
+plan_path = "imagemagick"
+[inetutils]
+plan_path = "inetutils"
+[inputproto]
+plan_path = "inputproto"
+[intltool]
+plan_path = "intltool"
+[iproute2]
+plan_path = "iproute2"
+[iptables]
+plan_path = "iptables"
+[jbigkit]
+plan_path = "jbigkit"
+[jdk7]
+plan_path = "jdk7"
+[jdk8]
+plan_path = "jdk8"
+[jemalloc]
+plan_path = "jemalloc"
+[jenkins]
+plan_path = "jenkins"
+[jetty]
+plan_path = "jetty"
+[jffi]
+plan_path = "jffi"
+[jfrog-cli]
+plan_path = "jfrog-cli"
+[jo]
+plan_path = "jo"
+[jq-static]
+plan_path = "jq-static"
+[jre7]
+plan_path = "jre7"
+[jre8]
+plan_path = "jre8"
+[jruby]
+plan_path = "jruby"
+[jruby1]
+plan_path = "jruby1"
+[journalbeat]
+journalbeat = "journalbeat"
+[kafka]
+plan_path = "kafka"
+[kbproto]
+plan_path = "kbproto"
+[kibana]
+plan_path = "kibana"
+[kmod]
+plan_path = "kmod"
+[krb5]
+plan_path = "krb5"
+[kubernetes]
+plan_path = "kubernetes"
+[lcms2]
+plan_path = "lcms2"
+[less]
+plan_path = "less"
+[leveldb]
+plan_path = "leveldb"
+[libaio]
+plan_path = "libaio"
+[libarchive]
+plan_path = "libarchive"
+[libarchive-musl]
+plan_path = "libarchive-musl"
+[libassuan]
+plan_path = "libassuan"
+[libatomic_ops]
+plan_path = "libatomic_ops"
+[libbsd]
+plan_path = "libbsd"
+[libcap]
+plan_path = "libcap"
+[libcap-ng]
+plan_path = "libcap-ng"
+[libcxx]
+plan_path = "libcxx"
+[libedit]
+plan_path = "libedit"
+[liberation-fonts-ttf]
+plan_path = "liberation-fonts-ttf"
+[libev]
+plan_path = "libev"
+[libevent]
+plan_path = "libevent"
+[libffi]
+plan_path = "libffi"
+[libgcrypt]
+plan_path = "libgcrypt"
+[libghthash]
+plan_path = "libghthash"
+[libgpg-error]
+plan_path = "libgpg-error"
+[libice]
+plan_path = "libice"
+[libiconv]
+plan_path = "libiconv"
+[libidn]
+plan_path = "libidn"
+[libjpeg-turbo]
+plan_path = "libjpeg-turbo"
+[libksba]
+plan_path = "libksba"
+[libmpc]
+plan_path = "libmpc"
+[libossp-uuid]
+plan_path = "libossp-uuid"
+[libpcap]
+plan_path = "libpcap"
+[libpipeline]
+plan_path = "libpipeline"
+[libpng]
+plan_path = "libpng"
+[libpthread-stubs]
+plan_path = "libpthread-stubs"
+[libressl]
+plan_path = "libressl"
+[libressl-musl]
+plan_path = "libressl-musl"
+[libscrypt]
+plan_path = "libscrypt"
+[libseccomp]
+plan_path = "libseccomp"
+[libsm]
+plan_path = "libsm"
+[libsodium]
+plan_path = "libsodium"
+[libsodium-musl]
+plan_path = "libsodium-musl"
+[libtermkey]
+plan_path = "libtermkey"
+[libtiff]
+plan_path = "libtiff"
+[libtool]
+plan_path = "libtool"
+[libunistring]
+plan_path = "libunistring"
+[libunwind]
+plan_path = "libunwind"
+[libvterm]
+plan_path = "libvterm"
+[libwebp]
+plan_path = "libwebp"
+[libxau]
+plan_path = "libxau"
+[libxcb]
+plan_path = "libxcb"
+[libxdmcp]
+plan_path = "libxdmcp"
+[libxext]
+plan_path = "libxext"
+[libxfixes]
+plan_path = "libxfixes"
+[libxi]
+plan_path = "libxi"
+[libxml2]
+plan_path = "libxml2"
+[libxmu]
+plan_path = "libxmu"
+[libxrender]
+plan_path = "libxrender"
+[libxslt]
+plan_path = "libxslt"
+[libxt]
+plan_path = "libxt"
+[libxtst]
+plan_path = "libxtst"
+[libyajl2]
+plan_path = "libyajl2"
+[libyaml]
+plan_path = "libyaml"
+[linux]
+plan_path = "linux"
+[linux-headers]
+plan_path = "linux-headers"
+[linux-headers-musl]
+plan_path = "linux-headers-musl"
+[linux-pam]
+plan_path = "linux-pam"
+[llvm]
+plan_path = "llvm"
+[local-lib]
+plan_path = "local-lib"
+[logback]
+plan_path = "logback"
+[logstash]
+plan_path = "logstash"
+[logstash2]
+plan_path = "logstash2"
+[lsof]
+plan_path = "lsof"
+[lsyncd]
+plan_path = "lsyncd"
+[lttng-ust]
+plan_path = "lttng-ust"
+[lua]
+plan_path = "lua"
+[lynx]
+plan_path = "lynx"
+[lz4]
+plan_path = "lz4"
+[lzip]
+plan_path = "lzip"
+[lzo]
+plan_path = "lzo"
+[lzop]
+plan_path = "lzop"
+[m4]
+plan_path = "m4"
+[make]
+plan_path = "make"
+[man-db]
+plan_path = "man-db"
+[man-pages]
+plan_path = "man-pages"
+[mariadb]
+plan_path = "mariadb"
+[maven]
+plan_path = "maven"
+[mawk]
+plan_path = "mawk"
+[mc]
+plan_path = "mc"
+[memcached]
+plan_path = "memcached"
+[mention-bot]
+plan_path = "mention-bot"
+[mercurial]
+plan_path = "mercurial"
+[mg]
+plan_path = "mg"
+[mongo-tools]
+plan_path = "mongo-tools"
+[mongodb]
+plan_path = "mongodb"
+[mpfr]
+plan_path = "mpfr"
+[mssql]
+plan_path = "mssql"
+[musl]
+plan_path = "musl"
+[mysql]
+plan_path = "mysql"
+[mysql-client]
+plan_path = "mysql-client"
+[nasm]
+plan_path = "nasm"
+[nats-streaming-server]
+plan_path = "nats-streaming-server"
+[nats-top]
+plan_path = "nats-top"
+[ncdu]
+plan_path = "ncdu"
+[ncurses]
+plan_path = "ncurses"
+[net-tools]
+plan_path = "net-tools"
+[netcat]
+plan_path = "netcat"
+[netcat-openbsd]
+plan_path = "netcat-openbsd"
+[nghttp2]
+plan_path = "nghttp2"
+[nginx]
+plan_path = "nginx"
+[ninja]
+plan_path = "ninja"
+[node]
+plan_path = "node"
+[node8]
+plan_path = "node8"
+[node_exporter]
+plan_path = "node_exporter"
+[npth]
+plan_path = "npth"
+[nspr]
+plan_path = "nspr"
+[nss]
+plan_path = "nss"
+[numactl]
+plan_path = "numactl"
+[ocaml]
+plan_path = "ocaml"
+[ocamlbuild]
+plan_path = "ocamlbuild"
+[omniORB]
+plan_path = "omniORB"
+[opam]
+plan_path = "opam"
+[openjpeg]
+plan_path = "openjpeg"
+[openldap]
+plan_path = "openldap"
+[openresty]
+plan_path = "openresty"
+[openssh]
+plan_path = "openssh"
+[openssl]
+plan_path = "openssl"
+[openssl-musl]
+plan_path = "openssl-musl"
+[openvpn]
+plan_path = "openvpn"
+[packer]
+plan_path = "packer"
+[pango]
+plan_path = "pango"
+[patch]
+plan_path = "patch"
+[patchelf]
+plan_path = "patchelf"
+[pax-utils]
+plan_path = "pax-utils"
+[pcre]
+plan_path = "pcre"
+[percona-xtrabackup]
+plan_path = "percona-xtrabackup"
+[perl]
+plan_path = "perl"
+[phantomjs]
+plan_path = "phantomjs"
+[php]
+plan_path = "php"
+[php5]
+plan_path = "php5"
+[pixman]
+plan_path = "pixman"
+[pkg-config]
+plan_path = "pkg-config"
+[polipo]
+plan_path = "polipo"
+[ponysay]
+plan_path = "ponysay"
+[popt]
+plan_path = "popt"
+[postgresql]
+plan_path = "postgresql"
+[postgresql93]
+plan_path = "postgresql93"
+[postgresql94]
+plan_path = "postgresql94"
+[postgresql95]
+plan_path = "postgresql95"
+[powershell]
+plan_path = "powershell"
+[procps-ng]
+plan_path = "procps-ng"
+[prometheus]
+plan_path = "prometheus"
+[protobuf]
+plan_path = "protobuf"
+[protobuf-c]
+plan_path = "protobuf-c"
+[protobuf-cpp]
+plan_path = "protobuf-cpp"
+[protobuf-rust]
+plan_path = "protobuf-rust"
+[psmisc]
+plan_path = "psmisc"
+[pv]
+plan_path = "pv"
+[python]
+plan_path = "python"
+[python2]
+plan_path = "python2"
+[qemu]
+plan_path = "qemu"
+[R]
+plan_path = "R"
+[rabbitmq]
+plan_path = "rabbitmq"
+[rabbitmqadmin]
+plan_path = "rabbitmqadmin"
+[raml2html]
+plan_path = "raml2html"
+[re2c]
+plan_path = "re2c"
+[readline]
+plan_path = "readline"
+[rebar3]
+plan_path = "rebar3"
+[recordproto]
+plan_path = "recordproto"
+[redis]
+plan_path = "redis"
+[relx]
+plan_path = "relx"
+[renderproto]
+plan_path = "renderproto"
+[repo]
+plan_path = "repo"
+[rethinkdb]
+plan_path = "rethinkdb"
+[rngd]
+plan_path = "rngd"
+[rpm]
+plan_path = "rpm"
+[rq]
+plan_path = "rq"
+[rsync]
+plan_path = "rsync"
+[ruby]
+plan_path = "ruby"
+[runit]
+plan_path = "runit"
+[rust]
+plan_path = "rust"
+[sassc]
+plan_path = "sassc"
+[scaffolding-base]
+plan_path = "scaffolding-base"
+[scaffolding-go]
+plan_path = "scaffolding-go"
+[scaffolding-go17]
+plan_path = "scaffolding-go17"
+[scaffolding-gradle]
+plan_path = "scaffolding-gradle"
+[scaffolding-node]
+plan_path = "scaffolding-node"
+[scaffolding-ruby]
+plan_path = "scaffolding-ruby"
+[scons]
+plan_path = "scons"
+[sed]
+plan_path = "sed"
+[sensu]
+plan_path = "sensu"
+[serf]
+plan_path = "serf"
+[shadow]
+plan_path = "shadow"
+[shield]
+plan_path = "shield"
+[shield-agent]
+plan_path = "shield-agent"
+[shield-proxy]
+plan_path = "shield-proxy"
+[snappy]
+plan_path = "snappy"
+[socat]
+plan_path = "socat"
+[spark]
+plan_path = "spark"
+[sqitch]
+plan_path = "sqitch"
+[sqlite]
+plan_path = "sqlite"
+[storm]
+plan_path = "storm"
+[strace]
+plan_path = "strace"
+[stringencoders]
+plan_path = "stringencoders"
+[subversion]
+plan_path = "subversion"
+[sudo]
+plan_path = "sudo"
+[sumologic]
+plan_path = "sumologic"
+[swig]
+plan_path = "swig"
+[sysstat]
+plan_path = "sysstat"
+[systemd]
+plan_path = "systemd"
+[tar]
+plan_path = "tar"
+[tcl]
+plan_path = "tcl"
+[tcpdump]
+plan_path = "tcpdump"
+[telegraf]
+plan_path = "telegraf"
+[terraform]
+plan_path = "terraform"
+[texinfo]
+plan_path = "texinfo"
+[tmux]
+plan_path = "tmux"
+[tomcat-native]
+plan_path = "tomcat-native"
+[tomcat7]
+plan_path = "tomcat7"
+[tomcat8]
+plan_path = "tomcat8"
+[tor]
+plan_path = "tor"
+[traefik]
+plan_path = "traefik"
+[tree]
+plan_path = "tree"
+[ttyrec]
+plan_path = "ttyrec"
+[tzdata]
+plan_path = "tzdata"
+[unzip]
+plan_path = "unzip"
+[userspace-rcu]
+plan_path = "userspace-rcu"
+[util-linux]
+plan_path = "util-linux"
+[util-macros]
+plan_path = "util-macros"
+[valgrind]
+plan_path = "valgrind"
+[varnish]
+plan_path = "varnish"
+[vault]
+plan_path = "vault"
+[vde2]
+plan_path = "vde2"
+[vim]
+plan_path = "vim"
+[virtualenv]
+plan_path = "virtualenv"
+[vmtouch]
+plan_path = "vmtouch"
+[wal-e]
+plan_path = "wal-e"
+[wget]
+plan_path = "wget"
+[wget-static]
+plan_path = "wget-static"
+[which]
+plan_path = "which"
+[wordpress]
+plan_path = "wordpress"
+[wordpress-proxy]
+plan_path = "wordpress-proxy"
+[wrk]
+plan_path = "wrk"
+[xcb-proto]
+plan_path = "xcb-proto"
+[xextproto]
+plan_path = "xextproto"
+[xeyes]
+plan_path = "xeyes"
+[xlib]
+plan_path = "xlib"
+[xproto]
+plan_path = "xproto"
+[xtrans]
+plan_path = "xtrans"
+[xz]
+plan_path = "xz"
+[xz-musl]
+plan_path = "xz-musl"
+[yarn]
+plan_path = "yarn"
+[yasm]
+plan_path = "yasm"
+[zeromq]
+plan_path = "zeromq"
+[zip]
+plan_path = "zip"
+[zlib]
+plan_path = "zlib"
+[zlib-musl]
+plan_path = "zlib-musl"
+[zookeeper]
+plan_path = "zookeeper"
+[zsh]
+plan_path = "zsh"
+[zstd]
+plan_path = "zstd"
