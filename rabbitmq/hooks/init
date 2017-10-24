@@ -1,13 +1,8 @@
 #!/bin/bash
 
-echo 2>&1
+exec 2>&1
 
-source "{{pkg.svc_config_path}}/env"
-
-{{#if cfg.rabbitmq.management.enabled}}
-echo "Enabling management console"
-rabbitmq-plugins --offline enable rabbitmq_management
-{{else}}
-echo "Disabling management console"
-rabbitmq-plugins --offline disable rabbitmq_management
-{{/if}}
+if [ -f "{{pkg.svc_var_path}}/.erlang.cookie" ]; then
+  cp -Rv "{{pkg.svc_config_path}}/.erlang.cookie" "{{pkg.svc_var_path}}/.erlang.cookie"
+  chmod 400 "{{pkg.svc_var_path}}/.erlang.cookie"
+fi

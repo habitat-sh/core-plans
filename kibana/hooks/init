@@ -3,7 +3,7 @@
 exec 2>&1
 
 # Move directories that ship in the package into place
-for dir in config etc node_modules package.json src bin installedPlugins optimize tasks webpackShims
+for dir in config etc node_modules package.json src bin tasks webpackShims ui_framework plugins test
 do
   cp -r {{pkg.path}}/$dir {{pkg.svc_static_path}}/
 done

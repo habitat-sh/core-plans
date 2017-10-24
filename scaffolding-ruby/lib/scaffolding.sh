@@ -26,6 +26,8 @@ fi
 
 do_default_prepare() {
   local gem_dir gem_path
+  # The install prefix path for the app
+  scaffolding_app_prefix="$pkg_prefix/$app_prefix"
 
   # Determine Ruby engine, ABI version, and Gem path by running `ruby` itself.
   eval "$(ruby -rubygems -rrbconfig - <<-'EOF'
@@ -390,6 +392,7 @@ scaffolding_run_assets_precompile() {
     pushd "$scaffolding_app_prefix" > /dev/null
     if _rake -P --trace | grep -q '^rake assets:precompile$'; then
       build_line "Detected and running Rake 'assets:precompile'"
+      export DATABASE_URL=${DATABASE_URL:-"postgresql://nobody@nowhere/fake_db_to_appease_rails_env"}
       _rake assets:precompile
     fi
     popd > /dev/null
@@ -447,7 +450,7 @@ _setup_vars() {
   _bundler_version="$("$(pkg_path_for bundler)/bin/bundle" --version \
     | awk '{print $NF}')"
   # The install prefix path for the app
-  scaffolding_app_prefix="$pkg_prefix/app"
+  app_prefix="app"
   #
   : "${scaffolding_app_port:=8000}"
   # If `${scaffolding_env[@]` is not yet set, setup the hash
@@ -620,13 +623,13 @@ _update_bin_dirs() {
   pkg_bin_dirs=(
     ${pkg_bin_dir[@]}
     bin
-    $(basename "$scaffolding_app_prefix")/binstubs
+    $app_prefix/binstubs
   )
 }
 
 _update_svc_run() {
   if [[ -z "$pkg_svc_run" ]]; then
-    pkg_svc_run="$pkg_prefix/bin/${pkg_name}-web"
+    pkg_svc_run="${pkg_name}-web"
     build_line "Setting pkg_svc_run='$pkg_svc_run'"
   fi
 }

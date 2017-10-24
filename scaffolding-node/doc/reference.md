@@ -95,6 +95,7 @@ pkg_build_deps=(core/makesmall)
 By default the latest version of the [`core/node`][] package will be injected into your Plan's `pkg_deps` array. To specify a non-default version of Node.js, there are three locations you can do this:
 
 1. Use the [`engines.node`][package_json_engines] data structure in your app's `package.json`
+  * you can specify the version in these formats "5.0.0", "v5.0.0", "=5.0.0", ">=5.0.0", ">5.0.0","<=5.0.0","<5.0.0"
 2. Write an [`.nvmrc`][] in your app's root directory with the version of Node.js to use
 3. Set the `scaffolding_node_pkg` variable in your Plan with a valid Habitat package identifier corresponding to a package with a `node` program
 
@@ -177,6 +178,10 @@ scaffolding_pkg_manager=yarn
 ```
 
 This would force the Scaffolding code to use Yarn over npm, even if no `yarn.lock` file was present.
+
+## Build and Post-Build scripts
+
+This scaffolding does support running build scripts, etc. that are defined in package.json. However, due to a [known issue](https://github.com/habitat-sh/habitat/issues/1547), you will need to run the Habitat services as "root" rather than the default "hab" user.  You can do this by adding this line to your plan.sh
 
 ## Process Bins
 

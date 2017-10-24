@@ -2,7 +2,7 @@ pkg_name=traefik
 pkg_description="a modern reverse proxy"
 pkg_upstream_url="https://traefik.io"
 pkg_origin=core
-pkg_version="v1.3.6"
+pkg_version="v1.4.0"
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=("MIT")
 pkg_source="http://github.com/containous/traefik"
@@ -39,14 +39,14 @@ do_download() {
   build_line "go get -d github.com/containous/traefik"
   go get -d github.com/containous/traefik
 
-  pushd "$scaffolding_go_src_path"
+  pushd "${scaffolding_go_gopath:?}/src/github.com/containous/traefik"
     build_line "checking out $pkg_version"
     git reset --hard $pkg_version
   popd
 }
 
 do_build() {
-  pushd "$scaffolding_go_src_path"
+  pushd "${scaffolding_go_gopath:?}/src/github.com/containous/traefik"
     build_line "building webui static assets"
     pushd webui
       yarn install
@@ -74,5 +74,5 @@ do_build() {
 
 do_install() {
   build_line "copying traefik binary"
-  cp "${scaffolding_go_src_path:?}/dist/traefik" "${pkg_prefix}/bin"
+  cp "${scaffolding_go_gopath:?}/src/github.com/containous/traefik/dist/traefik" "${pkg_prefix}/bin"
 }

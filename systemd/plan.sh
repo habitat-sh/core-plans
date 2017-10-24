@@ -2,35 +2,46 @@ pkg_name=systemd
 pkg_origin=core
 pkg_version="233"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="systemd is an init system used in Linux distributions to \
+bootstrap the user space. Subsequently to booting, it is used to manage system \
+processes."
 pkg_license=('LGPL-2.1')
 pkg_source="https://github.com/systemd/${pkg_name}/archive/v${pkg_version}.tar.gz"
+pkg_upstream_url="https://github.com/systemd/systemd"
 pkg_shasum="8b3e99da3d4164b66581830a7f2436c0c8fe697b5fbdc3927bdb960646be0083"
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib var/lib usr/lib)
-pkg_deps=(core/glibc core/util-linux core/libcap)
+pkg_deps=(
+  core/glibc
+  core/libcap
+  core/lz4
+  core/util-linux
+)
 pkg_svc_user=root
 pkg_svc_group=root
 pkg_build_deps=(
-  core/glibc
-  core/m4
-  core/pkg-config
-  core/gcc
-  core/gcc-libs
   core/autoconf
   core/automake
-  core/make
-  core/libtool
-  core/intltool
-  core/util-linux
-  core/gettext
-  core/perl
-  core/local-lib
   core/cpanminus
-  core/expat
-  core/gperf
-  core/libxslt
   core/dbus
+  core/expat
+  core/gcc
+  core/gcc-libs
+  core/gettext
+  core/glibc
+  core/gperf
+  core/intltool
+  core/libtool
+  core/libxslt
+  core/local-lib
+  core/lz4
+  core/m4
+  core/make
+  core/perl
+  core/pkg-config
+  core/util-linux
+  core/xz
 )
 
 do_prepare() {

@@ -1,40 +1,39 @@
-
 cluster.name: {{cfg.cluster.name}}
 
 cluster.routing.allocation.node_concurrent_recoveries: {{cfg.cluster.routing.allocation.node_concurrent_recoveries}}
 cluster.routing.allocation.node_initial_primaries_recoveries: {{cfg.cluster.routing.allocation.node_initial_primaries_recoveries}}
 cluster.routing.allocation.same_shard.host: {{cfg.cluster.routing.allocation.same_shard-host}}
 
-{{~#if cfg.cluster.routing.allocation.awareness-attributes}}
+{{#if cfg.cluster.routing.allocation.awareness-attributes ~}}
 cluster.routing.allocation.awareness.attributes: {{cfg.cluster.routing.allocation.awareness-attributes}}
-{{~/if}}
+{{/if ~}}
 
-{{~#if cfg.node.name}}
+{{#if cfg.node.name ~}}
 node.name: {{cfg.node.name}}
-{{~/if}}
+{{/if ~}}
 node.max_local_storage_nodes: {{cfg.node.max_local_storage_nodes}}
 
-{{~#if cfg.node.rack_id}}
+{{#if cfg.node.rack_id ~}}
 node.rack_id: {{cfg.node.rack_id}}
-{{~/if}}
-{{~#if cfg.node.zone}}
+{{/if ~}}
+{{#if cfg.node.zone ~}}
 node.zone: {{cfg.node.zone}}
-{{~/if}}
-{{~#if cfg.node.master}}
+{{/if ~}}
+{{#if cfg.node.master ~}}
 node.master: {{cfg.node.master}}
-{{~/if}}
-{{~#if cfg.node.data}}
+{{/if ~}}
+{{#if cfg.node.data ~}}
 node.data: {{cfg.node.data}}
-{{~/if}}
+{{/if ~}}
 
 path.logs: {{pkg.svc_var_path}}/logs
 path.data: {{pkg.svc_data_path}}/{{cfg.path.data}}
 
 indices.recovery.max_bytes_per_sec: {{cfg.indices.recovery.max_bytes_per_sec}}
 
-{{~#if cfg.indices.fielddata.cache-size}}
+{{#if cfg.indices.fielddata.cache-size ~}}
 indices.fielddata.cache.size: {{cfg.indices.fielddata.cache-size}}
-{{~/if}}
+{{/if ~}}
 
 indices.breaker.total.limit: {{cfg.indices.breaker.total-limit}}
 indices.breaker.fielddata.limit: {{cfg.indices.breaker.fielddata-limit}}
@@ -48,22 +47,22 @@ network.host: {{cfg.network.host}}
 http.port: {{cfg.network.port}}
 transport.tcp.port: {{cfg.transport.port}}
 discovery.zen.fd.ping_timeout: {{cfg.discovery.zen_fd_ping_timeout}}
-{{#if bind.has_elasticsearch ~}}
+{{#if bind.elasticsearch ~}}
 discovery.zen.ping.unicast.hosts: [{{#each bind.elasticsearch.members ~}} "{{sys.ip}}", {{/each ~}}]
 {{else ~}}
 discovery.zen.ping.unicast.hosts: {{cfg.discovery.ping_unicast_hosts}}
 {{/if ~}}
 discovery.zen.minimum_master_nodes: {{cfg.discovery.minimum_master_nodes}}
 
-{{~#if cfg.gateway.recover_after_nodes}}
+{{#if cfg.gateway.recover_after_nodes ~}}
 gateway.recover_after_nodes: {{cfg.gateway.recover_after_nodes}}
-{{~/if}}
+{{/if ~}}
 gateway.expected_nodes: {{cfg.gateway.expected_nodes}}
 gateway.expected_master_nodes: {{cfg.gateway.expected_master_nodes}}
 gateway.expected_data_nodes: {{cfg.gateway.expected_data_nodes}}
-{{~#if cfg.gateway.recover_after_time}}
+{{#if cfg.gateway.recover_after_time ~}}
 gateway.recover_after_time: {{cfg.gateway.recover_after_time}}
-{{~/if}}
+{{/if ~}}
 
 action.destructive_requires_name: {{cfg.action.destructive_requires_name}}
 

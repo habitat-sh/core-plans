@@ -14,6 +14,7 @@ To become a maintainer, open a pull request to this list.
 ## Maintainers
 
 * [Seth Chisamore](https://github.com/schisamo)
+* [Steven Danna](https://github.com/stevendanna)
 * [Elliott Davis](https://github.com/elliott-davis)
 * [Mike Fiedler](https://github.com/miketheman)
 * [Scott Macfarlane](https://github.com/smacfarlane)
@@ -25,3 +26,7 @@ To become a maintainer, open a pull request to this list.
 * [Jamie Winsor](https://github.com/reset)
 * [Salim Afiune](https://github.com/afiune)
 * [John Jelinek IV](https://github.com/johnjelinek)
+* [Robb Kidd](https://github.com/robbkidd)
+* [Thom May](https://github.com/thommay)
+* [Paul Mooring](https://github.com/paulmooring)
+* [Josh Brand](https://github.com/joshbrand)
