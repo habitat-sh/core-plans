@@ -1,0 +1,19 @@
+#!/bin/bash
+
+exec 2>&1
+
+source "{{pkg.svc_config_path}}/env"
+
+{{#if cfg.rabbitmq.cluster.enabled ~}}
+# Make sure that RabbitMQ started before we attempt to cluster
+rabbitmqctl wait {{pkg.svc_var_path}}/db/rabbit@{{sys.hostname}}.pid
+{{#if svc.me.follower ~}}
+{{#with svc.leader ~}}
+rabbitmqctl stop_app
+rabbitmqctl join_cluster rabbit@{{sys.hostname}}
+rabbitmqctl start_app
+{{/with ~}}
+{{/if ~}}
+{{/if ~}}
+# sending TERM to ensure configuration is fully applied
+kill -SIGTERM `cat {{pkg.svc_pid_file}}`

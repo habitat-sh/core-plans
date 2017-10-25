@@ -2,17 +2,27 @@
 
 source "{{pkg.svc_config_path}}/env"
 
-{{#if cfg.rabbitmq.management.enabled}}
-echo "Enabling management console"
-rabbitmq-plugins --offline enable rabbitmq_management
-{{else}}
-echo "Disabling management console"
-rabbitmq-plugins --offline disable rabbitmq_management
-{{/if}}
+{{#if cfg.erlang.cookie ~}}
+# We do this in the run hook because we need to ensure that the cookie
+# the Erlang VM starts with is the same cookie throughout the
+# lifecycle, including reconfiguration.
+
+echo "Creating Erlang Cookie from configuration"
+# we cannot cp because the file will be read-only, so make it writable first
+
+chmod 0600 -v {{pkg.svc_var_path}}/.erlang.cookie
+cp -v {{pkg.svc_config_path}}/.erlang.cookie {{pkg.svc_var_path}}/.erlang.cookie
+chmod 0400 {{pkg.svc_var_path}}/.erlang.cookie
+{{/if ~}}
 
 # https://www.youtube.com/watch?v=wGhQ2BDt4VE
+#
+# use shutdown instead of stop to ensure that the Erlang VM is
+# completely halted and isn't using a stale cookie.
+#
+# No one wants a stale cookie.
 kill_rabbit() {
-  rabbitmqctl stop
+  rabbitmqctl shutdown
   exit
 }
 
