@@ -1,11 +1,13 @@
 pkg_name=libxslt
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_version=1.1.28
+pkg_description="Libxslt is the XSLT C library developed for the GNOME project"
+pkg_upstream_url=http://xmlsoft.org/XSLT/
+pkg_version=1.1.31
 pkg_origin=core
 pkg_license=('libxslt')
-pkg_source=ftp://xmlsoft.org/libxslt/libxslt-${pkg_version}.tar.gz
+pkg_source=http://xmlsoft.org/sources/${pkg_name}-${pkg_version}.tar.gz
 pkg_filename=${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=5fc7151a57b89c03d7b825df5a0fae0a8d5f05674c0e7cf2937ecec4d54a028c
+pkg_shasum=db25e96b6b801144277e67c05b10560ac09dfff82ccd53a154ce86e43622f3ab
 pkg_deps=(core/glibc core/libxml2 core/zlib)
 pkg_build_deps=(core/coreutils core/patch core/make core/gcc)
 pkg_bin_dirs=(bin)
