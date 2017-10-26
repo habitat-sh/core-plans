@@ -21,8 +21,8 @@
         entry: ./bin/check-default-variables.sh
         language: system
         files: plan.sh$
-    # -   id: check-bad-patterns
-    #     name: Check for bad patterns in Hook files
-    #     entry: ./bin/check-bad-patterns.sh
-    #     language: system
-    #     files: hooks/*
+    -   id: check-bad-patterns
+        name: Check for bad patterns in Hook files
+        entry: ./bin/check-bad-patterns.sh
+        language: system
+        files: hooks/*
