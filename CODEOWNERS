@@ -115,6 +115,7 @@ jdk8 @rsertelon
 jre7 @rsertelon
 jre8 @rsertelon
 monit @rsertelon
+mosquitto @rsertelon
 pango @rsertelon
 rabbitmqadmin @predominant
 shared-mime-info @rsertelon
