@@ -104,3 +104,4 @@ mg @fnichol
 # This list shall be alphabetical, for sanity purposes.
 
 rabbitmqadmin @predominant
+zlib-static @rsertelon
