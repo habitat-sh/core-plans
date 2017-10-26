@@ -1,0 +1,9 @@
+#!{{pkgPathFor "core/bash"}}/bin/bash
+
+exec 2>&1
+
+export CONFIG_FILE={{pkg.svc_config_path}}/monit.conf
+
+# Monit won't start if permissions are not set to 600
+chmod 600 $CONFIG_FILE
+exec monit -I -c $CONFIG_FILE

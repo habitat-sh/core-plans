@@ -545,6 +545,11 @@ plan_path = "mention-bot"
 plan_path = "mercurial"
 [mg]
 plan_path = "mg"
+[monit]
+plan_path = "monit"
+paths = [
+  "monit/*",
+]
 [mongo-tools]
 plan_path = "mongo-tools"
 [mongodb]
