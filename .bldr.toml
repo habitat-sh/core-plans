@@ -566,6 +566,8 @@ paths = [
 plan_path = "mongo-tools"
 [mongodb]
 plan_path = "mongodb"
+[mosquitto]
+plan_path = "mosquitto"
 [mpfr]
 plan_path = "mpfr"
 [mssql]
