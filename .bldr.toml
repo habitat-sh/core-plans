@@ -30,6 +30,9 @@ plan_path = "bash"
 plan_path = "bash-completion"
 [bash-static]
 plan_path = "bash-static"
+paths = [
+  "bash/*",
+]
 [bats]
 plan_path = "bats"
 [bc]
@@ -50,10 +53,16 @@ plan_path = "bundler"
 plan_path = "busybox"
 [busybox-static]
 plan_path = "busybox-static"
+paths = [
+  "busybox/*",
+]
 [bzip2]
 plan_path = "bzip2"
 [bzip2-musl]
 plan_path = "bzip2-musl"
+paths = [
+  "bzip2/*",
+]
 [cacerts]
 plan_path = "cacerts"
 [caddy]
@@ -82,6 +91,9 @@ plan_path = "consul"
 plan_path = "coreutils"
 [coreutils-static]
 plan_path = "coreutils-static"
+paths = [
+  "coreutils/*",
+]
 [cpanminus]
 plan_path = "cpanminus"
 [cpio]
@@ -96,6 +108,9 @@ plan_path = "curator"
 plan_path = "curl"
 [curl-static-musl]
 plan_path = "curl-static-musl"
+paths = [
+  "curl/*",
+]
 [cyrus-sasl]
 plan_path = "cyrus-sasl"
 [db]
@@ -194,6 +209,9 @@ plan_path = "gawk"
 plan_path = "gcc"
 [gcc-libs]
 plan_path = "gcc-libs"
+paths = [
+  "gcc/*",
+]
 [gdb]
 plan_path = "gdb"
 [gdbm]
@@ -216,6 +234,9 @@ plan_path = "github_changelog_generator"
 plan_path = "glib"
 [glibc]
 plan_path = "glibc"
+paths = [
+  "tzdata/*",
+]
 [gmp]
 plan_path = "gmp"
 [gnatsd]
@@ -224,6 +245,9 @@ plan_path = "gnatsd"
 plan_path = "gnupg"
 [gnupg-static]
 plan_path = "gnupg-static"
+paths = [
+  "gnupg/*",
+]
 [go]
 plan_path = "go"
 [go14]
@@ -336,6 +360,9 @@ plan_path = "libaio"
 plan_path = "libarchive"
 [libarchive-musl]
 plan_path = "libarchive-musl"
+paths = [
+  "libarchive/*",
+]
 [libassuan]
 plan_path = "libassuan"
 [libatomic_ops]
@@ -390,6 +417,9 @@ plan_path = "libpthread-stubs"
 plan_path = "libressl"
 [libressl-musl]
 plan_path = "libressl-musl"
+paths = [
+  "libressl/*",
+]
 [libscrypt]
 plan_path = "libscrypt"
 [libseccomp]
@@ -400,6 +430,9 @@ plan_path = "libsm"
 plan_path = "libsodium"
 [libsodium-musl]
 plan_path = "libsodium-musl"
+paths = [
+  "libsodium/*",
+]
 [libtermkey]
 plan_path = "libtermkey"
 [libtiff]
@@ -542,6 +575,9 @@ plan_path = "ninja"
 plan_path = "node"
 [node8]
 plan_path = "node8"
+paths = [
+  "node/*",
+]
 [node_exporter]
 plan_path = "node_exporter"
 [npth]
@@ -572,6 +608,9 @@ plan_path = "openssh"
 plan_path = "openssl"
 [openssl-musl]
 plan_path = "openssl-musl"
+paths = [
+  "openssl/*",
+]
 [openvpn]
 plan_path = "openvpn"
 [packer]
@@ -610,10 +649,19 @@ plan_path = "popt"
 plan_path = "postgresql"
 [postgresql93]
 plan_path = "postgresql93"
+paths = [
+  "postgresql/*",
+]
 [postgresql94]
 plan_path = "postgresql94"
+paths = [
+  "postgresql/*",
+]
 [postgresql95]
 plan_path = "postgresql95"
+paths = [
+  "postgresql/*",
+]
 [powershell]
 plan_path = "powershell"
 [procps-ng]
@@ -794,6 +842,9 @@ plan_path = "wal-e"
 plan_path = "wget"
 [wget-static]
 plan_path = "wget-static"
+paths = [
+  "wget/*",
+]
 [which]
 plan_path = "which"
 [wordpress]
@@ -818,6 +869,9 @@ plan_path = "xtrans"
 plan_path = "xz"
 [xz-musl]
 plan_path = "xz-musl"
+paths = [
+  "xz/*",
+]
 [yarn]
 plan_path = "yarn"
 [yasm]
@@ -830,6 +884,9 @@ plan_path = "zip"
 plan_path = "zlib"
 [zlib-musl]
 plan_path = "zlib-musl"
+paths = [
+  "zlib/*",
+]
 [zookeeper]
 plan_path = "zookeeper"
 [zsh]
