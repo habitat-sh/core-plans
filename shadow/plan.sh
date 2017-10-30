@@ -1,10 +1,10 @@
 pkg_name=shadow
 pkg_origin=core
-pkg_version=4.2.1
+pkg_version=4.5
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('bsd')
-pkg_source=http://pkg-shadow.alioth.debian.org/releases/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=3b0893d1476766868cd88920f4f1231c4795652aa407569faff802bcda0f3d41
+pkg_source=https://github.com/shadow-maint/${pkg_name}/releases/download/${pkg_version}/${pkg_name}-${pkg_version}.tar.xz
+pkg_shasum=fc8c858381ad577a5c25ff5beb6ee60a34f8719c73e4e7c61e74188b4e54b741
 pkg_deps=(core/glibc core/attr core/acl)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
 pkg_bin_dirs=(bin)
@@ -39,6 +39,10 @@ do_build() {
     --without-selinux \
     --without-libpam
   make
+}
+
+do_check() {
+  make check
 }
 
 do_install() {
