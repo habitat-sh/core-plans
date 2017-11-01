@@ -11,13 +11,13 @@ source {{pkg.svc_config_path}}/functions.sh
 init_pgpass
 write_local_conf
 
-{{#if svc.me.follower }}
+{{#if svc.me.follower ~}}
 if [[ ! -f "{{pkg.svc_data_path}}/PG_VERSION" ]]; then
   bootstrap_replica_via_pg_basebackup
 fi
 
 cp {{pkg.svc_config_path}}/recovery.conf {{pkg.svc_data_path}}/
-{{/if}}
+{{/if ~}}
 
 ensure_dir_ownership
 

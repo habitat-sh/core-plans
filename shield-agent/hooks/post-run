@@ -11,24 +11,24 @@ export SHIELD_API_TOKEN
 SHIELD_CONFIG=$(mktemp --tmpdir auto.XXXXXX)
 trap "rm -rf ${SHIELD_CONFIG}" INT TERM QUIT EXIT
 
-{{ #if cfg.skip_ssl_verify }}
+{{#if cfg.skip_ssl_verify ~}}
 export SHIELD_SKIP_SSL_VERIFY=true
-{{ /if }}
+{{/if ~}}
 
 # Create a specific config file for shield-agent stuff, to avoid race
 # conditions in case we are colocated with shield-daemon.
 shield -c ${SHIELD_CONFIG} create-backend hab ${SHIELD_ENDPOINT}
 
-{{#if cfg.advertise_ip }}
+{{#if cfg.advertise_ip ~}}
 my_ip='{{cfg.advertise_ip}}'
-{{else}}
+{{else ~}}
 my_ip='{{sys.ip}}'
-{{/if}}
-{{#if cfg.advertise_port}}
+{{/if ~}}
+{{#if cfg.advertise_port ~}}
 my_port='{{cfg.advertise_port}}'
-{{else}}
+{{else ~}}
 my_port='{{cfg.port}}'
-{{/if}}
+{{/if ~}}
 
 provision() {
   local name=$1; shift
@@ -59,19 +59,19 @@ job() {
 EOF
 }
 
-{{ #each cfg.schedules }}
+{{#each cfg.schedules ~}}
 cat <<EOF | provision '{{@key}}' schedule
 {"name":"{{@key}}",
  "when":"{{this}}"}
 EOF
-{{ /each }}
-{{ #each cfg.retention-policies }}
+{{/each ~}}
+{{#each cfg.retention-policies ~}}
 cat <<EOF | provision '{{@key}}' policy
 {"name":"{{@key}}",
  "expires": {{this}} }
 EOF
-{{ /each }}
-{{ #each cfg.targets }}
+{{/each ~}}
+{{#each cfg.targets ~}}
 target_config_{{@index}}=$(cat <<EOF | tr -d [[:space:]] | sed 's/"/\\"/g'
 {{toJson config}}
 EOF
@@ -82,8 +82,8 @@ cat <<EOF | provision '{{name}}' target
  "endpoint": "$target_config_{{@index}}",
  "agent":    "$my_ip:$my_port"}
 EOF
-{{ /each }}
-{{ #each cfg.stores }}
+{{/each ~}}
+{{#each cfg.stores ~}}
 store_config_{{@index}}=$(cat <<EOF | tr -d [[:space:]] | sed 's/"/\\"/g'
 {{toJson config}}
 EOF
@@ -94,15 +94,15 @@ cat <<EOF | provision '{{name}}' store
  "endpoint" : "$store_config_{{@index}}",
  "agent":    "$my_ip:$my_port"}
 EOF
-{{ /each }}
+{{/each ~}}
 sleep 1
-{{ #each cfg.jobs }}
+{{#each cfg.jobs ~}}
 job '{{name}}' \
    '{{target}}'    \
    '{{store}}'     \
    '{{retention}}' \
    '{{schedule}}'
-{{ /each }}
+{{/each ~}}
 
 sleep 5
 echo "all done"
