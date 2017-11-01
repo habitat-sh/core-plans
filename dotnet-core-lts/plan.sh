@@ -36,9 +36,9 @@ do_unpack() {
 }
 
 do_prepare() {
-  find -type f -name 'dotnet' \
+  find . -type f -name 'dotnet' \
     -exec patchelf --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" --set-rpath "$LD_RUN_PATH" {} \;
-  find -type f -name '*.so*' \
+  find . -type f -name '*.so*' \
     -exec patchelf --set-rpath "$LD_RUN_PATH" {} \;
 }
 
