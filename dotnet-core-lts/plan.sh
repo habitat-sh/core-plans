@@ -30,7 +30,9 @@ pkg_bin_dirs=(bin)
 do_unpack() {
   # Extract into $pkg_dirname instead of straight into $HAB_CACHE_SRC_PATH.
   mkdir -p "$HAB_CACHE_SRC_PATH/$pkg_dirname"
-  tar xfz "$HAB_CACHE_SRC_PATH/$pkg_filename" -C "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+  tar xf "$HAB_CACHE_SRC_PATH/$pkg_filename" \
+    -C "$HAB_CACHE_SRC_PATH/$pkg_dirname" \
+    --no-same-owner
 }
 
 do_prepare() {
