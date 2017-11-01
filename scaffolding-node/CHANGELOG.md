@@ -2,6 +2,10 @@
 
 [Full history](https://github.com/habitat-sh/core-plans/commits/master/scaffolding-node)
 
+## 0.6.7 (10-31-2017)
+
+- Detect if both a package-lock.json and yarn.lock are present
+
 ## 0.6.6 (10-18-2017)
 
 - support prebuild and postbuild scripts
