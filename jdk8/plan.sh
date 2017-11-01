@@ -1,9 +1,9 @@
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_name=jdk8
-pkg_version=8u131
-pkg_source=http://download.oracle.com/otn-pub/java/jdk/${pkg_version}-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-${pkg_version}-linux-x64.tar.gz
-pkg_shasum=62b215bdfb48bace523723cdbb2157c665e6a25429c73828a32f00e587301236
+pkg_version=8u151
+pkg_source=http://download.oracle.com/otn-pub/java/jdk/${pkg_version}-b12/e758a0de34e24606bca991d704f6dcbf/jdk-${pkg_version}-linux-x64.tar.gz
+pkg_shasum=c78200ce409367b296ec39be4427f020e2c585470c4eed01021feada576f027f
 pkg_filename=jdk-${pkg_version}-linux-x64.tar.gz
 pkg_license=('Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX')
 pkg_description=('Oracle Java Development Kit. This package is made available to you to allow you to run your applications as provided in and subject to the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html')
