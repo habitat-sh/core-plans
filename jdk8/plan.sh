@@ -8,7 +8,7 @@ pkg_filename=jdk-${pkg_version}-linux-x64.tar.gz
 pkg_license=('Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX')
 pkg_description=('Oracle Java Development Kit. This package is made available to you to allow you to run your applications as provided in and subject to the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html')
 pkg_upstream_url=http://www.oracle.com/technetwork/java/javase/overview/index.html
-pkg_deps=(core/glibc core/gcc-libs)
+pkg_deps=(core/glibc core/gcc-libs core/xlib core/libxi core/libxext core/libxrender core/libxtst)
 pkg_build_deps=(core/patchelf core/file)
 pkg_bin_dirs=(bin jre/bin)
 pkg_lib_dirs=(lib lib/amd64)
@@ -66,7 +66,7 @@ do_install() {
   build_line "Setting interpreter for '${pkg_prefix}/bin/java' '$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2'"
   build_line "Setting rpath for '${pkg_prefix}/bin/java' to '$LD_RUN_PATH'"
 
-  export LD_RUN_PATH=$LD_RUN_PATH:$pkg_prefix/lib/amd64/jli:$pkg_prefix/lib/amd64:$pkg_prefix/jre/lib/amd64/jli:$pkg_prefix/jre/lib/amd64
+  export LD_RUN_PATH=$LD_RUN_PATH:$pkg_prefix/lib/amd64/jli:$pkg_prefix/lib/amd64:$pkg_prefix/jre/lib/amd64/jli:$pkg_prefix/jre/lib/amd64:$pkg_prefix/jre/lib/amd64/server
 
   find "$pkg_prefix"/bin "$pkg_prefix"/jre/bin -type f -executable \
     -exec sh -c 'file -i "$1" | grep -q "x-executable; charset=binary"' _ {} \; \
