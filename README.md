@@ -10,7 +10,20 @@ Participation in the Habitat community is governed by the [code of conduct](http
 
 You can browse all available packages that you can leverage and use, including packages built and maintained by community members both inside and outside of this core origin, in [Habitat Builder](https://bldr.habitat.sh/#/explore).
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for information about how to contribute to this project. Keep in mind that a core plan must by definition be abstracted to serve a wide array of users in service of their applications. If you are building a plan that is tailor made for your own unique application or specific use case, it is better suited to your own origin. If you think it would still be useful for a subset of other people, you can make it public in your own origin too. Community and external project owned origins are an awesome way to make, share, and use functionality that lives outside of and extends core plans.
+## Contributing
+
+  - [CONTRIBUTING.md](CONTRIBUTING.md)  
+    _Contains most of the information about contributing to this portion of the Habitat project._ 
+  - [MAINTAINERS.md](MAINTAINERS.md)  
+    _Contains the current list of Core-Plans maintainers_
+  - [CODEOWNERS](CODEOWNERS)  
+    _Contains Owner to Package mapping used in GitHub for AuthZ_
+  - [MEMBERSHIP.md](MEMBERSHIP.md)  
+    _Contains details of contributor roles in the Habitat community_
+
+**Keep in mind that a core plan must by definition be abstracted to serve a wide array of users in service of their applications.** 
+
+If you are building a plan that is tailor-made for your own unique application or specific use case, it is better suited to your own origin. If you think it would still be useful for a subset of other people, you can make it public in your own origin too. Community and external project owned origins are an awesome way to make, share, and use functionality that lives outside of and extends core plans.
 
 The code for the core components of Habitat itself is in the [habitat-sh/habitat](https://github.com/habitat-sh/habitat/) GitHub repository.
 
