@@ -1,5 +1,8 @@
 #!/bin/bash
 
+touch "{{pkg.svc_data_path}}/cursor-state"
+touch "{{pkg.svc_data_path}}/pending-queue"
+
 wget \
   --quiet \
   https://raw.githubusercontent.com/logzio/public-certificates/master/COMODORSADomainValidationSecureServerCA.crt \

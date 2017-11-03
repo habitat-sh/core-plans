@@ -1,7 +1,7 @@
 ---
 journalbeat:
-cursor_state_file: "{{pkg.svc_data_path}}/.cursor-state"
-pending_queue.file: "{{pkg.svc_data_path}}/.pending-queue"
+cursor_state_file: "{{pkg.svc_data_path}}/cursor-state"
+pending_queue.file: "{{pkg.svc_data_path}}/pending-queue"
 units: ["{{cfg.units}}"]
 name: "journalbeat"
 tags: ["{{svc.group}}"]
