@@ -1,10 +1,11 @@
 hosts = "localhost:9200"
-units = "hab-sup-default.service" # must be a comma-and-space-separated list if multiple
+units = "hab-sup-default.service" # a `, ` separated list if multiple units
 
-[logging]
-level = "warning"
-
-## configure these keys if you are shipping logs to Logz.io
+## configure these keys if you are shipping logs to Logz.io ##
 # logzio_codec = "json"
 # logzio_token = ""
 # fields_under_root = true
+## configure these keys if you are shipping logs to Logz.io ##
+
+[logging]
+level = "warning"

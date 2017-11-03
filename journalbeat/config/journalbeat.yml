@@ -8,7 +8,9 @@ tags: ["{{svc.group}}"]
 output.logstash:
   enabled: true
   hosts: ["{{cfg.hosts}}"]
+  {{~#if cfg.logzio_codec}}
   ssl.certificate_authorities: ["{{pkg.svc_config_path}}/certificate.crt"]
+  {{~/if}}
 
 logging.level: "{{cfg.logging.level}}"
 

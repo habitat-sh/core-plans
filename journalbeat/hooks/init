@@ -1,9 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 
 touch "{{pkg.svc_data_path}}/cursor-state"
 touch "{{pkg.svc_data_path}}/pending-queue"
 
+{{~#if cfg.logzio_codec}}
 wget \
   --quiet \
-  https://raw.githubusercontent.com/logzio/public-certificates/master/COMODORSADomainValidationSecureServerCA.crt \
-  --output-document={{pkg.svc_config_path}}/certificate.crt
+  --output-document={{pkg.svc_config_path}}/certificate.crt \
+  https://raw.githubusercontent.com/logzio/public-certificates/master/COMODORSADomainValidationSecureServerCA.crt
+{{~/if}}
