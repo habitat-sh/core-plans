@@ -1,7 +1,7 @@
 - Change Name: (fill me in with a unique ident, my_awesome_change)
 - Start Date: (fill me in with today's date, YYYY-MM-DD)
 - RFC PR: (leave this empty)
-- Rust Issue: (leave this empty)
+- Core-Plans Issue: (leave this empty)
 
 # Summary
 [summary]: #summary
@@ -24,7 +24,7 @@ Explain the proposal as if it was already included in the language and you were 
 - If applicable, provide sample error messages, deprecation warnings, or migration guidance.
 - If applicable, describe the differences between teaching this to existing Habitat Users and new Habitat Users.
 
-For implementation-oriented RFCs (e.g. for substantial package feature changes), this section should focus on how  contributors should think about the new way the package would be used, and give examples of its concrete impact. For policy RFCs, this section should provide an example-driven introduction to the policy, and explain its impact in concrete terms.
+For implementation-oriented RFCs (e.g. for substantial package feature changes), this section should focus on how contributors should think about the new way the package would be used, and give examples of its concrete impact. For policy RFCs, this section should provide an example-driven introduction to the policy, and explain its impact in concrete terms.
 
 # Reference-level explanation
 [reference-level-explanation]: #reference-level-explanation
@@ -55,3 +55,4 @@ Why should we *not* do this?
 - What parts of the design do you expect to resolve through the RFC process before this gets merged?
 - What parts of the design do you expect to resolve through the implementation of this feature before stabilization?
 - What related issues do you consider out of scope for this RFC that could be addressed in the future independently of the solution that comes out of this RFC?
+- 
