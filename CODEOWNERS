@@ -95,3 +95,12 @@ vim @fnichol
 libbsd @fnichol
 clens @fnichol
 mg @fnichol
+
+# # Community Plans
+#
+# These plans are contributed and supported by community members, and are
+# not critical for the build/development of Habitat itself. Election or
+# inclusion here is voluntary.
+# This list shall be alphabetical, for sanity purposes.
+
+rabbitmqadmin @predominant
