@@ -15,7 +15,7 @@ The Habitat Maintainers <humans@habitat.sh>
 ## Usage
 
 - On the first node: `hab sup start core/etcd --topology leader`
-- On subsequent nodes: `hab sup start core/crate -- topology leader --peer <first node ip>`
+- On subsequent nodes: `hab sup start core/etcd --topology leader --peer <first node ip>`
 
 On all nodes the following ports are available:
 
