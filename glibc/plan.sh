@@ -18,6 +18,7 @@ pkg_deps=(
   core/linux-headers
 )
 pkg_build_deps=(
+  core/iana-etc
   core/coreutils
   core/bison
   core/diffutils
@@ -91,6 +92,10 @@ do_prepare() {
   # Adjust `scripts/test-installation.pl` to use our new dynamic linker
   sed -i "s|libs -o|libs -L${pkg_prefix}/lib -Wl,-dynamic-linker=${dynamic_linker} -o|" \
     scripts/test-installation.pl
+
+  # Use core/iana-etc's /etc/protocols and /etc/services
+  sed -i "s|/etc/protocols|$(pkg_path_for core/iana-etc)/etc/protocols|" resolv/netdb.h
+  sed -i "s|/etc/services|$(pkg_path_for core/iana-etc)/etc/services|" resolv/netdb.h
 }
 
 do_build() {
