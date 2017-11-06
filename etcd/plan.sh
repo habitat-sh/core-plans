@@ -8,7 +8,7 @@ pkg_source=https://github.com/coreos/${pkg_name}/releases/download/${pkg_version
 pkg_upstream_url=https://github.com/coreos/etcd/releases/
 pkg_shasum=1e962459cb649363215eb022eb7ea8857ea95dce836eb9ff3b3dc54c851b4cb1
 pkg_dirname=${pkg_name}-${pkg_version}-linux-amd64
-pkg_deps=()
+pkg_deps=(core/curl)
 pkg_build_deps=(core/gnupg)
 pkg_bin_dirs=(/usr/bin)
 
