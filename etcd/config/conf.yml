@@ -9,11 +9,17 @@ etcd-server-end: {{cfg.etcd-server-end}}
 
 etcd-auto-tls: {{cfg.etcd-auto-tls}}
 
-{{#if cfg.etcd-auto-tls ~}}
-etcd-http-proto: "https"
-{{else ~}}
-etcd-http-proto: "http"
-{{/if ~}}
+etcd-http-proto: {{cfg.etcd-http-proto}}
+
+etcd-client-cert-auth: {{cfg.etcd-client-cert-auth}}
+etcd-cert-file: {{cfg.etcd-cert-file}}
+etcd-key-file: {{cfg.etcd-key-file}}
+etcd-trusted-ca-file: {{cfg.etcd-trusted-ca-file}}
+
+etcd-peer-client-cert-auth: {{cfg.etcd-peer-client-cert-auth}}
+etcd-peer-cert-file: {{cfg.etcd-peer-cert-file}}
+etcd-peer-key-file: {{cfg.etcd-peer-key-file}}
+etcd-peer-trusted-ca-file: {{cfg.etcd-peer-key-file}}
 
 etcd-listen-client-urls: {{cfg.etcd-listen-client-urls}}
 etcd-listen-peer-urls: {{cfg.etcd-listen-peer-urls}}

@@ -14,6 +14,16 @@ etcd-discovery = ""
 
 etcd-listen-host-ip = ""
 
+etcd-client-cert-auth = ""
+etcd-cert-file = ""
+etcd-key-file = ""
+etcd-trusted-ca-file = ""
+
+etcd-peer-client-cert-auth = ""
+etcd-peer-cert-file = ""
+etcd-peer-key-file = ""
+etcd-peer-trusted-ca-file = ""
+
 etcd-listen-client-urls = "http://0.0.0.0"
 etcd-listen-peer-urls = "http://0.0.0.0"
 etcd-advertise-client-urls = "http://0.0.0.0"

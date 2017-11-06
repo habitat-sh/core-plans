@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 exec 2>&1
 
@@ -6,9 +6,22 @@ proto="{{cfg.etcd-http-proto}}"
 
 cd {{pkg.svc_path}}
 
-if [ "{{cfg.etcd-auto-tls}}" = "true" ] ; then
+if [[ "{{cfg.etcd-auto-tls}}" == "true" ]]; then
 	export ETCD_AUTO_TLS="true"
 	export ETCD_PEER_AUTO_TLS="true"
+else
+  if [[ "{{cfg.etcd-client-cert-auth}}" == "true" ]]; then
+    export ETCD_CLIENT_CERT_AUTH="true"
+    export ETCD_CERT_FILE="{{cfg.etcd-cert-file}}"
+    export ETCD_KEY_FILE="{{cfg.etcd-key-file}}"
+    export ETCD_TRUSTED_CA_FILE="{{cfg.etcd-trusted-ca-file}}"
+  fi
+  if [[ "{{cfg.etcd-peer-client-cert-auth}}" == "true" ]]; then
+    export ETCD_PEER_CLIENT_CERT_AUTH="true"
+    export ETCD_PEER_CERT_FILE="{{cfg.etcd-peer-cert-file}}"
+    export ETCD_PEER_KEY_FILE="{{cfg.etcd-peer-key-file}}"
+    export ETCD_PEER_TRUSTED_CA_FILE="{{cfg.etcd-peer-trusted-ca-file}}"
+  fi
 fi
 
 listen_ip="{{sys.ip}}"
