@@ -2,12 +2,12 @@ pkg_name=traefik
 pkg_description="a modern reverse proxy"
 pkg_upstream_url="https://traefik.io"
 pkg_origin=core
-pkg_version="v1.4.1"
+pkg_version="v1.4.2"
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=("MIT")
 pkg_source="http://github.com/containous/traefik"
 pkg_build_deps=(
-  core/node
+  core/node6
   core/sed
   core/yarn
 )
@@ -51,12 +51,12 @@ do_build() {
     pushd webui
       yarn install
 
-      # We can't use `fix_interpreter` as core/node is not a runtime dep
+      # We can't use `fix_interpreter` as core/node6 is not a runtime dep
       for t in node_modules/.bin/*; do
         local interpreter_old
         local interpreter_new
         interpreter_old=".*node"
-        interpreter_new="$(pkg_path_for core/node)/bin/node"
+        interpreter_new="$(pkg_path_for core/node6)/bin/node"
         t="$(readlink --canonicalize --no-newline "$t")"
         build_line "Replacing '${interpreter_old}' with '${interpreter_new}' in '${t}'"
         sed -e "s#\#\!${interpreter_old}#\#\!${interpreter_new}#" -i "$t"
