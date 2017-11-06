@@ -17,9 +17,9 @@ if [[ "{{cfg.listen-host-ip}}" ]] ; then
         listen_ip="{{cfg.listen-host-ip}}"
 fi
 
-nodes="{{#each svc.members ~}}{{sys.ip}}=${proto}://{{sys.ip}}:{{cfg.etcd-server-end}},{{/each ~}}"
+nodes="{{#each svc.members as |member| ~}}{{member.sys.hostname}}=${proto}://{{member.sys.ip}}:{{../cfg.etcd-server-end}},{{/each ~}}"
 
-export ETCD_NAME="{{sys.ip}}"
+export ETCD_NAME="{{sys.hostname}}"
 export ETCD_DATA_DIR="{{pkg.svc_data_path}}"
 export ETCD_LISTEN_CLIENT_URLS="${proto}://${listen_ip}:{{cfg.etcd-client-end}}"
 export ETCD_LISTEN_PEER_URLS="${proto}://${listen_ip}:{{cfg.etcd-server-end}}"
