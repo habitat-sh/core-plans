@@ -21,6 +21,7 @@ In order for a package to be accepted as a core package, the following requireme
 - [Linting your plans](#linting-your-plans)
 - [Pre-commit hooks](#pre-commit-hooks)
 - [Signing your commits](#signing-your-commits)
+- [Separate changes, separate PRs](#separate-prs)
 - [Pull request review and merge automation](#pull-request-review-and-merge-automation)
 - [Add yourself as a CODEOWNER](#add-yourself-as-a-codeowner)
 - [Add yourself to core plans maintainers](#add-yourself-to-core-plans-maintainers)
@@ -216,6 +217,19 @@ Git makes it easy to add this line to your commit messages.
 
 1. Make sure the `user.name` and `user.email` are set in your git configs.
 2. Use `-s` or `--signoff` to add the Signed-off-by line to the end of the commit message.
+
+## Separate Changes, Separate Pull Requests
+
+Each package being changed should be separated into its own pull request. E.g. If you are making a change to `core/openssl` and your change requires another change in `core/curl` to be merged, each of these changes should be submitted as two different PRs with a note about the order in which each thing should be submitted. 
+
+Each of these change PRs submitted should include a bracketed packagename as the prefix to the change information. For example in the previously defined situation the PR titles above might titled like so:
+
+  - `[curl] Making a change here`
+  - `[openssl] Also making a change here`
+
+If you have opened a single PR that changes multiple plans, it is assumed you are making a substantial change to core plans. Substantial change PRs submitted without an RFC will be closed and you will be directed to open an RFC. If this was not your intention please open separate PRs per package change.
+
+
 
 ## Pull Request Review and Merge Automation
 
