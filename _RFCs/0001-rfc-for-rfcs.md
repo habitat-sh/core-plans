@@ -65,7 +65,7 @@ You need to follow this process if you intend to make any change considered "sub
   - Any changes to the standard core-plans accepted style and baseline.
   - Any inbound Habitat change that obligates all entries in Core-Plans to change.
 
-**NOTE:** If you have opened a single PR that changes multiple plans, it is assumed you are making a substantial change to core plans. Substantial change PRs submitted without an RFC will be closed and you will need to open an RFC. If this was not your intention (for example in the case of updating two interdependent packages) please open separate PRs per package change.
+**NOTE:** If you have opened a single PR that changes multiple plans, it is assumed you are making a substantial change to core plans. Substantial change PRs submitted without an RFC will be closed and you will be directed to open an RFC. If this was not your intention (for example in the case of updating two interdependent packages) please open separate PRs per package change.
 
 Some changes do not require an RFC:
 
