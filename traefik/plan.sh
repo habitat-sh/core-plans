@@ -2,7 +2,10 @@ pkg_name=traefik
 pkg_description="a modern reverse proxy"
 pkg_upstream_url="https://traefik.io"
 pkg_origin=core
+# note: to have the version match the codename, please update both values when
+#       updating this for a new release
 pkg_version="v1.4.2"
+traefik_codename="roquefort"
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=("MIT")
 pkg_source="http://github.com/containous/traefik"
@@ -28,6 +31,11 @@ pkg_exports=(
 do_prepare() {
   build_line "adding \$GOPATH/bin to \$PATH"
   export PATH=${scaffolding_go_gopath:?}/bin:$PATH
+
+  build_line "setting \$VERSION to \$pkg_version"
+  export VERSION=$pkg_version
+  build_line "setting \$CODENAME to $traefik_codename"
+  export CODENAME=$traefik_codename
 
   build_line "building go-bindata"
   go get github.com/jteeuwen/go-bindata
