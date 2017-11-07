@@ -56,7 +56,7 @@ The "RFC" (request for comments) process is intended to provide a consistent pat
 ## When you need to follow this process
 [When you need to follow this process]: #when-you-need-to-follow-this-process
 
-You need to follow this process if you intend to make any change considered "substantial" to the Core-Plans repository, tooling, or maintenance processes (including the RFC process itself). What constitutes a "substantial" change may evolve over time based on the community, but may initially include the following.
+You need to follow this process if you intend to make any change considered "substantial" to the Core-Plans repository, tooling, or maintenance processes (including the RFC process itself). What constitutes a "substantial" change may evolve over time based on the community, but initially includes the following:
 
   - Any process or operational changes to the Core-Plans Maintenance Policies.
   - Any package feature or rewrite that breaks backwards compatibility for current users.
@@ -69,12 +69,12 @@ You need to follow this process if you intend to make any change considered "sub
 
 Some changes do not require an RFC:
 
-  - Package refactors/rephrases, changes that are transparent to user.
-  - Adding net "New" software to the core repository.
+  - Package refactors or changes that are transparent to users.
+  - Adding "Net New" software to the core repository (plans for software that doesnt currently exist in the core origin).
   - Additions only likely to be _noticed by_ other maintainers (Invisible to target package users).
   - Bug fixes for currently available packages.
 
-If you submit a pull request to implement a new feature without going through the RFC process, it may be closed with a polite request to submit an RFC first.
+If you submit a pull request to implement a new substantial change without going through the RFC process, it may be closed with a polite request to submit an RFC first.
 
 ## Before creating an RFC
 [Before creating an RFC]: #before-creating-an-rfc
@@ -131,7 +131,7 @@ Maintainers make the final decisions about RFCs after the benefits and drawbacks
 
 Some accepted RFCs represent vital changes that need to be implemented right away. Other accepted RFCs can represent changes that can wait until some arbitrary contributor feels like doing the work. Every accepted RFC has an associated issue tracking its implementation in the Core-Plans repository; thus that associated issue can be assigned a priority via the triage process that the team uses for all issues in the Core-Plans repository.
 
-The author of an RFC is not obligated to implement it. Of course, the RFC author (like any other contributor) is welcome to post an implementation for review after the RFC has been accepted.
+The author of an RFC is not obligated to implement it. Of course, the RFC author (like any other contributor) is welcome to post an implementation for review after the RFC has been accepted. With that in mind, the best chance for an RFC to get implemented quickly is much more likely to happen if the RFC author either intends to write the feature themselves, **OR** has had conversations with a maintainer who is advocating for the RFC and has expressed the willingness to implement the change in the case that the RFC is accepted.
 
 If you are interested in working on the implementation for an "active" RFC, but cannot determine if someone else is already working on it, feel free to ask (e.g. by leaving a comment on the associated issue).
 
