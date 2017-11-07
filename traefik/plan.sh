@@ -2,12 +2,15 @@ pkg_name=traefik
 pkg_description="a modern reverse proxy"
 pkg_upstream_url="https://traefik.io"
 pkg_origin=core
-pkg_version="v1.4.1"
+# note: to have the version match the codename, please update both values when
+#       updating this for a new release
+pkg_version="v1.4.2"
+traefik_codename="roquefort"
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=("MIT")
 pkg_source="http://github.com/containous/traefik"
 pkg_build_deps=(
-  core/node
+  core/node6
   core/sed
   core/yarn
 )
@@ -28,6 +31,11 @@ pkg_exports=(
 do_prepare() {
   build_line "adding \$GOPATH/bin to \$PATH"
   export PATH=${scaffolding_go_gopath:?}/bin:$PATH
+
+  build_line "setting \$VERSION to \$pkg_version"
+  export VERSION=$pkg_version
+  build_line "setting \$CODENAME to $traefik_codename"
+  export CODENAME=$traefik_codename
 
   build_line "building go-bindata"
   go get github.com/jteeuwen/go-bindata
@@ -51,12 +59,12 @@ do_build() {
     pushd webui
       yarn install
 
-      # We can't use `fix_interpreter` as core/node is not a runtime dep
+      # We can't use `fix_interpreter` as core/node6 is not a runtime dep
       for t in node_modules/.bin/*; do
         local interpreter_old
         local interpreter_new
         interpreter_old=".*node"
-        interpreter_new="$(pkg_path_for core/node)/bin/node"
+        interpreter_new="$(pkg_path_for core/node6)/bin/node"
         t="$(readlink --canonicalize --no-newline "$t")"
         build_line "Replacing '${interpreter_old}' with '${interpreter_new}' in '${t}'"
         sed -e "s#\#\!${interpreter_old}#\#\!${interpreter_new}#" -i "$t"
