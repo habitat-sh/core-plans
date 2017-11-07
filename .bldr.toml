@@ -63,6 +63,8 @@ plan_path = "bzip2-musl"
 paths = [
   "bzip2/*",
 ]
+[c-ares]
+plan_path = "c-ares"
 [cacerts]
 plan_path = "cacerts"
 [caddy]
