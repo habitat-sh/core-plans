@@ -1,4 +1,18 @@
-
-listening_port = 3000
+#Default config items
+listening_port = 80
 admin_user = "admin"
 admin_pass = "password"
+
+#LDAP config
+ldap_enabled = "false"
+ldap_host = ""
+ldap_bind_dn = ""
+ldap_bind_password = ""
+ldap_search_base_dns = ""
+ldap_admin_group = ""
+ldap_editor_group = ""
+ldap_viewer_group = "*"
+
+protocol = "http"
+cert_file = ""
+cert_key = ""

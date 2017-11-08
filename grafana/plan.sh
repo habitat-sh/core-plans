@@ -11,7 +11,7 @@ pkg_deps=(core/glibc core/bash core/wget core/curl core/cacerts)
 pkg_build_deps=(core/patchelf)
 pkg_bin_dirs=(bin)
 pkg_description="Grafana graphing app, dynamically finds prometheus data sources"
-
+pkg_svc_user="root"
 pkg_exports=(
   [grafana_port]=listening_port
 )
