@@ -1,0 +1,36 @@
+#!/bin/sh
+
+exec 2>&1
+
+cd {{pkg.svc_path}}
+
+exec kube-apiserver \
+  --admission-control=Initializers,NamespaceLifecycle,NodeRestriction,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota,AlwaysPullImages \
+  --advertise-address="{{sys.ip}}" \
+  --allow-privileged=true \
+  --enable-swagger-ui=true \
+  --audit-log-maxage=30 \
+  --audit-log-maxbackup=3 \
+  --audit-log-maxsize=100 \
+  --audit-log-path=/var/log/audit.log \
+  --authorization-mode=Node,RBAC \
+  --bind-address="{{cfg.bind-address}}" \
+  --client-ca-file="{{cfg.client-ca-file}}" \
+  --etcd-cafile="{{cfg.etcd-cafile}}" \
+  --etcd-certfile="{{cfg.etcd-certfile}}" \
+  --etcd-keyfile="{{cfg.etcd-keyfile}}" \
+  --etcd-servers="{{cfg.etcd-servers}}" \
+  --event-ttl=1h \
+  --insecure-bind-address="{{cfg.insecure-bind-address}}" \
+  --kubelet-certificate-authority="{{cfg.kubelet-certificate-authority}}" \
+  --kubelet-client-certificate="{{cfg.kubelet-client-certificate}}" \
+  --kubelet-client-key="{{cfg.kubelet-client-key}}" \
+  --kubelet-https=true \
+  --runtime-config=api/all \
+  --service-account-key-file="{{cfg.service-account-key-file}}" \
+  --service-cluster-ip-range="{{cfg.service-cluster-ip-range}}" \
+  --service-node-port-range="{{cfg.service-node-port-range}}" \
+  --tls-ca-file="{{cfg.tls-ca-file}}" \
+  --tls-cert-file="{{cfg.tls-cert-file}}" \
+  --tls-private-key-file="{{cfg.tls-private-key-file}}" \
+  --v="{{cfg.verbosity}}"

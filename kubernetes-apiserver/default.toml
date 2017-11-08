@@ -1,0 +1,23 @@
+bind-address = "0.0.0.0"
+insecure-bind-address = "0.0.0.0"
+
+client-ca-file = ""
+
+etcd-cafile = ""
+etcd-certfile = ""
+etcd-keyfile = ""
+etcd-servers = ""
+
+kubelet-certificate-authority = ""
+kubelet-client-certificate = ""
+kubelet-client-key = ""
+
+service-account-key-file = ""
+service-cluster-ip-range = "10.32.0.0/24"
+service-node-port-range = "30000-32767"
+
+tls-ca-file = ""
+tls-cert-file = ""
+tls-private-key-file = ""
+
+verbosity=2
