@@ -1,0 +1,16 @@
+#!/bin/sh
+
+exec 2>&1
+
+cd {{pkg.svc_path}}
+
+exec kube-controller-manager \
+  --address="{{cfg.address}}" \
+  --cluster-name=kubernetes \
+  --cluster-signing-cert-file="{{cfg.cluster-signing-cert-file}}" \
+  --cluster-signing-key-file="{{cfg.cluster-signing-key-file}}" \
+  --master="{{cfg.master}}" \
+  --root-ca-file="{{cfg.root-ca-file}}" \
+  --service-account-private-key-file="{{cfg.service-account-private-key-file}}" \
+  --service-cluster-ip-range="{{cfg.service-cluster-ip-range}}" \
+  --v=2
