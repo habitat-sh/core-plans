@@ -49,7 +49,7 @@ Rather than providing an example-driven introduction to the RFC process this ent
 
 A majority of contributor and maintainer work can be implemented and reviewed via [the normal GitHub pull request workflow](https://guides.github.com/introduction/flow/). These changes include bug fixes, documentation improvements, package version bumps, and adding a new core-plan.
 
-Other changes by their nature are considered more complex, and we prefer to have an established process that these changes can be put through in order to provide the Habitat Maintainers and Community members those an opportunity to contribute to the design process and produce a consensus among the community.
+Other changes are more complex. For such changes, we prefer an established, consensus-based process through which Habitat Maintainers and Community members can contribute to the design of the change.
 
 The "RFC" (request for comments) process is intended to provide a consistent path and expectation for a few things specifically: tooling changes, process changes, or new standards that might modify the acceptance criteria for new packages entering core-plans. The purpose is to ensure that all project stakeholders can be confident and aware of the direction core-plans and their maintenance are heading in.
 
