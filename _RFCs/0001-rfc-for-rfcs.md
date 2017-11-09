@@ -16,7 +16,7 @@ We want to provide safety-nets and transparency over core-plans direction and de
 # Guide-level explanation
 [guide-level-explanation]: #guide-level-explanation
 
-The RFC for RFC Implementation adds a clearly defined process for _when_, _why_ ,  and _how_ to open RFCs for changes in the core-plans repository. 
+The RFC for RFC Implementation adds a clearly defined process for _when_, _why_ ,  and _how_ to open RFCs for changes in the core-plans repository.
 
 The expected impact is that core-plans maintainers have another tool in the maintenance process toolchest to enable them to deal with tricky changes, whether those are substantial in scope, or substantial in outcome.
 
@@ -47,7 +47,7 @@ Rather than providing an example-driven introduction to the RFC process this ent
 # Core-Plans RFCs
 [Core-Plans RFCs]: #core-plans-rfcs
 
-A majority of contributor and maintainer work can be implemented and reviewed via [the normal GitHub pull request workflow](https://guides.github.com/introduction/flow/). These changes include bug fixes, documentation improvements, package version bumps, and adding a new core-plan. 
+A majority of contributor and maintainer work can be implemented and reviewed via [the normal GitHub pull request workflow](https://guides.github.com/introduction/flow/). These changes include bug fixes, documentation improvements, package version bumps, and adding a new core-plan.
 
 Other changes by their nature are considered more complex, and we prefer to have an established process that these changes can be put through in order to provide the Habitat Maintainers and Community members those an opportunity to contribute to the design process and produce a consensus among the community.
 
