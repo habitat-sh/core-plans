@@ -7,6 +7,7 @@ pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=("Apache-2.0")
 pkg_source="https://github.com/mholt/caddy/caddy"
 pkg_bin_dirs=(bin)
+pkg_deps=(core/glibc)
 pkg_scaffolding=core/scaffolding-go
 scaffolding_go_base_path=github.com/mholt/caddy/caddy
 scaffolding_go_build_deps=()
