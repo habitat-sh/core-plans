@@ -1,0 +1,20 @@
+#!/bin/sh
+
+rc=0
+
+protocol=http{{#unless cfg.listener.tls_disable}}s{{/unless}}
+
+status=$(curl \
+  --write-out %{http_code} \
+  --fail \
+  --silent \
+  ${protocol}://{{cfg.listener.location}}:{{cfg.listener.port}}/v1/sys/health)
+
+case $? in
+  0)
+    rc=0 ;;
+  *)
+    rc=2 ;;
+esac
+
+exit $rc

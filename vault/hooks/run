@@ -1,11 +1,14 @@
-#!/bin/bash -xe
+#!/bin/sh
 
 exec 2>&1
 
 DEVMODE={{cfg.dev.mode}}
 
 if [ "$DEVMODE" = true ] ; then
-  exec vault server -dev-listen-address=0.0.0.0:8200 -dev
+  exec vault server \
+    -dev-listen-address=0.0.0.0:{{cfg.listener.port}} \
+    -dev
 else
-  exec vault server -config={{pkg.svc_config_path}}/settings.hcl
+  exec vault server \
+    -config={{pkg.svc_config_path}}/settings.hcl
 fi
