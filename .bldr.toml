@@ -220,6 +220,8 @@ paths = [
 plan_path = "gdb"
 [gdbm]
 plan_path = "gdbm"
+[gdk-pixbuf]
+plan_path = "gdk-pixbuf"
 [gecode]
 plan_path = "gecode"
 [geoip]
