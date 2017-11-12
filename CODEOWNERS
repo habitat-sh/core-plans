@@ -104,8 +104,16 @@ mg @fnichol
 # This list shall be alphabetical, for sanity purposes.
 
 acbuild @rsertelon
+atk @rsertelon
+cairo @rsertelon
+gdk-pixbuf @rsertelon
+glib @rsertelon
+gtk2 @rsertelon
+harfbuzz @rsertelon
 jdk7 @rsertelon
 jdk8 @rsertelon
 jre7 @rsertelon
 jre8 @rsertelon
+pango @rsertelon
 rabbitmqadmin @predominant
+shared-mime-info @rsertelon
