@@ -278,6 +278,8 @@ plan_path = "groff"
 plan_path = "grub"
 [gsl]
 plan_path = "gsl"
+[gtk2]
+plan_path = "gtk2"
 [guile]
 plan_path = "guile"
 [gzip]
