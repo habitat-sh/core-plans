@@ -98,7 +98,6 @@ scaffolding_modules_install() {
   fi
 
   build_line "Installing dependencies using $_pkg_manager $("$_pkg_manager" --version)"
-
   # Many node dependencies require /usr/bin/env
   # This directory is not created with Habitat by design
   # Instead, we use core/coreutils for this functionality
@@ -109,6 +108,7 @@ scaffolding_modules_install() {
   start_sec="$SECONDS"
   case "$_pkg_manager" in
     npm)
+
       if [[ ! -f "$CACHE_PATH/package.json" ]]; then
         cp -av package.json "$CACHE_PATH/"
       fi
@@ -118,6 +118,20 @@ scaffolding_modules_install() {
       if [[ -n "$HAB_NONINTERACTIVE" ]]; then
         export NPM_CONFIG_PROGRESS=false
       fi
+
+      # The following files are required
+      # for applications that use Angular-Seed
+      # https://github.com/mgechev/angular-seed
+      if [[ -f "gulpfile.ts" ]]; then
+        cp -av gulpfile.ts "$CACHE_PATH/"
+      fi
+      if [[ -d "tools" ]]; then
+        cp -R tools "$CACHE_PATH/"
+      fi
+      if [[ -f "tsconfig.json" ]]; then
+        cp -av tsconfig.json "$CACHE_PATH/"
+      fi
+
       pushd "$CACHE_PATH" > /dev/null
       npm install \
         --unsafe-perm \
