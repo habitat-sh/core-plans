@@ -1,0 +1,5 @@
+cluster-cidr = "10.200.0.0/16"
+
+kubeconfig = ""
+
+verbosity = "2"

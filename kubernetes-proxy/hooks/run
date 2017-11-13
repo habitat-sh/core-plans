@@ -1,0 +1,11 @@
+#!/bin/sh
+
+exec 2>&1
+
+cd {{pkg.svc_path}}
+
+exec kube-proxy \
+  --cluster-cidr="{{cfg.cluster-cidr}}" \
+  --kubeconfig="{{cfg.kubeconfig}}" \
+  --proxy-mode=iptables \
+  --v="{{cfg.verbosity}}"
