@@ -1,0 +1,22 @@
+#!/bin/sh
+
+exec 2>&1
+
+cd {{pkg.svc_path}}
+
+exec kubelet \
+  --allow-privileged=true \
+  --anonymous-auth=false \
+  --authorization-mode=Webhook \
+  --network-plugin=cni \
+  --feature-gates=KubeletConfigFile=true \
+  --init-config-dir="{{cfg.init-config-dir}}" \
+  --client-ca-file="{{cfg.client-ca-file}}" \
+  --cluster-dns="{{cfg.cluster-dns}}" \
+  --cluster-domain="{{cfg.cluster-domain}}" \
+  --kubeconfig="{{cfg.kubeconfig}}" \
+  --tls-cert-file="{{cfg.tls-cert-file}}" \
+  --tls-private-key-file="{{cfg.tls-private-key-file}}" \
+  --cni-conf-dir="{{cfg.cni-conf-dir}}" \
+  --cloud-provider="" \
+  --v="{{cfg.verbosity}}"
