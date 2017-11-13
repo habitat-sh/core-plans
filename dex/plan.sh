@@ -2,7 +2,7 @@ gopkg="github.com/coreos/dex"
 pkg_name=dex
 pkg_description="OpenID Connect Identity (OIDC) and OAuth 2.0 Provider with Pluggable Connectors"
 pkg_origin=core
-pkg_version="v2.7.1"
+pkg_version="v2.8.0"
 pkg_maintainer="Chef Software Inc. <support@chef.io>"
 pkg_license=("Apache-2.0")
 pkg_source="https://$gopkg"
@@ -35,13 +35,11 @@ do_download() {
 }
 
 do_build() {
-  build_line "go build --ldflags \"${GO_LDFLAGS}\" -o bin/dex $gopkg/cmd/dex"
-  go build --ldflags "${GO_LDFLAGS}" -o bin/dex $gopkg/cmd/dex
+  build_line "go build --ldflags \"${GO_LDFLAGS}\" -o $pkg_prefix/bin/dex $gopkg/cmd/dex"
+  go build --ldflags "${GO_LDFLAGS}" -o "$pkg_prefix/bin/dex" "$gopkg/cmd/dex"
 }
 
 do_install() {
-  build_line "copying dex binary"
-  cp -r "${scaffolding_go_gopath:?}/bin" "$pkg_prefix"
   build_line "copying static web content"
   cp -r "${scaffolding_go_gopath:?}/src/$gopkg/web" "$pkg_prefix"
 }
