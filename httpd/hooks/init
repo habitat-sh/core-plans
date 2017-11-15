@@ -1,5 +1,4 @@
-#!/bin/sh
-#
+#!{{pkgPathFor "core/bash"}}/bin/bash
 
 mkdir -p {{pkg.svc_data_path}}/htdocs
 mkdir -p {{pkg.svc_data_path}}/cgi-bin

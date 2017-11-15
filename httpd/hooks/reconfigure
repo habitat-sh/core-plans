@@ -1,4 +1,4 @@
-#!/bin/sh
+#!{{pkgPathFor "core/bash"}}/bin/bash
 
 # httpd starts as root but then drops privileges to the "hab" user. This makes
 # it so the server doesn't have to run as root the whole time and is the

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!{{pkgPathFor "core/bash"}}/bin/bash
 
 # Kill with a USR1 signal on reload rather than restarting
 kill -USR1 "$(cat "{{pkg.svc_var_path}}/httpd.pid")"
