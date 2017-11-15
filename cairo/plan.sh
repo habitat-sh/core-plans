@@ -33,6 +33,7 @@ pkg_deps=(
 pkg_build_deps=(
   core/autoconf
   core/automake
+  core/diffutils
   core/gcc
   core/make
   core/pkg-config
