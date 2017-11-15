@@ -109,3 +109,4 @@ jdk8 @rsertelon
 jre7 @rsertelon
 jre8 @rsertelon
 rabbitmqadmin @predominant
+zlib-static @rsertelon

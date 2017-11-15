@@ -900,6 +900,8 @@ plan_path = "zlib-musl"
 paths = [
   "zlib/*",
 ]
+[zlib-static]
+plan_path = "zlib-static"
 [zookeeper]
 plan_path = "zookeeper"
 [zsh]
