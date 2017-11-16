@@ -2,6 +2,10 @@
 
 [Full history](https://github.com/habitat-sh/core-plans/commits/master/scaffolding-node)
 
+## 0.6.8 (10-31-2017)
+
+- Support Angular-Seed applications
+
 ## 0.6.7 (10-31-2017)
 
 - Detect if both a package-lock.json and yarn.lock are present
