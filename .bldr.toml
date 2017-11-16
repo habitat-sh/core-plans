@@ -709,6 +709,8 @@ plan_path = "rabbitmq"
 plan_path = "rabbitmqadmin"
 [raml2html]
 plan_path = "raml2html"
+[randrproto]
+randrproto = "randrproto"
 [re2c]
 plan_path = "re2c"
 [readline]
