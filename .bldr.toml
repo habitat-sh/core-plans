@@ -16,6 +16,8 @@ plan_path = "artifactory-pro"
 plan_path = "aspcud"
 [atk]
 plan_path = "atk"
+[at-spi2-atk]
+plan_path = "at-spi2-atk"
 [attr]
 plan_path = "attr"
 [autoconf]
