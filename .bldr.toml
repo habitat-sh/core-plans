@@ -348,6 +348,8 @@ plan_path = "jre8"
 plan_path = "jruby"
 [jruby1]
 plan_path = "jruby1"
+[journalbeat]
+journalbeat = "journalbeat"
 [kafka]
 plan_path = "kafka"
 [kbproto]

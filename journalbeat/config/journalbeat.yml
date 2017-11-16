@@ -1,0 +1,22 @@
+---
+journalbeat:
+cursor_state_file: "{{pkg.svc_data_path}}/cursor-state"
+pending_queue.file: "{{pkg.svc_data_path}}/pending-queue"
+units: ["{{cfg.units}}"]
+name: "journalbeat"
+tags: ["{{svc.group}}"]
+output.logstash:
+  enabled: true
+  hosts: ["{{cfg.hosts}}"]
+  {{~#if cfg.logzio_codec}}
+  ssl.certificate_authorities: ["{{pkg.svc_config_path}}/certificate.crt"]
+  {{~/if}}
+
+logging.level: "{{cfg.logging.level}}"
+
+{{~#if cfg.logzio_codec}}
+fields:
+  logzio_codec: "{{cfg.logzio_codec}}"
+  token: "{{cfg.logzio_token}}"
+fields_under_root: {{cfg.fields_under_root}}
+{{~/if}}
