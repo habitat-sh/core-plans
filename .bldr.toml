@@ -91,6 +91,8 @@ plan_path = "clingo"
 plan_path = "cmake"
 [composer]
 plan_path = "composer"
+[concourse]
+plan_path = "concourse"
 [consul]
 plan_path = "consul"
 [coreutils]
