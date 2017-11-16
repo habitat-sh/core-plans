@@ -95,6 +95,7 @@ In short, to get a change into Core Plans, one must first get the RFC merged int
   - Fork the [Core Plans Repository](https://github.com/habitat-sh/core-plans)
   - Copy `_RFCs/0000-template.md` to `_RFCs/0000-my-feature.md` (where "my-feature" is descriptive. don't assign an RFC number yet).
   - Fill in the RFC. Put care into the details: RFCs that do not present convincing motivation, demonstrate understanding of the impact of the design, or are disingenuous about the drawbacks or alternatives tend to be poorly-received.
+  - Set your RFC number to the last active +1. For example. If the largest number RFC merged to master is currently 0096, then your RFC number should be 0097.
   - Submit a pull request ([make sure you sign your commits](https://github.com/habitat-sh/core-plans/blob/master/CONTRIBUTING.md#signing-your-commits)). As a pull request the RFC will receive design feedback from the larger community, and the author should be prepared to revise it in response.
   - Each pull request will be labeled with the RFC tag, which will lead to its being triaged by the core-plans maintainers in a future meeting and assigned to one of it's members.
   - Build consensus and integrate feedback. RFCs that have broad support are much more likely to make progress than those that don't receive any comments. Feel free to reach out to the RFC assignee directly to get help identifying stakeholders and obstacles.
