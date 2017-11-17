@@ -117,3 +117,7 @@ jre8 @rsertelon
 pango @rsertelon
 rabbitmqadmin @predominant
 shared-mime-info @rsertelon
+wrk @afiune
+protobuf-cpp @afiune
+go @afiune
+dep @afiune
