@@ -14,6 +14,8 @@ plan_path = "apr-util"
 plan_path = "artifactory-pro"
 [aspcud]
 plan_path = "aspcud"
+[at-spi2-core]
+plan_path = "at-spi2-core"
 [atk]
 plan_path = "atk"
 [attr]
