@@ -18,6 +18,8 @@ plan_path = "aspcud"
 plan_path = "at-spi2-core"
 [atk]
 plan_path = "atk"
+[at-spi2-atk]
+plan_path = "at-spi2-atk"
 [attr]
 plan_path = "attr"
 [autoconf]
