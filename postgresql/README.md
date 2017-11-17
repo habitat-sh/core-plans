@@ -12,7 +12,7 @@ hab start core/postgresql
 ```
 or
 ```
-docker run starkandwayne/postgresql
+docker run habitat/postgresql
 ```
 if you want to bring up the pre-exported docker image.
 
@@ -22,7 +22,7 @@ This plan supports running clustered PostgreSQL by utilizing Habitat's native le
 
 You can run an example cluster via docker-compose after exporting a docker container from this plan:
 ```
-$ hab pkg export docker core/postgresql
+$ hab pkg export docker $(ls -1t results/*.hart | head -1)
 ```
 
 The docker post-process should create a docker image named `core/postgresql` and it should be available on your local machine
@@ -33,21 +33,34 @@ version: '3'
 
 services:
   pg1:
-    image: core/postgresql
-    command: "start core/postgresql --group cluster --topology leader"
+    image: habitat/postgresql
+    command: --group cluster
+      --topology leader
+    volumes:
+      - pg1-data:/hab/svc/postgresql/data
   pg2:
-    image: core/postgresql
-    command: "start core/postgresql --group cluster --topology leader --peer pg1"
+    image: habitat/postgresql
+    command: --group cluster
+      --topology leader
+      --peer pg1
+    volumes:
+      - pg2-data:/hab/svc/postgresql/data
   pg3:
-    image: core/postgresql
-    command: "start core/postgresql --group cluster --topology leader --peer pg1"
+    image: habitat/postgresql
+    command: --group cluster
+      --topology leader
+      --peer pg1
+    volumes:
+      - pg3-data:/hab/svc/postgresql/data
+
+volumes:
+  pg1-data:
+  pg2-data:
+  pg3-data:
 EOF
 
 docker-compose up
 ```
-
-We intend to support a prod ready clustering solution similar to [patroni](https://github.com/zalando/patroni) and are working on getting there quickly.
-
 
 ## Binding
 
@@ -59,13 +72,38 @@ hab start <origin>/<app> --bind database:postgresql.default --peer <pg-host>
 
 Superuser access is exposed to consumers when binding and we advise that required databases, schemas and roles be created and migrations get run in the init hook of the consuming service. The created roles (with restricted access) should then be exposed to the application code that will get run.
 
-To support binding to either standalone or custered PostgreSQL services we suggest using the `.first` field of the binding in the handlebars interpolation:
+In the template of the consuming service, there is currently a difference between the binding syntax for binding to the leader in a clustered topology vs binding to any member.  A [future enhancement](https://github.com/habitat-sh/habitat/issues/4127) may improve upon that, but for now something like this could work if used in an interpreted script file:
+
 ```
-{{#with bind.database.first as |pg| }}
-PGPASSWORD={{pg.cfg.superuser_password}}
-PGUSER={{pg.cfg.superuser_name}}
-PGHOST={{pg.sys.ip}}
-{{/with}}
+# Use the eachAlive and @first helpers to bind to the oldest alive member of the bound service group
+#   - members are processed in the chronological order of when they joined the ring
+# If a later member comes along that is the leader of a cluster topology, override the environment variable definitions with that
+#   - if not, the second section is omitted
+{{~ #if bind.database}}
+  {{~ #eachAlive bind.database.members as |member|}}
+    {{~ #if @first}}
+# First alive member
+PGHOST="{{member.sys.ip}}"
+PGPORT="{{member.cfg.port}}"
+PGUSER="{{member.cfg.superuser_name}}"
+PGPASSWORD="{{member.cfg.superuser_password}}"
+    {{~ /if}}
+
+    {{~ #if member.leader}}
+# Leader node override
+PGHOST="{{member.sys.ip}}"
+PGPORT="{{member.cfg.port}}"
+PGUSER="{{member.cfg.superuser_name}}"
+PGPASSWORD="{{member.cfg.superuser_password}}"
+    {{~ /if}}
+  {{~ /eachAlive}}
+{{~ /if}}
 ```
 
-`.first` will always point to the leader when present.
+However if you're using more of a rigid configuration file syntax then you still need to know and choose in advance whether or not you're expecting to connect to a leader topology or not.
+
+
+# TODO (Potential improvements to this plan):
+- Upgrade logic (detect if the database engine is newer than the data on disk and perform pg_upgrade)
+- Full cluster restart logic (elect the previous leader)
+  - add a `suitability` hook based on the existence of a `recovery.conf` file
