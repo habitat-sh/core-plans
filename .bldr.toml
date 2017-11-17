@@ -475,6 +475,8 @@ plan_path = "libxi"
 plan_path = "libxml2"
 [libxmu]
 plan_path = "libxmu"
+[libxrandr]
+plan_path = "libxrandr"
 [libxrender]
 plan_path = "libxrender"
 [libxslt]
