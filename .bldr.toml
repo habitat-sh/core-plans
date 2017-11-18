@@ -496,6 +496,8 @@ plan_path = "libice"
 plan_path = "libiconv"
 [libidn]
 plan_path = "libidn"
+[libidn2]
+plan_path = "libidn2"
 [libjpeg-turbo]
 plan_path = "libjpeg-turbo"
 [libksba]
