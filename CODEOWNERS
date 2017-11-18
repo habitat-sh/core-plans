@@ -110,12 +110,12 @@ gdk-pixbuf @rsertelon
 glib @rsertelon
 gtk2 @rsertelon
 harfbuzz @rsertelon
-jdk7 @rsertelon
-jdk8 @rsertelon
-jdk9 @predominant
-jre7 @rsertelon
-jre8 @rsertelon
-jre9 @predominant
+jdk7 @predominant @rsertelon
+jdk8 @predominant @rsertelon
+jdk9 @predominant @rsertelon
+jre7 @predominant @rsertelon
+jre8 @predominant @rsertelon
+jre9 @predominant @rsertelon
 monit @rsertelon
 pango @rsertelon
 rabbitmqadmin @predominant
