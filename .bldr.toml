@@ -205,6 +205,8 @@ plan_path = "fixesproto"
 plan_path = "flatbuffers"
 [flex]
 plan_path = "flex"
+[fluentd]
+plan_path = "fluentd"
 [fontconfig]
 plan_path = "fontconfig"
 [foulkon]
