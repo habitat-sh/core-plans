@@ -298,6 +298,8 @@ plan_path = "gnupg-static"
 paths = [
   "gnupg/*",
 ]
+[gnutls]
+plan_path = "gnutls"
 [go]
 plan_path = "go"
 [go14]
