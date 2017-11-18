@@ -112,8 +112,10 @@ gtk2 @rsertelon
 harfbuzz @rsertelon
 jdk7 @rsertelon
 jdk8 @rsertelon
+jdk9 @predominant
 jre7 @rsertelon
 jre8 @rsertelon
+jre9 @predominant
 monit @rsertelon
 pango @rsertelon
 rabbitmqadmin @predominant
