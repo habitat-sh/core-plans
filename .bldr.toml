@@ -221,6 +221,8 @@ plan_path = "fping"
 plan_path = "freetype"
 [galera]
 plan_path = "galera"
+[gamin]
+plan_path = "gamin"
 [gawk]
 plan_path = "gawk"
 [gcc]
