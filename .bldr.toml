@@ -336,6 +336,8 @@ plan_path = "grpcurl"
 plan_path = "grub"
 [gsl]
 plan_path = "gsl"
+[gtk]
+plan_path = "gtk"
 [gtk2]
 plan_path = "gtk2"
 [guile]
