@@ -136,23 +136,23 @@ if ! $pkg_prefix/libexec/is_db_connected; then
   >&2 echo "Is the database not running or are the database connection"
   >&2 echo "credentials incorrect?"
   >&2 echo ""
-{{~#if bind.database}}
+{{#if bind.database ~}}
   >&2 echo "This app started with a database bind and will discovery the"
   >&2 echo "hostname and port number in the Habitat ring."
   >&2 echo ""
   >&2 echo "There are 3 remaining config settings which must be set correctly:"
-{{else}}
+{{else ~}}
   >&2 echo "This app started without a database bind meaning that the"
   >&2 echo "database is assumed to be running outside of a Habitat ring."
   >&2 echo "Therefore, you must provide all the database connection values."
   >&2 echo ""
   >&2 echo "There are 5 config settings which must be set correctly:"
-{{~/if}}
+{{/if ~}}
   >&2 echo ""
-{{~#unless bind.database}}
+{{#unless bind.database ~}}
   >&2 echo " * db.host      - The database hostname or IP address (Current: {{#if cfg.db.host}}{{cfg.db.host}}{{else}}<unset>{{/if}})"
   >&2 echo " * db.port      - The database listen port number (Current: {{#if cfg.db.port}}{{cfg.db.port}}{{else}}5432{{/if}})"
-{{~/unless}}
+{{/unless ~}}
   >&2 echo " * db.adapter   - The database adapter (Current: {{#if cfg.db.adapter}}{{cfg.db.adapter}}{{else}}postgresql{{/if}})"
   >&2 echo " * db.user      - The database username (Current: {{#if cfg.db.user}}{{cfg.db.user}}{{else}}<unset>{{/if}})"
   >&2 echo " * db.password  - The database password (Current: {{#if cfg.db.password}}<set>{{else}}<unset>{{/if}})"

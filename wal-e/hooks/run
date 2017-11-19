@@ -25,8 +25,8 @@ write_env_var '{{cfg.pg.superuser_password}}' 'PGPASSWORD'
 write_env_var 'postgres' 'PGDATABASE'
 
 while true; do
-{{ #if cfg.pg.data_dir }}
+{{#if cfg.pg.data_dir ~}}
   envdir {{pkg.svc_config_path}}/env wal-e backup-push {{cfg.pg.data_dir}}
-{{/if}}
+{{/if ~}}
   sleep {{cfg.backup_interval}}
 done

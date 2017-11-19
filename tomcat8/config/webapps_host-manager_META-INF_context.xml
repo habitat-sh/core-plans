@@ -16,8 +16,8 @@
   limitations under the License.
 -->
 <Context antiResourceLocking="false" privileged="true" >
-{{#if cfg.host-manager.localhost-only}}
+{{#if cfg.host-manager.localhost-only ~}}
   <Valve className="org.apache.catalina.valves.RemoteAddrValve"
          allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
-{{/if}}
+{{/if ~}}
 </Context>

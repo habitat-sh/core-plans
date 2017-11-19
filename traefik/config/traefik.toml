@@ -1,6 +1,6 @@
 logLevel = "{{cfg.log.level}}"
 
-{{~#if cfg.web.enable}}
+{{#if cfg.web.enable ~}}
 [web]
 address = "{{cfg.web.host}}:{{cfg.web.port}}"
-{{~/if}}
+{{/if ~}}

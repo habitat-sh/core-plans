@@ -8,10 +8,10 @@ export SPARK_LOG_DIR="{{pkg.svc_var_path}}/logs"
 export SPARK_WORKER_DIR="{{pkg.svc_var_path}}/work"
 export SPARK_NO_DAEMONIZE=1
 
-{{~#if svc.me.leader}}
+{{#if svc.me.leader ~}}
 exec start-master.sh
-{{else}}
-{{~#with svc.leader}}
+{{else ~}}
+{{#with svc.leader ~}}
 exec start-slave.sh "spark://{{sys.ip}}:{{cfg.port}}"
-{{~/with}}
-{{~/if}}
+{{/with ~}}
+{{/if ~}}
