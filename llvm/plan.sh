@@ -1,13 +1,18 @@
 pkg_name=llvm
 pkg_origin=core
-pkg_version=3.6.2
+pkg_version=3.9.1
 pkg_license=('NCSA')
 pkg_description="Next-gen compiler infrastructure"
-pkg_upstream_url=http://llvm.org/
+pkg_upstream_url="http://llvm.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_filename=${pkg_name}-${pkg_version}.src.tar.xz
-pkg_source=http://llvm.org/releases/${pkg_version}/${pkg_name}-${pkg_version}.src.tar.xz
-pkg_shasum=f60dc158bfda6822de167e87275848969f0558b3134892ff54fced87e4667b94
+pkg_filename="${pkg_name}-${pkg_version}.src.tar.xz"
+pkg_source="http://llvm.org/releases/${pkg_version}/${pkg_name}-${pkg_version}.src.tar.xz"
+pkg_shasum="1fd90354b9cf19232e8f168faf2220e79be555df3aa743242700879e8fd329ee"
+pkg_deps=(
+  core/gcc-libs
+  core/glibc
+  core/zlib
+)
 pkg_build_deps=(
   core/cmake
   core/coreutils
@@ -15,11 +20,6 @@ pkg_build_deps=(
   core/gcc
   core/ninja
   core/python2
-)
-pkg_deps=(
-  core/gcc-libs
-  core/glibc
-  core/zlib
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
@@ -42,7 +42,7 @@ do_unpack() {
   build_line "Unpacking Clang FrontEnd to custom cache dir"
   download_file http://llvm.org/releases/${pkg_version}/cfe-${pkg_version}.src.tar.xz \
     cfe-${pkg_version}.src.tar.xz \
-    ae9180466a23acb426d12444d866b266ff2289b266064d362462e44f8d4699f3
+    e6c4cebb96dee827fa0470af313dff265af391cb6da8d429842ef208c8f25e63
 
   local clang_src_dir="$unpack_dir/tools/clang"
   mkdir -p "$clang_src_dir"
