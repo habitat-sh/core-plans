@@ -14,6 +14,8 @@ etcd-discovery = ""
 
 etcd-listen-host-ip = ""
 
+etcd-initial-cluster = ""
+
 etcd-client-cert-auth = ""
 etcd-cert-file = ""
 etcd-key-file = ""
@@ -31,3 +33,5 @@ etcd-initial-advertise-peer-urls = "http://0.0.0.0"
 
 etcd-initial-cluster-state = "new"
 etcd-initial-cluster-token = "etcd-cluster-1"
+
+etcd-env-vars-file = ""

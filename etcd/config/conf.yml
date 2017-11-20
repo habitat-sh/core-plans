@@ -28,3 +28,9 @@ etcd-initial-advertise-peer-urls: {{cfg.etcd-initial-advertise-peer-urls}}
 
 etcd-discovery: {{cfg.etcd-discovery}}
 etcd-initial-cluster-state: {{cfg.etcd-initial-cluster-state}}
+etcd-initial-cluster-token: {{cfg.etcd-initial-cluster-token}}
+etcd-initial-cluster: {{cfg.etcd-initial-cluster}}
+
+etcd-listen-host-ip: {{cfg.etcd-listen-host-ip}}
+
+etcd-env-vars-file: {{cfg.etcd-env-vars-file}}

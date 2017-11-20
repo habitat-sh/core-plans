@@ -25,12 +25,14 @@ else
 fi
 
 listen_ip="{{sys.ip}}"
-
-if [[ "{{cfg.listen-host-ip}}" ]] ; then
-        listen_ip="{{cfg.listen-host-ip}}"
+if [[ -n "{{cfg.etcd-listen-host-ip}}" ]]; then
+  listen_ip="{{cfg.etcd-listen-host-ip}}"
 fi
 
 nodes="{{#each svc.members as |member| ~}}{{member.sys.hostname}}=${proto}://{{member.sys.ip}}:{{../cfg.etcd-server-end}},{{/each ~}}"
+if [[ -n "{{cfg.etcd-initial-cluster}}" ]]; then
+  nodes="{{cfg.etcd-initial-cluster}}"
+fi
 
 export ETCD_NAME="{{sys.hostname}}"
 export ETCD_DATA_DIR="{{pkg.svc_data_path}}"
@@ -41,5 +43,9 @@ export ETCD_INITIAL_ADVERTISE_PEER_URLS="${proto}://${listen_ip}:{{cfg.etcd-serv
 export ETCD_INITIAL_CLUSTER_TOKEN="{{cfg.etcd-initial-cluster-token}}"
 export ETCD_INITIAL_CLUSTER_STATE="{{cfg.etcd-initial-cluster-state}}"
 export ETCD_INITIAL_CLUSTER="$nodes"
+
+if [[ -n "{{cfg.etcd-env-vars-file}}" ]]; then
+  source "{{cfg.etcd-env-vars-file}}"
+fi
 
 exec etcd
