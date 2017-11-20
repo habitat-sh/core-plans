@@ -1,3 +1,4 @@
+advertise-address = ""
 bind-address = "0.0.0.0"
 insecure-bind-address = "0.0.0.0"
 

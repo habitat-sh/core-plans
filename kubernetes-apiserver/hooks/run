@@ -1,12 +1,18 @@
-#!/bin/sh
+#!/bin/bash
 
 exec 2>&1
 
 cd {{pkg.svc_path}}
 
+advertise_address="{{sys.ip}}"
+
+if [[ -n "{{cfg.advertise-address}}" ]]; then
+  advertise_address="{{cfg.advertise-address}}"
+fi
+
 exec kube-apiserver \
   --admission-control=Initializers,NamespaceLifecycle,NodeRestriction,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota,AlwaysPullImages \
-  --advertise-address="{{sys.ip}}" \
+  --advertise-address="${advertise_address}" \
   --allow-privileged=true \
   --enable-swagger-ui=true \
   --audit-log-maxage=30 \
