@@ -463,6 +463,8 @@ plan_path = "libtool"
 plan_path = "libunistring"
 [libunwind]
 plan_path = "libunwind"
+[libuv]
+plan_path = "libuv"
 [libvterm]
 plan_path = "libvterm"
 [libwebp]
