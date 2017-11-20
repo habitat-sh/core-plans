@@ -470,7 +470,7 @@ _detect_node() {
       # TODO fin: Add more robust packages.json to Habitat package matching
       case "$val" in
         *)
-          nearest_version_string=$(_nearest_version_on_builder $val)
+          nearest_version_string=$(_nearest_version_on_builder "$val")
           nearest_version="${nearest_version_string//\"}"
 
           if [[ $nearest_version =~ (.*No compatible version of node found.*) ]]; then
