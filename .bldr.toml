@@ -368,6 +368,31 @@ plan_path = "kmod"
 plan_path = "krb5"
 [kubernetes]
 plan_path = "kubernetes"
+[kubernetes-apiserver]
+plan_path = "kubernetes-apiserver"
+paths = [
+  "kubernetes/*",
+]
+[kubernetes-controller-manager]
+plan_path = "kubernetes-controller-manager"
+paths = [
+  "kubernetes/*",
+]
+[kubernetes-kubelet]
+plan_path = "kubernetes-kubelet"
+paths = [
+  "kubernetes/*",
+]
+[kubernetes-proxy]
+plan_path = "kubernetes-proxy"
+paths = [
+  "kubernetes/*",
+]
+[kubernetes-scheduler]
+plan_path = "kubernetes-scheduler"
+paths = [
+  "kubernetes/*",
+]
 [lcms2]
 plan_path = "lcms2"
 [less]
