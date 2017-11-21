@@ -1,5 +1,5 @@
 -   repo: git://github.com/pre-commit/pre-commit-hooks
-    sha: v0.9.1
+    sha: v1.1.1
     hooks:
     -   id: check-added-large-files
     -   id: check-merge-conflict
@@ -8,6 +8,7 @@
         exclude: config/.*$
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
+        exclude: .*\.patch
 -   repo: git://github.com/detailyang/pre-commit-shell
     sha: 1.0.2
     hooks:
