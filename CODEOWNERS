@@ -106,6 +106,7 @@ mg @fnichol
 acbuild @rsertelon
 atk @rsertelon
 cairo @rsertelon
+elasticsearch @joshbrand
 gdk-pixbuf @rsertelon
 glib @rsertelon
 gtk2 @rsertelon
@@ -116,6 +117,8 @@ jdk9 @predominant @rsertelon
 jre7 @predominant @rsertelon
 jre8 @predominant @rsertelon
 jre9 @predominant @rsertelon
+kibana @joshbrand
+logstash @joshbrand
 monit @rsertelon
 mosquitto @rsertelon
 pango @rsertelon
