@@ -9,7 +9,7 @@ scaffolding-* @habitat-sh/scaffolding-maintainers
 libarchive @reset @fnichol
 libsodium @reset @fnichol
 nginx @reset @fnichol
-postgresql @reset @fnichol
+postgresql @reset @fnichol @irvingpop
 protobuf @reset @fnichol
 protobuf-rust @reset @fnichol
 zeromq @reset @fnichol
@@ -120,6 +120,7 @@ monit @rsertelon
 mosquitto @rsertelon
 pango @rsertelon
 rabbitmqadmin @predominant
+redis @irvingpop
 shared-mime-info @rsertelon
 wrk @afiune
 protobuf-cpp @afiune
