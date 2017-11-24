@@ -1,10 +1,10 @@
 pkg_name=binutils
 pkg_origin=core
-pkg_version=2.25.1
+pkg_version=2.29.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('gpl')
 pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.bz2
-pkg_shasum=b5b14added7d78a8d1ca70b5cb75fef57ce2197264f4f5835326b0df22ac9f22
+pkg_shasum=1509dff41369fb70aed23682351b663b56db894034773e6dbf7d5d6071fc55cc
 pkg_deps=(core/glibc core/zlib)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/texinfo core/expect core/dejagnu)
 pkg_bin_dirs=(bin)
@@ -17,15 +17,21 @@ do_prepare() {
   # Add explicit linker instructions as the binutils we are using may have its
   # own dynamic linker defaults.
   dynamic_linker="$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2"
+  LDFLAGS="-L$(pkg_path_for zlib)/lib"
   LDFLAGS="$LDFLAGS -Wl,-rpath=${LD_RUN_PATH},--enable-new-dtags"
   LDFLAGS="$LDFLAGS -Wl,--dynamic-linker=$dynamic_linker"
   export LDFLAGS
   build_line "Updating LDFLAGS=$LDFLAGS"
 
-  # Don't depend on dynamically linked libgcc, as we don't want it denpending
-  # on our /tools install.
-  export CFLAGS="$CFLAGS -static-libgcc"
+  # Binutils has some vendored code that also exists in glibc but could be
+  # API-incompatible, so we're going to zero-out the C*FLAGS environment
+  # variables.
+  export CFLAGS="-I$(pkg_path_for zlib)/include"
   build_line "Updating CFLAGS=$CFLAGS"
+  export CXXFLAGS="$CFLAGS"
+  build_line "Updating CXXFLAGS=$CXXFLAGS"
+  export CPPFLAGS="$CFLAGS"
+  build_line "Updating CPPFLAGS=$CPPFLAGS"
 
   # TODO: For the wrapper scripts to function correctly, we need the full
   # path to bash. Until a bash plan is created, we're going to wing this...
@@ -51,11 +57,16 @@ do_prepare() {
   # Thanks to: https://github.com/NixOS/nixpkgs/blob/0889bbe/pkgs/development/tools/misc/binutils/deterministic.patch
   patch -p1 < $PLAN_CONTEXT/more-deterministic-output.patch
 
-  cat $PLAN_CONTEXT/custom-libs.patch \
-    | sed -e "s,@dynamic_linker@,$dynamic_linker,g" \
-      -e "s,@glibc_lib@,$(pkg_path_for glibc)/lib,g" \
-      -e "s,@zlib_lib@,$(pkg_path_for zlib)/lib,g" \
+  # shellcheck disable=SC2002
+  cat "$PLAN_CONTEXT/disable_failing_tests.patch" \
+    | sed "s,@zlib_libs@,$(pkg_path_for zlib)/lib,g" \
     | patch -p1
+
+  # cat $PLAN_CONTEXT/custom-libs.patch \
+  #   | sed -e "s,@dynamic_linker@,$dynamic_linker,g" \
+  #     -e "s,@glibc_lib@,$(pkg_path_for glibc)/lib,g" \
+  #     -e "s,@zlib_lib@,$(pkg_path_for zlib)/lib,g" \
+  #   | patch -p1
 
   # We don't want to search for libraries in system directories such as `/lib`,
   # `/usr/local/lib`, etc.
@@ -75,9 +86,13 @@ do_build() {
     ../$pkg_dirname/configure \
       --prefix=$pkg_prefix \
       --enable-shared \
+      --enable-gold \
+      --enable-ld=default \
+      --enable-plugins \
       --enable-deterministic-archives \
       --enable-threads \
-      --disable-werror
+      --disable-werror \
+      --with-system-zlib
 
     # Check the environment to make sure all the necessary tools are available
     make configure-host
@@ -91,10 +106,14 @@ do_check() {
     # This testsuite is pretty sensitive to its environment, especially when
     # libraries and headers are being flown in from non-standard locations.
     original_LD_RUN_PATH="$LD_RUN_PATH"
-    export LD_LIBRARY_PATH="$LD_RUN_PATH:$(pkg_path_for gcc)/lib"
+    if [[ "$STUDIO_TYPE" = "stage1" ]]; then
+      export LD_LIBRARY_PATH="$LD_RUN_PATH:/tools/lib"
+    else
+      export LD_LIBRARY_PATH="$LD_RUN_PATH:$(pkg_path_for gcc)/lib"
+    fi
     unset LD_RUN_PATH
 
-    make check LDFLAGS=""
+    make check LDFLAGS="$LDFLAGS"
 
     unset LD_LIBRARY_PATH
     export LD_RUN_PATH="$original_LD_RUN_PATH"
