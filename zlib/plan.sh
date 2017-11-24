@@ -1,11 +1,11 @@
 pkg_name=zlib
 pkg_distname=$pkg_name
 pkg_origin=core
-pkg_version=1.2.8
+pkg_version=1.2.11
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('zlib')
-pkg_source=http://zlib.net/fossils/${pkg_distname}-${pkg_version}.tar.gz
-pkg_shasum=36658cb768a54c1d4dec43c3116c27ed893e88b02ecfcb44f2166f9c0b7f2a0d
+pkg_source=http://zlib.net/${pkg_distname}-${pkg_version}.tar.gz
+pkg_shasum=c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1
 pkg_dirname=${pkg_distname}-${pkg_version}
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
