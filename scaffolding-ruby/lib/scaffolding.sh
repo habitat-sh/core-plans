@@ -48,6 +48,15 @@ EOF
   # Silence Bundler warning when run as root user
   export BUNDLE_SILENCE_ROOT_WARNING=1
 
+  # Attempt to preserve any original Bundler config by moving it to the side
+  if [[ -f .bundle/config ]]; then
+    build_line "Detecting existing bundler config. Temporarily renaming ..."
+    mv .bundle/config .bundle/config.prehab
+    dot_bundle=true
+  elif [[ -d .bundle ]]; then
+    dot_bundle=true
+  fi
+
   GEM_HOME="$gem_dir"
   build_line "Setting GEM_HOME=$GEM_HOME"
   GEM_PATH="$gem_dir:$gem_path"
@@ -184,15 +193,7 @@ EOT
 
 
 scaffolding_bundle_install() {
-  local start_sec elapsed dot_bundle
-
-  # Attempt to preserve any original Bundler config by moving it to the side
-  if [[ -f .bundle/config ]]; then
-    mv .bundle/config .bundle/config.prehab
-    dot_bundle=true
-  elif [[ -d .bundle ]]; then
-    dot_bundle=true
-  fi
+  local start_sec elapsed
 
   build_line "Installing dependencies using $(_bundle --version)"
   start_sec="$SECONDS"
@@ -1025,7 +1026,9 @@ EOF
 }
 
 _restore_bundle_config() {
-  rm -f .bundle/config
-  mv .bundle/config.prehab .bundle/config
-  rm -f .bundle/config.prehab
+  build_line "Restoring original bundler config"
+  if [[ -f .bundle/config.prehab ]]; then
+    rm -f .bundle/config
+    mv .bundle/config.prehab .bundle/config
+  fi
 }
