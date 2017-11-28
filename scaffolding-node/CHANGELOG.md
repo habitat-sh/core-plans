@@ -2,6 +2,10 @@
 
 [Full history](https://github.com/habitat-sh/core-plans/commits/master/scaffolding-node)
 
+## 0.6.10 (11-28-2017)
+
+- Adds explicit dependency on yarn
+
 ## 0.6.9 (11-27-2017)
 
 - Use more robust compat_regex and fix code readability
