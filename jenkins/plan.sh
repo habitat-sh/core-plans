@@ -14,10 +14,6 @@ pkg_exports=(
 pkg_exposes=(port)
 pkg_svc_user="root"
 
-# do_clean() {
-#     return 0
-# }
-
 do_unpack() {
     return 0
 }
