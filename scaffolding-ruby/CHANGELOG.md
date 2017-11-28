@@ -2,6 +2,9 @@
 
 [Full history](https://github.com/habitat-sh/core-plans/commits/master/scaffolding-ruby)
 
+# 0.8.8 (11-27-2017)
+- move the bundle config swap out to do_default_prepare
+
 # 0.8.7 (10-20-2017)
 - provide a default database config for asset compilation
 
