@@ -1,6 +1,16 @@
 #!/bin/sh
 
-raw_data="$(curl -o /dev/null --silent --head --write-out '%{http_code}\n' {{sys.ip}}:{{cfg.jenkins.https.port}})"
+{{~#if cfg.jenkins.http.enabled}}
+CHECK_ADDR="{{sys.ip}}:{{cfg.jenkins.http.port}}"
+{{~/if}}
+{{~#if cfg.jenkins.https.enabled}}
+CHECK_ADDR="{{sys.ip}}:{{cfg.jenkins.https.port}}"
+{{~/if}}
+{{~#if cfg.jenkins.http2.enabled}}
+CHECK_ADDR="{{sys.ip}}:{{cfg.jenkins.http2.port}}"
+{{~/if}}
+
+raw_data="$(curl -o /dev/null --silent --head --write-out '%{http_code}\n' ${CHECK_ADDR})"
 status="$(echo "${raw_data: : -1}" | awk '{print $3}')"
 
 case $status in
