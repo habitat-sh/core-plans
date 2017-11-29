@@ -10,9 +10,9 @@ The goal of code review is to ensure the quality of the core plans,
 encourage new contributors, and help drive contributions towards
 completion.
 
-Code review is a conversation between the submitter and the reviewer
-aimed. Code review comments should be friendly and should assume that
-all parties have the best intents.
+Code review is a conversation between the submitter and the reviewer.
+Comments should be friendly and should assume that all parties have
+the best intents.
 
 It is currently up to each reviewer as to what they require for a pull
 request to receive an approval. Some examples of items you may
