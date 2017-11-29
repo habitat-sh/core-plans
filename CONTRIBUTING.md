@@ -95,9 +95,9 @@ You can read more about [callbacks](https://www.habitat.sh/docs/reference/#refer
 
 #### Don't's
 
-- You should never call `exit` within a build phase. You should instead return an exit code such as `return 1` for failure, and `return 0` for success.  
+- You should never call `exit` within a build phase. You should instead return an exit code such as `return 1` for failure, and `return 0` for success.
 - If you clone a repo from git, you must override `do_verify()` to `return 0`.
-- Never use `pkg_source` unless you are downloading something as a third party.  
+- Never use `pkg_source` unless you are downloading something as a third party.
 - You should never shell out to `hab` from within a callback. If you think you want to, you should use a [utility function](https://www.habitat.sh/docs/reference/#utility-functions) instead.
 - You should not call any function or helper that begin with an underscore, for example `_dont_call_this_function()`. Those are internal only functions that are not supported for external use and will break your plan if you call them.
 - Don't run any code or run anything outside of a build phase or bash function.
@@ -116,7 +116,7 @@ The supervisor dynamically invokes hooks at run-time, triggered by an applicatio
 - Attempting to execute commands as a `root` user or trying to do `sudo hab install` are not good practice.
 - Don't edit any of the Supervisor rendered templates.
   - You can only write to: `/var/`, `/static/`, `/data/` directories. You should only access these with your `runtime configuration setting` variable.
-  - No one should ever edit anything in `/hab/` directly.  
+  - No one should ever edit anything in `/hab/` directly.
   - No one should write to anything in `/hab/` directly.
 
 ### README
