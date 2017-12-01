@@ -125,6 +125,8 @@ paths = [
 ]
 [cyrus-sasl]
 plan_path = "cyrus-sasl"
+[damageproto]
+plan_path = "damageproto"
 [db]
 plan_path = "db"
 [dbus]
