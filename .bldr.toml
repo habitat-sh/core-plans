@@ -143,6 +143,8 @@ plan_path = "devicemapper"
 plan_path = "dex"
 [diffutils]
 plan_path = "diffutils"
+[direnv]
+plan_path = "direnv"
 [docker]
 plan_path = "docker"
 [docutils]
@@ -161,6 +163,8 @@ plan_path = "dotnet-core-sdk-lts"
 plan_path = "doxygen"
 [dpkg]
 plan_path = "dpkg"
+[dri2proto]
+plan_path = "dri2proto"
 [drupal]
 plan_path = "drupal"
 [drush]
@@ -226,6 +230,8 @@ plan_path = "gcc-libs"
 paths = [
   "gcc/*",
 ]
+[gdal]
+plan_path = "gdal"
 [gdb]
 plan_path = "gdb"
 [gdbm]
@@ -236,6 +242,8 @@ plan_path = "gdk-pixbuf"
 plan_path = "gecode"
 [geoip]
 plan_path = "geoip"
+[geos]
+plan_path = "geos"
 [gettext]
 plan_path = "gettext"
 [giflib]
@@ -253,6 +261,8 @@ plan_path = "glibc"
 paths = [
   "tzdata/*",
 ]
+[glproto]
+plan_path = "glproto"
 [gmp]
 plan_path = "gmp"
 [gnatsd]
@@ -270,6 +280,8 @@ plan_path = "go"
 plan_path = "go14"
 [go17]
 plan_path = "go17"
+[goreplay]
+plan_path = "gorplay"
 [gox]
 plan_path = "gox"
 [gperf]
@@ -358,6 +370,8 @@ plan_path = "jre9"
 plan_path = "jruby"
 [jruby1]
 plan_path = "jruby1"
+[json-glib]
+plan_path = "json-glib"
 [kafka]
 plan_path = "kafka"
 [kbproto]
@@ -372,6 +386,8 @@ plan_path = "krb5"
 plan_path = "kubernetes"
 [lcms2]
 plan_path = "lcms2"
+[leptonica]
+plan_path = "leptonica"
 [less]
 plan_path = "less"
 [leveldb]
@@ -397,6 +413,8 @@ plan_path = "libcap"
 plan_path = "libcap-ng"
 [libcxx]
 plan_path = "libcxx"
+[libdrm]
+plan_path = "libdrm"
 [libedit]
 plan_path = "libedit"
 [liberation-fonts-ttf]
@@ -429,6 +447,8 @@ plan_path = "libmpc"
 plan_path = "libossp-uuid"
 [libpcap]
 plan_path = "libpcap"
+[libpciaccess]
+plan_path = "libpciaccss"
 [libpipeline]
 plan_path = "libpipeline"
 [libpng]
@@ -475,6 +495,8 @@ plan_path = "libwebp"
 plan_path = "libxau"
 [libxcb]
 plan_path = "libxcb"
+[libxdamage]
+plan_path = "libxdamage"
 [libxdmcp]
 plan_path = "libxdmcp"
 [libxext]
@@ -491,6 +513,8 @@ plan_path = "libxmu"
 plan_path = "libxrandr"
 [libxrender]
 plan_path = "libxrender"
+[libxshmfence]
+plan_path = "libxshmfence"
 [libxslt]
 plan_path = "libxslt"
 [libxt]
@@ -704,6 +728,8 @@ paths = [
 plan_path = "powershell"
 [procps-ng]
 plan_path = "procps-ng"
+[proj]
+plan_path = "proj"
 [prometheus]
 plan_path = "prometheus"
 [protobuf]
@@ -836,6 +862,8 @@ plan_path = "tcpdump"
 plan_path = "telegraf"
 [terraform]
 plan_path = "terraform"
+[tesseract]
+plan_path = "tesseract"
 [texinfo]
 plan_path = "texinfo"
 [tmux]
