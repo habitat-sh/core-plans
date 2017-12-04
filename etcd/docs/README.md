@@ -15,7 +15,7 @@ The Habitat Maintainers <humans@habitat.sh>
 ## Usage
 
 - On the first node: `hab sup start core/etcd --topology leader`
-- On subsequent nodes: `hab sup start core/crate -- topology leader --peer <first node ip>`
+- On subsequent nodes: `hab sup start core/etcd --topology leader --peer <first node ip>`
 
 On all nodes the following ports are available:
 
@@ -24,13 +24,25 @@ On all nodes the following ports are available:
 
 The ports can be changed.
 
-
 On all nodes the following URLs are accessible:
 - **listen-client-urls**: URLs to listen on for client traffic. Default to https://IP:2379
 - **listen-peer-urls**: URLs to listen on for peer traffic. Default to https://IP:2380
 
 The URLs can be changed.
 
+The plan defaults to automatically generated, self-signed certificates,
+alternatively client and peer certificate locations can be configured.
+
+### Testing with etcdctl
+
+Example:
+
+```
+$ etcdctl --debug --insecure-transport=false --insecure-skip-tls-verify --endpoints https://IP:2379 member list
+b82a52a6ff5c63c3, started, node-1, https://192.168.222.11:2380, https://192.168.222.11:2379
+ddfa35d3c9a4c741, started, node-2, https://192.168.222.12:2380, https://192.168.222.12:2379
+f1986a6cf0ad46aa, started, node-0, https://192.168.222.10:2380, https://192.168.222.10:2379
+```
 
 ### Testing with curl
 
@@ -61,9 +73,6 @@ $ curl -L -k https://10.0.2.15:2379/v2/keys/new
 ```
 
 ## Notes
-
-- This plan uses self-signed certificates with automatic generation. It assumes that
-etcd is not exposed to outside world. The plan will be improved in next versions.
 
 - hab v0.22/0.23 due to a bug in domain resolution inside these versions
 of Habitat, etcd configuration is only using IP addresses to contact

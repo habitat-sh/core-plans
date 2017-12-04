@@ -1,14 +1,14 @@
 pkg_name=etcd
 pkg_description="Distributed reliable key-value store for the most critical data of a distributed system"
 pkg_origin=core
-pkg_version="v3.1.5"
+pkg_version="v3.2.9"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source=https://github.com/coreos/${pkg_name}/releases/download/${pkg_version}/${pkg_name}-${pkg_version}-linux-amd64.tar.gz
 pkg_upstream_url=https://github.com/coreos/etcd/releases/
-pkg_shasum=812f2a8e28330cb1e127177ff81efaa24f8e57ce22d3cd28799ef1f939f71454
+pkg_shasum=1e962459cb649363215eb022eb7ea8857ea95dce836eb9ff3b3dc54c851b4cb1
 pkg_dirname=${pkg_name}-${pkg_version}-linux-amd64
-pkg_deps=()
+pkg_deps=(core/curl)
 pkg_build_deps=(core/gnupg)
 pkg_bin_dirs=(/usr/bin)
 
@@ -28,7 +28,7 @@ do_download() {
 
   download_file "https://github.com/coreos/${pkg_name}/releases/download/${pkg_version}/${pkg_name}-${pkg_version}-linux-amd64.tar.gz.asc" \
 	        "${pkg_name}-${pkg_version}-linux-amd64.tar.gz.asc" \
-  		"f6ef73ff5b8e70313c0ff759cd9dcb86974e95882dff3b9c762342d568a08121"
+	        "71a1d07ce70b68a35a2c41d16719857d947bed4e4e61509cab21db0b6e2aae8f"
   download_file "https://coreos.com/dist/pubkeys/app-signing-pubkey.gpg" \
 	        "app-signing-pubkey.gpg" \
                 "16b93904e4b3133fe4b5f95f46e3db998c3b2f9d9cee6d4c2eb531f98028bcb3"
@@ -38,7 +38,7 @@ do_verify() {
   do_default_verify
 
   verify_file "${pkg_name}-${pkg_version}-linux-amd64.tar.gz.asc" \
-	      "f6ef73ff5b8e70313c0ff759cd9dcb86974e95882dff3b9c762342d568a08121"
+	      "71a1d07ce70b68a35a2c41d16719857d947bed4e4e61509cab21db0b6e2aae8f"
   verify_file "app-signing-pubkey.gpg" \
 	      "16b93904e4b3133fe4b5f95f46e3db998c3b2f9d9cee6d4c2eb531f98028bcb3"
 
