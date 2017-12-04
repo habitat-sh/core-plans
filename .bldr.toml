@@ -937,6 +937,11 @@ randrproto = "randrproto"
 plan_path = "re2c"
 [readline]
 plan_path = "readline"
+[readline6]
+plan_path = "readline6"
+paths = [
+  "readline/*",
+]
 [rebar]
 plan_path = "rebar"
 [rebar3]
