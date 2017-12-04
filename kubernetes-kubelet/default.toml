@@ -1,0 +1,15 @@
+client-ca-file = ""
+
+cluster-dns = "10.32.0.10"
+cluster-domain = "cluster.local"
+
+kubeconfig = ""
+
+tls-cert-file = ""
+tls-private-key-file = ""
+
+verbosity = "2"
+
+cni-conf-dir = "static/cni/"
+
+init-config-dir = "/var/lib/kubelet-config/"
