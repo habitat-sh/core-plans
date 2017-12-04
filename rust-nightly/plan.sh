@@ -26,7 +26,7 @@ pkg_version() {
   # and produces a version string like:
   #     1.24.0-2017-11-27
   local v
-  v="$(cat "$pkg_dirname/version")"
+  v="$(cat "$CACHE_PATH/version")"
   echo "$(\
     echo "$v" | cut -d ' ' -f 1 | sed 's,-nightly$,,')-$(\
     echo "$v" | cut -d ' ' -f 3 | sed 's,)$,,')"
