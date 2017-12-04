@@ -1,11 +1,30 @@
-#!/bin/bash
+#!/bin/sh
 
 exec 2>&1
 
-export JAVA_HOME={{pkgPathFor "core/jre8"}}
-export JENKINS_HOME={{pkg.svc_data_path}}
+export JAVA_HOME="{{pkgPathFor "core/jre8"}}"
+export JENKINS_HOME="{{pkg.svc_data_path}}"
 
-exec java -jar {{pkg.path}}/jenkins.war \
-     --httpPort={{cfg.jenkins.http.port}} \
-     --httpListenAddress={{sys.ip}} \
-     --ajp13Port=-1
+exec java \
+  {{cfg.java.opts}} \
+  -jar "{{pkg.path}}/jenkins.war" \
+  --prefix={{cfg.jenkins.prefix}} \
+  {{~#if cfg.jenkins.http.enabled}}
+  --httpPort={{cfg.jenkins.http.port}} \
+  --httpListenAddress={{sys.ip}} \
+  {{~/if}}
+  {{~#if cfg.jenkins.https.enabled}}
+  --httpsPort={{cfg.jenkins.https.port}} \
+  --httpsListenAddress={{sys.ip}} \
+  {{~/if}}
+  {{~#if cfg.jenkins.http2.enabled}}
+  --http2Port={{cfg.jenkins.http2.port}} \
+  --http2ListenAddress={{sys.ip}} \
+  {{~/if}}
+  {{~#if cfg.jenkins.ajp13.enabled}}
+  --ajp13Port={{cfg.jenkins.ajp13.port}} \
+  --ajp13ListenAddress={{sys.ip}} \
+  {{~else}}
+  --ajp13Port=-1 \
+  {{~/if}}
+  --sessionTimeout={{cfg.jenkins.session.timeout}}

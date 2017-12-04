@@ -1,8 +1,24 @@
 [jenkins]
-  winstone_opts = "-XX:PermSize=512M -XX:MaxPermSize=2048M -Xmn128M -Xms1024M -Xmx2048M"
+prefix = "/"
 
-  [jenkins.http] 
-    port = 8080
+[jenkins.session]
+timeout = 60
+
+[jenkins.http]
+enabled = true
+port = 80
+
+[jenkins.https]
+enabled = false
+port = 443
+
+[jenkins.http2]
+enabled = false
+port = 80
+
+[jenkins.ajp13]
+enabled = false
+port = 8009
 
 [java]
-  opts = ""
+opts = "-XX:PermSize=512M -XX:MaxPermSize=2048M -Xmn128M -Xms1024M -Xmx2048M"
