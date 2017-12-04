@@ -1,0 +1,12 @@
+pkg_origin=core
+pkg_name=inotify-tools
+pkg_version=3.14
+pkg_description="inotify-tools is a C library and a set of command-line programs for Linux providing a simple interface to inotify. These programs can be used to monitor and act upon filesystem events."
+pkg_upstream_url=https://github.com/rvoicilas/inotify-tools/wiki
+pkg_license=("GPL-2.0")
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_source="http://github.com/downloads/rvoicilas/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum=222bcca8893d7bf8a1ce207fb39ceead5233b5015623d099392e95197676c92f
+pkg_deps=(core/glibc)
+pkg_build_deps=(core/gcc core/make)
+pkg_bin_dirs=(bin)
