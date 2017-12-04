@@ -6,6 +6,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-3.0')
 pkg_description="The GNU Readline library provides a set of functions for use by applications that allow users to edit command lines as they are typed in."
 _url_base="http://ftp.gnu.org/gnu/${pkg_name}"
+pkg_upstream_url="https://www.gnu.org/"
 pkg_source="${_url_base}/${pkg_name}-${_base_version}.tar.gz"
 pkg_dirname="${pkg_name}-${_base_version}"
 pkg_shasum=750d437185286f40a369e1e4f4764eda932b9459b5ec9a731628393dd3d32334
@@ -42,7 +43,7 @@ do_verify() {
 
   # Verify all patch files against their shasums
   for i in $(seq 0 $((${#_patch_files[@]} - 1))); do
-    verify_file "$(basename ${_patch_files[$i]})" "${_patch_shasums[$i]}"
+    verify_file "$(basename "${_patch_files[$i]}")" "${_patch_shasums[$i]}"
   done; unset i
 }
 
@@ -71,7 +72,7 @@ do_install() {
   do_default_install
 
   # An empty `bin/` directory gets made, which we don't need and is confusing
-  rm -rf "${pkg_prefix}/bin"
+  rm -rf "${pkg_prefix:?}/bin"
 }
 
 
