@@ -1,13 +1,13 @@
 pkg_name=msgpack
 pkg_origin=core
-pkg_version="2.1.1"
+pkg_version="2.1.5"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="MessagePack implementation for C and C++"
+pkg_upstream_url="https://github.com/msgpack/msgpack-c"
 pkg_license=('BSL-1.0')
 pkg_source="https://github.com/msgpack/${pkg_name}-c/releases/download/cpp-$pkg_version/${pkg_name}-$pkg_version.tar.gz"
-pkg_shasum="fce702408f0d228a1b9dcab69590d6a94d3938f694b95c9e5e6249617e98d83f"
-pkg_deps=(
-  core/glibc
-)
+pkg_shasum="6126375af9b204611b9d9f154929f4f747e4599e6ae8443b337915dcf2899d2b"
+pkg_deps=(core/glibc)
 pkg_build_deps=(
   core/cmake
   core/doxygen
@@ -16,8 +16,6 @@ pkg_build_deps=(
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
-pkg_description="MessagePack implementation for C and C++"
-pkg_upstream_url="https://github.com/msgpack/msgpack-c"
 
 do_build() {
   cmake . \
