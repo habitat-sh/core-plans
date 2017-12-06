@@ -22,6 +22,11 @@
         entry: ./bin/check-default-variables.sh
         language: system
         files: plan.sh$
+    -   id: check-bldr-toml
+        name: Check for an entry in .bldr.toml
+        entry: ./bin/check-bldr-toml.sh
+        language: system
+        files: plan.sh$
     -   id: check-bad-patterns
         name: Check for bad patterns in Hook files
         entry: ./bin/check-bad-patterns.sh
