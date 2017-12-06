@@ -330,6 +330,8 @@ plan_path = "icu56"
 plan_path = "imagemagick"
 [inetutils]
 plan_path = "inetutils"
+[inotify-tools]
+plan_path = "inotify-tools"
 [inputproto]
 plan_path = "inputproto"
 [intltool]
