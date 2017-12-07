@@ -38,7 +38,7 @@ do_install() {
   cp -a ./* "${pkg_prefix}/es"
 
   # jvm.options needs to live relative to the binary.
-  # mkdir -p mkdir -p "$pkg_prefix/es/config"
+  # mkdir -p "$pkg_prefix/es/config"
   # install -vDm644 config/jvm.options "$pkg_prefix/es/config/jvm.options"
 
   # Delete unused binaries to save space
