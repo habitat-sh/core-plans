@@ -4,7 +4,7 @@ pkg_upstream_url="https://traefik.io"
 pkg_origin=core
 # note: to have the version match the codename, please update both values when
 #       updating this for a new release
-pkg_version="v1.4.4"
+pkg_version="v1.4.5"
 traefik_codename="roquefort"
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=("MIT")
