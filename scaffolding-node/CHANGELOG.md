@@ -2,6 +2,11 @@
 
 [Full history](https://github.com/habitat-sh/core-plans/commits/master/scaffolding-node)
 
+## 0.6.11 (12-08-2017)
+
+- Improve git detection with `git rev-parse --is-in-work-tree`, makes
+  core/git a direct build dependency
+
 ## 0.6.10 (11-28-2017)
 
 - Adds explicit dependency on yarn

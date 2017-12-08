@@ -42,6 +42,7 @@ Most non-trivial apps need more than their own codebase to run correctly. Many h
 The following Habitat package dependencies will be injected into your app's Plan:
 
 * [`core/busybox-static`][]: Used by process bins to have valid [shebangs][] and a consistent minimal command set. Will be injected into your Plan's `pkg_deps` array.
+* `core/git`: Used to detect if your app exists within a git repository to better support installing your app while honoring the `.gitignore` file. Will be injected into your Plan's `pkg_build_deps` array.
 
 ### Detected Dependencies
 
@@ -56,7 +57,6 @@ The following gems will checked for in the `Gemfile.lock` to conditionally injec
 Additional checks performed by this scaffolding are:
 
 * The app's version of Ruby will be determined by checking several source locations. See the Ruby Version section for more details.
-* If your app's root directory contains a `.git/` subdirectory, then Git-related Habitat packages will be injected into your Plan's `pkg_build_deps` array to better support installing your app while honoring the `.gitignore` file.
 
 ###  Specifying Run Dependencies in Your Plan
 
