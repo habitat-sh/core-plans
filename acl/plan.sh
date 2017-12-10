@@ -4,14 +4,27 @@ pkg_version=2.2.52
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('lgpl')
 pkg_source=http://download.savannah.gnu.org/releases/$pkg_name/$pkg_name-${pkg_version}.src.tar.gz
+pkg_upstream_url="https://savannah.nongnu.org/projects/acl"
+pkg_description="Commands for Manipulating POSIX Access Control Lists"
 pkg_shasum=179074bb0580c06c4b4137be4c5a92a701583277967acdb5546043c7874e0d23
-pkg_deps=(core/glibc core/attr)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/gettext)
+pkg_deps=(
+  core/glibc
+  core/attr
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/file
+  core/gcc
+  core/gettext
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
-do_prepare() {
+_fix_segfault() {
   # Fix a bug that causes `getfacl -e` to segfault on overly long group name.
   #
   # Thanks to: http://www.linuxfromscratch.org/lfs/view/stable/chapter06/acl.html
@@ -19,11 +32,24 @@ do_prepare() {
     libacl/__acl_to_any_text.c
 }
 
-do_install() {
-  make install install-dev install-lib
-  chmod -v 755 $pkg_prefix/lib/libacl.so
+do_prepare() {
+  _fix_segfault
+  if [[ ! -r /usr/bin/file ]]; then
+    ln -sv "$(pkg_path_for file)/bin/file" /usr/bin/file
+    _clean_file=true
+  fi
 }
 
+do_install() {
+  make install install-dev install-lib
+  chmod -v 755 "${pkg_prefix}/lib/libacl.so"
+}
+
+do_end() {
+  if [[ -n "$_clean_file" ]]; then
+    rm -fv /usr/bin/file
+  fi
+}
 
 # ----------------------------------------------------------------------------
 # **NOTICE:** What follows are implementation details required for building a
@@ -34,4 +60,10 @@ do_install() {
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
   pkg_build_deps=(core/gcc)
+  do_prepare() {
+    _fix_segfault
+  }
+  do_end() {
+    return 0
+  }
 fi
