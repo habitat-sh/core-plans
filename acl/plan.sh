@@ -4,9 +4,22 @@ pkg_version=2.2.52
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('lgpl')
 pkg_source=http://download.savannah.gnu.org/releases/$pkg_name/$pkg_name-${pkg_version}.src.tar.gz
+pkg_upstream_url="https://savannah.nongnu.org/projects/acl"
+pkg_description="Commands for Manipulating POSIX Access Control Lists"
 pkg_shasum=179074bb0580c06c4b4137be4c5a92a701583277967acdb5546043c7874e0d23
-pkg_deps=(core/glibc core/attr)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/gettext)
+pkg_deps=(
+  core/glibc
+  core/attr
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/file
+  core/gcc
+  core/gettext
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
@@ -17,11 +30,17 @@ do_prepare() {
   # Thanks to: http://www.linuxfromscratch.org/lfs/view/stable/chapter06/acl.html
   sed -i -e "/TABS-1;/a if (x > (TABS-1)) x = (TABS-1);" \
     libacl/__acl_to_any_text.c
+
+  # Update all references to the `/usr/bin/file` absolute path with `file`
+  # which will be on `$PATH` due to file being a build dependency.
+  grep -lr /usr/bin/file * | while read f; do
+    sed -i -e "s,/usr/bin/file,file,g" "$f"
+  done
 }
 
 do_install() {
   make install install-dev install-lib
-  chmod -v 755 $pkg_prefix/lib/libacl.so
+  chmod -v 755 "${pkg_prefix}/lib/libacl.so"
 }
 
 
