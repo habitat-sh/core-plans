@@ -26,4 +26,3 @@ do_build() {
 ./configure
 make
 }
-
