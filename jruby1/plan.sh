@@ -1,11 +1,11 @@
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_name=jruby1
-pkg_version=1.7.25
+pkg_version=1.7.27
 pkg_description="A high performance, stable, fully threaded Java implementation of the Ruby programming language."
 pkg_upstream_url=https://github.com/jruby/jruby
 pkg_source=https://github.com/jruby/jruby/archive/${pkg_version}.tar.gz
-pkg_shasum=4e17872bc38cf6c0ff238a365d2046e36e3149d0d381df2198fd949902602c9c
+pkg_shasum=25628ef9b5ba3018563ae625c1534de3472b3a95b184aef6d8ef6731378909b7
 pkg_license=('EPL 1.0' 'GPL-2.0' 'LGPL-2.1')
 pkg_deps=(
   core/bash
@@ -31,7 +31,7 @@ do_build() {
 
 do_install() {
   cp -R ./* "$pkg_prefix/"
-  fix_interpreter "$pkg_prefix/bin/*" core/coreutils bin/env
+  fix_interpreter "$pkg_prefix/bin/*" core/bash bash
 
   # Remove *.so for other platforms...they cause `do_strip()' to fail
   # with `Unable to recognise the format' errors
