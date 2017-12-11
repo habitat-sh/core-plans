@@ -714,6 +714,8 @@ plan_path = "openvpn"
 plan_path = "packer"
 [pango]
 plan_path = "pango"
+[papi]
+plan_path = "papi"
 [patch]
 plan_path = "patch"
 [patchelf]
