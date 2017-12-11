@@ -53,4 +53,5 @@ I had originally [proposed splitting the node scaffolding](https://github.com/ha
 # Unresolved questions
 [unresolved]: #unresolved-questions
 
-- How will we and who will update the existing scaffoldings to these standards?
+The node and ruby scaffolding currently adhere to these standards - who will determine whether the rest of the scaffoldings in core-plans also adhere to these standards?
+
