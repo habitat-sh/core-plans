@@ -625,6 +625,8 @@ plan_path = "mongodb"
 plan_path = "mosquitto"
 [mpfr]
 plan_path = "mpfr"
+[msgpack]
+plan_path = "msgpack"
 [mssql]
 plan_path = "mssql"
 [musl]
