@@ -38,3 +38,8 @@ do_end() {
     rm -fv /usr/bin/file
   fi
 }
+
+do_check() {
+  # The ssh2.c test case expects USER to be set
+  USER=root make check
+}
