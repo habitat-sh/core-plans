@@ -929,6 +929,8 @@ plan_path = "tree"
 plan_path = "ttyrec"
 [tzdata]
 plan_path = "tzdata"
+[unibilium]
+plan_path = "unibilium"
 [unzip]
 plan_path = "unzip"
 [userspace-rcu]
