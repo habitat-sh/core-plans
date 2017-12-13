@@ -390,6 +390,8 @@ plan_path = "kibana"
 plan_path = "kmod"
 [krb5]
 plan_path = "krb5"
+[kubectl]
+plan_path = "kubectl"
 [kubernetes]
 plan_path = "kubernetes"
 [kubernetes-apiserver]
