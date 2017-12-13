@@ -508,6 +508,8 @@ plan_path = "libsodium-musl"
 paths = [
   "libsodium/*",
 ]
+[libssh2]
+plan_path = "libssh2"
 [libtermkey]
 plan_path = "libtermkey"
 [libtiff]
