@@ -114,6 +114,7 @@ harfbuzz @rsertelon
 jdk7 @predominant @rsertelon
 jdk8 @predominant @rsertelon
 jdk9 @predominant @rsertelon
+jenkins @predominant
 jre7 @predominant @rsertelon
 jre8 @predominant @rsertelon
 jre9 @predominant @rsertelon
