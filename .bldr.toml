@@ -819,6 +819,8 @@ plan_path = "renderproto"
 plan_path = "repo"
 [rethinkdb]
 plan_path = "rethinkdb"
+[ripgrep]
+plan_path = "ripgrep"
 [rngd]
 plan_path = "rngd"
 [rpm]
