@@ -1,0 +1,8 @@
+log_level = "warn"
+
+[input]
+[input.forward]
+port = 24224
+
+[input.http]
+port = 8888
