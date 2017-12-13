@@ -193,6 +193,8 @@ plan_path = "erlang19"
 plan_path = "etcd"
 [eudev]
 plan_path = "eudev"
+[exercism]
+plan_path = "exercism"
 [expat]
 plan_path = "expat"
 [expect]
