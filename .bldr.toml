@@ -823,6 +823,8 @@ plan_path = "repo"
 plan_path = "rethinkdb"
 [ripgrep]
 plan_path = "ripgrep"
+[rkt]
+plan_path = "rkt"
 [rngd]
 plan_path = "rngd"
 [rpm]
