@@ -43,12 +43,12 @@ do_build() {
   ./configure --prefix="${pkg_prefix}" \
     --without-zenmap \
     --with-libdnet=included \
-    --with-liblinear=included
+    --with-liblinear=included \
     --with-liblua="$(pkg_path_for "core/lua")" \
     --with-libpcap=included \
     --with-libpcre="$(pkg_path_for "core/pcre")" \
     --with-libssh2=included \
-    --with-libz="$(pkg_path_for "core/zlib")" \
+    --with-libz="$(pkg_path_for "core/zlib")"
   make
 }
 
