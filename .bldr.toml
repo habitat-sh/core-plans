@@ -861,6 +861,8 @@ plan_path = "scaffolding-node"
 plan_path = "scaffolding-ruby"
 [scons]
 plan_path = "scons"
+[scowl]
+plan_path = "scowl"
 [sed]
 plan_path = "sed"
 [sensu]
