@@ -12,6 +12,7 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_build() {
+  attach
   pushd build_unix > /dev/null
   ../dist/configure \
     --prefix=$pkg_prefix \
@@ -26,6 +27,7 @@ do_build() {
 do_install() {
   pushd build_unix > /dev/null
   do_default_install
+  make uninstall_docs
   popd > /dev/null
 
   # Install license file
