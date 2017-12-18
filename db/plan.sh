@@ -5,6 +5,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Berkeley DB is a family of embedded key-value database libraries providing scalable high-performance data management services to applications."
 pkg_license=('custom')
 pkg_source=http://download.oracle.com/berkeley-db/${pkg_name}-${pkg_version}.tar.gz
+pkg_upstream_url="http://www.oracle.com/technetwork/database/database-technologies/berkeleydb/overview/index.html"
 pkg_shasum=e0a992d740709892e81f9d93f06daf305cf73fb81b545afe72478043172c3628
 pkg_deps=(core/glibc core/gcc-libs)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
