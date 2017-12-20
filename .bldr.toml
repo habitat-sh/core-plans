@@ -175,6 +175,8 @@ plan_path = "e2fsprogs"
 plan_path = "ed"
 [elasticsearch]
 plan_path = "elasticsearch"
+[elasticsearch5]
+plan_path = "elasticsearch5"
 [elfutils]
 plan_path = "elfutils"
 [elixir]
