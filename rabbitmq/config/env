@@ -7,3 +7,4 @@ export RABBITMQ_ENABLED_PLUGINS_FILE="{{pkg.svc_var_path}}/enabled_plugins"
 export HOME="{{pkg.svc_var_path}}"
 export RABBITMQ_LOGS=-
 export RABBITMQ_SASL_LOGS=-
+export LC_ALL=en_US.UTF-8
