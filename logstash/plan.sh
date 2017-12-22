@@ -45,5 +45,4 @@ do_install() {
 
   # Ensure we only print to the console
   cp "${PLAN_CONTEXT}/log4j2.properties" "$pkg_prefix/settings/"
-
 }
