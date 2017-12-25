@@ -138,6 +138,8 @@ paths = [
 plan_path = "clens"
 [clingo]
 plan_path = "clingo"
+[clojure]
+plan_path = "clojure"
 [cmake]
 plan_path = "cmake"
 [cockroach]
