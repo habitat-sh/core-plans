@@ -2,15 +2,15 @@
 
 . "{{pkg.svc_config_path}}/env"
 
-{{#if cfg.rabbitmq.management.enabled ~}}
+{{~#if cfg.rabbitmq.management.enabled}}
 echo "Enabling management console"
-rabbitmq-plugins --offline enable rabbitmq_management
-{{else ~}}
+$SUP_CMD rabbitmq-plugins --offline enable rabbitmq_management
+{{~else}}
 echo "Disabling management console"
-rabbitmq-plugins --offline disable rabbitmq_management
-{{/if ~}}
+$SUP_CMD rabbitmq-plugins --offline disable rabbitmq_management
+{{~/if}}
 
-{{#if cfg.erlang.cookie ~}}
+{{~#if cfg.erlang.cookie}}
 # We do this in the run hook because we need to ensure that the cookie
 # the Erlang VM starts with is the same cookie throughout the
 # lifecycle, including reconfiguration.
@@ -21,20 +21,18 @@ echo "Creating Erlang Cookie from configuration"
 chmod 0600 -v {{pkg.svc_var_path}}/.erlang.cookie
 cp -v {{pkg.svc_config_path}}/.erlang.cookie {{pkg.svc_var_path}}/.erlang.cookie
 chmod 0400 {{pkg.svc_var_path}}/.erlang.cookie
-{{/if ~}}
+{{~/if}}
 
-# https://www.youtube.com/watch?v=wGhQ2BDt4VE
-#
 # use shutdown instead of stop to ensure that the Erlang VM is
 # completely halted and isn't using a stale cookie.
 #
 # No one wants a stale cookie.
 kill_rabbit() {
-  rabbitmqctl shutdown
+  $SUP_CMD rabbitmqctl shutdown
   exit
 }
 
 trap "kill_rabbit" INT TERM HUP ABRT QUIT
 
 # We do NOT call exec here, as we trap signals and kill rabbit in this script
-rabbitmq-server 2>&1
+$SUP_CMD rabbitmq-server 2>&1

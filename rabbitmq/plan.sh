@@ -30,6 +30,7 @@ pkg_build_deps=(
   core/rsync
   core/unzip
   core/zip
+  core/patchelf
 )
 pkg_include_dirs=(include)
 pkg_bin_dirs=(sbin)
@@ -55,6 +56,15 @@ do_prepare() {
 
 do_build() {
   make
+}
+
+do_install() {
+  do_default_install || return $?
+  # Install tini, to reap zombie child process https://github.com/habitat-sh/core-plans/issues/1099
+  curl -L -o ${pkg_prefix}/sbin/tini https://github.com/krallin/tini/releases/download/v0.16.1/tini-amd64
+  chmod +x ${pkg_prefix}/sbin/tini
+  patchelf --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" --set-rpath "${LD_RUN_PATH}" ${pkg_prefix}/sbin/tini
+  return $?
 }
 
 do_check() {

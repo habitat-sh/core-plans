@@ -1,4 +1,4 @@
 #!/bin/sh
 
 . "{{pkg.svc_config_path}}/env"
-rabbitmqctl node_health_check
+$SUP_CMD rabbitmqctl -q node_health_check

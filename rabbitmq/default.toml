@@ -16,6 +16,9 @@ default_user="guest"
 # Password for the default user.
 default_pass="guest"
 
+# Install a special supervisor in docker to reap zomblie child processes
+docker_supervision=false
+
 [rabbitmq.management]
 # Whether to enable the rabbitmq management plugin.
 enabled=false
