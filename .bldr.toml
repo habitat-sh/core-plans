@@ -831,6 +831,8 @@ plan_path = "rethinkdb"
 plan_path = "ripgrep"
 [rkt]
 plan_path = "rkt"
+[rlwrap]
+plan_path = "rlwrap"
 [rngd]
 plan_path = "rngd"
 [rpm]
