@@ -1,6 +1,6 @@
 pkg_name=fluentd
 pkg_origin=core
-pkg_version=0.14.23
+pkg_version=1.0.2
 pkg_deps=(
   core/ruby
   core/coreutils
