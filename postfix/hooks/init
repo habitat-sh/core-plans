@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# setup user/group
+id -u {{cfg.mail_owner}} &>/dev/null || useradd {{cfg.mail_owner}}
+groupadd -f {{cfg.setgid_group}}
+
+# setup data/
+cp -vnr {{pkg.path}}/data/* {{pkg.svc_data_path}}/
+mkdir -p {{pkg.svc_data_path}}/spool
+chown -R {{cfg.mail_owner}}:{{cfg.setgid_group}} {{pkg.svc_data_path}}
+chmod g+w -R {{pkg.svc_data_path}}/spool
+
+# setup environment
+if [[ ! -f /etc/services ]]; then
+  cp -v {{pkgPathFor "core/iana-etc"}}/etc/services /etc/services
+fi
+
+# initial aliases database
+newaliases -C {{pkg.svc_config_path}}
