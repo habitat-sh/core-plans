@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# script/update: Update application to run for its current checkout.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+
+script/bootstrap
+
+
+echo "==> Installing last build…"
+source results/last_build.env
+hab pkg install "results/${pkg_artifact}"
+
+
+echo "==> Reading config version…"
+if [ -f test-config.toml.version ]; then
+    POSTFIX_CONFIG_VERSION=$(($(cat test-config.toml.version)+1))
+else
+    POSTFIX_CONFIG_VERSION=1
+fi
+
+
+echo "==> Appyling test-config.toml version ${POSTFIX_CONFIG_VERSION}…"
+cat test-config.toml | hab config apply postfix.default ${POSTFIX_CONFIG_VERSION}
+
+
+echo "==> Writing config version ${POSTFIX_CONFIG_VERSION}…"
+echo "${POSTFIX_CONFIG_VERSION}" > test-config.toml.version
