@@ -3,10 +3,10 @@
 
 # setup syslogd
 echo
-hab pkg install core/busybox-static
-
-echo
 echo "--> Launching syslogd in the background for postfix debugging..."
+
+echo "    Installing: core/busybox-static"
+hab pkg install core/busybox-static
 
 [[ -S /dev/log ]] && echo "    Erasing: /dev/log" && rm /dev/log
 
@@ -55,12 +55,12 @@ postfix-install() {
 echo "    * Use 'postfix-start' to start the postfix service"
 postfix-start() {
     postfix-install
-    hab svc start core/postfix
+    hab svc start jarvus/postfix
 }
 
 echo "    * Use 'postfix-stop' to stop the postfix service"
 postfix-stop() {
-    hab svc stop core/postfix
+    hab svc stop jarvus/postfix
 }
 
 echo "    * Use 'postfix-restart' to restart the postfix service"
