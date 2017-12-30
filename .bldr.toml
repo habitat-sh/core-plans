@@ -600,6 +600,8 @@ plan_path = "polipo"
 plan_path = "ponysay"
 [popt]
 plan_path = "popt"
+[postfix]
+plan_path = "postfix"
 [postgresql]
 plan_path = "postgresql"
 [postgresql93]
