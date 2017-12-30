@@ -1,48 +1,36 @@
-# postfix habitat service
+# jarvus/postfix habitat service
 
 A habitat plan for building and running postfix as a supervised service
 
-## Logging
+## Development / Testing
 
-Postfix is hardcoded to use syslog via `/dev/log`, which is not available by default in studio or container environments.
+### Using studio
 
-`busybox-static` contains `syslogd` which can provide a minimal logging interface that writes to `/var/log/messages`. Start it within a studio before starting postfix with `hab pkg exec core/busybox-static syslogd -n &`
-
-## Testing
+[`.studiorc`](./.studiorc) provides an environment and several commands for testing and development, see output when studio launches for usage.
 
 To test with the default configuration, ensure that `localhost.localdomain` is an additional name for your `localhost` entry in your host machine's `/etc/hosts`
 
-### Start in studio
+### Writing test emails directly into queue
 
-1. Run `build` at least once to have at least one build available under `./results/`, re-run as needed
-1. Run `script/server` to start syslogd, configure postfix service, and (re)load the postfix service
-1. Tail `/var/log/messages` for postfix log output
+1. Open SMTP socket connection from inside of studio:
 
-### Write test emails directly into queue
-
-1. Open socket connection from outside of studio:
-
-    `nc localhost 25`
-
-   - Or, from inside studio:
-
-       `hab pkg install core/netcat && hab pkg exec core/netcat nc localhost 25`
+    `postfix-email`
 1. Start SMTP session:
 
-    `ehlo localhost.localdomain`
+    `EHLO localhost.localdomain`
 
 1. Set sender:
 
-    `mail from: tester@example.com`
+    `MAIL FROM: <tester@example.com>`
 
 1. Set recipient:
 
-    `rcpt to: root@localhost`
+    `RCPT TO: <root@localhost>`
 
 1. Set message:
 
     ```smtp
-    data
+    DATA
     Subject: Hello world!
 
     This is the body of my email.
@@ -57,19 +45,50 @@ To test with the default configuration, ensure that `localhost.localdomain` is a
 
 1. Close SMTP session:
 
-    `quit`
+    `QUIT`
 
 1. Read the mailbox from within the studio:
 
     `less /hab/svc/postfix/data/spool/root`
 
-## References
+## Sample configurations
 
-- http://www.postfix.org/INSTALL.html
-- http://www.postfix.org/DB_README.html
-- http://www.postfix.org/BASIC_CONFIGURATION_README.html
-- http://www.postfix.org/postconf.5.html
-- http://www.postfix.org/VIRTUAL_README.html
-- https://github.com/alezzandro/postfix-docker
-- http://www.postfix.org/master.8.html
-- https://mediatemple.net/community/products/dv/204404584/sending-or-viewing-emails-using-telnet
+### Receive incoming mail to a virtual destination
+
+These options illustrate delivering incoming mail to a script, with some parameters passed as arguments and the mail body piped into STDIN:
+
+```
+command_time_limit = "3600s"
+
+[virtual]
+transport = "myreceivescript"
+mailbox_domains = "pcre:/opt/myreceivescript/domains"
+
+[[services]]
+name = "myreceivescript"
+destination_recipient_limit = 1
+type = "unix"
+private = true
+unpriv = false
+chroot = false
+command = """
+pipe user=www-data argv=php
+  -q
+  /opt/myreceivescript/mail.php
+  ${domain}
+  ${mailbox}
+  ${sender}
+  ${queue_id}
+"""
+```
+
+### Delivery to internet via secure relay
+
+These options illustrate delivering outgoing mail via an authenticated relay (like mailgun):
+
+```
+relayhost = "[smtp.mailgun.org]:2525"
+
+[smtp.sasl]
+password_maps = "static:postmaster@example.org:MYPASSWORD"
+```
