@@ -1,0 +1,70 @@
+#!/bin/bash
+
+
+# setup syslogd
+echo
+hab pkg install core/busybox-static
+
+echo
+echo "--> Launching syslogd in the background for postfix debugging..."
+
+[[ -S /dev/log ]] && echo "    Erasing: /dev/log" && rm /dev/log
+
+echo "    Running: syslogd -n"
+setsid hab pkg exec core/busybox-static syslogd -n &
+
+echo "    * Use 'tail -f /var/log/messages' to see what postfix and other processes are up to"
+
+
+# setup development commands
+echo
+echo "--> Setting up postfix development commands..."
+
+echo "    * Use 'postfix-configure myconfig.toml' to reconfigure the postfix service"
+postfix-configure() {
+    [ -z "$1" ] && { echo >&2 "Usage: postfix-configure myconfig.toml"; return 1; }
+
+    if [ -f .postfix-config-version ]; then
+        POSTFIX_CONFIG_VERSION=$(($(cat .postfix-config-version)+1))
+        echo "Read last config version from .postfix-config-version: ${POSTFIX_CONFIG_VERSION}"
+    else
+        POSTFIX_CONFIG_VERSION=1
+        echo ".postfix-config-version not found, initializing config version to 1"
+    fi
+
+    echo "Appyling $1 as config version version ${POSTFIX_CONFIG_VERSION}"
+    cat "$1" | hab config apply postfix.default ${POSTFIX_CONFIG_VERSION}
+
+    echo "Saving config version to .postfix-config-version"
+    echo "${POSTFIX_CONFIG_VERSION}" > .postfix-config-version
+}
+
+echo "    * Use 'postfix-install' to install the last postfix build"
+postfix-install() {
+    [ -f results/last_build.env ] || { echo >&2 "No results/last_build.env found, run build first"; return 1; }
+    source results/last_build.env
+
+    [ "${pkg_name}" == "postfix" ] || { echo >&2 "Last package built wasn't postfix, run build first"; return 1; }
+    hab pkg install "results/${pkg_artifact}"
+}
+
+echo "    * Use 'postfix-start' to start the postfix service"
+postfix-start() {
+    postfix-install
+    hab svc start core/postfix
+}
+
+echo "    * Use 'postfix-stop' to stop the postfix service"
+postfix-stop() {
+    hab svc stop core/postfix
+}
+
+echo "    * Use 'postfix-restart' to restart the postfix service"
+postfix-restart() {
+    postfix-stop
+    postfix-start
+}
+
+
+
+echo
