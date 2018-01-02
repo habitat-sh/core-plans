@@ -13,6 +13,7 @@ pkg_deps=(
   core/openssl
   core/pcre
   core/zlib
+  core/libpcap
 )
 pkg_build_deps=(
   core/bzip2
@@ -45,7 +46,6 @@ do_build() {
     --with-libdnet=included \
     --with-liblinear=included \
     --with-liblua="$(pkg_path_for "core/lua")" \
-    --with-libpcap=included \
     --with-libpcre="$(pkg_path_for "core/pcre")" \
     --with-libssh2=included \
     --with-libz="$(pkg_path_for "core/zlib")"
