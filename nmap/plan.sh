@@ -30,6 +30,8 @@ pkg_build_deps=(
   core/which
 )
 
+pkg_bin_dirs=(bin)
+
 do_prepare() {
   export CFLAGS="${CFLAGS} -O2 -Wcpp"
   export CXXFLAGS="${CXXFLAGS} -O2 -Wcpp"
