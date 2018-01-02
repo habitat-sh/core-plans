@@ -1,4 +1,4 @@
-# jarvus/postfix habitat service
+# postfix habitat service
 
 A habitat plan for building and running postfix as a supervised service
 

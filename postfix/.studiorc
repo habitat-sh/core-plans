@@ -55,12 +55,12 @@ postfix-install() {
 echo "    * Use 'postfix-start' to start the postfix service"
 postfix-start() {
     postfix-install
-    hab svc start jarvus/postfix
+    hab svc start core/postfix
 }
 
 echo "    * Use 'postfix-stop' to stop the postfix service"
 postfix-stop() {
-    hab svc stop jarvus/postfix
+    hab svc stop core/postfix
 }
 
 echo "    * Use 'postfix-restart' to restart the postfix service"
