@@ -4,7 +4,7 @@ pkg_upstream_url="https://traefik.io"
 pkg_origin=core
 # note: to have the version match the codename, please update both values when
 #       updating this for a new release
-pkg_version="v1.4.5"
+pkg_version="v1.4.6"
 traefik_codename="roquefort"
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=("MIT")
@@ -54,6 +54,13 @@ do_download() {
 }
 
 do_build() {
+  # Note (2018/01/08): yarn uses core/node; traefik's build process depends on
+  # node-sass, which needs node6. So, we ensure that this ends up picking up
+  # the right node version for traefik to build.
+  # An alternative way would have been to change the order of dependencies in
+  # pkg_deps, but this is too brittle.
+  PATH=$(pkg_path_for core/node6)/bin:${PATH}
+  export PATH
   pushd "${scaffolding_go_gopath:?}/src/github.com/containous/traefik"
     build_line "building webui static assets"
     pushd webui
