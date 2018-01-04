@@ -863,6 +863,8 @@ plan_path = "scaffolding-gradle"
 plan_path = "scaffolding-node"
 [scaffolding-ruby]
 plan_path = "scaffolding-ruby"
+[sccache]
+plan_path = "sccache"
 [scons]
 plan_path = "scons"
 [scowl]
