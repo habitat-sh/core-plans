@@ -843,6 +843,8 @@ plan_path = "rq"
 plan_path = "rsync"
 [ruby]
 plan_path = "ruby"
+[ruby25]
+plan_path = "ruby25"
 [runit]
 plan_path = "runit"
 [rust]
