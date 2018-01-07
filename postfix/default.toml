@@ -4,7 +4,7 @@ setgid_group = "postdrop"
 myhostname = "localhost"
 mydomain = "localdomain"
 
-inet_interfaces = "127.0.0.0"
+inet_interfaces = "127.0.0.1"
 mynetworks = "127.0.0.0/8"
 mydestination = ""
 smtpd_relay_restrictions = "permit_mynetworks permit_sasl_authenticated defer_unauth_destination"
