@@ -288,6 +288,10 @@ plan_path = "go"
 plan_path = "go14"
 [go17]
 plan_path = "go17"
+[googlemock]
+plan_path = "googlemock"
+[googletest]
+plan_path = "googletest"
 [goreplay]
 plan_path = "gorplay"
 [gox]
