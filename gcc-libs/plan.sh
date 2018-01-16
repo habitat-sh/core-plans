@@ -19,7 +19,7 @@ _gcc_libs=(
   libatomic
   libcilkrts
   libgcc_s
-  libgomp-plugin-host_nonshm
+  libgfortran
   libgomp
   libitm
   liblsan
