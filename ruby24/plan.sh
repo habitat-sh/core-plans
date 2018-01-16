@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148,SC1091
 source ../ruby/plan.sh
 
 pkg_name=ruby24
