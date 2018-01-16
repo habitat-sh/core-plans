@@ -12,11 +12,3 @@ pkg_source=https://cache.ruby-lang.org/pub/ruby/ruby-${pkg_version}.tar.gz
 pkg_upstream_url=https://www.ruby-lang.org/en/
 pkg_shasum=fd0375582c92045aa7d31854e724471fb469e11a4b08ff334d39052ccaaa3a98
 pkg_dirname="ruby-$pkg_version"
-
-pkg_version() {
-  echo "$pkg_version"
-}
-
-do_before() {
-  update_pkg_version
-}

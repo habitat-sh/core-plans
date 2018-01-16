@@ -41,3 +41,11 @@ do_install() {
   gem update --system --no-document
   gem install rb-readline --no-document
 }
+
+pkg_version() {
+  echo "$pkg_version"
+}
+
+do_before() {
+  update_pkg_version
+}
