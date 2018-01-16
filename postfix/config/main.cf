@@ -1,0 +1,65 @@
+daemon_directory = {{pkg.path}}/sbin
+command_directory = {{pkg.path}}/bin
+mailq_path = {{pkg.path}}/bin/mailq
+sendmail_path = {{pkg.path}}/bin/sendmail
+newaliases_path = {{pkg.path}}/bin/newaliases
+shlib_directory = {{pkg.path}}/lib
+meta_directory = {{pkg.path}}/meta
+manpage_directory = {{pkg.path}}/man
+
+config_directory = {{pkg.svc_config_path}}
+data_directory = {{pkg.svc_data_path}}/postfix
+mail_spool_directory = {{pkg.svc_data_path}}/spool
+queue_directory = {{pkg.svc_data_path}}/queue
+
+alias_database = hash:{{pkg.svc_config_path}}/aliases
+alias_maps = hash:{{pkg.svc_config_path}}/aliases
+
+
+disable_dns_lookups = yes
+command_time_limit = {{cfg.command_time_limit}}
+
+
+myhostname = {{cfg.myhostname}}
+mydomain = {{cfg.mydomain}}
+
+
+inet_interfaces = {{cfg.inet_interfaces}}
+smtpd_relay_restrictions = {{cfg.smtpd_relay_restrictions}}
+mynetworks = {{cfg.mynetworks}}
+{{#if cfg.mydestination ~}}
+  mydestination = {{cfg.mydestination}}
+{{/if}}
+
+
+mail_owner = {{cfg.mail_owner}}
+setgid_group = {{cfg.setgid_group}}
+
+
+{{#if cfg.virtual.transport ~}}
+  virtual_transport = {{cfg.virtual.transport}}
+{{/if ~}}
+
+{{#if cfg.virtual.mailbox_domains ~}}
+  virtual_mailbox_domains = {{cfg.virtual.mailbox_domains}}
+{{/if ~}}
+
+{{#each cfg.services as |service| ~}}
+  {{service.name}}_destination_recipient_limit = {{service.destination_recipient_limit}}
+{{/each}}
+
+
+{{#if cfg.relayhost ~}}
+  relayhost = {{cfg.relayhost}}
+{{/if}}
+
+
+smtp_tls_loglevel = {{cfg.smtp.tls.loglevel}}
+smtp_sasl_security_options = {{cfg.smtp.sasl.security_options}}
+smtp_sasl_auth_enable = {{#if cfg.smtp.sasl.auth_enable}}yes{{else}}no{{/if}}
+{{#if cfg.smtp.tls.security_level ~}}
+  smtp_tls_security_level = {{cfg.smtp.tls.security_level}}
+{{/if ~}}
+{{#if cfg.smtp.sasl.password_maps ~}}
+  smtp_sasl_password_maps = {{cfg.smtp.sasl.password_maps}}
+{{/if ~}}

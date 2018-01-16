@@ -1,0 +1,88 @@
+#!/bin/bash
+
+
+# setup syslogd
+echo
+echo "--> Launching syslogd in the background for postfix debugging..."
+
+echo "    Installing: core/busybox-static"
+hab pkg install core/busybox-static
+
+[[ -S /dev/log ]] && echo "    Erasing: /dev/log" && rm /dev/log
+
+echo "    Running: syslogd -n"
+setsid hab pkg exec core/busybox-static syslogd -n &
+
+echo "    * Use 'tail -f /var/log/messages' to see what postfix and other processes are up to"
+echo "    * Use 'less /hab/svc/postfix/data/spool/root' to read root user's mailbox"
+
+
+# setup development commands
+echo
+echo "--> Setting up postfix development commands..."
+
+echo "    Installing: core/netcat"
+hab pkg install core/netcat
+
+echo "    * Use 'postfix-configure myconfig.toml' to reconfigure the postfix service"
+postfix-configure() {
+    [ -z "$1" ] && { echo >&2 "Usage: postfix-configure myconfig.toml"; return 1; }
+
+    echo "Appyling $1 as config..."
+    hab config apply postfix.default "$(date +%s)" < "$1"
+}
+
+echo "    * Use 'postfix-install' to install the last postfix build"
+postfix-install() {
+    [ -f results/last_build.env ] || { echo >&2 "No results/last_build.env found, run build first"; return 1; }
+    source results/last_build.env
+
+    [ "${pkg_name}" == "postfix" ] || { echo >&2 "Last package built wasn't postfix, run build first"; return 1; }
+    hab pkg install "results/${pkg_artifact}"
+}
+
+echo "    * Use 'postfix-start' to start the postfix service"
+postfix-start() {
+    postfix-install
+    hab svc start core/postfix
+}
+
+echo "    * Use 'postfix-stop' to stop the postfix service"
+postfix-stop() {
+    hab svc stop core/postfix
+}
+
+echo "    * Use 'postfix-restart' to restart the postfix service"
+postfix-restart() {
+    postfix-stop
+    postfix-start
+}
+
+echo "    * Use 'postfix-email' to open an SMTP session with postfix"
+postfix-email() {
+    hab pkg exec core/netcat nc localhost 25
+}
+
+echo "    * Use 'postfix-test' to send a test message to root"
+postfix-test() {
+    echo "Sending email to root@localhost"
+
+    hab pkg exec core/netcat nc localhost 25 <<-EOM
+	EHLO localhost.localdomain
+	MAIL FROM: <user@localhost>
+	RCPT TO: <root@localhost>
+	DATA
+	Subject: This is a test message on $(date)
+
+	Hello my future admin! This is what I sound like.
+
+	.
+	QUIT
+	EOM
+
+    echo "Read with 'less /hab/svc/postfix/data/spool/root'"
+}
+
+
+
+echo

@@ -1,0 +1,27 @@
+mail_owner = "postfix"
+setgid_group = "postdrop"
+
+myhostname = "localhost"
+mydomain = "localdomain"
+
+inet_interfaces = "127.0.0.1"
+mynetworks = "127.0.0.0/8"
+mydestination = ""
+smtpd_relay_restrictions = "permit_mynetworks permit_sasl_authenticated defer_unauth_destination"
+
+command_time_limit = "1000s"
+
+relayhost = false
+
+[virtual]
+transport = ""
+mailbox_domains = ""
+
+[smtp.sasl]
+auth_enable = true
+password_maps = false
+security_options = "noanonymous"
+
+[smtp.tls]
+security_level = "may"
+loglevel = 1
