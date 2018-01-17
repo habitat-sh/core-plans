@@ -1,10 +1,10 @@
 pkg_name=sccache
 pkg_origin=core
-pkg_version=0.2.2
+pkg_version=0.2.4
 pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://github.com/mozilla/sccache/archive/${pkg_version}.tar.gz
-pkg_shasum="6a741ebf41bc8cee97ded3b823f464038af65c55de474b53efb1e24b5d234c36"
+pkg_shasum="82d8d553a0cf2752e71266523f9aac30c1b5a12fa6b1faea8c7c6e1ec9827371"
 pkg_bin_dirs=(bin)
 pkg_upstream_url="https://github.com/mozilla/sccache"
 pkg_description="sccache is ccache with cloud storage"
