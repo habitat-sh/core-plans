@@ -862,6 +862,11 @@ plan_path = "ruby24"
 paths = [
   "ruby/*"
 ]
+[ruby25]
+plan_path = "ruby25"
+paths = [
+  "ruby/*"
+]
 [runit]
 plan_path = "runit"
 [rust]
