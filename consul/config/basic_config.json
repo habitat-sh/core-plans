@@ -9,7 +9,6 @@
     "dns": {{cfg.ports.dns}},
     "http": {{cfg.ports.http}},
     "https": {{cfg.ports.https}},
-    "rpc": {{cfg.ports.rpc}},
     "serf_lan": {{cfg.ports.serf_lan}},
     "serf_wan": {{cfg.ports.serf_wan}},
     "server": {{cfg.ports.server}}

@@ -490,6 +490,8 @@ plan_path = "libpciaccss"
 plan_path = "libpipeline"
 [libpng]
 plan_path = "libpng"
+[libpq]
+plan_path = "libpq"
 [libpthread-stubs]
 plan_path = "libpthread-stubs"
 [libressl]
@@ -754,6 +756,8 @@ plan_path = "polipo"
 plan_path = "ponysay"
 [popt]
 plan_path = "popt"
+[postfix]
+plan_path = "postfix"
 [postgresql]
 plan_path = "postgresql"
 [postgresql93]
@@ -845,6 +849,24 @@ plan_path = "rsync"
 plan_path = "ruby"
 [ruby25]
 plan_path = "ruby25"
+paths = [
+  "ruby/*"
+]
+[ruby22]
+plan_path = "ruby22"
+paths = [
+  "ruby/*"
+]
+[ruby23]
+plan_path = "ruby23"
+paths = [
+  "ruby/*"
+]
+[ruby24]
+plan_path = "ruby24"
+paths = [
+  "ruby/*"
+]
 [runit]
 plan_path = "runit"
 [rust]
