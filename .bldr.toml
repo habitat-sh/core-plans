@@ -847,11 +847,6 @@ plan_path = "rq"
 plan_path = "rsync"
 [ruby]
 plan_path = "ruby"
-[ruby25]
-plan_path = "ruby25"
-paths = [
-  "ruby/*"
-]
 [ruby22]
 plan_path = "ruby22"
 paths = [
@@ -864,6 +859,11 @@ paths = [
 ]
 [ruby24]
 plan_path = "ruby24"
+paths = [
+  "ruby/*"
+]
+[ruby25]
+plan_path = "ruby25"
 paths = [
   "ruby/*"
 ]
