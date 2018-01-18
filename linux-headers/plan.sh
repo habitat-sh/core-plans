@@ -1,12 +1,12 @@
 pkg_name=linux-headers
 pkg_origin=core
-pkg_version=4.14.2
+pkg_version=4.14.9
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('gplv2')
 pkg_source=https://www.kernel.org/pub/linux/kernel/v4.x/linux-${pkg_version}.tar.xz
 pkg_description="The Linux kernel headers"
 pkg_upstream_url="https://kernel.org"
-pkg_shasum=e92690620a4e4811c6b37b2f1b6c9b32a1dde40aa12be6527c8dc215fb27464c
+pkg_shasum=cfccbb448d337761127aac28caba8f5649683c645f84b59b6e446b6e06a414ef
 pkg_dirname=linux-$pkg_version
 pkg_deps=()
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
