@@ -1,11 +1,11 @@
 pkg_name=libmpc
 pkg_distname=mpc
 pkg_origin=core
-pkg_version=1.0.3
+pkg_version=1.1.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('lgpl')
-pkg_source=http://www.multiprecision.org/mpc/download/${pkg_distname}-${pkg_version}.tar.gz
-pkg_shasum=617decc6ea09889fb08ede330917a00b16809b8db88c29c31bfbb49cbf88ecc3
+pkg_source=https://ftp.gnu.org/gnu/${pkg_distname}/${pkg_distname}-${pkg_version}.tar.gz
+pkg_shasum=6985c538143c1208dcb1ac42cedad6ff52e267b47e5f970183a3e75125b43c2e
 pkg_deps=(core/glibc core/gmp core/mpfr)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/binutils)
 pkg_include_dirs=(include)
