@@ -1,10 +1,10 @@
 pkg_name=mpfr
 pkg_origin=core
-pkg_version=3.1.6
+pkg_version=4.0.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('lgpl')
 pkg_source=http://www.mpfr.org/${pkg_name}-${pkg_version}/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=7a62ac1a04408614fccdc506e4844b10cf0ad2c2b1677097f8f35d3a1344a950
+pkg_shasum=fbe2cd1418b321f5c899ce4f0f0f4e73f5ecc7d02145b0e1fd096f5c3afb8a1d
 pkg_deps=(core/glibc core/gmp)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/binutils)
 pkg_include_dirs=(include)
