@@ -68,4 +68,5 @@ ensure_dir_ownership() {
   chown -RL hab:hab {{pkg.svc_var_path}}
   chown -RL hab:hab {{pkg.svc_config_path}}
   chown -RL hab:hab {{pkg.svc_data_path}}
+  chmod 0700 {{pkg.svc_data_path}}
 }
