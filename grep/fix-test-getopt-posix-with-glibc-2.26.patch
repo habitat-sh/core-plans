@@ -1,0 +1,17 @@
+diff -ru grep-3.1.orig/gnulib-tests/test-getopt-posix.c grep-3.1/gnulib-tests/test-getopt-posix.c
+--- grep-3.1.orig/gnulib-tests/test-getopt-posix.c	2018-01-24 20:04:21.136685867 +0000
++++ grep-3.1/gnulib-tests/test-getopt-posix.c	2018-01-24 20:05:34.695505354 +0000
+@@ -22,6 +22,13 @@
+    ftell link warning if we are not using the gnulib ftell module.  */
+ #define _GL_NO_LARGE_FILES
+ 
++/*
++ * Glibc 2.26 does hard include bits/getopt_posix.h which causes the system
++ * to use glibc's getopt but the tests expect gnulib behavior. Until a better
++ * fix is available this avoids that mis-resolution.
++ */
++#include <getopt.h>
++
+ /* POSIX and glibc provide the getopt() function in <unistd.h>, see
+    http://pubs.opengroup.org/onlinepubs/9699919799/functions/getopt.html
+    https://www.gnu.org/software/libc/manual/html_node/Using-Getopt.html
