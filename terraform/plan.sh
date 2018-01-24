@@ -1,13 +1,13 @@
 pkg_name=terraform
 pkg_origin=core
-pkg_version=0.10.2
+pkg_version=0.11.2
 pkg_license=('MPL-2.0')
 pkg_description="Terraform is a tool for building, changing, and combining infrastructure safely and efficiently"
 pkg_upstream_url="http://www.terraform.io/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://releases.hashicorp.com/${pkg_name}/${pkg_version}/${pkg_name}_${pkg_version}_linux_amd64.zip
 pkg_filename=${pkg_name}_${pkg_version}_linux_amd64.zip
-pkg_shasum=6c1b5ce1a78bc7bb895055052d9074e519f51293770871acfe2dbd289e2f2aaa
+pkg_shasum=f728fa73ff2a4c4235a28de4019802531758c7c090b6ca4c024d48063ab8537b
 pkg_build_deps=(core/unzip)
 pkg_deps=()
 pkg_bin_dirs=(bin)
