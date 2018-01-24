@@ -1,10 +1,10 @@
 pkg_name=flex
 pkg_origin=core
-pkg_version=2.6.0
+pkg_version=2.6.4
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('custom')
-pkg_source=https://downloads.sourceforge.net/project/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=d39b15a856906997ced252d76e9bfe2425d7503c6ed811669665627b248e4c73
+pkg_source="https://github.com/westes/$pkg_name/releases/download/v${pkg_version}/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum=e87aae032bf07c26f85ac0ed3250998c37621d95f8bd748b31f15b33c45ee995
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/m4 core/bison)
 pkg_bin_dirs=(bin)
