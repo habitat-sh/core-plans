@@ -9,7 +9,7 @@ set -e
 pg_isready -d "${PG_SUPERUSER_URI}"
 set +e
 
-{{#with cfg.db}}
+{{#with cfg.db ~}}
 echo "Trying to create role '{{username}}'..."
 
 psql -d "${PG_SUPERUSER_URI}" \
@@ -28,7 +28,7 @@ PGPASSWORD="${PG_SUPERUSER_PASSWORD}" psql -U "${PG_SUPERUSER}" -h "${PGHOST}" -
   -c "CREATE EXTENSION citext"
 
 DATABASE_DSN="postgres://{{username}}:{{password}}@${PGHOST}:${PGPORT}/{{name}}?sslmode=disable"
-{{/with}}
+{{/with ~}}
 
 set -e
 shield-schema -t postgres -d "${DATABASE_DSN}"

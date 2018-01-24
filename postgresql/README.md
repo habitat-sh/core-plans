@@ -48,7 +48,6 @@ docker-compose up
 
 We intend to support a prod ready clustering solution similar to [patroni](https://github.com/zalando/patroni) and are working on getting there quickly.
 
-
 ## Binding
 
 Consuming services can bind to PostgreSQL via:
@@ -61,11 +60,11 @@ Superuser access is exposed to consumers when binding and we advise that require
 
 To support binding to either standalone or custered PostgreSQL services we suggest using the `.first` field of the binding in the handlebars interpolation:
 ```
-{{#with bind.database.first as |pg| }}
+{{#with bind.database.first as |pg| ~}}
 PGPASSWORD={{pg.cfg.superuser_password}}
 PGUSER={{pg.cfg.superuser_name}}
 PGHOST={{pg.sys.ip}}
-{{/with}}
+{{/with ~}}
 ```
 
 `.first` will always point to the leader when present.

@@ -13,15 +13,15 @@ password = "{{cfg.admin.password}}"
 type = "postgres"
 
 [database.postgres]
-{{#if bind.database}}
-{{~#eachAlive bind.database.members as |member|}}
+{{#if bind.database ~}}
+{{#eachAlive bind.database.members as |member| ~}}
 datasourcename = "postgres://{{cfg.storage.user}}:{{cfg.storage.password}}@{{member.sys.ip}}:{{member.cfg.port}}/{{cfg.storage.database}}?sslmode={{cfg.storage.ssl_mode}}"
-{{~/eachAlive}}
-{{else}}
-{{#with cfg.storage}}
+{{/eachAlive ~}}
+{{else ~}}
+{{#with cfg.storage ~}}
 datasourcename = "postgres://{{user}}:{{password}}@{{host}}:{{port}}/{{database}}?sslmode={{ssl_mode}}"
-{{/with}}
-{{~/if}}
+{{/with ~}}
+{{/if ~}}
 
 [authenticator]
 type = "{{cfg.authenticator.type}}"
