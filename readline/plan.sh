@@ -1,7 +1,7 @@
 pkg_name=readline
 pkg_origin=core
 _base_version=7.0
-pkg_version=${_base_version}.0
+pkg_version=${_base_version}.3
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-3.0')
 pkg_description="The GNU Readline library provides a set of functions for use by applications that allow users to edit command lines as they are typed in."
