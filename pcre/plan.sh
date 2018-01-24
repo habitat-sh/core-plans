@@ -1,12 +1,12 @@
 pkg_name=pcre
 pkg_origin=core
-pkg_version=8.38
+pkg_version=8.41
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="A library that implements Perl 5-style regular expressions"
 pkg_upstream_url="http://www.pcre.org/"
 pkg_license=('bsd')
 pkg_source="https://ftp.pcre.org/pub/${pkg_name}/${pkg_name}-${pkg_version}.tar.bz2"
-pkg_shasum=b9e02d36e23024d6c02a2e5b25204b3a4fa6ade43e0a5f869f254f49535079df
+pkg_shasum=e62c7eac5ae7c0e7286db61ff82912e1c0b7a0c13706616e94a7dd729321b530
 pkg_deps=(core/glibc core/gcc-libs)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
 pkg_bin_dirs=(bin)
