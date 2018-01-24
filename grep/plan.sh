@@ -1,18 +1,26 @@
 pkg_name=grep
 pkg_origin=core
-pkg_version=2.22
+pkg_version=3.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('gplv3+')
 pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=ca91d22f017bfcb503d4bc3b44295491c89a33a3df0c3d8b8614f2d3831836eb
+pkg_shasum=db625c7ab3bb3ee757b3926a5cfa8d9e1c3991ad24707a83dde8a5ef2bf7a07e
 pkg_deps=(core/glibc core/pcre)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/perl)
 pkg_bin_dirs=(bin)
 
 do_prepare() {
-  patch -p1 -i $PLAN_CONTEXT/disable-perf-related-test.patch
-}
+  # Fix failing test `test-getopt-posix` which appears to have problems when
+  # working against Glibc 2.26.
+  #
+  # TODO fn: when glibc package is upgraded, see if this patch is still
+  # required (it may be fixed in the near future)
+  #
+  # Thanks to:
+  # https://www.redhat.com/archives/libvir-list/2017-September/msg01054.html
+  patch -p1 < "$PLAN_CONTEXT/fix-test-getopt-posix-with-glibc-2.26.patch"
 
+}
 do_check() {
   make check
 }
