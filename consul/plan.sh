@@ -1,12 +1,12 @@
 pkg_origin=core
 pkg_name=consul
-pkg_version=1.0.2
+pkg_version=1.0.3
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=("MPL-2.0")
 pkg_description="Consul is a tool for service discovery, monitoring and configuration."
 pkg_upstream_url=https://www.consul.io/
 pkg_source=https://releases.hashicorp.com/${pkg_name}/${pkg_version}/${pkg_name}_${pkg_version}_linux_amd64.zip
-pkg_shasum=418329f0f4fc3f18ef08674537b576e57df3f3026f258794b4b4b611beae6c9b
+pkg_shasum=4782e4662de8effe49e97c50b1a1233c03c0026881f6c004144cc3b73f446ec5
 pkg_filename=${pkg_name}-${pkg_version}_linux_amd64.zip
 pkg_deps=()
 pkg_build_deps=(core/unzip)
