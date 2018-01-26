@@ -13,7 +13,6 @@ pkg_build_deps=(core/unzip)
 pkg_bin_dirs=(bin)
 pkg_svc_user=root
 pkg_svc_group=root
-
 pkg_exports=(
   [port]=listener.port
 )
