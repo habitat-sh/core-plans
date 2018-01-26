@@ -1,14 +1,14 @@
 pkg_name=bash
 pkg_distname=$pkg_name
 pkg_origin=core
-_base_version=4.3
-pkg_version=${_base_version}.42
+_base_version=4.4
+pkg_version=${_base_version}.12
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('gplv3+')
 _url_base=http://ftp.gnu.org/gnu/$pkg_distname
 pkg_source=$_url_base/${pkg_distname}-${_base_version}.tar.gz
 pkg_dirname=${pkg_distname}-$_base_version
-pkg_shasum=afc687a28e0e24dc21b988fa159ff9dbcf6b7caa92ade8645cc6d5605cd024d4
+pkg_shasum=d86b3392c1202e8ff5a423b302e6284db7f8f435ea9f39b5b1b20fd3ac36dfcb
 pkg_deps=(core/glibc core/ncurses core/readline)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
 pkg_bin_dirs=(bin)
