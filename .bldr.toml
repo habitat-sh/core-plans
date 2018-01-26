@@ -290,6 +290,8 @@ plan_path = "go14"
 plan_path = "go17"
 [goreplay]
 plan_path = "gorplay"
+[govc]
+plan_path = "govc"
 [gox]
 plan_path = "gox"
 [gperf]
