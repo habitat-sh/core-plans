@@ -1,13 +1,27 @@
 pkg_name=vim
 pkg_origin=core
-pkg_version=8.0.0004
-pkg_license=('vim')
+pkg_version=8.0.1432
+pkg_license=("Vim")
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_upstream_url="http://www.vim.org/"
 pkg_description="Vim is a greatly improved version of the good old UNIX editor Vi"
 pkg_source="http://github.com/${pkg_name}/${pkg_name}/archive/v${pkg_version}.tar.gz"
-pkg_shasum=3ba0aeaf86c9f89ea55d6144b82f36f82d3ad5b7efcd393d0689e6ec2ca970ef
-pkg_deps=(core/glibc core/acl core/ncurses)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed core/autoconf)
+pkg_shasum="ed4eec357534476e422dcfd6493c85f74c9f413c419bae0fb814999e80c215d4"
+pkg_deps=(
+  core/acl
+  core/attr
+  core/glibc
+  core/ncurses
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+  core/sed
+  core/autoconf
+)
 pkg_bin_dirs=(bin)
 
 do_prepare() {
@@ -15,7 +29,7 @@ do_prepare() {
     autoconf
   popd > /dev/null
 
-  export CPPFLAGS="$CPPFLAGS $CFLAGS"
+  export CPPFLAGS="$CPPFLAGS $CFLAGS -O2"
   build_line "Setting CPPFLAGS=$CPPFLAGS"
 }
 
