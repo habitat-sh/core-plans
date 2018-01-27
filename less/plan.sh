@@ -1,5 +1,6 @@
 pkg_name=less
 pkg_description="a terminal pager program used to view (but not change) the contents of a text file"
+pkg_upstream_url="http://www.greenwoodsoftware.com/less/index.html"
 pkg_origin=core
 pkg_version=487
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
