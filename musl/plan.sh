@@ -1,14 +1,21 @@
 pkg_name=musl
 pkg_origin=core
-pkg_version=1.1.17
-pkg_license=('mit')
+pkg_version=1.1.18
+pkg_license=('MIT')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source=http://www.musl-libc.org/releases/${pkg_name}-${pkg_version}.tar.gz
 pkg_description="musl is a new standard library to power a new generation of Linux-based devices. musl is lightweight, fast, simple, free, and strives to be correct in the sense of standards-conformance and safety."
-pkg_upstream_url=https://www.musl-libc.org/
-pkg_shasum=c8aa51c747a600704bed169340bf3e03742ceee027ea0051dd4b6cc3c5f51464
+pkg_upstream_url="https://www.musl-libc.org/"
+pkg_source="http://www.musl-libc.org/releases/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum="d017ee5d01aec0c522a1330fdff06b1e428cb409e1db819cc4935d5da4a5a118"
 pkg_deps=()
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/gcc
+  core/make
+  core/patch
+  core/sed
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
@@ -18,7 +25,6 @@ do_prepare() {
   build_line "Setting default stack size to '$stack_size' from default of '81920'"
   sed -i "s/#define DEFAULT_STACK_SIZE .*/#define DEFAULT_STACK_SIZE $stack_size/" \
     src/internal/pthread_impl.h
-  return 0
 }
 
 do_build() {
