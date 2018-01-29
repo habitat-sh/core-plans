@@ -181,6 +181,8 @@ plan_path = "elasticsearch5"
 plan_path = "elfutils"
 [elixir]
 plan_path = "elixir"
+[envconsul]
+plan_path = "envconsul"
 [envdir]
 plan_path = "envdir"
 [erlang]
