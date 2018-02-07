@@ -59,7 +59,7 @@ hab start <origin>/<app> --bind database:postgresql.default --peer <pg-host>
 
 Superuser access is exposed to consumers when binding and we advise that required databases, schemas and roles be created and migrations get run in the init hook of the consuming service. The created roles (with restricted access) should then be exposed to the application code that will get run.
 
-To support binding to either standalone or custered PostgreSQL services we suggest using the `.first` field of the binding in the handlebars interpolation:
+To support binding to either standalone or clustered PostgreSQL services we suggest using the `.first` field of the binding in the handlebars interpolation:
 ```
 {{#with bind.database.first as |pg| }}
 PGPASSWORD={{pg.cfg.superuser_password}}
