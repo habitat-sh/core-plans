@@ -6,13 +6,13 @@ scaffolding-* @habitat-sh/scaffolding-maintainers
 #
 # All of these plans are critical for Builder's operation and build
 
-libarchive @reset @fnichol
-libsodium @reset @fnichol
-nginx @reset @fnichol
-postgresql @reset @fnichol @irvingpop
-protobuf @reset @fnichol
-protobuf-rust @reset @fnichol
-zeromq @reset @fnichol
+libarchive @reset @fnichol @raskchanky
+libsodium @reset @fnichol @raskchanky
+nginx @reset @fnichol @raskchanky
+postgresql @reset @fnichol @irvingpop @raskchanky
+protobuf @reset @fnichol @raskchanky
+protobuf-rust @reset @fnichol @raskchanky
+zeromq @reset @fnichol @raskchanky
 
 # # Base Plans
 #
@@ -90,7 +90,7 @@ xz-musl @fnichol
 libsodium-musl @fnichol @reset
 openssl-musl @fnichol
 libarchive-musl @fnichol @reset
-rust @fnichol @reset
+rust @fnichol @reset @raskchanky
 vim @fnichol
 libbsd @fnichol
 clens @fnichol
