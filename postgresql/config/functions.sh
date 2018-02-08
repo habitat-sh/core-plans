@@ -1,6 +1,10 @@
 init_pgpass() {
-  export PGPASSFILE="{{pkg.svc_config_path}}/.pgpass"
-  chmod 0600 {{pkg.svc_config_path}}/.pgpass
+  cat > {{pkg.svc_var_path}}/.pgpass<<EOF
+*:*:*:{{cfg.superuser.name}}:{{cfg.superuser.password}}
+*:*:*:{{cfg.replication.name}}:{{cfg.replication.password}}
+EOF
+chmod 0600 {{pkg.svc_var_path}}/.pgpass
+  export PGPASSFILE="{{pkg.svc_var_path}}/.pgpass"
 }
 
 write_local_conf() {
@@ -58,15 +62,25 @@ master_ready() {
 
 bootstrap_replica_via_pg_basebackup() {
   echo 'Bootstrapping replica via pg_basebackup from leader '
-
-  rm -rf {{pkg.svc_data_path}}/*
-  pg_basebackup --pgdata={{pkg.svc_data_path}} --xlog-method=stream --dbname='postgres://{{cfg.replication.name}}@{{svc.leader.sys.ip}}:{{cfg.port}}/postgres'
+  rm -rf {{pkg.svc_data_path}}/pgdata/*
+  pg_basebackup --verbose --progress --pgdata={{pkg.svc_data_path}}/pgdata --xlog-method=stream --dbname='postgres://{{cfg.replication.name}}@{{svc.leader.sys.ip}}:{{cfg.port}}/postgres'
 }
 
 ensure_dir_ownership() {
-  echo 'Making sure hab user owns var, config and data paths'
+  echo 'Making sure hab user owns var and data paths'
   chown -RL hab:hab {{pkg.svc_var_path}}
-  chown -RL hab:hab {{pkg.svc_config_path}}
   chown -RL hab:hab {{pkg.svc_data_path}}
-  chmod 0700 {{pkg.svc_data_path}}
+  chmod 0700 {{pkg.svc_data_path}}/pgdata
+}
+
+promote_to_leader() {
+  if [ -f {{pkg.svc_data_path}}/pgdata/recovery.conf ]; then
+    echo "Promoting database"
+    until pg_isready -U {{cfg.superuser.name}} -h localhost -p {{cfg.port}}; do
+      echo "Waiting for database to start"
+      sleep 1
+    done
+
+    pg_ctl promote -D {{pkg.svc_data_path}}/pgdata
+  fi
 }

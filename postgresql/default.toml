@@ -16,4 +16,3 @@ name = 'replication'
 password = 'replication'
 lag_health_threshold = 1048576
 enable = false
-archive_path = "{{pkg.svc_path}}/archive"
