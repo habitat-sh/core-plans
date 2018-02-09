@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -ex
+
+outdir=${PWD}/${OUT}
+
+cd ${PACKAGE_CONTEXT}
+
+cat <<EOF | hab origin key import
+${HAB_ORIGIN_KEY}
+EOF
+
+start_docker
+
+hab studio run 'build . && hab pkg export docker $(ls results/*.hart)'
+
+mv results/* ${outdir}
+ls ${outdir}/${HAB_ORIGIN}* > ${outdir}/pkg_name
+
+docker_tag=$(docker images | grep ${HAB_ORIGIN} | grep -v 'latest' | tail -n1 | awk '{print $2}')
+docker tag ${HAB_ORIGIN}/${PLAN_NAME}:latest ${HAB_ORIGIN}/${PLAN_NAME}:habitat
+docker save -o ${outdir}/${HAB_ORIGIN}-${PLAN_NAME}-docker.tar ${HAB_ORIGIN}/${PLAN_NAME}:habitat
+
+echo "${docker_tag}" > ${outdir}/docker_tag
