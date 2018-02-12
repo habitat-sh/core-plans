@@ -6,6 +6,8 @@ plan_path = "acbuild"
 plan_path = "acl"
 [ant]
 plan_path = "ant"
+[ansible]
+plan_path = "ansible"
 [apr]
 plan_path = "apr"
 [apr-util]
