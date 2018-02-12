@@ -71,15 +71,15 @@ Please *do not* issue a PR containing a new plan for the specific version of sof
 
 Issues with an associated gist containing a working fork of our current plan which builds the version of the software will be attended to first.
 
+## Dependencies
+
+If your package has dependencies, it should only depend on other packages in the core origin.
+
 ## Plan syntax
 
 You can review the entire [plan syntax guide here](https://www.habitat.sh/docs/developing-packages/).
 
 Please note that the following conditions must be observed for any plan to be merged into core plans (and are important best practices for any plan):
-
-## Dependencies
-
-If your package has dependencies, it should only depend on other packages in the core origin.
 
 ### Plan basic settings
 
