@@ -73,7 +73,7 @@ Issues with an associated gist containing a working fork of our current plan whi
 
 ## Dependencies
 
-If your package has dependencies, it should only depend on other packages in the core origin.
+If your package has dependencies, it must only depend on other packages in the core origin.
 
 ## Plan syntax
 
