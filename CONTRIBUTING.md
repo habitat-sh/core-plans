@@ -17,6 +17,7 @@ In order for a package to be accepted as a core package, the following requireme
 - [Package Metadata](#package-metadata)
 - [Package Name Conventions](#package-name-conventions)
 - [Adding an older version of a core package](#adding-an-older-version-of-a-core-package)
+- [Dependencies](#dependencies)
 - [Plan syntax](#plan-syntax)
 - [Linting your plans](#linting-your-plans)
 - [Pre-commit hooks](#pre-commit-hooks)
@@ -75,6 +76,10 @@ Issues with an associated gist containing a working fork of our current plan whi
 You can review the entire [plan syntax guide here](https://www.habitat.sh/docs/developing-packages/).
 
 Please note that the following conditions must be observed for any plan to be merged into core plans (and are important best practices for any plan):
+
+## Dependencies
+
+If your package has dependencies, it should only depend on other packages in the core origin.
 
 ### Plan basic settings
 
