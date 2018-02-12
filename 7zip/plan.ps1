@@ -17,3 +17,4 @@ function Invoke-Unpack {
 function Invoke-Install {
   Copy-Item * "$pkg_prefix/bin" -Recurse -Force
 }
+Signed-off-by: Joseph Smith <joseph@chef.io>
