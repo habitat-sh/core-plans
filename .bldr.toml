@@ -925,6 +925,8 @@ plan_path = "spark"
 plan_path = "sqitch"
 [sqlite]
 plan_path = "sqlite"
+[sshpass]
+plan_path = "sshpass"
 [storm]
 plan_path = "storm"
 [strace]
