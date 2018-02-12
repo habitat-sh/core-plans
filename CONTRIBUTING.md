@@ -225,7 +225,7 @@ Git makes it easy to add this line to your commit messages.
 
 ## Separate Changes, Separate Pull Requests
 
-Each package being changed should be separated into its own pull request. E.g. If you are making a change to `core/openssl` and your change requires another change in `core/curl` to be merged, each of these changes should be submitted as two different PRs with a note about the order in which each thing should be submitted. 
+Each package being changed should be separated into its own pull request. E.g. If you are making a change to `core/openssl` and your change requires another change in `core/curl` to be merged, each of these changes should be submitted as two different PRs with a note about the order in which each thing should be submitted.
 
 Each of these change PRs submitted should include a bracketed packagename as the prefix to the change information. For example in the previously defined situation the PR titles above might titled like so:
 
