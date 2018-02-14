@@ -111,8 +111,10 @@ wix @mwrock
 # This list shall be alphabetical, for sanity purposes.
 
 acbuild @rsertelon
+artifactory @defilan
 atk @rsertelon
 cairo @rsertelon
+consul @defilan
 elasticsearch @joshbrand @predominant
 gdk-pixbuf @rsertelon
 glib @rsertelon
@@ -129,6 +131,7 @@ kibana @joshbrand @predominant
 logstash @joshbrand @predominant
 monit @rsertelon
 mosquitto @rsertelon
+nmap @defilan
 pango @rsertelon
 rabbitmqadmin @predominant
 redis @irvingpop
@@ -145,4 +148,5 @@ dotnet-core-sdkdotnet-core @mwrock
 innounp @mwrock
 mssql @mwrock
 nuget @mwrock
+vault @defilan
 visual-build-tools-2017 @mwrock
