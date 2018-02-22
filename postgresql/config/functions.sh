@@ -76,8 +76,8 @@ ensure_dir_ownership() {
     ownership_command="chgrp -RL $(id -g) $paths"
   fi
   echo "Ensuring proper ownership: $ownership_command"
-  $ownership_command  || true
-  chmod 0700 {{pkg.svc_data_path}}/pgdata || true
+  $ownership_command
+  chmod 0700 {{pkg.svc_data_path}}/pgdata
 }
 
 promote_to_leader() {
