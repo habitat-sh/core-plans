@@ -1,12 +1,12 @@
 pkg_name=util-linux
 pkg_origin=core
-pkg_version=2.27.1
+pkg_version=2.31.1
 pkg_license=('GPLv2')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Miscellaneous system utilities for Linux"
 pkg_upstream_url=https://www.kernel.org/pub/linux/utils/util-linux
 pkg_source=https://www.kernel.org/pub/linux/utils/${pkg_name}/v${pkg_version%.?}/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=0a818fcdede99aec43ffe6ca5b5388bff80d162f2f7bd4541dca94fecb87a290
+pkg_shasum=1a51b16fa9cd51d26ef9ab52d2f1de12403b810fc8252bf7d478df91b3cddf11
 pkg_deps=(core/glibc core/zlib core/ncurses)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed)
 pkg_bin_dirs=(bin)
