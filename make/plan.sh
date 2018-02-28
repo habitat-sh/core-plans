@@ -32,7 +32,13 @@ exec $(pkg_path_for binutils)/bin/ar U\$@
 EOF
   chmod -v 0744 wrappers/ar
 
-  env PATH="$(pwd)/wrappers:$PATH" make check
+  # The `PERL_USE_UNSAFE_INC=1` variable allows the test suite to run with Perl
+  # 5.26 (resolves a "Can't locate driver" error).
+  #
+  # Thanks to:
+  # * https://lists.gnu.org/archive/html/bug-make/2017-03/msg00040.html
+  # * https://bugs.archlinux.org/task/55127
+  env PATH="$(pwd)/wrappers:$PATH" PERL_USE_UNSAFE_INC=1 make check
 }
 
 
