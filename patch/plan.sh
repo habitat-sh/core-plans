@@ -1,10 +1,10 @@
 pkg_name=patch
 pkg_origin=core
-pkg_version=2.7.5
+pkg_version=2.7.6
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('gplv3+')
 pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=fd95153655d6b95567e623843a0e77b81612d502ecf78a489a4aed7867caa299
+pkg_shasum=ac610bda97abe0d9f6b7c963255a11dcb196c25e337c61f94e4778d632f1d8fd
 pkg_deps=(core/glibc core/attr)
 pkg_build_deps=(core/coreutils core/diffutils core/make core/gcc core/sed)
 pkg_bin_dirs=(bin)
