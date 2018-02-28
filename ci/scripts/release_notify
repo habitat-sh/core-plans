@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -ex
+
+if [ -d "./${GROUP_CONTEXT}" ]; then
+    build_group=$(ls ${GROUP_CONTEXT})
+    group=${build_group#bldr-}
+    channel="release-${group}"
+
+    cat > notify_message/success_message <<EOF
+    :party_habitat: Release of pkg: *'${PKG_CONTEXT}'* succeeded for build group: *'${build_group}'*
+    Release channel: '${channel}'"
+EOF
+
+    cat > notify_message/failure_message <<EOF
+    :flames: Release of pkg: *'${PKG_CONTEXT}'* failed for build group: *'${build_group}'*
+EOF
+
+fi

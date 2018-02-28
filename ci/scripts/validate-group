@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -ex
+
+cd "${GROUP_CONTEXT}"
+fails=$(cat ./* | jq '[.group[]| select(.state | contains("Failure"))]')
+fail_count=$(echo $fails | jq 'length')
+
+if [[ $fail_count -gt 0 ]]; then
+  echo "Failure: $fail_count failures in build graph."
+  for f in $fails; do
+    echo $f
+  done
+  exit 1
+else
+  echo "Success: 0 failures in build group."
+fi

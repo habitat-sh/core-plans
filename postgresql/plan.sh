@@ -1,12 +1,12 @@
 pkg_name=postgresql
-pkg_version=9.6.3
+pkg_version=9.6.6
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="PostgreSQL is a powerful, open source object-relational database system."
 pkg_upstream_url="https://www.postgresql.org/"
 pkg_license=('PostgreSQL')
 pkg_source=https://ftp.postgresql.org/pub/source/v${pkg_version}/${pkg_name}-${pkg_version}.tar.bz2
-pkg_shasum=1645b3736901f6d854e695a937389e68ff2066ce0cde9d73919d6ab7c995b9c6
+pkg_shasum=399cdffcb872f785ba67e25d275463d74521566318cfef8fe219050d063c8154
 
 pkg_deps=(
   core/bash
@@ -44,13 +44,10 @@ pkg_exports=(
 )
 pkg_exposes=(port)
 
-pkg_svc_user=root
-pkg_svc_group=$pkg_svc_user
-
-ext_postgis_version=2.3.2
+ext_postgis_version=2.4.2
 ext_postgis_source=http://download.osgeo.org/postgis/source/postgis-${ext_postgis_version}.tar.gz
 ext_postgis_filename=postgis-${ext_postgis_version}.tar.gz
-ext_postgis_shasum=e92e34c18f078a3d1a2503cd870efdc4fa9e134f0bcedbbbdb8b46b0e6af09e4
+ext_postgis_shasum=23625bc99ed440d53a20225721095a3f5c653b62421c4d597c8038f0d7a321d9
 
 do_before() {
   ext_postgis_dirname="postgis-${ext_postgis_version}"
