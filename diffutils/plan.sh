@@ -1,13 +1,26 @@
 pkg_name=diffutils
 pkg_origin=core
-pkg_version=3.3
+pkg_version=3.6
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('gplv3+')
 pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=a25e89a8ab65fded1731e4186be1bb25cda967834b6df973599cdcd5abdfc19c
+pkg_shasum=d621e8bdd4b573918c8145f7ae61817d1be9deb4c8d2328a65cea8e11d783bd6
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/coreutils core/patch core/make core/gcc core/sed)
 pkg_bin_dirs=(bin)
+
+do_build() {
+  # Since glibc >= 2.26, don't try to use getopt_long replacement bundled with
+  # diffutils. It will conflict with the one from glibc.
+  #
+  # Thanks to: https://patchwork.ozlabs.org/patch/809145/
+  echo "gl_cv_func_getopt_gnu=yes" >> config.cache
+
+  ./configure \
+    --prefix="$pkg_prefix" \
+    --cache-file=config.cache
+  make
+}
 
 do_check() {
   # Fixes a broken test with either gcc 5.2.x and/or perl 5.22.x:
