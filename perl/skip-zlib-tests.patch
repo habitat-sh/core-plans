@@ -1,0 +1,126 @@
+diff -ru perl-5.26.1.orig/cpan/Compress-Raw-Zlib/t/01version.t perl-5.26.1/cpan/Compress-Raw-Zlib/t/01version.t
+--- perl-5.26.1.orig/cpan/Compress-Raw-Zlib/t/01version.t	2017-07-18 22:49:30.000000000 +0000
++++ perl-5.26.1/cpan/Compress-Raw-Zlib/t/01version.t	2018-02-28 06:47:32.185828677 +0000
+@@ -26,8 +26,8 @@
+ # Check zlib_version and ZLIB_VERSION are the same.
+ 
+ SKIP: {
+-    skip "TEST_SKIP_VERSION_CHECK is set", 1 
+-        if $ENV{TEST_SKIP_VERSION_CHECK};
++    skip "Internal zlib won't match system zlib version", 1 
++        if "true";
+     my $zlib_h = ZLIB_VERSION ;
+     my $libz   = Compress::Raw::Zlib::zlib_version;
+ 
+diff -ru perl-5.26.1.orig/cpan/Compress-Raw-Zlib/t/02zlib.t perl-5.26.1/cpan/Compress-Raw-Zlib/t/02zlib.t
+--- perl-5.26.1.orig/cpan/Compress-Raw-Zlib/t/02zlib.t	2017-07-18 22:49:30.000000000 +0000
++++ perl-5.26.1/cpan/Compress-Raw-Zlib/t/02zlib.t	2018-02-28 06:49:58.147639917 +0000
+@@ -50,8 +50,8 @@
+ 
+ # Check zlib_version and ZLIB_VERSION are the same.
+ SKIP: {
+-    skip "TEST_SKIP_VERSION_CHECK is set", 1 
+-        if $ENV{TEST_SKIP_VERSION_CHECK};
++    skip "Internal zlib won't match system zlib version", 1 
++        if "true";
+     is Compress::Raw::Zlib::zlib_version, ZLIB_VERSION,
+         "ZLIB_VERSION matches Compress::Raw::Zlib::zlib_version" ;
+ }
+diff -ru perl-5.26.1.orig/cpan/Compress-Raw-Zlib/t/18lvalue.t perl-5.26.1/cpan/Compress-Raw-Zlib/t/18lvalue.t
+--- perl-5.26.1.orig/cpan/Compress-Raw-Zlib/t/18lvalue.t	2017-07-18 22:49:30.000000000 +0000
++++ perl-5.26.1/cpan/Compress-Raw-Zlib/t/18lvalue.t	2018-02-28 06:50:37.375051875 +0000
+@@ -39,8 +39,8 @@
+ 
+ # Check zlib_version and ZLIB_VERSION are the same.
+ SKIP: {
+-    skip "TEST_SKIP_VERSION_CHECK is set", 1 
+-        if $ENV{TEST_SKIP_VERSION_CHECK};
++    skip "Internal zlib won't match system zlib version", 1 
++        if "true";
+     is Compress::Raw::Zlib::zlib_version, ZLIB_VERSION,
+         "ZLIB_VERSION matches Compress::Raw::Zlib::zlib_version" ;
+ }
+diff -ru perl-5.26.1.orig/cpan/Compress-Raw-Zlib/t/19nonpv.t perl-5.26.1/cpan/Compress-Raw-Zlib/t/19nonpv.t
+--- perl-5.26.1.orig/cpan/Compress-Raw-Zlib/t/19nonpv.t	2017-07-18 22:49:30.000000000 +0000
++++ perl-5.26.1/cpan/Compress-Raw-Zlib/t/19nonpv.t	2018-02-28 06:51:02.974668153 +0000
+@@ -35,8 +35,8 @@
+ 
+ # Check zlib_version and ZLIB_VERSION are the same.
+ SKIP: {
+-    skip "TEST_SKIP_VERSION_CHECK is set", 1 
+-        if $ENV{TEST_SKIP_VERSION_CHECK};
++    skip "Internal zlib won't match system zlib version", 1 
++        if "true";
+     is Compress::Raw::Zlib::zlib_version, ZLIB_VERSION,
+         "ZLIB_VERSION matches Compress::Raw::Zlib::zlib_version" ;
+ }
+diff -ru perl-5.26.1.orig/cpan/IO-Compress/t/cz-01version.t perl-5.26.1/cpan/IO-Compress/t/cz-01version.t
+--- perl-5.26.1.orig/cpan/IO-Compress/t/cz-01version.t	2017-07-18 22:49:33.000000000 +0000
++++ perl-5.26.1/cpan/IO-Compress/t/cz-01version.t	2018-02-28 06:51:44.962038865 +0000
+@@ -26,8 +26,8 @@
+ # Check zlib_version and ZLIB_VERSION are the same.
+ 
+ SKIP: {
+-    skip "TEST_SKIP_VERSION_CHECK is set", 1 
+-        if $ENV{TEST_SKIP_VERSION_CHECK};
++    skip "Internal zlib won't match system zlib version", 1 
++        if "true";
+     my $zlib_h = ZLIB_VERSION ;
+     my $libz   = Compress::Zlib::zlib_version;
+ 
+diff -ru perl-5.26.1.orig/cpan/IO-Compress/t/cz-03zlib-v1.t perl-5.26.1/cpan/IO-Compress/t/cz-03zlib-v1.t
+--- perl-5.26.1.orig/cpan/IO-Compress/t/cz-03zlib-v1.t	2017-07-18 22:49:33.000000000 +0000
++++ perl-5.26.1/cpan/IO-Compress/t/cz-03zlib-v1.t	2018-02-28 06:52:21.793486915 +0000
+@@ -48,8 +48,8 @@
+ 
+ # Check zlib_version and ZLIB_VERSION are the same.
+ SKIP: {
+-    skip "TEST_SKIP_VERSION_CHECK is set", 1 
+-        if $ENV{TEST_SKIP_VERSION_CHECK};
++    skip "Internal zlib won't match system zlib version", 1 
++        if "true";
+     is Compress::Zlib::zlib_version, ZLIB_VERSION,
+         "ZLIB_VERSION matches Compress::Zlib::zlib_version" ;
+ }
+diff -ru perl-5.26.1.orig/cpan/IO-Compress/t/cz-06gzsetp.t perl-5.26.1/cpan/IO-Compress/t/cz-06gzsetp.t
+--- perl-5.26.1.orig/cpan/IO-Compress/t/cz-06gzsetp.t	2017-07-18 22:49:33.000000000 +0000
++++ perl-5.26.1/cpan/IO-Compress/t/cz-06gzsetp.t	2018-02-28 06:52:39.785217299 +0000
+@@ -43,8 +43,8 @@
+ 
+ # Check zlib_version and ZLIB_VERSION are the same.
+ SKIP: {
+-    skip "TEST_SKIP_VERSION_CHECK is set", 1 
+-        if $ENV{TEST_SKIP_VERSION_CHECK};
++    skip "Internal zlib won't match system zlib version", 1 
++        if "true";
+     is Compress::Zlib::zlib_version, ZLIB_VERSION,
+         "ZLIB_VERSION matches Compress::Zlib::zlib_version" ;
+ }
+diff -ru perl-5.26.1.orig/cpan/IO-Compress/t/cz-08encoding.t perl-5.26.1/cpan/IO-Compress/t/cz-08encoding.t
+--- perl-5.26.1.orig/cpan/IO-Compress/t/cz-08encoding.t	2017-07-18 22:49:33.000000000 +0000
++++ perl-5.26.1/cpan/IO-Compress/t/cz-08encoding.t	2018-02-28 06:53:00.160911971 +0000
+@@ -38,8 +38,8 @@
+ 
+ # Check zlib_version and ZLIB_VERSION are the same.
+ SKIP: {
+-    skip "TEST_SKIP_VERSION_CHECK is set", 1 
+-        if $ENV{TEST_SKIP_VERSION_CHECK};
++    skip "Internal zlib won't match system zlib version", 1 
++        if "true";
+     is Compress::Zlib::zlib_version, ZLIB_VERSION,
+         "ZLIB_VERSION matches Compress::Zlib::zlib_version" ;
+ }
+diff -ru perl-5.26.1.orig/cpan/IO-Compress/t/cz-14gzopen.t perl-5.26.1/cpan/IO-Compress/t/cz-14gzopen.t
+--- perl-5.26.1.orig/cpan/IO-Compress/t/cz-14gzopen.t	2017-07-18 22:49:33.000000000 +0000
++++ perl-5.26.1/cpan/IO-Compress/t/cz-14gzopen.t	2018-02-28 06:53:47.472203092 +0000
+@@ -28,8 +28,8 @@
+ 
+ {
+     SKIP: {
+-        skip "TEST_SKIP_VERSION_CHECK is set", 1 
+-            if $ENV{TEST_SKIP_VERSION_CHECK};
++        skip "Internal zlib won't match system zlib version", 1 
++            if "true";
+         # Check zlib_version and ZLIB_VERSION are the same.
+         is Compress::Zlib::zlib_version, ZLIB_VERSION,
+             "ZLIB_VERSION matches Compress::Zlib::zlib_version" ;
