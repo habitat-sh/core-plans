@@ -1,12 +1,12 @@
 pkg_name=expect
 pkg_origin=core
-pkg_version=5.45.3
+pkg_version=5.45.4
 pkg_license=('custom')
 pkg_description="A tool for automating interactive applications"
 pkg_upstream_url="http://expect.sourceforge.net/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="http://downloads.sourceforge.net/project/$pkg_name/Expect/${pkg_version}/${pkg_name}${pkg_version}.tar.gz"
-pkg_shasum="c520717b7195944a69ce1492ec82ca0ac3f3baf060804e6c5ee6d505ea512be9"
+pkg_shasum="49a7da83b0bdd9f46d04a04deec19c7767bb9a323e40c4781f89caf760b92c34"
 pkg_dirname=${pkg_name}${pkg_version}
 pkg_deps=(
   core/gcc-libs
