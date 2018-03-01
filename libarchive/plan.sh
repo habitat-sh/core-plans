@@ -21,3 +21,7 @@ do_build() {
       --without-lzo2
   make
 }
+
+do_check() {
+  make check
+}
