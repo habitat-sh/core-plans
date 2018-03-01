@@ -24,6 +24,11 @@ pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_prepare() {
+  # Add GCC 7 compatibility
+  #
+  # Thanks to: https://git.archlinux.org/svntogit/packages.git/tree/trunk/gcc7_buildfix.diff?h=packages/libidn
+  patch -p1 -i $PLAN_CONTEXT/gcc7-buildfix.patch
+
   if [[ ! -r /usr/bin/file ]]; then
     ln -sv "$(pkg_path_for file)/bin/file" /usr/bin/file
     _clean_file=true
