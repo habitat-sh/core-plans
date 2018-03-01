@@ -247,7 +247,6 @@ cat <<_PLANS_ | while read plan; do _build $plan; done
   core-plans/expect
   core-plans/dejagnu
   core-plans/check
-  core-plans/libidn
   core-plans/cacerts
   core-plans/openssl
   core-plans/wget
