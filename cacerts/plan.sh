@@ -8,6 +8,18 @@ pkg_shasum=nopenopebucketofnope
 pkg_deps=()
 pkg_build_deps=()
 
+pkg_version() {
+  local build_date
+  # Extract the build date of the certificates file
+  # shellcheck disable=SC2002
+  build_date="$(cat "$HAB_CACHE_SRC_PATH/$pkg_filename" \
+    | grep 'Certificate data from Mozilla' \
+    | sed 's/^## Certificate data from Mozilla as of: //')"
+
+  # Update the `$pkg_version` value with the build date
+  date --date="$build_date" "+%Y.%m.%d"
+}
+
 do_download() {
   do_default_download
   update_pkg_version
@@ -32,30 +44,4 @@ do_install() {
   mkdir -pv "$pkg_prefix/ssl/certs"
   cp -v "$pkg_filename" "$pkg_prefix/ssl/certs"
   ln -sv certs/cacert.pem "$pkg_prefix/ssl/cert.pem"
-}
-
-update_pkg_version() {
-  local build_date
-  # Extract the build date of the certificates file
-  # shellcheck disable=SC2002
-  build_date="$(cat "$HAB_CACHE_SRC_PATH/$pkg_filename" \
-    | grep 'Certificate data from Mozilla' \
-    | sed 's/^## Certificate data from Mozilla as of: //')"
-
-  # Update the `$pkg_version` value with the build date
-  pkg_version=$(date --date="$build_date" "+%Y.%m.%d")
-  build_line "Version updated to $pkg_version from CA Certs file"
-
-  # Several metadata values get their defaults from the value of `$pkg_version`
-  # so we must update these as well
-  pkg_dirname=${pkg_name}-${pkg_version}
-  pkg_prefix=$HAB_PKG_PATH/${pkg_origin}/${pkg_name}/${pkg_version}/${pkg_release}
-  pkg_artifact="$HAB_CACHE_ARTIFACT_PATH/${pkg_origin}-${pkg_name}-${pkg_version}-${pkg_release}-${pkg_target}.${_artifact_ext}"
-  if [[ "$CACHE_PATH" == "$SRC_PATH" ]]; then
-    local update_src_path=true
-  fi
-  CACHE_PATH="$HAB_CACHE_SRC_PATH/$pkg_dirname"
-  if [[ "${update_src_path:-}" == true ]]; then
-    SRC_PATH="$CACHE_PATH"
-  fi
 }
