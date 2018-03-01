@@ -79,10 +79,10 @@ libidn @fnichol
 cacerts @fnichol
 openssl @fnichol @reset
 wget @fnichol
-unzip @fnichol
+unzip @fnichol @nellshamrell
 rq @fnichol
-linux-headers-musl @fnichol
-musl @fnichol
+linux-headers-musl @fnichol @nellshamrell
+musl @fnichol @nellshamrell
 busybox-static @fnichol
 zlib-musl @fnichol
 bzip2-musl @fnichol
