@@ -38,6 +38,10 @@ do_install() {
   install -Dm644 COPYING "${pkg_prefix}/share/licenses/LICENSE"
 }
 
+do_check() {
+  make check
+}
+
 do_end() {
   if [[ -n "$_clean_file" ]]; then
     rm -fv /usr/bin/file
@@ -52,11 +56,5 @@ do_end() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc core/coreutils core/sed core/diffutils core/make core/patch)
-  do_prepare() {
-    return 0
-  }
-  do_end() {
-    return 0
-  }
+  pkg_build_deps=(core/gcc core/coreutils core/sed core/diffutils core/make core/patch core/file)
 fi
