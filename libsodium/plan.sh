@@ -11,3 +11,7 @@ pkg_deps=(core/glibc)
 pkg_build_deps=(core/autoconf core/automake core/diffutils core/patch core/make core/gcc core/sed)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
+
+do_check() {
+  make check
+}
