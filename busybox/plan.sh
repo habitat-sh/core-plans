@@ -1,11 +1,11 @@
 pkg_name=busybox
 pkg_distname=$pkg_name
 pkg_origin=core
-pkg_version=1.24.2
+pkg_version=1.28.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('gplv2')
 pkg_source=http://www.busybox.net/downloads/${pkg_distname}-${pkg_version}.tar.bz2
-pkg_shasum=e71ef53ec656f31c42633918d301405d40dea1d97eca12f272217ae4a971c855
+pkg_shasum=98fe1d3c311156c597cd5cfa7673bb377dc552b6fa20b5d3834579da3b13652e
 
 pkg_deps=(core/glibc)
 pkg_build_deps=(
