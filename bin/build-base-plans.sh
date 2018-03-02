@@ -264,6 +264,7 @@ cat <<_PLANS_ | while read plan; do _build $plan; done
   core-plans/libarchive-musl
   core-plans/rust
   habitat/components/hab:hab
+  core-plans/bats
   habitat/components/plan-build:hab-plan-build
   core-plans/vim
   core-plans/libbsd
