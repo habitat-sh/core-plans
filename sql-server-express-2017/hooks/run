@@ -1,0 +1,15 @@
+Start-Service 'MSSQL${{cfg.instance}}'
+Write-Host "{{pkg.name}} is running"
+ 
+try {
+    while($(Get-Service 'MSSQL${{cfg.instance}}').Status -eq "Running") {
+        Start-Sleep -Seconds 1
+    }
+}
+finally {
+    if($(Get-Service 'MSSQL${{cfg.instance}}').Status -ne "Stopped") {
+        Write-Host "{{pkg.name}} stopping..."
+        Stop-Service 'MSSQL${{cfg.instance}}'
+        Write-Host "{{pkg.name}} has stopped"
+    }
+}

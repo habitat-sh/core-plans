@@ -1,0 +1,7 @@
+# Create application Users
+ 
+Write-Host "Starting application user setup..."
+ 
+."$env:ProgramFiles\Microsoft SQL Server\140\Tools\Binn\OSQL.EXE" -S localhost,{{cfg.port}} -U sa -P {{cfg.sa_password}} -i $(Join-Path {{pkg.svc_config_path}} user.sql)
+ 
+Write-Host "Application user setup complete"
