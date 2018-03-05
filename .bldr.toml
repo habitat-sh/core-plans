@@ -851,6 +851,11 @@ plan_path = "rlwrap"
 plan_path = "rngd"
 [rpm]
 plan_path = "rpm"
+[rpm2cpio]
+plan_path = "rpm2cpio"
+paths = [
+  "rpm2cpio/*"
+]
 [rq]
 plan_path = "rq"
 [rsync]
