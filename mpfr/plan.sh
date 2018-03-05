@@ -2,11 +2,27 @@ pkg_name=mpfr
 pkg_origin=core
 pkg_version=4.0.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="\
+GNU MPFR (GNU Multiple Precision Floating-Point Reliably) is a GNU portable \
+C library for arbitrary-precision binary floating-point computation with \
+correct rounding, based on GNU Multi-Precision Library.\
+"
+pkg_upstream_url="http://www.mpfr.org/"
 pkg_license=('lgpl')
-pkg_source=http://www.mpfr.org/${pkg_name}-${pkg_version}/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=fbe2cd1418b321f5c899ce4f0f0f4e73f5ecc7d02145b0e1fd096f5c3afb8a1d
-pkg_deps=(core/glibc core/gmp)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/binutils)
+pkg_source="http://www.mpfr.org/${pkg_name}-${pkg_version}/${pkg_name}-${pkg_version}.tar.xz"
+pkg_shasum="fbe2cd1418b321f5c899ce4f0f0f4e73f5ecc7d02145b0e1fd096f5c3afb8a1d"
+pkg_deps=(
+  core/glibc
+  core/gmp
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+  core/binutils
+)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
@@ -19,10 +35,10 @@ do_prepare() {
 
 do_build() {
   ./configure \
-    --prefix=$pkg_prefix \
-    --with-gmp=$(pkg_path_for gmp) \
+    --prefix="$pkg_prefix" \
+    --with-gmp="$(pkg_path_for gmp)" \
     --enable-thread-safe
-  make -j$(nproc)
+  make -j"$(nproc)"
 }
 
 do_check() {
@@ -38,5 +54,7 @@ do_check() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/binutils)
+  pkg_build_deps=(
+    core/binutils
+  )
 fi
