@@ -2,20 +2,30 @@ pkg_name=glibc
 pkg_origin=core
 pkg_version=2.26
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="\
+The GNU C Library project provides the core libraries for the GNU system and \
+GNU/Linux systems, as well as many other systems that use Linux as the \
+kernel. These libraries provide critical APIs including ISO C11, \
+POSIX.1-2008, BSD, OS-specific APIs and more. These APIs include such \
+foundational facilities as open, read, write, malloc, printf, getaddrinfo, \
+dlopen, pthread_create, crypt, login, exit and more.\
+"
+pkg_upstream_url="https://www.gnu.org/software/libc"
 pkg_license=('GPL-2.0' 'LGPL-2.0')
-pkg_description="$(cat << EOF
-  The GNU C Library project provides the core libraries for the GNU system and GNU/Linux systems,
-  as well as many other systems that use Linux as the kernel. These libraries provide critical
-  APIs including ISO C11, POSIX.1-2008, BSD, OS-specific APIs and more. These APIs include such
-  foundational facilities as open, read, write, malloc, printf, getaddrinfo, dlopen,
-  pthread_create, crypt, login, exit and more.
-EOF
-)"
-pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=e54e0a934cd2bc94429be79da5e9385898d2306b9eaf3c92d5a77af96190f6bd
-pkg_upstream_url=https://www.gnu.org/software/libc
-pkg_deps=(core/linux-headers)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed core/perl)
+pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
+pkg_shasum="e54e0a934cd2bc94429be79da5e9385898d2306b9eaf3c92d5a77af96190f6bd"
+pkg_deps=(
+  core/linux-headers
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+  core/sed
+  core/perl
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
@@ -118,7 +128,8 @@ do_build() {
 # corresponds to your prefix, i.e. `(length of prefix path + 1)` to ensure that
 # you haven't really broken abi with your change."
 #
-# Source: https://sourceware.org/glibc/wiki/Testing/Testsuite#Known_testsuite_failures
+# Source:
+# https://sourceware.org/glibc/wiki/Testing/Testsuite#Known_testsuite_failures
 #
 # ## FAIL: posix/tst-getaddrinfo4
 #
@@ -315,7 +326,8 @@ extract_src() {
     do_clean
     build_line "Unpacking $pkg_filename"
     do_unpack
-    mv -v "$HAB_CACHE_SRC_PATH/$pkg_dirname" "$HAB_CACHE_SRC_PATH/$build_dirname/$plan"
+    mv -v "$HAB_CACHE_SRC_PATH/$pkg_dirname" \
+      "$HAB_CACHE_SRC_PATH/$build_dirname/$plan"
   )
 }
 
