@@ -2,11 +2,27 @@ pkg_name=m4
 pkg_origin=core
 pkg_version=1.4.18
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="\
+GNU M4 is an implementation of the traditional Unix macro processor. It is \
+mostly SVR4 compatible although it has some extensions (for example, handling \
+more than 9 positional parameters to macros). GNU M4 also has built-in \
+functions for including files, running shell commands, doing arithmetic, etc.\
+"
+pkg_upstream_url="http://www.gnu.org/software/m4"
 pkg_license=('gplv3')
-pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=f2c1e86ca0a404ff281631bdc8377638992744b175afb806e25871a24a934e07
-pkg_deps=(core/glibc)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/binutils)
+pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
+pkg_shasum="f2c1e86ca0a404ff281631bdc8377638992744b175afb806e25871a24a934e07"
+pkg_deps=(
+  core/glibc
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+  core/binutils
+)
 pkg_bin_dirs=(bin)
 
 do_prepare() {
@@ -50,5 +66,7 @@ do_check() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/binutils)
+  pkg_build_deps=(
+    core/binutils
+  )
 fi
