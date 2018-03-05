@@ -157,10 +157,10 @@ EOF
   done
 
   trap "rm -f ${PIPELINE}/.deploy.yml" INT QUIT TERM EXIT
-  spruce merge base.yml packages/*.yml > .deploy.yml && \
-    REDACT=yes spruce merge --prune meta base.yml packages/*.yml > pipeline.yml && \
-    fly --target lite2 set-pipeline --pipeline habitat-plans --config .deploy.yml     &&
-    fly --target lite2 unpause-pipeline --pipeline habitat-plans
+  spruce merge settings.yml base.yml packages/*.yml > .deploy.yml && \
+    REDACT=yes spruce merge --prune meta settings.yml base.yml packages/*.yml > pipeline.yml && \
+    fly --target plans-ci set-pipeline --pipeline habitat-plans --config .deploy.yml     &&
+    fly --target plans-ci unpause-pipeline --pipeline habitat-plans
 
   rm -rf packages tests
 popd >/dev/null

@@ -1,29 +1,4 @@
 ---
-meta:
-  delmo:
-    machine_name: REDACTED
-  dockerhub:
-    email: REDACTED
-    username: REDACTED
-    password: REDACTED
-  habitat:
-    origin_key: REDACTED
-    auth_token: REDACTED
-    origin: core
-  aws:
-    docker-machine-bucket: docker-machine-bucket
-    docker-machine-ami: ami-41e0b93b
-    access_key_id: REDACTED
-    secret_access_key: REDACTED
-    region: us-east-1
-  concourse:
-    target: http://ip.of.concourse.web:8080
-    team: REDACTED
-    user: REDACTED
-    password: REDACTED
-  slack:
-    webhook: REDACTED
-
 groups:
 - name: all-packages
   jobs: []
