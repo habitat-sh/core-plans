@@ -1,14 +1,26 @@
 pkg_name=file
 pkg_origin=core
 pkg_version=5.32
-pkg_description="Ian Darwin's implementation of the Unix File(1) command."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="\
+file is a standard Unix program for recognizing the type of data contained in \
+a computer file.\
+"
+pkg_upstream_url="https://www.darwinsys.com/file/"
 pkg_license=('custom')
-pkg_source=ftp://ftp.astron.com/pub/$pkg_name/${pkg_name}-${pkg_version}.tar.gz
-pkg_upstream_url=https://www.darwinsys.com/file/
-pkg_shasum=8639dc4d1b21e232285cd483604afc4a6ee810710e00e579dbe9591681722b50
-pkg_deps=(core/glibc core/zlib)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
+pkg_source="ftp://ftp.astron.com/pub/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum="8639dc4d1b21e232285cd483604afc4a6ee810710e00e579dbe9591681722b50"
+pkg_deps=(
+  core/glibc
+  core/zlib
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
