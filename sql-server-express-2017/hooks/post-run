@@ -1,7 +1,17 @@
 # Create application Users
- 
+
+$listening = $false
+while(!$listening) {
+  Write-Host "waiting for sql server to start accepting connections..."
+  sleep 3
+  try{
+    $listening = New-Object System.Net.Sockets.TCPClient -ArgumentList localhost,{{cfg.port}} -ErrorAction SilentlyContinue | ? { $_.Connected }
+  } catch {} 
+}
+
 Write-Host "Starting application user setup..."
  
-."$env:ProgramFiles\Microsoft SQL Server\140\Tools\Binn\OSQL.EXE" -S localhost,{{cfg.port}} -U sa -P {{cfg.sa_password}} -i $(Join-Path {{pkg.svc_config_path}} user.sql)
+$sqlMajorVersion = [Version]::new("{{pkg.version}}").Major
+."$env:ProgramFiles\Microsoft SQL Server\${sqlMajorVersion}0\Tools\Binn\OSQL.EXE" -S localhost,{{cfg.port}} -U sa -P {{cfg.sa_password}} -i $(Join-Path {{pkg.svc_config_path}} user.sql)
  
 Write-Host "Application user setup complete"

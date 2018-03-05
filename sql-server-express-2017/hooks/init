@@ -1,10 +1,12 @@
+$sqlMajorVersion = [Version]::new("{{pkg.version}}").Major
+
 # If the sql instance data is not present, install a new instance
-if (!(Test-Path {{pkg.svc_data_path}}/mssql14.{{cfg.instance}})) {
+if (!(Test-Path "{{pkg.svc_data_path}}/mssql${sqlMajorVersion}.{{cfg.instance}}")) {
     setup.exe /configurationfile={{pkg.svc_config_path}}/config.ini /Q
 }
 
 # Configure the instance for the configured port
-Set-ItemProperty -Path  "HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL14.{{cfg.instance}}\MSSQLServer\SuperSocketNetLib\Tcp\IPAll" -Name TcpPort -Value {{cfg.port}}
+Set-ItemProperty -Path  "HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL${sqlMajorVersion}.{{cfg.instance}}\MSSQLServer\SuperSocketNetLib\Tcp\IPAll" -Name TcpPort -Value {{cfg.port}}
 
 # Open port on firewall only if Windows Firewall service is running
 if($(Get-Service 'MpsSvc').Status -eq "Running") {
