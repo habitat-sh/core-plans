@@ -1,16 +1,29 @@
 pkg_name=zlib
-pkg_distname=$pkg_name
+_distname="$pkg_name"
 pkg_origin=core
 pkg_version=1.2.11
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="\
+Compression library implementing the deflate compression method found in gzip \
+and PKZIP.\
+"
+pkg_upstream_url="http://www.zlib.net/"
 pkg_license=('zlib')
-pkg_source=http://zlib.net/${pkg_distname}-${pkg_version}.tar.gz
-pkg_shasum=c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1
-pkg_dirname=${pkg_distname}-${pkg_version}
-pkg_deps=(core/glibc)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
-pkg_lib_dirs=(lib)
+pkg_source="http://zlib.net/${_distname}-${pkg_version}.tar.gz"
+pkg_shasum="c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1"
+pkg_dirname="${_distname}-${pkg_version}"
+pkg_deps=(
+  core/glibc
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+)
 pkg_include_dirs=(include)
+pkg_lib_dirs=(lib)
 
 do_prepare() {
   do_default_prepare
