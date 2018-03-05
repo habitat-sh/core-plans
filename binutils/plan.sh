@@ -2,11 +2,29 @@ pkg_name=binutils
 pkg_origin=core
 pkg_version=2.29.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="\
+The GNU Binary Utilities, or binutils, are a set of programming tools for \
+creating and managing binary programs, object files, libraries, profile data, \
+and assembly source code.\
+"
+pkg_upstream_url="https://www.gnu.org/software/binutils/"
 pkg_license=('gpl')
-pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.bz2
-pkg_shasum=1509dff41369fb70aed23682351b663b56db894034773e6dbf7d5d6071fc55cc
-pkg_deps=(core/glibc core/zlib)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/texinfo core/expect core/dejagnu)
+pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.bz2"
+pkg_shasum="1509dff41369fb70aed23682351b663b56db894034773e6dbf7d5d6071fc55cc"
+pkg_deps=(
+  core/glibc
+  core/zlib
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+  core/texinfo
+  core/expect
+  core/dejagnu
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
@@ -26,11 +44,14 @@ do_prepare() {
   # Binutils has some vendored code that also exists in glibc but could be
   # API-incompatible, so we're going to zero-out the C*FLAGS environment
   # variables.
-  export CFLAGS="-I$(pkg_path_for zlib)/include"
+  CFLAGS="-I$(pkg_path_for zlib)/include"
+  export CFLAGS
   build_line "Updating CFLAGS=$CFLAGS"
-  export CXXFLAGS="$CFLAGS"
+  CXXFLAGS="$CFLAGS"
+  export CXXFLAGS
   build_line "Updating CXXFLAGS=$CXXFLAGS"
-  export CPPFLAGS="$CFLAGS"
+  CPPFLAGS="$CFLAGS"
+  export CPPFLAGS
   build_line "Updating CPPFLAGS=$CPPFLAGS"
 
   # TODO: For the wrapper scripts to function correctly, we need the full
@@ -43,30 +64,24 @@ do_prepare() {
   #
   # Thanks to: https://github.com/NixOS/nixpkgs/blob/2524504/pkgs/development/tools/misc/binutils/new-dtags.patch
   # Thanks to: https://build.opensuse.org/package/view_file?file=ld-dtags.diff&package=binutils&project=devel%3Agcc&srcmd5=011dbdef56800d1cd2fa8c585b3dd7db
-  patch -p1 < $PLAN_CONTEXT/new-dtags.patch
+  patch -p1 < "$PLAN_CONTEXT/new-dtags.patch"
 
   # Since binutils 2.22, DT_NEEDED flags aren't copied for dynamic outputs.
   # That requires upstream changes for things to work. So we can patch it to
   # get the old behaviour fo now.
   #
   # Thanks to: https://github.com/NixOS/nixpkgs/blob/d9f4b0a/pkgs/development/tools/misc/binutils/dtneeded.patch
-  patch -p1 < $PLAN_CONTEXT/dt-needed-true.patch
+  patch -p1 < "$PLAN_CONTEXT/dt-needed-true.patch"
 
   # # Make binutils output deterministic by default.
   #
   # Thanks to: https://github.com/NixOS/nixpkgs/blob/0889bbe/pkgs/development/tools/misc/binutils/deterministic.patch
-  patch -p1 < $PLAN_CONTEXT/more-deterministic-output.patch
+  patch -p1 < "$PLAN_CONTEXT/more-deterministic-output.patch"
 
   # shellcheck disable=SC2002
   cat "$PLAN_CONTEXT/disable_failing_tests.patch" \
     | sed "s,@zlib_libs@,$(pkg_path_for zlib)/lib,g" \
     | patch -p1
-
-  # cat $PLAN_CONTEXT/custom-libs.patch \
-  #   | sed -e "s,@dynamic_linker@,$dynamic_linker,g" \
-  #     -e "s,@glibc_lib@,$(pkg_path_for glibc)/lib,g" \
-  #     -e "s,@zlib_lib@,$(pkg_path_for zlib)/lib,g" \
-  #   | patch -p1
 
   # We don't want to search for libraries in system directories such as `/lib`,
   # `/usr/local/lib`, etc.
@@ -83,8 +98,8 @@ do_build() {
   rm -rf ../${pkg_name}-build
   mkdir ../${pkg_name}-build
   pushd ../${pkg_name}-build > /dev/null
-    ../$pkg_dirname/configure \
-      --prefix=$pkg_prefix \
+    "../$pkg_dirname/configure" \
+      --prefix="$pkg_prefix" \
       --enable-shared \
       --enable-gold \
       --enable-ld=default \
@@ -97,7 +112,7 @@ do_build() {
     # Check the environment to make sure all the necessary tools are available
     make configure-host
 
-    make -j$(nproc) tooldir=$pkg_prefix
+    make -j"$(nproc)" tooldir="$pkg_prefix"
   popd > /dev/null
 }
 
@@ -107,10 +122,11 @@ do_check() {
     # libraries and headers are being flown in from non-standard locations.
     original_LD_RUN_PATH="$LD_RUN_PATH"
     if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-      export LD_LIBRARY_PATH="$LD_RUN_PATH:/tools/lib"
+      LD_LIBRARY_PATH="$LD_RUN_PATH:/tools/lib"
     else
-      export LD_LIBRARY_PATH="$LD_RUN_PATH:$(pkg_path_for gcc)/lib"
+      LD_LIBRARY_PATH="$LD_RUN_PATH:$(pkg_path_for gcc)/lib"
     fi
+    export LD_LIBRARY_PATH
     unset LD_RUN_PATH
 
     make check LDFLAGS="$LDFLAGS"
@@ -121,14 +137,14 @@ do_check() {
 }
 
 do_install() {
-  pushd ../${pkg_name}-build > /dev/null
-    make prefix=$pkg_prefix tooldir=$pkg_prefix install
+  pushd ../"${pkg_name}-build" > /dev/null
+    make prefix="$pkg_prefix" tooldir="$pkg_prefix" install
 
     # Remove unneeded files
-    rm -fv ${pkg_prefix}/share/man/man1/{dlltool,nlmconv,windres,windmc}*
+    rm -fv "$pkg_prefix"/share/man/man1/{dlltool,nlmconv,windres,windmc}*
 
     # No shared linking to these files outside binutils
-    rm -fv ${pkg_prefix}/lib/lib{bfd,opcodes}.so
+    rm -fv "$pkg_prefix"/lib/lib{bfd,opcodes}.so
 
     # Wrap key binaries so we can add some arguments and flags to the real
     # underlying binary.
@@ -145,7 +161,7 @@ _verify_tty() {
   local expected='spawn ls'
   local cmd="expect -c 'spawn ls'"
   if actual=$(expect -c "spawn ls" | sed 's/\r$//'); then
-    if [[ $expected != $actual ]]; then
+    if [[ "$expected" != "$actual" ]]; then
       exit_with "Expected out from '$cmd' was: '$expected', actual: '$actual'" 1
     fi
   else
@@ -157,7 +173,7 @@ _wrap_binary() {
   local bin="$pkg_prefix/bin/$1"
   build_line "Adding wrapper $bin to ${bin}.real"
   mv -v "$bin" "${bin}.real"
-  sed $PLAN_CONTEXT/ld-wrapper.sh \
+  sed "$PLAN_CONTEXT/ld-wrapper.sh" \
     -e "s^@shell@^${bash}^g" \
     -e "s^@dynamic_linker@^${dynamic_linker}^g" \
     -e "s^@program@^${bin}.real^g" \
