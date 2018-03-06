@@ -2,11 +2,26 @@ pkg_name=grep
 pkg_origin=core
 pkg_version=3.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="\
+Grep searches one or more input files for lines containing a match to a \
+specified pattern. By default, Grep outputs the matching lines.\
+"
+pkg_upstream_url="https://www.gnu.org/software/grep/"
 pkg_license=('gplv3+')
-pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=db625c7ab3bb3ee757b3926a5cfa8d9e1c3991ad24707a83dde8a5ef2bf7a07e
-pkg_deps=(core/glibc core/pcre)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/perl)
+pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
+pkg_shasum="db625c7ab3bb3ee757b3926a5cfa8d9e1c3991ad24707a83dde8a5ef2bf7a07e"
+pkg_deps=(
+  core/glibc
+  core/pcre
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+  core/perl
+)
 pkg_bin_dirs=(bin)
 
 do_prepare() {
@@ -34,5 +49,8 @@ do_check() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc core/coreutils)
+  pkg_build_deps=(
+    core/gcc
+    core/coreutils
+  )
 fi
