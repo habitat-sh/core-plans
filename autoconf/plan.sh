@@ -2,7 +2,10 @@ pkg_name=autoconf
 pkg_origin=core
 pkg_version=2.69
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_description="Autoconf is an extensible package of M4 macros that produce shell scripts to automatically configure software source code packages"
+pkg_description="\
+Autoconf is an extensible package of M4 macros that produce shell scripts to \
+automatically configure software source code packages.\
+"
 pkg_upstream_url="https://www.gnu.org/software/autoconf/autoconf.html"
 pkg_license=('GPL-2.0')
 pkg_source="http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz"
@@ -28,5 +31,11 @@ pkg_bin_dirs=(bin)
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc core/coreutils core/sed core/gawk core/diffutils)
+  pkg_build_deps=(
+    core/gcc
+    core/coreutils
+    core/sed
+    core/gawk
+    core/diffutils
+  )
 fi
