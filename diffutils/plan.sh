@@ -2,11 +2,24 @@ pkg_name=diffutils
 pkg_origin=core
 pkg_version=3.6
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="\
+GNU Diffutils is a package of several programs related to finding differences \
+between files.\
+"
+pkg_upstream_url="https://www.gnu.org/software/diffutils"
 pkg_license=('gplv3+')
-pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=d621e8bdd4b573918c8145f7ae61817d1be9deb4c8d2328a65cea8e11d783bd6
-pkg_deps=(core/glibc)
-pkg_build_deps=(core/coreutils core/patch core/make core/gcc core/sed)
+pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
+pkg_shasum="d621e8bdd4b573918c8145f7ae61817d1be9deb4c8d2328a65cea8e11d783bd6"
+pkg_deps=(
+  core/glibc
+)
+pkg_build_deps=(
+  core/coreutils
+  core/patch
+  core/make
+  core/gcc
+  core/sed
+)
 pkg_bin_dirs=(bin)
 
 do_build() {
@@ -43,5 +56,9 @@ do_check() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc core/coreutils core/sed)
+  pkg_build_deps=(
+    core/gcc
+    core/coreutils
+    core/sed
+  )
 fi
