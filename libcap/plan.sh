@@ -2,11 +2,24 @@ pkg_name=libcap
 pkg_origin=core
 pkg_version=2.25
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="POSIX 1003.1e capabilities."
+pkg_upstream_url="http://sites.google.com/site/fullycapable/"
 pkg_license=('gplv2')
-pkg_source=https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=693c8ac51e983ee678205571ef272439d83afe62dd8e424ea14ad9790bc35162
-pkg_deps=(core/glibc core/attr)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/linux-headers core/perl)
+pkg_source="https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/${pkg_name}-${pkg_version}.tar.xz"
+pkg_shasum="693c8ac51e983ee678205571ef272439d83afe62dd8e424ea14ad9790bc35162"
+pkg_deps=(
+  core/glibc
+  core/attr
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+  core/linux-headers
+  core/perl
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
@@ -35,5 +48,8 @@ do_install() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc core/linux-headers)
+  pkg_build_deps=(
+    core/gcc
+    core/linux-headers
+  )
 fi
