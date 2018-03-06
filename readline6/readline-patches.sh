@@ -1,4 +1,4 @@
-_patch_url_base="${_url_base}/${pkg_name}-${_base_version}-patches/${pkg_name}${_base_version//.}"
+_patch_url_base="${_url_base}/${_distname}-${_base_version}-patches/${_distname}${_base_version//.}"
 
 # All official patch file URLs
 _patch_files=(
