@@ -1,15 +1,41 @@
 pkg_name=gcc
-pkg_distname=$pkg_name
+_distname=$pkg_name
 pkg_origin=core
 pkg_version=7.2.0
-pkg_description="The GNU Compiler Collection"
-pkg_upstream_url="https://gcc.gnu.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="\
+The GNU Compiler Collection (GCC) is a compiler system produced by the GNU \
+Project supporting various programming languages. GCC is a key component of \
+the GNU toolchain and the standard compiler for most Unix-like operating \
+systems.\
+"
+pkg_upstream_url="https://gcc.gnu.org/"
 pkg_license=('GPL-2.0')
-pkg_source=http://ftp.gnu.org/gnu/$pkg_distname/${pkg_distname}-${pkg_version}/${pkg_distname}-${pkg_version}.tar.xz
-pkg_shasum=1cf7adf8ff4b5aa49041c8734bbcf1ad18cc4c94d0029aae0f4e48841088479a
-pkg_deps=(core/glibc core/zlib core/gmp core/mpfr core/libmpc core/binutils)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/file core/make core/gcc core/gawk core/m4 core/texinfo core/perl core/inetutils core/expect core/dejagnu)
+pkg_source="http://ftp.gnu.org/gnu/$_distname/${_distname}-${pkg_version}/${_distname}-${pkg_version}.tar.xz"
+pkg_shasum="1cf7adf8ff4b5aa49041c8734bbcf1ad18cc4c94d0029aae0f4e48841088479a"
+pkg_deps=(
+  core/glibc
+  core/zlib
+  core/gmp
+  core/mpfr
+  core/libmpc
+  core/binutils
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/file
+  core/make
+  core/gcc
+  core/gawk
+  core/m4
+  core/texinfo
+  core/perl
+  core/inetutils
+  core/expect
+  core/dejagnu
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
@@ -93,7 +119,7 @@ do_prepare() {
 
   # Update all references to the `/usr/bin/file` absolute path with `file`
   # which will be on `$PATH` due to file being a build dependency.
-  grep -lr /usr/bin/file * | while read f; do
+  grep -lr /usr/bin/file ./* | while read -r f; do
     sed -i -e "s,/usr/bin/file,file,g" "$f"
   done
 
@@ -306,5 +332,8 @@ wrap_binary() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/m4 core/file)
+  pkg_build_deps=(
+    core/m4
+    core/file
+  )
 fi
