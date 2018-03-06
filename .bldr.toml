@@ -330,6 +330,8 @@ plan_path = "handlebars-cmd"
 plan_path = "haproxy"
 [harfbuzz]
 plan_path = "harfbuzz"
+[helm]
+plan_path = "helm"
 [htop]
 plan_path = "htop"
 [httpd]
