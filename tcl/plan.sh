@@ -1,15 +1,26 @@
 pkg_name=tcl
 pkg_origin=core
 pkg_version=8.6.8
-pkg_license=('custom')
-pkg_description="Tool Command Language -- A dynamic programming language."
-pkg_upstream_url="http://www.tcl.tk/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source=http://downloads.sourceforge.net/sourceforge/${pkg_name}/${pkg_name}${pkg_version}-src.tar.gz
-pkg_shasum=c43cb0c1518ce42b00e7c8f6eaddd5195c53a98f94adc717234a65cbcfd3f96a
-pkg_dirname=${pkg_name}${pkg_version}
-pkg_deps=(core/glibc core/gcc-libs core/zlib)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed)
+pkg_description="Tool Command Language -- A dynamic programming language."
+pkg_upstream_url="http://tcl.sourceforge.net/"
+pkg_license=('custom')
+pkg_source="http://downloads.sourceforge.net/sourceforge/${pkg_name}/${pkg_name}${pkg_version}-src.tar.gz"
+pkg_shasum="c43cb0c1518ce42b00e7c8f6eaddd5195c53a98f94adc717234a65cbcfd3f96a"
+pkg_dirname="${pkg_name}${pkg_version}"
+pkg_deps=(
+  core/glibc
+  core/gcc-libs
+  core/zlib
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+  core/sed
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
@@ -77,5 +88,12 @@ do_install() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc core/coreutils core/sed core/diffutils core/make core/patch)
+  pkg_build_deps=(
+    core/gcc
+    core/coreutils
+    core/sed
+    core/diffutils
+    core/make
+    core/patch
+  )
 fi
