@@ -2,7 +2,7 @@ pkg_name=bash
 _distname="$pkg_name"
 pkg_origin=core
 _base_version=4.4
-pkg_version=${_base_version}.12
+pkg_version=${_base_version}.19
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
  Bash is the GNU Project's shell. Bash is the Bourne Again SHell. Bash is an \
