@@ -1,16 +1,34 @@
 pkg_name=openssl
-pkg_distname=$pkg_name
+_distname="$pkg_name"
 pkg_origin=core
 pkg_version=1.0.2n
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_description="OpenSSL is an open source project that provides a robust, commercial-grade, and full-featured toolkit for the Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols. It is also a general-purpose cryptography library."
-pkg_license=('OpenSSL')
+pkg_description="\
+OpenSSL is an open source project that provides a robust, commercial-grade, \
+and full-featured toolkit for the Transport Layer Security (TLS) and Secure \
+Sockets Layer (SSL) protocols. It is also a general-purpose cryptography \
+library.\
+"
 pkg_upstream_url="https://www.openssl.org"
-pkg_source=https://www.openssl.org/source/${pkg_distname}-${pkg_version}.tar.gz
-pkg_shasum=370babb75f278c39e0c50e8c4e7493bc0f18db6867478341a832a982fd15a8fe
-pkg_dirname="${pkg_distname}-${pkg_version}"
-pkg_deps=(core/glibc core/zlib core/cacerts)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed core/grep core/perl)
+pkg_license=('OpenSSL')
+pkg_source="https://www.openssl.org/source/${_distname}-${pkg_version}.tar.gz"
+pkg_shasum="370babb75f278c39e0c50e8c4e7493bc0f18db6867478341a832a982fd15a8fe"
+pkg_dirname="${_distname}-${pkg_version}"
+pkg_deps=(
+  core/glibc
+  core/zlib
+  core/cacerts
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+  core/sed
+  core/grep
+  core/perl
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
@@ -91,5 +109,14 @@ do_install() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc core/coreutils core/sed core/grep core/perl core/diffutils core/make core/patch)
+  pkg_build_deps=(
+    core/gcc
+    core/coreutils
+    core/sed
+    core/grep
+    core/perl
+    core/diffutils
+    core/make
+    core/patch
+  )
 fi
