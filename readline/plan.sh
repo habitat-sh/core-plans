@@ -1,25 +1,40 @@
 pkg_name=readline
+_distname="$pkg_name"
 pkg_origin=core
 _base_version=7.0
 pkg_version=${_base_version}.3
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="\
+The GNU Readline library provides a set of functions for use by applications \
+that allow users to edit command lines as they are typed in.\
+"
+pkg_upstream_url="http://tiswww.case.edu/php/chet/readline/rltop.html"
 pkg_license=('GPL-3.0')
-pkg_description="The GNU Readline library provides a set of functions for use by applications that allow users to edit command lines as they are typed in."
-_url_base="http://ftp.gnu.org/gnu/${pkg_name}"
-pkg_upstream_url="https://www.gnu.org/"
-pkg_source="${_url_base}/${pkg_name}-${_base_version}.tar.gz"
-pkg_dirname="${pkg_name}-${_base_version}"
-pkg_shasum=750d437185286f40a369e1e4f4764eda932b9459b5ec9a731628393dd3d32334
-pkg_deps=(core/glibc core/ncurses)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/bison core/grep)
+_url_base="http://ftp.gnu.org/gnu/${_distname}"
+pkg_source="${_url_base}/${_distname}-${_base_version}.tar.gz"
+pkg_shasum="750d437185286f40a369e1e4f4764eda932b9459b5ec9a731628393dd3d32334"
+pkg_dirname="${_distname}-${_base_version}"
+pkg_deps=(
+  core/glibc
+  core/ncurses
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+  core/bison
+  core/grep
+)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_begin() {
-  # The maintainer of Readline only releases these patches to fix serious issues,
-  # so any new official patches will be part of this build, which will be
-  # reflected in the "tiny" or "patch" number of the version coordinate. In other
-  # words, given 6 patches, the version of this Readline package would be
+  # The maintainer of Readline only releases these patches to fix serious
+  # issues, so any new official patches will be part of this build, which will
+  # be reflected in the "tiny" or "patch" number of the version coordinate. In
+  # other words, given 6 patches, the version of this Readline package would be
   # `MAJOR.MINOR.6`.
 
   # Source a file containing an array of patch URLs and an array of patch file
@@ -84,5 +99,9 @@ do_install() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc core/bison core/grep)
+  pkg_build_deps=(
+    core/gcc
+    core/bison
+    core/grep
+  )
 fi
