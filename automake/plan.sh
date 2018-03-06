@@ -2,9 +2,12 @@ pkg_name=automake
 pkg_origin=core
 pkg_version=1.16
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=("GPL-2.0")
-pkg_description="Automake is a tool for automatically generating Makefile.in files compliant with the GNU Coding Standards"
+pkg_description="\
+Automake is a tool for automatically generating Makefile.in files compliant \
+with the GNU Coding Standards.\
+"
 pkg_upstream_url="https://www.gnu.org/software/automake/"
+pkg_license=("GPL-2.0")
 pkg_source="http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="f98f2d97b11851cbe7c2d4b4eaef498ae9d17a3c2ef1401609b7b4ca66655b8a"
 pkg_deps=(
@@ -29,5 +32,10 @@ pkg_bin_dirs=(bin)
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc core/coreutils core/diffutils core/autoconf)
+  pkg_build_deps=(
+    core/gcc
+    core/coreutils
+    core/diffutils
+    core/autoconf
+  )
 fi
