@@ -1,36 +1,51 @@
 pkg_name=ncurses
 pkg_origin=core
 pkg_version=6.0
-pkg_description="The ncurses (new curses) library"
-pkg_upstream_url=https://www.gnu.org/software/ncurses/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="\
+ncurses (new curses) is a programming library providing an application \
+programming interface (API) that allows the programmer to write text-based \
+user interfaces in a terminal-independent manner.\
+"
+pkg_upstream_url="https://www.gnu.org/software/ncurses/"
 pkg_license=('ncurses')
-pkg_source=http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=f551c24b30ce8bfb6e96d9f59b42fbea30fa3a6123384172f9e7284bcf647260
-pkg_deps=(core/glibc core/gcc-libs)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/bzip2)
+pkg_source="http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum="f551c24b30ce8bfb6e96d9f59b42fbea30fa3a6123384172f9e7284bcf647260"
+pkg_deps=(
+  core/glibc
+  core/gcc-libs
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+  core/bzip2
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
-patch_date=20160910
-patch_source=http://invisible-mirror.net/archives/ncurses/${pkg_version}/ncurses-${pkg_version}-${patch_date}-patch.sh.bz2
-patch_checksum=f570bcfe3852567f877ee6f16a616ffc7faa56d21549ad37f6649022f8662538
+_patch_date=20160910
+_patch_filename="${pkg_name}-${pkg_version}-${_patch_date}-patch.sh"
+_patch_source="http://invisible-mirror.net/archives/$pkg_name/$pkg_version/${_patch_filename}.bz2"
+_patch_shasum="f570bcfe3852567f877ee6f16a616ffc7faa56d21549ad37f6649022f8662538"
 
 do_download() {
   do_default_download
 
-  download_file ${patch_source} ncurses-${pkg_version}-${patch_date}-patch.sh.bz2 ${patch_checksum}
+  download_file "$_patch_source" "${_patch_filename}.bz2" "$_patch_shasum"
 }
 
 do_unpack() {
   do_default_unpack
 
-  bunzip2 -c ncurses-${pkg_version}-${patch_date}-patch.sh.bz2 > "${pkg_dirname}/ncurses-${pkg_version}-${patch_date}-patch.sh"
+  bunzip2 -c "${_patch_filename}.bz2" > "${pkg_dirname}/${_patch_filename}"
 }
 
 do_build() {
-  sh ncurses-${pkg_version}-${patch_date}-patch.sh
+  sh "$_patch_filename"
 
   ./configure --prefix="$pkg_prefix" \
     --with-shared \
@@ -88,5 +103,7 @@ do_install() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc)
+  pkg_build_deps=(
+    core/gcc
+  )
 fi
