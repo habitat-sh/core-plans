@@ -1,6 +1,6 @@
 pkg_name=rust
 pkg_origin=core
-pkg_version=1.24.0
+pkg_version=1.24.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Safe, concurrent, practical language"
 pkg_upstream_url="https://www.rust-lang.org/"
@@ -8,7 +8,7 @@ pkg_license=('Apache-2.0' 'MIT')
 _url_base=http://static.rust-lang.org/dist
 pkg_source=$_url_base/${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz
 pkg_dirname=${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu
-pkg_shasum=336cf7af6c857cdaa110e1425719fa3a1652351098dc73f156e5bf02ed86443c
+pkg_shasum=4567e7f6e5e0be96e9a5a7f5149b5452828ab6a386099caca7931544f45d5327
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_deps=(core/glibc core/gcc-libs core/zlib core/gcc core/cacerts core/busybox-static)
@@ -19,7 +19,7 @@ _target_sources=(
 )
 
 _target_shasums=(
-  c42d22807ff1a46f612a54a8d68782abd2368f7d6e3dceaba3643d49812c13ae
+  8718c7e4e8a757570749848b07ae5ac70afaeeca9215271f6b418dc0b0fced6f
 )
 
 do_download() {
