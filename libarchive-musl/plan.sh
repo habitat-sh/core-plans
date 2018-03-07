@@ -1,8 +1,18 @@
 source ../libarchive/plan.sh
 
 pkg_name=libarchive-musl
+pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_deps=(core/musl core/openssl-musl core/zlib-musl core/bzip2-musl core/xz-musl)
+pkg_description="Multi-format archive and compression library"
+pkg_upstream_url="https://www.libarchive.org"
+pkg_license=('BSD')
+pkg_deps=(
+  core/musl
+  core/openssl-musl
+  core/zlib-musl
+  core/bzip2-musl
+  core/xz-musl
+)
 
 do_prepare() {
   export CC=musl-gcc
@@ -29,5 +39,12 @@ do_check() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc core/coreutils core/sed core/grep core/diffutils core/make)
+  pkg_build_deps=(
+    core/gcc
+    core/coreutils
+    core/sed
+    core/grep
+    core/diffutils
+    core/make
+  )
 fi
