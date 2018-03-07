@@ -1,0 +1,23 @@
+---
+groups:
+- name: docker-machine-setup
+  jobs: [docker-machine-setup]
+
+jobs:
+- name: docker-machine-setup
+  serial: true
+  plan:
+  - task: docker-machine-setup
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: { repository: habitat/docker-machine-setup }
+      params:
+        MACHINE_NAME: (( grab meta.delmo.machine_name ))
+        AWS_DEFAULT_REGION: (( grab meta.aws.region ))
+        AWS_ACCESS_KEY_ID: (( grab meta.aws.access_key_id ))
+        AWS_SECRET_ACCESS_KEY: (( grab meta.aws.secret_access_key ))
+        AWS_BUCKET: (( grab meta.aws.docker-machine-bucket ))
+      run:
+        path: /setup-aws

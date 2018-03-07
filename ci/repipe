@@ -152,15 +152,23 @@ resources:
     uri: https://github.com/habitat-sh/core-plans.git
     paths: [${package_name}/tests/*]
 EOF
-#      fi
-    fi
-  done
 
   trap "rm -f ${PIPELINE}/.deploy.yml" INT QUIT TERM EXIT
   spruce merge settings.yml base.yml packages/*.yml > .deploy.yml && \
     REDACT=yes spruce merge --prune meta settings.yml base.yml packages/*.yml > pipeline.yml && \
-    fly --target plans-ci set-pipeline --pipeline habitat-plans --config .deploy.yml     &&
-    fly --target plans-ci unpause-pipeline --pipeline habitat-plans
+    fly --target plans-ci set-pipeline --non-interactive --pipeline ${package_name} --config .deploy.yml &&
+    fly --target plans-ci unpause-pipeline --pipeline ${package_name}
+
+  rm -rf packages/* .deploy.yml pipeline.yml
+    fi
+  done
 
   rm -rf packages tests
+
+  trap "rm -f ${PIPELINE}/.deploy.yml" INT QUIT TERM EXIT
+   spruce merge settings.yml dmsetup.yml > .deploy.yml && \
+     REDACT=yes spruce merge --prune meta settings.yml dmsetup.yml > pipeline.yml && \
+     fly --target plans-ci set-pipeline --non-interactive --pipeline docker-machine-setup --config .deploy.yml &&
+     fly --target plans-ci unpause-pipeline --pipeline docker-machine-setup
+
 popd >/dev/null
