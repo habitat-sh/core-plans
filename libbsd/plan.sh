@@ -1,10 +1,13 @@
 pkg_name=libbsd
 pkg_origin=core
 pkg_version=0.8.7
-pkg_license=('custom')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_description="This library provides useful functions commonly found on BSD systems, and lacking on others like GNU systems"
+pkg_description="\
+This library provides useful functions commonly found on BSD systems, and \
+lacking on others like GNU systems\
+"
 pkg_upstream_url="https://libbsd.freedesktop.org/wiki/"
+pkg_license=('custom')
 pkg_source="https://libbsd.freedesktop.org/releases/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="f548f10e5af5a08b1e22889ce84315b1ebe41505b015c9596bad03fd13a12b31"
 pkg_deps=(
@@ -56,5 +59,13 @@ do_end() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc core/coreutils core/sed core/diffutils core/make core/patch core/file)
+  pkg_build_deps=(
+    core/gcc
+    core/coreutils
+    core/sed
+    core/diffutils
+    core/make
+    core/patch
+    core/file
+  )
 fi
