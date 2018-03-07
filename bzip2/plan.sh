@@ -55,7 +55,7 @@ do_check() {
 do_install() {
   local maj maj_min
   maj=$(echo $pkg_version | cut -d "." -f 1)
-  mag_min=$(echo $pkg_version | cut -d "." -f 1-2)
+  maj_min=$(echo $pkg_version | cut -d "." -f 1-2)
 
   make install PREFIX="$pkg_prefix"
 
