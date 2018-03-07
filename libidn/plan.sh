@@ -1,10 +1,13 @@
 pkg_name=libidn
 pkg_origin=core
 pkg_version=1.33
-pkg_license=('LGPL-2.0-or-later')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_description="GNU Libidn is a fully documented implementation of the Stringprep, Punycode and IDNA 2003 specifications"
+pkg_description="\
+GNU Libidn is a fully documented implementation of the Stringprep, Punycode \
+and IDNA 2003 specifications.\
+"
 pkg_upstream_url="https://www.gnu.org/software/libidn/"
+pkg_license=('LGPL-2.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="44a7aab635bb721ceef6beecc4d49dfd19478325e1b47f3196f7d2acc4930e19"
 pkg_deps=(
@@ -13,7 +16,6 @@ pkg_deps=(
 pkg_build_deps=(
   core/coreutils
   core/diffutils
-  core/file
   core/patch
   core/make
   core/gcc
@@ -27,22 +29,11 @@ do_prepare() {
   # Add GCC 7 compatibility
   #
   # Thanks to: https://git.archlinux.org/svntogit/packages.git/tree/trunk/gcc7_buildfix.diff?h=packages/libidn
-  patch -p1 -i $PLAN_CONTEXT/gcc7-buildfix.patch
-
-  if [[ ! -r /usr/bin/file ]]; then
-    ln -sv "$(pkg_path_for file)/bin/file" /usr/bin/file
-    _clean_file=true
-  fi
+  patch -p1 -i "$PLAN_CONTEXT/gcc7-buildfix.patch"
 }
 
 do_check() {
   make check
-}
-
-do_end() {
-  if [[ -n "$_clean_file" ]]; then
-    rm -fv /usr/bin/file
-  fi
 }
 
 
@@ -54,5 +45,11 @@ do_end() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc core/coreutils core/diffutils core/make core/patch core/file)
+  pkg_build_deps=(
+    core/gcc
+    core/coreutils
+    core/diffutils
+    core/make
+    core/patch
+  )
 fi
