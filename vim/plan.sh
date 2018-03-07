@@ -1,10 +1,14 @@
 pkg_name=vim
 pkg_origin=core
 pkg_version=8.0.1432
-pkg_license=("Vim")
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="\
+Vim is a highly configurable text editor built to make creating and changing \
+any kind of text very efficient. It is included as "vi" with most UNIX \
+systems and with Apple OS X.\
+"
 pkg_upstream_url="http://www.vim.org/"
-pkg_description="Vim is a greatly improved version of the good old UNIX editor Vi"
+pkg_license=("Vim")
 pkg_source="http://github.com/${pkg_name}/${pkg_name}/archive/v${pkg_version}.tar.gz"
 pkg_shasum="ed4eec357534476e422dcfd6493c85f74c9f413c419bae0fb814999e80c215d4"
 pkg_deps=(
@@ -64,5 +68,13 @@ do_install() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc core/coreutils core/sed core/diffutils core/make core/patch core/autoconf)
+  pkg_build_deps=(
+    core/gcc
+    core/coreutils
+    core/sed
+    core/diffutils
+    core/make
+    core/patch
+    core/autoconf
+  )
 fi
