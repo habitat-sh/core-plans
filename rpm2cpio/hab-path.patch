@@ -1,0 +1,29 @@
+--- rpm2cpio.orig	2018-03-05 20:06:39.742753467 +0000
++++ rpm2cpio	2018-03-05 20:25:07.926398170 +0000
+@@ -60,22 +60,22 @@
+ 	#	tell($f)-16, $magic, $sections, $bytes, $smagic);
+ 
+ 	if ($smagic == 0x1f8b) {
+-		$filter = "gzip -cd";
++		$filter = "%%gzip%% -cd";
+ 		last;
+ 	}
+ 	# BZh
+ 	if ($smagic == 0x425a and ($smagic2 & 0xff000000) == 0x68000000) {
+-		$filter = "bzip2 -cd";
++		$filter = "%%bzip2%% -cd";
+ 		last;
+ 	}
+ 	# 0xFD, '7zXZ', 0x0
+ 	if ($smagic == 0xfd37 and $smagic2 == 0x7a585a00) {
+-		$filter = "xz -cd";
++		$filter = "%%xz%% -cd";
+ 		last;
+ 	}
+ 	# assume lzma if there is no sig
+ 	if ($magic != 0x8eade801) {
+-		$filter = "lzma -cd";
++		$filter = "%%lzma%% -cd";
+ 		last;
+ 	}
+ 
