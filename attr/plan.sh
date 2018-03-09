@@ -35,5 +35,7 @@ do_install() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc)
+  pkg_build_deps=(
+    core/gcc
+  )
 fi
