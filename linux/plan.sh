@@ -2,12 +2,14 @@ pkg_name=linux
 pkg_origin=core
 pkg_version="4.14.9"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('gplv2')
-pkg_source="https://cdn.kernel.org/pub/linux/kernel/v4.x/${pkg_name}-${pkg_version}.tar.xz"
 pkg_description="The Linux kernel"
 pkg_upstream_url="https://www.kernel.org/"
+pkg_license=('gplv2')
+pkg_source="https://cdn.kernel.org/pub/linux/kernel/v4.x/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="cfccbb448d337761127aac28caba8f5649683c645f84b59b6e446b6e06a414ef"
-pkg_deps=(core/glibc)
+pkg_deps=(
+  core/glibc
+)
 pkg_build_deps=(
   core/bc
   core/diffutils
