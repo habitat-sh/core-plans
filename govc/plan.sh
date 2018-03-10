@@ -1,0 +1,10 @@
+pkg_name=govc
+pkg_origin=core
+pkg_version="0.16.0"
+pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
+pkg_license=("Apache-2.0")
+pkg_description="govc is a vSphere CLI built on top of govmomi."
+pkg_upstream_url="https://github.com/vmware/govmomi"
+pkg_scaffolding="core/scaffolding-go"
+pkg_source="https://github.com/vmware/govmomi/govc"
+pkg_bin_dirs=(bin)

@@ -11,18 +11,16 @@ To become a maintainer, open a pull request to this list.
 
 * [Adam Jacob](https://github.com/adamhjk)
 
-## Maintainers
+## Active Maintainers
 
 * [Tom Duffield](https://github.com/tduffield)
 * [Steven Danna](https://github.com/stevendanna)
 * [Elliott Davis](https://github.com/elliott-davis)
 * [Mike Fiedler](https://github.com/miketheman)
+* [Ian Henry](https://github.com/eeyun)
 * [Scott Macfarlane](https://github.com/smacfarlane)
 * [Fletcher Nichol](https://github.com/fnichol)
-* [Dave Parfitt](https://github.com/metadave)
 * [Nell Shamrell-Harrington](https://github.com/nellshamrell)
-* [Nathan L Smith](https://github.com/smith)
-* [Joshua Timberman](https://github.com/jtimberman)
 * [Jamie Winsor](https://github.com/reset)
 * [Salim Afiune](https://github.com/afiune)
 * [John Jelinek IV](https://github.com/johnjelinek)
@@ -30,3 +28,10 @@ To become a maintainer, open a pull request to this list.
 * [Thom May](https://github.com/thommay)
 * [Paul Mooring](https://github.com/paulmooring)
 * [Josh Brand](https://github.com/joshbrand)
+* [Christopher P. Maher](https://github.com/defilan)
+
+## Alumni
+
+* [Dave Parfitt](https://github.com/metadave)
+* [Nathan L Smith](https://github.com/smith)
+* [Joshua Timberman](https://github.com/jtimberman)

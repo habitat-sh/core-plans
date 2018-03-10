@@ -18,6 +18,10 @@ pkg_include_dirs=(include)
 
 source_dir=$HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_version}
 
+do_setup_environment() {
+ set_runtime_env JAVA_HOME "$pkg_prefix"
+}
+
 # Most steps sourced from ../jdk8/plan.sh
 
 do_install() {

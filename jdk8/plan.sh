@@ -16,6 +16,10 @@ pkg_include_dirs=(include)
 
 source_dir=$HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_version}
 
+do_setup_environment() {
+ set_runtime_env JAVA_HOME "$pkg_prefix"
+}
+
 ## Refer to habitat/components/plan-build/bin/hab-plan-build.sh for help
 
 # Customomized download_file() to work around the Oracle EULA Cookie-wall

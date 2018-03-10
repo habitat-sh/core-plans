@@ -1,0 +1,32 @@
+---
+groups:
+- name: all-packages
+  jobs: []
+
+resources:
+- name: habitat-plans-ci
+  type: git
+  source:
+    uri: https://github.com/habitat-sh/core-plans.git
+    paths: [ci/*]
+
+- name: notify
+  type: slack-notification
+  source:
+    url: (( grab meta.slack.webhook ))
+
+resource_types:
+- name: hab-pkg
+  type: docker-image
+  source:
+    repository: cfcommunity/habitat-resource
+
+- name: bldr-job
+  type: docker-image
+  source:
+    repository: habitat/bldr-resource
+
+- name: slack-notification
+  type: docker-image
+  source:
+    repository: cfcommunity/slack-notification-resource

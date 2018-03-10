@@ -12,5 +12,5 @@ ulimit -l {{cfg.runtime.max_locked_memory}}
 ulimit -n {{cfg.runtime.max_open_files}}
 {{/if ~}}
 
-export ES_JVM_OPTIONS="{{pkg.svc_config_path}}/jvm.options"
-exec elasticsearch -Epath.conf={{pkg.svc_config_path}}
+export ES_PATH_CONF="{{pkg.svc_config_path}}"
+exec elasticsearch

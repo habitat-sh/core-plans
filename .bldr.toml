@@ -6,6 +6,8 @@ plan_path = "acbuild"
 plan_path = "acl"
 [ant]
 plan_path = "ant"
+[ansible]
+plan_path = "ansible"
 [apr]
 plan_path = "apr"
 [apr-util]
@@ -135,6 +137,8 @@ plan_path = "dbus"
 plan_path = "dd-agent"
 [dejagnu]
 plan_path = "dejagnu"
+[delmo]
+plan_path = "delmo"
 [dep]
 plan_path = "dep"
 [devicemapper]
@@ -175,10 +179,14 @@ plan_path = "e2fsprogs"
 plan_path = "ed"
 [elasticsearch]
 plan_path = "elasticsearch"
+[elasticsearch5]
+plan_path = "elasticsearch5"
 [elfutils]
 plan_path = "elfutils"
 [elixir]
 plan_path = "elixir"
+[envconsul]
+plan_path = "envconsul"
 [envdir]
 plan_path = "envdir"
 [erlang]
@@ -193,6 +201,8 @@ plan_path = "erlang19"
 plan_path = "etcd"
 [eudev]
 plan_path = "eudev"
+[exercism]
+plan_path = "exercism"
 [expat]
 plan_path = "expat"
 [expect]
@@ -211,6 +221,8 @@ plan_path = "fixesproto"
 plan_path = "flatbuffers"
 [flex]
 plan_path = "flex"
+[fluentd]
+plan_path = "fluentd"
 [fontconfig]
 plan_path = "fontconfig"
 [foulkon]
@@ -221,6 +233,8 @@ plan_path = "fping"
 plan_path = "freetype"
 [galera]
 plan_path = "galera"
+[gamin]
+plan_path = "gamin"
 [gawk]
 plan_path = "gawk"
 [gcc]
@@ -280,8 +294,14 @@ plan_path = "go"
 plan_path = "go14"
 [go17]
 plan_path = "go17"
+[googlemock]
+plan_path = "googlemock"
+[googletest]
+plan_path = "googletest"
 [goreplay]
 plan_path = "gorplay"
+[govc]
+plan_path = "govc"
 [gox]
 plan_path = "gox"
 [gperf]
@@ -314,6 +334,8 @@ plan_path = "handlebars-cmd"
 plan_path = "haproxy"
 [harfbuzz]
 plan_path = "harfbuzz"
+[helm]
+plan_path = "helm"
 [htop]
 plan_path = "htop"
 [httpd]
@@ -384,6 +406,8 @@ plan_path = "kibana"
 plan_path = "kmod"
 [krb5]
 plan_path = "krb5"
+[kubectl]
+plan_path = "kubectl"
 [kubernetes]
 plan_path = "kubernetes"
 [kubernetes-apiserver]
@@ -413,6 +437,8 @@ paths = [
 ]
 [lcms2]
 plan_path = "lcms2"
+[leiningen]
+plan_path = "leiningen"
 [leptonica]
 plan_path = "leptonica"
 [less]
@@ -480,6 +506,8 @@ plan_path = "libpciaccss"
 plan_path = "libpipeline"
 [libpng]
 plan_path = "libpng"
+[libpq]
+plan_path = "libpq"
 [libpthread-stubs]
 plan_path = "libpthread-stubs"
 [libressl]
@@ -502,6 +530,8 @@ plan_path = "libsodium-musl"
 paths = [
   "libsodium/*",
 ]
+[libssh2]
+plan_path = "libssh2"
 [libtermkey]
 plan_path = "libtermkey"
 [libtiff]
@@ -612,6 +642,8 @@ plan_path = "mention-bot"
 plan_path = "mercurial"
 [mesa]
 plan_path = "mesa"
+[meson]
+plan_path = "meson"
 [mg]
 plan_path = "mg"
 [monit]
@@ -627,6 +659,8 @@ plan_path = "mongodb"
 plan_path = "mosquitto"
 [mpfr]
 plan_path = "mpfr"
+[msgpack]
+plan_path = "msgpack"
 [mssql]
 plan_path = "mssql"
 [musl]
@@ -657,6 +691,8 @@ plan_path = "nghttp2"
 plan_path = "nginx"
 [ninja]
 plan_path = "ninja"
+[nmap]
+plan_path = "nmap"
 [node]
 plan_path = "node"
 [node6]
@@ -708,6 +744,8 @@ plan_path = "openvpn"
 plan_path = "packer"
 [pango]
 plan_path = "pango"
+[papi]
+plan_path = "papi"
 [patch]
 plan_path = "patch"
 [patchelf]
@@ -736,6 +774,8 @@ plan_path = "polipo"
 plan_path = "ponysay"
 [popt]
 plan_path = "popt"
+[postfix]
+plan_path = "postfix"
 [postgresql]
 plan_path = "postgresql"
 [postgresql93]
@@ -793,6 +833,8 @@ randrproto = "randrproto"
 plan_path = "re2c"
 [readline]
 plan_path = "readline"
+[rebar]
+plan_path = "rebar"
 [rebar3]
 plan_path = "rebar3"
 [recordproto]
@@ -807,16 +849,47 @@ plan_path = "renderproto"
 plan_path = "repo"
 [rethinkdb]
 plan_path = "rethinkdb"
+[ripgrep]
+plan_path = "ripgrep"
+[rkt]
+plan_path = "rkt"
+[rlwrap]
+plan_path = "rlwrap"
 [rngd]
 plan_path = "rngd"
 [rpm]
 plan_path = "rpm"
+[rpm2cpio]
+plan_path = "rpm2cpio"
+paths = [
+  "rpm2cpio/*"
+]
 [rq]
 plan_path = "rq"
 [rsync]
 plan_path = "rsync"
 [ruby]
 plan_path = "ruby"
+[ruby22]
+plan_path = "ruby22"
+paths = [
+  "ruby/*"
+]
+[ruby23]
+plan_path = "ruby23"
+paths = [
+  "ruby/*"
+]
+[ruby24]
+plan_path = "ruby24"
+paths = [
+  "ruby/*"
+]
+[ruby25]
+plan_path = "ruby25"
+paths = [
+  "ruby/*"
+]
 [runit]
 plan_path = "runit"
 [rust]
@@ -837,8 +910,12 @@ plan_path = "scaffolding-gradle"
 plan_path = "scaffolding-node"
 [scaffolding-ruby]
 plan_path = "scaffolding-ruby"
+[sccache]
+plan_path = "sccache"
 [scons]
 plan_path = "scons"
+[scowl]
+plan_path = "scowl"
 [sed]
 plan_path = "sed"
 [sensu]
@@ -865,6 +942,8 @@ plan_path = "spark"
 plan_path = "sqitch"
 [sqlite]
 plan_path = "sqlite"
+[sshpass]
+plan_path = "sshpass"
 [storm]
 plan_path = "storm"
 [strace]
@@ -915,6 +994,8 @@ plan_path = "tree"
 plan_path = "ttyrec"
 [tzdata]
 plan_path = "tzdata"
+[unibilium]
+plan_path = "unibilium"
 [unzip]
 plan_path = "unzip"
 [userspace-rcu]

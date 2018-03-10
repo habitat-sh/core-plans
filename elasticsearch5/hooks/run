@@ -1,0 +1,16 @@
+#!/bin/bash
+
+exec 2>&1
+
+{{#if cfg.runtime.es_startup_sleep_time ~}}
+export ES_STARTUP_SLEEP_TIME={{cfg.runtime.es_startup_sleep_time}}
+{{/if ~}}
+{{#if cfg.runtime.max_locked_memory ~}}
+ulimit -l {{cfg.runtime.max_locked_memory}}
+{{/if ~}}
+{{#if cfg.runtime.max_open_files ~}}
+ulimit -n {{cfg.runtime.max_open_files}}
+{{/if ~}}
+
+export ES_JVM_OPTIONS="{{pkg.svc_config_path}}/jvm.options"
+exec elasticsearch -Epath.conf={{pkg.svc_config_path}}

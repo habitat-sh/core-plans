@@ -16,6 +16,10 @@ pkg_include_dirs=(include)
 
 source_dir=$HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_version}
 
+do_setup_environment() {
+ set_runtime_env JAVA_HOME "$pkg_prefix"
+}
+
 do_unpack() {
   build_line "By including the JDK you accept the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, which can be found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html"
   local unpack_file="$HAB_CACHE_SRC_PATH/$pkg_filename"

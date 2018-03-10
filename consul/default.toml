@@ -22,8 +22,6 @@ dns = 8600
 http = 8500
 # The HTTPS API, -1 to disable
 https = -1
-# The CLI RPC endpoint
-rpc = 8400
 # The Serf LAN port
 serf_lan = 8301
 # The Serf WAN port

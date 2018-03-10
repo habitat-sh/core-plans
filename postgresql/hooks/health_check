@@ -24,7 +24,16 @@ fi
 # startup), 2 if there was no response to the connection attempt, and 3 if no
 # attempt was made (for example due to invalid parameters).
 #
-# The options --dbname and --username can be used to avoid gratuitous error
-# messages in the logs, but are not necessary for proper functionality.
-pg_isready --dbname=postgres --quiet
+# The options --dbname and --username are used to avoid gratuitous
+# error messages in the logs, but are not necessary for proper
+# functionality.
+#
+# We return CRITICAL if we can't connect as well as if the server is
+# rejecting connections (not yet ready).
+{ pg_isready --port {{cfg.port}} --dbname postgres --username {{cfg.superuser.name}} --quiet; err="$?"; } || true
+case "$err" in
+    "0") exit 0;;               # OK (200)
+    "3") exit 3;;               # UNKNOWN (500)
+    *)   exit 2;;               # CRITICAL (503)
+esac
 {{/if}}

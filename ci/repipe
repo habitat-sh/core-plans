@@ -1,0 +1,174 @@
+#!/bin/bash
+
+PIPELINE=$(cd $(dirname ${BASH_SOURCE[0]}) ; pwd)
+hab_origin=core
+
+pushd $PIPELINE >/dev/null
+  rm -rf packages
+  mkdir packages tests
+  for package in $(find .. -d -maxdepth 1); do
+    if [[ -f ${package}/plan.sh ]]; then
+      package_name=$(basename ${package})
+      source ${package}/plan.sh
+      cat > packages/${package_name}.yml <<EOF
+---
+groups:
+- name: ${package_name%-*}
+  jobs:
+  - (( append ))
+  - validate-${package_name}
+  - test-${package_name}
+  - release-${package_name}
+- name: all-packages
+  jobs:
+  - (( append ))
+  - test-${package_name}
+  - release-${package_name}
+
+jobs:
+- name: validate-${package_name}
+  public: true
+  plan:
+  - (( inline ))
+  - aggregate:
+    - (( append ))
+    - get: ${hab_origin}-${package_name}-bldr-group
+      trigger: true
+    - {get: habitat-plans-ci}
+  - task: validate-${package_name}-group
+    privileged: true
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: { repository: habitat/habitat-plans-pipeline }
+      inputs:
+      - name: ${hab_origin}-${package_name}-bldr-group
+      - name: habitat-plans-ci
+      outputs:
+      - name: result
+      run:
+        path: ./habitat-plans-ci/ci/scripts/validate-group
+      params:
+        GROUP_CONTEXT: ${hab_origin}-${package_name}-bldr-group
+        HAB_ORIGIN: ${hab_origin}
+        PLAN_NAME: ${package_name}
+        HAB_ORIGIN_KEY: (( grab meta.habitat.origin_key ))
+- name: test-${package_name}
+  public: false
+  serial: true
+  serial_groups: [delmo]
+  plan:
+  - aggregate:
+    - get: ${hab_origin}-${package_name}-bldr-group
+      trigger: true
+      passed: [validate-${package_name}]
+    - {get: ${package_name}-tests}
+  - task: test-${package_name}
+    privileged: true
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: { repository: habitat/hab-delmo }
+      params:
+        GROUP_CONTEXT: ${hab_origin}-${package_name}-bldr-group
+        PKG_CONTEXT: ${package_name}
+        MACHINE_EXPORT_AWS_ACCESS_KEY_ID: (( grab meta.aws.access_key_id ))
+        MACHINE_EXPORT_AWS_SECRET_ACCESS_KEY: (( grab meta.aws.secret_access_key ))
+        MACHINE_EXPORT_AWS_REGION: (( grab meta.aws.region ))
+        MACHINE_EXPORT_AWS_BUCKET: (( grab meta.aws.docker-machine-bucket ))
+        MACHINE_NAME: (( grab meta.delmo.machine_name ))
+        AWS_ACCESS_KEY: (( grab meta.aws.access_key_id ))
+        AWS_SECRET_KEY: (( grab meta.aws.secret_access_key ))
+        AWS_REGION: (( grab meta.aws.region ))
+      inputs:
+      - name: ${package_name}-tests
+      - name: ${hab_origin}-${package_name}-bldr-group
+      outputs:
+      - name: notify_message
+      run:
+        path: /entrypoint.sh
+    ensure:
+      put: notify
+      params:
+        username: Hab-CI
+        icon_url: https://brand.chef.io/images/habitat/logos/logo-3.png
+        text_file: notify_message/message
+- name: release-${package_name}
+  public: true
+  plan:
+  - (( inline ))
+  - aggregate:
+    - (( inline ))
+    - get: ${hab_origin}-${package_name}-bldr-group
+      passed: [test-${package_name}]
+      trigger: true
+    - {get: habitat-plans-ci}
+  - task: release-${package_name}
+    privileged: true
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: { repository: habitat/habitat-plans-pipeline }
+      params:
+        GROUP_CONTEXT: ${hab_origin}-${package_name}-bldr-group
+        PKG_CONTEXT: ${hab_origin}/${package_name}
+      inputs:
+      - name: ${hab_origin}-${package_name}-bldr-group
+      - name: habitat-plans-ci
+      outputs:
+      - name: notify_message
+      run:
+        path: ./habitat-plans-ci/ci/scripts/release_notify
+  - aggregate:
+    - put: ${hab_origin}-${package_name}-bldr-group
+      params:
+        result: ${hab_origin}-${package_name}-bldr-group
+      on_success:
+        put: notify
+        params:
+          username: Hab-CI
+          icon_url: https://brand.chef.io/images/habitat/logos/logo-3.png
+          text_file: notify_message/success_message
+      on_failure:
+        put: notify
+        params:
+          username: Hab-CI
+          icon_url: https://brand.chef.io/images/habitat/logos/logo-3.png
+          text_file: notify_message/failure_message
+
+resources:
+- name: ${hab_origin}-${package_name}-bldr-group
+  type: bldr-job
+  source:
+    origin: (( grab meta.habitat.origin ))
+    name: ${package_name}
+    auth_token: (( grab meta.habitat.auth_token ))
+- name: ${package_name}-tests
+  type: git
+  source:
+    uri: https://github.com/habitat-sh/core-plans.git
+    paths: [${package_name}/tests/*]
+EOF
+
+  trap "rm -f ${PIPELINE}/.deploy.yml" INT QUIT TERM EXIT
+  spruce merge settings.yml base.yml packages/*.yml > .deploy.yml && \
+    REDACT=yes spruce merge --prune meta settings.yml base.yml packages/*.yml > pipeline.yml && \
+    fly --target plans-ci set-pipeline --non-interactive --pipeline ${package_name} --config .deploy.yml &&
+    fly --target plans-ci unpause-pipeline --pipeline ${package_name}
+
+  rm -rf packages/* .deploy.yml pipeline.yml
+    fi
+  done
+
+  rm -rf packages tests
+
+  trap "rm -f ${PIPELINE}/.deploy.yml" INT QUIT TERM EXIT
+   spruce merge settings.yml dmsetup.yml > .deploy.yml && \
+     REDACT=yes spruce merge --prune meta settings.yml dmsetup.yml > pipeline.yml && \
+     fly --target plans-ci set-pipeline --non-interactive --pipeline docker-machine-setup --config .deploy.yml &&
+     fly --target plans-ci unpause-pipeline --pipeline docker-machine-setup
+
+popd >/dev/null
