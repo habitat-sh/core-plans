@@ -640,6 +640,8 @@ plan_path = "memcached"
 plan_path = "mention-bot"
 [mercurial]
 plan_path = "mercurial"
+[mesa]
+plan_path = "mesa"
 [meson]
 plan_path = "meson"
 [mg]
