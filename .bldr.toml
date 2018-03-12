@@ -163,6 +163,8 @@ plan_path = "dotnet-core-lts"
 plan_path = "dotnet-core-sdk"
 [dotnet-core-sdk-lts]
 plan_path = "dotnet-core-sdk-lts"
+[dovecot]
+plan_path = "dovecot"
 [doxygen]
 plan_path = "doxygen"
 [dpkg]
