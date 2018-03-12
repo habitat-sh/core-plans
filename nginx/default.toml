@@ -19,6 +19,12 @@ worker_processes = 4
 # worker_connections: Connections per Worker Process.  Default = 1024
 worker_connections = 1024
 
+[[include.additional_configuration_file]]
+config_file = "mime.types"
+
+[[include.additional_configuration_file]]
+config_file = "win-utf"
+
 
 #### HTTP Context Configuration
 [http]
@@ -33,6 +39,19 @@ tcp_nodelay = "on"
 
 # http.keepalive_timeout: Timeout on client connection keepalive, in seconds. Default = 75
 keepalive_timeout = 60
+
+# http.server_names_hash_bucket_size: Sets the bucket size for the server names hash tables.
+# The default value depends on the size of the processor’s cache line. Default = 32
+server_names_hash_bucket_size = 64
+
+www-data = "/hab/svc/nginx/data"
+global_ssl_password_file = "# ssl_password_file /home/hab/.ssh/tls/global.pass;"
+
+
+[http.vhosts]
+additional_servers = true
+available = "/etc/nginx/sites-available"
+enabled = "/etc/nginx/sites-enabled"
 
 [http.listen]
 port = 80
