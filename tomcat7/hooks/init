@@ -12,6 +12,7 @@ debug "sys.ip        = {{sys.ip}}"
 debug "sys.hostname  = {{sys.hostname}}"
 debug "pkg.origin    = {{pkg.origin}}"
 debug "pkg.name      = {{pkg.name}}"
+debug "pkg.path      = {{pkg.path}}"
 debug "pkg.version   = {{pkg.version}}"
 debug "pkg.release   = {{pkg.release}}"
 debug "pkg.ident     = {{pkg.ident}}"
@@ -25,16 +26,21 @@ debug "pkg.svc_static_path   = {{pkg.svc_static_path}}"
 debug "pkg.svc_var_path      = {{pkg.svc_var_path}}"
 
 # Move directories that ship in the package into place
-cp -a {{pkg.path}}/tc {{pkg.svc_var_path}}/
+# DON'T MOVE the conf dir
+for dir in $(cd {{pkg.path}}/tc/; hab pkg exec core/coreutils ls -1 -I conf)
+do
+  echo "Copying $dir"
+  cp -R {{pkg.path}}/tc/* {{pkg.svc_var_path}}/
+done
+
+# Create the conf directory
+mkdir -p {{pkg.svc_var_path}}/conf
 
 # Symlink config files into $TOMCAT_HOME/conf
 for file in $(cd {{pkg.svc_config_path}}; ls -1)
 do
-  echo "Linking $file"
-  target="${file//_//}"
-  ln -vsf {{pkg.svc_config_path}}/$file {{pkg.svc_var_path}}/tc/$target
+  echo "Linking {{pkg.svc_config_path}}/$file to {{pkg.svc_var_path}}/conf/$file"
+  ln -sf {{pkg.svc_config_path}}/$file {{pkg.svc_var_path}}/conf/$file
 done
-
-chown -R hab:hab {{pkg.svc_path}}/*
 
 echo "Done preparing TOMCAT_HOME"

@@ -14,8 +14,9 @@ if [ -z ${JAVA_HOME+x} ]; then
   exit 1
 fi
 
-export TOMCAT_HOME="{{pkg.svc_var_path}}/tc"
+export CATALINA_HOME="{{pkg.svc_var_path}}"
 export CATALINA_OPTS="{{cfg.server.catalina-opts}}"
 
-echo "Executing Tomcat here: ${TOMCAT_HOME}/bin/catalina.sh"
-exec ${TOMCAT_HOME}/bin/catalina.sh run
+cd {{pkg.svc_var_path}}
+echo "Executing Tomcat here: {{pkg.svc_var_path}}/bin/catalina.sh"
+exec {{pkg.svc_var_path}}/bin/catalina.sh run
