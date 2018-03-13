@@ -1,6 +1,6 @@
 pkg_name=glibc
 pkg_origin=core
-pkg_version=2.26
+pkg_version=2.27
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU C Library project provides the core libraries for the GNU system and \
@@ -13,12 +13,13 @@ dlopen, pthread_create, crypt, login, exit and more.\
 pkg_upstream_url="https://www.gnu.org/software/libc"
 pkg_license=('GPL-2.0' 'LGPL-2.0')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="e54e0a934cd2bc94429be79da5e9385898d2306b9eaf3c92d5a77af96190f6bd"
+pkg_shasum="5172de54318ec0b7f2735e5a91d908afe1c9ca291fec16b5374d9faadfc1fc72"
 pkg_deps=(
   core/linux-headers
 )
 pkg_build_deps=(
   core/coreutils
+  core/bison
   core/diffutils
   core/patch
   core/make
@@ -33,7 +34,16 @@ pkg_lib_dirs=(lib)
 do_prepare() {
   # The `/bin/pwd` path is hardcoded, so we'll add a symlink if needed.
   if [[ ! -r /bin/pwd ]]; then
-    ln -sv "$(pkg_path_for coreutils)/bin/pwd" /bin/pwd
+    # We can't use the `command -v pwd` trick here, as `pwd` is a shell
+    # builtin, and therefore returns the string of "pwd" (i.e. not the full
+    # path to the executable on `$PATH`). In a stage1 Studio, the coreutils
+    # package isn't built yet so we can't rely on using the `pkg_path_for`
+    # helper either.  Sweet twist, no?
+    if [[ "$STUDIO_TYPE" = "stage1" ]]; then
+      ln -sv /tools/bin/pwd /bin/pwd
+    else
+      ln -sv "$(pkg_path_for coreutils)/bin/pwd" /bin/pwd
+    fi
     _clean_pwd=true
   fi
 
@@ -142,14 +152,25 @@ do_check() {
   pushd ../${pkg_name}-build > /dev/null
     # One of the tests uses the hardcoded `bin/cat` path, so we'll add it, if
     # it doesn't exist.
+    # Checking for the binary on `$PATH` will work in both stage1 and default
+    # Studios.
     if [[ ! -r /bin/cat ]]; then
-      ln -sv "$(pkg_path_for coreutils)/bin/cat" /bin/cat
+      ln -sv "$(command -v cat)" /bin/cat
       _clean_cat=true
     fi
     # One of the tests uses the hardcoded `bin/echo` path, so we'll add it, if
     # it doesn't exist.
     if [[ ! -r /bin/echo ]]; then
-      ln -sv "$(pkg_path_for coreutils)/bin/echo" /bin/echo
+      # We can't use the `command -v echo` trick here, as `echo` is a shell
+      # builtin, and therefore returns the string of "echo" (i.e. not the full
+      # path to the executable on `$PATH`). In a stage1 Studio, the coreutils
+      # package isn't built yet so we can't rely on using the `pkg_path_for`
+      # helper either. Sweet twist, no?
+      if [[ "$STUDIO_TYPE" = "stage1" ]]; then
+        ln -sv /tools/bin/echo /bin/echo
+      else
+        ln -sv "$(pkg_path_for coreutils)/bin/echo" /bin/echo
+      fi
       _clean_echo=true
     fi
 
