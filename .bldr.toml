@@ -352,6 +352,8 @@ plan_path = "icu52"
 plan_path = "icu56"
 [imagemagick]
 plan_path = "imagemagick"
+[img]
+plan_path = "img"
 [inetutils]
 plan_path = "inetutils"
 [inotify-tools]
@@ -894,6 +896,8 @@ plan_path = "ruby25"
 paths = [
   "ruby/*"
 ]
+[runc]
+plan_path = "runc"
 [runit]
 plan_path = "runit"
 [rust]
