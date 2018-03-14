@@ -1,6 +1,6 @@
 pkg_name=ncurses
 pkg_origin=core
-pkg_version=6.0
+pkg_version=6.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 ncurses (new curses) is a programming library providing an application \
@@ -10,7 +10,7 @@ user interfaces in a terminal-independent manner.\
 pkg_upstream_url="https://www.gnu.org/software/ncurses/"
 pkg_license=('ncurses')
 pkg_source="http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="f551c24b30ce8bfb6e96d9f59b42fbea30fa3a6123384172f9e7284bcf647260"
+pkg_shasum="aa057eeeb4a14d470101eff4597d5833dcef5965331be3528c08d99cebaa0d17"
 pkg_deps=(
   core/glibc
   core/gcc-libs
@@ -27,26 +27,7 @@ pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
-_patch_date=20160910
-_patch_filename="${pkg_name}-${pkg_version}-${_patch_date}-patch.sh"
-_patch_source="http://invisible-mirror.net/archives/$pkg_name/$pkg_version/${_patch_filename}.bz2"
-_patch_shasum="f570bcfe3852567f877ee6f16a616ffc7faa56d21549ad37f6649022f8662538"
-
-do_download() {
-  do_default_download
-
-  download_file "$_patch_source" "${_patch_filename}.bz2" "$_patch_shasum"
-}
-
-do_unpack() {
-  do_default_unpack
-
-  bunzip2 -c "${_patch_filename}.bz2" > "${pkg_dirname}/${_patch_filename}"
-}
-
 do_build() {
-  sh "$_patch_filename"
-
   ./configure --prefix="$pkg_prefix" \
     --with-shared \
     --with-termlib \
