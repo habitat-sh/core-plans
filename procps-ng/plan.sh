@@ -26,6 +26,10 @@ pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
+do_prepare() {
+  patch -p1 < "$PLAN_CONTEXT/disable-test.patch"
+}
+
 do_build() {
   # The Util-linux package will provide the `kill` command
   ./configure \
@@ -36,9 +40,6 @@ do_build() {
 }
 
 do_check() {
-  # Fix a failing test
-  sed -i 's,ps.test/ps_output.exp,,' testsuite/Makefile.in
-
   make check
 }
 
