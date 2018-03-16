@@ -114,6 +114,9 @@ scaffolding_modules_install() {
       if [[ ! -f "$CACHE_PATH/package.json" ]]; then
         cp -av package.json "$CACHE_PATH/"
       fi
+      if [[ ! -f "$CACHE_PATH/.npmrc" ]]; then
+        cp -av .npmrc "$CACHE_PATH/"
+      fi
       if [[ -f "npm-shrinkwrap.json" ]]; then
         cp -av npm-shrinkwrap.json "$CACHE_PATH/"
       fi
