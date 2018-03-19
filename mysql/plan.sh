@@ -49,6 +49,7 @@ pkg_exports=(
   [port]=port
   [password]=app_password
   [username]=app_username
+  [bind]=bind
 )
 
 do_build() {
