@@ -134,6 +134,11 @@ scaffolding_modules_install() {
         cp -av tsconfig.json "$CACHE_PATH/"
       fi
 
+      # Important for tsoa
+      if [[ ! -f "$CACHE_PATH/tsoa.json" ]]; then
+        cp -av tsoa.json "$CACHE_PATH/"
+      fi
+
       pushd "$CACHE_PATH" > /dev/null
       npm install \
         --unsafe-perm \
