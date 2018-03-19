@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec redis-server {{pkg.svc_config_path}}/redis.config
