@@ -2,6 +2,10 @@
 
 [Full history](https://github.com/habitat-sh/core-plans/commits/master/scaffolding-node)
 
+## 0.6.13 (03-30-2018)
+
+- Copy over .npmrc if defined by the user project.
+
 ## 0.6.12 (03-29-2018)
 
 - Add support for tsoa module
