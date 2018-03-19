@@ -1,0 +1,9 @@
+#!/bin/bash
+
+exec 2>&1
+
+export JAVA_HOME={{pkgPathFor "core/jre8"}}
+export CASSANDRA_CONF="{{pkg.svc_config_path}}"
+
+exec {{pkgPathFor "core/cassandra"}}/bin/cassandra -f \
+	-Dcassandra.logdir="{{pkg.svc_var_path}}/logs"
