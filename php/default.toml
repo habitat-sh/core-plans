@@ -1,4 +1,4 @@
-listen = "0.0.0.0"
+listen = "127.0.0.1"
 port = 9000
 daemonize = "no"
 log_level = "notice"
