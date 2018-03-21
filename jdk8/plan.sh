@@ -1,7 +1,7 @@
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_name=jdk8
-pkg_version=8u151
+pkg_version=8u1561
 pkg_source=http://download.oracle.com/otn-pub/java/jdk/${pkg_version}-b12/e758a0de34e24606bca991d704f6dcbf/jdk-${pkg_version}-linux-x64.tar.gz
 pkg_shasum=c78200ce409367b296ec39be4427f020e2c585470c4eed01021feada576f027f
 pkg_filename=jdk-${pkg_version}-linux-x64.tar.gz
