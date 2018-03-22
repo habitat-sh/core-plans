@@ -1,19 +1,20 @@
 pkg_name=nmap
 pkg_origin=core
-pkg_version=7.60
+pkg_version=7.70
 pkg_description="nmap is a free security scanner for network exploration and security audits"
-pkg_upstream_url=https://nmap.org/
+pkg_upstream_url="https://nmap.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0')
-pkg_source=https://nmap.org/dist/${pkg_name}-${pkg_version}.tar.bz2
-pkg_shasum=a8796ecc4fa6c38aad6139d9515dc8113023a82e9d787e5a5fb5fa1b05516f21
+pkg_source="https://nmap.org/dist/${pkg_name}-${pkg_version}.tar.bz2"
+pkg_shasum="847b068955f792f4cc247593aca6dc3dc4aae12976169873247488de147a6e18"
 pkg_deps=(
   core/glibc
   core/gcc-libs
+  core/libpcap
+  core/libssh2
   core/openssl
   core/pcre
   core/zlib
-  core/libpcap
 )
 pkg_build_deps=(
   core/bzip2
@@ -49,7 +50,7 @@ do_build() {
     --with-liblinear=included \
     --with-liblua="$(pkg_path_for "core/lua")" \
     --with-libpcre="$(pkg_path_for "core/pcre")" \
-    --with-libssh2=included \
+    --with-libssh2="$(pkg_path_for "core/libssh2")" \
     --with-libz="$(pkg_path_for "core/zlib")"
   make
 }
