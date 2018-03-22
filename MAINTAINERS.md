@@ -29,6 +29,7 @@ To become a maintainer, open a pull request to this list.
 * [Paul Mooring](https://github.com/paulmooring)
 * [Josh Brand](https://github.com/joshbrand)
 * [Christopher P. Maher](https://github.com/defilan)
+* [Romain Sertelon](https://github.com/rsertelon)
 
 ## Alumni
 
