@@ -15,7 +15,7 @@ pkg_bin_dirs=(bin)
 # The pkg_filename does not extract into a folder. We need to force it.
 do_unpack() {
   cd "${HAB_CACHE_SRC_PATH}" || exit
-  unzip ${pkg_filename} -d "${pkg_name}-${pkg_version}"
+  unzip "${pkg_filename}" -d "${pkg_name}-${pkg_version}"
 }
 
 do_build() {

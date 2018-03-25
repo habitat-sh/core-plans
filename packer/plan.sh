@@ -7,13 +7,12 @@ pkg_source=https://releases.hashicorp.com/${pkg_name}/${pkg_version}/${pkg_name}
 pkg_shasum=dd90f00b69c4d8f88a8d657fff0bb909c77ebb998afd1f77da110bc05e2ed9c3
 pkg_description="Packer is a tool for creating machine and container images for multiple platforms from a single source configuration."
 pkg_upstream_url=packer.io
-pkg_dirname=$pkg_name
+pkg_build_deps=(core/unzip)
 pkg_bin_dirs=(bin)
 
 do_unpack() {
-  pushd "${HAB_CACHE_SRC_PATH}"
-    unzip "${pkg_filename}" -d "packer"
-  popd
+  cd "${HAB_CACHE_SRC_PATH}" || exit
+  unzip "${pkg_filename}" -d "${pkg_name}-${pkg_version}"
 }
 
 do_build() {
@@ -21,5 +20,5 @@ do_build() {
 }
 
 do_install() {
-  install -v "packer" "$pkg_prefix/bin/"
+  install -D packer "$pkg_prefix/bin/packer"
 }
