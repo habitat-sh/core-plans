@@ -540,6 +540,8 @@ paths = [
 ]
 [libssh2]
 plan_path = "libssh2"
+[libtalloc]
+plan_path = "libtalloc"
 [libtermkey]
 plan_path = "libtermkey"
 [libtiff]
