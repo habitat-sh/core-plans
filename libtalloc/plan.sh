@@ -10,7 +10,7 @@ pkg_dirname="talloc-${pkg_version}"
 pkg_shasum="987c0cf6815e948d20caaca04eba9b823e67773f361ffafe676e24b953cc604b"
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
-pkg_pconfig_dirs=(core/pkg-config)
+pkg_pconfig_dirs=(lib/pkgconfig)
 
 pkg_deps=(core/python2 core/glibc)
 
@@ -18,6 +18,7 @@ pkg_build_deps=(
 core/gcc
 core/make
 core/coreutils
+core/pkg-config
 )
 
 do_prepare() {
