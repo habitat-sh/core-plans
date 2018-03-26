@@ -4,9 +4,9 @@ pkg_description="kubectl CLI tool"
 pkg_upstream_url=https://github.com/kubernetes/kubernetes
 pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_version=1.8.3
+pkg_version=1.9.6
 pkg_source=https://github.com/kubernetes/kubernetes/archive/v${pkg_version}.tar.gz
-pkg_shasum=8ab7e41126dfc3bc1a23ff76efc20e5131320530dc1277e5c2ed8c9618041b95
+pkg_shasum=d0c0edba4410426bf9b7b8f9f0efd0d59816cdeaef25fc99311a90ece843c1d3
 pkg_dirname="kubernetes-${pkg_version}"
 
 pkg_bin_dirs=(bin)
