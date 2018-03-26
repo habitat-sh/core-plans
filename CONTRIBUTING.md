@@ -126,6 +126,8 @@ The supervisor dynamically invokes hooks at run-time, triggered by an applicatio
 
 ### README
 
+Check out the [core plans README template](https://github.com/habitat-sh/core-plans/blob/master/README_TEMPLATE_FOR_PLANS.md) for a quick start!
+
 All plans should have a README. In core plans, it is a hard requirement. Your README at a bare minimum should include:
 
 - Your name as maintainer and supporter of this plan.
