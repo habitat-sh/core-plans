@@ -10,20 +10,26 @@ pkg_dirname="talloc-${pkg_version}"
 pkg_shasum="987c0cf6815e948d20caaca04eba9b823e67773f361ffafe676e24b953cc604b"
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
+pkg_pconfig_dirs=(core/pkg-config)
+
+pkg_deps=(core/python2 core/glibc)
 
 pkg_build_deps=(
 core/gcc
 core/make
-core/python2
 core/coreutils
 )
 
 do_prepare() {
   if [[ ! -r /usr/bin/env ]]; then
-    ln -sv "$(pkg_path_for coreutils)/bin/env" /usr/bin/env
+   ln -sv "$(pkg_path_for coreutils)/bin/env" /usr/bin/env
   fi
 }
 
+do_end(){
+  unlink /usr/bin/env
+}
+
 do_check(){
-  make tests
+  make check
 }
