@@ -1,5 +1,8 @@
 # Habitat package: libtalloc
 
+## Maintainers
+* [Christopher P. Maher](https://github.com/defilan)
+
 ## Description
 
 Talloc is a hierarchical, reference counted memory pool system with destructors. It is the core memory allocator used in Samba.
@@ -9,7 +12,7 @@ Talloc is a hierarchical, reference counted memory pool system with destructors.
 This is a library needed for various projects, such as FreeRADIUS(https://freeradius.org). It can be consumed by a plan
 during build/runtime.
 
-Example:
+## Example
 
 do_build() {
   ./configure --prefix="${pkg_prefix}" \
