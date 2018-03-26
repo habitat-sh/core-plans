@@ -129,6 +129,7 @@ jre8 @predominant @rsertelon
 jre9 @predominant @rsertelon
 kibana @joshbrand @predominant
 logstash @joshbrand @predominant
+libtalloc @defilan
 monit @rsertelon
 mosquitto @rsertelon
 nmap @defilan
