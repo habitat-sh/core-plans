@@ -151,6 +151,8 @@ plan_path = "diffutils"
 plan_path = "direnv"
 [docker]
 plan_path = "docker"
+[docker-compose]
+plan_path = "docker-compose"
 [docutils]
 plan_path = "docutils"
 [dosfstools]
