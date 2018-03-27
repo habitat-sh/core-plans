@@ -45,7 +45,7 @@ do_install() {
   cp -a opt/mssql/lib "$pkg_prefix"
 
   PYTHONPATH="$(pkg_path_for core/python2)"
-  sed -i "s#/usr/bin/python#$PYTHONPATH/bin/python#" "$pkg_prefix/lib/mssql-conf/mssql-conf.py"
+  sed -i'' "s#/usr/bin/python#$PYTHONPATH/bin/python#" "$pkg_prefix/lib/mssql-conf/mssql-conf.py"
 
   find "$pkg_prefix/bin" -type f -name '*' \
     -exec patchelf --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" --set-rpath "$LD_RUN_PATH" {} \;

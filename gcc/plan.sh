@@ -65,7 +65,7 @@ do_prepare() {
   # Patch the configure script so it finds glibc headers
   #
   # Thanks to: https://github.com/NixOS/nixpkgs/blob/release-15.09/pkgs/development/compilers/gcc/builder.sh
-  sed -i \
+  sed -i'' \
     -e "s,glibc_header_dir=/usr/include,glibc_header_dir=${headers}," \
     gcc/configure
 
@@ -77,7 +77,7 @@ do_prepare() {
   for header in "gcc/config/"*-gnu.h "gcc/config/"*"/"*.h; do
     grep -q LIBC_DYNAMIC_LINKER "$header" || continue
     build_line "  Fixing $header"
-    sed -i "$header" \
+    sed -i'' "$header" \
       -e 's|define[[:blank:]]*\([UCG]\+\)LIBC_DYNAMIC_LINKER\([0-9]*\)[[:blank:]]"\([^\"]\+\)"$|define \1LIBC_DYNAMIC_LINKER\2 "'"${glibc}"'\3"|g' \
       -e 's|/lib64/ld-linux-|/lib/ld-linux-|g'
   done
@@ -85,7 +85,7 @@ do_prepare() {
   # Installs x86_64 libraries under `lib/` vs the default `lib64/`
   #
   # Thanks to: https://projects.archlinux.org/svntogit/packages.git/tree/trunk/PKGBUILD?h=packages/gcc
-  sed -i '/m64=/s/lib64/lib/' gcc/config/i386/t-linux64
+  sed -i'' '/m64=/s/lib64/lib/' gcc/config/i386/t-linux64
 
   # Build up the build cflags that will be set for multiple environment
   # variables in the `make` command

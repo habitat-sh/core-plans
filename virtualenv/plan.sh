@@ -22,5 +22,5 @@ do_install() {
   python setup.py install --prefix="$pkg_prefix"
 
   # Modify the command to have the correct PYTHONPATH
-  sed -i "2iimport sys; sys.path.append(\"$PYTHONPATH\")" "$pkg_prefix/bin/virtualenv"
+  sed -i'' "2iimport sys; sys.path.append(\"$PYTHONPATH\")" "$pkg_prefix/bin/virtualenv"
 }

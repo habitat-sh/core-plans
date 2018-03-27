@@ -13,7 +13,7 @@ do_prepare() {
   do_default_prepare
 
   build_line "Patching 'zless' with the full path to 'less'"
-  sed -i \
+  sed -i'' \
     -e "s,less -V,$(pkg_path_for less)/bin/less -V,g" \
     -e "s,exec less,exec $(pkg_path_for less)/bin/less,g" \
     zless.in
@@ -32,7 +32,7 @@ do_build() {
 do_check() {
   # Skip help-version test for running zmore which requires `more` on PATH. We
   # don't yet have one built and will assume that it works well enough.
-  sed -i -e "s,zmore,,g" tests/Makefile
+  sed -i'' -e "s,zmore,,g" tests/Makefile
 
   make check
 }

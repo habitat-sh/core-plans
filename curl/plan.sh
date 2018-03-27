@@ -28,7 +28,7 @@ pkg_lib_dirs=(lib)
 
 do_prepare() {
   # Patch the zsh-generating program to use our perl at build time
-  sed -i "s,/usr/bin/perl,$(pkg_path_for perl)/bin/perl,g" scripts/zsh.pl
+  sed -i'' "s,/usr/bin/perl,$(pkg_path_for perl)/bin/perl,g" scripts/zsh.pl
 }
 
 do_build() {

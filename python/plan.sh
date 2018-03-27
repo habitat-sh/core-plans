@@ -36,7 +36,7 @@ pkg_interpreters=(bin/python bin/python3 bin/python3.5)
 
 do_prepare() {
   sed -i.bak 's/#zlib/zlib/' Modules/Setup.dist
-  sed -i -re "/(SSL=|_ssl|-DUSE_SSL|-lssl).*/ s|^#||" Modules/Setup.dist
+  sed -i'' -re "/(SSL=|_ssl|-DUSE_SSL|-lssl).*/ s|^#||" Modules/Setup.dist
 }
 
 do_build() {

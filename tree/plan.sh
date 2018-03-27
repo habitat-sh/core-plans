@@ -16,6 +16,6 @@ do_build() {
 }
 
 do_install() {
-  sed -i "s#prefix = /usr#prefix = ${pkg_prefix}#" Makefile
+  sed -i'' "s#prefix = /usr#prefix = ${pkg_prefix}#" Makefile
   make install
 }

@@ -24,7 +24,7 @@ do_prepare() {
 
   #  Make Cwd work with the `pwd` command from `coreutils` (we cannot rely
   #  on `/bin/pwd` exisiting in an environment)
-  sed -i "s,'/bin/pwd','$(pkg_path_for coreutils)/bin/pwd',g" \
+  sed -i'' "s,'/bin/pwd','$(pkg_path_for coreutils)/bin/pwd',g" \
     dist/PathTools/Cwd.pm
 
   # Build the `-Dlocincpth` configure flag, which is collection of all

@@ -43,7 +43,7 @@ pkg_include_dirs=(lib64/R/include)
 pkg_lib_dirs=(lib64/R/lib)
 
 do_build() {
-    sed -i '/#include.*<cairo-xlib.h>/d' ./configure
+    sed -i'' '/#include.*<cairo-xlib.h>/d' ./configure
     ./configure --prefix="${pkg_prefix}" \
 		 --with-x=no \
                 --disable-java \

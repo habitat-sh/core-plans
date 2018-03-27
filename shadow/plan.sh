@@ -22,15 +22,15 @@ do_prepare() {
   #
   # Thanks to: http://www.linuxfromscratch.org/lfs/view/stable/chapter06/shadow.html
   # shellcheck disable=SC2016
-  sed -i 's/groups$(EXEEXT) //' src/Makefile.in
-  find man -name Makefile.in -exec sed -i 's/groups\.1 / /' {} \;
+  sed -i'' 's/groups$(EXEEXT) //' src/Makefile.in
+  find man -name Makefile.in -exec sed -i'' 's/groups\.1 / /' {} \;
 
   # Instead of using the default crypt method, use the more secure SHA-512
   # method of password encryption, which also allows passwords longer than 8
   # characters.
   #
   # Thanks to: http://www.linuxfromscratch.org/lfs/view/stable/chapter06/shadow.html
-  sed -i -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD SHA512@' etc/login.defs
+  sed -i'' -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD SHA512@' etc/login.defs
 }
 
 do_build() {

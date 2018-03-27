@@ -38,7 +38,7 @@ do_setup() {
 }
 
 do_build() {
-  sed -i "s/#! \/usr\/bin\/env bash/#!\/bin\/bash/" ./autogen.sh
+  sed -i'' "s/#! \/usr\/bin\/env bash/#!\/bin\/bash/" ./autogen.sh
 
   ./linguas.sh
   ./autogen.sh

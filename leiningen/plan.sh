@@ -36,7 +36,7 @@ do_build() {
 do_install() {
   mkdir -p "${pkg_prefix}/share/java"
   cd "${HAB_CACHE_SRC_PATH}" || exit
-  sed -i "s|^LEIN_JAR=.*|LEIN_JAR=${pkg_prefix}/share/java/${pkg_filename%.*}.jar|" lein
+  sed -i'' "s|^LEIN_JAR=.*|LEIN_JAR=${pkg_prefix}/share/java/${pkg_filename%.*}.jar|" lein
   chmod +x lein
   install -D lein "${pkg_prefix}/bin/lein"
   install -D "${pkg_filename%.*}.jar" "${pkg_prefix}/share/java/${pkg_filename%.*}.jar"

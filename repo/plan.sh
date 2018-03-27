@@ -50,5 +50,5 @@ do_install() {
 
   # fix shebang in `repo`
   PYTHONPATH="$(pkg_path_for core/python2)"
-  sed -i "s#/usr/bin/env python#$PYTHONPATH/bin/python#" "$pkg_prefix"/bin/"$pkg_name"
+  sed -i'' "s#/usr/bin/env python#$PYTHONPATH/bin/python#" "$pkg_prefix"/bin/"$pkg_name"
 }

@@ -25,7 +25,7 @@ pkg_lib_dirs=(lib)
 pkg_svc_run="mosquitto -c $pkg_svc_config_path/mosquitto.conf"
 
 do_prepare() {
-    sed -i "s#prefix=/usr/local#prefix=#" config.mk
+    sed -i'' "s#prefix=/usr/local#prefix=#" config.mk
     export DESTDIR="${pkg_prefix}"
 }
 

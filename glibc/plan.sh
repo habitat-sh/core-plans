@@ -74,7 +74,7 @@ do_prepare() {
   patch -p1 < "$PLAN_CONTEXT/glibc-2.22-upstream_fixes-1.patch"
 
   # Adjust `scripts/test-installation.pl` to use our new dynamic linker
-  sed -i "s|libs -o|libs -L${pkg_prefix}/lib -Wl,-dynamic-linker=${dynamic_linker} -o|" \
+  sed -i'' "s|libs -o|libs -L${pkg_prefix}/lib -Wl,-dynamic-linker=${dynamic_linker} -o|" \
     scripts/test-installation.pl
 }
 

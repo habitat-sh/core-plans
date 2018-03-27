@@ -64,7 +64,7 @@ do_prepare() {
   # Use symlinks instead of hard links to save space (otherwise `strip(1)`
   # needs to process each hard link seperately)
   for f in binutils/Makefile.in gas/Makefile.in ld/Makefile.in gold/Makefile.in; do
-    sed -i "$f" -e 's|ln |ln -s |'
+    sed -i'' "$f" -e 's|ln |ln -s |'
   done
 }
 

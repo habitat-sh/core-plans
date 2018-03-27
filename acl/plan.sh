@@ -15,7 +15,7 @@ do_prepare() {
   # Fix a bug that causes `getfacl -e` to segfault on overly long group name.
   #
   # Thanks to: http://www.linuxfromscratch.org/lfs/view/stable/chapter06/acl.html
-  sed -i -e "/TABS-1;/a if (x > (TABS-1)) x = (TABS-1);" \
+  sed -i'' -e "/TABS-1;/a if (x > (TABS-1)) x = (TABS-1);" \
     libacl/__acl_to_any_text.c
 }
 

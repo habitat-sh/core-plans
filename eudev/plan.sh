@@ -17,7 +17,7 @@ pkg_upstream_url="https://wiki.gentoo.org/wiki/Project:Eudev"
 do_prepare() {
   # http://www.linuxfromscratch.org/lfs/view/stable/chapter06/eudev.html
   sed -r -i 's|/usr(/bin/test)|\1|' test/udev-test.pl
-  sed -i '/keyboard_lookup_key/d' src/udev/udev-builtin-keyboard.c
+  sed -i'' '/keyboard_lookup_key/d' src/udev/udev-builtin-keyboard.c
   cat > config.cache << "EOF"
 HAVE_BLKID=1
 BLKID_LIBS="-lblkid"

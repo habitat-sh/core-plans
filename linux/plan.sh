@@ -44,13 +44,13 @@ do_build() {
   #  builds that have CONFIG_ options set that require building scripts/ or tools/
 
   # Let the inline test build (CONFIG_STACK_VALIDATION) know where libelf lives
-  sed -i "932s|-xc|$LDFLAGS -xc|" Makefile
+  sed -i'' "932s|-xc|$LDFLAGS -xc|" Makefile
 
   # Override the defaults for building scripts and tools.
   #  scripts/sign-file and tools/objtool need openssl and elfutils.
-  sed -i "306s|$| $LDFLAGS|" Makefile
-  sed -i "98s|\$(hostc_flags)|\$(hostc_flags) \$(HOSTLDFLAGS)|" scripts/Makefile.host
-  sed -i "55s|\$(LDFLAGS)|\$(LDFLAGS) \$(HOSTLDFLAGS)|" tools/objtool/Makefile
+  sed -i'' "306s|$| $LDFLAGS|" Makefile
+  sed -i'' "98s|\$(hostc_flags)|\$(hostc_flags) \$(HOSTLDFLAGS)|" scripts/Makefile.host
+  sed -i'' "55s|\$(LDFLAGS)|\$(LDFLAGS) \$(HOSTLDFLAGS)|" tools/objtool/Makefile
 
   HOST_EXTRACFLAGS="${CFLAGS}" make -j "$(nproc)" bzImage modules
 

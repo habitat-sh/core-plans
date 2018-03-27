@@ -40,7 +40,7 @@ do_prepare() {
   # Set the dynamic linker from `glibc`
   dynamic_linker="$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2"
   find src/cmd -name asm.c -exec \
-    sed -i "s,/lib/ld-linux.*\.so\.[0-9],$dynamic_linker," {} \;
+    sed -i'' "s,/lib/ld-linux.*\.so\.[0-9],$dynamic_linker," {} \;
 
   # Use the protocols database from `iana-etc`
   sed -e "s,/etc/protocols,$(pkg_path_for iana-etc)/etc/protocols," \
