@@ -47,7 +47,7 @@ docker run -ti --rm -P --name prom2 --link prom0:peer_node fastrobot/prometheus 
 
 If you are running a standalone Prometheus instance and want to use an update strategy, you should use either "none" (which is the default update strategy) or "all-at-once"
 
-If you are running a PostgreSQL cluster, you will likely want to use the Rolling strategy.
+If you are running a Prometheus cluster, you will likely want to use the Rolling strategy.
 
 ### Configuration Updates
 
