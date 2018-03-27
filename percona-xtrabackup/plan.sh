@@ -19,7 +19,7 @@ do_prepare() {
   if [ -f CMakeCache.txt ]; then
     rm CMakeCache.txt
   fi
-  sed -i 's/^.*abi_check.*$/#/' CMakeLists.txt
+  sed -i'' 's/^.*abi_check.*$/#/' CMakeLists.txt
   export CXXFLAGS="$CFLAGS"
 }
 

@@ -21,7 +21,7 @@ pkg_build_deps=(
 
 do_prepare() {
   build_line "replacing /usr/bin/file with $(pkg_path_for core/file)/bin/file"
-  sed -i "s,/usr/bin/file,$(pkg_path_for core/file)/bin/file,g" "jni/libffi/configure"
+  sed -i'' "s,/usr/bin/file,$(pkg_path_for core/file)/bin/file,g" "jni/libffi/configure"
 
   export USE_SYSTEM_LIBFFI=1
   export JAVA_HOME

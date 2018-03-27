@@ -15,10 +15,10 @@ pkg_lib_dirs=(lib)
 
 _common_prepare() {
   # Makes the symbolic links in installation relative vs. absolute
-  sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
+  sed -i'' 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
 
   # Ensure that the man pages are installed under share/man
-  sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
+  sed -i'' "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
 }
 
 do_prepare() {

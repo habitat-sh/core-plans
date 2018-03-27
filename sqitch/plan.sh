@@ -33,7 +33,7 @@ do_install() {
   ./Build install
 
   for file in ${pkg_prefix}/bin/*; do
-    sed -i "1 s,.*,& -I${pkg_prefix}/lib/perl5," $file
+    sed -i'' "1 s,.*,& -I${pkg_prefix}/lib/perl5," $file
   done
 }
 

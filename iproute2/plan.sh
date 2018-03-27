@@ -22,11 +22,11 @@ pkg_deps=(core/glibc)
 
 do_prepare() {
   # http://www.linuxfromscratch.org/lfs/view/development/chapter06/iproute2.html
-  sed -i /ARPD/d Makefile
-  sed -i 's/arpd.8//' man/man8/Makefile
+  sed -i'' /ARPD/d Makefile
+  sed -i'' 's/arpd.8//' man/man8/Makefile
   rm doc/arpd.sgml
 
-  sed -i 's/m_ipt.o//' tc/Makefile
+  sed -i'' 's/m_ipt.o//' tc/Makefile
 }
 
 do_build() {

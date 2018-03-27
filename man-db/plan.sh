@@ -63,7 +63,7 @@ do_prepare() {
   #
   # The file that gets generated here gets written to
   # $pkg_prefix/etc/man_db.conf.
-  sed -i -e "s#/var/#$pkg_svc_var_path/#g" "$CACHE_PATH/src/man_db.conf.in"
+  sed -i'' -e "s#/var/#$pkg_svc_var_path/#g" "$CACHE_PATH/src/man_db.conf.in"
 }
 
 do_check() {
@@ -75,5 +75,5 @@ do_install() {
 
   # Removing reference to non-existent user(--disable-setuid), inspired from Linux From Scratch:
   # http://www.linuxfromscratch.org/lfs/view/development/chapter06/man-db.html
-  sed -i "s:man root:root root:g" "${pkg_svc_config_path}/tmpfiles.d/man-db.conf"
+  sed -i'' "s:man root:root root:g" "${pkg_svc_config_path}/tmpfiles.d/man-db.conf"
 }

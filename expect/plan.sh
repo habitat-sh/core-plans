@@ -18,7 +18,7 @@ do_prepare() {
   do_default_prepare
 
   # Make the path to `stty` absolute from `coreutils`
-  sed -i "s,/bin/stty,$(pkg_path_for coreutils)/bin/stty,g" configure
+  sed -i'' "s,/bin/stty,$(pkg_path_for coreutils)/bin/stty,g" configure
 }
 
 do_build() {

@@ -37,12 +37,12 @@ pkg_interpreters=(bin/python bin/python2 bin/python2.7)
 
 do_prepare() {
   sed -i.bak 's/#zlib/zlib/' Modules/Setup.dist
-  sed -i -re "/(SSL=|_ssl|-DUSE_SSL|-lssl).*/ s|^#||" Modules/Setup.dist
+  sed -i'' -re "/(SSL=|_ssl|-DUSE_SSL|-lssl).*/ s|^#||" Modules/Setup.dist
 
   # Allow embedded sqlite to load extensions
   # Uncertain if this is absolutely required, leaving commented for now.
   # https://docs.python.org/2/library/sqlite3.html#f1
-  # sed -i 's/sqlite_defines.append(("SQLITE_OMIT_LOAD_EXTENSION", "1"))//g' setup.py
+  # sed -i'' 's/sqlite_defines.append(("SQLITE_OMIT_LOAD_EXTENSION", "1"))//g' setup.py
 }
 
 do_build() {

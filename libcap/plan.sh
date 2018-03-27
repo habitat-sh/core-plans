@@ -15,7 +15,7 @@ do_prepare() {
   do_default_prepare
 
   # Install binaries under `bin/` vs. `sbin/`
-  sed -i "/SBINDIR/s#sbin#bin#" Make.Rules
+  sed -i'' "/SBINDIR/s#sbin#bin#" Make.Rules
 }
 
 do_build() {

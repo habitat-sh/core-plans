@@ -17,7 +17,7 @@ pkg_bin_dirs=(bin)
 
 do_check() {
   for file in test/mawktest test/fpe_test; do
-    sed -i "s|PATH=/bin:/usr/bin|PATH=/bin:/usr/bin:$PATH|g" $file
+    sed -i'' "s|PATH=/bin:/usr/bin|PATH=/bin:/usr/bin:$PATH|g" $file
   done
   make check
 }

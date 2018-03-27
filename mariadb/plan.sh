@@ -22,8 +22,8 @@ do_prepare() {
       rm CMakeCache.txt
     fi
 
-    sed -i 's/^.*abi_check.*$/#/' CMakeLists.txt
-    sed -i "s@data/test@\${INSTALL_MYSQLTESTDIR}@g" sql/CMakeLists.txt
+    sed -i'' 's/^.*abi_check.*$/#/' CMakeLists.txt
+    sed -i'' "s@data/test@\${INSTALL_MYSQLTESTDIR}@g" sql/CMakeLists.txt
     export CXXFLAGS="$CFLAGS"
 }
 
