@@ -1,4 +1,4 @@
-- Change Name: Standardize tracking major package versions
+- Change Name: standardize_tracking_major_package_versions
 - Start Date: 2018-03-27
 - RFC PR: (leave this empty)
 - Core-Plans Issue: (leave this empty)
