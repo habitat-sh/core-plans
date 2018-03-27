@@ -56,6 +56,8 @@ fi
 HAB_PKG_PATH="$HAB_ROOT_PATH/pkgs"
 # The default package origin which was used to in the base Plans
 origin=core
+# The path to the print deps program
+print_deps_cmd="${0%/*}/print-deps.sh"
 
 
 # ## Private/Internal helper functions
@@ -109,34 +111,33 @@ trap _on_exit 1 2 3 15 ERR
 # _build coreutils EXTRA=vars FOR=command
 # ```
 _build() {
-  local plan_dir plan
-  plan_dir="${1:-}"
-  plan="$(basename "$plan_dir")"
+  local prj_dir plan_sh pkg_ident pkg_name
+  prj_dir="${1}"
   shift
-  # If the `$plan` value is a path/name combination like
-  # `../components/foobar:hab-foobar` then split the token into its requisite
-  # parts.
-  # shellcheck disable=SC2126
-  case $(echo "$plan" | grep -o ':' | wc -l | sed 's,^[^0-9]*,,') in
-    1)
-      plan_dir=$(echo "$plan_dir" | cut -d ':' -f 1)
-      plan=$(echo "$plan" | cut -d ':' -f 2)
-      ;;
-  esac
+  if [[ -f "$prj_dir/plan.sh" ]]; then
+    plan_sh="$prj_dir/plan.sh"
+  elif [[ -f "$prj_dir/habitat/plan.sh" ]]; then
+    plan_sh="$prj_dir/habitat/plan.sh"
+  else
+    >&2 echo "Missing plan.sh in: $prj_dir, something is wrong, aborting"
+    exit 10
+  fi
+  pkg_ident="$("$print_deps_cmd" "$plan_sh" | head -n 1)"
+  pkg_name="$(echo "$pkg_ident" | cut -d '/' -f 2)"
+
   if [ -n "${PRINT_IDENTS_ONLY:-}" ]; then
-    echo "${origin}/$plan"
+    echo "$pkg_ident"
     return 0
   fi
   # If the `$STOP_BEFORE` environment variable is set, and its value is the
   # desired Plan, then we'll stop. This is a convenient way to build up to an
   # interesting Plan without steamrolling right over it.
-  if [ "${STOP_BEFORE:-}" = "$plan" ]; then
-    echo "STOP_BEFORE=$STOP_BEFORE set, stopping before $plan. Cheers ;)"
+  if [ "${STOP_BEFORE:-}" = "$pkg_name" ]; then
+    echo "STOP_BEFORE=$STOP_BEFORE set, stopping before $pkg_name. Cheers ;)"
     exit 0
   fi
   local db="tmp/${DB_PREFIX:-}build-base-plans.db"
-  local path="$HAB_PKG_PATH/$origin/$plan"
-  local manifest
+  local path="$HAB_PKG_PATH/$pkg_ident"
   local ident
   local cmd
   mkdir -p "$(dirname "$db")"
@@ -144,7 +145,7 @@ _build() {
 
   # Check if the requested Plan exists in the database, meaning that this
   # program has previously built it.
-  if grep -q "^$origin/$plan:$*$" "$db" > /dev/null; then
+  if grep -q "^$pkg_ident:$*$" "$db" > /dev/null; then
     # If a fully extracted/installed package exists on disk under
     # `$HAB_PKG_PATH`. We're using the `IDENT` metadata file as a sentinel
     # file stand-in for the package.
@@ -153,18 +154,18 @@ _build() {
       # If the package's `IDENT` file is missing, something has gone wrong, die
       # early.
       if [ ! -f "$ident" ]; then
-        >&2 echo "[$plan] Missing file $ident, something is wrong, aborting"
+        >&2 echo "[$pkg_ident] Missing file $ident, something is wrong, aborting"
         exit 1
       fi
-      # If all else is good, we should be able to count on this previsouly
+      # If all else is good, we should be able to count on this previously
       # built and installed package, so we will early return from this
       # function.
-      echo "[$plan] Previous build found in db $db, skipping ($(cat "$ident"))"
+      echo "[$pkg_ident] Previous build found in db $db, skipping ($(cat "$ident"))"
       return 0
     else
       # If the entry exists in the database, but we can't find it installed on
       # disk, something is up and so we'll die early.
-      >&2 echo "[$plan] Found in db $db but missing on disk, aborting"
+      >&2 echo "[$pkg_ident] Found in db $db but missing on disk, aborting"
       exit 2
     fi
   fi
@@ -172,15 +173,15 @@ _build() {
   # If extra args are passed to this function, we will treat them all as
   # environment variables.
   if [ -n "$*" ]; then
-    cmd="env $* $BUILD $plan_dir"
+    cmd="env $* $BUILD $prj_dir"
   else
-    cmd="$BUILD $plan_dir"
+    cmd="$BUILD $prj_dir"
   fi
-  echo "[$plan] Building with: $cmd"
+  echo "[$pkg_ident] Building with: $cmd"
   eval "$cmd"
   # Record the successful build into our simple database
-  echo "[$plan] Recording build record in $db"
-  echo "$origin/$plan:$*" >> "$db"
+  echo "[$pkg_ident] Recording build record in $db"
+  echo "$pkg_ident:$*" >> "$db"
 }
 
 
@@ -262,15 +263,15 @@ cat <<_PLANS_ | while read plan; do _build $plan; done
   core-plans/openssl-musl
   core-plans/libarchive-musl
   core-plans/rust
-  habitat/components/hab:hab
+  habitat/components/hab
   core-plans/bats
-  habitat/components/plan-build:hab-plan-build
+  habitat/components/plan-build
   core-plans/vim
   core-plans/libbsd
   core-plans/clens
   core-plans/mg
-  habitat/components/backline:hab-backline
-  habitat/components/studio:hab-studio
+  habitat/components/backline
+  habitat/components/studio
 _PLANS_
 
 _on_exit 0
