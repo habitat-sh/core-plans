@@ -33,7 +33,7 @@ pkg_include_dirs=(include)
 pkg_interpreters=(bin/php)
 pkg_exports=(
   [port]=port
-  [listen]=listen
+  [local_only]=local_only
 )
 pkg_svc_run="php-fpm --fpm-config ${pkg_svc_config_path}/php-fpm.conf -c ${pkg_svc_config_path}"
 
