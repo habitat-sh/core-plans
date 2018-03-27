@@ -68,7 +68,8 @@ end
 sorted_deps = all_deps.tsort
 
 unless options[:with_base]
-  prog = "#{File.dirname(__FILE__)}/build-base-plans.sh"
+  base_plans = "#{File.dirname(File.dirname(__FILE__))}/base-plans.txt"
+  prog = "#{File.dirname(__FILE__)}/build-plans.sh #{base_plans}"
   raw = `env PRINT_IDENTS_ONLY=true #{prog}`.chomp
   base_deps = raw.split(/\n/)
   sorted_deps.delete_if { |dep| base_deps.include?(dep) }
