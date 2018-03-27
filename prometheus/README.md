@@ -52,3 +52,11 @@ If you are running a Prometheus cluster, you will likely want to use the Rolling
 ### Configuration Updates
 
 For details on what is configurable, check out this plan's [Default.toml](./Default.toml)
+
+## Scaling
+
+This plan supports running in a leader/follower cluster, it has not yet been tested in a highly available configuration.
+
+## Monitoring
+
+Prometheus, being a monitoring solution, can monitor itself.  For inforation about how to se this up, check out [the official Prometheus docs](https://prometheus.io/docs/prometheus/latest/getting_started/#configuring-prometheus-to-monitor-itself).
