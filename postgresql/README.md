@@ -140,6 +140,16 @@ If you are running a standalone PostgreSQL instance and want to use an update st
 
 If you are running a PostgreSQL cluster, you will likely want to use the Rolling strategy.
 
+## Scaling
+
+This plan can be run in a cluster, see the above section on "Leader/Follower" for more information.
+
+This plan has not been tested in a highly available architecture.
+
+## Monitoring
+
+If you wish to monitor this service directly, you can use [Datadog](https://www.datadoghq.com/) (there is also a [datadog agent plan](./dd-agent) in this repo), [Sumologic](https://www.sumologic.com/)(there is also a [sumlogic plan](./sumologic)), and other monitoring services.
+
 ## Notes
 
 ### TODO (Potential improvements to this plan):
