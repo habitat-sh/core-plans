@@ -1,17 +1,5 @@
 #!/bin/bash
 #
-# # Usage
-#
-# ```sh
-# $ build-base-plans.sh
-# ```
-#
-# # Synopsis
-#
-# Builds a set of foundational base Plans comprising a fully bootstrapped Bldr
-# environment which can be used to build additional software. The build order
-# is very similiar to the Linux From Scratch project, and not by accident.
-#
 # # License and Copyright
 #
 # ```
@@ -46,6 +34,7 @@ fi
 
 # ## Default variables
 
+program="$(basename "$0")"
 # The build command to execute. Defaults to `build`, but could be overridden if
 # a full path to `hab-plan-build` is required.
 : "${BUILD:=build}"
@@ -54,13 +43,33 @@ fi
 : "${HAB_ROOT_PATH:=/hab}"
 # Location containing installed packages.
 HAB_PKG_PATH="$HAB_ROOT_PATH/pkgs"
-# The default package origin which was used to in the base Plans
-origin=core
 # The path to the print deps program
 print_deps_cmd="${0%/*}/print-deps.sh"
 
 
 # ## Private/Internal helper functions
+
+# **Internal** Prints help and usage information. Straight forward, no?
+_print_help() {
+  echo "$program
+
+The Habitat Maintainers <humans@habitat.sh>
+
+Builds a set of Plans and maintains a lightweight database so the same input
+set can be resumed to make forward progress.
+
+USAGE:
+    $program [FLAGS] [<INPUT_FILE>]
+
+FLAGS:
+    -h, --help       Prints help information
+
+ARGS:
+    <INPUT_FILE>     A file containing a directory path containing a plan.sh
+                     with one entry per line. When argument is not present,
+                     input is read on standard in.
+"
+}
 
 # **Internal** Handles exiting the program on signals. Takes either an argument
 # with the status code, or uses the last command's status code.
@@ -103,7 +112,7 @@ trap _on_exit 1 2 3 15 ERR
 # maintained to track every Plan that has successfully completed so that if a
 # Plan in the middle fails, a developer need only fix the failing Plan, and
 # re-run the program--not needed to start from sqaure one. The database is
-# `tmp/build-base-plans.db` by default so deleting this file simply removes its
+# `tmp/build-plans.db` by default so deleting this file simply removes its
 # build "memory".
 #
 # ```sh
@@ -136,7 +145,7 @@ _build() {
     echo "STOP_BEFORE=$STOP_BEFORE set, stopping before $pkg_name. Cheers ;)"
     exit 0
   fi
-  local db="tmp/${DB_PREFIX:-}build-base-plans.db"
+  local db="tmp/${DB_PREFIX:-}build-plans.db"
   local path="$HAB_PKG_PATH/$pkg_ident"
   local ident
   local cmd
@@ -190,88 +199,32 @@ _build() {
 # Read a list of tokens that are directories containing a `plan.sh` file. For
 # each token, invoke the `_build` function and pass the while line in. Simple,
 # no?
-# shellcheck disable=SC2162,SC2086
-cat <<_PLANS_ | while read plan; do _build $plan; done
-  core-plans/linux-headers
-  core-plans/glibc
-  core-plans/zlib
-  core-plans/file
-  core-plans/binutils
-  core-plans/m4
-  core-plans/gmp
-  core-plans/mpfr
-  core-plans/libmpc
-  core-plans/gcc
-  core-plans/patchelf FIRST_PASS=true
-  core-plans/gcc-libs
-  core-plans/patchelf
-  core-plans/bzip2
-  core-plans/pkg-config
-  core-plans/ncurses
-  core-plans/attr
-  core-plans/acl
-  core-plans/libcap
-  core-plans/sed
-  core-plans/shadow
-  core-plans/psmisc
-  core-plans/procps-ng
-  core-plans/coreutils
-  core-plans/bison
-  core-plans/flex
-  core-plans/pcre
-  core-plans/grep
-  core-plans/readline
-  core-plans/bash
-  core-plans/bc
-  core-plans/tar
-  core-plans/gawk
-  core-plans/libtool
-  core-plans/gdbm
-  core-plans/expat
-  core-plans/db
-  core-plans/inetutils
-  core-plans/iana-etc
-  core-plans/less
-  core-plans/perl
-  core-plans/diffutils
-  core-plans/autoconf
-  core-plans/automake
-  core-plans/findutils
-  core-plans/xz
-  core-plans/gettext
-  core-plans/gzip
-  core-plans/make
-  core-plans/patch
-  core-plans/texinfo
-  core-plans/util-linux
-  core-plans/tcl
-  core-plans/expect
-  core-plans/dejagnu
-  core-plans/check
-  core-plans/cacerts
-  core-plans/openssl
-  core-plans/wget
-  core-plans/unzip
-  core-plans/rq
-  core-plans/linux-headers-musl
-  core-plans/musl
-  core-plans/busybox-static
-  core-plans/zlib-musl
-  core-plans/bzip2-musl
-  core-plans/xz-musl
-  core-plans/libsodium-musl
-  core-plans/openssl-musl
-  core-plans/libarchive-musl
-  core-plans/rust
-  habitat/components/hab
-  core-plans/bats
-  habitat/components/plan-build
-  core-plans/vim
-  core-plans/libbsd
-  core-plans/clens
-  core-plans/mg
-  habitat/components/backline
-  habitat/components/studio
-_PLANS_
+
+if [[ -z "${1:-}" ]]; then
+  # If no arguments were provided, read the input on stdin
+  echo "Reading input on stdin..."
+  # shellcheck disable=SC2086
+  while read -r plan; do _build $plan; done
+else
+  case "$1" in
+    --help|-h)
+      _print_help
+      exit 0
+      ;;
+    -*)
+      >&2 echo "Invalid argument: $1, aborting"
+      _print_help
+      exit 1
+      ;;
+    *)
+      if [[ ! -f "$1" ]]; then
+        >&2 echo "No input file found: $1, aborting"
+        exit 9
+      fi
+      # shellcheck disable=SC2086,SC2002
+      cat "$1" | while read -r plan; do _build $plan; done
+      ;;
+  esac
+fi
 
 _on_exit 0
