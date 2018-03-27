@@ -667,6 +667,10 @@ paths = [
 plan_path = "mongo-tools"
 [mongodb]
 plan_path = "mongodb"
+[mono4]
+plan_path = "mono4"
+[mono5]
+plan_path = "mono5"
 [mosquitto]
 plan_path = "mosquitto"
 [mpfr]
