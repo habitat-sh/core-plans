@@ -1,10 +1,8 @@
 # PostgreSQL
 
-This packages PostgreSQL in a Habitat package that can be run with the Habitat supervisor.
+This packages PostgreSQL in a Habitat package that can be run with the Habitat Supervisor.
 
 This PostgreSQL plan supports standalone and clustered modes as well as continuous archiving via wal-e integration.
-
-*NOTE:* The current version of this plan is an interim version of the package that cannot be considered production ready. It can be used however archiving (by default) copies data in `{{pkg.svc_path}}/archive` which cannot be guaranteed as persisted between failures. That being said, the archive location is tunable in the default.toml.
 
 ## Maintainers
 
@@ -152,7 +150,9 @@ If you wish to monitor this service directly, you can use [Datadog](https://www.
 
 ## Notes
 
-### TODO (Potential improvements to this plan):
+# TODO (Potential improvements to this plan):
 - Upgrade logic (detect if the database engine is newer than the data on disk and perform pg_upgrade)
 - Full cluster restart logic (elect the previous leader)
   - add a `suitability` hook based on the existence of a `recovery.conf` file
+- Test for various high-availability and other operational optimizations (high writes, high reads)
+  - add configuration to the plan for people who wish to use those
