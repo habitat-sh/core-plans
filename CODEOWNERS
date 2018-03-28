@@ -139,8 +139,8 @@ redis @irvingpop
 shared-mime-info @rsertelon
 wrk @afiune
 protobuf-cpp @afiune
-go @afiune
-dep @afiune
+go @afiune @nellshamrell
+dep @afiune @nellshamrell
 dotnet-47-dev-pack @mwrock
 dotnet-core-lts @mwrock
 dotnet-core-sdk-lts @mwrock
