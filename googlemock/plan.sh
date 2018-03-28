@@ -7,9 +7,9 @@ EOF
 )"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('bsd-3-clause')
-pkg_source="https://github.com/google/${pkg_name}/archive/release-${pkg_version}.tar.gz"
+pkg_source="https://github.com/google/googletest/archive/release-${pkg_version}.tar.gz"
 pkg_shasum="58a6f4277ca2bc8565222b3bbd58a177609e9c488e8a72649359ba51450db7d8"
-pkg_upstream_url="https://github.com/google/googlemock"
+pkg_upstream_url="https://github.com/google/googletest/tree/master/googlemock"
 pkg_dirname="googletest-release-${pkg_version}"
 
 pkg_deps=(
