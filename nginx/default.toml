@@ -11,7 +11,7 @@
 
 #### General Configuration
 # redirector: If set, bypass normal config and just redirect http to https
-redirector = true
+# redirector = true
 # worker_processes: Number of NGINX processes. Default = 1
 worker_processes = 4
 
