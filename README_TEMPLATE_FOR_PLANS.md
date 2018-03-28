@@ -12,7 +12,7 @@ This should state whether the package is a service package or a binary package.
 
 A service package is something that will be run by the Habitat supervisor (i.e. core/postgresql).  A service package must always have a run file or define pkg_svc_run in the plan.sh file.
 
-Checkout the documentation for [binary wrapper packages](https://www.habitat.sh/docs/best-practices/#binary-wrapper-packages) for more clarity on binary packages.
+A binary package is something that packages up a standalone binary, something that does not need to run under the Habitat supervisor (i.e. core/dep). They are often used as dependencies of other packages. Binary packages do not have a run file and do not need to define pkg_svc_run in the plan.sh file.
 
 ## Usage
 
