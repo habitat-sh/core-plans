@@ -34,10 +34,12 @@ This RFC would not change any current plans, it would apply to updated and new p
 
 Users who want the bleeding edge versions of software will not be able to get them through Habitat's core plans.
 
+The recommended way to use a non-stable version of a package is to create it as a part of your own origin, until it becomes stable, at which point it can be added to core.
+
 # Rationale and alternatives
 [alternatives]: #alternatives
 
-It would not make sense to add a new package for the edge version (i.e. if the latest edge release of Node is 10, create a "core/node10"), then remove that package when that version become the stable version and is tracked in core/node. It also would be confusing to, rather than remove the edge version package ("core/node10") when it becomes the LTS version, to track Node 10 in both "core/node" and "core/node10".
+It would not make sense to add a new package for the edge version (i.e. if the latest edge release of Node is 10, create a "core/node10"), then remove that package when that version become the stable version and is tracked in core/node. It also would be confusing to, rather than remove the edge version package ("core/node10") when it becomes the LTS version, track Node 10 in both "core/node" and "core/node10".
 
 Some have mentioned the idea of not having any generic packages - rather than "core/node", have only "core/node8", "core/node9", etc. While possible, this would potentially break plans which already depend on "core/node" or "core/docker", and a large amount of existing plans, documentation, and more would be required to change. I don't feel it is worth that pain of making our users switch from something like "core/node" to always specifying the latest major versions, particulary for users who don't care about the version as long as it works.
 
