@@ -135,7 +135,7 @@ scaffolding_modules_install() {
       fi
 
       # Important for tsoa
-      if [[ ! -f "$CACHE_PATH/tsoa.json" ]]; then
+      if [[ -f "tsoa.json" ]]; then
         cp -av tsoa.json "$CACHE_PATH/"
       fi
 
