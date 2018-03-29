@@ -2,6 +2,10 @@
 
 [Full history](https://github.com/habitat-sh/core-plans/commits/master/scaffolding-node)
 
+## 0.6.12 (03-29-2018)
+
+- Add support for tsoa module
+
 ## 0.6.11 (12-08-2017)
 
 - Improve git detection with `git rev-parse --is-in-work-tree`, makes
