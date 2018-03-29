@@ -1,6 +1,6 @@
-# docker
+# docker 17
 
-The Docker Engine
+The Docker 17 Engine
 
 ## Maintainers
 
@@ -11,6 +11,8 @@ The Docker Engine
 Binary package
 
 ## Usage
+
+This plan tracks Docker 17.x versions.
 
 The docker plan _only_ provides users access to the standalone [docker binaries](https://docs.docker.com/engine/installation/binaries/). It is provided with the intention that any user's who need to run docker will write their own plan that depends on this package and provide their own runtime management.
 
