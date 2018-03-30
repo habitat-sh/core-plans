@@ -6,12 +6,16 @@
 # Summary
 [summary]: #summary
 
-Generic package names (ones which do not specify a version in the name - i.e. "core/docker") must always point to the latest **stable** version of the software.  They must not track edge versions of the software.
+Everytime a new major version of software packaged by Habitat is released (whether stable or an edge release), a new core plan must be made for that version (i.e. when Docker11 is released, we should create core/docker11).
+
+Generic package names (ones which do not specify a version in the name - i.e. core/docker) must always point to the latest **stable** version of the software.  They must not track edge versions of the software.  They must source the plan for the latest stable plan which tracks that software (i.e. if the current stable version of Docker is Docker10, and the edge version is Docker11, core/docker should source core/docker10).
+
+If a user wishes to use an edge version of the software (i.e. Docker11 is the edge version, while Docker10 is the stable version), they can do so by directly depending on core/docker11.
 
 # Motivation
 [motivation]: #motivation
 
-We currently have several generic packages (i.e. "core/docker") that track the "current" version of the packaged software (as of today, core/docker points to Docker 17). When a new major version of the package becomes available, we move the old version (i.e. Docker 16) to a separate plan to track the old version (i.e. "core/docker16") while the "generic" package ("core/docker") will be updated to point to the current major version of the software.
+We currently have several generic packages (i.e. core/docker) that track the current stable version of the packaged software (as of today, core/docker points to Docker 17). When a new major version of the package becomes available, we move the old version (i.e. Docker 16) to a separate plan to track the old version (i.e. core/docker16) while the generic package (core/docker) will be updated to point to the current major version of the software.
 
 However, we do not have a process in place to handle edge releases of software. As of today, Docker 18 is the latest edge version of Docker, but the latest stable version is still Docker 17. This brought us to the question - should "core/docker" track the latest stable version or the latest edge version?
 
@@ -20,9 +24,11 @@ However, we do not have a process in place to handle edge releases of software. 
 
 Many Habitat packages track and package 3rd party software - this includes Docker, Node, Java, and more. We learned early on that even when a new major version of the software was released, many people still used the older version (and sometimes did not have the choice of upgrading immediately due to compliance or other reasons).
 
-Historically, when a new major version of software was released (i.e. when Node 8 became the new LTS over Node 7) we changed the "generic" package (i.e. "core/node") to track the newest major version and, for people who needed to use an older major version of the software, created a new plan (i.e. "core/node7") that they could refer to.
+Historically, when a new major version of software was released (i.e. when Node 8 became the new LTS over Node 7) we changed the generic package (i.e. core/node) to track the newest major version and, for people who needed to use an older major version of the software, created a new plan (i.e. "core/node7") that they could refer to.
 
-When a new edge version of the software is released (i.e. Node 9.9.0 is the latest edge release as of this RFC), we do not track that in the generic package (i.e. core/node). The generic package must always track the latest stable release.
+Now we will create a new core plan for every major release of a piece of software, edge or stable (i.e. when Docker11 is released as edge, we will create a core/docker11 plan so that someone can use the edge version if they wish).
+
+Generic packages (i.e core/docker) will continue to track the latest stable version of the software. However, they will do this by sourcing whatever version plan corresponds to the latest stable version (i.e. if Docker10 is stable, core/docker will source core/docker10, even if core/docker11 tracks the edge version).
 
 # Reference-level explanation
 [reference-level-explanation]: #reference-level-explanation
@@ -32,16 +38,16 @@ This RFC would not change any current plans, it would apply to updated and new p
 # Drawbacks
 [drawbacks]: #drawbacks
 
-Users who want the bleeding edge versions of software will not be able to get them through Habitat's core plans.
-
-The recommended way to use a non-stable version of a package is to create it as a part of your own origin, until it becomes stable, at which point it can be added to core.
+This does potentially introduce many more plans into core/plans - which will need to be maintained and rebuilt as necessary, and it will increase the build load on Builder.
 
 # Rationale and alternatives
 [alternatives]: #alternatives
 
-It would not make sense to add a new package for the edge version (i.e. if the latest edge release of Node is 10, create a "core/node10"), then remove that package when that version become the stable version and is tracked in core/node. It also would be confusing to, rather than remove the edge version package ("core/node10") when it becomes the LTS version, track Node 10 in both "core/node" and "core/node10".
+The alternative is to keep doing what we have historically done - having the generic plan (i.e. core/node) track the latest major stable version of the software, and add in core/nodeX whenever a new major version of Node is released to stable).
 
-Some have mentioned the idea of not having any generic packages - rather than "core/node", have only "core/node8", "core/node9", etc. While possible, this would potentially break plans which already depend on "core/node" or "core/docker", and a large amount of existing plans, documentation, and more would be required to change. I don't feel it is worth that pain of making our users switch from something like "core/node" to always specifying the latest major versions, particulary for users who don't care about the version as long as it works.
+However, this would prevent our users from using the edge versions of software should they wish to.  It also makes it more difficult for users to "pin" to a certain version of software if they know they are not going to be upgrading to the next major version in the near future.
+
+The other alternative is to avoid sourcing another plan from the generic plan by tracking the latest stable version in both the generic plan (i.e. core/node) and the version specific plan (i.e. core/node9). This, however, introduces duplication, and the high possiblility of one being updated and the other not. Directly sourcing the version specific plan from the generic plan prevents this.
 
 
 # Unresolved questions
