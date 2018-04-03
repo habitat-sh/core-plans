@@ -20,6 +20,7 @@ pkg_deps=(
   core/libffi
   core/libiconv
   core/pcre
+  core/python
   core/util-linux
   core/zlib
 )
@@ -33,7 +34,6 @@ pkg_build_deps=(
   core/make
   core/perl
   core/pkg-config
-  core/python
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
