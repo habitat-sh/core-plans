@@ -817,6 +817,8 @@ plan_path = "procps-ng"
 plan_path = "proj"
 [prometheus]
 plan_path = "prometheus"
+[prometheus-cpp]
+plan_path = "prometheus-cpp"
 [protobuf]
 plan_path = "protobuf"
 [protobuf-c]
