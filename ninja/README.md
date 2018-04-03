@@ -12,4 +12,4 @@ Binary package
 
 ## Usage
 
-*TODO: Add instructions for usage*
+To have `ninja` in your `PATH` just add `core/ninja` to `pkg_build_deps`.
