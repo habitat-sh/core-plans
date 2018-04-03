@@ -10,16 +10,18 @@ pkg_description="Pango is a library for laying out and rendering of text, with a
 pkg_deps=(
   core/bzip2
   core/cairo
-  core/coreutils
   core/expat
   core/fontconfig
   core/freetype
+  core/gcc-libs
   core/glib
   core/glibc
   core/harfbuzz
   core/libffi
+  core/libice
   core/libiconv
   core/libpng
+  core/libsm
   core/libxau
   core/libxcb
   core/libxdmcp
@@ -30,6 +32,8 @@ pkg_deps=(
   core/zlib
 )
 pkg_build_deps=(
+  core/coreutils
+  core/diffutils
   core/file
   core/gcc
   core/make
@@ -37,7 +41,7 @@ pkg_build_deps=(
   core/pkg-config
 )
 pkg_bin_dirs=(bin)
-pkg_include_dirs=(include/pango-1.0/pango)
+pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
