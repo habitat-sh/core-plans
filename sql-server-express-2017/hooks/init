@@ -1,0 +1,34 @@
+$sqlMajorVersion = [Version]::new("{{pkg.version}}").Major
+
+# If the sql instance data is not present, install a new instance
+if (!(Test-Path "{{pkg.svc_data_path}}/mssql${sqlMajorVersion}.{{cfg.instance}}")) {
+    setup.exe /configurationfile={{pkg.svc_config_path}}/config.ini /Q
+}
+
+# Configure the instance for the configured port
+Set-ItemProperty -Path  "HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL${sqlMajorVersion}.{{cfg.instance}}\MSSQLServer\SuperSocketNetLib\Tcp\IPAll" -Name TcpPort -Value {{cfg.port}}
+
+# Open port on firewall only if Windows Firewall service is running
+if($(Get-Service 'MpsSvc').Status -eq "Running") {
+    if(!(Get-Module xNetworking -ListAvailable)) {
+        Write-Host "Ensuring xNetworking DSC resources are installed..."
+        Install-Module xNetworking -Force | Out-Null
+
+        # Need to move xNetworking because LCM is not honoring PS Core's PSModulePath
+        $mod = (Get-Module xNetworking -ListAvailable).ModuleBase
+        $machine_mod = "C:\Program Files\windowsPowerShell\Modules\xNetworking"
+        if(Test-Path $machine_mod) { Remove-Item $machine_mod -Recurse -Force }
+        copy-Item $mod $machine_mod -Recurse -Force
+    }
+    
+    Write-Host "Compiling DSC mof..."
+    . (Join-Path {{pkg.svc_config_path}} firewall.ps1)
+    $mof = NewFirewallRule -OutputPath "{{pkg.svc_data_path}}"
+    
+    $configurationData = Get-Content $mof.FullName -AsByteStream -ReadCount 0
+    $totalSize = [System.BitConverter]::GetBytes($configurationData.Length + 4)
+    $configurationData = $totalSize + $configurationData
+    
+    Write-Host "Applying DSC configuration..."
+    Invoke-CimMethod -ComputerName localhost -Namespace "root/Microsoft/Windows/DesiredStateConfiguration" -ClassName "MSFT_DSCLocalConfigurationManager" -MethodName "SendConfigurationApply" -Arguments @{ConfigurationData = $configurationData; Force = $true}
+}
