@@ -118,6 +118,7 @@ consul @defilan
 elasticsearch @joshbrand @predominant
 gdk-pixbuf @rsertelon
 glib @rsertelon
+grpcurl @afiune
 gtk2 @rsertelon
 harfbuzz @rsertelon
 jdk7 @predominant @rsertelon

@@ -1,0 +1,10 @@
+pkg_name=grpcurl
+pkg_origin=core
+pkg_description="Like cURL, but for gRPC: Command-line tool for interacting with gRPC servers"
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_source="https://github.com/fullstorydev/grpcurl/cmd/grpcurl"
+pkg_upstream_url="https://github.com/fullstorydev/grpcurl"
+pkg_version="0.1.0"
+pkg_license=('custom')
+pkg_bin_dirs=(bin)
+pkg_scaffolding=core/scaffolding-go
