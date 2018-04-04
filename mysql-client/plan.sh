@@ -1,10 +1,10 @@
 pkg_name=mysql-client
 pkg_origin=core
-pkg_version=5.7.14
+pkg_version=5.7.21
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=('GPL-2.0')
 pkg_source=http://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-${pkg_version}.tar.gz
-pkg_shasum=f7415bdac2ca8bbccd77d4f22d8a0bdd7280b065bd646a71a506b77c7a8bd169
+pkg_shasum=fa205079c27a39c24f3485e7498dd0906a6e0b379b4f99ebc0ec38a9ec5b09b7
 pkg_upstream_url=https://www.mysql.com/
 pkg_description="MySQL Client Tools"
 pkg_deps=(
@@ -46,7 +46,7 @@ do_build() {
           -DCRYPTO_LIBRARY="$(pkg_path_for core/openssl)/lib/libcrypto.so" \
           -DWITHOUT_SERVER:BOOL=ON \
           -DCMAKE_INSTALL_PREFIX="$pkg_prefix"
-  make
+  make --jobs="$(nproc)"
 }
 
 do_install() {
