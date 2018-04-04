@@ -13,5 +13,3 @@ Binary package
 ## Usage
 
 The usage of this tool can be found [here](https://github.com/fullstorydev/grpcurl#example-usage)
-
-
