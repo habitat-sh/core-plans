@@ -56,7 +56,7 @@ do_build() {
     --with-cc-opt="$CFLAGS" \
     --with-ld-opt="$LDFLAGS"
 
-  make
+  make -j4
 }
 
 do_install() {

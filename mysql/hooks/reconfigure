@@ -1,0 +1,32 @@
+#!{{pkgPathFor "core/bash"}}/bin/bash -e
+#
+LOCAL_CONNECT_STRING="--defaults-extra-file={{pkg.svc_config_path}}/client.cnf"
+
+# Wait for both the local mysql instance to be ready
+mysqladmin $LOCAL_CONNECT_STRING --wait=5 ping
+# get current follower status (blank if a leader)
+SLAVE_STATUS=$(mysql $LOCAL_CONNECT_STRING -e "SHOW SLAVE STATUS" --auto-vertical-output)
+CURRENT_MASTER_HOST=$(mysql $LOCAL_CONNECT_STRING -e "SHOW SLAVE STATUS" --auto-vertical-output | grep "Master_Host:" | awk '{print $2}')
+
+{{~#if svc.me.follower}}
+# MySQL follower (aka "slave" in MySQL parlance) setup
+
+if ! [ "${CURRENT_MASTER_HOST}" == "{{svc.leader.sys.ip}}" ]; then
+  echo "Reconfiguring local mysql instance as a follower"
+  mysql $LOCAL_CONNECT_STRING -e "STOP SLAVE"
+  mysql $LOCAL_CONNECT_STRING -e "CHANGE MASTER TO MASTER_HOST='{{svc.leader.sys.ip}}', MASTER_USER='root', MASTER_PASSWORD='{{cfg.root_password}}'"
+  mysql $LOCAL_CONNECT_STRING -e "START SLAVE"
+  mysql $LOCAL_CONNECT_STRING -e "SHOW SLAVE STATUS"
+  echo "Success"
+fi
+{{~else}}
+# MySQL leader
+
+# determine if this leader was previously a follower, if so it needs to be reconfigured
+if ! [ "${SLAVE_STATUS}" == '' ]; then
+  echo "Reconfiguring local mysql instance as a leader"
+  mysql $LOCAL_CONNECT_STRING -e "STOP SLAVE"
+  mysql $LOCAL_CONNECT_STRING -e "RESET MASTER"
+  echo "Success"
+fi
+{{~/if}}
