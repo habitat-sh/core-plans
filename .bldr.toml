@@ -47,6 +47,8 @@ plan_path = "bats"
 plan_path = "bc"
 [bdwgc]
 plan_path = "bdwgc"
+[bind]
+plan_path = "bind"
 [binutils]
 plan_path = "binutils"
 [bison]
