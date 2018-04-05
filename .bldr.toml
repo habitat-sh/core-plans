@@ -314,6 +314,8 @@ plan_path = "govc"
 plan_path = "gox"
 [gperf]
 plan_path = "gperf"
+[gperftools]
+plan_path = "gperftools"
 [gpgme]
 plan_path = "gpgme"
 [gradle]
