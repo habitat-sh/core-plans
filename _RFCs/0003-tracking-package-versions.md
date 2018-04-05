@@ -17,8 +17,6 @@ Edge versions of software are not tracked by core plans. If a user wishes to use
 
 We currently have several generic packages (i.e. core/docker) that track the current stable version of the packaged software (as of today, core/docker points to Docker 17). When a new major version of the package becomes available, we move the old version (i.e. Docker 16) to a separate plan to track the old version (i.e. core/docker16) while the generic package (core/docker) will be updated to point to the current major version of the software.
 
-However, we do not have a process in place to handle edge releases of software. As of today, Docker 18 is the latest edge version of Docker, but the latest stable version is still Docker 17. This brought us to the question - should "core/docker" track the latest stable version or the latest edge version? Should we even track edge versions at all?
-
 # Guide-level explanation
 [guide-level-explanation]: #guide-level-explanation
 
