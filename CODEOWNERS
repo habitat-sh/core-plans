@@ -149,6 +149,7 @@ protobuf-cpp @afiune
 rabbitmqadmin @predominant
 redis @irvingpop
 shared-mime-info @rsertelon
+sqlserver @mwrock
 vault @defilan
 visual-build-tools-2017 @mwrock
 wrk @afiune

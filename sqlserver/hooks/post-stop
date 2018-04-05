@@ -1,0 +1,5 @@
+if($(Get-Service 'MSSQL${{cfg.instance}}').Status -eq "Running") {
+    Write-Host "{{pkg.name}} stopping..."
+    Stop-Service 'MSSQL${{cfg.instance}}'
+    Write-Host "{{pkg.name}} has stopped"
+}
