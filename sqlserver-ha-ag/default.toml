@@ -1,0 +1,11 @@
+endpoint_port=5022
+probe_port=59999
+availability_group_name="AG"
+availability_group_ip=""
+availability_group_failover_threshold=1
+backup_path="\\\\$env:computername\\backup"
+databases="''"
+cluster_name="sql"
+cluster_ip=""
+failover_mode="Automatic"
+availability_mode="SynchronousCommit"
