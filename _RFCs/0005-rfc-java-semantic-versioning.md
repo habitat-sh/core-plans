@@ -18,17 +18,17 @@ Habitat has been designed to work with semantic versions of the format `M.m.p`, 
 
 Java packages (jre and jdk) with version <= 8 will now adapt the official java version to habitat's package system:
 
-- core/jre8/8u151 will become core/jre8/8.0.151
-- core/jdk8/8u92 will become core/jdk8/8.0.92
+- core/jre8/8u151 will become core/jre8/8.151.0
+- core/jdk8/8u92 will become core/jdk8/8.92.0
 
-Generally, versions `<M>u<p>` will be renamed `<M>.0.<p>`
+Generally, versions `<M>u<m>` will be renamed `<M>.<m>.0`
 
 # Reference-level explanation
 [reference-level-explanation]: #reference-level-explanation
 
 The package versions change should happen only for the latest of jre8 and jdk8. Indeed, Java 7 is not supported anymore by Oracle.
 
-Note that version 8.0.151 is considered more recent than 8u151 by habitat, which implies that this RFC shouldn't have any undesired side-effects.
+Note that version 8.151.0 is considered more recent than 8u151 by habitat, which implies that this RFC shouldn't have any undesired side-effects.
 
 # Drawbacks
 [drawbacks]: #drawbacks
