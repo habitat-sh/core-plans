@@ -6,16 +6,16 @@
 # Summary
 [summary]: #summary
 
-Everytime a new major version of software packaged by Habitat is released (whether stable or an edge release), a new core plan must be made for that version (i.e. when Docker11 is released, we should create core/docker11).
+Generic package names (ones which do not specify a version in the name - i.e. core/docker) must always point to the latest **stable** version of the software.
 
-Generic package names (ones which do not specify a version in the name - i.e. core/docker) must always point to the latest **stable** version of the software.  They must not track edge versions of the software.  They must source the plan for the latest stable plan which tracks that software (i.e. if the current stable version of Docker is Docker10, and the edge version is Docker11, core/docker should source core/docker10).
+Everytime a new major version of software packaged by Habitat is released as stable, a new core plan must be made for that version (i.e. when Docker11 is released as stable, we should create core/docker11). Any core plan which tracks a major stable version release (i.e. core/docker10, core/docker11) should source the generic plan and overwrite download urls, build phases, etc., as necessary to download and package that major version.
 
 Edge versions of software are not tracked by core plans. If a user wishes to use the edge version of a package, they must either fork an existing core plan or create a new core plan to package it. Core plans only support stable versions of software.
 
 # Motivation
 [motivation]: #motivation
 
-We currently have several generic packages (i.e. core/docker) that track the current stable version of the packaged software (as of today, core/docker points to Docker 17). When a new major version of the package becomes available, we move the old version (i.e. Docker 16) to a separate plan to track the old version (i.e. core/docker16) while the generic package (core/docker) will be updated to point to the current major version of the software.
+We currently have several generic packages (i.e. core/docker) that track the current stable version of the packaged software (as of today, core/docker points to Docker 17). When a new major version of the package becomes available, we move the old version (i.e. Docker 16) to a separate plan to track the old version (i.e. core/docker16) while the generic package (core/docker) is updated to point to the current major version of the software.
 
 # Guide-level explanation
 [guide-level-explanation]: #guide-level-explanation
@@ -26,7 +26,7 @@ Historically, when a new major version of software was released (i.e. when Node 
 
 Now we will create a new core plan for every major release of a piece of software.
 
-Generic packages (i.e core/docker) will continue to track the latest stable version of the software. However, they will do this by sourcing whatever version plan corresponds to the latest stable version (i.e. if Docker10 is stable, core/docker will source core/docker10, rather than core/docker9).
+Generic packages (i.e core/docker) will continue to track the latest stable version of the software. Version specific plans (i.e. core/Docker10) will source the generic plan and overwrite download urls, build phases, and whatever else is appropriate. We currently do this with our core/postgres and core/postgresX packages and will follow this process with each of our core plans going forward.
 
 # Reference-level explanation
 [reference-level-explanation]: #reference-level-explanation
@@ -45,7 +45,7 @@ The alternative is to keep doing what we have historically done - having the gen
 
 However, this makes it more difficult for users to "pin" to a certain version of software if they know they are not going to be upgrading to the next major version in the near future.
 
-The other alternative is to avoid sourcing another plan from the generic plan by tracking the latest stable version in both the generic plan (i.e. core/node) and the version specific plan (i.e. core/node9). This, however, introduces duplication, and the high possiblility of one being updated and the other not. Directly sourcing the version specific plan from the generic plan prevents this.
+The other alternative is to avoid sourcing another plan by tracking the latest stable version in both the generic plan (i.e. core/node) and the version specific plan (i.e. core/node9). This, however, introduces duplication, and the high possiblility of one being updated and the other not. Directly sourcing the version specific plan from the generic plan prevents this.
 
 
 # Unresolved questions
