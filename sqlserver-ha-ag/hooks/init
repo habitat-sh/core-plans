@@ -1,0 +1,74 @@
+$ProgressPreference="SilentlyContinue"
+
+$secondary = @()
+$primary = '{{bind.database.first.sys.hostname}}'
+{{~#eachAlive bind.database.members as |member|}}
+if($primary -ne '{{member.sys.hostname}}') {
+    $secondary += '{{member.sys.hostname}}'
+}
+{{~/eachAlive}}
+
+Invoke-Command -ComputerName localhost -EnableNetworkAccess {
+    $ProgressPreference="SilentlyContinue"
+    Write-Host "Checking for nuget package provider..."
+    if(!(Get-PackageProvider -Name nuget -ErrorAction SilentlyContinue -ListAvailable)) {
+        Write-Host "Installing Nuget provider..."
+        Install-PackageProvider -Name NuGet -Force | Out-Null
+    }
+    Write-Host "Checking for SqlServer PS module..."
+    if(!(Get-Module SqlServer -ListAvailable)) {
+        Write-Host "Installing SqlServer PS Module..."
+        Install-Module SqlServer -Force | Out-Null
+    }
+    Write-Host "Checking for xNetworking PS module..."
+    if(!(Get-Module xNetworking -ListAvailable)) {
+        Write-Host "Installing xNetworking PS Module..."
+        Install-Module xNetworking -Force | Out-Null
+    }
+    Write-Host "Checking for SqlServerDsc PS module..."
+    if(!(Get-Module SqlServerDsc -ListAvailable)) {
+        Write-Host "Installing SqlServerDsc PS Module..."
+        Install-Module SqlServerDsc -Force | Out-Null
+    }
+}
+
+Import-Module "{{pkgPathFor "core/dsc-core"}}/Modules/DscCore"
+Start-DscCore (Join-Path {{pkg.svc_config_path}} cluster.ps1) EnableFailover
+
+# Adding a cluster here because DSC requires us to pass
+# credentials.
+Invoke-Command -ComputerName localhost -EnableNetworkAccess -ArgumentList (,($secondary + $primary)) {
+    param ($nodes)
+    $ProgressPreference="SilentlyContinue"
+
+    $needToAddNode = $true
+    if(!(Get-Cluster -Name {{cfg.cluster_name}} -Domain $env:UserDomain)) {
+        Write-Host "Creating new {{cfg.cluster_name}} cluster"
+        $cluster = New-Cluster -Name {{cfg.cluster_name}} -Node $env:ComputerName -NoStorage -StaticAddress {{cfg.cluster_ip}} -ErrorAction SilentlyContinue
+        if ($cluster) {
+            $needToAddNode = $false
+        } else {
+            Write-Host "Cluster already created"
+            do {
+                write-host "waiting for nodes to come online..."
+                Start-Sleep -Seconds 5
+            } until ($nodes | ? {  Get-ClusterNode -Cluster $_ -ErrorAction SilentlyContinue })
+        }
+    } else {
+        Write-Host "Cluster {{cfg.cluster_name}} already created"
+        if(Get-ClusterNode -Cluster $env:ComputerName -ErrorAction SilentlyContinue) {
+            Write-Host "$env:ComputerName already added to cluster"
+            $needToAddNode = $false
+        }
+    }
+
+    if($needToAddNode) {
+        Write-Host "Adding $env:ComputerName to cluster"
+        # In azure we have to add the node and reference the
+        # cluster by the name of one of the nodes already joined
+        $node = $nodes | ? {  Get-ClusterNode -Cluster $_ -ErrorAction SilentlyContinue }
+        Add-ClusterNode -Name $env:ComputerName -Cluster $node -NoStorage
+    }
+}
+
+Start-DscCore (Join-Path {{pkg.svc_config_path}} feature.ps1) EnableAlwaysOn

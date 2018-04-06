@@ -1,0 +1,89 @@
+$ProgressPreference="SilentlyContinue"
+
+$secondary = @()
+$primary = '{{bind.database.first.sys.hostname}}'
+$instance="{{bind.database.first.cfg.instance}}"
+{{~#eachAlive bind.database.members as |member|}}
+if($primary -ne '{{member.sys.hostname}}') {
+    $secondary += '{{member.sys.hostname}}'
+}
+{{~/eachAlive}}
+
+Import-Module "{{pkgPathFor "core/dsc-core"}}/Modules/DscCore"
+
+# Open ports on firewall only if Windows Firewall service is running
+if($(Get-Service 'MpsSvc').Status -eq "Running") {
+    Start-DscCore (Join-Path {{pkg.svc_config_path}} firewall.ps1) NewFirewallRule
+}
+
+if($env:ComputerName -eq $primary) {
+    $login = "${env:userdomain}\${env:ComputerName}`$"
+
+    Invoke-Command -ComputerName localhost -EnableNetworkAccess -ArgumentList $login, $secondary, $instance {
+        param ($login, $secondary, $instance)
+        $ProgressPreference="SilentlyContinue"
+        Import-Module SqlServer -DisableNameChecking
+
+        foreach($s in $secondary) {
+            Write-Host "Waiting for HADR to be enabled on $s"
+            $hadrEnabled = $false
+            while(!$hadrEnabled) {
+                Start-Sleep -Seconds 1
+                $svr = New-Object ('Microsoft.SqlServer.Management.Smo.Server') "$s\$instance"
+                $hadrEnabled = $svr.IsHadrEnabled
+            }
+        }
+
+        # The DSC will run under the machine account so we need to add
+        # that login to the secondary replicas
+        foreach($s in $secondary) {
+            if(!(Get-SqlLogin -LoginName $login -ServerInstance "$s\$instance" -ErrorAction SilentlyContinue)) {
+                Write-Host "Adding machine account login to $s"
+                Add-SqlLogin -LoginName $login -LoginType WindowsUser -ServerInstance "$s\$instance" -Enable
+
+                $svr = New-Object ('Microsoft.SqlServer.Management.Smo.Server') "$s\$instance"
+                $svrole = $svr.Roles | where {$_.Name -eq 'sysadmin'}
+                $svrole.AddMember($login)
+            }
+        }
+    }
+
+    Start-DscCore (Join-Path {{pkg.svc_config_path}} group.ps1) NewAvailabilityGroup
+}
+
+Write-Host "All DSC Completed"
+
+# dsc does not configure the probe port so we do that here
+if($env:ComputerName -eq $primary -and ('{{cfg.availability_group_ip}}' -ne '')) {
+    Invoke-Command -Computer localhost {
+        $ProgressPreference="SilentlyContinue"
+        $p = Get-ClusterResource '{{cfg.availability_group_name}}_{{cfg.availability_group_ip}}' | Get-ClusterParameter -Name ProbePort
+        if($p.Value -ne '{{cfg.probe_port}}') {
+            Write-Host "Adding probe port {{cfg.probe_port}} to {{cfg.availability_group_name}}_{{cfg.availability_group_ip}}"
+            Get-ClusterResource '{{cfg.availability_group_name}}_{{cfg.availability_group_ip}}' | Set-ClusterParameter -Name ProbePort -Value {{cfg.probe_port}}
+            Write-Host "Stopping IP Resource"
+            Stop-ClusterResource '{{cfg.availability_group_name}}_{{cfg.availability_group_ip}}' | Out-Null
+            Write-Host "Starting IP Resource"
+            Start-ClusterResource '{{cfg.availability_group_name}}_{{cfg.availability_group_ip}}' | Out-Null
+            Write-Host "Starting Cluster Group"
+            Start-ClusterGroup '{{cfg.availability_group_name}}' | Out-Null
+        }
+    }
+}
+
+# adjust failover threshold if needed
+if($env:ComputerName -eq $primary) {
+    Invoke-Command -Computer localhost {
+        $group = Get-ClusterGroup -Name {{cfg.availability_group_name}}
+        if('{{cfg.availability_group_failover_threshold}}' -ne $group.FailoverThreshold) {
+            Write-Host "Changing failover threshold to {{cfg.availability_group_failover_threshold}}"
+            $group.FailoverThreshold = {{cfg.availability_group_failover_threshold}}
+        }
+    }
+}
+
+Write-Host "Availability group configuration complete!"
+
+while($true) {
+    Start-Sleep -Seconds 1
+}
