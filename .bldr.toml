@@ -298,6 +298,8 @@ plan_path = "gnupg-static"
 paths = [
   "gnupg/*",
 ]
+[gnuplot]
+plan_path = "gnuplot"
 [go]
 plan_path = "go"
 [go14]
@@ -482,6 +484,8 @@ plan_path = "libbsd"
 plan_path = "libcap"
 [libcap-ng]
 plan_path = "libcap-ng"
+[libcerf]
+plan_path = "libcerf"
 [libcxx]
 plan_path = "libcxx"
 [libdrm]
@@ -500,6 +504,8 @@ plan_path = "libevent"
 plan_path = "libffi"
 [libgcrypt]
 plan_path = "libgcrypt"
+[libgd]
+plan_path = "libgd"
 [libghthash]
 plan_path = "libghthash"
 [libgpg-error]
