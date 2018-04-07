@@ -1,11 +1,12 @@
 pkg_name=gnuplot
 pkg_origin=core
-pkg_version="5.0.6"
+pkg_version="5.2.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('gnuplot')
 pkg_source="https://sourceforge.net/projects/$pkg_name/files/$pkg_name/$pkg_version/$pkg_name-$pkg_version.tar.gz"
-pkg_shasum="5bbe4713e555c2e103b7d4ffd45fca69551fff09cf5c3f9cb17428aaacc9b460"
+pkg_shasum="a416d22f02bdf3873ef82c5eb7f8e94146795811ef808e12b035ada88ef7b1a1"
 pkg_deps=(
+  core/bzip2
   core/cairo
   core/expat
   core/fontconfig
@@ -14,16 +15,28 @@ pkg_deps=(
   core/glib
   core/glibc
   core/harfbuzz
+  core/jbigkit
   core/libcerf
   core/liberation-fonts-ttf
+  core/libffi
+  core/libice
   core/libiconv
   core/libgd
+  core/libjpeg-turbo
   core/libpng
-  core/lua
+  core/libsm
+  core/libtiff
+  core/libxau
+  core/libxcb
+  core/libxdmcp
+  core/libxext
+  core/ncurses
   core/pango
   core/pcre
   core/pixman
   core/readline
+  core/xlib
+  core/xz
   core/zlib
 )
 pkg_build_deps=(
