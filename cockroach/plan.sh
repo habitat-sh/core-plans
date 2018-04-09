@@ -26,14 +26,10 @@ do_build() {
   fix_interpreter "src/github.com/cockroachdb/cockroach/scripts/*.sh" core/coreutils bin/env
 
   make build
-
-  return $?
 }
 
 do_install() {
   pushd "./src/github.com/cockroachdb/cockroach" > /dev/null
   cp -v cockroach bin/* "${pkg_prefix}/bin/"
   popd > /dev/null
-
-  return 0
 }
