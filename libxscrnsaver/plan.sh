@@ -1,0 +1,34 @@
+pkg_name=libxscrnsaver
+pkg_distname=libXScrnSaver
+pkg_origin=core
+pkg_version=1.2.2
+pkg_dirname="${pkg_distname}-${pkg_version}"
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="X11 Screen Saver extension client library"
+pkg_upstream_url="https://www.x.org/"
+pkg_license=('MIT')
+pkg_source="https://www.x.org/releases/individual/lib/${pkg_distname}-${pkg_version}.tar.bz2"
+pkg_shasum="8ff1efa7341c7f34bcf9b17c89648d6325ddaae22e3904e091794e0b4426ce1d"
+pkg_deps=(
+  core/glibc
+  core/libxau
+  core/libxcb
+  core/libxdmcp
+  core/libxext
+  core/xlib
+)
+pkg_build_deps=(
+  core/diffutils
+  core/gcc
+  core/kbproto
+  core/libpthread-stubs
+  core/make
+  core/pkg-config
+  core/scrnsaverproto
+  core/util-macros
+  core/xextproto
+  core/xproto
+)
+pkg_include_dirs=(include)
+pkg_lib_dirs=(lib)
+pkg_pconfig_dirs=(lib/pkgconfig)
