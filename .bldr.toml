@@ -960,6 +960,8 @@ plan_path = "sccache"
 plan_path = "scons"
 [scowl]
 plan_path = "scowl"
+[scrnsaverproto]
+plan_path = "scrnsaverproto"
 [sed]
 plan_path = "sed"
 [sensu]
