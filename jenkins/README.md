@@ -34,4 +34,10 @@ An `at-once` update strategy, or none work for Jenkins.
 
 By default, this package is configured for plain HTTP and is intended for usage in secure environment.
 
+## Port
+
+This plan uses port `8080` for HTTP and `8443` for HTTPS by default.
+
+Previous versions of this plan used port 80 and 443. Upgrading from a pervious version may yield unexpected connection issues if you're expecting this to service on port 80/443.
+
 [jenkins]: https://jenkins.io
