@@ -364,6 +364,8 @@ plan_path = "helm"
 plan_path = "htop"
 [httpd]
 plan_path = "httpd"
+[hwloc]
+plan_path = "hwloc"
 [iana-etc]
 plan_path = "iana-etc"
 [icu]
