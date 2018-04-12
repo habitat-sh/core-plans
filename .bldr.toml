@@ -95,6 +95,10 @@ plan_path = "ccache"
 plan_path = "certstrap"
 [check]
 plan_path = "check"
+[clang]
+plan_path = "clang"
+[clang-tools-extra]
+plan_path = "clang-tools-extra"
 [clens]
 plan_path = "clens"
 [clingo]
