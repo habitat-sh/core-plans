@@ -7,10 +7,8 @@ pkg_license=('Apache-2.0')
 pkg_source=nosuchfile.tar.gz
 pkg_upstream_url="https://github.com/habitat-sh/core-plans"
 pkg_deps=(
-  core/go
-)
-pkg_build_deps=(
   ${pkg_deps[@]}
+  core/go
   core/git
   core/gcc
   core/make
