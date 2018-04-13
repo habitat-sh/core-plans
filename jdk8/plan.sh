@@ -1,11 +1,11 @@
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_name=jdk8
-pkg_version=8u161
-#pkg_source=http://download.oracle.com/otn-pub/java/jdk/${pkg_version}-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-${pkg_version}-linux-x64.tar.gz
-pkg_source=http://download.oracle.com/otn-pub/java/jdk/${pkg_version}-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-${pkg_version}-linux-x64.tar.gz
-pkg_shasum=6dbc56a0e3310b69e91bb64db63a485bd7b6a8083f08e48047276380a0e2021e
-pkg_filename=jdk-${pkg_version}-linux-x64.tar.gz
+pkg_version=8.162.0
+pkg_upstream_version=8u162
+pkg_source=http://download.oracle.com/otn-pub/java/jdk/${pkg_upstream_version}-b12/0da788060d494f5095bf8624735fa2f1/jdk-${pkg_upstream_version}-linux-x64.tar.gz
+pkg_shasum=68ec82d47fd9c2b8eb84225b6db398a72008285fafc98631b1ff8d2229680257
+pkg_filename=jdk-${pkg_upstream_version}-linux-x64.tar.gz
 pkg_license=('Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX')
 pkg_description=('Oracle Java Development Kit. This package is made available to you to allow you to run your applications as provided in and subject to the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html')
 pkg_upstream_url=http://www.oracle.com/technetwork/java/javase/overview/index.html
@@ -15,7 +15,7 @@ pkg_bin_dirs=(bin jre/bin)
 pkg_lib_dirs=(lib lib/amd64)
 pkg_include_dirs=(include)
 
-source_dir=$HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_version}
+source_dir=$HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_upstream_version}
 
 do_setup_environment() {
  set_runtime_env JAVA_HOME "$pkg_prefix"
