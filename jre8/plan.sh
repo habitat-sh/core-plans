@@ -1,10 +1,11 @@
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_name=jre8
-pkg_version=8u162
-pkg_source="http://download.oracle.com/otn-pub/java/jdk/${pkg_version}-b12/0da788060d494f5095bf8624735fa2f1/jre-${pkg_version}-linux-x64.tar.gz"
+pkg_version=8.162.0
+pkg_upstream_version=8u162
+pkg_source="http://download.oracle.com/otn-pub/java/jdk/${pkg_upstream_version}-b12/0da788060d494f5095bf8624735fa2f1/jre-${pkg_upstream_version}-linux-x64.tar.gz"
 pkg_shasum="dfa25ebd1f90bf74ad7ba2dacb0e08d884594e733c9a522b58256778031341a4"
-pkg_filename="jre-${pkg_version}-linux-x64.tar.gz"
+pkg_filename="jre-${pkg_upstream_version}-linux-x64.tar.gz"
 pkg_license=('Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX')
 pkg_description=('Oracle Java Runtime Environment. This package is made available to you to allow you to run your applications as provided in and subject to the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html')
 pkg_upstream_url="http://www.oracle.com/technetwork/java/javase/overview/index.html"
@@ -14,7 +15,7 @@ pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 
-source_dir=$HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_version}
+source_dir=$HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_upstream_version}
 
 do_setup_environment() {
  set_runtime_env JAVA_HOME "$pkg_prefix"
