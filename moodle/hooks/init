@@ -1,0 +1,54 @@
+#!{{pkgPathFor "core/bash"}}/bin/bash
+set -e
+exec 2>&1
+
+export HOME="/hab"
+_moodle_path="{{pkg.svc_static_path}}/moodle"
+_moodle_dataroot="{{pkg.svc_data_path}}/dataroot"
+_moodle_config_source="{{pkg.svc_config_path}}/config.php"
+_mysql_client_config="{{pkg.svc_config_path}}/my.cnf"
+
+if [[ -d $_moodle_path ]]; then
+  echo "Removing previous version deployed at ${_moodle_path}"
+  rm -rf "${_moodle_path}"
+fi
+
+echo "Deploying new version from {{pkg.path}} to {{pkg.svc_static_path}}"
+cp -r {{pkg.path}}/moodle {{pkg.svc_static_path}}
+
+echo "Copy moodle configuration from ${_moodle_config_source} to ${_moodle_path}"
+cp ${_moodle_config_source} ${_moodle_path}
+
+echo "Ensure group 'hab' has read access to files in ${_moodle_path}"
+chmod 0755 "{{pkg.svc_static_path}}"
+chown -R hab:hab "${_moodle_path}"
+find "${_moodle_path}" -type f -exec chmod g+r {} \;
+find "${_moodle_path}" -type d -exec chmod g+rx {} \;
+
+echo "Ensure php-fpm moodle.socket is accessable in {{pkg.svc_var_path}}"
+chmod 0755 {{pkg.svc_var_path}}
+
+if ! [[ -d $_moodle_dataroot ]]; then
+  echo "Create moodle dataroot and make is writable for 'hab' user"
+  mkdir "${_moodle_dataroot}"
+  chown hab:hab "${_moodle_dataroot}"
+fi
+echo "Make sure 'hab' group can reach the moodle dataroot directory"
+chown hab:hab "{{pkg.svc_data_path}}"
+chmod 0755 "{{pkg.svc_data_path}}"
+echo "Moodle dataroot: ${_moodle_dataroot}"
+
+_database_exists=$(mysql --defaults-file=${_mysql_client_config} -N -B -e "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '{{cfg.dbname}}';")
+if [[ $_database_exists != {{cfg.dbname}} ]]; then
+  echo "Setup moodle application database and user"
+  mysql --defaults-file=${_mysql_client_config} < {{pkg.svc_config_path}}/init.sql
+  echo "Initialize the Moodle database and setup the admin user: {{cfg.adminuser}}"
+  php -c {{pkg.svc_config_path}} \
+    "${_moodle_path}/admin/cli/install_database.php" \
+    --adminuser={{cfg.adminuser}} \
+    --adminpass={{cfg.adminpass}} \
+    --adminemail={{cfg.adminemail}} \
+    --agree-license
+fi
+
+exit 0

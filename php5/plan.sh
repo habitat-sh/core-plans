@@ -17,6 +17,8 @@ pkg_deps=(
   core/libxml2
   core/openssl
   core/zlib
+  core/libjpeg-turbo
+  core/libpng
 )
 pkg_build_deps=(
   core/bison2
@@ -41,7 +43,14 @@ do_build() {
     --with-libxml-dir="$(pkg_path_for libxml2)" \
     --with-openssl="$(pkg_path_for openssl)" \
     --with-xmlrpc \
-    --with-zlib="$(pkg_path_for zlib)"
+    --with-zlib="$(pkg_path_for zlib)" \
+    --with-mysql=mysqlnd \
+    --with-mysqli=mysqlnd \
+    --with-pdo-mysql=mysqlnd \
+    --enable-zip \
+    --with-gd \
+    --with-jpeg-dir="$(pkg_path_for libjpeg-turbo)" \
+    --with-png-dir="$(pkg_path_for libpng)"
   make
 }
 
