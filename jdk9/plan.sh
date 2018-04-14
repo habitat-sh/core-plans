@@ -3,9 +3,9 @@ source ../jdk8/plan.sh
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_name=jdk9
-pkg_version=9.0.1
-pkg_source=http://download.oracle.com/otn-pub/java/jdk/${pkg_version}+11/jdk-${pkg_version}_linux-x64_bin.tar.gz
-pkg_shasum=2cdaf0ff92d0829b510edd883a4ac8322c02f2fc1beae95d048b6716076bc014
+pkg_version=9.0.4
+pkg_source=http://download.oracle.com/otn-pub/java/jdk/${pkg_version}+11/c2514751926b4512b076cc82f959763f/jdk-${pkg_version}_linux-x64_bin.tar.gz
+pkg_shasum=90c4ea877e816e3440862cfa36341bc87d05373d53389ec0f2d54d4e8c95daa2
 pkg_filename=jdk-${pkg_version}_linux-x64_bin.tar.gz
 pkg_license=('Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX')
 pkg_description=('Oracle Java Development Kit. This package is made available to you to allow you to run your applications as provided in and subject to the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html')
