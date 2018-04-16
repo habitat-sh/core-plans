@@ -13,6 +13,7 @@ pkg_deps=(core/glibc core/openssl core/zlib core/bzip2 core/xz)
 pkg_build_deps=(core/gcc core/coreutils core/make)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_build() {
     ./configure \

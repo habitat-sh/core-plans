@@ -10,12 +10,13 @@ pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_install() {
   do_default_install
 
   # Clean up extra files
-  rm -rfv $pkg_prefix/share/info/dir $pkg_prefix/share/doc/check/*ChangeLog*
+  rm -rfv "$pkg_prefix/share/info/dir" "$pkg_prefix/share/doc/check/*ChangeLog*"
 }
 
 

@@ -11,6 +11,7 @@ pkg_deps=(core/glibc)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
+pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_prepare() {
   do_default_prepare
