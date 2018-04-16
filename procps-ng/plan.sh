@@ -10,12 +10,13 @@ pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_build() {
   # The Util-linux package will provide the `kill` command
   ./configure \
-    --prefix=$pkg_prefix \
-    --sbindir=$pkg_prefix/bin \
+    --prefix="$pkg_prefix" \
+    --sbindir="$pkg_prefix/bin" \
     --disable-kill
   make
 }
