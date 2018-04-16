@@ -22,6 +22,10 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
+do_prepare() {
+  export CFLAGS="${CFLAGS} -Wno-error=implicit-function-declaration"
+}
+
 do_check() {
   make check
 }
