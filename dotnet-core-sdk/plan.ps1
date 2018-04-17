@@ -1,20 +1,15 @@
 $pkg_name="dotnet-core-sdk"
 $pkg_origin="core"
-$pkg_version="1.0.4"
+$pkg_version="2.0.3"
 $pkg_license=('MIT')
 $pkg_upstream_url="https://www.microsoft.com/net/core"
 $pkg_description=".NET Core is a blazing fast, lightweight and modular platform
   for creating web applications and services that run on Windows,
   Linux and Mac."
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-$pkg_source="https://dotnetcli.blob.core.windows.net/dotnet/Sdk/$pkg_version/dotnet-dev-win-x64.$pkg_version.zip"
-$pkg_shasum="82869baef9e010415583174b0b0be95a2cb326dfd36bb32ec270803a9c8196ec"
-$pkg_filename="dotnet-dev-win-x64.$pkg_version.zip"
+$pkg_source="https://download.microsoft.com/download/D/7/2/D725E47F-A4F1-4285-8935-A91AE2FCC06A/dotnet-sdk-$pkg_version-win-x64.zip"
+$pkg_shasum="64556c5454be49388a73525518f372b003113d3a418b92ea41e1659f1734b045"
 $pkg_bin_dirs=@("bin")
-
-function Invoke-Unpack {
-  Expand-Archive -Path "$HAB_CACHE_SRC_PATH/$pkg_filename" -DestinationPath "$HAB_CACHE_SRC_PATH/$pkg_dirname"
-}
 
 function Invoke-Install {
   Copy-Item * "$pkg_prefix/bin" -Recurse -Force
@@ -23,7 +18,11 @@ function Invoke-Install {
 function Invoke-Check() {
   mkdir dotnet-new
   Push-Location dotnet-new
-  ../dotnet.exe new
+  ../dotnet.exe new web
+  if(!(Test-Path "program.cs")) {
+    Pop-Location
+    Write-Error "dotnet app was not generated"
+  }
   Pop-Location
   Remove-Item -Recurse -Force dotnet-new
 }
