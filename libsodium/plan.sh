@@ -28,6 +28,7 @@ pkg_build_deps=(
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_check() {
   make check
