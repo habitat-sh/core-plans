@@ -17,6 +17,10 @@ function Invoke-Unpack {
   lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_filename").Path
   Expand-Archive -Path "chefdk-${pkg_version}-1-x64/SourceDir/opscode/chefdk.zip" -DestinationPath "$HAB_CACHE_SRC_PATH/$pkg_dirname"
   Remove-Item chefdk-${pkg_version}-1-x64 -Recurse -Force
+  Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname/embedded/bin/*.bat" | % {
+    (Get-Content $_).Replace("C:\opscode\chefdk\embedded\bin", "%~dp0") | Set-Content $_
+    (Get-Content $_).Replace("C:/opscode/chefdk/embedded/bin", "%~dp0") | Set-Content $_
+  }
 }
 
 function Invoke-Install {
