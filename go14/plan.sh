@@ -17,7 +17,7 @@ do_prepare() {
   build_line "Setting GOOS=$GOOS"
   export GOARCH=amd64
   build_line "Setting GOARCH=$GOARCH"
-  export CGO_ENABLED=1
+  export CGO_ENABLED=0
   build_line "Setting CGO_ENABLED=$CGO_ENABLED"
 
   GOROOT="$(pwd)"
@@ -69,7 +69,7 @@ do_prepare() {
 
 do_build() {
   pushd src > /dev/null
-    env CGO_ENABLED=0 bash make.bash --no-clean
+    bash make.bash --no-clean
   popd > /dev/null
 }
 
