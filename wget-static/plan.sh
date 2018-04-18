@@ -10,8 +10,6 @@ FTP and FTPS the most widely-used Internet protocols.\
 "
 pkg_upstream_url="https://www.gnu.org/software/wget/"
 pkg_license=('GPL-3.0+')
-# Empty out the run deps array
-pkg_deps=()
 # Throw the run deps into build deps as this will be static
 pkg_build_deps=(
   core/linux-headers-musl
@@ -19,6 +17,8 @@ pkg_build_deps=(
   "${pkg_build_deps[@]}"
   "${pkg_deps[@]}"
 )
+# Empty out the run deps array
+pkg_deps=()
 
 do_prepare() {
   CFLAGS="-I$(pkg_path_for linux-headers-musl)/include -I$(pkg_path_for musl)/include"
