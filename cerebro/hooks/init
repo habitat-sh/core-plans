@@ -1,0 +1,9 @@
+#!/bin/sh
+
+export CEREBRO_LOG_PATH="{{pkg.svc_var_path}}/logs"
+mkdir -p "${CEREBRO_LOG_PATH}"
+chown {{pkg.svc_user}}:{{pkg.svc_group}} "${CEREBRO_LOG_PATH}"
+
+export CEREBRO_TMP_PATH="{{pkg.svc_data_path}}/tmp"
+mkdir -p "${CEREBRO_TMP_PATH}"
+chown {{pkg.svc_user}}:{{pkg.svc_group}} "${CEREBRO_TMP_PATH}"

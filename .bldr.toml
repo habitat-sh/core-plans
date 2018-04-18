@@ -91,6 +91,8 @@ plan_path = "camlp4"
 plan_path = "cargo-nightly"
 [ccache]
 plan_path = "ccache"
+[cerebro]
+plan_path = "cerebro"
 [certstrap]
 plan_path = "certstrap"
 [check]

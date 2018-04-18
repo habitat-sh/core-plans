@@ -1,0 +1,12 @@
+#!/bin/sh
+
+exec 2>&1
+
+exec java \
+	-Duser.dir={{pkg.svc_path}} \
+	-Dhttp.port={{cfg.port}} \
+    -Dorg.sqlite.tmpdir={{pkg.svc_data_path}}/tmp \
+    -Dconfig.file={{pkg.svc_config_path}}/application.conf \
+    -Dlogback.configurationFile={{pkg.svc_config_path}}/logback.xml \
+	-cp '' \
+	-jar "{{pkg.path}}/lib/cerebro.cerebro-{{pkg.version}}-launcher.jar"
