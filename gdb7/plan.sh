@@ -2,8 +2,7 @@ pkg_name=gdb
 pkg_origin=core
 pkg_version=7.9
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('GPL-3.0')
-pkg_description="GDB, the GNU Project debugger, allows you to see what is going on 'inside' another program while it executes -- or what another program was doing at the moment it crashed."
+pkg_license=('GPL-3.0') pkg_description="GDB, the GNU Project debugger, allows you to see what is going on 'inside' another program while it executes -- or what another program was doing at the moment it crashed."
 pkg_upstream_url="https://www.gnu.org/software/gdb/"
 pkg_source="http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum=9b315651a16528f7af8c7d8284699fb0c965df316cc7339bb0b7bae335848392
@@ -34,7 +33,7 @@ pkg_lib_dirs=(lib)
 
 do_prepare() {
   export CFLAGS="${CFLAGS} -O2 -fstack-protector-strong -Wformat -Werror=format-security "
-  export CXXFLAGS="${CXXFLAGS} -O2 -fstack-protector-strong -Wformat -Werror=format-security "
+  export CXXFLAGS="${CXXFLAGS} -O2 -fstack-protector-strong -Wformat -Werror=format-security -fpermissive "
   export CPPFLAGS="${CPPFLAGS} -Wdate-time"
   export LDFLAGS="${LDFLAGS} -Wl,-Bsymbolic-functions -Wl,-z,relro"
 }
