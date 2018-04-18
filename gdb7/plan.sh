@@ -1,4 +1,4 @@
-pkg_name=gdb
+pkg_name=gdb7
 pkg_origin=core
 pkg_version=7.9
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
