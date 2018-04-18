@@ -1,13 +1,13 @@
 pkg_name=go
 pkg_origin=core
-pkg_version=1.9.4
+pkg_version=1.10.1
 pkg_description="Go is an open source programming language that makes it easy to
   build simple, reliable, and efficient software."
 pkg_upstream_url=https://golang.org/
 pkg_license=('BSD')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://storage.googleapis.com/golang/go${pkg_version}.src.tar.gz
-pkg_shasum=0573a8df33168977185aa44173305e5a0450f55213600e94541604b75d46dc06
+pkg_shasum=589449ff6c3ccbff1d391d4e7ab5bb5d5643a5a41a04c99315e55c16bbf73ddc
 pkg_dirname=go
 pkg_deps=(core/glibc core/iana-etc core/cacerts)
 pkg_build_deps=(core/coreutils core/inetutils core/bash core/patch core/gcc core/go17 core/perl)

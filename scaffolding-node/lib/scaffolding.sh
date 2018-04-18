@@ -114,6 +114,9 @@ scaffolding_modules_install() {
       if [[ ! -f "$CACHE_PATH/package.json" ]]; then
         cp -av package.json "$CACHE_PATH/"
       fi
+      if [[ -c ".npmrc" ]]; then
+        cp -av .npmrc "$CACHE_PATH/"
+      fi
       if [[ -f "npm-shrinkwrap.json" ]]; then
         cp -av npm-shrinkwrap.json "$CACHE_PATH/"
       fi
@@ -132,6 +135,11 @@ scaffolding_modules_install() {
       fi
       if [[ -f "tsconfig.json" ]]; then
         cp -av tsconfig.json "$CACHE_PATH/"
+      fi
+
+      # Important for tsoa
+      if [[ -f "tsoa.json" ]]; then
+        cp -av tsoa.json "$CACHE_PATH/"
       fi
 
       pushd "$CACHE_PATH" > /dev/null

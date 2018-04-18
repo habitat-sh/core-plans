@@ -1,25 +1,25 @@
 pkg_name=llvm
 pkg_origin=core
-pkg_version=3.9.1
+pkg_version=5.0.1
 pkg_license=('NCSA')
 pkg_description="Next-gen compiler infrastructure"
 pkg_upstream_url="http://llvm.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_filename="${pkg_name}-${pkg_version}.src.tar.xz"
 pkg_source="http://llvm.org/releases/${pkg_version}/${pkg_name}-${pkg_version}.src.tar.xz"
-pkg_shasum="1fd90354b9cf19232e8f168faf2220e79be555df3aa743242700879e8fd329ee"
+pkg_shasum="5fa7489fc0225b11821cab0362f5813a05f2bcf2533e8a4ea9c9c860168807b0"
 pkg_deps=(
+  core/coreutils
   core/gcc-libs
   core/glibc
+  core/python2
   core/zlib
 )
 pkg_build_deps=(
   core/cmake
-  core/coreutils
   core/diffutils
   core/gcc
-  core/ninja
-  core/python2
+  core/make
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
@@ -32,9 +32,10 @@ do_unpack() {
   # There may be some more awesome way to do this - I don't know that yet.
   build_line "Unpacking $pkg_filename to custom cache dir"
   local source_file=$HAB_CACHE_SRC_PATH/$pkg_filename
-  local unpack_dir=$HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_version}
+  # we want to keep the src as some later dependencies require it
+  local unpack_dir="${pkg_prefix}/src"
   mkdir -p "$unpack_dir"
-  pushd "$unpack_dir" > /dev/null
+  pushd "$unpack_dir" > /dev/null || exit
   # Per tar's help output:
   #
   #   --no-same-owner        extract files as yourself (default for ordinary users)
@@ -42,34 +43,67 @@ do_unpack() {
   # The llvm package has some files owned by specific UIDs that we
   # can't be sure exist on the builder or target system.
   tar xf "$source_file" --strip 1 --no-same-owner
-  popd > /dev/null
-
-  # Download Clang frontend and place it in the correct place
-  build_line "Unpacking Clang FrontEnd to custom cache dir"
-  download_file http://llvm.org/releases/${pkg_version}/cfe-${pkg_version}.src.tar.xz \
-    cfe-${pkg_version}.src.tar.xz \
-    e6c4cebb96dee827fa0470af313dff265af391cb6da8d429842ef208c8f25e63
-
-  local clang_src_dir="$unpack_dir/tools/clang"
-  mkdir -p "$clang_src_dir"
-  pushd "$clang_src_dir" > /dev/null
-  tar xf "$HAB_CACHE_SRC_PATH/cfe-${pkg_version}.src.tar.xz" --strip 1 --no-same-owner
-  popd > /dev/null
+  popd > /dev/null || exit
 }
 
 do_build() {
   mkdir -p build
   cd build || exit
-  cmake -DCMAKE_INSTALL_PREFIX:PATH="$pkg_prefix" -G "Ninja" ../
-  ninja
+  cmake \
+    -DCMAKE_INSTALL_PREFIX:PATH="$pkg_prefix" \
+    -DCMAKE_BUILD_TYPE=Release \
+    -G "Unix Makefiles" "${pkg_prefix}/src"
+  make
 }
 
 do_check() {
   cd build || exit
-  ninja check
+  make test
 }
 
 do_install() {
   cd build || exit
-  ninja install
+  make install
+
+  # fix the interpreters in the `src`
+  _fix_interpreter_in_path "$pkg_prefix/src" '*.py' core/python2 bin/python
+  _fix_interpreter_in_path "$pkg_prefix/src" '*.py' core/coreutils bin/env
+  _fix_interpreter_in_path "$pkg_prefix/src" '*.sh' core/coreutils bin/env
+}
+
+do_strip() {
+  build_line "Stripping unneeded symbols from binaries and libraries"
+  # we need to skip the src folder
+  for folder in bin include lib; do
+    find "$pkg_prefix/$folder" -type f -perm -u+w -print0 2> /dev/null \
+      | while read -rd '' f; do
+        case "$(file -bi "$f")" in
+          *application/x-executable*) strip --strip-all "$f";;
+          *application/x-sharedlib*) strip --strip-unneeded "$f";;
+          *application/x-archive*) strip --strip-debug "$f";;
+          *) continue;;
+          esac
+      done
+  done
+}
+
+# private #
+_fix_interpreter_in_path() {
+  local path=$1
+  local fileending=$2
+  local pkg=$3
+  local int=$4
+
+  # shellcheck disable=SC2016
+  # I need these to be evaluated at exec time
+  find "$path" -name "$fileending" -type f \
+    -exec grep -Iq . {} \; \
+    -exec sh -c 'head -n 1 "$1" | grep -q "$2"' _ {} "$int" \; \
+    -exec sh -c 'echo "$1"' _ {} \; > /tmp/fix_interpreter_in_path_list
+
+  grep -v '^ *#' < /tmp/fix_interpreter_in_path_list | while IFS= read -r line
+  do
+    fix_interpreter "$line" "$pkg" "$int"
+  done
+  rm -rf /tmp/fix_interpreter_in_path_list
 }

@@ -48,7 +48,7 @@ volumes:
   data-volume: {}
 EOF
 
-docker-compose up    
+docker-compose up
 ```
 
 ## tests

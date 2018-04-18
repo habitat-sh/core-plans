@@ -114,7 +114,7 @@
     [stats.breaker.log]
       [stats.breaker.log.jobs]
         limit = "5%"
-      
+
       [stats.breaker.log.operations]
         limit = "5%"
 

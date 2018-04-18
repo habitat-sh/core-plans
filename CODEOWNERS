@@ -115,11 +115,21 @@ artifactory-pro @defilan
 atk @rsertelon
 cairo @rsertelon
 consul @defilan
+dep @afiune @nellshamrell
+dotnet-47-dev-pack @mwrock
+dotnet-core-lts @mwrock
+dotnet-core-sdk-lts @mwrock
+dotnet-core-sdk-preview @mwrock
+dotnet-core-sdkdotnet-core @mwrock
+dsc-core @mwrock
 elasticsearch @joshbrand @predominant
 gdk-pixbuf @rsertelon
 glib @rsertelon
+go @afiune @nellshamrell
+grpcurl @afiune
 gtk2 @rsertelon
 harfbuzz @rsertelon
+innounp @mwrock
 jdk7 @predominant @rsertelon
 jdk8 @predominant @rsertelon
 jdk9 @predominant @rsertelon
@@ -132,22 +142,16 @@ logstash @joshbrand @predominant
 libtalloc @defilan
 monit @rsertelon
 mosquitto @rsertelon
+mssql @mwrock
 nmap @defilan
+nuget @mwrock
 pango @rsertelon
+protobuf-cpp @afiune
 rabbitmqadmin @predominant
 redis @irvingpop
 shared-mime-info @rsertelon
-wrk @afiune
-protobuf-cpp @afiune
-go @afiune @nellshamrell
-dep @afiune @nellshamrell
-dotnet-47-dev-pack @mwrock
-dotnet-core-lts @mwrock
-dotnet-core-sdk-lts @mwrock
-dotnet-core-sdk-preview @mwrock
-dotnet-core-sdkdotnet-core @mwrock
-innounp @mwrock
-mssql @mwrock
-nuget @mwrock
+sqlserver @mwrock
+sqlserver-ha-ag @mwrock
 vault @defilan
 visual-build-tools-2017 @mwrock
+wrk @afiune

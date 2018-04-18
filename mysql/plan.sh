@@ -1,10 +1,10 @@
 pkg_name=mysql
 pkg_origin=core
-pkg_version=5.7.17
+pkg_version=5.7.21
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=('GPL-2.0')
 pkg_source=http://dev.mysql.com/get/Downloads/MySQL-5.7/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=cebf23e858aee11e354c57d30de7a079754bdc2ef85eb684782458332a4b9651
+pkg_shasum=fa205079c27a39c24f3485e7498dd0906a6e0b379b4f99ebc0ec38a9ec5b09b7
 pkg_upstream_url=https://www.mysql.com/
 pkg_description=$(cat << EOF
 Starts MySQL with a basic configuration. Configurable at run time:
@@ -49,6 +49,7 @@ pkg_exports=(
   [port]=port
   [password]=app_password
   [username]=app_username
+  [server_id]=server_id
 )
 
 do_build() {
@@ -64,7 +65,7 @@ do_build() {
           -DCMAKE_INSTALL_PREFIX="$pkg_prefix" \
           -DWITH_EMBEDDED_SERVER=no \
           -DWITH_EMBEDDED_SHARED_LIBRARY=no
-  make
+  make --jobs="$(nproc)"
 }
 
 do_install() {

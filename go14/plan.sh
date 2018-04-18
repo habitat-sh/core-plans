@@ -69,7 +69,7 @@ do_prepare() {
 
 do_build() {
   pushd src > /dev/null
-    bash make.bash --no-clean
+    env CGO_ENABLED=0 bash make.bash --no-clean
   popd > /dev/null
 }
 

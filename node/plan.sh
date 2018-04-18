@@ -7,8 +7,8 @@ pkg_license=('MIT')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://nodejs.org/dist/v${pkg_version}/node-v${pkg_version}.tar.gz
 pkg_shasum=729b44b32b2f82ecd5befac4f7518de0c4e3add34e8fe878f745740a66cbbc01
-pkg_deps=(core/glibc core/gcc-libs)
-pkg_build_deps=(core/python2 core/gcc core/grep core/make)
+pkg_deps=(core/glibc core/gcc-libs core/python2 core/bash)
+pkg_build_deps=(core/gcc core/grep core/make)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_interpreters=(bin/node)
@@ -39,5 +39,11 @@ do_install() {
   # fix that everywhere to point directly at the env binary in core/coreutils.
   grep -nrlI '^\#\!/usr/bin/env' "$pkg_prefix" | while read -r target; do
     sed -e "s#\#\!/usr/bin/env node#\#\!${pkg_prefix}/bin/node#" -i "$target"
+    sed -e "s#\#\!/usr/bin/env sh#\#\!$(pkg_path_for bash)/bin/sh#" -i "$target"
+    sed -e "s#\#\!/usr/bin/env bash#\#\!$(pkg_path_for bash)/bin/bash#" -i "$target"
+    sed -e "s#\#\!/usr/bin/env python#\#\!$(pkg_path_for python2)/bin/python2#" -i "$target"
   done
+
+  # This script has a hardcoded bare `node` command
+  sed -e "s#^\([[:space:]]\)\+node\([[:space:]]\)#\1${pkg_prefix}/bin/node\2#" -i "${pkg_prefix}/lib/node_modules/npm/bin/node-gyp-bin/node-gyp"
 }

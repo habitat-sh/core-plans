@@ -1,0 +1,35 @@
+pkg_name=libxcursor
+pkg_distname=libXcursor
+pkg_origin=core
+pkg_version=1.1.15
+pkg_dirname="${pkg_distname}-${pkg_version}"
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="X11 miscellaneous extensions library"
+pkg_upstream_url="https://www.x.org/"
+pkg_license=('MIT')
+pkg_source="https://www.x.org/releases/individual/lib/${pkg_distname}-${pkg_version}.tar.bz2"
+pkg_shasum="294e670dd37cd23995e69aae626629d4a2dfe5708851bbc13d032401b7a3df6b"
+pkg_deps=(
+  core/glibc
+  core/libxau
+  core/libxcb
+  core/libxdmcp
+  core/libxfixes
+  core/libxrender
+  core/xlib
+)
+pkg_build_deps=(
+  core/fixesproto
+  core/gcc
+  core/kbproto
+  core/libpthread-stubs
+  core/make
+  core/pkg-config
+  core/renderproto
+  core/util-macros
+  core/xextproto
+  core/xproto
+)
+pkg_include_dirs=(include)
+pkg_lib_dirs=(lib)
+pkg_pconfig_dirs=(lib/pkgconfig)

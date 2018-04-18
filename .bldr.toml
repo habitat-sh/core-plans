@@ -4,6 +4,8 @@ plan_path = "7zip"
 plan_path = "acbuild"
 [acl]
 plan_path = "acl"
+[alsa-lib]
+plan_path = "alsa-lib"
 [ant]
 plan_path = "ant"
 [ansible]
@@ -47,6 +49,10 @@ plan_path = "bats"
 plan_path = "bc"
 [bdwgc]
 plan_path = "bdwgc"
+[benchmark]
+plan_path = "benchmark"
+[bind]
+plan_path = "bind"
 [binutils]
 plan_path = "binutils"
 [bison]
@@ -89,14 +95,22 @@ plan_path = "ccache"
 plan_path = "certstrap"
 [check]
 plan_path = "check"
+[clang]
+plan_path = "clang"
+[clang-tools-extra]
+plan_path = "clang-tools-extra"
 [clens]
 plan_path = "clens"
 [clingo]
 plan_path = "clingo"
 [cmake]
 plan_path = "cmake"
+[cockroach]
+plan_path = "cockroach"
 [composer]
 plan_path = "composer"
+[compositeproto]
+plan_path = "compositeproto"
 [concourse]
 plan_path = "concourse"
 [consul]
@@ -151,6 +165,8 @@ plan_path = "diffutils"
 plan_path = "direnv"
 [docker]
 plan_path = "docker"
+[docker17]
+plan_path = "docker17"
 [docker-compose]
 plan_path = "docker-compose"
 [docutils]
@@ -292,6 +308,8 @@ plan_path = "gnupg-static"
 paths = [
   "gnupg/*",
 ]
+[gnutls]
+plan_path = "gnutls"
 [go]
 plan_path = "go"
 [go14]
@@ -310,6 +328,8 @@ plan_path = "govc"
 plan_path = "gox"
 [gperf]
 plan_path = "gperf"
+[gperftools]
+plan_path = "gperftools"
 [gpgme]
 plan_path = "gpgme"
 [gradle]
@@ -322,10 +342,14 @@ plan_path = "graphviz"
 plan_path = "grep"
 [groff]
 plan_path = "groff"
+[grpcurl]
+plan_path = "grpcurl"
 [grub]
 plan_path = "grub"
 [gsl]
 plan_path = "gsl"
+[gtk]
+plan_path = "gtk"
 [gtk2]
 plan_path = "gtk2"
 [guile]
@@ -344,6 +368,8 @@ plan_path = "helm"
 plan_path = "htop"
 [httpd]
 plan_path = "httpd"
+[hwloc]
+plan_path = "hwloc"
 [iana-etc]
 plan_path = "iana-etc"
 [icu]
@@ -544,6 +570,8 @@ paths = [
 plan_path = "libssh2"
 [libtalloc]
 plan_path = "libtalloc"
+[libtasn1]
+plan_path = "libtasn1"
 [libtermkey]
 plan_path = "libtermkey"
 [libtiff]
@@ -564,6 +592,10 @@ plan_path = "libwebp"
 plan_path = "libxau"
 [libxcb]
 plan_path = "libxcb"
+[libxcomposite]
+plan_path = "libxcomposite"
+[libxcursor]
+plan_path = "libxcursor"
 [libxdamage]
 plan_path = "libxdamage"
 [libxdmcp]
@@ -582,6 +614,8 @@ plan_path = "libxmu"
 plan_path = "libxrandr"
 [libxrender]
 plan_path = "libxrender"
+[libxscrnsaver]
+plan_path = "libxscrnsaver"
 [libxshmfence]
 plan_path = "libxshmfence"
 [libxslt]
@@ -701,6 +735,8 @@ plan_path = "net-tools"
 plan_path = "netcat"
 [netcat-openbsd]
 plan_path = "netcat-openbsd"
+[nettle]
+plan_path = "nettle"
 [nghttp2]
 plan_path = "nghttp2"
 [nginx]
@@ -756,6 +792,8 @@ paths = [
 ]
 [openvpn]
 plan_path = "openvpn"
+[p11-kit]
+plan_path = "p11-kit"
 [packer]
 plan_path = "packer"
 [pango]
@@ -817,6 +855,8 @@ plan_path = "procps-ng"
 plan_path = "proj"
 [prometheus]
 plan_path = "prometheus"
+[prometheus-cpp]
+plan_path = "prometheus-cpp"
 [protobuf]
 plan_path = "protobuf"
 [protobuf-c]
@@ -934,6 +974,8 @@ plan_path = "sccache"
 plan_path = "scons"
 [scowl]
 plan_path = "scowl"
+[scrnsaverproto]
+plan_path = "scrnsaverproto"
 [sed]
 plan_path = "sed"
 [sensu]
