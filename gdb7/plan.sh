@@ -78,3 +78,4 @@ do_install() {
   rm -fv "${pkg_prefix}/include/{ansidecl,bfd,bfdlink,dis-asm,plugin-api,symcat}.h"
   rm -fv "${pkg_prefix}/share/info/bfd.info"
 }
+
