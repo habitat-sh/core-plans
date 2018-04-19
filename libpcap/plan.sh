@@ -12,6 +12,7 @@ pkg_build_deps=(core/gcc core/make core/flex core/bison core/m4)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_bin_dirs=(bin)
+pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_build() {
   ./configure --prefix="$pkg_prefix" --with-pcap=linux
