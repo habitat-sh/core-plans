@@ -3,8 +3,13 @@ branches:
   - master
 language: python
 cache: pip
+addons:
+  apt:
+    sources:
+      - debian-sid
 install:
   - pip install pre-commit
+  - sudo apt-get install -y shellcheck
 notifications:
   webhooks: https://old-bots.habitat.sh:54856/travis
 script: ./bin/travis.sh
