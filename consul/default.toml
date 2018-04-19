@@ -9,7 +9,7 @@ expect = "3"
 [server]
 bind = "127.0.0.1"
 data-dir = "/hab/svc/consul/data/consul"
-datacenter = "east-aws"
+datacenter = "dc1"
 loglevel = "INFO"
 # switch this to false you want to start in DEVMODE
 # https://www.consul.io/docs/guides/bootstrapping.html
