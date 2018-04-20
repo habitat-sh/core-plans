@@ -11,7 +11,7 @@ pkg_shasum="fc49bbc7ff25ef42ad9c0a8b5f3d0641702abc9a9a8e847bc845bca4c09a7c58"
 pkg_deps=(
   core/bash
   core/coreutils
-  core/jdk8/8u151/20171213095056
+  core/jdk8
 )
 pkg_bin_dirs=(bin)
 
