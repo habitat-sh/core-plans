@@ -19,7 +19,7 @@ used, such as MSSQL, Oracle, PosgreSQL, and MySQL. Please refer to Artifactory P
 
 ### Standalone
 Unless you have a license for Artifactory Pro HA (Enterprise License(https://jfrog.com/pricing)), it is highly
-recommended you run this in standalone
+recommended you run this using the standalone topology.
 ```text
 hab start core/artifactory-pro
 ```
