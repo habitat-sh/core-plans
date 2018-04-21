@@ -14,6 +14,9 @@ pkg_exports=(
 )
 pkg_exposes=(port)
 
+pkg_svc_user=root
+pkg_svc_group=root
+
 do_build() {
   fix_interpreter "bin/artifactory.sh" core/bash bin/bash
 }
