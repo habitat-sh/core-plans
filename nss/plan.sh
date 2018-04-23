@@ -1,15 +1,24 @@
 #!/bin/bash
 pkg_name=nss
 pkg_origin=core
-pkg_version=3.25
+pkg_version=3.35
 pkg_license=("MPL-2.0")
 pkg_description="Network Security Services"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_upstream_url=https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS
-pkg_source=https://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_${pkg_version//./_}_RTM/src/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=5d1ad475da19d0c033a716350dc5f8a747999d3eba5ac07ee0368c5bad6e2359
-pkg_deps=(core/glibc core/nspr core/zlib core/sqlite)
-pkg_build_deps=(core/gcc core/make core/patch core/perl)
+pkg_upstream_url="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS"
+pkg_source="https://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_${pkg_version//./_}_RTM/src/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum="f4127de09bede39f5fd0f789d33c3504c5d261e69ea03022d46b319b3e32f6fa"
+pkg_deps=(
+  core/glibc
+  core/nspr
+  core/sqlite
+  core/zlib
+)
+pkg_build_deps=(
+  core/gcc
+  core/make
+  core/perl
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include/nss)
 pkg_lib_dirs=(lib)
