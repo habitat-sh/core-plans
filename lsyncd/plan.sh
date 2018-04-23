@@ -1,16 +1,16 @@
 pkg_name=lsyncd
 pkg_origin=core
-pkg_version=2.1.6
+pkg_version=2.2.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0')
 pkg_source="https://github.com/axkibe/$pkg_name/archive/release-$pkg_version.tar.gz"
 pkg_dirname="$pkg_name-release-$pkg_version"
-pkg_shasum=02c241ee71b6abb23a796ac994a414e1229f530c249b838ae72d2ef74ae0f775
+pkg_shasum="f41969454a17f9441a9b1809bb251235631768393bf5d29ad8e8142670ae4735"
 pkg_deps=(core/glibc)
 pkg_build_deps=(
   core/cmake
   core/gcc
-  core/lua/5.1.5
+  core/lua
   core/make
 )
 pkg_bin_dirs=(bin)
