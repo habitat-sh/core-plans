@@ -234,7 +234,7 @@ Each of these change PRs submitted should include a bracketed packagename as the
   - `[curl] Making a change here`
   - `[openssl] Also making a change here`
 
-If you have opened a single PR that changes multiple plans, it is assumed you are making a substantial change to core plans. Substantial change PRs submitted without an RFC will be closed and you will be directed to open an RFC. If this was not your intention please open separate PRs per package change.
+If you have opened a single PR that changes multiple plans, it is assumed you are making a substantial change to core plans. Substantial change PRs submitted without an RFC will be closed and you will be directed to open an RFC. If this was not your intention please open separate PRs per package change. RFCs live in their [own repository](https://github.com/habitat-sh/core-plans-rfcs). To open one, write one up according to the template, and open a pull request.
 
 
 
