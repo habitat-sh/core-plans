@@ -75,6 +75,8 @@ Issues with an associated gist containing a working fork of our current plan whi
 
 If your package has dependencies, it must only depend on other packages in the core origin.
 
+Pinned versions are not allowed as they prevent package rebuilds and will cause dependencies conflicts.
+
 ## Plan syntax
 
 You can review the entire [plan syntax guide here](https://www.habitat.sh/docs/developing-packages/).
