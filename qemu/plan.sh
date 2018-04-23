@@ -1,8 +1,8 @@
 pkg_name=qemu
 pkg_origin=core
-pkg_version=2.7.0
+pkg_version=2.11.1
 pkg_source=http://wiki.qemu-project.org/download/${pkg_name}-${pkg_version}.tar.bz2
-pkg_shasum=326e739506ba690daf69fc17bd3913a6c313d9928d743bd8eddb82f403f81e53
+pkg_shasum=d9df2213ceed32e91dab7bc9dd19c1af83f91ba72c7aeef7605dfaaf81732ccb
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="QEMU is a generic and open source machine emulator and virtualizer."
 pkg_upstream_url="http://www.qemu.org"
@@ -31,6 +31,7 @@ pkg_deps=(
   core/libcap-ng
   core/lzo
   core/ncurses
+  core/patch
   core/pcre
   core/pixman
   core/python2
@@ -39,6 +40,10 @@ pkg_deps=(
   core/vde2
   core/zlib
 )
+
+do_prepare() {
+  patch -p1 < "${PLAN_CONTEXT}/glibc-2.27.patch"
+}
 
 do_build() {
   mkdir build

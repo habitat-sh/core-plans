@@ -1,0 +1,25 @@
+diff -rupN a/configure b/configure
+--- a/configure	2018-04-21 08:49:05.659068185 +0000
++++ b/configure	2018-04-21 08:50:37.790056866 +0000
+@@ -3646,7 +3646,7 @@ fi
+ # check if memfd is supported
+ memfd=no
+ cat > $TMPC << EOF
+-#include <sys/memfd.h>
++#include <sys/mman.h>
+ 
+ int main(void)
+ {
+diff -rupN a/util/memfd.c b/util/memfd.c
+--- a/util/memfd.c	2018-04-21 08:49:05.295072077 +0000
++++ b/util/memfd.c	2018-04-21 08:50:57.009839688 +0000
+@@ -31,9 +31,7 @@
+ 
+ #include "qemu/memfd.h"
+ 
+-#ifdef CONFIG_MEMFD
+-#include <sys/memfd.h>
+-#elif defined CONFIG_LINUX
++#if defined CONFIG_LINUX && !defined CONFIG_MEMFD
+ #include <sys/syscall.h>
+ #include <asm/unistd.h>
