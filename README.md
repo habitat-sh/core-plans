@@ -33,6 +33,12 @@ See [MAINTAINERS.md](MAINTAINERS.md) for a list of core plans maintainers.
 
 Get started with the [Habitat tutorials](https://www.habitat.sh/tutorials/) or plunge into the [complete documentation](https://www.habitat.sh/docs/).
 
+## RFCs
+
+Occasionally you might need to open an RFC. RFCs live in their [own
+repository](https://github.com/habitat-sh/core-plans-rfcs). To open one, write
+up a markdown file that follows the template and open a pull request.
+
 ## Community and support
 
 - [Habitat Slack](https://slack.habitat.sh)
