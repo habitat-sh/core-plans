@@ -10,9 +10,8 @@ This plan provides the static binary for execution.
 
 ## Usage
 This package contains Vault. To use Vault properly, you need to provide it
-with a valid backend, for example using [Consul](consul.io). Be default, this
-package is set to run Vault in "dev" mode, a simple setup enabling
-experimenting and testing.
+with a valid backend, for example [Consul](https://consul.io). By default, this
+package is set to run Vault in "dev" mode, a simple setup solely for experimenting and testing.
 
 Warning: Never, ever, ever run a "dev" mode server in production. It is insecure and will lose data on every restart (since it stores data in-memory). It is only made for development or experimentation.
 
