@@ -10,8 +10,6 @@ $pkg_bin_dirs=@("bin")
 
 function Invoke-Verify { }
 
-function Invoke-Unpack{ }
-
 function Invoke-Build { }
 
 function Invoke-Install {
