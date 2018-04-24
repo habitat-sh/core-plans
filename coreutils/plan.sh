@@ -13,6 +13,8 @@ pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core
 pkg_bin_dirs=(bin)
 pkg_interpreters=(bin/env)
 
+source ../includes/hardening-defaults.sh
+
 do_build() {
   # The `FORCE_` variable allows the software to compile with the root user,
   # and the `--enable-no-install-program` flag skips installation of binaries
