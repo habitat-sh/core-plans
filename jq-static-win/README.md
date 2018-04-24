@@ -1,9 +1,5 @@
-# Habitat package: jq-static-win
+# Habitat package: jq-static
 
 ## Description
 
-Provide a brief description of the `jq-static-win` plan / purpose.
-
-## Usage
-
-Describe the general usage for the `jq-static-win` plan
+Provides jq for windows
