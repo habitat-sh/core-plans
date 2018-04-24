@@ -20,7 +20,7 @@ Vault can be deployed either in a `standalone` topology or in a multi-node
 `leader` topology. There are multiple ways to make this work, with your needs
 and HA requirements driving the configuration.
 
-``text
+```text
 hab start core/vault
 ```
 
