@@ -19,5 +19,5 @@ hab studio enter # stay in studio
  build grafana
  hab pkg export docker <yourOrg>/grafana
  # exit studio
-docker run -p 3000:3000 --name my_grafana <yourOrg>/grafana
+docker run -p 3000:80 --name my_grafana <yourOrg>/grafana
 ```
