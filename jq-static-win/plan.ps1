@@ -1,5 +1,5 @@
 $pkg_name="jq-static"
-$pkg_origin="skylerto"
+$pkg_origin="core"
 $pkg_version="1.5"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_license=@("Apache-2.0")
