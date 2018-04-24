@@ -113,6 +113,8 @@ plan_path = "composer"
 plan_path = "compositeproto"
 [concourse]
 plan_path = "concourse"
+[concourse-fly]
+plan_path = "concourse-fly"
 [consul]
 plan_path = "consul"
 [coreutils]
