@@ -1,8 +1,14 @@
-# Habitat package: cerebro
-
-## Description
+# cerebro
 
 Simple Cerebro installation.
+
+## Maintainers
+
+The Habitat Maintainers (humans@habitat.sh).
+
+## Type of package
+
+Service package.
 
 ## Usage
 
@@ -14,14 +20,20 @@ Browse to the node on port `9000` (default port).
 
 Once open in your browser, enter the URI to your elasticsearch instance(s) to administer them.
 
-## Topology
+## Bindings
+
+Requires no binds in order to start. Default installation / service configuration will provide a URL input on browsing to the application, in which you can specify your ElasticSearch cluster IP / Hostname.
+
+Exports `port`.
+
+## Topologies
 
 Recommended topology is `standalone`.
 
-## Update strategy
+## Update strategies
 
 Recommended update strategy is `at-once`.
 
-## Links and References
+## Notes
 
-* [Github](https://github.com/lmenezes/cerebro)
+[Cerebro Github](https://github.com/lmenezes/cerebro)
