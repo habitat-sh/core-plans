@@ -1,16 +1,32 @@
 pkg_name=libmpc
-pkg_distname=mpc
+_distname=mpc
 pkg_origin=core
-pkg_version=1.0.3
+pkg_version=1.1.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="\
+GNU MPC is a C library for the arithmetic of complex numbers with arbitrarily \
+high precision and correct rounding of the result.\
+"
+pkg_upstream_url="http://www.multiprecision.org/"
 pkg_license=('lgpl')
-pkg_source=http://www.multiprecision.org/mpc/download/${pkg_distname}-${pkg_version}.tar.gz
-pkg_shasum=617decc6ea09889fb08ede330917a00b16809b8db88c29c31bfbb49cbf88ecc3
-pkg_deps=(core/glibc core/gmp core/mpfr)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/binutils)
+pkg_source="https://ftp.gnu.org/gnu/${_distname}/${_distname}-${pkg_version}.tar.gz"
+pkg_shasum="6985c538143c1208dcb1ac42cedad6ff52e267b47e5f970183a3e75125b43c2e"
+pkg_dirname="${_distname}-${pkg_version}"
+pkg_deps=(
+  core/glibc
+  core/gmp
+  core/mpfr
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+  core/binutils
+)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
-pkg_dirname=${pkg_distname}-${pkg_version}
 
 do_prepare() {
   do_default_prepare
@@ -32,5 +48,7 @@ do_check() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/binutils)
+  pkg_build_deps=(
+    core/binutils
+  )
 fi

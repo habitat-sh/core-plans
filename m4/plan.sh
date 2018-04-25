@@ -1,15 +1,41 @@
 pkg_name=m4
 pkg_origin=core
-pkg_version=1.4.17
+pkg_version=1.4.18
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="\
+GNU M4 is an implementation of the traditional Unix macro processor. It is \
+mostly SVR4 compatible although it has some extensions (for example, handling \
+more than 9 positional parameters to macros). GNU M4 also has built-in \
+functions for including files, running shell commands, doing arithmetic, etc.\
+"
+pkg_upstream_url="http://www.gnu.org/software/m4"
 pkg_license=('gplv3')
-pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=f0543c3beb51fa6b3337d8025331591e0e18d8ec2886ed391f1aade43477d508
-pkg_deps=(core/glibc)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/binutils)
+pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
+pkg_shasum="f2c1e86ca0a404ff281631bdc8377638992744b175afb806e25871a24a934e07"
+pkg_deps=(
+  core/glibc
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+  core/binutils
+)
 pkg_bin_dirs=(bin)
 
 do_prepare() {
+  # Fix failing test `test-getopt-posix` which appears to have problems when
+  # working against Glibc 2.26.
+  #
+  # TODO fn: when glibc package is upgraded, see if this patch is still
+  # required (it may be fixed in the near future)
+  #
+  # Thanks to:
+  # https://www.redhat.com/archives/libvir-list/2017-September/msg01054.html
+  patch -p1 < "$PLAN_CONTEXT/fix-test-getopt-posix-with-glibc-2.26.patch"
+
   # Force gcc to use our ld wrapper from binutils when calling `ld`
   CFLAGS="$CFLAGS -B$(pkg_path_for binutils)/bin/"
   build_line "Updating CFLAGS=$CFLAGS"
@@ -40,5 +66,7 @@ do_check() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/binutils)
+  pkg_build_deps=(
+    core/binutils
+  )
 fi

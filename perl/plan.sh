@@ -1,12 +1,34 @@
 pkg_name=perl
 pkg_origin=core
-pkg_version=5.22.1
+pkg_version=5.26.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="\
+Perl 5 is a highly capable, feature-rich programming language with over 29 \
+years of development.\
+"
+pkg_upstream_url="http://www.perl.org/"
 pkg_license=('gpl' 'perlartistic')
-pkg_source=http://www.cpan.org/src/5.0/${pkg_name}-${pkg_version}.tar.bz2
-pkg_shasum=e98e4075a3167fa40524abe447c30bcca10c60e02a54ee1361eff278947a1221
-pkg_deps=(core/glibc core/zlib core/bzip2 core/gdbm core/db core/coreutils core/less)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/procps-ng core/inetutils core/iana-etc)
+pkg_source="http://www.cpan.org/src/5.0/${pkg_name}-${pkg_version}.tar.bz2"
+pkg_shasum="2812a01dd4d4cd7650cb70abfe259ee572bf6a0f1ee95763422ba7e54c68d12d"
+pkg_deps=(
+  core/glibc
+  core/zlib
+  core/bzip2
+  core/gdbm
+  core/db
+  core/coreutils
+  core/less
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+  core/procps-ng
+  core/inetutils
+  core/iana-etc
+)
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_interpreters=(bin/perl)
@@ -17,10 +39,22 @@ do_prepare() {
   # Do not look under `/usr` for dependencies.
   #
   # Thanks to: https://github.com/NixOS/nixpkgs/blob/release-15.09/pkgs/development/interpreters/perl/5.22/no-sys-dirs.patch
-  patch -p1 -i $PLAN_CONTEXT/no-sys-dirs.patch
+  patch -p1 -i "$PLAN_CONTEXT/no-sys-dirs.patch"
 
-  # Skip the only failing test in the suite--not bad, eh?
-  patch -p1 -i $PLAN_CONTEXT/skip-wide-character-test.patch
+  # Several tests related to zlib will fail due to using the system version of
+  # zlib instead of the internal version.
+  #
+  # Thanks to:
+  # http://www.linuxfromscratch.org/lfs/view/development/chapter06/perl.html
+  patch -p1 -i "$PLAN_CONTEXT/skip-wide-character-test.patch"
+
+  # Skip the only other failing test in the suite--not bad, eh?
+  patch -p1 -i "$PLAN_CONTEXT/skip-zlib-tests.patch"
+
+  # Fix perlbug test where PATH makes a line too long
+  #
+  # Thanks to: https://rt.perl.org/Public/Bug/Display.html?id=129048
+  patch -p1 -i "$PLAN_CONTEXT/fix-perlbug-test.patch"
 
   #  Make Cwd work with the `pwd` command from `coreutils` (we cannot rely
   #  on `/bin/pwd` exisiting in an environment)
@@ -33,6 +67,7 @@ do_prepare() {
   locincpth=""
   for i in $CFLAGS; do
     if echo "$i" | grep -q "^-I\/" > /dev/null; then
+      # shellcheck disable=SC2001
       locincpth="$locincpth $(echo "$i" | sed 's,^-I,,')"
     fi
   done
@@ -44,6 +79,7 @@ do_prepare() {
   loclibpth=""
   for i in $LDFLAGS; do
     if echo "$i" | grep -q "^-L\/" > /dev/null; then
+      # shellcheck disable=SC2001
       loclibpth="$loclibpth $(echo "$i" | sed 's,^-L,,')"
     fi
   done
@@ -54,7 +90,8 @@ do_prepare() {
   # build directory, which will contain the build shared Perl library.
   #
   # Thanks to: http://perl5.git.perl.org/perl.git/blob/c52cb8175c7c08890821789b4c7177b1e0e92558:/INSTALL#l478
-  export LD_LIBRARY_PATH="`pwd`:$LD_RUN_PATH"
+  LD_LIBRARY_PATH="$(pwd):$LD_RUN_PATH"
+  export LD_LIBRARY_PATH
   build_line "Setting LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
 }
 
@@ -65,9 +102,9 @@ do_build() {
 
   sh Configure \
     -de \
-    -Dprefix=$pkg_prefix \
-    -Dman1dir=$pkg_prefix/share/man/man1 \
-    -Dman3dir=$pkg_prefix/share/man/man3 \
+    -Dprefix="$pkg_prefix" \
+    -Dman1dir="$pkg_prefix/share/man/man1" \
+    -Dman3dir="$pkg_prefix/share/man/man3" \
     -Dlocincpth="$locincpth" \
     -Dloclibpth="$loclibpth" \
     -Dpager="$(pkg_path_for less)/bin/less -isR" \
@@ -78,7 +115,7 @@ do_build() {
     -Dinc_version_list=none \
     -Dlddlflags="-shared ${LDFLAGS}" \
     -Dldflags="${LDFLAGS}"
-  make -j$(nproc)
+  make -j"$(nproc)"
 
   # Clear temporary build time environment variables
   unset BUILD_ZLIB BUILD_BZIP2
@@ -89,11 +126,11 @@ do_check() {
   # versions from the `iana-etc` package. This is needed for several
   # network-related tests to pass.
   if [[ ! -f /etc/services ]]; then
-    cp -v $(pkg_path_for iana-etc)/etc/services /etc/services
+    cp -v "$(pkg_path_for iana-etc)/etc/services" /etc/services
     local clean_services=true
   fi
   if [[ ! -f /etc/protocols ]]; then
-    cp -v $(pkg_path_for iana-etc)/etc/protocols /etc/protocols
+    cp -v "$(pkg_path_for iana-etc)/etc/protocols" /etc/protocols
     local clean_protocols=true
   fi
 
@@ -118,5 +155,10 @@ do_check() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc core/procps-ng core/inetutils core/iana-etc)
+  pkg_build_deps=(
+    core/gcc
+    core/procps-ng
+    core/inetutils
+    core/iana-etc
+  )
 fi
