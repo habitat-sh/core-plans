@@ -9,7 +9,7 @@ pkg_source="ftp://ftp.gnutls.org/gcrypt/gnutls/v3.5/${pkg_name}-${pkg_version}.t
 pkg_shasum="ae2248d9e78747cf9c469dde81ff8f90b56838b707a0637f3f7d4eee90e80234"
 pkg_deps=(
   core/glibc
-  core/gmp
+  core/gmp/6.1.0 # coreutils is stuck on this one
   core/guile
   core/libiconv
   core/libidn2
