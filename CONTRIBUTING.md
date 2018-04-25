@@ -126,6 +126,10 @@ The supervisor dynamically invokes hooks at run-time, triggered by an applicatio
   - No one should ever edit anything in `/hab/` directly.
   - No one should write to anything in `/hab/` directly.
 
+### New Plans
+
+Adding a new plan to core-plans requires updating `.bldr.toml` with your new package plan. This is so that [Builder](https://bldr.habitat.sh/) can map all of the plans to their respective directories.
+
 ### README
 
 Check out the [core plans README template](https://github.com/habitat-sh/core-plans/blob/master/README_TEMPLATE_FOR_PLANS.md) for a quick start!
