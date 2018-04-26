@@ -600,6 +600,8 @@ plan_path = "libtasn1"
 plan_path = "libtermkey"
 [libtiff]
 plan_path = "libtiff"
+[libtirpc]
+plan_path = "libtirpc"
 [libtool]
 plan_path = "libtool"
 [libunistring]
