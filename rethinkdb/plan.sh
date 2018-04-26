@@ -8,7 +8,7 @@ pkg_license=('Apache-2.0')
 pkg_source="https://download.${pkg_name}.com/dist/${pkg_name}-${pkg_version}.tgz"
 pkg_shasum=dd8aeee169b177179bfe080725f0560443e0f26dae875b32ae25d90cf2f8ee10
 pkg_build_deps=(
-  core/gcc
+  core/gcc/5.2.0
   core/make
   core/python2
   core/boost
@@ -17,12 +17,12 @@ pkg_build_deps=(
   core/m4
 )
 pkg_deps=(
-  core/openssl
-  core/gcc-libs
-  core/protobuf
-  core/zlib
-  core/curl
-  core/ncurses
+  core/openssl/1.0.2l
+  core/gcc-libs/5.2.0
+  core/protobuf/2.6.1/20170514031228
+  core/zlib/1.2.8
+  core/curl/7.54.1/20180329185356
+  core/ncurses/6.0
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
