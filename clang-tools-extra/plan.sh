@@ -59,7 +59,7 @@ do_build() {
   cd build || exit
   cmake -DCMAKE_INSTALL_PREFIX:PATH="$pkg_prefix" -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" ../
   cd tools/extra || exit
-  make
+  make -j"$(nproc)"
 }
 
 do_check() {
