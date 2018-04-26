@@ -15,7 +15,7 @@ pkg_deps=(
 pkg_build_deps=(
   core/make
   core/which
-  core/go/1.8
+  core/go
   core/gcc
   core/cmake
   core/autoconf

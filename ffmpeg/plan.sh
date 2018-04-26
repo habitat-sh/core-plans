@@ -21,7 +21,7 @@ pkg_build_deps=(
 pkg_deps=(
   core/bzip2
   core/glibc
-  core/gmp
+  core/gmp/6.1.0
   core/libwebp
   core/openjpeg
   core/xz
@@ -40,7 +40,7 @@ do_build() {
     --enable-libwebp \
     --enable-shared \
     --enable-version3
-  make
+  make -j"$(nproc)"
 }
 
 do_check() {

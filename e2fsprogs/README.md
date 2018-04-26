@@ -1,5 +1,7 @@
 # e2fsprogs
 
+Ext2/3/4 filesystem userspace utilities
+
 ## Maintainers
 
 * The Habitat Maintainers: <humans@habitat.sh>

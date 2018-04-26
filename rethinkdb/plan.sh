@@ -13,7 +13,6 @@ pkg_build_deps=(
   core/python2
   core/boost
   core/coreutils
-  core/node/4.2.6
   core/jemalloc
   core/m4
 )

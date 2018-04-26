@@ -53,7 +53,7 @@ do_build() {
     -DCMAKE_INSTALL_PREFIX:PATH="$pkg_prefix" \
     -DCMAKE_BUILD_TYPE=Release \
     -G "Unix Makefiles" "${pkg_prefix}/src"
-  make
+  make -j"$(nproc)"
 }
 
 do_check() {

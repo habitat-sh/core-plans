@@ -75,6 +75,8 @@ Issues with an associated gist containing a working fork of our current plan whi
 
 If your package has dependencies, it must only depend on other packages in the core origin.
 
+Pinned versions are not allowed as they prevent package rebuilds and will cause dependencies conflicts.
+
 ## Plan syntax
 
 You can review the entire [plan syntax guide here](https://www.habitat.sh/docs/developing-packages/).
@@ -123,6 +125,10 @@ The supervisor dynamically invokes hooks at run-time, triggered by an applicatio
   - You can only write to: `/var/`, `/static/`, `/data/` directories. You should only access these with your `runtime configuration setting` variable.
   - No one should ever edit anything in `/hab/` directly.
   - No one should write to anything in `/hab/` directly.
+
+### New Plans
+
+Adding a new plan to core-plans requires updating `.bldr.toml` with your new package plan. This is so that [Builder](https://bldr.habitat.sh/) can map all of the plans to their respective directories.
 
 ### README
 
@@ -234,7 +240,7 @@ Each of these change PRs submitted should include a bracketed packagename as the
   - `[curl] Making a change here`
   - `[openssl] Also making a change here`
 
-If you have opened a single PR that changes multiple plans, it is assumed you are making a substantial change to core plans. Substantial change PRs submitted without an RFC will be closed and you will be directed to open an RFC. If this was not your intention please open separate PRs per package change.
+If you have opened a single PR that changes multiple plans, it is assumed you are making a substantial change to core plans. Substantial change PRs submitted without an RFC will be closed and you will be directed to open an RFC. If this was not your intention please open separate PRs per package change. RFCs live in their [own repository](https://github.com/habitat-sh/core-plans-rfcs). To open one, write one up according to the template, and open a pull request.
 
 
 

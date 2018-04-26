@@ -1,5 +1,6 @@
-# Set to true to log user information returned from LDAP
-verbose_logging = true
+# To troubleshoot and get more log info enable ldap debug logging in grafana.ini
+[log]
+filters = ldap:debug
 
 [[servers]]
 # Ldap server host (specify multiple hosts space separated)
@@ -31,8 +32,31 @@ search_base_dns = ["{{cfg.ldap_search_base_dns}}"]
 # This is done by enabling group_search_filter below. You must also set member_of= "cn"
 # in [servers.attributes] below.
 
+# Users with nested/recursive group membership and an LDAP server that supports LDAP_MATCHING_RULE_IN_CHAIN
+# can set group_search_filter, group_search_filter_user_attribute, group_search_base_dns and member_of
+# below in such a way that the user's recursive group membership is considered.
+#
+# Nested Groups + Active Directory (AD) Example:
+#
+#   AD groups store the Distinguished Names (DNs) of members, so your filter must
+#   recursively search your groups for the authenticating user's DN. For example:
+#
+#     group_search_filter = "(member:1.2.840.113556.1.4.1941:=%s)"
+#     group_search_filter_user_attribute = "distinguishedName"
+#     group_search_base_dns = ["ou=groups,dc=grafana,dc=org"]
+#
+#     [servers.attributes]
+#     ...
+#     member_of = "distinguishedName"
+
 ## Group search filter, to retrieve the groups of which the user is a member (only set if memberOf attribute is not available)
 # group_search_filter = "(&(objectClass=posixGroup)(memberUid=%s))"
+## Group search filter user attribute defines what user attribute gets substituted for %s in group_search_filter.
+## Defaults to the value of username in [server.attributes]
+## Valid options are any of your values in [servers.attributes]
+## If you are using nested groups you probably want to set this and member_of in
+## [servers.attributes] to "distinguishedName"
+# group_search_filter_user_attribute = "distinguishedName"
 ## An array of the base DNs to search through for groups. Typically uses ou=groups
 # group_search_base_dns = ["ou=groups,dc=grafana,dc=org"]
 
@@ -48,7 +72,7 @@ email =  "email"
 [[servers.group_mappings]]
 group_dn = "{{cfg.ldap_admin_group}}"
 org_role = "Admin"
-# The Grafana organization database id, optional, if left out the default org (id 1) will be used.  Setting this allows for multiple group_dn's to be assigned to the same org_role provided the org_id differs
+# The Grafana organization database id, optional, if left out the default org (id 1) will be used
 # org_id = 1
 
 [[servers.group_mappings]]
