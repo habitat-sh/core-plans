@@ -756,8 +756,15 @@ plan_path = "ponysay"
 plan_path = "popt"
 [postgresql]
 plan_path = "postgresql"
+[postgresql-client]
+plan_path = "postgresql"
 [postgresql93]
 plan_path = "postgresql93"
+paths = [
+  "postgresql/*",
+]
+[postgresql93-client]
+plan_path = "postgresql93-client"
 paths = [
   "postgresql/*",
 ]
@@ -766,8 +773,18 @@ plan_path = "postgresql94"
 paths = [
   "postgresql/*",
 ]
+[postgresql94-client]
+plan_path = "postgresql94-client"
+paths = [
+  "postgresql/*",
+]
 [postgresql95]
 plan_path = "postgresql95"
+paths = [
+  "postgresql/*",
+]
+[postgresql95-client]
+plan_path = "postgresql95-client"
 paths = [
   "postgresql/*",
 ]
