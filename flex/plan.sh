@@ -26,6 +26,11 @@ pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
+do_prepare() {
+  CFLAGS="${CFLAGS} -D_GNU_SOURCE"
+  build_line "Updating CFLAGS=$CFLAGS"
+}
+
 do_check() {
   # Set `LDFLAGS` for the c++ test code to find libstdc++
   make check LDFLAGS="$LDFLAGS -lstdc++"
