@@ -1,7 +1,7 @@
 source ../postgresql/plan.sh
 
 pkg_name=postgresql-client
-pkg_origin=jb
+pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="PostgreSQL is a powerful, open source object-relational database system."
 pkg_upstream_url="https://www.postgresql.org/"
