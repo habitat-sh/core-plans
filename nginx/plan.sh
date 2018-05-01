@@ -39,6 +39,7 @@ do_build() {
     --with-pcre-jit \
     --with-file-aio \
     --with-stream=dynamic \
+    --with-stream_ssl_module \
     --with-mail=dynamic \
     --with-http_gunzip_module \
     --with-http_gzip_static_module \
