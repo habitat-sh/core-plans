@@ -61,6 +61,8 @@ plan_path = "bison"
 plan_path = "bison2"
 [boost]
 plan_path = "boost"
+[boost159]
+plan_path = "boost159"
 [bundler]
 plan_path = "bundler"
 [busybox]
