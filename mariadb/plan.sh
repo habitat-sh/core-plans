@@ -1,13 +1,23 @@
 pkg_name=mariadb
 pkg_origin=core
-pkg_version=10.1.18
+pkg_version=10.1.24
 pkg_description="An open source monitoring software for networks and applications"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_upstream_url="https://mariadb.org/"
 pkg_license=('GPL-2.0')
-pkg_source=http://ftp.hosteurope.de/mirror/archive.mariadb.org//${pkg_name}-${pkg_version}/source/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=d7336907e9ff44496d6453f92526b25bd253638a64a051ca879f953499873b73
-pkg_deps=(core/ncurses core/gcc-libs core/zlib)
-pkg_build_deps=(core/gcc core/make core/coreutils core/cmake)
+pkg_source="http://ftp.hosteurope.de/mirror/archive.mariadb.org//${pkg_name}-${pkg_version}/source/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum="b3df99ae5b1ec8cf6cede4cbc4ae3f54ce66464549cba6d56d9ff4d24e4d551e"
+pkg_deps=(
+  core/gcc-libs
+  core/ncurses
+  core/zlib
+)
+pkg_build_deps=(
+  core/gcc
+  core/make
+  core/coreutils
+  core/cmake
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
