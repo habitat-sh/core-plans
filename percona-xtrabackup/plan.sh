@@ -1,26 +1,44 @@
 pkg_name=percona-xtrabackup
 pkg_origin=core
 pkg_version=2.3.5
-pkg_source=http://github.com/percona/percona-xtrabackup/archive/${pkg_name}-${pkg_version}.tar.gz
-pkg_upstream_url=https://www.percona.com/software/mysql-database/percona-xtrabackup
-pkg_shasum=1787623cb9ea331fb242992c4fcf3f88ee61045dcd42be027884bc7d373dcdae
-pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Percona xtrabackup utilities"
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_upstream_url="https://www.percona.com/software/mysql-database/percona-xtrabackup"
 pkg_license=('GPL-2.0')
+pkg_source="http://github.com/percona/percona-xtrabackup/archive/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum="1787623cb9ea331fb242992c4fcf3f88ee61045dcd42be027884bc7d373dcdae"
+pkg_dirname="percona-xtrabackup-percona-xtrabackup-${pkg_version}"
+pkg_build_deps=(
+  core/bison
+  core/boost159
+  core/cmake
+  core/gcc
+  core/make
+  core/ncurses
+  core/vim
+)
+pkg_deps=(
+  core/curl
+  core/gcc-libs
+  core/glibc
+  core/libaio
+  core/libev
+  core/libgcrypt
+  core/libgpg-error
+  core/nghttp2
+  core/openssl
+  core/zlib
+)
 pkg_bin_dirs=(bin)
-pkg_build_deps=(core/m4 core/make core/gcc core/bison core/cmake core/mysql core/libaio
-  core/boost159)
-pkg_deps=(core/bash core/iproute2 core/gnupg core/pkg-config core/glibc core/gcc-libs core/ncurses
-  core/vim core/curl core/libev core/openssl core/zlib core/libgcrypt core/libgpg-error
-  core/libtool)
-pkg_dirname=percona-xtrabackup-percona-xtrabackup-${pkg_version}
 
 do_prepare() {
   if [ -f CMakeCache.txt ]; then
     rm CMakeCache.txt
   fi
   sed -i 's/^.*abi_check.*$/#/' CMakeLists.txt
-  export CXXFLAGS="$CFLAGS"
+
+  export CXXFLAGS="$CFLAGS -Wno-error=implicit-fallthrough -fpermissive"
+  export CPPFLAGS="$CPPFLAGS -Wno-error=implicit-fallthrough"
 }
 
 do_build() {
@@ -39,4 +57,5 @@ do_build() {
 
 do_install() {
   make install
+  rm -rf "${pkg_prefix}/xtrabackup-test"
 }
