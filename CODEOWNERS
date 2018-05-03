@@ -154,6 +154,8 @@ protobuf-cpp @afiune
 rabbitmqadmin @predominant
 redis @irvingpop
 shared-mime-info @rsertelon
+sqitch @irvingpop
+sqitch_pg @irvingpop
 sqlserver @mwrock
 sqlserver-ha-ag @mwrock
 vault @defilan

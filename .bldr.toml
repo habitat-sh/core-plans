@@ -1016,6 +1016,8 @@ plan_path = "socat"
 plan_path = "spark"
 [sqitch]
 plan_path = "sqitch"
+[sqitch_pg]
+plan_path = "sqitch_pg"
 [sqlite]
 plan_path = "sqlite"
 [sshpass]
