@@ -151,6 +151,8 @@ plan_path = "cyrus-sasl"
 plan_path = "damageproto"
 [db]
 plan_path = "db"
+[dbdpg]
+plan_path = "dbdpg"
 [dbus]
 plan_path = "dbus"
 [dd-agent]
