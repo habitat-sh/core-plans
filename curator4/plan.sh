@@ -1,6 +1,6 @@
-pkg_name=curator
+pkg_name=curator4
 pkg_origin=core
-pkg_version=5.5.1
+pkg_version=4.1.2
 pkg_description="Elasticsearch Curator helps you curate, or manage your indices."
 pkg_upstream_url=https://github.com/elastic/curator
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
