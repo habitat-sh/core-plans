@@ -138,6 +138,8 @@ plan_path = "cppunit"
 plan_path = "cpputest"
 [curator]
 plan_path = "curator"
+[curator4]
+plan_path = "curator4"
 [curl]
 plan_path = "curl"
 [curl-static-musl]
