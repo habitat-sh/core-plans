@@ -63,6 +63,8 @@ plan_path = "bison2"
 plan_path = "boost"
 [boost159]
 plan_path = "boost159"
+[borningssl]
+plan_path = "boringssl"
 [bundler]
 plan_path = "bundler"
 [busybox]
