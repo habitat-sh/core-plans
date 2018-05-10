@@ -1175,3 +1175,5 @@ plan_path = "zookeeper"
 plan_path = "zsh"
 [zstd]
 plan_path = "zstd"
+[chef-dk]
+plan_path = "chef-dk"
