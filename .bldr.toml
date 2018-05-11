@@ -45,6 +45,8 @@ paths = [
 ]
 [bats]
 plan_path = "bats"
+[bazel]
+plan_path = "bazel"
 [bc]
 plan_path = "bc"
 [bdwgc]
