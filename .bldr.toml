@@ -672,6 +672,8 @@ plan_path = "lsyncd"
 plan_path = "lttng-ust"
 [lua]
 plan_path = "lua"
+[luajit]
+plan_path = "luajit"
 [lynx]
 plan_path = "lynx"
 [lz4]
