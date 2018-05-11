@@ -221,6 +221,8 @@ plan_path = "elixir"
 plan_path = "envconsul"
 [envdir]
 plan_path = "envdir"
+[envoy]
+plan_path = "envoy"
 [erlang]
 plan_path = "erlang"
 [erlang16]
