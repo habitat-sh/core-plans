@@ -1160,6 +1160,8 @@ plan_path = "xz-musl"
 paths = [
   "xz/*",
 ]
+[yaml-cpp]
+plan_path = "yaml-cpp"
 [yarn]
 plan_path = "yarn"
 [yasm]
