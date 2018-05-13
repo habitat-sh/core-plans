@@ -540,6 +540,8 @@ plan_path = "liberation-fonts-ttf"
 plan_path = "libev"
 [libevent]
 plan_path = "libevent"
+[libfcgi]
+plan_path = "libfcgi"
 [libffi]
 plan_path = "libffi"
 [libgcrypt]
