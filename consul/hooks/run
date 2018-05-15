@@ -6,9 +6,16 @@ SERVERMODE={{cfg.server.mode}}
 
 if [ "$SERVERMODE" = true ] ; then
   exec consul agent {{~#if cfg.website}} -ui {{~/if}} \
-          {{#eachAlive svc.members as |member| ~}}
-              -retry-join {{member.sys.ip}} \
-          {{/eachAlive ~}}
+          {{#if svc.me.leader }}
+            {{#eachAlive svc.members as |member| ~}}
+              {{#unless member.leader}}
+                -retry-join {{member.sys.ip}} \
+              {{/unless}
+            {{/eachAlive ~}}
+          {{/if}
+          {{#if svc.me.follower }}
+            -retry-join {{svc.leader.sys.ip}}
+          {{/if}}
           -server -bootstrap-expect {{cfg.bootstrap.expect}} \
           -config-file={{pkg.svc_config_path}}/basic_config.json
 else
