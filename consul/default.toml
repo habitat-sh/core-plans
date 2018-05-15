@@ -11,6 +11,9 @@ bind = "127.0.0.1"
 data-dir = "/hab/svc/consul/data/consul"
 datacenter = "dc1"
 loglevel = "INFO"
+# Consul WebUI has been redesigned, switch this to true to use the new Beta UI
+# https://www.consul.io/intro/getting-started/ui.html#how-to-use-the-new-ui
+beta_ui = false
 # switch this to false you want to start in DEVMODE
 # https://www.consul.io/docs/guides/bootstrapping.html
 mode = true
