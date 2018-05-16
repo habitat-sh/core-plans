@@ -2,7 +2,7 @@
 
 . "{{pkg.svc_config_path}}/env"
 
-{{#if cfg.rabbitmq.management.enabled ~}}
+{{#if cfg.management.enabled ~}}
 echo "Enabling management console"
 rabbitmq-plugins --offline enable rabbitmq_management
 {{else ~}}
