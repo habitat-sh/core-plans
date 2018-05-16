@@ -1,24 +1,29 @@
-[rabbitmq]
-
-# Host on which to listen. An empty string means "listen on all interfaces."
-listen_host=""
-
-# Port to bind to.
-listen_port=5672
-
-# Virtual host to create when RabbitMQ creates a new database from scratch. The
-# exchange amq.rabbitmq.log will exist in this virtual host.
 default_vhost="/"
-
-# User name to create when RabbitMQ creates a new database from scratch.
 default_user="guest"
-
-# Password for the default user.
 default_pass="guest"
 
-[rabbitmq.management]
-# Whether to enable the rabbitmq management plugin.
+[default_permissions]
+configure = ".*"
+read = ".*"
+write = ".*"
+
+[listeners]
+[listeners.tcp]
+default=5672
+
+[loopback_users]
+guest=true
+
+[management]
 enabled=false
+## One of 'basic', 'detailed' or 'none'. See
+## http://rabbitmq.com/management.html#fine-stats for more details.
+rates_mode="basic"
+
+[management.listener]
+port=15672
+ip="0.0.0.0"
+ssl=false
 
 [erlang]
 cookie=false

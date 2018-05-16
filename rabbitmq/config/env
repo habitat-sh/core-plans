@@ -1,9 +1,15 @@
-#!/bin/bash
+#!/bin/sh
 
 export RABBITMQ_MNESIA_BASE="{{pkg.svc_var_path}}/db"
 export RABBITMQ_CONFIG_FILE="{{pkg.svc_config_path}}/rabbitmq"
 export RABBITMQ_SCRIPTS_DIR="{{pkg.path}}/sbin"
 export RABBITMQ_ENABLED_PLUGINS_FILE="{{pkg.svc_var_path}}/enabled_plugins"
+export RABBITMQ_HOME="{{pkg.svc_var_path}}"
+export RABBITMQ_GENERATED_CONFIG_DIR="{{pkg.svc_var_path}}"
+export RABBITMQ_SCHEMA_DIR="{{pkg.svc_var_path}}"
 export HOME="{{pkg.svc_var_path}}"
 export RABBITMQ_LOGS=-
 export RABBITMQ_SASL_LOGS=-
+export LANG="en_US.utf8"
+export LANGUAGE="en_US:"
+export LC_ALL=en_US.UTF-8
