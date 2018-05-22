@@ -1,21 +1,20 @@
 pkg_name=drupal
-pkg_origin=core
-pkg_version="8.3.2"
-pkg_license=('gplv2+')
-pkg_deps=(core/mysql-client core/drush core/nginx core/php)
+pkg_origin=baggerspion
+pkg_version="8.5.3"
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_license=("Apache-2.0")
+pkg_source="https://ftp.drupal.org/files/projects/$pkg_name-$pkg_version.tar.gz"
+pkg_shasum="7fc105f9e04ac5ccd337ff784aeaba6b48841490d7a80fd8ddb002fac0def47b"
+pkg_deps=(core/nginx)
 pkg_binds=(
-  [database]="port username password"
+  [php]="port local_only"
 )
 pkg_svc_user="root"
-pkg_svc_run="php-fpm --nodaemonize"
-pkg_description="Drupal is a free and open source content-management framework written in PHP."
-pkg_upstream_url="https://www.drupal.org"
-pkg_maintainers="The Habitat Maintainers <humans@habitat.sh>"
 
 do_build() {
-  drush dl drupal-8.3.2 --destination="$CACHE_PATH" --drupal-project-rename=drupal
+  return 0
 }
 
 do_install() {
-  cp -r "$CACHE_PATH/drupal" "$pkg_prefix/drupal"
+  cp -r "$CACHE_PATH" "$pkg_prefix/drupal"
 }
