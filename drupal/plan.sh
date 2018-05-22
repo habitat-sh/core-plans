@@ -11,6 +11,7 @@ pkg_binds=(
 )
 pkg_svc_user="root"
 pkg_description="Drupal is a free and open source content-management framework written in PHP."
+pkg_upstream_url="https://www.drupal.org/"
 
 do_build() {
   return 0
