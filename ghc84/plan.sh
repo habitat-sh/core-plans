@@ -1,12 +1,13 @@
-pkg_name=ghc
+pkg_name=ghc84
 pkg_origin=core
-pkg_version=8.0.1
-pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_version=8.4.1
 pkg_license=('BSD-3-Clause')
 pkg_upstream_url=https://www.haskell.org/ghc/
 pkg_description="The Glasgow Haskell Compiler"
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-src.tar.xz
-pkg_shasum=90fb20cd8712e3c0fbeb2eac8dab6894404c21569746655b9b12ca9684c7d1d2
+pkg_shasum=39ae2f25192408f355693e5a3c8b6ff613ddb7c4da998fdf26210143a61839d2
+pkg_dirname=ghc-${pkg_version}
 
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
@@ -20,16 +21,23 @@ pkg_deps=(
   core/libedit
   core/libffi
   core/libiconv
-  alasconnect/ncurses
+  core/ncurses
 )
 
 pkg_build_deps=(
-  alasconnect/ghc/${pkg_version}
+  core/ghc82
   core/make
   core/diffutils
   core/sed
   core/patch
 )
+
+do_prepare() {
+  do_default_prepare
+
+  cp mk/build.mk.sample mk/build.mk
+  sed -i '1iBuildFlavour = perf' mk/build.mk
+}
 
 do_build() {
   libffi_include=$(find "$(pkg_path_for libffi)/lib/" -name "libffi-*.*.*")
