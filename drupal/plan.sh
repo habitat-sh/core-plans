@@ -1,5 +1,5 @@
 pkg_name=drupal
-pkg_origin=baggerspion
+pkg_origin=core
 pkg_version="8.5.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
