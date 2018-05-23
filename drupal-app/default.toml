@@ -1,0 +1,19 @@
+bind = "127.0.0.1"
+port = 9000
+local_only = true
+daemonize = "no"
+log_level = "notice"
+
+[pm]
+mode = "ondemand"
+max_children = 5
+timeout = "10s"
+requests = 500
+
+[opcache]
+memory_consumption = 128
+interned_strings_buffer = 8
+max_accelerated_files = 4000
+revalidate_freq = 60
+fast_shutdown = 1
+enable_cli = 1

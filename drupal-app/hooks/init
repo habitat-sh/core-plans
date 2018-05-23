@@ -1,0 +1,4 @@
+#!/bin/bash
+
+mkdir -p "{{pkg.svc_var_path}}/log"
+chown -R hab:hab "{{pkg.svc_var_path}}/log"
