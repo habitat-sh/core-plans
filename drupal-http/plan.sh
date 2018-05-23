@@ -1,4 +1,4 @@
-pkg_name=drupal
+pkg_name=drupal-http
 pkg_origin=core
 pkg_version="8.5.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
