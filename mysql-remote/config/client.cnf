@@ -1,0 +1,5 @@
+[client]
+host = {{ cfg.host }}
+port = {{ cfg.port }}
+user = {{ cfg.app_username }}
+password = {{ cfg.app_password }}
