@@ -9,9 +9,6 @@ pkg_exports=(
   [port]=port
   [local_only]=local_only
 )
-pkg_binds_optional=(
-  [database]="port host"
-)
 pkg_description="PHP is a popular general-purpose scripting language that is especially suited to web development."
 pkg_upstream_url="http://php.net"
 
