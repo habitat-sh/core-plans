@@ -1,12 +1,12 @@
 pkg_name=rethinkdb
 pkg_origin=core
-pkg_version=2.3.5
+pkg_version=2.3.6
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="The open-source database for the realtime web."
 pkg_upstream_url="https://rethinkdb.com"
 pkg_license=('Apache-2.0')
 pkg_source="https://download.${pkg_name}.com/dist/${pkg_name}-${pkg_version}.tgz"
-pkg_shasum=dd8aeee169b177179bfe080725f0560443e0f26dae875b32ae25d90cf2f8ee10
+pkg_shasum=c42159666910ad01be295a57caf8839ec3a89227d8919be5418e3aa1f0a3dc28
 pkg_build_deps=(
   core/gcc/5.2.0
   core/make
@@ -15,6 +15,7 @@ pkg_build_deps=(
   core/coreutils
   core/jemalloc
   core/m4
+  core/patch
 )
 pkg_deps=(
   core/openssl/1.0.2l
