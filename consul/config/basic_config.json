@@ -5,6 +5,11 @@
   "bind_addr": "{{cfg.server.bind}}",
   "client_addr": "{{cfg.client.bind}}",
   "server": {{cfg.server.mode}},
+  "retry_join": [
+  {{#eachAlive svc.members as |member| ~}}
+    "{{member.sys.ip}}" {{~#unless @last}},{{/unless}}
+  {{/eachAlive ~}}
+  ],
   "ports": {
     "dns": {{cfg.ports.dns}},
     "http": {{cfg.ports.http}},
