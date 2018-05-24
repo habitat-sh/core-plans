@@ -201,6 +201,8 @@ plan_path = "doxygen"
 plan_path = "dpkg"
 [dri2proto]
 plan_path = "dri2proto"
+[drupal]
+plan_path = "drupal"
 [drupal/drupal-app]
 plan_path = "drupal/drupal-app"
 [drupal/drupal-http]
