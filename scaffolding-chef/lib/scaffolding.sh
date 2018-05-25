@@ -70,7 +70,7 @@ EOF
 }
 
 do_default_build() {
-  if [ -d "$PLAN_CONTEXT/../policfyfiles" ]; then
+  if [ -d "$PLAN_CONTEXT/../policyfiles" ]; then
     _policyfile_path="$PLAN_CONTEXT/../policyfiles"
   else
     if [ -d "$PLAN_CONTEXT/../../policyfiles" ]; then
