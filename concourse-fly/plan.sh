@@ -1,6 +1,6 @@
 pkg_name=concourse-fly
 pkg_origin=core
-pkg_version="3.11.0"
+pkg_version="3.13.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Concourse CLI for interacting with the ATC API"
 pkg_license=('Apache-2.0')
@@ -35,7 +35,6 @@ do_verify() {
 }
 
 do_build(){
-  cd "$HAB_CACHE_SRC_PATH/$pkg_dirname/" || return 1
   source .envrc
   cd "$HAB_CACHE_SRC_PATH/$pkg_dirname/src/github.com/concourse/fly" || return 1
   go build
