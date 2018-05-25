@@ -9,11 +9,9 @@ pkg_filename="${pkg_distname}-${pkg_version}.tar.gz"
 pkg_dirname="${pkg_distname}-${pkg_version}"
 pkg_shasum="7fc105f9e04ac5ccd337ff784aeaba6b48841490d7a80fd8ddb002fac0def47b"
 pkg_deps=(
-  core/mysql-client
   core/nginx
 )
 pkg_binds=(
-  [database]="port username password"
   [php]="port local_only"
 )
 pkg_svc_user="root"
