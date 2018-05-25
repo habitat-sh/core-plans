@@ -28,6 +28,13 @@ Set-ItemProperty -Path  "HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL${sq
 # Open port on firewall only if Windows Firewall service is running
 if($(Get-Service 'MpsSvc').Status -eq "Running") {
     Invoke-Command -ComputerName localhost -EnableNetworkAccess {    Write-Host "Checking for xNetworking PS module..."
+        $ProgressPreference="SilentlyContinue"
+        Write-Host "Checking for nuget package provider..."
+        if(!(Get-PackageProvider -Name nuget -ErrorAction SilentlyContinue -ListAvailable)) {
+            Write-Host "Installing Nuget provider..."
+            Install-PackageProvider -Name NuGet -Force | Out-Null
+        }
+        Write-Host "Checking for xNetworking PS module..."
         if(!(Get-Module xNetworking -ListAvailable)) {
             Write-Host "Installing xNetworking PS Module..."
             Install-Module xNetworking -Force | Out-Null
