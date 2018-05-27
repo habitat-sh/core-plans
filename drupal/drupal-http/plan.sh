@@ -14,6 +14,9 @@ pkg_deps=(
 pkg_binds=(
   [php]="port local_only"
 )
+pkg_binds_optional=(
+  [database]="port password username server_id"
+)
 pkg_svc_user="root"
 pkg_description="Drupal is a free and open source content-management framework written in PHP."
 pkg_upstream_url="https://www.drupal.org/"
