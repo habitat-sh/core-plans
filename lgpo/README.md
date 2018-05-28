@@ -18,8 +18,7 @@ LGPO.exe can be used to apply local group policies to a machine using habitat
 
 ```
 $ hab pkg install core/lgpo
-$ hab pkg binlink core/lgpo
-$ LGPO.exe
+$ hab pkg exec core/lgpo LGPO.exe
 
 LGPO.exe v2.2 - Local Group Policy Object utility
 
