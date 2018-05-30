@@ -158,6 +158,7 @@ sqitch @irvingpop
 sqitch_pg @irvingpop
 sqlserver @mwrock
 sqlserver-ha-ag @mwrock
+terraform @defilan
 vault @defilan
 visual-build-tools-2017 @mwrock
 wrk @afiune
