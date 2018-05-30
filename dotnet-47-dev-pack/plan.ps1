@@ -2,7 +2,7 @@ $pkg_name="dotnet-47-dev-pack"
 $pkg_origin="core"
 $pkg_version="4.7"
 $pkg_description=".NET 4.7 Targeting Pack and the .NET 4.7 SDK."
-$pkg_upstream_url="https://www.microsoft.com/en-us/download/details.aspx?id=55168"
+$pkg_upstream_url="https://www.microsoft.com/net/download/all"
 $pkg_license=@("Microsoft Software License")
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_source="https://download.microsoft.com/download/A/1/D/A1D07600-6915-4CB8-A931-9A980EF47BB7/NDP47-DevPack-KB3186612-ENU.exe"
