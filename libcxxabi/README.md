@@ -1,6 +1,6 @@
-# libcxx
+# libcxxabi
 
-A new implementation of the C++ standard library, targeting C++11
+libcxxabi is a new implementation of low level support for a standard C++ library
 
 ## Maintainers
 
