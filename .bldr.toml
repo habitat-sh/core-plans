@@ -520,6 +520,8 @@ plan_path = "libcap-ng"
 plan_path = "libcerf"
 [libcxx]
 plan_path = "libcxx"
+[libcxxabi]
+plan_path = "libcxxabi"
 [libdrm]
 plan_path = "libdrm"
 [libedit]
