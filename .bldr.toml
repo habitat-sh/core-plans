@@ -1006,6 +1006,8 @@ plan_path = "rust-nightly"
 plan_path = "sassc"
 [scaffolding-base]
 plan_path = "scaffolding-base"
+[scaffolding-chef]
+plan_path = "scaffolding-chef"
 [scaffolding-go]
 plan_path = "scaffolding-go"
 [scaffolding-go17]
