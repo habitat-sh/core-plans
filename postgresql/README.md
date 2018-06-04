@@ -2,7 +2,7 @@
 
 This packages PostgreSQL in a Habitat package that can be run with the Habitat Supervisor.
 
-This PostgreSQL plan supports standalone and clustered modes as well as continuous archiving via wal-e integration.
+This PostgreSQL plan supports standalone and clustered modes.
 
 ## Maintainers
 
@@ -156,3 +156,4 @@ If you wish to monitor this service directly, you can use [Datadog](https://www.
   - add a `suitability` hook based on the existence of a `recovery.conf` file
 - Test for various high-availability and other operational optimizations (high writes, high reads)
   - add configuration to the plan for people who wish to use those
+- Add documentation of running Wal-E with PostgreSQL in a composite plan.
