@@ -933,7 +933,10 @@ plan_path = "postfix"
 [postgresql]
 plan_path = "postgresql"
 [postgresql-client]
-plan_path = "postgresql"
+plan_path = "postgresql-client"
+paths = [
+  "postgresql/*",
+]
 [postgresql93]
 plan_path = "postgresql93"
 paths = [
@@ -942,8 +945,8 @@ paths = [
 [postgresql93-client]
 plan_path = "postgresql93-client"
 paths = [
+  "postgresql/*",
   "postgresql93/*",
-  "postgresql93-client/*",
 ]
 [postgresql94]
 plan_path = "postgresql94"
@@ -953,8 +956,8 @@ paths = [
 [postgresql94-client]
 plan_path = "postgresql94-client"
 paths = [
+  "postgresql/*",
   "postgresql94/*",
-  "postgresql94-client/*"
 ]
 [postgresql95]
 plan_path = "postgresql95"
@@ -964,8 +967,19 @@ paths = [
 [postgresql95-client]
 plan_path = "postgresql95-client"
 paths = [
+  "postgresql/*",
   "postgresql95/*",
-  "postgresql95-client/*"
+]
+[postgresql96]
+plan_path = "postgresql96"
+paths = [
+  "postgresql/*",
+]
+[postgresql96-client]
+plan_path = "postgresql96-client"
+paths = [
+  "postgresql/*",
+  "postgresql96/*",
 ]
 [powershell]
 plan_path = "powershell"
