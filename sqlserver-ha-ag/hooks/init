@@ -18,7 +18,7 @@ Invoke-Command -ComputerName localhost -EnableNetworkAccess {
     Write-Host "Checking for SqlServer PS module..."
     if(!(Get-Module SqlServer -ListAvailable)) {
         Write-Host "Installing SqlServer PS Module..."
-        Install-Module SqlServer -Force | Out-Null
+        Install-Module SqlServer -Force -AllowClobber | Out-Null
     }
     Write-Host "Checking for xNetworking PS module..."
     if(!(Get-Module xNetworking -ListAvailable)) {
@@ -41,8 +41,14 @@ Invoke-Command -ComputerName localhost -EnableNetworkAccess -ArgumentList (,($se
     param ($nodes)
     $ProgressPreference="SilentlyContinue"
 
+    $featureState = (Get-WindowsFeature Failover-Clustering).InstallState
+    if($featureState -eq "InstallPending") {
+        Restart-Computer # that's right
+    }
+
     $needToAddNode = $true
-    if(!(Get-Cluster -Name {{cfg.cluster_name}} -Domain $env:UserDomain)) {
+    $domain = (Get-ciminstance win32_computersystem).Domain.Split(".")[0]
+    if(!(Get-Cluster -Name {{cfg.cluster_name}} -Domain $domain)) {
         Write-Host "Creating new {{cfg.cluster_name}} cluster"
         $cluster = New-Cluster -Name {{cfg.cluster_name}} -Node $env:ComputerName -NoStorage -StaticAddress {{cfg.cluster_ip}} -ErrorAction SilentlyContinue
         if ($cluster) {

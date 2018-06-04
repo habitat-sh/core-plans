@@ -17,7 +17,8 @@ if($(Get-Service 'MpsSvc').Status -eq "Running") {
 }
 
 if($env:ComputerName -eq $primary) {
-    $login = "${env:userdomain}\${env:ComputerName}`$"
+    $domain = (Get-ciminstance win32_computersystem).Domain.Split(".")[0]
+    $login = "$domain\${env:ComputerName}`$"
 
     Invoke-Command -ComputerName localhost -EnableNetworkAccess -ArgumentList $login, $secondary, $instance {
         param ($login, $secondary, $instance)
@@ -44,6 +45,16 @@ if($env:ComputerName -eq $primary) {
                 $svr = New-Object ('Microsoft.SqlServer.Management.Smo.Server') "$s\$instance"
                 $svrole = $svr.Roles | where {$_.Name -eq 'sysadmin'}
                 $svrole.AddMember($login)
+            }
+        }
+
+        # Create an empty database for each db if it does not already exist
+        $svr = New-Object ('Microsoft.SqlServer.Management.Smo.Server') "{{bind.database.first.sys.hostname}}\$instance"
+        $databases = @({{cfg.databases}})
+        foreach($db in $databases) {
+            if($db.Length -gt 0 -and (!$svr.Databases[$db])) {
+                Write-Host "Creating empty database for $db"
+                (New-Object -TypeName Microsoft.SqlServer.Management.Smo.Database -argumentlist $svr, $db).Create()
             }
         }
     }
