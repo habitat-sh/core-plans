@@ -1,6 +1,6 @@
-source ../postgresql/plan.sh
+source ../postgresql96/plan.sh
 
-pkg_name=postgresql-client
+pkg_name=postgresql96-client
 pkg_dirname="postgresql-${pkg_version}"
 
 # No exports/exposes for client
@@ -15,6 +15,7 @@ server_execs=(
     ecpg
     initdb
     pg_archivecleanup
+    pg_config
     pg_controldata
     pg_resetxlog
     pg_rewind
