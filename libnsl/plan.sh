@@ -25,7 +25,7 @@ pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_prepare() {
-  ACLOCAL_PATH="${ACLOCAL_PATH}:$(pkg_path_for core/gettext)/share/aclocal"
+  ACLOCAL_PATH="${ACLOCAL_PATH}:$(pkg_path_for core/gettext)/share/aclocal:$(pkg_path_for core/pkg-config)/share/aclocal"
   export ACLOCAL_PATH
 
   ./autogen.sh
