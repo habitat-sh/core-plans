@@ -1,5 +1,5 @@
 $pkg_name="chef-client"
-$pkg_origin="thelunaticscripter"
+$pkg_origin="core"
 $pkg_version="14.1.12"
 $pkg_description="Chef Client"
 $pkg_upstream_url="https://chef.io/"
