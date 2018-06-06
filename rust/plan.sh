@@ -61,7 +61,7 @@ do_install() {
   ./install.sh --prefix="$pkg_prefix" --disable-ldconfig
 
   # Update the dynamic linker & set `RUNPATH` for all ELF binaries under `bin/`
-  for b in rustc cargo rustdoc; do
+  for b in rustc cargo rustdoc cargo-fmt rls rustfmt; do
     patchelf \
       --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" \
       --set-rpath "$LD_RUN_PATH" \
@@ -87,7 +87,14 @@ do_install() {
     popd > /dev/null
   done; unset i
 
-  # Add a wrapper for cargo to properly set SSL certificates
+  # Add a wrapper for cargo to properly set SSL certificates. We're wrapping
+  # this to set an OpenSSL environment variable. Normally this would not be
+  # required as the Habitat OpenSSL pacakge is compiled with the correct path
+  # to certificates, however in this case we are not source-compiling Rust,
+  # so we can't influence the certificate path after the fact.
+  #
+  # This is largely a reminder for @fnichol, as he keeps trying to remove this
+  # only to remember why it's important in this one instance. Cheers!
   wrap_with_cert_path cargo
 }
 
