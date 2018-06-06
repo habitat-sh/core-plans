@@ -15,12 +15,12 @@ scaffolding_load() {
   parent_deps="${pkg_deps[*]}"
   pkg_deps=("chef/chef-client" "core/cacerts")
   for i in $parent_deps; do
-    pkg_deps+=(i)
+    pkg_deps+=($i)
   done
   parent_build_deps="${pkg_build_deps[*]}"
   pkg_build_deps=("chef/chef-dk" "core/git")
   for i in $parent_build_deps; do
-    pkg_build_deps+=(i)
+    pkg_build_deps+=($i)
   done
   pkg_svc_user="root"
   pkg_svc_run="set_just_so_you_will_render"
@@ -106,12 +106,12 @@ ssl_verify_mode :verify_none
 chef_zero.enabled true
 EOF
 
-  cp "$pkg_prefix/.chef/config.rb $pkg_prefix/config/bootstrap-config.rb"
+  cp "$pkg_prefix/.chef/config.rb" "$pkg_prefix/config/bootstrap-config.rb"
   cat << EOF >> "$pkg_prefix/config/bootstrap-config.rb"
 ENV['PATH'] = "/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:#{ENV['PATH']}"
 EOF
 
-  cp "$pkg_prefix/.chef/config.rb $pkg_prefix/config/client-config.rb"
+  cp "$pkg_prefix/.chef/config.rb" "$pkg_prefix/config/client-config.rb"
   cat << EOF >> "$pkg_prefix/config/client-config.rb"
 ENV['PATH'] = "{{cfg.env_path_prefix}}:#{ENV['PATH']}"
 
