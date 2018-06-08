@@ -1,8 +1,8 @@
 pkg_name=glibc
 pkg_origin=core
-pkg_version=2.22
+pkg_version=2.26
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('gplv2' 'lgplv2')
+pkg_license=('GPL-2.0' 'LGPL-2.0')
 pkg_description="$(cat << EOF
   The GNU C Library project provides the core libraries for the GNU system and GNU/Linux systems,
   as well as many other systems that use Linux as the kernel. These libraries provide critical
@@ -12,7 +12,7 @@ pkg_description="$(cat << EOF
 EOF
 )"
 pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=eb731406903befef1d8f878a46be75ef862b9056ab0cde1626d08a7a05328948
+pkg_shasum=e54e0a934cd2bc94429be79da5e9385898d2306b9eaf3c92d5a77af96190f6bd
 pkg_upstream_url=https://www.gnu.org/software/libc
 pkg_deps=(core/linux-headers)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed core/perl)
@@ -68,11 +68,6 @@ do_prepare() {
   # Source: https://lists.debian.org/debian-glibc/2013/11/msg00116.html
   patch -p1 < "$PLAN_CONTEXT/testsuite-fix.patch"
 
-  # Fix for CVE-2015-7547 and more
-  #
-  # Source: http://www.linuxfromscratch.org/patches/downloads/glibc/glibc-2.22-upstream_fixes-1.patch
-  patch -p1 < "$PLAN_CONTEXT/glibc-2.22-upstream_fixes-1.patch"
-
   # Adjust `scripts/test-installation.pl` to use our new dynamic linker
   sed -i "s|libs -o|libs -L${pkg_prefix}/lib -Wl,-dynamic-linker=${dynamic_linker} -o|" \
     scripts/test-installation.pl
@@ -104,7 +99,7 @@ do_build() {
 
 # Running a `make check` is considered one critical test of the correctness of
 # the resulting glibc build. Unfortunetly, the time to complete the test suite
-# rougly triples the build time of this Plan and there are at least 4 known
+# rougly triples the build time of this Plan and there are at least 2 known
 # failures which means that `make check` certainly returns a non-zero exit
 # code. Despite these downsides, it is still worth the pain when building the
 # first time in a new environment, or when a new upstream version is attempted.
@@ -124,18 +119,6 @@ do_build() {
 # you haven't really broken abi with your change."
 #
 # Source: https://sourceware.org/glibc/wiki/Testing/Testsuite#Known_testsuite_failures
-#
-# ## FAIL: elf/tst-protected1a
-#
-# "The elf/tst-protected1a and elf/tst-protected1b tests are known to fail with
-# the current stable version of binutils."
-#
-# Source: http://www.linuxfromscratch.org/lfs/view/stable/chapter06/glibc.html
-# Source: https://sourceware.org/glibc/wiki/Release/2.22
-#
-# ## FAIL: elf/tst-protected1b
-#
-# Same as above.
 #
 # ## FAIL: posix/tst-getaddrinfo4
 #
@@ -165,7 +148,7 @@ do_check() {
     # https://sourceware.org/ml/libc-alpha/2012-04/msg01014.html regarding the
     # use of system library directories here)."
     #
-    # Source: https://sourceware.org/glibc/wiki/Release/2.22
+    # Source: https://sourceware.org/glibc/wiki/Release/2.23
     # Source: http://www0.cs.ucl.ac.uk/staff/ucacbbl/glibc/index.html#bug-atexit3
     if [[ "$STUDIO_TYPE" = "stage1" ]]; then
       ln -sv /tools/lib/libgcc_s.so.1 .
@@ -202,7 +185,7 @@ do_install() {
     # a multilib installation is assumed (i.e. 32-bit and 64-bit). We will
     # fool this check by symlinking a "32-bit" file to the real loader.
     mkdir -p "$pkg_prefix/lib"
-    ln -sv ld-2.22.so "$pkg_prefix/lib/ld-linux.so.2"
+    ln -sv ld-${pkg_version}.so "$pkg_prefix/lib/ld-linux.so.2"
 
     # Add a `lib64` -> `lib` symlink for `bin/ldd` to work correctly.
     #
