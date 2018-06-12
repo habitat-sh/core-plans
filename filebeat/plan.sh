@@ -16,7 +16,8 @@ pkg_description="Lightweight shipper for logfiles"
 pkg_upstream_url="https://www.elastic.co/products/beats/filebeat"
 
 do_download() {
-  export GOPATH=$(dirname "${HAB_CACHE_SRC_PATH}")
+  GOPATH=$(dirname "${HAB_CACHE_SRC_PATH}")
+  export GOPATH
   build_line "Fetching Go sources."
   go get github.com/elastic/beats/filebeat
   pushd "${HAB_CACHE_SRC_PATH}/github.com/elastic/beats/filebeat" > /dev/null
