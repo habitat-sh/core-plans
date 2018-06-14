@@ -1,0 +1,36 @@
+[srv]
+
+## Local Listener Port, what host or IP address to use for end client connection. E.g. p4.example.com, 127.0.0.1
+host = "localhost"
+
+## Local Listener Port, what port to use for end client connection. E.g. 1666
+port = 2018
+
+## Local Listener Protocol, what protocol to use for end client connection. E.g. tcp:, udp:, ssl:, or "" for default (TCP)
+protocol = "ssl:"
+
+[app]
+
+## Target Host, what host or IP to connect to originating PerForce Server. E.g. p4.example.com, 127.0.0.1
+targetHost = "localhost"
+
+## Target Port, what port to connect to originating PerForce Server. E.g. 1666
+targetPort = 1666
+
+## Target Protocol, what protocol to connect to originating PerForce Server. E.g. tcp:, udp:, ssl:, or "" for default (TCP)
+targetProtocol = ""
+
+## Service Log Output Level:
+# 0 = Disable broker command logging.
+# 1 = Logs broker commands to the server log file.
+# 2 = In addition to data logged at level 1, logs broker command completion and basic information on
+#     CPU time used. Time elapsed is reported in seconds. On UNIX, CPU usage (system and user time)
+#     is reported in milliseconds, as per getrusage().
+# 3 = In addition to data logged at level 2, adds usage information for compute phases of p4 sync and
+#     p4 flush (p4 sync -k) commands.
+debug-level = 1
+
+## Admin contact info, seen in p4 info
+admin-name  = "Perforce Admins"
+admin-phone = "999/911"
+admin-email = "perforce-admins@example.com"
