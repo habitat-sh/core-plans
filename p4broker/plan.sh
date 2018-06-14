@@ -1,5 +1,5 @@
 pkg_name=p4broker
-pkg_origin=dbhagen
+pkg_origin=core
 pkg_version="18.1"
 pkg_maintainer="Daniel Hagen <daniel.b.hagen@gmail.com>"
 pkg_license=("Apache-2.0")
