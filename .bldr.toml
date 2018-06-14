@@ -720,6 +720,8 @@ plan_path = "meson"
 plan_path = "mg"
 [minio]
 plan_path = "minio"
+[mksh]
+plan_path = "mksh"
 [monit]
 plan_path = "monit"
 paths = [
