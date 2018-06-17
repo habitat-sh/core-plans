@@ -11,7 +11,8 @@
 
 #### General Configuration
 # redirector: If set, bypass normal config and just redirect http to https
-# redirector = true
+redirector = false
+
 # worker_processes: Number of NGINX processes. Default = 1
 worker_processes = 4
 
@@ -36,6 +37,27 @@ tcp_nodelay = "on"
 
 # http.keepalive_timeout: Timeout on client connection keepalive, in seconds. Default = 75
 keepalive_timeout = 60
+
+extra_config = ""
+
+[http.server]
+name = "localhost"
+canonicalize = false
+extra_config = ""
+
+[http.server.default_location]
+root = ""
+index = "index.html index.htm"
+extra_config = ""
+
+[http.server.ssl]
+enable = false
+port = 443
+certificate = ""
+certificate_file = "/hab/svc/nginx/files/ssl.crt"
+key = ""
+key_file = "/hab/svc/nginx/files/ssl.key"
+protocols = "TLSv1 TLSv1.1 TLSv1.2"
 
 [http.listen]
 port = 80

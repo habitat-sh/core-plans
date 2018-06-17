@@ -1,0 +1,6 @@
+#!/bin/bash -e
+
+
+# test stub_status response
+
+curl -s http://127.0.0.1/stub_status | grep "Active connections:"
