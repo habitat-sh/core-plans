@@ -125,4 +125,3 @@ This is separate from information about Habitat's HTTP API monitoring service.  
 
 (Optional)
 
-Anything that does not fit in the above sections should go here - i.e. how does this fit into a user's development workflow?
