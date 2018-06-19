@@ -9,7 +9,7 @@ pkg_source="https://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.g
 pkg_shasum="ae7a42df026550b85daca8389b6a60ba6313b0567f374392e54918588a411e94"
 pkg_deps=(
   core/glibc
-  core/gmp/6.1.0 # coreutils is stuck on this one
+  core/gmp
 )
 pkg_build_deps=(
   core/diffutils

@@ -1,15 +1,21 @@
 pkg_name=linux-headers
 pkg_origin=core
-pkg_version=4.13.1
+pkg_version=4.15.9
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('gplv2')
-pkg_source=https://www.kernel.org/pub/linux/kernel/v4.x/linux-${pkg_version}.tar.xz
 pkg_description="The Linux kernel headers"
 pkg_upstream_url="https://kernel.org"
-pkg_shasum=decee7a2de34aea921fce3e7934f520790fe43176de29bd9718a84419ca6e1ce
-pkg_dirname=linux-$pkg_version
+pkg_license=('gplv2')
+pkg_source="https://www.kernel.org/pub/linux/kernel/v4.x/linux-${pkg_version}.tar.xz"
+pkg_shasum="dda015b2042e71c6d0df56de553846df1252eac486514000c76b741cde6d4492"
+pkg_dirname="linux-$pkg_version"
 pkg_deps=()
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+)
 pkg_include_dirs=(include)
 
 do_build() {
@@ -17,7 +23,10 @@ do_build() {
 }
 
 do_install() {
-  find "$pkg_prefix/include" \( -name ..install.cmd -o -name .install \) -print0 | xargs -0 rm -v
+  find "$pkg_prefix/include" \
+    \( -name ..install.cmd -o -name .install \) \
+    -print0 \
+  | xargs -0 rm -v
 }
 
 

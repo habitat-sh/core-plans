@@ -1,15 +1,18 @@
 pkg_name=linux
 pkg_origin=core
-pkg_version="4.13.1"
+pkg_version="4.16.7"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('gplv2')
-pkg_source="https://cdn.kernel.org/pub/linux/kernel/v4.x/${pkg_name}-${pkg_version}.tar.xz"
 pkg_description="The Linux kernel"
 pkg_upstream_url="https://www.kernel.org/"
-pkg_shasum="decee7a2de34aea921fce3e7934f520790fe43176de29bd9718a84419ca6e1ce"
-pkg_deps=(core/glibc)
+pkg_license=('gplv2')
+pkg_source="https://cdn.kernel.org/pub/linux/kernel/v4.x/${pkg_name}-${pkg_version}.tar.xz"
+pkg_shasum="d87abef6c5666329194a0005fa8331c0cc03b65383f195442dee8f5558af0139"
+pkg_deps=(
+  core/glibc
+)
 pkg_build_deps=(
   core/bc
+  core/bison
   core/diffutils
   core/elfutils
   core/findutils
@@ -44,13 +47,13 @@ do_build() {
   #  builds that have CONFIG_ options set that require building scripts/ or tools/
 
   # Let the inline test build (CONFIG_STACK_VALIDATION) know where libelf lives
-  sed -i "932s|-xc|$LDFLAGS -xc|" Makefile
+  sed -i "969s|-xc|$LDFLAGS -xc|" Makefile
 
   # Override the defaults for building scripts and tools.
   #  scripts/sign-file and tools/objtool need openssl and elfutils.
-  sed -i "306s|$| $LDFLAGS|" Makefile
-  sed -i "98s|\$(hostc_flags)|\$(hostc_flags) \$(HOSTLDFLAGS)|" scripts/Makefile.host
-  sed -i "55s|\$(LDFLAGS)|\$(LDFLAGS) \$(HOSTLDFLAGS)|" tools/objtool/Makefile
+  sed -i "367s|$| $LDFLAGS|" Makefile
+  sed -i "87s|\$(hostc_flags)|\$(hostc_flags) \$(HOSTLDFLAGS)|" scripts/Makefile.host
+  sed -i "50s|\$(LDFLAGS)|\$(LDFLAGS) \$(HOSTLDFLAGS)|" tools/objtool/Makefile
 
   HOST_EXTRACFLAGS="${CFLAGS}" make -j "$(nproc)" bzImage modules
 

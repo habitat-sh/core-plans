@@ -1,15 +1,15 @@
-diff -ru glibc-2.22.orig/stdio-common/Makefile glibc-2.22/stdio-common/Makefile
---- glibc-2.22.orig/stdio-common/Makefile	2015-08-05 06:42:21.000000000 +0000
-+++ glibc-2.22/stdio-common/Makefile	2015-12-17 04:51:00.303026327 +0000
-@@ -107,9 +107,9 @@
+diff -ru glibc-2.27.orig/stdio-common/Makefile glibc-2.27/stdio-common/Makefile
+--- glibc-2.27.orig/stdio-common/Makefile	2018-03-10 00:45:56.544264559 +0000
++++ glibc-2.27/stdio-common/Makefile	2018-03-10 00:57:15.122250501 +0000
+@@ -140,9 +140,9 @@
  # GNU extension.  The latter are needed, though, when internal headers
  # are used.  So made sure we see the installed headers first.
- CFLAGS-scanf15.c = -I../libio -I../stdlib -I../wcsmbs -I../time -I../string \
+ CFLAGS-scanf15.c += -I../libio -I../stdlib -I../wcsmbs -I../time -I../string \
 -		   -I../wctype
 +		   -I../wctype -I$(common-objpfx)misc
- CFLAGS-scanf17.c = -I../libio -I../stdlib -I../wcsmbs -I../time -I../string \
+ CFLAGS-scanf17.c += -I../libio -I../stdlib -I../wcsmbs -I../time -I../string \
 -		   -I../wctype
 +		   -I../wctype -I$(common-objpfx)misc
  
- CPPFLAGS += $(libio-mtsafe)
- 
+ # tst-gets.c tests a deprecated function.
+ CFLAGS-tst-gets.c += -Wno-deprecated-declarations

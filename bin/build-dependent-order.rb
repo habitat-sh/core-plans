@@ -3,7 +3,6 @@
 require 'delegate'
 require 'optparse'
 require 'tsort'
-require 'tempfile'
 
 # Command line parser
 class Cli
@@ -65,28 +64,12 @@ end
 
 options = Cli.parse(ARGV)
 
-bash_prog = Tempfile.new('print_deps.sh')
-bash_prog.write(<<'EOF')
-#!/bin/bash
-set -e
-STUDIO_TYPE=stage1
-FIRST_PASS=true
-PLAN_CONTEXT=$(pwd)/$(dirname $1)
-
-cd $(dirname $1)
-source $(basename $1)
-echo "${pkg_origin}/${pkg_name}"
-echo "${pkg_build_deps[*]} ${pkg_deps[*]}"
-exit 0
-EOF
-bash_prog.close
-
 all_deps = Sortable.new({})
 ident_to_plan = {}
 
 ARGF.each_line do |file|
   # Load the plan by sourcing it with a small Bash program
-  raw = `bash #{bash_prog.path} #{file}`.chomp
+  raw = `bash #{File.dirname(__FILE__)}/print-deps.sh #{file}`.chomp
   # Parse out the package identifier and the dependencies from the Bash program
   ident, _, deps_str = raw.partition(/\n/)
   # Add the package ident to a key in an "all deps" hash with the value being

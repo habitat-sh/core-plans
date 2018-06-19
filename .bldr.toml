@@ -520,6 +520,8 @@ plan_path = "libcap-ng"
 plan_path = "libcerf"
 [libcxx]
 plan_path = "libcxx"
+[libcxxabi]
+plan_path = "libcxxabi"
 [libdrm]
 plan_path = "libdrm"
 [libedit]
@@ -556,6 +558,8 @@ plan_path = "libjpeg-turbo"
 plan_path = "libksba"
 [libmpc]
 plan_path = "libmpc"
+[libnsl]
+plan_path = "libnsl"
 [libossp-uuid]
 plan_path = "libossp-uuid"
 [libpcap]
@@ -600,6 +604,8 @@ plan_path = "libtasn1"
 plan_path = "libtermkey"
 [libtiff]
 plan_path = "libtiff"
+[libtirpc]
+plan_path = "libtirpc"
 [libtool]
 plan_path = "libtool"
 [libunistring]
@@ -939,6 +945,11 @@ randrproto = "randrproto"
 plan_path = "re2c"
 [readline]
 plan_path = "readline"
+[readline6]
+plan_path = "readline6"
+paths = [
+  "readline/*",
+]
 [rebar]
 plan_path = "rebar"
 [rebar3]

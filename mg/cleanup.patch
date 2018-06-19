@@ -1,7 +1,6 @@
-Common subdirectories: mg-20160118.orig/CVS and mg-20160118/CVS
-diff -u mg-20160118.orig/GNUmakefile mg-20160118/GNUmakefile
---- mg-20160118.orig/GNUmakefile	2016-01-18 15:01:49.000000000 +0000
-+++ mg-20160118/GNUmakefile	2016-01-22 22:14:49.831947418 +0000
+diff -ru mg-20171014.orig/GNUmakefile mg-20171014/GNUmakefile
+--- mg-20171014.orig/GNUmakefile	2018-03-01 19:58:39.118807329 +0000
++++ mg-20171014/GNUmakefile	2018-03-01 20:00:16.377297903 +0000
 @@ -7,15 +7,15 @@
  
  name=		mg
@@ -13,18 +12,18 @@ diff -u mg-20160118.orig/GNUmakefile mg-20160118/GNUmakefile
  includedir=	$(prefix)/include
  mandir=		$(prefix)/man
  
--PKG_CONFIG=	/usr/bin/pkg-config
+-PKG_CONFIG=	/usr/bin/pkg-config --silence-errors
 -INSTALL=	/usr/bin/install
 -STRIP=		/usr/bin/strip
-+PKG_CONFIG=	pkg-config
++PKG_CONFIG=	pkg-config --silence-errors
 +INSTALL=	install
 +STRIP=		strip
  
  UNAME:=		$(shell uname)
  ifeq ($(UNAME),FreeBSD)
-diff -u mg-20160118.orig/Makefile mg-20160118/Makefile
---- mg-20160118.orig/Makefile	2016-01-07 18:55:54.000000000 +0000
-+++ mg-20160118/Makefile	2016-01-22 22:14:10.620400854 +0000
+diff -ru mg-20171014.orig/Makefile mg-20171014/Makefile
+--- mg-20171014.orig/Makefile	2018-03-01 19:58:39.118807329 +0000
++++ mg-20171014/Makefile	2018-03-01 20:02:25.327299700 +0000
 @@ -12,6 +12,9 @@
  #
  CFLAGS+=-Wall -DREGEX

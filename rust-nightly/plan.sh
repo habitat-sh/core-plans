@@ -2,16 +2,31 @@ pkg_name=rust-nightly
 _distname=rust
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_description="Safe, concurrent, practical language"
+pkg_description="\
+Rust is a systems programming language that runs blazingly fast, prevents \
+segfaults, and guarantees thread safety.\
+"
 pkg_upstream_url="https://www.rust-lang.org/"
 pkg_license=('Apache-2.0' 'MIT')
-_url_base=http://static.rust-lang.org/dist
-pkg_source=$_url_base/${_distname}-nightly-x86_64-unknown-linux-gnu.tar.gz
-pkg_dirname=${_distname}-nightly-x86_64-unknown-linux-gnu
+_url_base="http://static.rust-lang.org/dist"
+pkg_source="$_url_base/${_distname}-nightly-x86_64-unknown-linux-gnu.tar.gz"
+pkg_dirname="${_distname}-nightly-x86_64-unknown-linux-gnu"
+pkg_deps=(
+  core/glibc
+  core/gcc-libs
+  core/zlib
+  core/gcc
+  core/cacerts
+  core/busybox-static
+)
+pkg_build_deps=(
+  core/patchelf
+  core/findutils
+  core/coreutils
+  core/sed
+)
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
-pkg_deps=(core/glibc core/gcc-libs core/zlib core/gcc core/cacerts core/busybox-static)
-pkg_build_deps=(core/patchelf core/findutils core/coreutils core/sed)
 
 _target_sources=(
   $_url_base/${_distname}-std-nightly-x86_64-unknown-linux-musl.tar.gz

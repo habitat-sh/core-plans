@@ -1,7 +1,7 @@
-diff -ru -x '*~' -x '*.rej' perl-5.20.0-orig/Configure perl-5.20.0/Configure
---- perl-5.20.0-orig/Configure	2014-05-26 15:34:18.000000000 +0200
-+++ perl-5.20.0/Configure	2014-06-25 10:43:35.368285986 +0200
-@@ -106,15 +106,7 @@
+diff -ru perl-5.26.1.orig/Configure perl-5.26.1/Configure
+--- perl-5.26.1.orig/Configure	2017-09-22 14:27:02.000000000 +0000
++++ perl-5.26.1/Configure	2018-02-18 20:41:45.072171685 +0000
+@@ -111,15 +111,7 @@
  fi
  
  : Proper PATH setting
@@ -18,8 +18,8 @@ diff -ru -x '*~' -x '*.rej' perl-5.20.0-orig/Configure perl-5.20.0/Configure
  
  for p in $paths
  do
-@@ -1337,8 +1329,7 @@
- archname=''
+@@ -1443,8 +1435,7 @@
+ i_whoami=''
  : Possible local include directories to search.
  : Set locincpth to "" in a hint file to defeat local include searches.
 -locincpth="/usr/local/include /opt/local/include /usr/gnu/include"
@@ -28,8 +28,8 @@ diff -ru -x '*~' -x '*.rej' perl-5.20.0-orig/Configure perl-5.20.0/Configure
  :
  : no include file wanted by default
  inclwanted=''
-@@ -1349,17 +1340,12 @@
- 
+@@ -1458,17 +1449,12 @@
+ archobjs=''
  libnames=''
  : change the next line if compiling for Xenix/286 on Xenix/386
 -xlibpth='/usr/lib/386 /lib/386'
@@ -49,16 +49,18 @@ diff -ru -x '*~' -x '*.rej' perl-5.20.0-orig/Configure perl-5.20.0/Configure
  
  : Private path used by Configure to find libraries.  Its value
  : is prepended to libpth. This variable takes care of special
-@@ -1391,8 +1377,6 @@
- libswanted="$libswanted m crypt sec util c cposix posix ucb bsd BSD"
- : We probably want to search /usr/shlib before most other libraries.
- : This is only used by the lib/ExtUtils/MakeMaker.pm routine extliblist.
+@@ -1499,10 +1485,6 @@
+ : If anyone needs extra -lxxx, put those in a hint file.
+ libswanted="cl pthread socket bind inet nsl ndbm gdbm dbm db malloc dl ld"
+ libswanted="$libswanted sun m crypt sec util c cposix posix ucb bsd BSD"
+-: We probably want to search /usr/shlib before most other libraries.
+-: This is only used by the lib/ExtUtils/MakeMaker.pm routine extliblist.
 -glibpth=`echo " $glibpth " | sed -e 's! /usr/shlib ! !'`
 -glibpth="/usr/shlib $glibpth"
  : Do not use vfork unless overridden by a hint file.
  usevfork=false
  
-@@ -2446,7 +2430,6 @@
+@@ -2559,7 +2541,6 @@
  zip
  "
  pth=`echo $PATH | sed -e "s/$p_/ /g"`
@@ -66,7 +68,7 @@ diff -ru -x '*~' -x '*.rej' perl-5.20.0-orig/Configure perl-5.20.0/Configure
  for file in $loclist; do
  	eval xxx=\$$file
  	case "$xxx" in
-@@ -4936,7 +4919,7 @@
+@@ -5048,7 +5029,7 @@
  : Set private lib path
  case "$plibpth" in
  '') if ./mips; then
@@ -75,7 +77,7 @@ diff -ru -x '*~' -x '*.rej' perl-5.20.0-orig/Configure perl-5.20.0/Configure
      fi;;
  esac
  case "$libpth" in
-@@ -8600,13 +8583,8 @@
+@@ -8927,13 +8908,8 @@
  echo " "
  case "$sysman" in
  '')
@@ -91,7 +93,7 @@ diff -ru -x '*~' -x '*.rej' perl-5.20.0-orig/Configure perl-5.20.0/Configure
  	;;
  esac
  if $test -d "$sysman"; then
-@@ -19900,9 +19878,10 @@
+@@ -21359,9 +21335,10 @@
  case "$full_ar" in
  '') full_ar=$ar ;;
  esac
@@ -103,11 +105,10 @@ diff -ru -x '*~' -x '*.rej' perl-5.20.0-orig/Configure perl-5.20.0/Configure
  
  : see what type gids are declared as in the kernel
  echo " "
-Only in perl-5.20.0/: Configure.orig
-diff -ru -x '*~' -x '*.rej' perl-5.20.0-orig/ext/Errno/Errno_pm.PL perl-5.20.0/ext/Errno/Errno_pm.PL
---- perl-5.20.0-orig/ext/Errno/Errno_pm.PL	2014-05-26 15:34:20.000000000 +0200
-+++ perl-5.20.0/ext/Errno/Errno_pm.PL	2014-06-25 10:31:24.317970047 +0200
-@@ -126,11 +126,7 @@
+diff -ru perl-5.26.1.orig/ext/Errno/Errno_pm.PL perl-5.26.1/ext/Errno/Errno_pm.PL
+--- perl-5.26.1.orig/ext/Errno/Errno_pm.PL	2017-07-18 22:49:55.000000000 +0000
++++ perl-5.26.1/ext/Errno/Errno_pm.PL	2018-02-18 20:45:29.840819166 +0000
+@@ -123,11 +123,7 @@
  	if ($dep =~ /(\S+errno\.h)/) {
  	     $file{$1} = 1;
  	}
@@ -120,11 +121,10 @@ diff -ru -x '*~' -x '*.rej' perl-5.20.0-orig/ext/Errno/Errno_pm.PL perl-5.20.0/e
      # When cross-compiling we may store a path for gcc's "sysroot" option:
      my $sysroot = $Config{sysroot} || '';
  	# Some Linuxes have weird errno.hs which generate
-Only in perl-5.20.0/ext/Errno: Errno_pm.PL.orig
-diff -ru -x '*~' -x '*.rej' perl-5.20.0-orig/hints/freebsd.sh perl-5.20.0/hints/freebsd.sh
---- perl-5.20.0-orig/hints/freebsd.sh	2014-01-31 22:55:51.000000000 +0100
-+++ perl-5.20.0/hints/freebsd.sh	2014-06-25 10:25:53.263964680 +0200
-@@ -119,21 +119,21 @@
+diff -ru perl-5.26.1.orig/hints/freebsd.sh perl-5.26.1/hints/freebsd.sh
+--- perl-5.26.1.orig/hints/freebsd.sh	2017-08-23 20:25:38.000000000 +0000
++++ perl-5.26.1/hints/freebsd.sh	2018-02-18 20:50:05.912731422 +0000
+@@ -127,21 +127,21 @@
          objformat=`/usr/bin/objformat`
          if [ x$objformat = xaout ]; then
              if [ -e /usr/lib/aout ]; then
@@ -152,9 +152,9 @@ diff -ru -x '*~' -x '*.rej' perl-5.20.0-orig/hints/freebsd.sh perl-5.20.0/hints/
         ldflags="-Wl,-E "
          lddlflags="-shared "
          cccdlflags='-DPIC -fPIC'
-diff -ru -x '*~' -x '*.rej' perl-5.20.0-orig/hints/linux.sh perl-5.20.0/hints/linux.sh
---- perl-5.20.0-orig/hints/linux.sh	2014-05-26 15:34:20.000000000 +0200
-+++ perl-5.20.0/hints/linux.sh	2014-06-25 10:33:47.354883843 +0200
+diff -ru perl-5.26.1.orig/hints/linux.sh perl-5.26.1/hints/linux.sh
+--- perl-5.26.1.orig/hints/linux.sh	2017-07-18 22:50:00.000000000 +0000
++++ perl-5.26.1/hints/linux.sh	2018-02-18 20:53:58.353305636 +0000
 @@ -150,25 +150,6 @@
      ;;
  esac
@@ -181,8 +181,8 @@ diff -ru -x '*~' -x '*.rej' perl-5.20.0-orig/hints/linux.sh perl-5.20.0/hints/li
  case "$plibpth" in
  '') plibpth=`LANG=C LC_ALL=C $gcc $ccflags $ldflags -print-search-dirs | grep libraries |
  	cut -f2- -d= | tr ':' $trnl | grep -v 'gcc' | sed -e 's:/$::'`
-@@ -178,32 +159,6 @@
-     ;;
+@@ -195,32 +176,6 @@
+   ;;
  esac
  
 -case "$libc" in
@@ -211,10 +211,10 @@ diff -ru -x '*~' -x '*.rej' perl-5.20.0-orig/hints/linux.sh perl-5.20.0/hints/li
 -    ;;
 -esac
 -
- # Are we using ELF?  Thanks to Kenneth Albanowski <kjahds@kjahds.com>
- # for this test.
- cat >try.c <<'EOM'
-@@ -367,33 +322,6 @@
+ if ${sh:-/bin/sh} -c exit; then
+   echo ''
+   echo 'You appear to have a working bash.  Good.'
+@@ -298,33 +253,6 @@
  	;;
  esac
  

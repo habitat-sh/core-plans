@@ -2,17 +2,31 @@ pkg_name=rust
 pkg_origin=core
 pkg_version=1.26.2
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_description="Safe, concurrent, practical language"
+pkg_description="\
+Rust is a systems programming language that runs blazingly fast, prevents \
+segfaults, and guarantees thread safety.\
+"
 pkg_upstream_url="https://www.rust-lang.org/"
 pkg_license=('Apache-2.0' 'MIT')
-_url_base=http://static.rust-lang.org/dist
-pkg_source=$_url_base/${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz
-pkg_dirname=${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu
-pkg_shasum=d2b4fb0c544874a73c463993bde122f031c34897bb1eeb653d2ba2b336db83e6
+_url_base="http://static.rust-lang.org/dist"
+pkg_source="$_url_base/${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz"
+pkg_shasum="d2b4fb0c544874a73c463993bde122f031c34897bb1eeb653d2ba2b336db83e6"
+pkg_dirname="${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu"
+pkg_deps=(
+  core/glibc
+  core/gcc-libs
+  core/zlib
+  core/gcc
+  core/cacerts
+  core/busybox-static
+)
+pkg_build_deps=(
+  core/patchelf
+  core/findutils
+  core/coreutils
+)
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
-pkg_deps=(core/glibc core/gcc-libs core/zlib core/gcc core/cacerts core/busybox-static)
-pkg_build_deps=(core/patchelf core/findutils core/coreutils)
 
 _target_sources=(
   $_url_base/${pkg_name}-std-${pkg_version}-x86_64-unknown-linux-musl.tar.gz
@@ -68,10 +82,7 @@ do_install() {
       "$pkg_prefix/bin/$b"
   done; unset b
 
-  # Going to want to write a cargo wrapper
-  #    SSL_CERT_FILE=$(pkg_path_for cacerts)/ssl/cert.pem \
-
-    # Set `RUNPATH` for all shared libraries under `lib/`
+  # Set `RUNPATH` for all shared libraries under `lib/`
   find "$pkg_prefix/lib" -name "*.so" -print0 \
     | xargs -0 -I '%' patchelf \
       --set-rpath "$LD_RUN_PATH" \
@@ -117,5 +128,14 @@ do_strip() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/patchelf core/coreutils core/sed core/grep core/diffutils core/findutils core/make core/patch)
+  pkg_build_deps=(
+    core/patchelf
+    core/coreutils
+    core/sed
+    core/grep
+    core/diffutils
+    core/findutils
+    core/make
+    core/patch
+  )
 fi
