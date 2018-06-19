@@ -1,6 +1,6 @@
 pkg_name=bundler
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_version=1.16.0
+pkg_version=1.16.2
 pkg_origin=core
 pkg_license=('bundler')
 pkg_description="The Ruby language dependency manager"
