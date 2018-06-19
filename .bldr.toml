@@ -834,8 +834,6 @@ paths = [
 plan_path = "openvpn"
 [p11-kit]
 plan_path = "p11-kit"
-[p4broker]
-plan_path = "p4broker"
 [packer]
 plan_path = "packer"
 [pango]
