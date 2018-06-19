@@ -3,21 +3,20 @@
 
 if [ ! -d {{pkg.svc_data_path}}/log ]; then
 	mkdir -p {{pkg.svc_data_path}}/log
-	chown -R hab:hab {{pkg.svc_data_path}}/log
-	rm -rf {{pkg.svc_data_path}}/log/p4broker.log
+	chown -R {{pkg.svc_user}}:{{pkg.svc_group}} {{pkg.svc_data_path}}/log
 	ln -s /dev/stdout {{pkg.svc_data_path}}/log/p4broker.log
 else
-	chown -R hab:hab {{pkg.svc_data_path}}/log
+	chown -R {{pkg.svc_user}}:{{pkg.svc_group}} {{pkg.svc_data_path}}/log
 	rm -rf {{pkg.svc_data_path}}/log/p4broker.log
 	ln -s /dev/stdout {{pkg.svc_data_path}}/log/p4broker.log
 fi
 
 if [ ! -d {{pkg.svc_files_path}}/sslkeys ]; then
 	mkdir -p {{pkg.svc_files_path}}/sslkeys
-	chown -R hab:hab {{pkg.svc_files_path}}/sslkeys
+	chown -R {{pkg.svc_user}}:{{pkg.svc_group}} {{pkg.svc_files_path}}/sslkeys
 	chmod 700 -R {{pkg.svc_files_path}}/sslkeys
 else
-	chown -R hab:hab {{pkg.svc_files_path}}/sslkeys
+	chown -R {{pkg.svc_user}}:{{pkg.svc_group}} {{pkg.svc_files_path}}/sslkeys
 	chmod 700 -R {{pkg.svc_files_path}}/sslkeys
 fi
 
