@@ -1,4 +1,4 @@
-pkg_origin=core
+pkg_origin=dbhagen
 pkg_name=vault
 pkg_version=0.10.2
 pkg_description="A tool for managing secrets."

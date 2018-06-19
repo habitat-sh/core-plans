@@ -4,8 +4,38 @@ exec 2>&1
 
 DEVMODE={{cfg.dev.mode}}
 
-if [ "$DEVMODE" = true ] ; then
-  exec vault server -dev-listen-address=0.0.0.0:8200 -dev
-else
+STORAGE="{{cfg.backend.storage}}"
+
+cat {{pkg.svc_config_path}}/settings.hcl
+
+if [[ "$STORAGE" == "" ]] ; then
+  echo "No storage method specified. Entering Dev mode."
+  DEVMODE=true
+elif [[ "$STORAGE" == file ]] ; then
+  STORAGE_FILE_PATH={{cfg.backend.storage_file_path}}
+  if [[ ! -d "$STORAGE_FILE_PATH" ]] ; then
+    mkdir -p "$STORAGE_FILE_PATH"
+  fi
+elif [[ "$STORAGE" == consul ]] ; then
+  CONSUL_STORAGE={{cfg.backend.storage}}
+  CONSUL_ADDRESS={{cfg.backend.address}}
+  CONSULE_PATH={{path}}
+  if [[ "$CONSUL_STORAGE" == "" ]] || [[ "$CONSUL_ADDRESS" == "" ]] || [[ "$CONSULE_PATH" == "" ]] ; then
+    echo "Consul config strings missing. Please review config file. Entering Dev mode."
+    DEVMODE=true
+  fi
+elif [[ "$STORAGE" == dynamodb ]] ; then
+  DYNAMODB_TABLE="{{cfg.backend.table}}"
+  DYNAMODB_ACCESSKEY="{{cfg.backend.access_key}}"
+  DYNAMODB_SECRETKEY="{{cfg.backend.secret_key}}"
+  if [[ "$DYNAMODB_TABLE" == "" ]] || [[ "$DYNAMODB_ACCESSKEY" == "" ]] || [[ "$DYNAMODB_SECRETKEY" == "" ]] ; then
+    echo "DynamoDB config strings missing. Please review config file. Entering Dev mode."
+    DEVMODE=true
+  fi
+fi
+
+if [[ "$DEVMODE" = false ]] ; then
   exec vault server -config={{pkg.svc_config_path}}/settings.hcl
+else
+  exec vault server -dev-listen-address={{cfg.listener.location}}:{{cfg.listener.port}} -dev
 fi
