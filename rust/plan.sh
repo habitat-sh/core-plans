@@ -1,25 +1,39 @@
 pkg_name=rust
 pkg_origin=core
-pkg_version=1.26.1
+pkg_version=1.26.2
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_description="Safe, concurrent, practical language"
+pkg_description="\
+Rust is a systems programming language that runs blazingly fast, prevents \
+segfaults, and guarantees thread safety.\
+"
 pkg_upstream_url="https://www.rust-lang.org/"
 pkg_license=('Apache-2.0' 'MIT')
-_url_base=http://static.rust-lang.org/dist
-pkg_source=$_url_base/${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz
-pkg_dirname=${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu
-pkg_shasum=b7e964bace1286696d511c287b945f3ece476ba77a231f0c31f1867dfa5080e0
+_url_base="http://static.rust-lang.org/dist"
+pkg_source="$_url_base/${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz"
+pkg_shasum="d2b4fb0c544874a73c463993bde122f031c34897bb1eeb653d2ba2b336db83e6"
+pkg_dirname="${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu"
+pkg_deps=(
+  core/glibc
+  core/gcc-libs
+  core/zlib
+  core/gcc
+  core/cacerts
+  core/busybox-static
+)
+pkg_build_deps=(
+  core/patchelf
+  core/findutils
+  core/coreutils
+)
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
-pkg_deps=(core/glibc core/gcc-libs core/zlib core/gcc core/cacerts core/busybox-static)
-pkg_build_deps=(core/patchelf core/findutils core/coreutils)
 
 _target_sources=(
   $_url_base/${pkg_name}-std-${pkg_version}-x86_64-unknown-linux-musl.tar.gz
 )
 
 _target_shasums=(
-  9d6a4191ad8ddfae10a05882cd0e867ecc2b64d26da2f38fbdcbdcbcf94139cf
+  5ba536ccc53bf550d7ae3f032cc743b2f13c1ac92e3be45f0843762ed8aa4ca0
 )
 
 do_download() {
@@ -61,17 +75,14 @@ do_install() {
   ./install.sh --prefix="$pkg_prefix" --disable-ldconfig
 
   # Update the dynamic linker & set `RUNPATH` for all ELF binaries under `bin/`
-  for b in rustc cargo rustdoc; do
+  for b in rustc cargo rustdoc cargo-fmt rls rustfmt; do
     patchelf \
       --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" \
       --set-rpath "$LD_RUN_PATH" \
       "$pkg_prefix/bin/$b"
   done; unset b
 
-  # Going to want to write a cargo wrapper
-  #    SSL_CERT_FILE=$(pkg_path_for cacerts)/ssl/cert.pem \
-
-    # Set `RUNPATH` for all shared libraries under `lib/`
+  # Set `RUNPATH` for all shared libraries under `lib/`
   find "$pkg_prefix/lib" -name "*.so" -print0 \
     | xargs -0 -I '%' patchelf \
       --set-rpath "$LD_RUN_PATH" \
@@ -87,7 +98,14 @@ do_install() {
     popd > /dev/null
   done; unset i
 
-  # Add a wrapper for cargo to properly set SSL certificates
+  # Add a wrapper for cargo to properly set SSL certificates. We're wrapping
+  # this to set an OpenSSL environment variable. Normally this would not be
+  # required as the Habitat OpenSSL pacakge is compiled with the correct path
+  # to certificates, however in this case we are not source-compiling Rust,
+  # so we can't influence the certificate path after the fact.
+  #
+  # This is largely a reminder for @fnichol, as he keeps trying to remove this
+  # only to remember why it's important in this one instance. Cheers!
   wrap_with_cert_path cargo
 }
 
@@ -117,5 +135,14 @@ do_strip() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/patchelf core/coreutils core/sed core/grep core/diffutils core/findutils core/make core/patch)
+  pkg_build_deps=(
+    core/patchelf
+    core/coreutils
+    core/sed
+    core/grep
+    core/diffutils
+    core/findutils
+    core/make
+    core/patch
+  )
 fi

@@ -2,13 +2,23 @@ pkg_name=shadow
 pkg_origin=core
 pkg_version=4.5
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('bsd')
-pkg_source=https://github.com/shadow-maint/${pkg_name}/releases/download/${pkg_version}/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=fc8c858381ad577a5c25ff5beb6ee60a34f8719c73e4e7c61e74188b4e54b741
-pkg_description="Password and account management tool suite"
+pkg_description="Password and account management tool suite."
 pkg_upstream_url="https://github.com/shadow-maint/shadow"
-pkg_deps=(core/glibc core/attr core/acl)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
+pkg_license=('bsd')
+pkg_source="https://github.com/shadow-maint/${pkg_name}/releases/download/${pkg_version}/${pkg_name}-${pkg_version}.tar.xz"
+pkg_shasum="fc8c858381ad577a5c25ff5beb6ee60a34f8719c73e4e7c61e74188b4e54b741"
+pkg_deps=(
+  core/glibc
+  core/attr
+  core/acl
+)
+pkg_build_deps=(
+  core/coreutils
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+)
 pkg_bin_dirs=(bin)
 
 do_prepare() {
@@ -20,7 +30,8 @@ do_prepare() {
   # Disable the installation of the `groups` program as Coreutils provides a
   # better version.
   #
-  # Thanks to: http://www.linuxfromscratch.org/lfs/view/stable/chapter06/shadow.html
+  # Thanks to:
+  # http://www.linuxfromscratch.org/lfs/view/stable/chapter06/shadow.html
   # shellcheck disable=SC2016
   sed -i 's/groups$(EXEEXT) //' src/Makefile.in
   find man -name Makefile.in -exec sed -i 's/groups\.1 / /' {} \;
@@ -29,7 +40,8 @@ do_prepare() {
   # method of password encryption, which also allows passwords longer than 8
   # characters.
   #
-  # Thanks to: http://www.linuxfromscratch.org/lfs/view/stable/chapter06/shadow.html
+  # Thanks to:
+  # http://www.linuxfromscratch.org/lfs/view/stable/chapter06/shadow.html
   sed -i -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD SHA512@' etc/login.defs
 }
 
@@ -69,5 +81,7 @@ do_install() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc)
+  pkg_build_deps=(
+    core/gcc
+  )
 fi

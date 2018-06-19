@@ -1,8 +1,19 @@
 source ../libsodium/plan.sh
 
 pkg_name=libsodium-musl
+pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_deps=(core/musl)
+pkg_description="\
+Sodium is a new, easy-to-use software library for encryption, decryption, \
+signatures, password hashing and more. It is a portable, cross-compilable, \
+installable, packageable fork of NaCl, with a compatible API, and an extended \
+API to improve usability even further.\
+"
+pkg_upstream_url="https://github.com/jedisct1/libsodium"
+pkg_license=('libsodium')
+pkg_deps=(
+  core/musl
+)
 
 do_prepare() {
   export CC=musl-gcc
@@ -18,5 +29,11 @@ do_prepare() {
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc core/coreutils core/sed core/diffutils core/make)
+  pkg_build_deps=(
+    core/gcc
+    core/coreutils
+    core/sed
+    core/diffutils
+    core/make
+  )
 fi

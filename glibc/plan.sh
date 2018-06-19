@@ -1,21 +1,32 @@
 pkg_name=glibc
 pkg_origin=core
-pkg_version=2.22
+pkg_version=2.27
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('gplv2' 'lgplv2')
-pkg_description="$(cat << EOF
-  The GNU C Library project provides the core libraries for the GNU system and GNU/Linux systems,
-  as well as many other systems that use Linux as the kernel. These libraries provide critical
-  APIs including ISO C11, POSIX.1-2008, BSD, OS-specific APIs and more. These APIs include such
-  foundational facilities as open, read, write, malloc, printf, getaddrinfo, dlopen,
-  pthread_create, crypt, login, exit and more.
-EOF
-)"
-pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz
-pkg_shasum=eb731406903befef1d8f878a46be75ef862b9056ab0cde1626d08a7a05328948
-pkg_upstream_url=https://www.gnu.org/software/libc
-pkg_deps=(core/linux-headers)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed core/perl)
+pkg_description="\
+The GNU C Library project provides the core libraries for the GNU system and \
+GNU/Linux systems, as well as many other systems that use Linux as the \
+kernel. These libraries provide critical APIs including ISO C11, \
+POSIX.1-2008, BSD, OS-specific APIs and more. These APIs include such \
+foundational facilities as open, read, write, malloc, printf, getaddrinfo, \
+dlopen, pthread_create, crypt, login, exit and more.\
+"
+pkg_upstream_url="https://www.gnu.org/software/libc"
+pkg_license=('GPL-2.0' 'LGPL-2.0')
+pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
+pkg_shasum="5172de54318ec0b7f2735e5a91d908afe1c9ca291fec16b5374d9faadfc1fc72"
+pkg_deps=(
+  core/linux-headers
+)
+pkg_build_deps=(
+  core/coreutils
+  core/bison
+  core/diffutils
+  core/patch
+  core/make
+  core/gcc
+  core/sed
+  core/perl
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
@@ -23,7 +34,16 @@ pkg_lib_dirs=(lib)
 do_prepare() {
   # The `/bin/pwd` path is hardcoded, so we'll add a symlink if needed.
   if [[ ! -r /bin/pwd ]]; then
-    ln -sv "$(pkg_path_for coreutils)/bin/pwd" /bin/pwd
+    # We can't use the `command -v pwd` trick here, as `pwd` is a shell
+    # builtin, and therefore returns the string of "pwd" (i.e. not the full
+    # path to the executable on `$PATH`). In a stage1 Studio, the coreutils
+    # package isn't built yet so we can't rely on using the `pkg_path_for`
+    # helper either.  Sweet twist, no?
+    if [[ "$STUDIO_TYPE" = "stage1" ]]; then
+      ln -sv /tools/bin/pwd /bin/pwd
+    else
+      ln -sv "$(pkg_path_for coreutils)/bin/pwd" /bin/pwd
+    fi
     _clean_pwd=true
   fi
 
@@ -68,11 +88,6 @@ do_prepare() {
   # Source: https://lists.debian.org/debian-glibc/2013/11/msg00116.html
   patch -p1 < "$PLAN_CONTEXT/testsuite-fix.patch"
 
-  # Fix for CVE-2015-7547 and more
-  #
-  # Source: http://www.linuxfromscratch.org/patches/downloads/glibc/glibc-2.22-upstream_fixes-1.patch
-  patch -p1 < "$PLAN_CONTEXT/glibc-2.22-upstream_fixes-1.patch"
-
   # Adjust `scripts/test-installation.pl` to use our new dynamic linker
   sed -i "s|libs -o|libs -L${pkg_prefix}/lib -Wl,-dynamic-linker=${dynamic_linker} -o|" \
     scripts/test-installation.pl
@@ -104,7 +119,7 @@ do_build() {
 
 # Running a `make check` is considered one critical test of the correctness of
 # the resulting glibc build. Unfortunetly, the time to complete the test suite
-# rougly triples the build time of this Plan and there are at least 4 known
+# rougly triples the build time of this Plan and there are at least 2 known
 # failures which means that `make check` certainly returns a non-zero exit
 # code. Despite these downsides, it is still worth the pain when building the
 # first time in a new environment, or when a new upstream version is attempted.
@@ -123,19 +138,8 @@ do_build() {
 # corresponds to your prefix, i.e. `(length of prefix path + 1)` to ensure that
 # you haven't really broken abi with your change."
 #
-# Source: https://sourceware.org/glibc/wiki/Testing/Testsuite#Known_testsuite_failures
-#
-# ## FAIL: elf/tst-protected1a
-#
-# "The elf/tst-protected1a and elf/tst-protected1b tests are known to fail with
-# the current stable version of binutils."
-#
-# Source: http://www.linuxfromscratch.org/lfs/view/stable/chapter06/glibc.html
-# Source: https://sourceware.org/glibc/wiki/Release/2.22
-#
-# ## FAIL: elf/tst-protected1b
-#
-# Same as above.
+# Source:
+# https://sourceware.org/glibc/wiki/Testing/Testsuite#Known_testsuite_failures
 #
 # ## FAIL: posix/tst-getaddrinfo4
 #
@@ -148,14 +152,25 @@ do_check() {
   pushd ../${pkg_name}-build > /dev/null
     # One of the tests uses the hardcoded `bin/cat` path, so we'll add it, if
     # it doesn't exist.
+    # Checking for the binary on `$PATH` will work in both stage1 and default
+    # Studios.
     if [[ ! -r /bin/cat ]]; then
-      ln -sv "$(pkg_path_for coreutils)/bin/cat" /bin/cat
+      ln -sv "$(command -v cat)" /bin/cat
       _clean_cat=true
     fi
     # One of the tests uses the hardcoded `bin/echo` path, so we'll add it, if
     # it doesn't exist.
     if [[ ! -r /bin/echo ]]; then
-      ln -sv "$(pkg_path_for coreutils)/bin/echo" /bin/echo
+      # We can't use the `command -v echo` trick here, as `echo` is a shell
+      # builtin, and therefore returns the string of "echo" (i.e. not the full
+      # path to the executable on `$PATH`). In a stage1 Studio, the coreutils
+      # package isn't built yet so we can't rely on using the `pkg_path_for`
+      # helper either. Sweet twist, no?
+      if [[ "$STUDIO_TYPE" = "stage1" ]]; then
+        ln -sv /tools/bin/echo /bin/echo
+      else
+        ln -sv "$(pkg_path_for coreutils)/bin/echo" /bin/echo
+      fi
       _clean_echo=true
     fi
 
@@ -165,7 +180,7 @@ do_check() {
     # https://sourceware.org/ml/libc-alpha/2012-04/msg01014.html regarding the
     # use of system library directories here)."
     #
-    # Source: https://sourceware.org/glibc/wiki/Release/2.22
+    # Source: https://sourceware.org/glibc/wiki/Release/2.23
     # Source: http://www0.cs.ucl.ac.uk/staff/ucacbbl/glibc/index.html#bug-atexit3
     if [[ "$STUDIO_TYPE" = "stage1" ]]; then
       ln -sv /tools/lib/libgcc_s.so.1 .
@@ -202,7 +217,7 @@ do_install() {
     # a multilib installation is assumed (i.e. 32-bit and 64-bit). We will
     # fool this check by symlinking a "32-bit" file to the real loader.
     mkdir -p "$pkg_prefix/lib"
-    ln -sv ld-2.22.so "$pkg_prefix/lib/ld-linux.so.2"
+    ln -sv ld-${pkg_version}.so "$pkg_prefix/lib/ld-linux.so.2"
 
     # Add a `lib64` -> `lib` symlink for `bin/ldd` to work correctly.
     #
@@ -332,7 +347,8 @@ extract_src() {
     do_clean
     build_line "Unpacking $pkg_filename"
     do_unpack
-    mv -v "$HAB_CACHE_SRC_PATH/$pkg_dirname" "$HAB_CACHE_SRC_PATH/$build_dirname/$plan"
+    mv -v "$HAB_CACHE_SRC_PATH/$pkg_dirname" \
+      "$HAB_CACHE_SRC_PATH/$build_dirname/$plan"
   )
 }
 

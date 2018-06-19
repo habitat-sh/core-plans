@@ -18,18 +18,19 @@ pkg_build_deps=(
 pkg_deps=(
   # postfix deps
   core/coreutils
-  core/glibc
-  core/db
-  core/pcre
-  core/openssl
   core/cyrus-sasl
+  core/db
+  core/glibc
+  core/libnsl
+  core/openssl
+  core/pcre
+  core/zlib
 
   # plan/hook deps
   core/shadow
   core/iana-etc
 )
 
-pkg_lib_dirs=(lib)
 pkg_bin_dirs=(bin sbin)
 
 pkg_svc_user=root
@@ -40,23 +41,25 @@ do_build() {
     -DHAS_DB
       -I$(pkg_path_for db)/include
     -DHAS_NIS
-      -I$(pkg_path_for glibc)/include
+      -I$(pkg_path_for core/libnsl)/include
     -DUSE_TLS
-      -I$(pkg_path_for openssl)/include
+      -I$(pkg_path_for core/openssl)/include
     -DUSE_SASL_AUTH -DUSE_CYRUS_SASL
-      -I$(pkg_path_for cyrus-sasl)/include/sasl
+      -I$(pkg_path_for core/cyrus-sasl)/include/sasl
   )
   build_line "Setting POSTFIX_CCARGS=${POSTFIX_CCARGS[*]}"
 
   POSTFIX_AUXLIBS=(
     -ldb
-      -L$(pkg_path_for db)/lib
-    -lnsl -lresolv
-      -L$(pkg_path_for glibc)/lib
+      -L$(pkg_path_for core/db)/lib
+    -lnsl
+      -L$(pkg_path_for core/libnsl)/lib
+    -lresolv
+      -L$(pkg_path_for core/glibc)/lib
     -lssl -lcrypto
-      -L$(pkg_path_for openssl)/lib
+      -L$(pkg_path_for core/openssl)/lib
     -lsasl2
-      -L$(pkg_path_for cyrus-sasl)/lib
+      -L$(pkg_path_for core/cyrus-sasl)/lib
   )
   build_line "Setting POSTFIX_AUXLIBS=${POSTFIX_AUXLIBS[*]}"
 

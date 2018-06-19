@@ -1,11 +1,11 @@
 pkg_name=direnv
 pkg_origin=core
-pkg_version="2.14.0"
+pkg_version="2.16.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_source="https://github.com/$pkg_name/$pkg_name/releases/download/v$pkg_version/$pkg_name.linux-amd64"
 pkg_filename="$pkg_name.linux-amd64"
-pkg_shasum="2b34f3d9146e147d7ef26a5ddf3b18e5284d6b31e93bd861de32782650f1ca30"
+pkg_shasum="a4faa0843c01ee64e4981b30101dc620623db52ce788e2730be005164dcfd8fb"
 pkg_bin_dirs=(bin)
 pkg_description="direnv is an environment switcher for the shell."
 pkg_upstream_url="https://direnv.net/"
