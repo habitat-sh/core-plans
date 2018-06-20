@@ -1,26 +1,19 @@
-pkg_name=ncurses5-compat-libs
+source ../ncurses/plan.sh
+
+pkg_name=ncurses5
 pkg_origin=core
-pkg_version=6.0
-pkg_description="The ncurses (new curses) library with version 5 API"
-pkg_upstream_url=https://www.gnu.org/software/ncurses/
+pkg_version=6.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="The ncurses (new curses) library with version 5 API"
+pkg_upstream_url="https://www.gnu.org/software/ncurses/"
 pkg_license=('ncurses')
-pkg_dirname=ncurses-${pkg_version}
-pkg_filename=${pkg_dirname}.tar.gz
-pkg_source=http://ftp.gnu.org/gnu/ncurses/${pkg_filename}
-pkg_shasum=f551c24b30ce8bfb6e96d9f59b42fbea30fa3a6123384172f9e7284bcf647260
-pkg_deps=(core/glibc core/gcc-libs)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/wget core/bzip2)
-pkg_bin_dirs=(bin)
-pkg_include_dirs=(include)
-pkg_lib_dirs=(lib)
+pkg_dirname="ncurses-${pkg_version}"
+pkg_filename="${pkg_dirname}.tar.gz"
+pkg_source="http://ftp.gnu.org/gnu/ncurses/${pkg_filename}"
+pkg_shasum="aa057eeeb4a14d470101eff4597d5833dcef5965331be3528c08d99cebaa0d17"
 
 do_build() {
-  wget http://invisible-mirror.net/archives/ncurses/6.0/ncurses-6.0-20160910-patch.sh.bz2
-  bzip2 -d ncurses-6.0-20160910-patch.sh.bz2
-
-  sh ncurses-6.0-20160910-patch.sh
-
+  # API Version 5 doesn't compile with --enable-ext-colors
   ./configure --prefix="$pkg_prefix" \
     --with-shared \
     --with-termlib \
@@ -32,7 +25,6 @@ do_build() {
     --with-pkg-config-libdir="$pkg_prefix/lib/pkgconfig" \
     --enable-symlinks \
     --enable-widec \
-    --enable-ext-colors \
     --without-debug \
     --with-normal \
     --enable-overwrite \
@@ -64,15 +56,3 @@ do_install() {
   # shellcheck disable=SC2016
   grep -B 100 '$Id' README > "$pkg_prefix/share/licenses/LICENSE"
 }
-
-
-# ----------------------------------------------------------------------------
-# **NOTICE:** What follows are implementation details required for building a
-# first-pass, "stage1" toolchain and environment. It is only used when running
-# in a "stage1" Studio and can be safely ignored by almost everyone. Having
-# said that, it performs a vital bootstrapping process and cannot be removed or
-# significantly altered. Thank you!
-# ----------------------------------------------------------------------------
-if [[ "$STUDIO_TYPE" = "stage1" ]]; then
-  pkg_build_deps=(core/gcc)
-fi

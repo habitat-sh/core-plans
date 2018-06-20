@@ -2,47 +2,56 @@ pkg_name=ghc80
 pkg_origin=core
 pkg_version=8.0.2
 pkg_license=('BSD-3-Clause')
-pkg_upstream_url=https://www.haskell.org/ghc/
+pkg_upstream_url="https://www.haskell.org/ghc/"
 pkg_description="The Glasgow Haskell Compiler"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source=http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-src.tar.xz
-pkg_shasum=11625453e1d0686b3fa6739988f70ecac836cadc30b9f0c8b49ef9091d6118b1
-pkg_dirname=ghc-${pkg_version}
+pkg_source="http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-src.tar.xz"
+pkg_shasum="11625453e1d0686b3fa6739988f70ecac836cadc30b9f0c8b49ef9091d6118b1"
+pkg_dirname="ghc-${pkg_version}"
 
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(lib/ghc-${pkg_version}/include)
 
 pkg_deps=(
-  core/perl
   core/gcc
   core/glibc
-  core/gmp/6.1.0/20170513202112
+  core/gmp
   core/libedit
   core/libffi
-  core/libiconv
   core/ncurses
+  core/perl
 )
 
 pkg_build_deps=(
+  core/binutils
+  core/diffutils
   core/ghc710-bootstrap
   core/make
-  core/diffutils
-  core/sed
   core/patch
+  core/sed
 )
 
 do_prepare() {
   do_default_prepare
+
+  # Explicitly set linker so we aren't tied to the default studio linker
+  LD="$(pkg_path_for binutils)/bin/ld"
+  export LD
+  build_line "Updating LD=$LD"
+  # Set library path
+  LIBRARY_PATH="${LIBRARY_PATH}:${LD_RUN_PATH}"
+  export LIBRARY_PATH
+  build_line "Updating LIBRARY_PATH=$LIBRARY_PATH"
 
   cp mk/build.mk.sample mk/build.mk
   sed -i '1iBuildFlavour = perf' mk/build.mk
 }
 
 do_build() {
-  # Setting these paths is only necessary when building from a binary bootstrap
-  export LIBRARY_PATH="${LIBRARY_PATH}:${LD_RUN_PATH}"
-  export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${LD_RUN_PATH}"
+  # Setting this path is only necessary when building from a binary bootstrap
+  LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:$(pkg_path_for gmp)/lib:$(pkg_path_for ncurses)/lib:$(pkg_path_for libffi)/lib"
+  export LD_LIBRARY_PATH
 
   libffi_include=$(find "$(pkg_path_for libffi)/lib/" -name "libffi-*.*.*")
 
@@ -59,9 +68,7 @@ do_build() {
     --with-curses-includes="$(pkg_path_for ncurses)/include" \
     --with-curses-libraries="$(pkg_path_for ncurses)/lib" \
     --with-gmp-includes="$(pkg_path_for gmp)/include" \
-    --with-gmp-libraries="$(pkg_path_for gmp)/lib" \
-    --with-iconv-includes="$(pkg_path_for libiconv)/include" \
-    --with-iconv-libraries="$(pkg_path_for libiconv)/lib"
+    --with-gmp-libraries="$(pkg_path_for gmp)/lib"
 
   make
 }

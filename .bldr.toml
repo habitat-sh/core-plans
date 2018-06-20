@@ -302,6 +302,16 @@ plan_path = "geoip"
 plan_path = "geos"
 [gettext]
 plan_path = "gettext"
+[ghc710-bootstrap]
+plan_path = "ghc710-bootstrap"
+[ghc80]
+plan_path = "ghc80"
+[ghc82-bootstrap]
+plan_path = "ghc82-bootstrap"
+[ghc82]
+plan_path = "ghc82"
+[ghc84]
+plan_path = "ghc84"
 [giflib]
 plan_path = "giflib"
 [gifsicle]
@@ -777,6 +787,11 @@ plan_path = "nats-top"
 plan_path = "ncdu"
 [ncurses]
 plan_path = "ncurses"
+[ncurses5]
+plan_path = "ncurses5"
+paths = [
+  "ncurses/*",
+]
 [net-tools]
 plan_path = "net-tools"
 [netcat]

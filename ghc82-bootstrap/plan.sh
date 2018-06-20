@@ -2,29 +2,29 @@ pkg_name=ghc82-bootstrap
 pkg_origin=core
 pkg_version=8.2.1
 pkg_license=('BSD-3-Clause')
-pkg_upstream_url=https://www.haskell.org/ghc/
+pkg_upstream_url="https://www.haskell.org/ghc/"
 pkg_description="The Glasgow Haskell Compiler - Binary Bootstrap"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source=http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-x86_64-deb8-linux.tar.xz
-pkg_shasum=543b81bf610240bd0398111d6c6607a9094dc2d159b564057d46c8a3d1aaa130
-pkg_dirname=ghc-${pkg_version}
+pkg_source="http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-x86_64-deb8-linux.tar.xz"
+pkg_shasum="543b81bf610240bd0398111d6c6607a9094dc2d159b564057d46c8a3d1aaa130"
+pkg_dirname="ghc-${pkg_version}"
 
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(lib/ghc-${pkg_version}/include)
 
 pkg_deps=(
-  core/perl
   core/gcc
   core/glibc
-  core/gmp/6.1.0/20170513202112
+  core/gmp
   core/libffi
-  core/ncurses5-compat-libs
+  core/ncurses5
+  core/perl
 )
 
 pkg_build_deps=(
-  core/patchelf
   core/make
+  core/patchelf
 )
 
 ghc_patch_rpath() {
@@ -42,9 +42,12 @@ do_build() {
     -print \
     -exec patchelf --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" {} \;
 
-  export LD_LIBRARY_PATH="$LD_RUN_PATH"
+  LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:$(pkg_path_for gmp)/lib:$(pkg_path_for ncurses5)/lib:$(pkg_path_for libffi)/lib"
+  export LD_LIBRARY_PATH
 
-  ./configure --prefix="${pkg_prefix}"
+  ./configure --prefix="${pkg_prefix}" \
+    --with-gmp-includes="$(pkg_path_for gmp)/include" \
+    --with-gmp-libraries="$(pkg_path_for gmp)/lib"
 }
 
 do_install() {
@@ -52,7 +55,7 @@ do_install() {
 
   do_default_install
 
-  pushd "${pkg_prefix}" > /dev/null
+  pushd "${pkg_prefix}"
 
   GHC_LIB_PATHS=$(find . -name '*.so' -printf '%h\n' | uniq)
 
@@ -63,7 +66,7 @@ do_install() {
     -print \
     -exec bash -c 'ghc_patch_rpath $1 $2 ' _ "{}" "$GHC_LIB_PATHS" \;
 
-  popd > /dev/null
+  popd
 }
 
 do_strip() {
