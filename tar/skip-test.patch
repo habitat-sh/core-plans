@@ -1,0 +1,97 @@
+diff -ru tar-1.30.orig/tests/Makefile.in tar-1.30/tests/Makefile.in
+--- tar-1.30.orig/tests/Makefile.in	2018-06-08 01:57:17.585170057 +0000
++++ tar-1.30/tests/Makefile.in	2018-06-08 02:32:25.522341271 +0000
+@@ -1284,7 +1284,6 @@
+  delete03.at\
+  delete04.at\
+  delete05.at\
+- difflink.at\
+  exclude.at\
+  exclude01.at\
+  exclude02.at\
+diff -ru tar-1.30.orig/tests/testsuite tar-1.30/tests/testsuite
+--- tar-1.30.orig/tests/testsuite	2018-06-08 01:57:17.585170057 +0000
++++ tar-1.30/tests/testsuite	2018-06-08 02:35:48.508456129 +0000
+@@ -681,7 +681,6 @@
+ 89;extrac20.at:21;keep-directory-symlink;extrac20 extract old-files keep-old-files;
+ 90;extrac21.at:31;delay-directory-restore;extract extract21 read-only symlink delay-directory-restore;
+ 91;backup01.at:34;extracting existing dir with --backup;extract backup backup01;
+-92;difflink.at:17;link mismatch;diff difflink;
+ 93;label01.at:21;single-volume label;label label01;
+ 94;label02.at:21;multi-volume label;label label02 multi-label multivolume multiv;
+ 95;label03.at:27;test-label option;label label03 test-label;
+@@ -22670,74 +22669,6 @@
+ ) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+ read at_status <"$at_status_file"
+ #AT_STOP_91
+-#AT_START_92
+-at_fn_group_banner 92 'difflink.at:17' \
+-  "link mismatch" "                                  " 11
+-at_xfail=no
+-      test -f $XFAILFILE && at_xfail=yes
+-(
+-  $as_echo "92. $at_setup_line: testing $at_desc ..."
+-  $at_traceon
+-
+-
+-
+-
+-  { set +x
+-$as_echo "$at_srcdir/difflink.at:19:
+-mkdir ustar
+-(cd ustar
+-TEST_TAR_FORMAT=ustar
+-export TEST_TAR_FORMAT
+-TAR_OPTIONS=\"-H ustar\"
+-export TAR_OPTIONS
+-rm -rf *
+-
+-mkdir a
+-genfile -f a/x
+-ln -s x a/y
+-ln a/y a/z
+-tar cf a.tar a
+-rm a/z
+-ln -s x a/z
+-tar df a.tar
+-)"
+-at_fn_check_prepare_notrace 'an embedded newline' "difflink.at:19"
+-( $at_check_trace;
+-mkdir ustar
+-(cd ustar
+-TEST_TAR_FORMAT=ustar
+-export TEST_TAR_FORMAT
+-TAR_OPTIONS="-H ustar"
+-export TAR_OPTIONS
+-rm -rf *
+-
+-mkdir a
+-genfile -f a/x
+-ln -s x a/y
+-ln a/y a/z
+-tar cf a.tar a
+-rm a/z
+-ln -s x a/z
+-tar df a.tar
+-)
+-) >>"$at_stdout" 2>>"$at_stderr" 5>&-
+-at_status=$? at_failed=false
+-$at_check_filter
+-at_fn_diff_devnull "$at_stderr" || at_failed=:
+-echo >>"$at_stdout"; $as_echo "a/z: Not linked to a/y
+-" | \
+-  $at_diff - "$at_stdout" || at_failed=:
+-at_fn_check_status 1 $at_status "$at_srcdir/difflink.at:19"
+-$at_failed && at_fn_log_failure
+-$at_traceon; }
+-
+-
+- # Testing one format is enough
+-  set +x
+-  $at_times_p && times >"$at_times_file"
+-) 5>&1 2>&1 7>&- | eval $at_tee_pipe
+-read at_status <"$at_status_file"
+-#AT_STOP_92
+ #AT_START_93
+ at_fn_group_banner 93 'label01.at:21' \
+   "single-volume label" "                            " 12
