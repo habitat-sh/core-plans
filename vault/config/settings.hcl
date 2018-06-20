@@ -39,4 +39,8 @@ backend "dynamodb" {
 listener "{{cfg.listener.type}}" {
   address = "{{cfg.listener.location}}:{{cfg.listener.port}}"
   tls_disable = {{cfg.listener.tls_disable}}
+  {{#if cfg.listener.tls_disable~}}
+  tls_cert_file = "{{pkg.svc_files_path}}/{{cfg.listener.tls_cert_file}}"
+  tls_key_file = "{{pkg.svc_files_path}}/{{cfg.listener.tls_key_file}}"
+  {{/if ~}}
 }

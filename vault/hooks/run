@@ -2,7 +2,7 @@
 
 exec 2>&1
 
-DEVMODE={{cfg.dev.mode}}
+DEVMODE="{{cfg.dev.mode}}"
 
 STORAGE="{{cfg.backend.storage}}"
 
@@ -30,6 +30,20 @@ elif [[ "$STORAGE" == dynamodb ]] ; then
   DYNAMODB_SECRETKEY="{{cfg.backend.secret_key}}"
   if [[ "$DYNAMODB_TABLE" == "" ]] || [[ "$DYNAMODB_ACCESSKEY" == "" ]] || [[ "$DYNAMODB_SECRETKEY" == "" ]] ; then
     echo "DynamoDB config strings missing. Please review config file. Entering Dev mode."
+    DEVMODE=true
+  fi
+fi
+
+TLS_DISABLE="{{cfg.listener.tls_disable}}"
+
+if [[ "$TLS_DISABLE" == 0 ]] ; then
+  TLS_CERT_FILE="{{cfg.listener.tls_cert_file}}"
+  TLS_KEY_FILE="{{cfg.listener.tls_key_file}}"
+  if [[ "$TLS_CERT_FILE" == "" ]] || [[ "$TLS_KEY_FILE" == "" ]] ; then
+    echo "TLS Enabled, but certificate files are not specified. Entering Dev Mode."
+    DEVMODE=true
+  elif [[ ! -f "{{pkg.svc_files_path}}/$TLS_CERT_FILE" ]] || [[ ! -f "{{pkg.svc_files_path}}/$TLS_KEY_FILE" ]] ; then
+    echo "TLS Enabled, but certificate files are not found. Entering Dev Mode."
     DEVMODE=true
   fi
 fi
