@@ -10,8 +10,6 @@ pkg_binds_optional=(
   [elasticsearch]="http-port"
   [logstash]="port"
 )
-pkg_svc_user="hab"
-pkg_svc_group="${pkg_svc_user}"
 pkg_description="Lightweight shipper for logfiles"
 pkg_upstream_url="https://www.elastic.co/products/beats/filebeat"
 
