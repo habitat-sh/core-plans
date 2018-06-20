@@ -15,7 +15,7 @@ pkg_build_deps=(
   core/libpng
   core/zlib
   core/pkg-config
-  rakops/libimagequant
+  core/libimagequant
 )
 # pkg_lib_dirs=(lib)
 # pkg_include_dirs=(include)
