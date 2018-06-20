@@ -556,6 +556,8 @@ plan_path = "libiconv"
 plan_path = "libidn"
 [libidn2]
 plan_path = "libidn2"
+[libimagequant]
+plan_path = "libimagequant"
 [libjpeg-turbo]
 plan_path = "libjpeg-turbo"
 [libksba]
