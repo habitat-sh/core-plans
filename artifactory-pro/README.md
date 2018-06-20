@@ -1,11 +1,14 @@
 # Habitat package: artifactory-pro
 
+Artifactory is an advanced Binary Repository Manager for use by build tools (like Maven and Gradle), dependency management tools (like Ivy and NuGet) and build servers (like Jenkins, Hudson, TeamCity and Bamboo).
+
 ## Maintainers
+
 * [Christopher P. Maher](https://github.com/defilan)
 
-## Description
+## Type of Package
 
-Artifactory is an advanced Binary Repository Manager for use by build tools (like Maven and Gradle), dependency management tools (like Ivy and NuGet) and build servers (like Jenkins, Hudson, TeamCity and Bamboo).
+Service package
 
 ## Usage
 
@@ -24,3 +27,7 @@ recommended you run this using the standalone topology.
 ```text
 hab start core/artifactory-pro
 ```
+
+## Update Strategies
+
+The recommended update strategy is `rolling` in a HA setup. However, it can be `at-once` in standalone.
