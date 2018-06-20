@@ -1,127 +1,67 @@
-# Habitat package: vault
+# Vault
 
-## Maintainers
-* [Christopher P. Maher](https://github.com/defilan)
-* [Daniel B. Hagen](https://github.com/dbhagen)
-
-## Description
 [Vault](https://www.vaultproject.io/) secures, stores, and tightly controls access to tokens, passwords, certificates, API keys, and other secrets in modern computing. Vault handles leasing, key revocation, key rolling, and auditing.
 
 This plan provides the static binary for execution.
 
+## Maintainers
+
+* The Habitat Maintainers humans@habitat.sh
+* [Christopher P. Maher](https://github.com/defilan)
+* [Daniel B. Hagen](https://github.com/dbhagen)
+
+## Type of Package
+
+Service
+
 ## Usage
+
 This package contains Vault. To use Vault properly, you need to provide it
 with a valid backend, for example [Consul](https://consul.io). By default, this
 package is set to run Vault in "dev" mode, a simple setup solely for experimenting and testing.
 
 > <span style="color:red">**Warning:**</span> Never, ever, ever run a "dev" mode server in production. It is insecure and will lose data on every restart (since it stores data in-memory). It is only made for development or experimentation.
 
-## Topology
-Vault can be deployed either in a `standalone` topology or in a multi-node
-`leader` topology. There are multiple ways to make this work, with your needs
+## Bindings
+
+To Be Added.
+
+## Topologies
+
+Vault can be deployed either in a `Standalone` topology or in a multi-node
+`Leader/Follower` topology. There are multiple ways to make this work, with your needs
 and HA requirements driving the configuration.
 
 ```text
 hab start core/vault
 ```
 
-## Update Strategy
-
-Recommended update strategy for Vault is `rolling`.
-
-
-# Package Name
-
-Brief description of package
-
-## Maintainers
-
-Names of core plans maintainers (The Habitat Maintainers humans@habitat.sh is usually sufficient)
-
-## Type of Package
-
-This should state whether the package is a service package or a binary package.
-
-A service package is something that will be run by the Habitat supervisor (i.e. core/postgresql).  A service package must always have a run file or define pkg_svc_run in the plan.sh file.
-
-A binary package is something that packages up a standalone binary, something that does not need to run under the Habitat supervisor (i.e. core/dep). They are often used as dependencies of other packages. Binary packages do not have a run file and do not need to define pkg_svc_run in the plan.sh file.
-
-## Usage
-
-How would a user use this package?  i.e. can a user simply call the package as a dependency of their application?  Or is there more they need to do?
-
-## Bindings
-
-*(This is only required for service packages, not [binary wrapper packages](https://www.habitat.sh/docs/best-practices/#binary-wrapper-packages)))*
-
-How do other services that want to consume this service bind to it?
-
-Checkout [the core/postgresql](https://github.com/habitat-sh/core-plans/tree/master/postgresql) README for a good example of this.
-
-## Topologies
-
-*(This is only required for service packages, not [binary wrapper packages](https://www.habitat.sh/docs/best-practices/#binary-wrapper-packages))*
-
-What topologies does this plan support?
-
 ### Standalone
 
-*(This is only required for service packages, not [binary wrapper packages](https://www.habitat.sh/docs/best-practices/#binary-wrapper-packages))*
-
-Check out [the Habitat docs on standalone](https://www.habitat.sh/docs/using-habitat/#standalone) for more details on what the standalone topology is and what it does.
-
-If this plan can be used with the standalone topology, how do you do it?
-
-Checkout [the core/postgresql](https://github.com/habitat-sh/core-plans/tree/master/postgresql) README for a good example of this.
+To Be Added.
 
 ### Leader-Follower
 
-*(This is only required for service packages, not [binary wrapper packages](https://www.habitat.sh/docs/best-practices/#binary-wrapper-packages)))*
-
-If this plan can be used with the leader/follower topology, how do you do it?
-
-Check out [the Habitat docs on Leader-Follower](https://www.habitat.sh/docs/using-habitat/#leader-follower-topology) for more details on what the leader-follower topology is and what it does.
-
-Checkout [the core/postgresql](https://github.com/habitat-sh/core-plans/tree/master/postgresql) README for a good example of this (look under the Clustering heading)
+To Be Added.
 
 ## Update Strategies
 
-*(This is only required for service packages, not [binary wrapper packages](https://www.habitat.sh/docs/best-practices/#binary-wrapper-packages)))*
-
-What update strategies would work best for this plan?
-
-Checkout [the update strategy documentation](https://www.habitat.sh/docs/using-habitat/#update-strategy) for information on the strategies Habitat supports.
+The recommended update strategy for Vault is `rolling`.
 
 ### Configuration Updates
 
-*(This is only required for service packages, not [binary wrapper packages](https://www.habitat.sh/docs/best-practices/#binary-wrapper-packages)))*
-
 Checkout the [configuration update](https://www.habitat.sh/docs/using-habitat/#configuration-updates) documentation for more information on what configuration updates are and how they are executed.
 
-Link to the plan's default.toml file to list all the configurable values of the plan.
-
-If your plan has configuration values that require a complete rebuild when updated, note those here.
+View the [Default.toml](https://github.com/habitat-sh/core-plans/blob/master/vault/default.toml)
 
 ## Scaling
-*(This is only required for service packages, not [binary wrapper packages](https://www.habitat.sh/docs/best-practices/#binary-wrapper-packages)))*
 
-(Optional, but recommended)
-
-How would a user scale this service?
-
-Can this service be run in a cluster and/or as high availability?
+To Be Added.
 
 ## Monitoring
 
-*(This is only required for service packages, not [binary wrapper packages](https://www.habitat.sh/docs/best-practices/#binary-wrapper-packages)))*
-
-(Optional, but recommended)
-
-How would a user monitor the health of this surface at the application layer?
-
-This is separate from information about Habitat's HTTP API monitoring service.  This section should include some suggestions about how someone could monitor the application or service outside of Habitat - i.e. using something like sumologic, logstash, etc.  It does not need to be prescriptive, but should include some suggestions of where someone might start.
+To Be Added.
 
 ## Notes
 
 (Optional)
-
