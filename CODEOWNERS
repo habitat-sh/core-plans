@@ -150,6 +150,7 @@ mssql @mwrock
 nmap @defilan
 nuget @mwrock
 pango @rsertelon
+pngquant @predominant
 protobuf-cpp @afiune
 rabbitmqadmin @predominant
 redis @irvingpop

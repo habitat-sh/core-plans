@@ -862,6 +862,8 @@ plan_path = "php5"
 plan_path = "pixman"
 [pkg-config]
 plan_path = "pkg-config"
+[pngquant]
+plan_path = "pngquant"
 [polipo]
 plan_path = "polipo"
 [ponysay]
