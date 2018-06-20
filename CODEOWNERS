@@ -149,6 +149,7 @@ mosquitto @rsertelon
 mssql @mwrock
 nmap @defilan
 nuget @mwrock
+optipng @predominant
 pango @rsertelon
 protobuf-cpp @afiune
 rabbitmqadmin @predominant
