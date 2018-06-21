@@ -14,7 +14,7 @@ pkg_build_deps=(
   core/libpng
   core/zlib
   core/pkg-config
-  rakops/libimagequant
+  core/libimagequant
 )
 pkg_bin_dirs=(bin)
 pkg_description="Lossy PNG compressor"
