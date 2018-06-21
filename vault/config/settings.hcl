@@ -45,4 +45,7 @@ listener "{{cfg.listener.type}}" {
   tls_cert_file = "{{pkg.svc_files_path}}/{{cfg.listener.tls_cert_file}}"
   tls_key_file = "{{pkg.svc_files_path}}/{{cfg.listener.tls_key_file}}"
   {{/if ~}}
+  {{#if cfg.listener.cluster~}}
+  cluster_address = "{{cfg.listener.cluster.location}}:{{cfg.listener.cluster.port}}"
+  {{/if ~}}
 }

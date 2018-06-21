@@ -47,6 +47,12 @@ if [[ "$TLS_DISABLE" == 0 ]] ; then
   fi
 fi
 
+### UGLY way to fix Vault's dependancy on Root CAs being present.
+if [[ ! -f /etc/ssl/certs/ca-certificates.crt ]] ; then
+  mkdir -p /etc/ssl/certs/
+  ln -s "{{pkg.svc_data_path}}/cacert.pem" /etc/ssl/certs/ca-certificates.crt
+fi
+
 if [[ "$DEVMODE" = false ]] ; then
   exec vault server -config={{pkg.svc_config_path}}/settings.hcl
 else

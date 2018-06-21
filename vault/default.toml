@@ -58,3 +58,7 @@ tls_disable = "0"
 ## If tls_disable = 0 (Use TLS), the following must be set
 tls_cert_file = "selfsigned.crt"
 tls_key_file = "selfsigned.key"
+
+[listener.cluster]
+location = "127.0.0.1"
+port = "8201"

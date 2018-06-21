@@ -29,9 +29,7 @@ do_build() {
 
 do_install() {
   install -D vault "${pkg_prefix}"/bin/vault
-  cp "$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem" "$(pkg_svc_files_path)/cacert.pem"
-  if [[ ! -f /etc/ssl/certs/ca-certificates.crt ]] ; then
-    mkdir -p /etc/ssl/certs/
-    ln -s "$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem" /etc/ssl/certs/ca-certificates.crt
-  fi
+
+  ### Prep for an UGLY way to fix Vault's dependancy on Root CAs being present. See Run Hook.
+  cp "$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem" "$(pkg_svc_data_path)/cacert.pem"
 }
