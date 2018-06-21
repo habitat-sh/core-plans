@@ -1,6 +1,3 @@
-{{#unless cfg.backend.type~}}
-backend "inmem" {}
-{{/unless ~}}
 {{#if cfg.backend.type.inmem~}}
 backend "inmem" {}
 {{/if ~}}
