@@ -12,7 +12,6 @@ mode = false
 inmem = true
 consul = false
 file = false
-consul = false
 dynamodb = false
 
 [backend]
