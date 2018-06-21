@@ -126,6 +126,7 @@ dotnet-core-sdk-preview @mwrock
 dotnet-core-sdkdotnet-core @mwrock
 dsc-core @mwrock
 elasticsearch @joshbrand @predominant
+filebeat @predominant
 gdk-pixbuf @rsertelon
 glib @rsertelon
 go @afiune @nellshamrell
