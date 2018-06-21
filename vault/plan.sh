@@ -30,9 +30,6 @@ do_build() {
 do_install() {
   install -D vault "${pkg_prefix}"/bin/vault
   chown -R "$pkg_svc_user":"$pkg_svc_group" "${pkg_prefix}"
-  chown "$pkg_svc_user":"$pkg_svc_group" "${pkg_prefix}"/bin/vault
-
-  chown "$pkg_svc_user":"$pkg_svc_group" "${pkg_svc_config_path}"/settings.hcl
 
   ### Prep for an UGLY way to fix Vault's dependancy on Root CAs being present. See Run Hook.
   cp "$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem" "$(pkg_svc_data_path)/cacert.pem"
