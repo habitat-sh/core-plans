@@ -3,6 +3,7 @@
 
 exec 2>&1
 
+#chown -R hab:hab {{pkg.svc_path}}
 DEVMODE="{{cfg.dev.mode}}"
 
 STORAGE="{{cfg.backend.storage}}"
@@ -47,14 +48,8 @@ if [[ "$TLS_DISABLE" == 0 ]] ; then
   fi
 fi
 
-chown -R {{pkg.svc_user}}:{{pkg.svc_group}} "{{pkg.svc_config_path}}"/settings.hcl
-
-### UGLY way to fix Vault's dependancy on Root CAs being present.
-if [[ ! -f /etc/ssl/certs/ca-certificates.crt ]] ; then
-  mkdir -p /etc/ssl/certs/
-  ln -s "{{pkg.svc_data_path}}/cacert.pem" /etc/ssl/certs/ca-certificates.crt
-fi
-
+export SSL_CERT_FILE="{{pkg.svc_data_path}}/cacert.pem"
+echo $SSL_CERT_FILE
 if [[ "$DEVMODE" = false ]] ; then
   exec vault server -config={{pkg.svc_config_path}}/settings.hcl
 else
