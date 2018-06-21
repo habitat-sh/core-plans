@@ -834,6 +834,8 @@ paths = [
 ]
 [openvpn]
 plan_path = "openvpn"
+[optipng]
+plan_path = "optipng"
 [p11-kit]
 plan_path = "p11-kit"
 [packer]
