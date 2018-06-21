@@ -1,6 +1,6 @@
 $pkg_name = "git"
 $pkg_origin = "core"
-$pkg_version = "2.13.3"
+$pkg_version = "2.13.7"
 $pkg_description = "Git is a free and open source distributed version control
   system designed to handle everything from small to very large projects with
   speed and efficiency."
