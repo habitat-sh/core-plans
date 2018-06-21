@@ -13,7 +13,7 @@ pkg_lib_dirs=(lib)
 
 do_build() {
   ./configure \
-    --prefix=${pkg_prefix} \
+    --prefix="${pkg_prefix}" \
     --enable-static \
     --enable-shared
   make
