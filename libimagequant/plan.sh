@@ -4,7 +4,6 @@ pkg_version="2.12.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("GPL-3.0-or-later")
 pkg_source="https://github.com/ImageOptim/${pkg_name}/archive/${pkg_version}.tar.gz"
-# pkg_filename="${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="7035eb281bc9a49cf36db8db807b713d03a0ffe8c5abfbb17a9ea8a038f21d5e"
 pkg_deps=(core/coreutils)
 pkg_build_deps=(core/make core/gcc)
