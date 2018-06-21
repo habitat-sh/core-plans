@@ -48,6 +48,9 @@ storage = "inmem"
 #secret_key = ""
 #session_token = ""
 
+[app]
+ui = true
+
 [listener]
 type = "tcp"
 location = "127.0.0.1"
