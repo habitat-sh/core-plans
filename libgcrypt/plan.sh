@@ -10,6 +10,7 @@ pkg_build_deps=(core/gcc core/coreutils core/sed core/bison core/flex core/grep 
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+pkg_description="Libgcrypt is a general purpose cryptographic library originally based on code from GnuPG."
 
 do_build() {
   ./configure \
