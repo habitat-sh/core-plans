@@ -1,4 +1,5 @@
-#!/bin/bash -xe
+#!/bin/bash
+#-xe
 
 exec 2>&1
 
