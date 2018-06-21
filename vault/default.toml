@@ -10,10 +10,10 @@ mode = false
 ## Options: inmem, filesystem, consul, dynamodb.
 ## Only uncomment the one corrisponding to the configuration below.
 inmem = true
-#consul = true
-#file = true
-#consul = true
-#dynamodb = true
+consul = false
+file = false
+consul = false
+dynamodb = false
 
 [backend]
 ### Storage backends. Uncomment method and associate attributes required

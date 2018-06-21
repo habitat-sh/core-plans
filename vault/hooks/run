@@ -46,8 +46,6 @@ if [[ "$TLS_DISABLE" == 0 ]] ; then
   fi
 fi
 
-cat {{pkg.svc_config_path}}/settings.hcl
-
 if [[ "$DEVMODE" = false ]] ; then
   exec vault server -config={{pkg.svc_config_path}}/settings.hcl
 else
