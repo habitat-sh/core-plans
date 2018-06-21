@@ -6,8 +6,6 @@ DEVMODE="{{cfg.dev.mode}}"
 
 STORAGE="{{cfg.backend.storage}}"
 
-cat {{pkg.svc_config_path}}/settings.hcl
-
 if [[ "$STORAGE" == "" ]] ; then
   echo "No storage method specified. Entering Dev mode."
   DEVMODE=true
@@ -41,10 +39,10 @@ if [[ "$TLS_DISABLE" == 0 ]] ; then
   TLS_KEY_FILE="{{cfg.listener.tls_key_file}}"
   if [[ "$TLS_CERT_FILE" == "" ]] || [[ "$TLS_KEY_FILE" == "" ]] ; then
     echo "TLS Enabled, but certificate files are not specified. Entering Dev Mode."
-    DEVMODE=true
+    #DEVMODE=true
   elif [[ ! -f "{{pkg.svc_files_path}}/$TLS_CERT_FILE" ]] || [[ ! -f "{{pkg.svc_files_path}}/$TLS_KEY_FILE" ]] ; then
     echo "TLS Enabled, but certificate files are not found. Entering Dev Mode."
-    DEVMODE=true
+    #DEVMODE=true
   fi
 fi
 

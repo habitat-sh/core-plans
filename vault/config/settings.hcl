@@ -36,7 +36,7 @@ backend "dynamodb" {
 }
 {{/if ~}}
 
-ui = {{cfg.app.ui}}
+ui = true
 
 listener "{{cfg.listener.type}}" {
   address = "{{cfg.listener.location}}:{{cfg.listener.port}}"
