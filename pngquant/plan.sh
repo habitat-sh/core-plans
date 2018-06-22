@@ -24,3 +24,8 @@ do_build() {
   fix_interpreter "configure" core/coreutils bin/env
   do_default_build
 }
+
+do_install() {
+  cp COPYRIGHT "${pkg_prefix}"
+  do_default_install
+}
