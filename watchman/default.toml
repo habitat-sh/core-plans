@@ -1,0 +1,4 @@
+root_files = []
+enforce_root_files = false
+illegal_fstypes = ['nfs', 'cifs', 'smb']
+illegal_fstypes_advice = 'use a local directory'

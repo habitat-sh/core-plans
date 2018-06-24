@@ -1155,6 +1155,8 @@ plan_path = "virtualenv"
 plan_path = "vmtouch"
 [wal-e]
 plan_path = "wal-e"
+[watchman]
+plan_path = "watchman"
 [wget]
 plan_path = "wget"
 [wget-static]
