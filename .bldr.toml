@@ -796,6 +796,11 @@ plan_path = "node6"
 paths = [
   "node/*",
 ]
+[node8]
+plan_path = "node8"
+paths = [
+  "node/*",
+]
 [node9]
 plan_path = "node9"
 paths = [
