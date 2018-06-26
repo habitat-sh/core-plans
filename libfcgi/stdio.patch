@@ -1,0 +1,9 @@
+--- include/fcgio.h 2012-01-23 15:23:51.136063795 +0000
++++ include/fcgio.h 2012-01-23 15:22:19.057221383 +0000
+@@ -31,6 +31,7 @@
+ #define FCGIO_H
+
+ #include <iostream>
++#include <stdio.h>
+
+ #include "fcgiapp.h"
