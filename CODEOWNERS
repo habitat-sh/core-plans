@@ -102,7 +102,6 @@ lessmsi @mwrock
 visual-cpp-build-tools-2015 @mwrock
 visual-cpp-redist-2013 @mwrock
 wix @mwrock
-postgresql-client @joshbrand @irvingpop
 
 # # Community Plans
 #
@@ -155,6 +154,7 @@ nuget @mwrock
 optipng @predominant
 pango @rsertelon
 pngquant @predominant
+postgresql-client @joshbrand @irvingpop
 protobuf-cpp @afiune
 rabbitmqadmin @predominant
 redis @irvingpop
