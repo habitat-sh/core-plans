@@ -1,19 +1,21 @@
 pkg_name=libgcrypt
 pkg_origin=core
-pkg_version=1.6.4
+pkg_version=1.7.10
 pkg_license=('lgplv2+')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=ftp://ftp.gnupg.org/gcrypt/${pkg_name}/${pkg_name}-${pkg_version}.tar.bz2
-pkg_shasum=c9bc2c7fe2e5f4ea13b0c74f9d24bcbb1ad889bb39297d8082aebf23f4336026
+pkg_shasum=89f05a423dd66a25e5b38308097e2386e640d1cf835160d19a5c75350071d94c
 pkg_deps=(core/glibc core/libgpg-error)
 pkg_build_deps=(core/gcc core/coreutils core/sed core/bison core/flex core/grep core/bash core/gawk core/libtool core/diffutils core/findutils core/xz core/gettext core/gzip core/make core/patch core/texinfo core/util-linux)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
+pkg_upstream_url="https://www.gnupg.org/software/libgcrypt/index.html"
+pkg_description="Libgcrypt is a general purpose cryptographic library originally based on code from GnuPG."
 
 do_build() {
   ./configure \
-    --prefix=${pkg_prefix} \
+    --prefix="${pkg_prefix}" \
     --enable-static \
     --enable-shared
   make
