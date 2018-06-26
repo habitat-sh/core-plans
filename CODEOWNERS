@@ -102,6 +102,7 @@ lessmsi @mwrock
 visual-cpp-build-tools-2015 @mwrock
 visual-cpp-redist-2013 @mwrock
 wix @mwrock
+postgresql-client @joshbrand @irvingpop
 
 # # Community Plans
 #
