@@ -18,6 +18,7 @@ pkg_deps=(
   core/libjpeg-turbo
   core/libpng
   core/openssl
+  core/readline
   core/zlib
 )
 pkg_build_deps=(
@@ -25,7 +26,6 @@ pkg_build_deps=(
   core/gcc
   core/make
   core/re2c
-  core/readline
 )
 pkg_bin_dirs=(bin sbin)
 pkg_lib_dirs=(lib)
