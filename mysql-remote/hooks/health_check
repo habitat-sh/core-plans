@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+echo "[mysql] status: CLIENT my_ip: {{sys.ip}} remote: {{cfg.host}}:{{cfg.port}}"
+mysqladmin --defaults-extra-file={{pkg.svc_config_path}}/client.cnf --wait=5 status

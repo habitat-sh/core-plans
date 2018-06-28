@@ -1,0 +1,5 @@
+host = "127.0.0.1"
+port = 3306
+app_username = false
+app_password = false
+server_id = 1
