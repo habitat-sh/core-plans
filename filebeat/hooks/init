@@ -2,4 +2,4 @@
 
 exec 2>&1
 
-mkdir "{{pkg.svc_data_path}}/logs"
+mkdir -p "{{pkg.svc_data_path}}/logs"
