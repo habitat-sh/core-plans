@@ -666,7 +666,7 @@ stable_versions_list() {
 	versions_array=()
 
 	versions_array=($versions_str)
-	sorted_versions_array=($(for l in "${versions_array[@]}"; do echo "$l"; done | sort))
+	sorted_versions_array=($(for l in "${versions_array[@]}"; do echo "$l"; done | sort -V))
 	echo "${sorted_versions_array[@]}"
 }
 
