@@ -24,7 +24,6 @@ server_execs=(
     ecpg
     initdb
     pg_archivecleanup
-    pg_config
     pg_controldata
     pg_resetxlog
     pg_rewind
