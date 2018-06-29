@@ -1,6 +1,6 @@
 pkg_name=scaffolding-node
 pkg_origin=core
-pkg_version="0.6.13"
+pkg_version="0.6.14"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_description="Habitat Plan Scaffolding for Node.js Applications"
