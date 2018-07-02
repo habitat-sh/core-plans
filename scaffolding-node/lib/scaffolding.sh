@@ -644,9 +644,9 @@ _extracted_version_number() {
 }
 
 _full_version_digits() {
-    if [[ $1 =~ ([0-9]\.[0-9]\.[0-9]$) ]]; then
+    if [[ $1 =~ ([0-9]+\.[0-9]+\.[0-9]+$) ]]; then
         echo "$1"
-    elif [[ $1 =~ ([0-9]\.[0-9]$) ]]; then
+    elif [[ $1 =~ ([0-9]+\.[0-9]+$) ]]; then
         echo "$1.0"
     else
         echo "$1.0.0"
@@ -658,13 +658,15 @@ remove_single_chars() {
 }
 
 stable_versions_list() {
-	versions_list=$($_jq '.data[].version' < "${1}")
+  local filter=".data[] | select(.platforms[] | contains(\"$pkg_target\")) | .version"
+
+	versions_list=$($_jq "${filter}" < "${1}")
 	versions_str=${versions_list[0]}
 
 	versions_array=()
 
 	versions_array=($versions_str)
-	sorted_versions_array=($(for l in "${versions_array[@]}"; do echo "$l"; done | sort))
+	sorted_versions_array=($(for l in "${versions_array[@]}"; do echo "$l"; done | sort -V))
 	echo "${sorted_versions_array[@]}"
 }
 
