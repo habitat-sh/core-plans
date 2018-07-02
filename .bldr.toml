@@ -765,6 +765,8 @@ plan_path = "musl"
 plan_path = "mysql"
 [mysql-client]
 plan_path = "mysql-client"
+[nano]
+plan_path = "nano"
 [nasm]
 plan_path = "nasm"
 [nats-streaming-server]

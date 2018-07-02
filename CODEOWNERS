@@ -149,6 +149,7 @@ libtalloc @defilan
 monit @rsertelon
 mosquitto @rsertelon
 mssql @mwrock
+nano @predominant
 nmap @defilan
 nuget @mwrock
 optipng @predominant
