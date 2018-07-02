@@ -16,4 +16,4 @@ rabbitmqctl start_app
 {{/if ~}}
 {{/if ~}}
 # sending TERM to ensure configuration is fully applied
-kill -SIGTERM `cat {{pkg.svc_pid_file}}`
+kill -TERM `cat {{pkg.svc_pid_file}}`
