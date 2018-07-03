@@ -1,0 +1,9 @@
+sa_password="Pass@word1"
+port=8888
+app_user="hab"
+app_password="h@b1Tat"
+instance="hab_sql_server"
+svc_account="NT AUTHORITY\\Network Service"
+svc_account_password=""
+features="SQL_Engine"
+custom_install_media_dir=""
