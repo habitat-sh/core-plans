@@ -20,7 +20,6 @@ $server_execs=@(
     "ecpg.exe"
     "initdb.exe"
     "pg_archivecleanup.exe"
-    "pg_config.exe"
     "pg_controldata.exe"
     "pg_resetxlog.exe"
     "pg_rewind.exe"
