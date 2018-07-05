@@ -55,7 +55,7 @@
   # node.rack: r1
   #
   rack_id = ""
-  zone    = ""
+  zone = ""
   #
   # Disable starting multiple nodes on a single system:
   #
@@ -66,7 +66,7 @@
   # Default is master-eligible (master and data are both "true")
   #
   master = "true"
-  data   = "true"
+  data = "true"
 
 #
 # ----------------------------------- Paths ------------------------------------
@@ -75,49 +75,49 @@
   #
   # Path to directory where to store the data (separate multiple locations by comma):
   #
-  data =    ""
+  data = ""
   #
   # Path to log files:
   #
-  logs =    "logs"
+  logs = "logs"
 
 #
 # ----------------------------------- Indices ----------------------------------
 #
 [indices]
   [indices.recovery]
-    max_bytes_per_sec  =            "20mb"
+    max_bytes_per_sec = "20mb"
 
   [indices.fielddata]
     #
     # The max size of the field data cache, eg 30% of node heap space, or an absolute
     # value, eg 12GB. Defaults to unbounded.
     #
-    cache-size =                   ""
+    cache-size = ""
 
   [indices.breaker]
     #
     # Starting limit for overall parent breaker, defaults to 70% of JVM heap.
     #
-    total-limit =                    "70%"
+    total-limit = "70%"
     #
     # Limit for fielddata breaker, defaults to 60% of JVM heap.
     #
-    fielddata-limit =                "60%"
+    fielddata-limit = "60%"
     #
     # A constant that all field data estimations are multiplied with to determine a
     # final estimation. Defaults to 1.03
     #
-    fielddata-overhead =             "1.03"
+    fielddata-overhead = "1.03"
     #
     # Limit for request breaker, defaults to 40% of JVM heap.
     #
-    request-limit =                  "40%"
+    request-limit = "40%"
     #
     # A constant that all request estimations are multiplied with to determine a
     # final estimation. Defaults to 1.
     #
-    request-overhead =               "1"
+    request-overhead = "1"
 
 #
 # ----------------------------------- Memory -----------------------------------
@@ -141,7 +141,7 @@
   #
   # Set the bind address to a specific IP (IPv4 or IPv6):
   #
-  host =  "_site_"
+  host = "_site_"
   #
   # Set a custom port for HTTP:
   #
@@ -178,13 +178,13 @@
   #
   # Block initial recovery after a full cluster restart until N nodes are started:
   #
-  recover_after_nodes   = ""
+  recover_after_nodes = ""
   #
   # The number of (data or master) nodes that are expected to be in the cluster.
   # Recovery of local shards will start as soon as the expected number of nodes
   # have joined the cluster. Defaults to 0
   #
-  expected_nodes        = "0"
+  expected_nodes = "0"
   #
   # The number of master nodes that are expected to be in the cluster. Recovery
   # of local shards will start as soon as the expected number of master nodes
@@ -196,13 +196,13 @@
   # local shards will start as soon as the expected number of data nodes have
   # joined the cluster. Defaults to 0
   #
-  expected_data_nodes   = "0"
+  expected_data_nodes = "0"
   #
   # If the expected number of nodes is not achieved, the recovery process waits
   # for the configured amount of time before trying to recover regardless.
   # Defaults to 5m if one of the expected_nodes settings is configured.
   #
-  recover_after_time    = ""
+  recover_after_time = ""
   #
   # For more information, see the documentation at:
   # <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-gateway.html>
@@ -215,7 +215,7 @@
   #
   # Require explicit names when deleting indices:
   #
-  destructive_requires_name  = "true"
+  destructive_requires_name = "true"
 
 # ======================== Elasticsearch Logger Configuration =========================
 [logger]
@@ -227,8 +227,15 @@
 
 # ======================== Runtime Configuration =========================
 [runtime]
-  max_open_files = ""
+  user = "hab"
+  group = "hab"
+  max_open_files = 65536
   max_locked_memory = ""
   es_startup_sleep_time = ""
   es_java_opts = ""
   heapsize = "1g"
+  max_threads = 4096
+
+[sysctl]
+  [sysctl.vm]
+    max_map_count = 262144

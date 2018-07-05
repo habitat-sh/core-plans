@@ -8,6 +8,7 @@ pkg_license=('Revised BSD')
 pkg_source=https://artifacts.elastic.co/downloads/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz
 pkg_shasum=0464127140820d82b24bd2830232131ea85bcd49267a8bc7365e4fa391dee2a3
 pkg_deps=(
+  core/busybox-static
   core/coreutils-static
   core/glibc
   core/jre8
@@ -23,6 +24,8 @@ pkg_exports=(
   [transport-port]=transport.port
 )
 pkg_exposes=(http-port transport-port)
+pkg_svc_user="root"
+pkg_svc_group="${pkg_svc_user}"
 
 do_build() {
   return 0

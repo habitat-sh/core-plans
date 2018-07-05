@@ -2,6 +2,9 @@
 
 exec 2>&1
 
+# Root needs to perform the below.
+sysctl -w vm.max_map_count={{cfg.sysctl.vm.max_map_count}}
+
 {{#if cfg.runtime.es_startup_sleep_time ~}}
 export ES_STARTUP_SLEEP_TIME={{cfg.runtime.es_startup_sleep_time}}
 {{/if ~}}
@@ -11,6 +14,15 @@ ulimit -l {{cfg.runtime.max_locked_memory}}
 {{#if cfg.runtime.max_open_files ~}}
 ulimit -n {{cfg.runtime.max_open_files}}
 {{/if ~}}
+{{#if cfg.runtime.max_threads ~}}
+ulimit -u {{cfg.runtime.max_threads}}
+{{/if ~}}
+
+mkdir -p "{{pkg.svc_var_path}}/tmp"
+chown -R {{cfg.runtime.user}}:{{cfg.runtime.group}} "{{pkg.svc_path}}"
 
 export ES_PATH_CONF="{{pkg.svc_config_path}}"
-exec elasticsearch
+export ES_TMPDIR="{{pkg.svc_var_path}}/tmp"
+
+# Service is executed as the runtime user.
+exec su -p {{cfg.runtime.user}} -c 'elasticsearch'
