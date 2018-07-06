@@ -1,6 +1,6 @@
 pkg_name=filebeat
 pkg_origin=core
-pkg_version="6.2.4"
+pkg_version="6.3.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_build_deps=(core/go core/git core/make core/gcc)

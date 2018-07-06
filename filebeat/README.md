@@ -42,7 +42,7 @@ A configuration plan that uses this could look like:
 ```
 pkg_name=myfilebeat
 pkg_origin=work
-pkg_version="6.2.4"
+pkg_version="6.3.1"
 pkg_deps=(core/filebeat)
 ```
 
