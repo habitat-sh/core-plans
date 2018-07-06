@@ -17,6 +17,8 @@ if($setupExe) {
 if (!(Test-Path "{{pkg.svc_path}}/MSSQL.1/MSSQL")) {
     Write-Host "Installing SQL Server 2005"
     (Get-Content "{{pkg.svc_config_path}}/config.ini" | ? { !$_.EndsWith("`"`"") }) | Set-Content "{{pkg.svc_config_path}}/config.ini"
+    $resolvedSvcPath = (Resolve-Path "{{pkg.svc_path}}").Path
+    (Get-Content "{{pkg.svc_config_path}}/config.ini").replace("{{pkg.svc_path}}", $resolvedSvcPath) | Set-Content "{{pkg.svc_config_path}}/config.ini"
     Start-Process "$setupExe" -ArgumentList "/settings {{pkg.svc_config_path}}/config.ini /qn" -Wait
 }
 
