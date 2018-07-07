@@ -11,8 +11,6 @@ pkg_filename=${pkg_name}-${pkg_version}_linux_amd64.zip
 pkg_deps=(core/cacerts)
 pkg_build_deps=(core/unzip)
 pkg_bin_dirs=(bin)
-#pkg_svc_user=root
-#pkg_svc_group=root
 pkg_exports=(
   [port]=listener.port
 )
@@ -29,8 +27,6 @@ do_build() {
 
 do_install() {
   install -D vault "${pkg_prefix}"/bin/vault
-
-#  setcap cap_ipc_lock=+ep "${pkg_prefix}"/bin/vault
 
   if [[ ! -f "${pkg_svc_data_path}/cacert.pem" ]] ; then
     mkdir -p "${pkg_svc_data_path}"
