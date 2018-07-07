@@ -28,7 +28,7 @@ do_build() {
 do_install() {
   install -D vault "${pkg_prefix}"/bin/vault
 
-  # Not idea, but a solve for containerization and including checks to avoid overriding existing CA Roots.
+  # Not ideal, but a solve for containerization and including checks to avoid overriding existing CA Roots.
   if [[ ! -f "${pkg_svc_data_path}/cacert.pem" ]] ; then
     mkdir -p "${pkg_svc_data_path}"
     chown -R "${pkg_svc_user}:${pkg_svc_group}" "${pkg_svc_data_path}"
