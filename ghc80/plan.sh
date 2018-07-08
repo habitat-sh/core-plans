@@ -1,3 +1,6 @@
+# shellcheck disable=SC2148,SC1091
+source ../ghc/plan.sh
+
 pkg_name=ghc80
 pkg_origin=core
 pkg_version=8.0.2
@@ -9,62 +12,11 @@ pkg_source="http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-
 pkg_shasum="11625453e1d0686b3fa6739988f70ecac836cadc30b9f0c8b49ef9091d6118b1"
 pkg_dirname="ghc-${pkg_version}"
 
-pkg_bin_dirs=(bin)
-pkg_lib_dirs=(lib)
-pkg_include_dirs=(lib/ghc-${pkg_version}/include)
-
-pkg_deps=(
-  core/gcc
-  core/glibc
-  core/gmp
-  core/libedit
-  core/libffi
-  core/ncurses
-  core/perl
-)
-
 pkg_build_deps=(
   core/binutils
   core/diffutils
-  alasconnect/ghc710
+  core/ghc710
   core/make
   core/patch
   core/sed
 )
-
-do_prepare() {
-  do_default_prepare
-
-  # Explicitly set linker so we aren't tied to the default studio linker
-  LD="$(pkg_path_for binutils)/bin/ld"
-  export LD
-  build_line "Updating LD=$LD"
-  # Set library path
-  LIBRARY_PATH="${LIBRARY_PATH}:${LD_RUN_PATH}"
-  export LIBRARY_PATH
-  build_line "Updating LIBRARY_PATH=$LIBRARY_PATH"
-
-  cp mk/build.mk.sample mk/build.mk
-  sed -i '1iBuildFlavour = perf' mk/build.mk
-}
-
-do_build() {
-  libffi_include=$(find "$(pkg_path_for libffi)/lib/" -name "libffi-*.*.*")
-
-  if [ -z "${libffi_include}" ]; then
-    echo "libffi_include not found, exiting"
-    exit 1
-  fi
-
-  ./configure \
-    --prefix="${pkg_prefix}" \
-    --with-system-libffi \
-    --with-ffi-includes="${libffi_include}/include" \
-    --with-ffi-libraries="$(pkg_path_for libffi)/lib" \
-    --with-curses-includes="$(pkg_path_for ncurses)/include" \
-    --with-curses-libraries="$(pkg_path_for ncurses)/lib" \
-    --with-gmp-includes="$(pkg_path_for gmp)/include" \
-    --with-gmp-libraries="$(pkg_path_for gmp)/lib"
-
-  make
-}

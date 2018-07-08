@@ -1,3 +1,6 @@
+# shellcheck disable=SC2148,SC1091
+source ../ghc/plan.sh
+
 pkg_name=ghc710
 pkg_origin=core
 pkg_version=7.10.3
@@ -9,10 +12,6 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${patched_version}-src.tar.xz"
 pkg_shasum="06c6c20077dc3cf7ea3f40126b2128ce5ab144e1fa66fd1c05ae1ade3dfaa8e5"
 pkg_dirname="ghc-${pkg_version}"
-
-pkg_bin_dirs=(bin)
-pkg_lib_dirs=(lib)
-pkg_include_dirs=(lib/ghc-${pkg_version}/include)
 
 pkg_deps=(
   core/gcc
@@ -32,22 +31,6 @@ pkg_build_deps=(
   core/patch
   core/sed
 )
-
-do_prepare() {
-  do_default_prepare
-
-  # Explicitly set linker so we aren't tied to the default studio linker
-  LD="$(pkg_path_for binutils)/bin/ld"
-  export LD
-  build_line "Updating LD=$LD"
-  # Set library path
-  LIBRARY_PATH="${LIBRARY_PATH}:${LD_RUN_PATH}"
-  export LIBRARY_PATH
-  build_line "Updating LIBRARY_PATH=$LIBRARY_PATH"
-
-  cp mk/build.mk.sample mk/build.mk
-  sed -i '1iBuildFlavour = perf' mk/build.mk
-}
 
 do_build() {
   # Setting this path is only necessary when building from a binary bootstrap

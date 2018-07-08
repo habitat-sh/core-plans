@@ -12,4 +12,9 @@ Binary package
 
 ## Usage
 
-*TODO: Add instructions for usage*
+This package is meant purely for bootstrapping GHC into the habitat ecosystems
+and should not be used for compiling projects.
+
+A new version of GHC has to be bootstrapped via a prexisting binary whenever
+the [ClosureFlags.c](https://github.com/ghc/ghc/blob/master/rts/ClosureFlags.c)
+change, as previous versions of GHC will not be able to build the new version.

@@ -302,16 +302,32 @@ plan_path = "geoip"
 plan_path = "geos"
 [gettext]
 plan_path = "gettext"
+[ghc]
+plan_path = "ghc"
+[ghc710]
+plan_path = "ghc710"
+paths = [
+  "ghc/*",
+]
 [ghc710-bootstrap]
 plan_path = "ghc710-bootstrap"
 [ghc80]
 plan_path = "ghc80"
+paths = [
+  "ghc/*",
+]
 [ghc82-bootstrap]
 plan_path = "ghc82-bootstrap"
 [ghc82]
 plan_path = "ghc82"
+paths = [
+  "ghc/*",
+]
 [ghc84]
 plan_path = "ghc84"
+paths = [
+  "ghc/*",
+]
 [giflib]
 plan_path = "giflib"
 [gifsicle]
