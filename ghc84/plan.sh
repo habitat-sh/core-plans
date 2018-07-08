@@ -11,3 +11,5 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-src.tar.xz"
 pkg_shasum="ae47afda985830de8811243255aa3744dfb9207cb980af74393298b2b62160d6"
 pkg_dirname="ghc-${pkg_version}"
+
+pkg_include_dirs=(lib/ghc-${pkg_version}/include)

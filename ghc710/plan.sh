@@ -13,6 +13,8 @@ pkg_source="http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${patched_versi
 pkg_shasum="06c6c20077dc3cf7ea3f40126b2128ce5ab144e1fa66fd1c05ae1ade3dfaa8e5"
 pkg_dirname="ghc-${pkg_version}"
 
+pkg_include_dirs=(lib/ghc-${pkg_version}/include)
+
 pkg_deps=(
   core/gcc
   core/glibc
