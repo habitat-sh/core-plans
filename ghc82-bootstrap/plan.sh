@@ -12,6 +12,7 @@ pkg_dirname="ghc-${pkg_version}"
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(lib/ghc-${pkg_version}/include)
+pkg_interpreters=(bin/runhaskell bin/runghc)
 
 pkg_deps=(
   core/gcc
