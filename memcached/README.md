@@ -34,4 +34,3 @@ Update strategies depend on how your application(s) depend on Memcached for oper
 ## Monitoring
 
 Any network capable monitoring system can connect to the exposed port `11211` (by default) and issue the command `stats` to view basic system information for monitoring purposes.
-
