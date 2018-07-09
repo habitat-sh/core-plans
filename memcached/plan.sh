@@ -1,12 +1,12 @@
 pkg_origin=core
 pkg_name=memcached
-pkg_version=1.5.4
+pkg_version=1.5.9
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Distributed memory object caching system"
 pkg_upstream_url="https://memcached.org/"
 pkg_license=('BSD')
 pkg_source=http://www.memcached.org/files/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=e0c3cfa89fa4c2ffd8aa45df7825c6d1a2423ac89ab1a7c4f42bb9803f7403d4
+pkg_shasum=4af3577dbf71cb0a748096dc6562ccd587cddb7565c720f1fdb23e8a34241d06
 pkg_deps=(core/glibc core/libevent)
 pkg_build_deps=(core/git core/gcc core/make)
 pkg_bin_dirs=(bin)
