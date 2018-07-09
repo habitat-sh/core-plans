@@ -11,13 +11,3 @@ pkg_license=('PostgreSQL')
 pkg_source=https://ftp.postgresql.org/pub/source/v${pkg_version}/postgresql-${pkg_version}.tar.bz2
 pkg_shasum=845f5e4ac8cf026b6a77c5a180a2fe869f51e9d06acf8d0365b05505a2c66873
 pkg_dirname="postgresql-${pkg_version}"
-
-# Copy service files (hooks, config, default.toml) from the postgresql plan
-do_begin() {
-  _copy_service_files
-}
-
-# Cleanup from our workaround in `do_begin`
-do_end() {
-  _cleanup_copied_service_files
-}
