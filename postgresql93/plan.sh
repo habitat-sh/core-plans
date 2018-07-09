@@ -12,17 +12,12 @@ pkg_source=https://ftp.postgresql.org/pub/source/v${pkg_version}/postgresql-${pk
 pkg_shasum=845f5e4ac8cf026b6a77c5a180a2fe869f51e9d06acf8d0365b05505a2c66873
 pkg_dirname="postgresql-${pkg_version}"
 
-# Workaround `pkg_exports` check that runs before `do_build_config`
-do_prepare() {
-  cp "${PLAN_CONTEXT}/../postgresql/default.toml" "${PLAN_CONTEXT}/default.toml"
+# Copy service files (hooks, config, default.toml) from the postgresql plan
+do_begin() {
+  _copy_service_files
 }
 
-do_build_config() {
-  PLAN_CONTEXT="${PLAN_CONTEXT}/../postgresql/" do_default_build_config
-}
-
-# Cleanup from our workaround in `do_prepare`
+# Cleanup from our workaround in `do_begin`
 do_end() {
-  rm "${PLAN_CONTEXT}/default.toml"
-  do_default_end
+  _cleanup_copied_service_files
 }
