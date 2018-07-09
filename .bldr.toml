@@ -1070,6 +1070,8 @@ plan_path = "serf"
 plan_path = "shadow"
 [shared-mime-info]
 plan_path = "shared-mime-info"
+[shellcheck]
+plan_path = "shellcheck"
 [shield]
 plan_path = "shield"
 [shield-agent]
