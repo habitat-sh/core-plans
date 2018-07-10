@@ -1,0 +1,7 @@
+#!/bin/bash -xe
+#
+
+exec 2>&1
+
+export P4SSLDIR={{pkg.svc_files_path}}/sslkeys
+exec p4broker -c {{pkg.svc_config_path}}/p4broker.conf

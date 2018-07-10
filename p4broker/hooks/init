@@ -1,0 +1,29 @@
+#!/bin/bash -xe
+#
+
+if [ ! -d {{pkg.svc_data_path}}/log ]; then
+	mkdir -p {{pkg.svc_data_path}}/log
+	chown -R {{pkg.svc_user}}:{{pkg.svc_group}} {{pkg.svc_data_path}}/log
+	ln -s /dev/stdout {{pkg.svc_data_path}}/log/p4broker.log
+else
+	chown -R {{pkg.svc_user}}:{{pkg.svc_group}} {{pkg.svc_data_path}}/log
+	rm -rf {{pkg.svc_data_path}}/log/p4broker.log
+	ln -s /dev/stdout {{pkg.svc_data_path}}/log/p4broker.log
+fi
+
+if [ ! -d {{pkg.svc_files_path}}/sslkeys ]; then
+	mkdir -p {{pkg.svc_files_path}}/sslkeys
+	chown -R {{pkg.svc_user}}:{{pkg.svc_group}} {{pkg.svc_files_path}}/sslkeys
+	chmod 700 -R {{pkg.svc_files_path}}/sslkeys
+else
+	chown -R {{pkg.svc_user}}:{{pkg.svc_group}} {{pkg.svc_files_path}}/sslkeys
+	chmod 700 -R {{pkg.svc_files_path}}/sslkeys
+fi
+
+if [ ! -f {{pkg.svc_files_path}}/sslkeys/privatekey.txt ] || [ ! -f {{pkg.svc_files_path}}/sslkeys/certificate.txt ]; then
+	export P4SSLDIR={{pkg.svc_files_path}}/sslkeys
+	p4broker -Gc 2>&1
+	chmod 600 {{pkg.svc_files_path}}/sslkeys/*.txt
+else
+	chmod 600 {{pkg.svc_files_path}}/sslkeys/*.txt
+fi
