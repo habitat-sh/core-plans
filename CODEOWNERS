@@ -126,6 +126,7 @@ dotnet-core-sdk-preview @mwrock
 dotnet-core-sdkdotnet-core @mwrock
 dsc-core @mwrock
 elasticsearch @joshbrand @predominant
+filebeat @predominant
 gdk-pixbuf @rsertelon
 glib @rsertelon
 go @afiune @nellshamrell
@@ -143,14 +144,19 @@ jre8 @predominant @rsertelon
 jre9 @predominant @rsertelon
 kibana @joshbrand @predominant
 logstash @joshbrand @predominant
+libimagequant @predominant
 libtalloc @defilan
 monit @rsertelon
 mosquitto @rsertelon
 mssql @mwrock
+nano @predominant
 nmap @defilan
 nuget @mwrock
+optipng @predominant
 p4broker @dbhagen
 pango @rsertelon
+pngquant @predominant
+postgresql-client @joshbrand @irvingpop
 protobuf-cpp @afiune
 rabbitmqadmin @predominant
 redis @irvingpop
