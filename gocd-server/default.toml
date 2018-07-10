@@ -1,0 +1,5 @@
+memory = "512m"
+max-memory = "1024m"
+max-perm-gen = "256m"
+port = 8153
+ssl-port = 8154
