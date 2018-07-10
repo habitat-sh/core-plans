@@ -2,7 +2,7 @@
 
 exec 2>&1
 
-JAVA_HOME="$(hab pkg path core/jre8)"
+JAVA_HOME="{{pkgPathFor "core/jre8"}}"
 SERVER_WORK_DIR="{{pkg.svc_var_path}}"
 SERVER_MEM="{{cfg.memory}}"
 SERVER_MAX_MEM="{{cfg.max-memory}}"

@@ -24,6 +24,6 @@ do_build() {
 
 do_install() {
   mkdir -p "${pkg_prefix}/bin"
-  cp * "${pkg_prefix}/bin"
+  cp ./* "${pkg_prefix}/bin"
   mv "${pkg_prefix}/bin/LICENSE" "${pkg_prefix}/"
 }
