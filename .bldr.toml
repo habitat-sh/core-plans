@@ -249,6 +249,8 @@ plan_path = "expect"
 plan_path = "ffmpeg"
 [file]
 plan_path = "file"
+[filebeat]
+plan_path = "filebeat"
 [findutils]
 plan_path = "findutils"
 [fish]
@@ -300,6 +302,32 @@ plan_path = "geoip"
 plan_path = "geos"
 [gettext]
 plan_path = "gettext"
+[ghc]
+plan_path = "ghc"
+[ghc710]
+plan_path = "ghc710"
+paths = [
+  "ghc/*",
+]
+[ghc710-bootstrap]
+plan_path = "ghc710-bootstrap"
+[ghc80]
+plan_path = "ghc80"
+paths = [
+  "ghc/*",
+]
+[ghc82-bootstrap]
+plan_path = "ghc82-bootstrap"
+[ghc82]
+plan_path = "ghc82"
+paths = [
+  "ghc/*",
+]
+[ghc84]
+plan_path = "ghc84"
+paths = [
+  "ghc/*",
+]
 [giflib]
 plan_path = "giflib"
 [gifsicle]
@@ -538,6 +566,8 @@ plan_path = "liberation-fonts-ttf"
 plan_path = "libev"
 [libevent]
 plan_path = "libevent"
+[libfcgi]
+plan_path = "libfcgi"
 [libffi]
 plan_path = "libffi"
 [libgcrypt]
@@ -556,6 +586,8 @@ plan_path = "libiconv"
 plan_path = "libidn"
 [libidn2]
 plan_path = "libidn2"
+[libimagequant]
+plan_path = "libimagequant"
 [libjpeg-turbo]
 plan_path = "libjpeg-turbo"
 [libksba]
@@ -759,6 +791,8 @@ plan_path = "musl"
 plan_path = "mysql"
 [mysql-client]
 plan_path = "mysql-client"
+[nano]
+plan_path = "nano"
 [nasm]
 plan_path = "nasm"
 [nats-streaming-server]
@@ -769,6 +803,11 @@ plan_path = "nats-top"
 plan_path = "ncdu"
 [ncurses]
 plan_path = "ncurses"
+[ncurses5]
+plan_path = "ncurses5"
+paths = [
+  "ncurses/*",
+]
 [net-tools]
 plan_path = "net-tools"
 [netcat]
@@ -789,6 +828,11 @@ plan_path = "nmap"
 plan_path = "node"
 [node6]
 plan_path = "node6"
+paths = [
+  "node/*",
+]
+[node8]
+plan_path = "node8"
 paths = [
   "node/*",
 ]
@@ -832,6 +876,8 @@ paths = [
 ]
 [openvpn]
 plan_path = "openvpn"
+[optipng]
+plan_path = "optipng"
 [p11-kit]
 plan_path = "p11-kit"
 [p4broker]
@@ -864,6 +910,8 @@ plan_path = "php5"
 plan_path = "pixman"
 [pkg-config]
 plan_path = "pkg-config"
+[pngquant]
+plan_path = "pngquant"
 [polipo]
 plan_path = "polipo"
 [ponysay]

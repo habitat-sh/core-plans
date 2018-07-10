@@ -1,0 +1,10 @@
+#!/bin/sh
+
+exec 2>&1
+
+exec filebeat \
+  -c "filebeat.yml" \
+  --path.config "{{pkg.svc_config_path}}" \
+  --path.data "{{pkg.svc_data_path}}" \
+  --path.home "{{pkg.svc_path}}" \
+  --path.logs "{{pkg.svc_data_path}}/logs"

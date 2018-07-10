@@ -1,0 +1,10 @@
+[kibana]
+enabled = false
+host = "https://localhost:5601"
+
+[elasticsearch]
+enabled = true
+
+[[elasticsearch.members]]
+host = "localhost"
+port = 9200

@@ -1,0 +1,11 @@
+--- lib/mkmf.rb.orig	2018-07-02 13:27:03.210000000 +0000
++++ lib/mkmf.rb	2017-12-11 02:30:42.000000000 +0000
+@@ -657,7 +657,7 @@
+   end
+ 
+   def try_ldflags(flags, opts = {})
+-    try_link(MAIN_DOES_NOTHING, flags, {:werror => true}.update(opts))
++    try_link(MAIN_DOES_NOTHING, flags, opts)
+   end
+ 
+   def append_ldflags(flags, *opts)

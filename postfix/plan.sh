@@ -1,20 +1,18 @@
 pkg_name=postfix
 pkg_origin=core
-pkg_version="3.2.4"
+pkg_version="3.3.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Postfix is a free and open-source mail transfer agent that routes and delivers electronic mail."
 pkg_upstream_url="http://www.postfix.org/"
 pkg_license=('IPL-1.0')
 pkg_source="http://cdn.postfix.johnriley.me/mirrors/${pkg_name}-release/official/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="ec55ebaa2aa464792af8d5ee103eb68b27a42dc2b36a02fee42dafbf9740c7f6"
-
+pkg_shasum="54f514dae42b5275cb4bc9c69283f16c06200b71813d0bb696568c4ba7ae7e3b"
 pkg_build_deps=(
   core/make
   core/gcc
   core/sed
   core/gawk
 )
-
 pkg_deps=(
   # postfix deps
   core/coreutils
@@ -25,16 +23,12 @@ pkg_deps=(
   core/openssl
   core/pcre
   core/zlib
-
   # plan/hook deps
   core/shadow
   core/iana-etc
 )
-
 pkg_bin_dirs=(bin sbin)
-
 pkg_svc_user=root
-
 
 do_build() {
   POSTFIX_CCARGS=(
@@ -68,19 +62,8 @@ do_build() {
 }
 
 do_install() {
-
-  # because postfix-install ignores PATH
-  hab pkg binlink core/coreutils -d /bin uname
-  hab pkg binlink core/coreutils -d /bin rm
-  hab pkg binlink core/coreutils -d /bin touch
-  hab pkg binlink core/coreutils -d /bin mkdir
-  hab pkg binlink core/coreutils -d /bin chmod
-  hab pkg binlink core/coreutils -d /bin cp
-  hab pkg binlink core/coreutils -d /bin mv
-  hab pkg binlink core/coreutils -d /bin ln
-  hab pkg binlink core/sed -d /bin sed
-  hab pkg binlink core/gawk -d /bin awk
-
+  # Remove the override to PATH in postfix-install
+  sed -i '/^PATH=/c\ ' postfix-install
 
   make non-interactive-package \
     install_root="${pkg_prefix}" \

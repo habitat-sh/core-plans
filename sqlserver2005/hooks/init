@@ -1,0 +1,46 @@
+$ProgressPreference="SilentlyContinue"
+
+Import-Module "{{pkgPathFor "core/dsc-core"}}/Modules/DscCore"
+Start-DscCore (Join-Path {{pkg.svc_config_path}} dotnet2.ps1) DotNet
+
+$sqlMajorVersion = [Version]::new("{{pkg.version}}").Major
+$setupPath = "{{pkg.path}}\bin"
+if("{{cfg.custom_install_media_dir}}" -ne "") {
+    $setupPath = "{{cfg.custom_install_media_dir}}"
+}
+$setupExe = Get-Item (Join-Path $setupPath setup.exe) -ErrorAction SilentlyContinue
+if($setupExe) {
+    $sqlMajorVersion = [Version]::new($setupExe.VersionInfo.ProductVersion).Major
+}
+
+# If the sql instance data is not present, install a new instance
+if (!(Test-Path "{{pkg.svc_path}}/MSSQL.1/MSSQL")) {
+    Write-Host "Installing SQL Server 2005"
+    (Get-Content "{{pkg.svc_config_path}}/config.ini" | ? { !$_.EndsWith("`"`"") }) | Set-Content "{{pkg.svc_config_path}}/config.ini"
+    $resolvedSvcPath = (Resolve-Path "{{pkg.svc_path}}").Path
+    (Get-Content "{{pkg.svc_config_path}}/config.ini").replace("{{pkg.svc_path}}", $resolvedSvcPath) | Set-Content "{{pkg.svc_config_path}}/config.ini"
+    Start-Process "$setupExe" -ArgumentList "/settings {{pkg.svc_config_path}}/config.ini /qn" -Wait
+}
+
+# Configure the instance for the configured port
+$instance = (get-itemproperty "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Microsoft SQL Server\Instance Names\sql").{{cfg.instance}}
+Set-ItemProperty -Path  "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Microsoft SQL Server\$instance\MSSQLServer\SuperSocketNetLib\Tcp\IPAll" -Name TcpPort -Value {{cfg.port}}
+
+# Open port on firewall only if Windows Firewall service is running
+if($(Get-Service 'MpsSvc').Status -eq "Running") {
+    Invoke-Command -ComputerName localhost -EnableNetworkAccess {    Write-Host "Checking for xNetworking PS module..."
+        $ProgressPreference="SilentlyContinue"
+        Write-Host "Checking for nuget package provider..."
+        if(!(Get-PackageProvider -Name nuget -ErrorAction SilentlyContinue -ListAvailable)) {
+            Write-Host "Installing Nuget provider..."
+            Install-PackageProvider -Name NuGet -Force | Out-Null
+        }
+        Write-Host "Checking for xNetworking PS module..."
+        if(!(Get-Module xNetworking -ListAvailable)) {
+            Write-Host "Installing xNetworking PS Module..."
+            Install-Module xNetworking -Force | Out-Null
+        }
+    }
+
+    Start-DscCore (Join-Path {{pkg.svc_config_path}} firewall.ps1) NewFirewallRule
+}

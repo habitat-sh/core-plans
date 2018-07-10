@@ -1,0 +1,31 @@
+# Create application Users
+
+$sqlMajorVersion = [Version]::new("{{pkg.version}}").Major
+$setupPath = "{{pkg.path}}\bin"
+if("{{cfg.custom_install_media_dir}}" -ne "") {
+    $setupPath = "{{cfg.custom_install_media_dir}}"
+}
+$setupExe = Get-Item (Join-Path $setupPath setup.exe) -ErrorAction SilentlyContinue
+if($setupExe) {
+    $sqlMajorVersion = [Version]::new($setupExe.VersionInfo.ProductVersion).Major
+}
+
+if('{{cfg.app_user}}' -ne '') {
+  $listening = $false
+  while(!$listening) {
+    Write-Host "waiting for sql server to start accepting connections..."
+    Start-Sleep -Seconds 3
+    try{
+      $listening = New-Object System.Net.Sockets.TCPClient -ArgumentList localhost,{{cfg.port}} -ErrorAction SilentlyContinue | ? { $_.Connected }
+    } catch {}
+  }
+
+  Write-Host "Starting application user setup..."
+
+  if('{{cfg.app_password}}' -eq '') {
+    ."${env:ProgramFiles(x86)}\Microsoft SQL Server\${sqlMajorVersion}0\Tools\Binn\OSQL.EXE" -S localhost,{{cfg.port}} -U sa -P {{cfg.sa_password}} -i $(Join-Path {{pkg.svc_config_path}} windows_login.sql)
+  } else {
+    ."${env:ProgramFiles(x86)}\Microsoft SQL Server\${sqlMajorVersion}0\Tools\Binn\OSQL.EXE" -S localhost,{{cfg.port}} -U sa -P {{cfg.sa_password}} -i $(Join-Path {{pkg.svc_config_path}} sql_login.sql)
+  }
+  Write-Host "Application user setup complete"
+}

@@ -9,6 +9,7 @@ pkg_source="http://github.com/percona/percona-xtrabackup/archive/${pkg_name}-${p
 pkg_shasum="1787623cb9ea331fb242992c4fcf3f88ee61045dcd42be027884bc7d373dcdae"
 pkg_dirname="percona-xtrabackup-percona-xtrabackup-${pkg_version}"
 pkg_build_deps=(
+  core/m4
   core/bison
   core/boost159
   core/cmake
