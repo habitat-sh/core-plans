@@ -340,6 +340,8 @@ plan_path = "go"
 plan_path = "go14"
 [go17]
 plan_path = "go17"
+[gocd-server]
+plan_path = "gocd-server"
 [googlemock]
 plan_path = "googlemock"
 [googletest]
