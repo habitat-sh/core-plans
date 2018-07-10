@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+# zerotier-one.port file is created and maintained by running instance, client can't connect without it
+test -f /hab/svc/zerotier-one/data/zerotier-one.port
+
+# client should report ONLINE
+zerotier-cli info | egrep "ONLINE"

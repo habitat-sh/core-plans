@@ -1,0 +1,11 @@
+--- osdep/OSUtils.dist.cpp	2018-07-12 04:07:34.674510440 +0000
++++ osdep/OSUtils.cpp	2018-07-12 04:08:56.673732991 +0000
+@@ -410,7 +410,7 @@
+ 	return std::string("/var/db/zerotier-one");
+ #else
+ 	// Use /var/lib for Linux and other *nix
+-	return std::string("/var/lib/zerotier-one");
++	return std::string("/hab/svc/zerotier-one/data");
+ #endif
+ 
+ #endif

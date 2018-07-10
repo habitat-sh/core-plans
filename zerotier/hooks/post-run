@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+{{#if cfg.network ~}}
+  echo "Joining network {{cfg.network}}"
+
+  # wait for service to come up. something like habitat-sh/habitat#3721 would make this unnecessary
+  while [ ! -f /hab/svc/zerotier-one/data/zerotier-one.pid ] || [ ! -f /hab/svc/zerotier-one/data/zerotier-one.port ]; do
+    echo "Waiting for zerotier-one.pid and zerotier-one.port"
+    sleep 1
+  done
+
+  zerotier-cli join {{cfg.network}} || echo "Failed to join network"
+{{else}}
+  echo "No network configured"
+{{/if}}
