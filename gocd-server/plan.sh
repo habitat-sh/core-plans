@@ -10,7 +10,10 @@ pkg_description="GoCD is an open source tool which is used in software developme
 pkg_upstream_url="https://www.gocd.org"
 pkg_filename="go-server-${pkg_version}-${pkg_buildnumber}.zip"
 pkg_dirname="go-server-${pkg_version}"
-pkg_deps=(core/jre8)
+pkg_deps=(
+  core/git
+  core/jre8
+)
 pkg_bin_dirs=(bin)
 pkg_exports=(
   [port]=port
