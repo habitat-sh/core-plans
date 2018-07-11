@@ -130,6 +130,7 @@ filebeat @predominant
 gdk-pixbuf @rsertelon
 glib @rsertelon
 go @afiune @nellshamrell
+gocd-server @predominant
 grpcurl @afiune
 gtk2 @rsertelon
 harfbuzz @rsertelon

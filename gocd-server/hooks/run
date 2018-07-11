@@ -1,0 +1,15 @@
+#!/bin/sh
+
+exec 2>&1
+
+JAVA_HOME="{{pkgPathFor "core/jre8"}}"
+SERVER_WORK_DIR="{{pkg.svc_var_path}}"
+SERVER_MEM="{{cfg.memory}}"
+SERVER_MAX_MEM="{{cfg.max-memory}}"
+SERVER_MAX_PERM_GEN="{{cfg.max-perm-gen}}"
+GO_SERVER_PORT="{{cfg.port}}"
+GO_SERVER_SSL_PORT="{{cfg.ssl-port}}"
+
+export JAVA_HOME SERVER_WORK_DIR SERVER_MEM SERVER_MAX_MEM SERVER_MAX_PERM_GEN GO_SERVER_PORT GO_SERVER_SSL_PORT
+
+exec server.sh
