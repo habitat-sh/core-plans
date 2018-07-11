@@ -4,6 +4,8 @@ plan_path = "7zip"
 plan_path = "acbuild"
 [acl]
 plan_path = "acl"
+[alex]
+plan_path = "alex"
 [alsa-lib]
 plan_path = "alsa-lib"
 [ant]
@@ -85,6 +87,8 @@ paths = [
 ]
 [c-ares]
 plan_path = "c-ares"
+[cabal-install]
+plan_path = "cabal-install"
 [cacerts]
 plan_path = "cacerts"
 [caddy]
@@ -410,6 +414,8 @@ plan_path = "guile"
 plan_path = "gzip"
 [handlebars-cmd]
 plan_path = "handlebars-cmd"
+[happy]
+plan_path = "happy"
 [haproxy]
 plan_path = "haproxy"
 [harfbuzz]
