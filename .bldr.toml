@@ -816,6 +816,8 @@ plan_path = "net-tools"
 plan_path = "netcat"
 [netcat-openbsd]
 plan_path = "netcat-openbsd"
+[netdata]
+plan_path = "netdata"
 [nettle]
 plan_path = "nettle"
 [nghttp2]

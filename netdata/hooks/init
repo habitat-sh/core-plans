@@ -1,0 +1,20 @@
+#!/bin/sh
+
+exec 2>&1
+
+cp --no-clobber --recursive \
+    "{{ pkg.path }}/etc/netdata"/* \
+    "{{ pkg.svc_config_path }}"
+
+cp --recursive \
+    "{{ pkg.path }}/share/netdata/web" \
+    "{{ pkg.svc_data_path }}/"
+
+mkdir -p \
+    "{{ pkg.svc_var_path }}/log" \
+    "{{ pkg.svc_var_path }}/cache" \
+    "{{ pkg.svc_var_path }}/lib"
+
+chown -R {{ pkg.svc_user }}:{{ pkg.svc_group }} \
+    "{{ pkg.svc_var_path }}/log" \
+    "{{ pkg.svc_data_path }}/web"
