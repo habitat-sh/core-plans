@@ -38,6 +38,11 @@ server_includes=(
     postgresql/server
 )
 
+# Unset copy of service files
+do_begin() {
+  return 0
+}
+
 do_install() {
 	make -C src/bin install
 	make -C src/include install
@@ -59,4 +64,9 @@ do_install() {
        echo "rm -rf ${target}"
        rm -rf "${target}"
     done
+}
+
+# Unset cleanup of service files
+do_end() {
+  return 0
 }
