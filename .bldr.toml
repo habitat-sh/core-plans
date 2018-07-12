@@ -273,6 +273,8 @@ plan_path = "fontconfig"
 plan_path = "foulkon"
 [fping]
 plan_path = "fping"
+[freetds]
+plan_path = "freetds"
 [freetype]
 plan_path = "freetype"
 [galera]
