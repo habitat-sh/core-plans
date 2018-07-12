@@ -3,7 +3,7 @@
 exec 2>&1
 
 SERVERMODE={{cfg.server.mode}}
-export CONSUL_UI_BETA={{cfg.server.beta_ui}}
+export CONSUL_UI_LEGACY={{cfg.server.legacy_ui}}
 
 CONSUL_OPTS="-dev"
 if [ "$SERVERMODE" = true ]; then
