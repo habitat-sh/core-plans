@@ -111,8 +111,10 @@ wix @mwrock
 # This list shall be alphabetical, for sanity purposes.
 
 acbuild @rsertelon
+alex @wduncanfraser
 artifactory-pro @defilan
 atk @rsertelon
+cabal-install @wduncanfraser
 cairo @rsertelon
 cerebro @predominant
 concourse @echohack
@@ -129,10 +131,18 @@ elasticsearch @joshbrand @predominant
 filebeat @predominant
 gdk-pixbuf @rsertelon
 glib @rsertelon
+ghc @wduncanfraser
+ghc710 @wduncanfraser
+ghc710-bootstrap @wduncanfraser
+ghc80 @wduncanfraser
+ghc82 @wduncanfraser
+ghc82-bootstrap @wduncanfraser
+ghc84 @wduncanfraser
 go @afiune @nellshamrell
 gocd-server @predominant
 grpcurl @afiune
 gtk2 @rsertelon
+happy @wduncanfraser
 harfbuzz @rsertelon
 hugo @tduffield @cnunciato
 innounp @mwrock
@@ -162,6 +172,7 @@ protobuf-cpp @afiune
 rabbitmqadmin @predominant
 redis @irvingpop
 shared-mime-info @rsertelon
+shellcheck @wduncanfraser
 sqitch @irvingpop
 sqitch_pg @irvingpop
 sqlserver @mwrock
