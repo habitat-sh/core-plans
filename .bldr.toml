@@ -1125,6 +1125,8 @@ plan_path = "sed"
 plan_path = "sensu"
 [sensu-backend]
 plan_path = "sensu-backend"
+[sensu-agent]
+plan_path = "sensu-agent"
 [serf]
 plan_path = "serf"
 [shadow]
