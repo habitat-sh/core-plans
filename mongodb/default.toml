@@ -66,12 +66,6 @@ ipv6 = false
 	enabled = true
 	file_permissions = "0700"
 
-	#warning may produce vulnerabilties to server if enabled
-	[mongod.net.http]
-	enabled = false
-	jsonp_enabled = false
-	rest_interface_enabled = false
-
 	[mongod.net.ssl]
 	enabled = false
 	mode = "disabled"
