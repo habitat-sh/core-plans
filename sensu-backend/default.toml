@@ -1,0 +1,43 @@
+##
+# agent configuration
+##
+agent-host = "[::]"
+agent-port = 8081
+
+##
+# api configuration
+##
+api-host = "[::]"
+api-port = 8080
+
+##
+# ssl configuration
+##
+cert-file = ""
+key-file = ""
+trusted-ca-file = ""
+insecure-skip-tls-verify = false
+
+##
+# store configuration
+##
+listen-client-urls = ""
+listen-peer-urls = ""
+initial-cluster = ""
+initial-advertise-peer-urls = ""
+initial-cluster-state = ""
+initial-cluster-token = ""
+name = ""
+
+##
+# dashboard configuration
+##
+dashboard-host = "[::]"
+dashboard-port = 3000
+
+##
+# other
+##
+debug = false
+deregistration-handler = ""
+log-level = "warn"

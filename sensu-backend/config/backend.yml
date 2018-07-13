@@ -1,0 +1,55 @@
+---
+##
+# general configuration
+##
+state-dir: "{{pkg.svc_data_path}}/sensu"
+
+##
+# agent configuration
+##
+agent-host: "{{cfg.agent-host}}"
+agent-port: {{cfg.agent-port}}
+
+##
+# api configuration
+##
+api-host: "{{cfg.api-host}}"
+api-port: {{cfg.api-port}}
+
+##
+# ssl configuration
+##
+{{#if cfg.cert-file ~}}
+cert-file: "{{cfg.cert-file}}"
+{{/if ~}}
+{{#if cfg.key-file ~}}
+key-file: "{{cfg.key-file}}"
+{{/if ~}}
+{{#if cfg.trusted-ca-file ~}}
+trusted-ca-file: "{{cfg.trusted-ca-file}}"
+{{/if ~}}
+insecure-skip-tls-verify: {{cfg.insecure-skip-tls-verify}}
+
+##
+# store configuration
+##
+listen-client-urls: "{{cfg.listen-client-urls}}"
+listen-peer-urls: "{{cfg.listen-peer-urls}}"
+initial-cluster: "{{cfg.initial-cluster}}"
+initial-advertise-peer-urls: "{{cfg.initial-advertise-peer-urls}}"
+initial-cluster-state: "{{cfg.initial-cluster-state}}"
+initial-cluster-token: "{{cfg.initial-cluster-token}}"
+name: "{{cfg.name}}"
+
+##
+# dashboard configuration
+##
+dashboard-host: "{{cfg.dashboard-host}}"
+dashboard-port: {{cfg.dashboard-port}}
+
+##
+# other
+##
+debug: {{cfg.debug}}
+deregistration-handler: "{{cfg.deregistration-handler}}"
+log-level: "{{cfg.log-level}}"
