@@ -1,0 +1,8 @@
+# Mac
+.DS_Store
+
+# Hab
+results
+
+# Kitchen
+.kitchen
