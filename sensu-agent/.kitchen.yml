@@ -52,7 +52,7 @@ suites:
       package_version: 2.0.0-beta.2-4
       config_directory: test
       user_toml_name: agent-2.toml
-      service_update_strategy: rolling
+      service_update_strategy: at-once
       service_topology: standalone
       hab_sup_bind:
         - backend:sensu-backend.default

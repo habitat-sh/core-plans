@@ -6,7 +6,7 @@ This plan installs & configures the `sensu-agent`.
 
 ## Usage
 
-The sensu agent should be using in conjunction with one or more sensu backends. It can be configured to work with a backend via service bindings or through the package configuration.
+The sensu agent should be used in conjunction with one or more sensu backends. It can be configured to work with a backend via service bindings or through the package configuration.
 
 Ex:
 ```bash
