@@ -1109,6 +1109,8 @@ plan_path = "scrnsaverproto"
 plan_path = "sed"
 [sensu]
 plan_path = "sensu"
+[sensu-backend]
+plan_path = "sensu-backend"
 [serf]
 plan_path = "serf"
 [shadow]
