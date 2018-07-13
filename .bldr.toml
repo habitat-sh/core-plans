@@ -1187,6 +1187,8 @@ plan_path = "ttyrec"
 plan_path = "tzdata"
 [unibilium]
 plan_path = "unibilium"
+[unixodbc]
+plan_path = "unixodbc"
 [unzip]
 plan_path = "unzip"
 [userspace-rcu]
