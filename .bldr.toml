@@ -995,6 +995,29 @@ plan_path = "pv"
 plan_path = "python"
 [python2]
 plan_path = "python2"
+paths = [
+  "python/*"
+]
+[python34]
+plan_path = "python34"
+paths = [
+  "python/*"
+]
+[python35]
+plan_path = "python35"
+paths = [
+  "python/*"
+]
+[python36]
+plan_path = "python36"
+paths = [
+  "python/*"
+]
+[python37]
+plan_path = "python37"
+paths = [
+  "python/*"
+]
 [qemu]
 plan_path = "qemu"
 [R]
