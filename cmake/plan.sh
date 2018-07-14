@@ -11,15 +11,14 @@ pkg_shasum=80d0faad4ab56de07aa21a7fc692c88c4ce6156d42b0579c6962004a70a3218b
 pkg_deps=(
   core/glibc
   core/gcc-libs
+  core/curl
+  core/zlib
 )
 pkg_build_deps=(
   core/coreutils
   core/diffutils
   core/make
   core/gcc
-  core/curl
-  core/zlib
-  core/bzip2
 )
 
 pkg_lib_dirs=(lib)
@@ -27,7 +26,18 @@ pkg_include_dirs=(include)
 pkg_bin_dirs=(bin)
 
 do_build() {
-  ./bootstrap
+  ZLIB=$(pkg_path_for core/zlib)
+  ZLIB_LIB="${ZLIB}/lib"
+  ZLIB_INCLUDE="${ZLIB}/include"
+  CURL=$(pkg_path_for core/curl)
+  CURL_LIB="${CURL}/lib"
+  CURL_INCLUDE="${CURL}/include"
+
+  LD_LIBRARY_PATH=${ZLIB_LIB}:${CURL_LIB}
+  ./bootstrap --parallel="$(nproc)" --system-curl -- -DLD_LIBRARY_PATH=$LD_LIBRARY_PATH \
+    -DZLIB_LIBRARY:FILEPATH=${ZLIB_LIB}/libz.so -DZLIB_INCLUDE_DIR:PATH=${ZLIB_INCLUDE} \
+    -DCURL_LIBRARY:FILEPATH=${CURL_LIB}/libcurl.so  -DCURL_INCLUDE_DIR:PATH=${CURL_INCLUDE}
+
   ./configure --prefix="${pkg_prefix}"
   make -j "$(nproc)"
 }
