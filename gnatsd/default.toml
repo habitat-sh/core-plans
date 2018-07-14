@@ -1,0 +1,24 @@
+[gnatsd]
+net = "localhost"
+port = 4242
+use_auth = false
+pid_file = "/tmp/nats-server.pid"
+max_connections = 100
+max_subscriptions = 1000
+max_control_line = 512
+max_payload = 65536
+write_deadline = "2s"
+
+[gnatsd.http]
+port = 8222
+
+[gnatsd.auth]
+user = ""
+password = ""
+timeout = 1
+
+[gnatsd.logging]
+debug = true
+trace = true
+log_time = true
+file = ""
