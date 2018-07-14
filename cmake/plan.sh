@@ -34,9 +34,9 @@ do_build() {
   CURL_INCLUDE="${CURL}/include"
 
   LD_LIBRARY_PATH=${ZLIB_LIB}:${CURL_LIB}
-  ./bootstrap --parallel="$(nproc)" --system-curl -- -DLD_LIBRARY_PATH=$LD_LIBRARY_PATH \
-    -DZLIB_LIBRARY:FILEPATH=${ZLIB_LIB}/libz.so -DZLIB_INCLUDE_DIR:PATH=${ZLIB_INCLUDE} \
-    -DCURL_LIBRARY:FILEPATH=${CURL_LIB}/libcurl.so  -DCURL_INCLUDE_DIR:PATH=${CURL_INCLUDE}
+  ./bootstrap --parallel="$(nproc)" --system-curl -- -DLD_LIBRARY_PATH="${LD_LIBRARY_PATH}" \
+    -DZLIB_LIBRARY:FILEPATH="${ZLIB_LIB}/libz.so" -DZLIB_INCLUDE_DIR:PATH="${ZLIB_INCLUDE}" \
+    -DCURL_LIBRARY:FILEPATH="${CURL_LIB}/libcurl.so"  -DCURL_INCLUDE_DIR:PATH="${CURL_INCLUDE}"
 
   ./configure --prefix="${pkg_prefix}"
   make -j "$(nproc)"
