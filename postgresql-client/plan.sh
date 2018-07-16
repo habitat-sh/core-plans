@@ -1,15 +1,15 @@
 source ../postgresql/plan.sh
 
 pkg_name=postgresql-client
-# Default to version/shasum from sourced postgres93 plan
-pkg_version=${pkg_version:-9.6.3}
+# Default to version/shasum from sourced postgresql plan
+pkg_version=${pkg_version:-9.6.9}
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="PostgreSQL is a powerful, open source object-relational database system."
 pkg_upstream_url="https://www.postgresql.org/"
 pkg_license=('PostgreSQL')
-pkg_source=https://ftp.postgresql.org/pub/source/v${pkg_version}/postgresql-${pkg_version}.tar.bz2
-pkg_shasum=${pkg_shasum:-1645b3736901f6d854e695a937389e68ff2066ce0cde9d73919d6ab7c995b9c6}
+pkg_source="https://ftp.postgresql.org/pub/source/v${pkg_version}/postgresql-${pkg_version}.tar.bz2"
+pkg_shasum="${pkg_shasum:-b97952e3af02dc1e446f9c4188ff53021cc0eed7ed96f254ae6daf968c443e2e}"
 pkg_dirname="postgresql-${pkg_version}"
 
 # No exports/exposes for client
