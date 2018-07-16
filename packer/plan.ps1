@@ -10,4 +10,3 @@ $pkg_shasum="97c030add9c3d772f445df7bae3f0e70c4b67d4ed13c39e02b4cc338d8c93016"
 function Invoke-Install {
   Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_name-$pkg_version/$pkg_name.exe" $pkg_prefix\bin
 }
-
