@@ -793,6 +793,8 @@ plan_path = "mosquitto"
 plan_path = "mpfr"
 [msgpack]
 plan_path = "msgpack"
+[msodbcsql17]
+plan_path = "msodbcsql17"
 [mssql]
 plan_path = "mssql"
 [musl]
