@@ -67,16 +67,16 @@ do_install() {
   do_default_install
 
   # link pythonx.x to python for pkg_interpreters
-  local v=${pkg_version%.*}
-  local mv=${v%.*}
-  ln -rs "$pkg_prefix/bin/pip$v" "$pkg_prefix/bin/pip"
-  ln -rs "$pkg_prefix/bin/pydoc$v" "$pkg_prefix/bin/pydoc"
-  ln -rs "$pkg_prefix/bin/python$v" "$pkg_prefix/bin/python"
-  ln -rs "$pkg_prefix/bin/python$v-config" "$pkg_prefix/bin/python-config"
+  local minor=${pkg_version%.*}
+  local major=${minor%.*}
+  ln -rs "$pkg_prefix/bin/pip$minor" "$pkg_prefix/bin/pip"
+  ln -rs "$pkg_prefix/bin/pydoc$minor" "$pkg_prefix/bin/pydoc"
+  ln -rs "$pkg_prefix/bin/python$minor" "$pkg_prefix/bin/python"
+  ln -rs "$pkg_prefix/bin/python$minor-config" "$pkg_prefix/bin/python-config"
 
   # Remove idle as we are not building with Tk/x11 support so it is useless
-  rm -vf "$pkg_prefix/bin/idle$mv"
-  rm -vf "$pkg_prefix/bin/idle$v"
+  rm -vf "$pkg_prefix/bin/idle$major"
+  rm -vf "$pkg_prefix/bin/idle$minor"
 
   platlib=$(python -c "import sysconfig;print(sysconfig.get_path('platlib'))")
   cat <<EOF > "$platlib/_manylinux.py"
