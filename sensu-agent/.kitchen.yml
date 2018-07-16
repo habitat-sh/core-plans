@@ -1,0 +1,60 @@
+driver:
+  name: docker
+  binary: /usr/local/bin/docker
+  use_sudo: false
+
+provisioner:
+  name: habitat
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: centos-7.4
+
+suites:
+  - name: sensu_backend
+    provisioner:
+      package_origin: core
+      package_name: sensu-backend
+      package_version: 2.0.0-beta.2-4
+      service_update_strategy: at-once
+      service_topology: standalone
+    driver:
+      instance_name: backend
+      forward:
+        - 3000:3000
+        - 8080:8080
+        - 9631:9631
+        - 9638:9638
+  - name: sensu-agent-1
+    driver:
+      links: "backend:backend"
+    provisioner:
+      package_origin: core
+      package_name: sensu-agent
+      package_version: 2.0.0-beta.2-4
+      config_directory: test
+      user_toml_name: agent-1.toml
+      service_update_strategy: at-once
+      service_topology: standalone
+      hab_sup_bind:
+        - backend:sensu-backend.default
+      hab_sup_peer:
+        - backend
+  - name: sensu-agent-2
+    driver:
+      links:
+        - "backend:backend"
+    provisioner:
+      package_origin: core
+      package_name: sensu-agent
+      package_version: 2.0.0-beta.2-4
+      config_directory: test
+      user_toml_name: agent-2.toml
+      service_update_strategy: at-once
+      service_topology: standalone
+      hab_sup_bind:
+        - backend:sensu-backend.default
+      hab_sup_peer:
+        - backend
