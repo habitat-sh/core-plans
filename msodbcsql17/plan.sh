@@ -47,6 +47,9 @@ do_install() {
   cp -vr lib64/* "${pkg_prefix}/lib/"
   cp -vr share "${pkg_prefix}"
   popd
+
+  mkdir -p "${pkg_prefix}/doc"
+  cp -vr "usr/share/doc/${pkg_name}/"* "${pkg_prefix}/doc/"
 }
 
 do_strip() {
