@@ -37,6 +37,8 @@ do_prepare() {
   export CXXFLAGS="${CXXFLAGS} -O2 -fstack-protector-strong -Wformat -Werror=format-security "
   export CPPFLAGS="${CPPFLAGS} -Wdate-time"
   export LDFLAGS="${LDFLAGS} -Wl,-Bsymbolic-functions -Wl,-z,relro"
+
+  patch -p1 < "${PLAN_CONTEXT}/fix-python37.patch"
 }
 
 do_build() {
