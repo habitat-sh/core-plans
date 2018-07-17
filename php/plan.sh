@@ -31,6 +31,11 @@ pkg_bin_dirs=(bin sbin)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_interpreters=(bin/php)
+pkg_exports=(
+  [port]=port
+  [local_only]=local_only
+)
+pkg_svc_run="php-fpm --fpm-config ${pkg_svc_config_path}/php-fpm.conf -c ${pkg_svc_config_path}"
 
 do_build() {
   ./configure --prefix="$pkg_prefix" \
@@ -53,15 +58,6 @@ do_build() {
     --with-xmlrpc \
     --with-zlib="$(pkg_path_for zlib)"
   make
-}
-
-do_install() {
-  do_default_install
-
-  # Modify PHP-FPM config so it will be able to run out of the box. To run a real
-  # PHP-FPM application you would want to supply your own config with
-  # --fpm-config <file>.
-  mv "$pkg_prefix/etc/php-fpm.conf.default" "$pkg_prefix/etc/php-fpm.conf"
 }
 
 do_check() {
