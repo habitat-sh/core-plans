@@ -1,7 +1,7 @@
 pkg_name=msodbcsql17
 pkg_origin=core
 pkg_version=17.2.0.1-1
-pkg_license=('MICROSOFT SOFTWARE LICENSE')
+pkg_license=("Microsoft Software License")
 pkg_upstream_url="https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-2017"
 pkg_description="ODBC driver for SQL server"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
