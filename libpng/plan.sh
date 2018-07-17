@@ -26,11 +26,12 @@ pkg_lib_dirs=(lib)
 do_build() {
   _zlib_dir=$(pkg_path_for zlib)
 
-  ./configure --prefix="${pkg_prefix}" \
-              --host=x86_64-unknown-linux-gnu \
-              --build=x86_64-unknown-linux-gnu \
-              --disable-static \
-              --with-zlib-prefix="${_zlib_dir}"
+  ./configure \
+    --prefix="${pkg_prefix}" \
+    --host=x86_64-unknown-linux-gnu \
+    --build=x86_64-unknown-linux-gnu \
+    --disable-static \
+    --with-zlib-prefix="${_zlib_dir}"
   make
 }
 
