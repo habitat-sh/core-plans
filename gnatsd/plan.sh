@@ -10,8 +10,12 @@ pkg_shasum=18d6d1b014bfd262da101e15ed914e194b51b47e3e1a8ca4e8743c742d65310c
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/go core/coreutils core/gcc core/make)
 pkg_bin_dirs=(bin)
-pkg_svc_run="${pkg_name}"
-
+pkg_svc_run="${pkg_name} -c ${pkg_svc_config_path}/default.conf"
+pkg_exports=(
+  [port]=gnatsd.port
+  [http_port]=gnatsd.http.port
+)
+pkg_exposes=(port http_port)
 
 do_begin() {
   export GOPATH="/hab/cache"
