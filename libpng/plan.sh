@@ -1,6 +1,7 @@
 pkg_name=libpng
 pkg_version=1.6.35
 pkg_origin=core
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("libpng")
 pkg_description="An Open, Extensible Image Format with Lossless Compression"
 pkg_upstream_url=http://www.libpng.org/pub/png/
