@@ -1,7 +1,6 @@
-# unixodbc
+# msodbcsql17
 
-ODBC driver manager for Unix. ODBC is an open specification for providing application developers with a predictable API
- with which to access Data Sources.
+ODBC driver for SQL server
 
 ## Maintainers
 
@@ -13,11 +12,9 @@ Binary package
 
 ## Usage
 
-ODBCSYSINI and ODBCINI environment variables can be used to specify the location of your ODBC configuraiton. DO NOT
- use this package without setting the config location, as it will default to the $pkg_prefix/etc config that unixODBC
- specifies at build time.
+Use with unixODBC package.
 
-### Example Usage with SQL Server 2017 ODBC Driver
+### Usage example
 
 Include unixODBC and msodbcsql17 as runtime dependencies in your application:
 
@@ -44,6 +41,3 @@ export ODBCSYSINI="{{pkg.svc_config_path}}"
 ```
 
 You can then consume the ODBC driver via application unixODBC bindings.
-
-NOTE: You could also include odbc.ini in your config if you aren't setting up your connection details from inside your
- app.
