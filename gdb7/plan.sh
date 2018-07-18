@@ -18,7 +18,7 @@ pkg_deps=(
   core/expat
   core/guile
   core/bdwgc
-  core/python
+  core/python36
 )
 pkg_build_deps=(
   core/coreutils
