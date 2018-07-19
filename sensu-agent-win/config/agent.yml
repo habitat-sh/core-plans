@@ -1,0 +1,57 @@
+---
+#
+# authentication configuration
+#
+id: "{{cfg.id}}"
+organization: "{{cfg.organization}}"
+environment: "{{cfg.environment}}"
+subscriptions: "{{cfg.subscriptions}}"
+{{#if bind.backend}}
+backend-url:
+{{~#each bind.backend.members as |member|}}
+  - "ws://{{member.sys.ip}}:{{member.cfg.port}}"
+{{~/each}}
+{{else}}
+backend-url:
+{{~#each cfg.backend-urls as |url|}}
+  - "{{url}}"
+{{~/each}}
+{{/if}}
+
+user: "{{cfg.user}}"
+password: "{{cfg.password}}"
+
+#
+# api configuration
+#
+api-host: "{{cfg.api-host}}"
+api-port: {{cfg.api-port}}
+disable-api: {{cfg.disable-api}}
+
+#
+# socket configuration
+#
+disable-sockets: {{cfg.disable-sockets}}
+socket-host: "{{cfg.socket-host}}"
+socket-port: {{cfg.socket-port}}
+
+#
+# statsd configuration
+#
+statsd-disable: {{cfg.statsd-disable}}
+statsd-event-handlers: "{{cfg.statsd-event-handlers}}"
+statsd-flush-interval: {{cfg.statsd-flush-interval}}
+statsd-metrics-host: "{{cfg.statsd-metrics-host}}"
+statsd-metrics-port: {{cfg.statsd-metrics-port}}
+
+#
+# other
+#
+cache-dir: "{{pkg.svc_data_path}}/sensu"
+deregister: "{{cfg.deregister}}"
+deregistration-handler: "{{cfg.deregistration-handler}}"
+keepalive-timeout: {{cfg.keepalive-timeout}}
+keepalive-interval: {{cfg.keepalive-interval}}
+custom-attributes: "{{cfg.custom-attributes}}"
+log-level: "{{cfg.log-level}}"
+redact: "{{cfg.redact}}"
