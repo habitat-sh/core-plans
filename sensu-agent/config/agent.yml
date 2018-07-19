@@ -25,7 +25,7 @@ password: "{{cfg.password}}"
 # api configuration
 #
 api-host: "{{cfg.api-host}}"
-api-port: {{cfg.port}}
+api-port: {{cfg.api-port}}
 disable-api: {{cfg.disable-api}}
 
 #
