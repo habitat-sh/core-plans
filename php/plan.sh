@@ -1,5 +1,4 @@
 pkg_name=php
-pkg_distname=php
 pkg_origin=core
 pkg_version=7.2.7
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
