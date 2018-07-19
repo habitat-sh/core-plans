@@ -1,8 +1,8 @@
-# Habitat package: sensu-backend
+# Habitat package: sensuctl
 
 ## Description
 
-This plan installs the `sensuctl` command line management tool.
+This plan installs the Sensu 2.0 management tool.
 
 ## Usage
 
