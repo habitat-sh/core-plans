@@ -33,8 +33,7 @@ do_build() {
   CURL_LIB="${CURL}/lib"
   CURL_INCLUDE="${CURL}/include"
 
-  LD_LIBRARY_PATH=${ZLIB_LIB}:${CURL_LIB}
-  ./bootstrap --parallel="$(nproc)" --system-curl -- -DLD_LIBRARY_PATH="${LD_LIBRARY_PATH}" \
+  ./bootstrap --parallel="$(nproc)" --system-curl -- \
     -DZLIB_LIBRARY:FILEPATH="${ZLIB_LIB}/libz.so" -DZLIB_INCLUDE_DIR:PATH="${ZLIB_INCLUDE}" \
     -DCURL_LIBRARY:FILEPATH="${CURL_LIB}/libcurl.so"  -DCURL_INCLUDE_DIR:PATH="${CURL_INCLUDE}"
 
