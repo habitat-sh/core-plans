@@ -10,4 +10,8 @@ Binary package
 
 ## Usage
 
-*TODO: Add instructions for usage*
+Provides the `protoc` binary for compiling Protocol Buffer definitions; e.g.:
+
+```
+hab pkg exec core/protobuf protoc --help
+```
