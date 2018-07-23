@@ -855,6 +855,11 @@ plan_path = "node9"
 paths = [
   "node/*",
 ]
+[node10]
+plan_path = "node10"
+paths = [
+  "node/*",
+]
 [node_exporter]
 plan_path = "node_exporter"
 [npth]
