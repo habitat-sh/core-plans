@@ -1,4 +1,4 @@
-# protobuf
+# protobuf2
 
 ## Maintainers
 
@@ -13,5 +13,5 @@ Binary package
 Provides the `protoc` binary for compiling Protocol Buffer definitions; e.g.:
 
 ```
-hab pkg exec core/protobuf protoc --help
+hab pkg exec core/protobuf2 protoc --help
 ```
