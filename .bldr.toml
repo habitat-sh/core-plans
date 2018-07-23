@@ -997,6 +997,8 @@ plan_path = "prometheus"
 plan_path = "prometheus-cpp"
 [protobuf]
 plan_path = "protobuf"
+[protobuf2]
+plan_path = "protobuf2"
 [protobuf-c]
 plan_path = "protobuf-c"
 [protobuf-cpp]
