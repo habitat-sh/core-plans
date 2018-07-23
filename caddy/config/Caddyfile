@@ -1,0 +1,5 @@
+0.0.0.0:{{cfg.http.port}}
+{{#if cfg.gzip.enabled ~}}
+gzip
+{{/if ~}}
+root {{pkg.svc_data_path}}
