@@ -1,4 +1,4 @@
-# Redis
+# Redis3
 
 Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker.
 
@@ -17,13 +17,13 @@ Redis first requires configuration to setup the credentials for protected mode. 
 Example service install / load and setup:
 
 ```
-hab pkg install core/redis
+hab pkg install core/redis3
 
 echo '
 requirepass="password"
-' | hab config apply redis.default $(date +%s)
+' | hab config apply redis3.default $(date +%s)
 
-hab svc load core/redis
+hab svc load core/redis3
 ```
 
 ## Bindings
@@ -31,7 +31,7 @@ hab svc load core/redis
 Redis provides the bind `port` for other services to bind to.
 
 ```
-hab svc load my/service --bind redis:redis.default
+hab svc load my/service --bind redis:redis3.default
 ```
 
 ## Topologies
