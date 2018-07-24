@@ -1,11 +1,57 @@
-#!/bin/bash -xe
+#!/bin/bash
+#-xe
 
 exec 2>&1
 
-DEVMODE={{cfg.dev.mode}}
+#chown -R hab:hab {{pkg.svc_path}}
+DEVMODE="{{cfg.dev.mode}}"
 
-if [ "$DEVMODE" = true ] ; then
-  exec vault server -dev-listen-address=0.0.0.0:8200 -dev
-else
+STORAGE="{{cfg.backend.storage}}"
+
+if [[ "$STORAGE" == "" ]] ; then
+  echo "No storage method specified. Entering Dev mode."
+  DEVMODE=true
+elif [[ "$STORAGE" == file ]] ; then
+  STORAGE_FILE_PATH={{cfg.backend.storage_file_path}}
+  if [[ ! -d "$STORAGE_FILE_PATH" ]] ; then
+    mkdir -p "$STORAGE_FILE_PATH"
+  fi
+elif [[ "$STORAGE" == consul ]] ; then
+  CONSUL_STORAGE={{cfg.backend.storage}}
+  CONSUL_ADDRESS={{cfg.backend.address}}
+  CONSULE_PATH={{path}}
+  if [[ "$CONSUL_STORAGE" == "" ]] || [[ "$CONSUL_ADDRESS" == "" ]] || [[ "$CONSULE_PATH" == "" ]] ; then
+    echo "Consul config strings missing. Please review config file. Entering Dev mode."
+    DEVMODE=true
+  fi
+elif [[ "$STORAGE" == dynamodb ]] ; then
+  DYNAMODB_TABLE="{{cfg.backend.table}}"
+  DYNAMODB_ACCESSKEY="{{cfg.backend.access_key}}"
+  DYNAMODB_SECRETKEY="{{cfg.backend.secret_key}}"
+  if [[ "$DYNAMODB_TABLE" == "" ]] || [[ "$DYNAMODB_ACCESSKEY" == "" ]] || [[ "$DYNAMODB_SECRETKEY" == "" ]] ; then
+    echo "DynamoDB config strings missing. Please review config file. Entering Dev mode."
+    DEVMODE=true
+  fi
+fi
+
+TLS_DISABLE="{{cfg.listener.tls_disable}}"
+
+if [[ "$TLS_DISABLE" == 0 ]] ; then
+  TLS_CERT_FILE="{{cfg.listener.tls_cert_file}}"
+  TLS_KEY_FILE="{{cfg.listener.tls_key_file}}"
+  if [[ "$TLS_CERT_FILE" == "" ]] || [[ "$TLS_KEY_FILE" == "" ]] ; then
+    echo "TLS Enabled, but certificate files are not specified. Entering Dev Mode."
+    #DEVMODE=true
+  elif [[ ! -f "{{pkg.svc_files_path}}/$TLS_CERT_FILE" ]] || [[ ! -f "{{pkg.svc_files_path}}/$TLS_KEY_FILE" ]] ; then
+    echo "TLS Enabled, but certificate files are not found. Entering Dev Mode."
+    #DEVMODE=true
+  fi
+fi
+
+export SSL_CERT_FILE="{{pkg.svc_data_path}}/cacert.pem"
+echo $SSL_CERT_FILE
+if [[ "$DEVMODE" = false ]] ; then
   exec vault server -config={{pkg.svc_config_path}}/settings.hcl
+else
+  exec vault server -dev-listen-address={{cfg.listener.location}}:{{cfg.listener.port}} -dev
 fi

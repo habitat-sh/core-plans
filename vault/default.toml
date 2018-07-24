@@ -1,16 +1,64 @@
 # switch this to false you want to start in DEVMODE
 # https://www.vaultproject.io/intro/getting-started/dev-server.html
 [dev]
-mode = true
+### Developer mode Overides settings in bacvkend and uses in memory setting.
+## True = on, false = off
+mode = false
+
+[backend.type]
+### Set storage backend type, and then configure below.
+## Options: inmem, filesystem, consul, dynamodb.
+## Only uncomment the one corrisponding to the configuration below.
+inmem = true
+consul = false
+file = false
+dynamodb = false
 
 [backend]
-storage = "consul"
-location = "127.0.0.1"
-port = "8500"
-path = "vault"
+### Storage backends. Uncomment method and associate attributes required
+## DEFAULT - DEVMODE/IN MEMORY
+storage = "inmem"
+
+### FILE/FILESYSTEM
+#storage = "file"
+## Location to store data:
+#storage_file_path = "/path/to/vault/data"
+
+### CONSUL
+#storage = "consul"
+#address = "FQDNorIP:PORT"
+#path = "consulPath"
+
+### DYNAMDODB
+#storage = "dynamodb"
+#endpoint = ""
+#ha_enabled = "false"
+#max_parallel = "128"
+#region = "us-west-2"
+#read_capacity = 5
+
+## REQUIRED: DynamoDB table name.
+#table = "vault-dynamodb-backend"
+#write_capacity = 5
+
+### AWS Access
+## REQUIRED: Access key and secret to connect and create DynamoDB, if database does not exist.
+#access_key = ""
+#secret_key = ""
+#session_token = ""
+
+[app]
+ui = true
 
 [listener]
 type = "tcp"
 location = "127.0.0.1"
 port = "8200"
-tls_disable = "1"
+tls_disable = "0"
+## If tls_disable = 0 (Use TLS), the following must be set
+tls_cert_file = "selfsigned.crt"
+tls_key_file = "selfsigned.key"
+
+[listener.cluster]
+location = "127.0.0.1"
+port = "8201"

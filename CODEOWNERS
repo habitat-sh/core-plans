@@ -178,6 +178,6 @@ sqitch_pg @irvingpop
 sqlserver @mwrock
 sqlserver-ha-ag @mwrock
 terraform @defilan @echohack
-vault @defilan
+vault @defilan @dbhagen
 visual-build-tools-2017 @mwrock
 wrk @afiune
