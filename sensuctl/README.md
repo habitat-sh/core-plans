@@ -1,8 +1,14 @@
-# Habitat package: sensuctl
-
-## Description
+# sensuctl
 
 This plan installs the Sensu 2.0 management tool.
+
+## Maintainers
+
+The Habitat Maintainers humans@habitat.sh
+
+## Type of Package
+
+sensuctl is a binary package.
 
 ## Usage
 
