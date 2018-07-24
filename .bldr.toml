@@ -1063,6 +1063,16 @@ plan_path = "rebar3"
 plan_path = "recordproto"
 [redis]
 plan_path = "redis"
+[redis3]
+plan_path = "redis3"
+paths = [
+  "redis/*",
+]
+[redis4]
+plan_path = "redis4"
+paths = [
+  "redis/*",
+]
 [relx]
 plan_path = "relx"
 [renderproto]
