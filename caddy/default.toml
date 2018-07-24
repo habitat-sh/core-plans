@@ -1,0 +1,5 @@
+[http]
+port = 8080
+
+[gzip]
+enabled = true
