@@ -52,7 +52,8 @@ export SSL_CERT_FILE="{{pkgPathFor "core/cacerts"}}/ssl/cert.pem"
 cd {{pkg.path}}
 
 exec 2>&1
-exec chef-client -z -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb && chef-client -z -i {{cfg.interval}} -s {{cfg.splay}} -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb
+exec chef-client -z -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb
+exec chef-client -z -i {{cfg.interval}} -s {{cfg.splay}} -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb
 EOF
   chown 0755 "$pkg_prefix/hooks/run"
 }
