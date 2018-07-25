@@ -1,26 +1,22 @@
 pkg_name=etcd
 pkg_description="Distributed reliable key-value store for the most critical data of a distributed system"
 pkg_origin=core
-pkg_version="v3.2.9"
+pkg_version="v3.3.9"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
-pkg_source=https://github.com/coreos/${pkg_name}/releases/download/${pkg_version}/${pkg_name}-${pkg_version}-linux-amd64.tar.gz
-pkg_upstream_url=https://github.com/coreos/etcd/releases/
-pkg_shasum=1e962459cb649363215eb022eb7ea8857ea95dce836eb9ff3b3dc54c851b4cb1
-pkg_dirname=${pkg_name}-${pkg_version}-linux-amd64
+pkg_source="https://github.com/coreos/${pkg_name}/releases/download/${pkg_version}/${pkg_name}-${pkg_version}-linux-amd64.tar.gz"
+pkg_upstream_url=https://github.com/coreos/etcd/
+pkg_shasum=7b95bdc6dfd1d805f650ea8f886fdae6e7322f886a8e9d1b0d14603767d053b1
+pkg_dirname="${pkg_name}-${pkg_version}-linux-amd64"
 pkg_deps=(core/curl)
 pkg_build_deps=(core/gnupg)
 pkg_bin_dirs=(/usr/bin)
-
 pkg_exports=(
   [client-port]=etcd-client-end
   [server-port]=etcd-server-end
 )
-
 pkg_exposes=(client-port server-port)
-
 pkg_svc_user="root"
-
 # pkg_svc_group="$pkg_svc_user"
 
 do_download() {
@@ -28,7 +24,7 @@ do_download() {
 
   download_file "https://github.com/coreos/${pkg_name}/releases/download/${pkg_version}/${pkg_name}-${pkg_version}-linux-amd64.tar.gz.asc" \
 	        "${pkg_name}-${pkg_version}-linux-amd64.tar.gz.asc" \
-	        "71a1d07ce70b68a35a2c41d16719857d947bed4e4e61509cab21db0b6e2aae8f"
+	        "b8532c7166acde5d9da62cdf4ef7c5123c0a7cb718118dab8d9a524b02e80ebe"
   download_file "https://coreos.com/dist/pubkeys/app-signing-pubkey.gpg" \
 	        "app-signing-pubkey.gpg" \
                 "16b93904e4b3133fe4b5f95f46e3db998c3b2f9d9cee6d4c2eb531f98028bcb3"
@@ -38,7 +34,7 @@ do_verify() {
   do_default_verify
 
   verify_file "${pkg_name}-${pkg_version}-linux-amd64.tar.gz.asc" \
-	      "71a1d07ce70b68a35a2c41d16719857d947bed4e4e61509cab21db0b6e2aae8f"
+	      "b8532c7166acde5d9da62cdf4ef7c5123c0a7cb718118dab8d9a524b02e80ebe"
   verify_file "app-signing-pubkey.gpg" \
 	      "16b93904e4b3133fe4b5f95f46e3db998c3b2f9d9cee6d4c2eb531f98028bcb3"
 
