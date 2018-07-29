@@ -146,6 +146,11 @@ plan_path = "cppunit"
 plan_path = "cpputest"
 [cuda]
 plan_path = "cuda"
+[cuda-libs]
+plan_path = "cuda-libs"
+paths = [
+  "cuda/*"
+]
 [curator]
 plan_path = "curator"
 [curator4]
