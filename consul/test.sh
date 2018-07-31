@@ -1,7 +1,7 @@
 #!/bin/sh
 
 test_value() {
-  if [ $1 -eq $2 ]; then
+  if [ ${1} -eq ${2} ]; then
     printf "Pass"
   else
     printf "FAIL"
@@ -43,7 +43,7 @@ wait_listen tcp 9632 30
 
 # Ensure environment is clean for service testing
 source ./plan.sh
-hab svc unload ${HAB_ORIGIN}/${pkg_name}
+hab svc unload "${HAB_ORIGIN}/${pkg_name}"
 
 # Build and install
 set -e
