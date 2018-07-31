@@ -1,7 +1,7 @@
 #!/bin/sh
 
 test_value() {
-  if [ ${1} -eq ${2} ]; then
+  if [ "${1}" -eq "${2}" ]; then
     printf "Pass"
   else
     printf "FAIL"
