@@ -11,7 +11,8 @@ The Habitat Maintainers: <humans@habitat.sh>
 This is binary package. To use `sbt` in the dev shell:
 
 ```
-hab pkg binlink core/maven mvn
+hab pkg install core/jre8 --binlink
+hab pkg install core/sbt --binlink
 ```
 
 [1]: https://www.scala-sbt.org/1.x/docs/index.html

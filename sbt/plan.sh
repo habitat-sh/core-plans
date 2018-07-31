@@ -1,4 +1,4 @@
-pkg_origin=afiore
+pkg_origin=core
 pkg_name=sbt
 pkg_version=1.1.6
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
@@ -8,7 +8,6 @@ pkg_license=("BSD-3-Clause")
 pkg_source=https://github.com/sbt/sbt/releases/download/v${pkg_version}/sbt-${pkg_version}.tgz
 pkg_shasum=f545b530884e3abbca026df08df33d5a15892e6d98da5b8c2297413d1c7b68c1
 pkg_dirname="$pkg_name-$pkg_version"
-pkg_interpreters=(bin/bash)
 pkg_deps=(
   core/coreutils
   core/jre8
@@ -19,8 +18,8 @@ pkg_deps=(
 pkg_bin_dirs=(bin)
 
 do_prepare() {
-  export JAVA_HOME
   JAVA_HOME="$(pkg_path_for jre8)"
+  export JAVA_HOME
   build_line "Setting JAVA_HOME=$JAVA_HOME"
 }
 
