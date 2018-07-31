@@ -29,8 +29,8 @@ do_build() {
 }
 
 do_install() {
-  mkdir -p $pkg_prefix/share
-  cp -ra $HAB_CACHE_SRC_PATH/sbt $pkg_prefix/share
-  ln -s $pkg_prefix/share/sbt/bin/sbt $pkg_prefix/bin/
+  mkdir -p "$pkg_prefix/share"
+  cp -ra "$HAB_CACHE_SRC_PATH/sbt" "$pkg_prefix/share"
+  ln -s "$pkg_prefix/share/sbt/bin/sbt" "$pkg_prefix/bin/"
   fix_interpreter "${pkg_prefix}/bin/sbt" core/coreutils bin/env
 }
