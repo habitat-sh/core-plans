@@ -24,12 +24,10 @@ pkg_build_deps=(
     core/pkg-config
 )
 pkg_lib_dirs=(lib)
+pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 
 do_prepare() {
-  # TODO: if we don't copy this aclocal will fail. need to figure out how to fix this
-  cp "$(pkg_path_for core/pkg-config)/share/aclocal/pkg.m4" "$(pkg_path_for core/automake)/share/aclocal/"
-
   libtoolize
   ./autogen.sh
 }

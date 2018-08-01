@@ -12,4 +12,15 @@ Binary package
 
 ## Usage
 
-*TODO: Add instructions for usage*
+Install the pacakge
+
+```
+hab pkg install --binlink core/graphviz
+```
+
+You can now use graphviz binaries to render your files:
+
+```
+neato -Tpng -o mygraph.png mygraph.dot
+dot -Tpng -o mygraph.png mygraph.dot
+```
