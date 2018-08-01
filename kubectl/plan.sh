@@ -4,9 +4,9 @@ pkg_description="kubectl CLI tool"
 pkg_upstream_url=https://github.com/kubernetes/kubernetes
 pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_version=1.9.6
+pkg_version=1.11.1
 pkg_source=https://github.com/kubernetes/kubernetes/archive/v${pkg_version}.tar.gz
-pkg_shasum=d0c0edba4410426bf9b7b8f9f0efd0d59816cdeaef25fc99311a90ece843c1d3
+pkg_shasum=073b77321812f26df6513c0ad0aef3a8b0c17f6281a186d515f5855ae009ea17
 pkg_dirname="kubernetes-${pkg_version}"
 
 pkg_bin_dirs=(bin)
@@ -19,11 +19,19 @@ pkg_build_deps=(
   core/diffutils
   core/which
   core/rsync
+  core/coreutils
 )
 
 pkg_deps=(
   core/glibc
 )
+
+do_prepare() {
+  if [[ ! -r /usr/bin/env ]]; then
+    ln -sv "$(pkg_path_for coreutils)/bin/env" /usr/bin/env
+    _clean_env=true
+  fi
+}
 
 do_build() {
   make kubectl
@@ -33,4 +41,11 @@ do_build() {
 do_install() {
   cp _output/bin/kubectl "${pkg_prefix}/bin/"
   return $?
+}
+
+do_end() {
+  # Clean up
+  if [[ -n "$_clean_env" ]]; then
+    rm -fv /usr/bin/env
+  fi
 }
