@@ -1165,6 +1165,8 @@ plan_path = "scrnsaverproto"
 plan_path = "sed"
 [sensu]
 plan_path = "sensu"
+[sensuctl]
+plan_path = "sensuctl"
 [sensu-backend]
 plan_path = "sensu-backend"
 [sensu-agent]
