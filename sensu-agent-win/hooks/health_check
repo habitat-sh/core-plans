@@ -1,0 +1,18 @@
+Try {
+  $response = (Invoke-WebRequest -Uri "http://{{cfg.api-host}}:{{cfg.api-port}}/healthz").statuscode
+}
+Catch {
+  $message = $_.message.exception
+  Write-Warning $message
+}
+Finally {
+  If($response) {
+    If([int]$response -ne 200) {
+      exit $response
+    } Else {
+      exit 0
+    }
+  } Else {
+    exit 1
+  }
+}
