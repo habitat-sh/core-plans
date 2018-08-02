@@ -1,12 +1,12 @@
 ﻿$pkg_name="rust"
 $pkg_origin="core"
-$pkg_version="1.27.1"
+$pkg_version="1.28.0"
 $pkg_description="Safe, concurrent, practical language"
 $pkg_upstream_url="https://www.rust-lang.org/"
 $pkg_license=@("Apache-2.0", "MIT")
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_source="https://static.rust-lang.org/dist/rust-$pkg_version-x86_64-pc-windows-msvc.msi"
-$pkg_shasum="77006aa3727e8296a3ab9e7657da989975578da2f111d6f53d3d8def33b26990"
+$pkg_shasum="2ff48fa4eb89c574cf0cda595a29ef08e7deffaa1d091f4cd0087c3e25ba05a2"
 $pkg_deps=@("core/visual-cpp-redist-2013", "core/visual-cpp-build-tools-2015")
 $pkg_build_deps=@("core/lessmsi")
 $pkg_bin_dirs=@("bin")
