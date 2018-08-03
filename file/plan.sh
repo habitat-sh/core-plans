@@ -1,6 +1,6 @@
 pkg_name=file
 pkg_origin=core
-pkg_version=5.32
+pkg_version=5.34
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 file is a standard Unix program for recognizing the type of data contained in \
