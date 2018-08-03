@@ -6,8 +6,7 @@ $pkg_description = "Git is a free and open source distributed version control
   speed and efficiency."
 $pkg_upstream_url = "https://git-scm.com/"
 $pkg_maintainer = "The Habitat Maintainers <humans@habitat.sh>"
-$pkg_license = @("Apache-2.0")
-$pkg_license= @("GPL-2.0")
+$pkg_license = @("GPL-2.0")
 $pkg_source = "https://github.com/git-for-windows/git/releases/download/v$pkg_version.windows.1/Git-$pkg_version-64-bit.tar.bz2"
 $pkg_shasum = "120b7501b5563212f1ecbcd8fadac257e510067e0297ff844bc3b18d90eefb96"
 $pkg_bin_dirs = @("bin")
