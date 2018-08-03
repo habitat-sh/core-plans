@@ -1,4 +1,4 @@
-$pkg_name="node"
+$pkg_name="node10"
 $pkg_origin="core"
 $pkg_version="10.8.0"
 $pkg_description="Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine."
