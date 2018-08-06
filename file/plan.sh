@@ -9,7 +9,7 @@ a computer file.\
 pkg_upstream_url="https://www.darwinsys.com/file/"
 pkg_license=('custom')
 pkg_source="ftp://ftp.astron.com/pub/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="8639dc4d1b21e232285cd483604afc4a6ee810710e00e579dbe9591681722b50"
+pkg_shasum="f15a50dbbfa83fec0bd1161e8e191b092ec832720e30cd14536e044ac623b20a"
 pkg_deps=(
   core/glibc
   core/zlib

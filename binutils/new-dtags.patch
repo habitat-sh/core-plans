@@ -1,23 +1,10 @@
-diff -ru binutils-2.29.1.orig/ld/ld.texinfo binutils-2.29.1/ld/ld.texinfo
---- binutils-2.29.1.orig/ld/ld.texinfo	2017-10-19 12:40:00.640806973 +0000
-+++ binutils-2.29.1/ld/ld.texinfo	2017-10-19 12:40:49.770806414 +0000
-@@ -2391,7 +2391,7 @@
- @option{--enable-new-dtags}, the new dynamic tags will be created as needed
- and older dynamic tags will be omitted.
- If you specify @option{--disable-new-dtags}, no new dynamic tags will be
--created. By default, the new dynamic tags are not created. Note that
-+created. By default, the new dynamic tags are created. Note that
- those options are only available for ELF systems.
- 
- @kindex --hash-size=@var{number}
-diff -ru binutils-2.29.1.orig/ld/ldmain.c binutils-2.29.1/ld/ldmain.c
---- binutils-2.29.1.orig/ld/ldmain.c	2017-10-19 12:40:00.640806973 +0000
-+++ binutils-2.29.1/ld/ldmain.c	2017-10-19 12:42:09.570805506 +0000
-@@ -280,6 +280,7 @@
- 
+--- binutils/ld/ldmain.c
++++ binutils/ld/ldmain.c
+@@ -296,6 +296,7 @@ main (int argc, char **argv)
+
    link_info.allow_undefined_version = TRUE;
    link_info.keep_memory = TRUE;
 +  link_info.new_dtags = TRUE;
    link_info.combreloc = TRUE;
    link_info.strip_discarded = TRUE;
-   link_info.emit_hash = TRUE;
+   link_info.callbacks = &link_callbacks;
