@@ -533,6 +533,8 @@ paths = [
 plan_path = "lcms2"
 [leiningen]
 plan_path = "leiningen"
+[leproxy]
+plan_path = "leproxy"
 [leptonica]
 plan_path = "leptonica"
 [less]
