@@ -16,7 +16,6 @@ pkg_build_deps=(
   core/gcc
   core/go
   core/diffutils
-  core/patch
   core/which
   core/rsync
 )
