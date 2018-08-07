@@ -24,8 +24,9 @@
     {{/if}}
   },
   "api": {
-    "host": "localhost",
-    "port": 4567
+    "host": "{{cfg.api.host}}",
+    "bind": "{{cfg.api.bind}}",
+    "port": {{cfg.api.port}}
   },
   "handlers": {
     "default": {

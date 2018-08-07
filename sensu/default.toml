@@ -1,6 +1,11 @@
 log_level = "error"
 mode = "server"
 
+[api]
+host = "localhost"
+bind = "0.0.0.0"
+port = 4567
+
 [rabbitmq]
 user = "sensu"
 password = "sensu"
