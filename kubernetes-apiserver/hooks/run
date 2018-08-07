@@ -11,7 +11,7 @@ if [[ -n "{{cfg.advertise-address}}" ]]; then
 fi
 
 exec kube-apiserver \
-  --admission-control=Initializers,NamespaceLifecycle,NodeRestriction,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota,AlwaysPullImages \
+  --enable-admission-plugins=Initializers,NamespaceLifecycle,NodeRestriction,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota,AlwaysPullImages \
   --advertise-address="${advertise_address}" \
   --allow-privileged=true \
   --enable-swagger-ui=true \
@@ -27,7 +27,6 @@ exec kube-apiserver \
   --etcd-keyfile="{{cfg.etcd-keyfile}}" \
   --etcd-servers="{{cfg.etcd-servers}}" \
   --event-ttl=1h \
-  --insecure-bind-address="{{cfg.insecure-bind-address}}" \
   --kubelet-certificate-authority="{{cfg.kubelet-certificate-authority}}" \
   --kubelet-client-certificate="{{cfg.kubelet-client-certificate}}" \
   --kubelet-client-key="{{cfg.kubelet-client-key}}" \
@@ -36,7 +35,6 @@ exec kube-apiserver \
   --service-account-key-file="{{cfg.service-account-key-file}}" \
   --service-cluster-ip-range="{{cfg.service-cluster-ip-range}}" \
   --service-node-port-range="{{cfg.service-node-port-range}}" \
-  --tls-ca-file="{{cfg.tls-ca-file}}" \
   --tls-cert-file="{{cfg.tls-cert-file}}" \
   --tls-private-key-file="{{cfg.tls-private-key-file}}" \
   --v="{{cfg.verbosity}}"

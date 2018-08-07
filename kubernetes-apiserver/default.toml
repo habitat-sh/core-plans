@@ -1,6 +1,5 @@
 advertise-address = ""
 bind-address = "0.0.0.0"
-insecure-bind-address = "0.0.0.0"
 
 client-ca-file = ""
 
@@ -17,7 +16,6 @@ service-account-key-file = ""
 service-cluster-ip-range = "10.32.0.0/24"
 service-node-port-range = "30000-32767"
 
-tls-ca-file = ""
 tls-cert-file = ""
 tls-private-key-file = ""
 
