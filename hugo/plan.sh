@@ -6,7 +6,7 @@ pkg_license=("Apache-2.0")
 pkg_description="Hugo is one of the most popular open-source static site generators."
 pkg_build_deps=(
   core/dep
-  rakops/mage
+  core/mage
 )
 pkg_bin_dirs=(bin)
 pkg_source="https://github.com/gohugoio/hugo"
