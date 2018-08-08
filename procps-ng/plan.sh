@@ -1,6 +1,6 @@
 pkg_name=procps-ng
 pkg_origin=core
-pkg_version=3.3.12
+pkg_version=3.3.15
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Command line and full screen utilities for browsing procfs, a pseudo file \
@@ -10,7 +10,7 @@ status of entries in its process table.\
 pkg_upstream_url="https://gitlab.com/procps-ng/procps"
 pkg_license=('gpl' 'lgpl')
 pkg_source="https://downloads.sourceforge.net/project/${pkg_name}/Production/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="6ed65ab86318f37904e8f9014415a098bec5bc53653e5d9ab404f95ca5e1a7d4"
+pkg_shasum="10bd744ffcb3de2d591d2f6acf1a54a7ba070fdcc432a855931a5057149f0465"
 pkg_deps=(
   core/glibc
   core/ncurses
@@ -26,10 +26,6 @@ pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
-
-do_prepare() {
-  patch -p1 < "$PLAN_CONTEXT/disable-test.patch"
-}
 
 do_build() {
   # The Util-linux package will provide the `kill` command

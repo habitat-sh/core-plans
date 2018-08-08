@@ -1,6 +1,6 @@
 pkg_name=sed
 pkg_origin=core
-pkg_version=4.4
+pkg_version=4.5
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 sed (stream editor) is a non-interactive command-line text editor. sed is \
@@ -12,7 +12,7 @@ substituting multiple occurrences of a string within a file.\
 pkg_upstream_url="https://www.gnu.org/software/sed/"
 pkg_license=('gplv3')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="cbd6ebc5aaf080ed60d0162d7f6aeae58211a1ee9ba9bb25623daa6cd942683b"
+pkg_shasum="7aad73c8839c2bdadca9476f884d2953cdace9567ecd0d90f9959f229d146b40"
 pkg_deps=(
   core/glibc
   core/acl
