@@ -1,6 +1,6 @@
 pkg_name=libidn
 pkg_origin=core
-pkg_version=1.33
+pkg_version=1.35
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 GNU Libidn is a fully documented implementation of the Stringprep, Punycode \

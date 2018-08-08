@@ -1,7 +1,11 @@
 pkg_name=openssl
 _distname="$pkg_name"
 pkg_origin=core
+<<<<<<< HEAD
 pkg_version=1.0.2q
+=======
+pkg_version=1.0.2o
+>>>>>>> 1316eaff... next round of stage 1 plans - everything builds but habitat components
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 OpenSSL is an open source project that provides a robust, commercial-grade, \
@@ -12,7 +16,11 @@ library.\
 pkg_upstream_url="https://www.openssl.org"
 pkg_license=('OpenSSL')
 pkg_source="https://www.openssl.org/source/${_distname}-${pkg_version}.tar.gz"
+<<<<<<< HEAD
 pkg_shasum="5744cfcbcec2b1b48629f7354203bc1e5e9b5466998bbccc5b5fcde3b18eb684"
+=======
+pkg_shasum="ec3f5c9714ba0fd45cb4e087301eb1336c317e0d20b575a125050470e8089e4d"
+>>>>>>> 1316eaff... next round of stage 1 plans - everything builds but habitat components
 pkg_dirname="${_distname}-${pkg_version}"
 pkg_deps=(
   core/glibc
