@@ -746,6 +746,8 @@ plan_path = "lzo"
 plan_path = "lzop"
 [m4]
 plan_path = "m4"
+[mage]
+plan_path = "mage"
 [make]
 plan_path = "make"
 [man-db]
