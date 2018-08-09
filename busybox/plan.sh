@@ -52,7 +52,7 @@ do_install() {
   install -Dm755 busybox "$pkg_prefix/bin/busybox"
 
   # Check that busybox executable is not failing
-  "$pkg_prefix/bin/busybox" --version
+  "$pkg_prefix/bin/busybox"
 
   # Generate the symlinks back to the `busybox` executable
   for l in $("$pkg_prefix/bin/busybox" --list); do
@@ -74,6 +74,12 @@ _create_config() {
   # and resolve any differences 
   build_line "Customizing busybox configuration..."
   # shellcheck disable=SC2002
+
+build_line "==========="
+build_line "HELLO"
+build_line "CFLAGS=$CFLAGS"
+build_line "LDFLAGS=$LDFLAGS"
+
   cat "$PLAN_CONTEXT/config" \
     | sed \
       -e "s,@pkg_prefix@,$pkg_prefix,g" \

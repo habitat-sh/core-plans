@@ -20,8 +20,12 @@ pkg_build_deps=(
 pkg_dirname=${_distname}-${pkg_version}
 
 do_prepare() {
-  CFLAGS="-I$(pkg_path_for linux-headers-musl)/include -I$(pkg_path_for musl)/include"
+  CFLAGS="-I$(pkg_path_for linux-headers-musl)/include -I$(pkg_path_for musl)/include -g"
   build_line "Overriding CFLAGS=$CFLAGS"
+
+  LDFLAGS="-g"
+
+  build_line "Overriding LDFLAGS=$LDFLAGS"
 
   PLAN_CONTEXT="$PLAN_CONTEXT/../busybox" _create_config
   sed \
