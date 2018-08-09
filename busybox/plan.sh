@@ -52,10 +52,10 @@ do_install() {
   install -Dm755 busybox "$pkg_prefix/bin/busybox"
 
   # Check that busybox executable is not failing
-  "$pkg_prefix/bin/busybox"
+  busybox
 
   # Generate the symlinks back to the `busybox` executable
-  for l in $("$pkg_prefix/bin/busybox" --list); do
+  for l in $(busybox --list); do
     ln -sv busybox "$pkg_prefix/bin/$l"
   done
 }

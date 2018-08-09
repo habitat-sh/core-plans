@@ -40,4 +40,7 @@ do_prepare() {
 
 do_build() {
   make -j"$(nproc)" CC=musl-gcc
+
+  # Check that busybox executable is not failing
+  busybox
 }
