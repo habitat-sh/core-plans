@@ -1,6 +1,6 @@
 pkg_name=mg
 pkg_origin=core
-pkg_version=20171014
+pkg_version=20180408
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 mg is Micro GNU/emacs, this is a portable version of the mg maintained by the \
@@ -8,8 +8,8 @@ OpenBSD team.\
 "
 pkg_upstream_url="https://homepage.boetes.org/software/mg/"
 pkg_license=('publicdomain')
-pkg_source="http://homepage.boetes.org/software/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="51519698f3f44acd984d7805e4e315ded50c15aba8222521f88756fd67745341"
+pkg_source="https://github.com/hboetes/$pkg_name/archive/$pkg_version.tar.gz"
+pkg_shasum="85c1d47500fd042e427b670c630c228668bcc4f532a280f9ecce3d302229bbe4"
 pkg_deps=(
   core/glibc
   core/ncurses

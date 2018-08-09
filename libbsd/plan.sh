@@ -1,6 +1,6 @@
 pkg_name=libbsd
 pkg_origin=core
-pkg_version=0.8.7
+pkg_version=0.9.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 This library provides useful functions commonly found on BSD systems, and \
@@ -9,7 +9,7 @@ lacking on others like GNU systems\
 pkg_upstream_url="https://libbsd.freedesktop.org/wiki/"
 pkg_license=('custom')
 pkg_source="https://libbsd.freedesktop.org/releases/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="f548f10e5af5a08b1e22889ce84315b1ebe41505b015c9596bad03fd13a12b31"
+pkg_shasum="56d835742327d69faccd16955a60b6dcf30684a8da518c4eca0ac713b9e0a7a4"
 pkg_deps=(
   core/glibc
 )
