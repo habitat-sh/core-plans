@@ -1,12 +1,12 @@
 pkg_name=openresty
 pkg_origin=core
-pkg_version=1.11.2.2
+pkg_version=1.13.6.1
 pkg_description="Scalable Web Platform by Extending NGINX with Lua"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('BSD-2-Clause')
-pkg_source=https://openresty.org/download/${pkg_name}-${pkg_version}.tar.gz
+pkg_source="https://openresty.org/download/${pkg_name}-${pkg_version}.tar.gz"
 pkg_upstream_url=http://openresty.org/
-pkg_shasum=7f9ca62cfa1e4aedf29df9169aed0395fd1b90de254139996e554367db4d5a01
+pkg_shasum=d1246e6cfa81098eea56fb88693e980d3e6b8752afae686fab271519b81d696b
 pkg_deps=(core/glibc core/gcc-libs core/libxml2 core/libxslt core/zlib core/bzip2 core/openssl core/pcre core/coreutils core/perl core/which)
 pkg_build_deps=(core/gcc core/make)
 pkg_lib_dirs=(lib)
@@ -27,7 +27,7 @@ do_prepare() {
 }
 
 do_build() {
-  ./configure --prefix="$pkg_prefix" \
+  ./configure --prefix="${pkg_prefix}" \
     --user=hab \
     --group=hab \
     --http-log-path=/dev/stdout \
@@ -55,8 +55,8 @@ do_build() {
     --with-http_secure_link_module \
     --with-http_sub_module \
     --with-http_slice_module \
-    --with-cc-opt="$CFLAGS" \
-    --with-ld-opt="$LDFLAGS" \
+    --with-cc-opt="${CFLAGS}" \
+    --with-ld-opt="${LDFLAGS}" \
     --without-http_ssi_module \
     --without-mail_smtp_module \
     --without-mail_imap_module \
@@ -68,12 +68,12 @@ do_build() {
 
 do_install() {
   make install
-  fix_interpreter "$pkg_prefix/bin/*" core/coreutils bin/env
+  fix_interpreter "${pkg_prefix}/bin/*" core/coreutils bin/env
 }
 
 do_end() {
   # Clean up the `env` link, if we set it up.
-  if [[ -n "$_clean_env" ]]; then
+  if [[ -n "${_clean_env}" ]]; then
     rm -fv /usr/bin/env
   fi
 }
