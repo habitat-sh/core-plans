@@ -10,7 +10,7 @@ archiver.\
 "
 pkg_upstream_url="http://www.bzip.org/"
 pkg_license=('bzip2')
-pkg_source="http://www.bzip.org/$pkg_version/${pkg_name}-${pkg_version}.tar.gz"
+pkg_source="https://github.com/nemequ/${pkg_name}/releases/download/v${pkg_version}/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="a2848f34fcd5d6cf47def00461fcb528a0484d8edef8208d6d2e2909dc61d9cd"
 pkg_dirname="${_distname}-${pkg_version}"
 pkg_deps=(
