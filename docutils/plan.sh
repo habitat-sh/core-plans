@@ -10,6 +10,8 @@ pkg_license=(
 )
 pkg_source=https://downloads.sourceforge.net/project/${pkg_name}/${pkg_name}/${pkg_version}/${pkg_name}-${pkg_version}.tar.gz
 pkg_shasum=c7db717810ab6965f66c8cf0398a98c9d8df982da39b4cd7f162911eb89596fa
+pkg_description="Docutils is an open-source text processing system for processing plaintext documentation into useful formats, e.g.: HTML, LaTeX, man-pages, open-document, or XML."
+pkg_upstream_url="http://docutils.sourceforge.net"
 pkg_deps=(core/python2)
 pkg_build_deps=(
   core/make
