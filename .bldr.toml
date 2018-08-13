@@ -211,6 +211,10 @@ plan_path = "dpkg"
 plan_path = "dri2proto"
 [drupal]
 plan_path = "drupal"
+[drupal/drupal-app]
+plan_path = "drupal/drupal-app"
+[drupal/drupal-http]
+plan_path = "drupal/drupal-http"
 [drush]
 plan_path = "drush"
 [e2fsprogs]

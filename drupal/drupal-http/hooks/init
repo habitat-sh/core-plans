@@ -1,0 +1,8 @@
+#!/bin/bash
+
+exec 2>&1
+
+## Place Drupal PHP sources into the correct location
+cp -r {{pkg.path}}/drupal/* {{pkg.svc_data_path}}/
+chmod +x {{pkg/svc_data_path}}
+chown -RL hab:hab {{pkg.svc_data_path}}

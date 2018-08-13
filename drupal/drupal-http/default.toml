@@ -1,0 +1,14 @@
+[nginx]
+worker_processes = 4
+
+[nginx.events]
+worker_connections = 1024
+
+[nginx.http]
+keepalive_timeout = 60
+sendfile = "on"
+tcp_nodelay = "on"
+tcp_nopush = "on"
+
+[nginx.http.listen]
+port = 80
