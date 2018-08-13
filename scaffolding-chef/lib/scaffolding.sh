@@ -52,7 +52,7 @@ export SSL_CERT_FILE="{{pkgPathFor "core/cacerts"}}/ssl/cert.pem"
 cd {{pkg.path}}
 
 exec 2>&1
-exec chef-client -z -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb --once
+chef-client -z -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb --once
 exec chef-client -z -i {{cfg.interval}} -s {{cfg.splay}} -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb
 EOF
   chown 0755 "$pkg_prefix/hooks/run"
@@ -119,7 +119,7 @@ log_level = "warn"
 env_path_prefix = "/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin"
 
 [data_collector]
-enable = "false"
+enable = false
 token = "set_to_your_token"
 server_url = "set_to_your_url"
 EOF
