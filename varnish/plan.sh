@@ -9,10 +9,31 @@ pkg_version="5.1.2"
 pkg_source="https://varnish-cache.org/_downloads/${pkg_name}-${pkg_version}.tgz"
 
 pkg_shasum="39d858137e26948a7c85f07363f13f0778da61d234126e03a160a0cb9ba4fce3"
-pkg_deps=(core/glibc core/ncurses core/docutils core/pcre core/gcc core/bash )
-pkg_build_deps=(core/make core/python2 core/pkg-config core/readline core/graphviz core/libtool core/libedit core/automake core/m4 core/autoconf)
+pkg_deps=(
+  core/bash
+  core/gcc
+  core/glibc
+  core/ncurses
+  core/pcre
+)
+pkg_build_deps=(
+  core/autoconf
+  core/automake
+  core/docutils
+  core/graphviz
+  core/libedit
+  core/libtool
+  core/make
+  core/pkg-config
+  core/python2
+  core/readline
+  core/m4
+)
 
-pkg_bin_dirs=(sbin)
+pkg_bin_dirs=(
+  bin
+  sbin
+)
 pkg_svc_user=(root)
 
 pkg_exports=(
@@ -24,9 +45,6 @@ do_begin() {
 }
 
 do_prepare() {
-  #TODO: We need a sphinx plan to support this otherwise we cannot
-  #guarantee idempotency
-  pip install sphinx
   return 0
 }
 
