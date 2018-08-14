@@ -1,5 +1,7 @@
 # Kubernetes
 
+NOTE: This plan requires at least 8 GB of RAM to compile (according to [this issue on the Kubernetes project](https://github.com/kubernetes/kubernetes/issues/65481)). This means it cannot be built in Builder at this time. You will need to manually build it on a workstation with at least 8 GB of RAM then upload it to Builder from your workstation.
+
 The Kubernetes plan provides the Kubernetes binaries for controller and worker
 nodes. It can be used as a base for custom plans and serves as a base package
 for the `core/kubernetes-*` subpackages, i.e.
