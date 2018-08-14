@@ -31,12 +31,11 @@ do_install() {
   python install.py
 
   # write our wrapper script
-  bash_path=$(hab pkg path core/bash)
-  # echo "core/bash path: ${bash_path}"
+  bash_path=$(pkg_path_for core/bash)
   for file in ${pkg_prefix}/bin/*.py; do
-    # echo "Renaming ${file} to ${file}.real"
+    # Rename executable to ${file}.real"
     mv "${file}" "${file}.real"
-    # echo "Writing wrapper script"
+    # Write wrapper script to replace ${file}
     cat <<EOF > "${file}"
 #!${bash_path}/bin/bash
 export PYTHONPATH=$PYTHONPATH:${pkg_prefix}/lib/python2.7/site-packages
