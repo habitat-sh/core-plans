@@ -9,8 +9,7 @@ exec kubelet \
   --anonymous-auth=false \
   --authorization-mode=Webhook \
   --network-plugin=cni \
-  --feature-gates=KubeletConfigFile=true \
-  --init-config-dir="{{cfg.init-config-dir}}" \
+  --config="{{cfg.config}}" \
   --client-ca-file="{{cfg.client-ca-file}}" \
   --cluster-dns="{{cfg.cluster-dns}}" \
   --cluster-domain="{{cfg.cluster-domain}}" \

@@ -12,4 +12,4 @@ verbosity = "2"
 
 cni-conf-dir = "static/cni/"
 
-init-config-dir = "/var/lib/kubelet-config/"
+config = "/var/lib/kubelet-config/kubelet"
