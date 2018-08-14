@@ -1012,6 +1012,8 @@ plan_path = "protobuf2"
 plan_path = "protobuf-c"
 [protobuf-cpp]
 plan_path = "protobuf-cpp"
+[protobuf-cpp35]
+plan_path = "protobuf-cpp35"
 [protobuf-rust]
 plan_path = "protobuf-rust"
 [psmisc]
