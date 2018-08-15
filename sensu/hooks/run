@@ -2,18 +2,15 @@
 
 exec 2>&1
 
-export GEM_HOME="{{pkg.path}}/vendor/bundle/ruby/2.3.0"
-export GEM_PATH="{{pkgPathFor "core/ruby"}}/lib/ruby/gems/2.3.0:{{pkgPathFor "core/bundler"}}:$GEM_HOME"
+export GEM_HOME="{{pkg.path}}/vendor/bundle/ruby/2.5.0"
+export GEM_PATH="{{pkgPathFor "core/ruby"}}/lib/ruby/gems/2.5.0:{{pkgPathFor "core/bundler"}}:$GEM_HOME"
 export LD_LIBRARY_PATH="{{pkgPathFor "core/gcc-libs"}}/lib:{{pkgPathFor "core/libffi"}}/lib:{{pkgPathFor "core/openssl"}}/lib"
 export CONFIG_DIR="{{pkg.svc_config_path}}"
 
-if [ "{{cfg.mode}}" == "client" ]
-then
-exec sensu-client -d "{{pkg.svc_config_path}}" -L {{cfg.log_level}}
-elif [ "{{cfg.mode}}" == "server" ]
-then
-exec sensu-server -d "{{pkg.svc_config_path}}" -L {{cfg.log_level}}
+if [ "{{cfg.mode}}" == "client" ]; then
+  echo "Running Sensu Client"
+  exec sensu-client -d "{{pkg.svc_config_path}}" -L {{cfg.log_level}}
 else
-echo "{{cfg.mode}} is not supported."
-exit 1
+  echo "Running Sensu Server"
+  exec sensu-server -d "{{pkg.svc_config_path}}" -L {{cfg.log_level}}
 fi

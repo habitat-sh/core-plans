@@ -1,22 +1,20 @@
 
 {
-  {{#if bind.rabbitmq ~}}
   "rabbitmq": {
+    {{#if bind.rabbitmq ~}}
     "host": "{{bind.rabbitmq.first.sys.ip}}",
     "port": {{bind.rabbitmq.first.cfg.port}},
     "user": "{{cfg.rabbitmq.user}}",
     "password": "{{cfg.rabbitmq.password}}",
     "vhost": "{{cfg.rabbitmq.vhost}}"
-  },
-  {{else ~}}
-  "rabbitmq": {
+    {{else ~}}
     "host": "{{cfg.rabbitmq.host}}",
     "port": {{cfg.rabbitmq.port}},
     "user": "{{cfg.rabbitmq.user}}",
     "password": "{{cfg.rabbitmq.password}}",
     "vhost": "{{cfg.rabbitmq.vhost}}"
+    {{/if ~}}
   },
-  {{/if ~}}
   "client": {
     "name": "{{cfg.client.name}}",
     "address": "{{cfg.client.ipaddress}}",

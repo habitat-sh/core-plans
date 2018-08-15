@@ -1,19 +1,23 @@
-log_level="error"
+log_level = "error"
+mode = "server"
 
-mode="server"
+[api]
+host = "localhost"
+bind = "0.0.0.0"
+port = 4567
 
 [rabbitmq]
-user="sensu"
-password="sensu"
-vhost="/sensu"
-port=5672
-host="localhost"
+user = "sensu"
+password = "sensu"
+vhost = "/sensu"
+port = 5672
+host = "localhost"
 
 [redis]
-host="localhost"
-port=6379
+host = "localhost"
+port = 6379
 
 [client]
-subscriptions=["test"]
-name="localhost"
-ipaddress="127.0.0.1"
+subscriptions = ["test"]
+name = "localhost"
+ipaddress = "127.0.0.1"

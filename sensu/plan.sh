@@ -1,6 +1,6 @@
 pkg_name=sensu
 pkg_origin=core
-pkg_version=0.29.0
+pkg_version=1.4.3
 pkg_source=http://nothing.to.download.from.com
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="A monitoring framework that aims to be simple, malleable, and scalable."
@@ -10,12 +10,24 @@ pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_svc_user=root
 pkg_svc_group=${pkg_svc_user}
-pkg_build_deps=(core/make core/gcc core/gcc-libs)
-pkg_deps=(core/ruby core/bundler core/coreutils)
-pkg_binds=(
+pkg_build_deps=(
+  core/make
+  core/gcc
+  core/gcc-libs
+)
+pkg_deps=(
+  core/ruby
+  core/bundler
+  core/coreutils
+)
+pkg_binds_optional=(
   [rabbitmq]="port"
   [redis]="port"
 )
+pkg_exports=(
+  [port]=api.port
+)
+pkg_exposes=(port)
 
 do_download() {
   return 0
@@ -34,7 +46,6 @@ do_install() {
   cp -R . "$pkg_prefix/"
   fix_interpreter "$pkg_prefix/bin/*" core/coreutils bin/env
 }
-
 
 do_build() {
   local _bundler_dir
