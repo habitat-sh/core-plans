@@ -12,8 +12,4 @@ Binary package
 
 ## Usage
 
-Provides the `protoc` binary for compiling Protocol Buffer definitions; e.g.:
-
-```
-hab pkg exec core/protobuf-cpp35 protoc --help
-```
+*TODO: Add instructions for usage*
