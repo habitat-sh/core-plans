@@ -2,6 +2,8 @@
 
 The `dsc-core` plan applies Powershell DSC configurations on Powershell Core. Typically on Windows Powershell, one uses `Start-DscConfiguration` to apply a compiled DSC configuration mof. However, Powershell Core does not expose the `Start-DscConfiguration` cmdlet. It is possible to call a WMI method to invoke the Local Configuration manager but it incurs a bit of ceremony since it expects the `ConfigurationData` as a byte stream. this plan encapsulates the compilation and execution of a configuration into a simple "one liner."
 
+Note that this plan takes a dependency on the `core/ps-lock` plan to ensure that calls to apply a DSC configuration are serialized. See the [DSC and LCM Concurrency Protection](#DSC-and-LCM-Concurrency-Protection) section for more details.
+
 The plan puts its `psd1` and `psm1` files in the `PSModulePath` so that its function `Start-DscCore` is automatically discoverable.
 
 ## Maintainers
@@ -54,6 +56,20 @@ Invoke-Command -ComputerName localhost -EnableNetworkAccess {
     }
 }
 ```
+
+### DSC and LCM Concurrency Protection
+
+The DSC engine (LCM) can only apply a single configuration at a time on a machine. This plan uses the `core/ps-lock` plan to ensure that all `SendConfigurationApply` calls to the LCM are serialized and avoid potential exceptions from the LCM stating it is already applying a configuration.
+
+This should be completely transparent to consumers of this plan. However, if there is a service running on the same Supervisor that runs a `chef-client` that converges `dsc_resource` or `dsc_script` resources, those resources could potentially fail if `Start-DscCore` is performing an apply. You can avoid these potential errors by having the `chef-client` run honor the lock used by `Start-DscResource`. Declare a `$pkg_deps` on `core/ps-lock` and `core/dsc-core` and call the `chef-client` similar to the following:
+
+```
+Enter-PSLock -Name $(Get-DscLock) -Interval 10 -Splay 10 {
+    {{pkgPathFor "core/chef-dk"}}\chefdk\bin\chef-client -z
+}
+```
+
+If the `chef-client` only needs to run once, you can ommit the `-Interval` and `-Splay` arguments.
 
 ### Problems using in a local Windows Studio
 
