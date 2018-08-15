@@ -1,0 +1,16 @@
+diff --git a/nis/nss_nisplus/nisplus-alias.c b/nis/nss_nisplus/nisplus-alias.c
+index 7f698b4e6d..509ace1f83 100644
+--- a/nis/nss_nisplus/nisplus-alias.c
++++ b/nis/nss_nisplus/nisplus-alias.c
+@@ -297,10 +297,10 @@  _nss_nisplus_getaliasbyname_r (const char *name, struct aliasent *alias,
+       return NSS_STATUS_UNAVAIL;
+     }
+ 
+-  char buf[strlen (name) + 9 + tablename_len];
++  char buf[tablename_len + 9];
+   int olderr = errno;
+ 
+-  snprintf (buf, sizeof (buf), "[name=%s],%s", name, tablename_val);
++  snprintf (buf, sizeof (buf), "[name=],%s", tablename_val);
+ 
+   nis_result *result = nis_list (buf, FOLLOW_PATH | FOLLOW_LINKS, NULL, NULL);
