@@ -10,4 +10,10 @@ Binary package
 
 ## Usage
 
-*TODO: Add instructions for usage*
+```
+    hab pkg install core/docutils
+    hab pkg exec core/docutils rst2man.py --version
+    --------
+    hab pkg install core/docutils --binlink
+    rst2man.py --version
+```

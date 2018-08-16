@@ -10,11 +10,15 @@ pkg_license=(
 )
 pkg_source=https://downloads.sourceforge.net/project/${pkg_name}/${pkg_name}/${pkg_version}/${pkg_name}-${pkg_version}.tar.gz
 pkg_shasum=c7db717810ab6965f66c8cf0398a98c9d8df982da39b4cd7f162911eb89596fa
-pkg_deps=()
+pkg_description="Docutils is an open-source text processing system for processing plaintext documentation into useful formats, e.g.: HTML, LaTeX, man-pages, open-document, or XML."
+pkg_upstream_url="http://docutils.sourceforge.net"
+pkg_deps=(
+  core/bash
+  core/python2
+)
 pkg_build_deps=(
   core/make
   core/gcc
-  core/python2
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
@@ -25,4 +29,19 @@ do_build() {
 
 do_install() {
   python install.py
+
+  # write our wrapper script
+  bash_path=$(pkg_path_for core/bash)
+  for file in ${pkg_prefix}/bin/*.py; do
+    # Rename executable to ${file}.real"
+    mv "${file}" "${file}.real"
+    # Write wrapper script to replace ${file}
+    cat <<EOF > "${file}"
+#!${bash_path}/bin/bash
+export PYTHONPATH=$PYTHONPATH:${pkg_prefix}/lib/python2.7/site-packages
+exec ${file}.real "\$@"
+EOF
+    # set the execute bit
+    chmod a+x "${file}"
+  done
 }
