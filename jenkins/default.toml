@@ -6,15 +6,15 @@ timeout = 60
 
 [jenkins.http]
 enabled = true
-port = 80
+port = 8080
 
 [jenkins.https]
 enabled = false
-port = 443
+port = 8443
 
 [jenkins.http2]
 enabled = false
-port = 80
+port = 8080
 
 [jenkins.ajp13]
 enabled = false

@@ -12,7 +12,6 @@ pkg_exports=(
   [port]=jenkins.http.port
 )
 pkg_exposes=(port)
-pkg_svc_user="root"
 
 do_unpack() {
   return 0
