@@ -1,10 +1,10 @@
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_name=jre8
-pkg_version=8.172.0
-pkg_upstream_version=8u172
-pkg_source="http://download.oracle.com/otn-pub/java/jdk/${pkg_upstream_version}-b11/a58eab1ec242421181065cdc37240b08/jre-${pkg_upstream_version}-linux-x64.tar.gz"
-pkg_shasum="f08f25aec2bdc86138ccba8fd5b904451e3afa1d24a88c85f28c2d84bfd45bad"
+pkg_version=8.181.0
+pkg_upstream_version=8u181
+pkg_source="http://download.oracle.com/otn-pub/java/jdk/${pkg_upstream_version}-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-${pkg_upstream_version}-linux-x64.tar.gz"
+pkg_shasum="1845567095bfbfebd42ed0d09397939796d05456290fb20a83c476ba09f991d3"
 pkg_filename="jre-${pkg_upstream_version}-linux-x64.tar.gz"
 pkg_license=('Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX')
 pkg_description=('Oracle Java Runtime Environment. This package is made available to you to allow you to run your applications as provided in and subject to the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html')
