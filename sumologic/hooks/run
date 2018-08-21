@@ -2,7 +2,7 @@
 
 exec 2>&1
 
-exec {{pkg.path}}/sumologic/wrapper {{pkg.svc_config_path}}/wrapper.conf \
+exec {{pkg.path}}/{{pkg.name}}/wrapper {{pkg.svc_config_path}}/wrapper.conf \
 wrapper.syslog.ident=collector \
 wrapper.java.command="{{pkgPathFor "core/jre8"}}/bin/java" \
 wrapper.daemonize=FALSE \
