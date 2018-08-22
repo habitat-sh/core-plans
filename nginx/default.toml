@@ -8,14 +8,26 @@
  # refer to: http://nginx.org/en/docs/http/ngx_http_core_module.html
 
 
-
 #### General Configuration
-# redirector: If set, bypass normal config and just redirect http to https
-# redirector = true
 # worker_processes: Number of NGINX processes. Default = 1
 worker_processes = 4
 
-
+#### Simple Redirector Configuration
+# redirector: If set, bypass normal config and just redirect http to https for all requests.
+# redirector = true
+#### Advanced Redirect Configuration
+# If redirect_site is unset, this does nothing.
+# If set, a server entry is created for each server_name which will 301 to the target_url
+# If ssl_cert path is set, ssl_cert_key must also be set. Required if listen config includes "ssl".
+# The path will be relative to the config directory
+# You may create multiple [[redirect_site]] entries to redirect multiple sites
+# (This is a toml array of tables)
+#[[redirect_site]]
+#server_name = "somehost.somedomain.com"
+#listen = "443 ssl"
+#ssl_cert = "somehost.somedomain.crt"
+#ssl_cert_key = "somehost.somedomain.key"
+#target_url = "https://someothersite.someotherdomain.org"
 
 #### Events Context Configuration
 [events]
