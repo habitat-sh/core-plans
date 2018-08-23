@@ -35,28 +35,34 @@ function Start-DscCore {
 
         $configurationData = New-ConfigurationData (Get-Content $Path | Out-String) $ConfigFunction
 
-        while((Get-LcmMetaConfig).LCMState -ne "Idle") {
-            Write-Host "Waiting for LCM to become Idle..."
-            Start-Sleep -Seconds 5
-        }
+        Wait-LCMReady
 
         Enter-PSLock -Name $(Get-DscLock) {
             $conf = Get-LcmMetaConfig
             $currentRefreshMode = $conf.RefreshMode
             try {
                 Set-LcmRefreshMode "Push"
+                # Now that we have the lock, check once more just in case
+                Wait-LCMReady
                 Write-Output "Applying DSC configuration for $Path ..."
                 Invoke-CimMethod    -ComputerName localhost `
                                     -Namespace "root/Microsoft/Windows/DesiredStateConfiguration" `
                                     -ClassName "MSFT_DSCLocalConfigurationManager" `
                                     -MethodName "SendConfigurationApply" `
-                                    -Arguments @{ConfigurationData = $configurationData} `
+                                    -Arguments @{ConfigurationData = $configurationData; Force = $true} `
                                     -ErrorAction Stop | Out-Null
             }
             finally {
                 Set-LcmRefreshMode $currentRefreshMode
             }
         }
+    }
+}
+
+function Wait-LCMReady {
+    while((Get-LcmMetaConfig).LCMState -eq "Busy") {
+        Write-Host "Waiting for LCM to become available. Current state: $((Get-LcmMetaConfig).LCMState)..."
+        Start-Sleep -Seconds 5
     }
 }
 
