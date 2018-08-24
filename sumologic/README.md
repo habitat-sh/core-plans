@@ -28,4 +28,4 @@ Recommended update strategy for Sumologic is `rolling`.
 
 ## Testing
 
-For basic build testing, please run test.sh in the Studio. Unfortunently for adequete testing, you need to provide a valid accessid and accesskey.
+For basic build testing, please run test.sh in the Studio. This will build the artifact and test to see if the wrapper binary runs, which is what launches Sumologic. Unfortunently for adequete testing, you need to provide a valid accessid and accesskey.

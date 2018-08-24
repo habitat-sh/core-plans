@@ -18,7 +18,7 @@ pkg_build_deps=(
   core/patchelf
 )
 pkg_lib_dirs=("${pkg_name}/${pkg_version}/lib" "${pkg_name}/${pkg_version}/bin/native/lib")
-pkg_bin_dirs=("${pkg_name}/${pkg_version}/bin")
+pkg_bin_dirs=("${pkg_name}/${pkg_version}/bin" "${pkg_name}")
 pkg_svc_user="root"
 pkg_svc_group="root"
 
