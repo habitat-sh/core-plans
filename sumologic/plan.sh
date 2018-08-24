@@ -27,13 +27,13 @@ do_build() {
 }
 
 do_install() {
-  # # Remove unnecessary OS support
+  # Remove unnecessary OS support
   find . -name "*.bat" -type f -delete
   find . -name "*.dll" -type f -delete
   find . -name "*.cmd" -type f -delete
 
-  # # Move the linux wrapper into place
-  # # https://help.sumologic.com/Send-Data/Collector-FAQs/How-do-I-use-the-binary-package-to-install-a-Collector-on-Windows-or-MacOS
+  # Move the linux wrapper into place
+  # https://help.sumologic.com/Send-Data/Collector-FAQs/How-do-I-use-the-binary-package-to-install-a-Collector-on-Windows-or-MacOS
   mv tanuki/wrapper-linux-x86-64 ./wrapper
   chmod +x wrapper "${pkg_version}/bin/collector"
   mv "tanuki/linux64/libwrapper.so" "${pkg_version}/bin/native/lib/"
@@ -44,7 +44,7 @@ do_install() {
 
   patchelf --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" --set-rpath "$LD_RUN_PATH" wrapper
 
-   cp -a . "${pkg_prefix}/${pkg_name}"
+  cp -a . "${pkg_prefix}/${pkg_name}"
 }
 
 do_strip() {
