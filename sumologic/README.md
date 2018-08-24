@@ -2,7 +2,7 @@
 
 ## Description
 
-[Sumologic](1) is a cloud-based log management and analytics service. This plan configures a Sumologic Collector.
+[Sumologic](https://www.sumologic.com) is a cloud-based log management and analytics service. This plan configures a Sumologic Collector.
 
 This plan provides the static binary for execution.
 
@@ -26,4 +26,6 @@ The `standalone` topology would be the most typical use for this application
 
 Recommended update strategy for Sumologic is `rolling`.
 
-[1]: https://www.sumologic.com
+## Testing
+
+For basic build testing, please run test.sh in the Studio. Unfortunently for adequete testing, you need to provide a valid accessid and accesskey.
