@@ -1,3 +1,4 @@
+# shellcheck disable=SC2164
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_name=jre8
@@ -11,8 +12,8 @@ pkg_description=('Oracle Java Runtime Environment. This package is made availabl
 pkg_upstream_url="http://www.oracle.com/technetwork/java/javase/overview/index.html"
 pkg_deps=(core/glibc core/gcc-libs core/xlib core/libxi core/libxext core/libxrender core/libxtst)
 pkg_build_deps=(core/patchelf)
-pkg_bin_dirs=(bin)
-pkg_lib_dirs=(lib)
+pkg_bin_dirs=(bin jre/bin)
+pkg_lib_dirs=(lib jre/lib)
 pkg_include_dirs=(include)
 
 source_dir=$HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_upstream_version}
@@ -52,6 +53,9 @@ download_file() {
 
 do_unpack() {
   local unpack_file="$HAB_CACHE_SRC_PATH/$pkg_filename"
+  if [[ -d "$source_dir" ]]; then
+    rm -rf "$source_dir";
+  fi
   mkdir "$source_dir"
   pushd "$source_dir" >/dev/null
   tar xz --strip-components=1 -f "$unpack_file"
@@ -71,13 +75,22 @@ do_install() {
   build_line "Setting interpreter for '${pkg_prefix}/bin/java' '$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2'"
   build_line "Setting rpath for '${pkg_prefix}/bin/java' to '$LD_RUN_PATH'"
 
-  export LD_RUN_PATH=$LD_RUN_PATH:$pkg_prefix/lib/amd64/jli:$pkg_prefix/lib/amd64/server:$pkg_prefix/lib/amd64
+  LD_RUN_PATH=$LD_RUN_PATH:$pkg_prefix/lib/amd64/jli:$pkg_prefix/lib/amd64/server:$pkg_prefix/lib/amd64
+  LD_RUN_PATH=$LD_RUN_PATH:$pkg_prefix/jre/lib/amd64/jli:$pkg_prefix/jre/lib/amd64/server:$pkg_prefix/jre/lib/amd64
+  export LD_RUN_PATH
 
   find "$pkg_prefix"/bin -type f -executable \
     -exec sh -c 'file -i "$1" | grep -q "x-executable; charset=binary"' _ {} \; \
     -exec patchelf --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" --set-rpath "${LD_RUN_PATH}" {} \;
 
+  find "$pkg_prefix"/jre/bin -type f -executable \
+    -exec sh -c 'file -i "$1" | grep -q "x-executable; charset=binary"' _ {} \; \
+    -exec patchelf --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" --set-rpath "${LD_RUN_PATH}" {} \;
+
   find "$pkg_prefix/lib/amd64" -type f -name "*.so" \
+    -exec patchelf --set-rpath "${LD_RUN_PATH}" {} \;
+
+  find "$pkg_prefix/jre/lib/amd64" -type f -name "*.so" \
     -exec patchelf --set-rpath "${LD_RUN_PATH}" {} \;
 }
 
