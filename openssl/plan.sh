@@ -1,7 +1,7 @@
 pkg_name=openssl
 _distname="$pkg_name"
 pkg_origin=core
-pkg_version=1.0.2n
+pkg_version=1.0.2p
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 OpenSSL is an open source project that provides a robust, commercial-grade, \
@@ -12,12 +12,13 @@ library.\
 pkg_upstream_url="https://www.openssl.org"
 pkg_license=('OpenSSL')
 pkg_source="https://www.openssl.org/source/${_distname}-${pkg_version}.tar.gz"
-pkg_shasum="370babb75f278c39e0c50e8c4e7493bc0f18db6867478341a832a982fd15a8fe"
+pkg_shasum="50a98e07b1a89eb8f6a99477f262df71c6fa7bef77df4dc83025a2845c827d00"
 pkg_dirname="${_distname}-${pkg_version}"
 pkg_deps=(
   core/glibc
   core/zlib
   core/cacerts
+  core/openssl-fips
 )
 pkg_build_deps=(
   core/coreutils
@@ -62,20 +63,26 @@ do_build() {
   # Set PERL var for scripts in `do_check` that use Perl
   PERL=$(pkg_path_for core/perl)/bin/perl
   export PERL
-  # shellcheck disable=SC2086
-  ./config \
-    --prefix="${pkg_prefix}" \
-    --openssldir=ssl \
+  "$(pkg_path_for core/perl)/bin/perl" ./Configure \
     no-idea \
     no-mdc2 \
     no-rc5 \
+    no-sslv2 \
+    no-sslv3 \
+    no-comp \
     zlib \
     shared \
     disable-gost \
-    $CFLAGS \
-    $LDFLAGS
-  env CC= make depend
-  make CC="$BUILD_CC"
+    --prefix="${pkg_prefix}" \
+    --openssldir=ssl \
+    -I"$(pkg_path_for core/zlib)/include" \
+    -L"$(pkg_path_for core/zlib)/lib" \
+    linux-x86_64 \
+    --with-fipsdir="$(pkg_path_for core/openssl-fips)" \
+    fips
+
+  make CC= depend
+  make --jobs="$(nproc)" CC="$BUILD_CC"
 }
 
 do_check() {
