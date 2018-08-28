@@ -37,8 +37,6 @@ pkg_build_deps=(
 pkg_deps=(
   core/glibc
   core/gcc-libs
-  core/zlib
-  core/protobuf
 )
 
 pkg_bin_dirs=(bin)
@@ -75,5 +73,4 @@ target_link_libraries(myapp prometheus-cpp::prometheus-cpp)
 
 ### Example Application
 
-An example application built with Habitat is can be viewed
- [here](https://github.com/bdangit/prometheus-cpp-example).
+An example application built with Habitat is can be viewed [here](https://github.com/bdangit/prometheus-cpp-example).
