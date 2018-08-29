@@ -26,16 +26,6 @@ pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
-do_prepare() {
-  do_default_prepare
-  pushd "${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}"
-  # Purge the codebase of the hardcoded reliance on `/bin/rm`.
-  grep -lr '/bin/rm' . | while read -r f; do
-    sed -e 's,/bin/rm,rm,g' -i "$f"
-  done
-  popd
-}
-
 do_build() {
   pushd "${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}"
   ./config
