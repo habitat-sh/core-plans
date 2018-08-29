@@ -14,4 +14,3 @@ pkg_include_dirs=(include)
 pkg_bin_dirs=(bin)
 pkg_description="Simple Authentication and Security Layer library."
 pkg_upstream_url="https://www.cyrusimap.org/sasl/index.html"
-
