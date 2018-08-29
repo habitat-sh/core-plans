@@ -24,7 +24,6 @@ pkg_shasum="ec3f5c9714ba0fd45cb4e087301eb1336c317e0d20b575a125050470e8089e4d"
 pkg_dirname="${_distname}-${pkg_version}"
 pkg_deps=(
   core/glibc
-  core/zlib
   core/cacerts
   core/openssl-fips
 )
@@ -83,13 +82,11 @@ do_build() {
     no-sslv2 \
     no-sslv3 \
     no-comp \
-    zlib \
+    no-zlib \
     shared \
     disable-gost \
     --prefix="${pkg_prefix}" \
     --openssldir=ssl \
-    -I"$(pkg_path_for core/zlib)/include" \
-    -L"$(pkg_path_for core/zlib)/lib" \
     linux-x86_64 \
     --with-fipsdir="$(pkg_path_for core/openssl-fips)" \
     fips
