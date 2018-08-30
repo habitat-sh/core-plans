@@ -1,6 +1,6 @@
 pkg_name=mage
 pkg_origin=core
-pkg_version="v1.2.4"
+pkg_version="1.2.4"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_description="Mage is a make/rake-like build tool using Go. You write plain-old go functions, and Mage automatically uses them as Makefile-like runnable targets."
@@ -12,7 +12,7 @@ pkg_bin_dirs=(bin)
 do_download() {
   scaffolding_go_download
   pushd "${scaffolding_go_pkg_path}" > /dev/null
-  git reset --hard "${pkg_version}"
+  git reset --hard "v${pkg_version}"
   popd > /dev/null
 }
 
