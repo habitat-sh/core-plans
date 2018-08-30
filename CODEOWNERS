@@ -157,6 +157,7 @@ kibana @joshbrand @predominant
 logstash @joshbrand @predominant
 libimagequant @predominant
 libtalloc @defilan
+mage @predominant
 monit @rsertelon
 mosquitto @rsertelon
 mssql @mwrock
