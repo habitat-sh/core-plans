@@ -34,6 +34,7 @@ To become a maintainer, open a pull request to this list.
 * [Jon Bauman](https://github.com/baumanj)
 * [Graham Weldon](https://github.com/predominant)
 * [W. Duncan Fraser](https://github.com/wduncanfraser)
+* [David Echols](https://github.com/echohack)
 
 ## Alumni
 

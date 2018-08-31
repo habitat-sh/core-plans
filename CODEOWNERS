@@ -77,7 +77,7 @@ dejagnu @fnichol
 check @fnichol
 libidn @fnichol
 cacerts @fnichol
-openssl @fnichol @reset
+openssl @fnichol @reset @echohack
 wget @fnichol
 unzip @fnichol @nellshamrell
 rq @fnichol
