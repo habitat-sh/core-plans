@@ -59,7 +59,7 @@ _common_prepare() {
   # Instead, we link rm to maintain integrity.
   # Reference: https://www.openssl.org/docs/fips/UserGuide-2.0.pdf
   if [[ ! -f "/bin/rm" ]]; then
-    hab pkg binlink core/coreutils rm
+    hab pkg binlink core/coreutils rm --dest /bin
     BINLINKED_RM=true
   fi
 }
