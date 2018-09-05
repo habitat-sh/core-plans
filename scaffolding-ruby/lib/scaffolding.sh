@@ -197,7 +197,7 @@ EOT
 scaffolding_bundle_install() {
   local start_sec elapsed
 
-  build_line "Installing dependencies using $(_bundle --version)"
+  build_line "Installing dependencies using Bundler version ${_bundler_version}"
   start_sec="$SECONDS"
 
   {
@@ -347,7 +347,7 @@ scaffolding_generate_binstubs() {
 }
 
 scaffolding_vendor_bundler() {
-  build_line "Vendoring $(_bundle --version)"
+  build_line "Vendoring 'bundler' version ${_bundler_version}"
   gem install \
     --local "$(pkg_path_for bundler)/cache/bundler-${_bundler_version}.gem" \
     --install-dir "$GEM_HOME" \
@@ -451,7 +451,7 @@ _setup_vars() {
     tgbyte-activerecord-jdbcpostgresql-adapter)
   # The version of Bundler in use
   _bundler_version="$("$(pkg_path_for bundler)/bin/bundle" --version \
-    | awk '{print $NF}')"
+    | awk '/^Bundler version/ {print $NF}')"
   # The install prefix path for the app
   app_prefix="app"
   #
