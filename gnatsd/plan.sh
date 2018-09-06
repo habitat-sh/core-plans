@@ -1,12 +1,12 @@
 pkg_name=gnatsd
 pkg_origin=core
-pkg_version=1.2.0
+pkg_version=1.3.0
 pkg_description="A High Performance NATS Server written in Go."
 pkg_upstream_url=https://github.com/nats-io/gnatsd
 pkg_license=('MIT')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source=https://github.com/nats-io/gnatsd/archive/v${pkg_version}.tar.gz
-pkg_shasum=9624ce12adb528e86c03f78305c13f9c5f4edb48cf7b0db123d786f12be00590
+pkg_source="https://github.com/nats-io/gnatsd/archive/v${pkg_version}.tar.gz"
+pkg_shasum=2cb9a228acfa1932196652f4c50118e55c9b5ea1b1d6549c0f2cdda7edc1fc10
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/go core/coreutils core/gcc core/make)
 pkg_bin_dirs=(bin)
@@ -39,12 +39,11 @@ do_build() {
   go build
   local code=$?
   popd > /dev/null
-
   return $code
 }
 
 do_install() {
   mkdir -p "${pkg_prefix}/bin"
-  cp  "${pkg_name}" "${pkg_prefix}/bin/${pkg_name}"
+  cp "${pkg_name}" "${pkg_prefix}/bin/${pkg_name}"
   return $?
 }
