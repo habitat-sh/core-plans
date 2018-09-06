@@ -114,6 +114,7 @@ acbuild @rsertelon
 alex @wduncanfraser
 artifactory-pro @defilan
 atk @rsertelon
+benchmark @bdangit
 cabal-install @wduncanfraser
 cairo @rsertelon
 cerebro @predominant
@@ -140,6 +141,7 @@ ghc82-bootstrap @wduncanfraser
 ghc84 @wduncanfraser
 go @afiune @nellshamrell
 gocd-server @predominant
+googletest @bdangit
 grpcurl @afiune
 gtk2 @rsertelon
 happy @wduncanfraser
@@ -168,6 +170,7 @@ p4broker @dbhagen
 pango @rsertelon
 pngquant @predominant
 postgresql-client @joshbrand @irvingpop
+prometheus-cpp @bdangit
 protobuf-cpp @afiune
 rabbitmqadmin @predominant
 redis @irvingpop
