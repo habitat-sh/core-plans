@@ -1,7 +1,7 @@
 source ./plan.sh
 
 @test "Command is on path" {
-  [ "$(command -v gnatsd)" ]
+  [ "$(command -v minio)" ]
 }
 
 @test "Version matches, via help output" {
