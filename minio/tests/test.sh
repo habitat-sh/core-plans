@@ -2,6 +2,7 @@
 
 TESTDIR="$(dirname $0)"
 PLANDIR="$(dirname ${TESTDIR})"
+echo $PLANDIR
 
 SKIPBUILD=${SKIPBUILD:-0}
 
@@ -16,10 +17,12 @@ source "${PLANDIR}/plan.sh"
 
 if [ "${SKIPBUILD}" -eq 0 ]; then
   set -e
+  pushd "${PLANDIR}" > /dev/null
   build
   source results/last_build.env
   hab pkg install --binlink --force "results/${pkg_artifact}"
   hab svc load "${pkg_ident}"
+  popd > /dev/null
   set +e
 
   # Give some time for the service to start up
