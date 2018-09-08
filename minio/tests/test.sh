@@ -2,7 +2,6 @@
 
 TESTDIR="$(dirname "${0}")"
 PLANDIR="$(dirname "${TESTDIR}")"
-echo $PLANDIR
 
 SKIPBUILD=${SKIPBUILD:-0}
 
