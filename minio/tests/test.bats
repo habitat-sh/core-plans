@@ -1,4 +1,4 @@
-source ./plan.sh
+source "${BATS_TEST_DIRNAME}/../plan.sh"
 
 @test "Command is on path" {
   [ "$(command -v minio)" ]
@@ -16,7 +16,7 @@ source ./plan.sh
 }
 
 @test "A single process" {
-  result="$(ps aux | grep -v grep | grep -v "test\.bats" | grep minio | wc -l)"
+  result="$(ps aux | grep -v grep | grep "minio server" | wc -l)"
   [ "${result}" -eq 1 ]
 }
 

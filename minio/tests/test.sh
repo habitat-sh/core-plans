@@ -1,5 +1,8 @@
 #!/bin/sh
 
+TESTDIR="$(dirname $0)"
+PLANDIR="$(dirname ${TESTDIR})"
+
 SKIPBUILD=${SKIPBUILD:-0}
 
 hab pkg install --binlink core/bats
@@ -9,7 +12,7 @@ hab pkg binlink core/busybox-static ps
 hab pkg binlink core/busybox-static netstat
 hab pkg binlink core/busybox-static wc
 
-source ./plan.sh
+source "${PLANDIR}/plan.sh"
 
 if [ "${SKIPBUILD}" -eq 0 ]; then
   set -e
@@ -23,4 +26,4 @@ if [ "${SKIPBUILD}" -eq 0 ]; then
   sleep 5
 fi
 
-bats test.bats
+bats "${TESTDIR}/test.bats"
