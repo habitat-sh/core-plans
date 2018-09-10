@@ -3,7 +3,8 @@ pkg_name=filebeat
 pkg_origin=core
 pkg_version="6.3.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=("Apache-2.0")
+pkg_license=("Elastic")
+# License: https://github.com/elastic/beats/blob/6.4/licenses/ELASTIC-LICENSE.txt
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/go core/git core/make core/gcc)
 pkg_bin_dirs=(bin)
