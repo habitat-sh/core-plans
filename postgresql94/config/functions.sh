@@ -67,7 +67,7 @@ bootstrap_replica_via_pg_basebackup() {
 }
 
 ensure_dir_ownership() {
-  paths="{{pkg.svc_var_path}} {{pkg.svc_data_path}}"
+  paths="{{pkg.svc_var_path}} {{pkg.svc_data_path}}/pgdata {{pkg.svc_data_path}}/archive"
   if [[ $EUID -eq 0 ]]; then
     # if EUID is root, so we should chown to pkg_svc_user:pkg_svc_group
     ownership_command="chown -RL {{pkg.svc_user}}:{{pkg.svc_group}} $paths"
