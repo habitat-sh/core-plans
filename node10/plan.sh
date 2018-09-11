@@ -8,5 +8,5 @@ pkg_license=('MIT')
 pkg_upstream_url=https://nodejs.org/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://nodejs.org/dist/v${pkg_version}/node-v${pkg_version}.tar.gz"
-pkg_shasum=1ed31ba75080b16193f1c7a351807481b1f7da08bfaf7172bc07f0cf07e6ea71
+pkg_shasum=8cfcb0d6f859645934a9318d44872e9ebcf30dde6f567f453e6380912b2acff5
 pkg_dirname="node-v${pkg_version}"
