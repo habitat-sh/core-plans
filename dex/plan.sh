@@ -1,8 +1,8 @@
-gopkg="github.com/coreos/dex"
+gopkg="github.com/dexidp/dex"
 pkg_name=dex
 pkg_description="OpenID Connect Identity (OIDC) and OAuth 2.0 Provider with Pluggable Connectors"
 pkg_origin=core
-pkg_version="v2.10.0"
+pkg_version="v2.11.0"
 pkg_maintainer="Chef Software Inc. <support@chef.io>"
 pkg_license=("Apache-2.0")
 pkg_source="https://$gopkg"
@@ -15,7 +15,7 @@ pkg_exports=(
 pkg_deps=()
 pkg_bin_dirs=(bin)
 pkg_scaffolding=core/scaffolding-go
-scaffolding_go_base_path=github.com/coreos
+scaffolding_go_base_path=github.com/dexidp
 scaffolding_go_build_deps=()
 
 do_prepare() {
