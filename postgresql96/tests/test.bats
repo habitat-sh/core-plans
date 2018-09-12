@@ -12,7 +12,7 @@ source "${BATS_TEST_DIRNAME}/../plan.sh"
 }
 
 @test "Service is running" {
-  [ "$(hab svc status | grep "postgresql96\.default" | awk '{print $4}' | grep up)" ]
+  [ "$(hab svc status | grep "${pkg_name}\.default" | awk '{print $4}' | grep up)" ]
 }
 
 @test "A single process" {

@@ -1,4 +1,6 @@
-NONHAB_FILE="/hab/svc/postgresql96/data/lost+found"
+source "${BATS_TEST_DIRNAME}/../plan.sh"
+
+NONHAB_FILE="/hab/svc/${pkg_name}/data/lost+found"
 
 function setup() {
   touch "${NONHAB_FILE}"
@@ -11,10 +13,10 @@ function teardown() {
 }
 
 @test "Non-hab owned files in /data are allowed" {
-  ORIGIN=$(hab svc status |grep postgresql96| cut -f1 -d'/')
-  hab svc stop "${ORIGIN}/postgresql96"
+  ORIGIN=$(hab svc status |grep ${pkg_name}| cut -f1 -d'/')
+  hab svc stop "${ORIGIN}/${pkg_name}"
 
-  hab svc start "${ORIGIN}/postgresql96"
+  hab svc start "${ORIGIN}/${pkg_name}"
 
   # Wait for service to start
   sleep 1
@@ -25,5 +27,5 @@ function teardown() {
   [ "root" == $(stat -c %G "${NONHAB_FILE}") ]
   [ "-rw-------" == $(stat -c %A "${NONHAB_FILE}") ]
 
-  [ "$(hab svc status | grep "postgresql96.default" | awk '{print $4}' | grep up)" ]
+  [ "$(hab svc status | grep "${pkg_name}.default" | awk '{print $4}' | grep up)" ]
 }
