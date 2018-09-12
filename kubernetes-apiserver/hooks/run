@@ -31,6 +31,9 @@ exec kube-apiserver \
   --kubelet-client-certificate="{{cfg.kubelet-client-certificate}}" \
   --kubelet-client-key="{{cfg.kubelet-client-key}}" \
   --kubelet-https=true \
+  --requestheader-client-ca-file="{{cfg.requestheader-client-ca-file}}" \
+  --requestheader-group-headers="{{cfg.requestheader-group-headers}}" \
+  --requestheader-username-headers="{{cfg.requestheader-username-headers}}" \
   --runtime-config=api/all \
   --service-account-key-file="{{cfg.service-account-key-file}}" \
   --service-cluster-ip-range="{{cfg.service-cluster-ip-range}}" \
