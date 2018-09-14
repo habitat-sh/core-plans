@@ -1,4 +1,4 @@
-source ./plan.sh
+source "${BATS_TEST_DIRNAME}/../plan.sh"
 
 @test "Command is on path" {
   [ "$(command -v nginx)" ]

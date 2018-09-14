@@ -1,5 +1,7 @@
 #!/bin/sh
 
+TESTDIR="$(dirname "${0}")"
+PLANDIR="$(dirname "${TESTDIR}")"
 SKIPBUILD=${SKIPBUILD:-0}
 
 hab pkg install --binlink core/bats
@@ -10,18 +12,22 @@ hab pkg binlink core/busybox-static netstat
 hab pkg binlink core/busybox-static wc
 hab pkg binlink core/busybox-static uniq
 
-source ./plan.sh
+source "${PLANDIR}/plan.sh"
+# Unload the service if its already loaded.
+hab svc unload "${HAB_ORIGIN}/${pkg_name}"
 
 if [ "${SKIPBUILD}" -eq 0 ]; then
   set -e
+  pushd "${PLANDIR}" > /dev/null
   build
   source results/last_build.env
   hab pkg install --binlink --force "results/${pkg_artifact}"
   hab svc load "${pkg_ident}"
+  popd > /dev/null
   set +e
 
   # Give some time for the service to start up
-  sleep 5
+  sleep 3
 fi
 
-bats test.bats
+bats "${TESTDIR}/test.bats"

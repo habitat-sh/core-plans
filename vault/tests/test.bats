@@ -1,4 +1,4 @@
-source ./plan.sh
+source "${BATS_TEST_DIRNAME}/../plan.sh"
 
 @test "Version matches" {
   result="$(vault version | awk '{print $2}')"

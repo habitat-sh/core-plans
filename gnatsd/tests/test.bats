@@ -1,4 +1,4 @@
-source ./plan.sh
+source "${BATS_TEST_DIRNAME}/../plan.sh"
 
 @test "Command is on path" {
   [ "$(command -v gnatsd)" ]
@@ -19,7 +19,7 @@ source ./plan.sh
 }
 
 @test "A single process" {
-  result="$(ps aux | grep -v grep | grep -v "test\.bats" | grep gnatsd | wc -l)"
+  result="$(ps aux | grep -v grep | grep -v "test" | grep gnatsd | wc -l)"
   [ "${result}" -eq 1 ]
 }
 
