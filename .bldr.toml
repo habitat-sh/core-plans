@@ -629,6 +629,8 @@ plan_path = "libressl-musl"
 paths = [
   "libressl/*",
 ]
+[libsasl2]
+plan_path = "libsasl2"
 [libscrypt]
 plan_path = "libscrypt"
 [libseccomp]
