@@ -1,5 +1,6 @@
 # shellcheck disable=SC2148,SC1091
-source ../postgresql/plan.sh
+PLANDIR=$(dirname "${BASH_SOURCE[0]}")
+source "${PLANDIR}/../postgresql/plan.sh"
 
 pkg_name=postgresql94
 pkg_version=9.4.18
