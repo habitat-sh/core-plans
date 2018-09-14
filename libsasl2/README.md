@@ -1,9 +1,21 @@
-# Habitat package: libsasl
+# libsasl2
 
-## Description
+Simple Authentication and Security Layer library.
 
-Provide a brief description of the `libsasl` plan / purpose.
+## Maintainers
+
+* The Habitat Maintainers <humans@habitat.sh>
+
+## Type of Package
+
+Binary package
 
 ## Usage
 
-Describe the general usage for the `libsasl` plan
+Include this package as a build or runtime dependency as required:
+
+```
+pkg_deps=(
+  core/libsasl2
+)
+```
