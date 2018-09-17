@@ -11,7 +11,7 @@ API to improve usability even further.\
 "
 pkg_upstream_url="https://github.com/jedisct1/libsodium"
 pkg_license=('ISC')
-pkg_source="https://download.libsodium.org/libsodium/releases/${_distname}-${pkg_version}.tar.gz"
+pkg_source="https://download.libsodium.org/libsodium/releases/old/${_distname}-${pkg_version}.tar.gz"
 pkg_shasum="9c13accb1a9e59ab3affde0e60ef9a2149ed4d6e8f99c93c7a5b97499ee323fd"
 pkg_dirname="${_distname}-${pkg_version}"
 pkg_deps=(
