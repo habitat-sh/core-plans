@@ -104,7 +104,9 @@ scaffolding_modules_install() {
   # This directory is not created with Habitat by design
   # Instead, we use core/coreutils for this functionality
   # This sets up a symlink to simulate a /usr/bin/env,
-  # But still use coreutils
+  # But still use coreutils. Additionally, /usr/bin isn't
+  # guaranteed to exist, so create it first.
+  mkdir -p /usr/bin
   ln -svf "$(pkg_path_for coreutils)/bin/env" /usr/bin/env
 
   start_sec="$SECONDS"
