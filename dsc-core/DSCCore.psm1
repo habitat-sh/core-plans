@@ -41,9 +41,9 @@ function Start-DscCore {
             $conf = Get-LcmMetaConfig
             $currentRefreshMode = $conf.RefreshMode
             try {
-                Set-LcmRefreshMode "Push"
                 # Now that we have the lock, check once more just in case
                 Wait-LCMReady
+                Set-LcmRefreshMode "Push"
                 Write-Output "Applying DSC configuration for $Path ..."
                 Invoke-CimMethod    -ComputerName localhost `
                                     -Namespace "root/Microsoft/Windows/DesiredStateConfiguration" `
@@ -53,6 +53,7 @@ function Start-DscCore {
                                     -ErrorAction Stop | Out-Null
             }
             finally {
+                Wait-LCMReady
                 Set-LcmRefreshMode $currentRefreshMode
             }
         }

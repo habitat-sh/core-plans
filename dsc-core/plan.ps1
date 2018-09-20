@@ -1,6 +1,6 @@
 $pkg_name="dsc-core"
 $pkg_origin="core"
-$pkg_version="0.2.0"
+$pkg_version="0.2.1"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_license=@("Apache-2.0")
 $pkg_description="Compiles and applies DSC configurations in Powershell Core"
