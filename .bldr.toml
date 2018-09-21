@@ -933,6 +933,8 @@ plan_path = "php5"
 plan_path = "pixman"
 [pkg-config]
 plan_path = "pkg-config"
+[pngcrush]
+plan_path = "pngcrush"
 [pngquant]
 plan_path = "pngquant"
 [polipo]
