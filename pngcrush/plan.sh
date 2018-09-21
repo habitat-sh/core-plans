@@ -17,4 +17,5 @@ do_build() {
 
 do_install() {
   install -Dm0755 pngcrush "${pkg_prefix}/bin/pngcrush"
+  install -Dm0644 LICENSE "${pkg_prefix}/share/LICENSE"
 }
