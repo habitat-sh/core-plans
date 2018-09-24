@@ -144,6 +144,8 @@ plan_path = "cpio"
 plan_path = "cppunit"
 [cpputest]
 plan_path = "cpputest"
+[cuda]
+plan_path = "cuda"
 [curator]
 plan_path = "curator"
 [curator4]
