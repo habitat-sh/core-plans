@@ -9,8 +9,8 @@ pkg_source=http://www.memcached.org/files/${pkg_name}-${pkg_version}.tar.gz
 pkg_shasum=494c060dbd96d546c74ab85a3cc3984d009b4423767ac33e05dd2340c01f1c4b
 pkg_deps=(
   core/glibc
+  core/cyrus-sasl
   core/libevent
-  core/libsasl2
 )
 pkg_build_deps=(
   core/git
