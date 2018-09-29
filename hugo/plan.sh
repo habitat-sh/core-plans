@@ -8,6 +8,9 @@ pkg_build_deps=(
   core/dep
   core/mage
 )
+pkg_deps=(
+  core/glibc
+)
 pkg_bin_dirs=(bin)
 pkg_source="https://github.com/gohugoio/hugo"
 pkg_upstream_url="https://gohugo.io"
