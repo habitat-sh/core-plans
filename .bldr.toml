@@ -420,6 +420,21 @@ plan_path = "handlebars-cmd"
 plan_path = "happy"
 [haproxy]
 plan_path = "haproxy"
+[haproxy16]
+plan_path = "haproxy16"
+paths = [
+  "haproxy/*"
+]
+[haproxy17]
+plan_path = "haproxy17"
+paths = [
+  "haproxy/*"
+]
+[haproxy18]
+plan_path = "haproxy18"
+paths = [
+  "haproxy/*"
+]
 [harfbuzz]
 plan_path = "harfbuzz"
 [helm]
