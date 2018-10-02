@@ -18,12 +18,9 @@ source "${BATS_TEST_DIRNAME}/../plan.sh"
   [ "$(hab svc status | grep "cockroach\.default" | awk '{print $4}' | grep up)" ]
 }
 
-@test "Listening on port 11211" {
-  result="$(netstat -peanut | grep memcached | head -1 | awk '{print $4}' | awk -F':' '{print $2}')"
-  [ "${result}" -eq 11211 ]
-}
-
-@test "Contains SASL support" {
-  memcached --help | grep "enable-sasl"
+@test "Listening on ports: 8080, 26257" {
+  result="$(netstat -peanut | grep cockroach | awk '{print $4}' | awk -F':' '{print $2}' | grep 8080)"
+  [ $? -eq 0 ]
+  result="$(netstat -peanut | grep cockroach | awk '{print $4}' | awk -F':' '{print $2}' | grep 26257)"
   [ $? -eq 0 ]
 }
