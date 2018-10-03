@@ -1,0 +1,16 @@
+port = 8081
+
+[database]
+
+type   = "derby"
+url    = "jdbc:derby:{db.home};create=true"
+driver = "org.apache.derby.jdbc.EmbeddedDriver"
+
+[storage]
+
+binary_provider_type       = "file-system"
+binary_provider_cache_size = "5000000000"
+
+[jvm]
+min_heap = "512m"
+max_heap = "2g"
