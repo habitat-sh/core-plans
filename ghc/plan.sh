@@ -1,12 +1,12 @@
 pkg_name=ghc
 pkg_origin=core
-pkg_version=8.4.3
+pkg_version=8.6.1
 pkg_license=('BSD-3-Clause')
 pkg_upstream_url="https://www.haskell.org/ghc/"
 pkg_description="The Glasgow Haskell Compiler"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-src.tar.xz"
-pkg_shasum="ae47afda985830de8811243255aa3744dfb9207cb980af74393298b2b62160d6"
+pkg_shasum="2c25c26d1e5c47c7cbb2a1d8e6456524033e7a71409184dd3125e3fc5a3c7036"
 
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
@@ -26,7 +26,7 @@ pkg_deps=(
 pkg_build_deps=(
   core/binutils
   core/diffutils
-  core/ghc82
+  core/ghc84
   core/make
   core/patch
   core/sed
