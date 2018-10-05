@@ -1,0 +1,12 @@
+#!/bin/sh
+
+exec 2>&1
+exec cockroach start \
+  {{#if cfg.insecure ~}}
+  --insecure \
+  {{/if ~}}
+  --host={{sys.ip}} \
+  --port={{cfg.port}} \
+  --http-host={{sys.ip}} \
+  --http-port={{cfg.http-port}} \
+  --store={{pkg.svc_data_path}}
