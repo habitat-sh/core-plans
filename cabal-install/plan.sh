@@ -1,12 +1,12 @@
 pkg_name=cabal-install
 pkg_origin=core
-pkg_version=2.2.0.0
+pkg_version=2.4.0.0
 pkg_license=('BSD-3-Clause')
 pkg_upstream_url="https://www.haskell.org/cabal/"
 pkg_description="Command-line interface for Cabal and Hackage"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://www.haskell.org/cabal/release/cabal-install-${pkg_version}/cabal-install-${pkg_version}.tar.gz"
-pkg_shasum="c856a2dd93c5a7b909597c066b9f9ca27fbda1a502b3f96077b7918c0f64a3d9"
+pkg_shasum="1329e9564b736b0cfba76d396204d95569f080e7c54fe355b6d9618e3aa0bef6"
 
 pkg_bin_dirs=(bin)
 
