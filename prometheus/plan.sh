@@ -2,13 +2,12 @@ pkg_name=prometheus
 pkg_description="Prometheus monitoring"
 pkg_upstream_url=http://prometheus.io
 pkg_origin=core
-pkg_version=1.6.1
-pkg_maintainer="Lamont Lucas <lamont@fastrobot.com>"
+pkg_version=2.4.2
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_bin_dirs=(bin)
-# not used, since I actually git clone the repo and checkout the pkg_version branch
 pkg_source="https://github.com/prometheus/prometheus/archive/v${pkg_version}.tar.gz"
-pkg_shasum=ecc9ce94fce45994c23b76eb0c5acbb1b942513be601872c8cd74d0821450c5e
+pkg_shasum=5e327347490410f6c5491971b8e24ac02cf19fdd787354bd0bab90ea89421b76
 prom_pkg_dir="$HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_version}"
 prom_build_dir="${prom_pkg_dir}/src/${pkg_source}"
 pkg_build_deps=(
@@ -28,32 +27,27 @@ pkg_binds_optional=(
 )
 
 
-do_prepare() {
-  export GOPATH=$HAB_CACHE_SRC_PATH/$pkg_dirname
-}
-
-# since I'm cloning a git repo, override download and verify callbacks to do nothing
-do_download() {
-  return 0
-}
-
-do_verify () {
-  return 0
+do_setup_environment() {
+  export GOPATH="$HAB_CACHE_SRC_PATH/$pkg_dirname"
 }
 
 do_unpack() {
-  mkdir -p "$prom_pkg_dir/src/github.com/prometheus"
-  pushd "$prom_pkg_dir/src/github.com/prometheus"
-  git clone --branch v${pkg_version} https://github.com/prometheus/prometheus.git
-  popd
+  mkdir -p "$prom_pkg_dir/src/github.com/prometheus/prometheus"
+  pushd "$prom_pkg_dir/src/github.com/prometheus/prometheus" || exit 1
+  tar xf "$HAB_CACHE_SRC_PATH/$pkg_filename" --strip 1 --no-same-owner
+  popd || exit 1
 }
 
 do_build() {
-  pushd "${prom_pkg_dir}/src/github.com/prometheus/prometheus"
-  make build
-  "$GOPATH/bin/promu" build --prefix "$pkg_prefix/bin"
-  popd
-  return 0
+  pushd "$prom_pkg_dir/src/github.com/prometheus/prometheus" || exit 1
+  PREFIX="$pkg_prefix/bin" make build
+  popd || exit 1
+}
+
+do_check() {
+  pushd "$prom_pkg_dir/src/github.com/prometheus/prometheus" || exit 1
+  make test
+  popd || exit 1
 }
 
 do_install() {
