@@ -140,6 +140,8 @@ paths = [
 plan_path = "cpanminus"
 [cpio]
 plan_path = "cpio"
+[cppcheck]
+plan_path = "cppcheck"
 [cppunit]
 plan_path = "cppunit"
 [cpputest]
