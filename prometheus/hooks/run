@@ -2,6 +2,6 @@
 
 exec 2>&1
 
-exec prometheus -config.file={{pkg.svc_config_path}}/prometheus.yml \
- -web.listen-address ":{{cfg.listening_port}}" \
- -storage.local.path {{pkg.svc_data_path}}
+exec prometheus --config.file={{pkg.svc_config_path}}/prometheus.yml \
+ --web.listen-address ":{{cfg.listening_port}}" \
+ --storage.tsdb.path {{pkg.svc_data_path}}
