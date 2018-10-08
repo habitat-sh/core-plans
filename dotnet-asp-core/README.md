@@ -1,8 +1,6 @@
-# dotnet-core
+# dotnet-asp-core
 
-.NET Core is a blazing fast, lightweight and modular platform
-  for creating web applications and services that run on Windows,
-  Linux and Mac.
+ASP.NET Core is a cross-platform, high-performance, open-source framework for building modern, cloud-based, Internet-connected applications.
 
 ## Maintainers
 
@@ -12,6 +10,8 @@
 
 Binary package
 
-## Usage
-
-*TODO: Add instructions for usage*
+## Testing
+To test the Linux package run the following command from the Habitat Studio:
+```
+./tests/test.sh
+```
