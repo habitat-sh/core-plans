@@ -1,11 +1,11 @@
 source "${BATS_TEST_DIRNAME}/../plan.sh"
 
 @test "Version matches" {
-  result="$(dotnet --info | grep Version | awk '{print $2}')"
+  result="$(dotnet --version)"
   [ "$result" = "${pkg_version}" ]
 }
 
-@test "Help command" {
-  run dotnet --help
-  [ $status -eq 129 ]
+@test "Info command" {
+  run dotnet --info
+  [ $status -eq 0 ]
 }
