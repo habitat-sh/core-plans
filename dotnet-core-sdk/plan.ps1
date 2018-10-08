@@ -1,6 +1,6 @@
 $pkg_name="dotnet-core-sdk"
 $pkg_origin="core"
-$pkg_version="2.0.3"
+$pkg_version="2.1.403"
 $pkg_license=('MIT')
 $pkg_upstream_url="https://www.microsoft.com/net/core"
 $pkg_description=".NET Core is a blazing fast, lightweight and modular platform
