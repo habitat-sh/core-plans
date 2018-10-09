@@ -22,5 +22,5 @@ do_build() {
 
 do_install() {
   build_line "Copying files from $PWD"
-  cp -rv ${HAB_CACHE_SRC_PATH}/${pkg_name}-oss-${pkg_version}/* ${PREFIX}/
+  cp -rv "${HAB_CACHE_SRC_PATH}/${pkg_name}-oss-${pkg_version}"/* "${PREFIX}"/
 }
