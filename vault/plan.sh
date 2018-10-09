@@ -1,12 +1,12 @@
 pkg_origin=core
 pkg_name=vault
-pkg_version=0.11.2
+pkg_version=0.11.3
 pkg_description="A tool for managing secrets."
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=("MPL-2.0")
 pkg_upstream_url=https://www.vaultproject.io/
 pkg_source="https://releases.hashicorp.com/vault/${pkg_version}/vault_${pkg_version}_linux_amd64.zip"
-pkg_shasum=0d1c12fb26fc755cc94188e88a5b882bfeb74f0232fc32c7cf7769a3f4be2053
+pkg_shasum=b921abf4ade14087dbc21b6b353aa65f0630fad3275f27641c48b3d36093af25
 pkg_filename="${pkg_name}-${pkg_version}_linux_amd64.zip"
 pkg_deps=()
 pkg_build_deps=(core/unzip)
