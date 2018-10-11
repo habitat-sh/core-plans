@@ -121,6 +121,8 @@ cerebro @predominant
 concourse @echohack
 concourse-fly @echohack
 consul @defilan
+cuda @bdangit
+cuda-libs @bdangit
 dep @afiune @nellshamrell
 dotnet-47-dev-pack @mwrock
 dotnet-asp-core @defilan
