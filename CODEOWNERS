@@ -20,81 +20,81 @@ zeromq @reset @fnichol @raskchanky @nellshamrell
 # nothing and are in build order. Consequently, these need a closer look when
 # accepting changes, updating versions, etc.
 
-linux-headers @fnichol
-glibc @fnichol @reset
-zlib @fnichol
-file @fnichol
-binutils @fnichol
-m4 @fnichol
-gmp @fnichol
-mpfr @fnichol
-libmpc @fnichol
-gcc @fnichol
-gcc-libs @fnichol @reset
-patchelf @fnichol
-bzip2 @fnichol
-pkg-config @fnichol
-ncurses @fnichol
-attr @fnichol
-acl @fnichol
-libcap @fnichol
-sed @fnichol
-shadow @fnichol
-psmisc @fnichol
-procps-ng @fnichol
-coreutils @fnichol
-bison @fnichol
-flex @fnichol
-pcre @fnichol
-grep @fnichol
-readline @fnichol
-bash @fnichol @nellshamrell
-bc @fnichol
-tar @fnichol @nellshamrell
-gawk @fnichol
-libtool @fnichol
-gdbm @fnichol
-expat @fnichol
-db @fnichol
-inetutils @fnichol
-iana-etc @fnichol
-less @fnichol
-perl @fnichol
-diffutils @fnichol
-autoconf @fnichol
-automake @fnichol
-findutils @fnichol
-xz @fnichol
-gettext @fnichol
-gzip @fnichol
-make @fnichol
-patch @fnichol
-texinfo @fnichol
-util-linux @fnichol
-tcl @fnichol
-expect @fnichol
-dejagnu @fnichol
-check @fnichol
-libidn @fnichol
-cacerts @fnichol
-openssl @fnichol @reset @echohack
-wget @fnichol
-unzip @fnichol @nellshamrell
-rq @fnichol
-linux-headers-musl @fnichol @nellshamrell
-musl @fnichol @nellshamrell
-busybox-static @fnichol
-zlib-musl @fnichol
-bzip2-musl @fnichol
-xz-musl @fnichol
-libsodium-musl @fnichol @reset
-openssl-musl @fnichol
-libarchive-musl @fnichol @reset
-rust @fnichol @reset @raskchanky @nellshamrell
-vim @fnichol @nellshamrell
-libbsd @fnichol
-clens @fnichol
-mg @fnichol
+linux-headers @fnichol @smacfarlane
+glibc @fnichol @reset @smacfarlane
+zlib @fnichol @smacfarlane
+file @fnichol @smacfarlane
+binutils @fnichol @smacfarlane
+m4 @fnichol @smacfarlane
+gmp @fnichol @smacfarlane
+mpfr @fnichol @smacfarlane
+libmpc @fnichol @smacfarlane
+gcc @fnichol @smacfarlane
+gcc-libs @fnichol @reset @smacfarlane
+patchelf @fnichol @smacfarlane
+bzip2 @fnichol @smacfarlane
+pkg-config @fnichol @smacfarlane
+ncurses @fnichol @smacfarlane
+attr @fnichol @smacfarlane
+acl @fnichol @smacfarlane
+libcap @fnichol @smacfarlane
+sed @fnichol @smacfarlane
+shadow @fnichol @smacfarlane
+psmisc @fnichol @smacfarlane
+procps-ng @fnichol @smacfarlane
+coreutils @fnichol @smacfarlane
+bison @fnichol @smacfarlane
+flex @fnichol @smacfarlane
+pcre @fnichol @smacfarlane
+grep @fnichol @smacfarlane
+readline @fnichol @smacfarlane
+bash @fnichol @nellshamrell @smacfarlane
+bc @fnichol @smacfarlane
+tar @fnichol @nellshamrell @smacfarlane
+gawk @fnichol @smacfarlane
+libtool @fnichol @smacfarlane
+gdbm @fnichol @smacfarlane
+expat @fnichol @smacfarlane
+db @fnichol @smacfarlane
+inetutils @fnichol @smacfarlane
+iana-etc @fnichol @smacfarlane
+less @fnichol @smacfarlane
+perl @fnichol @smacfarlane
+diffutils @fnichol @smacfarlane
+autoconf @fnichol @smacfarlane
+automake @fnichol @smacfarlane
+findutils @fnichol @smacfarlane
+xz @fnichol @smacfarlane
+gettext @fnichol @smacfarlane
+gzip @fnichol @smacfarlane
+make @fnichol @smacfarlane
+patch @fnichol @smacfarlane
+texinfo @fnichol @smacfarlane
+util-linux @fnichol @smacfarlane
+tcl @fnichol @smacfarlane
+expect @fnichol @smacfarlane
+dejagnu @fnichol @smacfarlane
+check @fnichol @smacfarlane
+libidn @fnichol @smacfarlane
+cacerts @fnichol @smacfarlane
+openssl @fnichol @reset @echohack @smacfarlane
+wget @fnichol @smacfarlane
+unzip @fnichol @nellshamrell @smacfarlane
+rq @fnichol @smacfarlane
+linux-headers-musl @fnichol @nellshamrell @smacfarlane
+musl @fnichol @nellshamrell @smacfarlane
+busybox-static @fnichol @smacfarlane
+zlib-musl @fnichol @smacfarlane
+bzip2-musl @fnichol @smacfarlane
+xz-musl @fnichol @smacfarlane
+libsodium-musl @fnichol @reset @smacfarlane
+openssl-musl @fnichol @smacfarlane
+libarchive-musl @fnichol @reset @smacfarlane
+rust @fnichol @reset @raskchanky @nellshamrell @smacfarlane
+vim @fnichol @nellshamrell @smacfarlane
+libbsd @fnichol @smacfarlane
+clens @fnichol @smacfarlane
+mg @fnichol @smacfarlane
 powershell @mwrock
 7zip @mwrock
 docker-credential-helper @mwrock
