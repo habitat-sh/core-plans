@@ -10,7 +10,7 @@ pkg_build_deps=(
   core/gcc
 )
 pkg_deps=(
-  # core/glibc
+  core/glibc
 )
 pkg_bin_dirs=(bin)
 pkg_repository="https://github.com/gohugoio/hugo.git"
