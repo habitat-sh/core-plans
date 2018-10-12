@@ -1,5 +1,5 @@
-pkg_origin=core
 pkg_name=haproxy
+pkg_origin=core
 pkg_description="The Reliable, High Performance TCP/HTTP Load Balancer"
 pkg_version=1.8.14
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
