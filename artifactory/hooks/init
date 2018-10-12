@@ -1,0 +1,49 @@
+#!{{pkgPathFor "core/bash"}}/bin/bash
+
+exec 2>&1
+
+echo "Preparing ARTIFACTORY_HOME..."
+
+# 1) Clear out existing files we don't want to keep around
+# https://www.jfrog.com/confluence/display/RTF/Upgrading+Artifactory
+# 2) Move directories that ship in the package into place
+for dir in bin misc tomcat webapps
+do
+  rm -rf {{pkg.svc_var_path}}/$dir
+  cp -R {{pkg.path}}/$dir {{pkg.svc_var_path}}/
+done
+
+# Move in etc if it doesn't exist
+if [ ! -d "{{pkg.svc_var_path}}/etc" ]; then
+  cp -R {{pkg.path}}/etc {{pkg.svc_var_path}}/
+fi
+
+# Create required ephemeral directories
+for dir in backup data logs
+do
+  mkdir -p {{pkg.svc_var_path}}/$dir
+done
+
+# Cleanup legacy config
+rm -f {{pkg.svc_var_path}}/etc/storage.properties
+
+# Symlink config files into $ARTIFACTORY_HOME/etc
+for config in binarystore.xml db.properties
+do
+  echo "Linking $config"
+  ln -sf {{pkg.svc_config_path}}/$config {{pkg.svc_var_path}}/etc/$config
+done
+
+# Symlink config files into $ARTIFACTORY_HOME/tomcat/conf
+for config in server.xml
+do
+  echo "Linking $config"
+  ln -sf {{pkg.svc_config_path}}/$config {{pkg.svc_var_path}}/tomcat/conf/$config
+done
+
+# Symlink config files into $ARTIFACTORY_HOME/bin/
+for config in artifactory.default
+do
+  echo "Linking $config"
+  ln -sf {{pkg.svc_config_path}}/$config {{pkg.svc_var_path}}/bin/$config
+done
