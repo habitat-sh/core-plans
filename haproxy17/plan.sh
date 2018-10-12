@@ -1,8 +1,4 @@
-if [[ "${PWD}" = *"haproxy17"* ]]; then
-  source ../haproxy/plan.sh
-else
-  source haproxy/plan.sh
-fi
+source ../haproxy/plan.sh
 
 pkg_name=haproxy17
 pkg_distname=haproxy
