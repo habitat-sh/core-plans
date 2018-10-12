@@ -11,6 +11,9 @@ Go is an open source programming language that makes it easy to
 
 Binary package
 
-## Usage
+## Testing
 
-*TODO: Add instructions for usage*
+To test the build, enter the Habitat Studio and run:
+```
+./tests/test.sh
+```
