@@ -1,4 +1,4 @@
-source ./plan.sh
+source "${BATS_TEST_DIRNAME}/../plan.sh"
 
 @test "Binlink dependencies" {
   run hab pkg binlink core/go
