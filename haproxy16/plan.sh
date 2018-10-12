@@ -1,6 +1,7 @@
 source ../haproxy/plan.sh
 
 pkg_name=haproxy16
+pkg_description="The Reliable, High Performance TCP/HTTP Load Balancer"
 pkg_distname=haproxy
 pkg_version=1.6.14
 pkg_source=https://www.haproxy.org/download/1.6/src/${pkg_distname}-${pkg_version}.tar.gz
