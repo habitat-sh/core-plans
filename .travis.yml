@@ -3,6 +3,9 @@ branches:
   - master
 language: python
 cache: pip
+sudo: required
+services:
+  - docker
 addons:
   apt:
     sources:
@@ -10,6 +13,8 @@ addons:
 install:
   - pip install pre-commit
   - sudo apt-get install -y shellcheck
+  - curl https://raw.githubusercontent.com/habitat-sh/habitat/master/components/hab/install.sh | sudo bash
+  - hab --version
 notifications:
   webhooks: https://old-bots.habitat.sh:54856/travis
-script: ./bin/travis.sh
+script: ./bin/travis.sh && ./bin/travis-plan-test.sh
