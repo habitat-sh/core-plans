@@ -1,12 +1,23 @@
 #!/bin/sh
 
 exec 2>&1
-exec cockroachoss start \
+exec cockroach start \
   {{#if cfg.insecure ~}}
   --insecure \
+  {{else ~}}
+  --certs-dir="{{pkg.svc_var_path}}/certs" \
+  {{/if ~}}
+  {{#if svc.me.follower ~}}
+  --join={{svc.leader.sys.ip}}:{{svc.leader.cfg.port}} \
   {{/if ~}}
   --host={{sys.ip}} \
   --port={{cfg.port}} \
   --http-host={{sys.ip}} \
   --http-port={{cfg.http-port}} \
-  --store={{pkg.svc_data_path}}
+  --store={{pkg.svc_data_path}} \
+  --locality=region={{cfg.locality.region}},datacenter={{cfg.locality.datacenter}} \
+  --cache={{cfg.cache}} \
+  --max-sql-memory={{cfg.max-sql-memory}} \
+  --logtostderr=WARNING \
+  --log-dir={{pkg.svc_var_path}}/log \
+  --temp-dir={{pkg.svc_var_path}}/tmp
