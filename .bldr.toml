@@ -111,8 +111,16 @@ plan_path = "certstrap"
 plan_path = "check"
 [clang]
 plan_path = "clang"
-[clang-tools-extra]
-plan_path = "clang-tools-extra"
+[clang5]
+plan_path = "clang5"
+paths = [
+  "clang/*"
+]
+[clang7]
+plan_path = "clang7"
+paths = [
+  "clang/*"
+]
 [clens]
 plan_path = "clens"
 [clingo]
