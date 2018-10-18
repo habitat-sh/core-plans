@@ -1,8 +1,10 @@
 #!/bin/bash
 # Script to run when testing core-plans on Travis CI
 
-echo "Setup Habitat Sudio"
 export HAB_ORIGIN=travisci
+export DO_CHECK=1
+
+echo "Setup Habitat Sudio"
 hab origin key generate
 
 echo "Attempting to build and test core-plans changes:"
