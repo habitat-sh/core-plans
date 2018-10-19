@@ -7,6 +7,7 @@ export RABBITMQ_ENABLED_PLUGINS_FILE="{{pkg.svc_var_path}}/enabled_plugins"
 export RABBITMQ_HOME="{{pkg.svc_var_path}}"
 export RABBITMQ_GENERATED_CONFIG_DIR="{{pkg.svc_var_path}}"
 export RABBITMQ_SCHEMA_DIR="{{pkg.svc_var_path}}"
+export RABBITMQ_LOG_BASE="{{pkg.svc_var_path}}/logs"
 export HOME="{{pkg.svc_var_path}}"
 export RABBITMQ_LOGS=-
 export RABBITMQ_SASL_LOGS=-
