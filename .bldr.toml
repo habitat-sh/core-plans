@@ -1030,6 +1030,16 @@ plan_path = "procps-ng"
 plan_path = "proj"
 [prometheus]
 plan_path = "prometheus"
+[prometheus1]
+plan_path = "prometheus1"
+paths = [
+  "prometheus/*"
+]
+[prometheus2]
+plan_path = "prometheus2"
+paths = [
+  "prometheus/*"
+]
 [prometheus-cpp]
 plan_path = "prometheus-cpp"
 [protobuf]

@@ -16,7 +16,7 @@ source "${BATS_TEST_DIRNAME}/../plan.sh"
 }
 
 @test "Service is running" {
-  [ "$(hab svc status | grep "prometheus\.default" | awk '{print $4}' | grep up)" ]
+  [ "$(hab svc status | grep "prometheus2\.default" | awk '{print $4}' | grep up)" ]
 }
 
 @test "Listening on port 9090" {
