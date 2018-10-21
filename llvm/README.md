@@ -1,6 +1,6 @@
 # llvm
 
-This package provides the llvm libraries and binaries.
+This package provides the llvm libraries and binaries. This package tracks the latest major version of llvm.
 
 ## Usage
 

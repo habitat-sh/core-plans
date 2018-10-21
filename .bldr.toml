@@ -742,6 +742,16 @@ plan_path = "linux-headers-musl"
 plan_path = "linux-pam"
 [llvm]
 plan_path = "llvm"
+[llvm5]
+plan_path = "llvm5"
+paths = [
+  "llvm/*"
+]
+[llvm7]
+plan_path = "llvm7"
+paths = [
+  "llvm/*"
+]
 [local-lib]
 plan_path = "local-lib"
 [logback]
