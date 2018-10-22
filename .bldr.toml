@@ -732,6 +732,8 @@ plan_path = "libxtst"
 plan_path = "libyajl2"
 [libyaml]
 plan_path = "libyaml"
+[libzip]
+plan_path = "libzip"
 [linux]
 plan_path = "linux"
 [linux-headers]
