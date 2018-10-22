@@ -11,19 +11,25 @@ pkg_dirname="${pkg_name}-${pkg_version}"
 pkg_shasum=53ba0708be8a7db44256e3ae9fcecc91b811e5b5119e6080c951ffe7910ffb0f
 pkg_deps=(
   core/coreutils
+  core/libzip
+  core/bzip2-musl
   core/curl
   core/glibc
   core/libxml2
+  core/icu
   core/libjpeg-turbo
   core/libpng
   core/openssl
   core/readline
+  core/zip
   core/zlib
 )
 pkg_build_deps=(
   core/autoconf
   core/bison2
   core/gcc
+  core/gcc-libs
+  core/libgd
   core/make
   core/re2c
 )
@@ -33,6 +39,9 @@ pkg_include_dirs=(include)
 pkg_interpreters=(bin/php)
 
 do_build() {
+
+  set_ld_library_path
+
   ./configure --prefix="${pkg_prefix}" \
     --enable-exif \
     --enable-fpm \
@@ -51,7 +60,12 @@ do_build() {
     --with-openssl="$(pkg_path_for openssl)" \
     --with-png-dir="$(pkg_path_for libpng)" \
     --with-xmlrpc \
-    --with-zlib="$(pkg_path_for zlib)"
+    --with-zlib="$(pkg_path_for zlib)" \
+    --enable-zip \
+    --with-libzip="$(pkg_path_for "core/libzip")" \
+    --with-bz2="$(pkg_path_for "core/bzip2-musl")" \
+    --enable-intl
+
   make
 }
 
@@ -66,4 +80,24 @@ do_install() {
 
 do_check() {
   make test
+}
+
+set_ld_library_path() {
+  local ld_library_path_part=()
+
+  for dep in "${pkg_build_deps[@]}"; do
+    local dep_path
+    dep_path=$(pkg_path_for "$dep");
+
+    if [[ -f "$dep_path/LD_RUN_PATH" ]]; then
+      local data
+      local trimmed
+      data=$(cat "$dep_path/LD_RUN_PATH")
+      trimmed=$(trim "$data")
+      ld_library_path_part+=("$trimmed")
+    fi
+  done
+
+  LD_LIBRARY_PATH=$(join_by ':' "${ld_library_path_part[@]}")
+  export LD_LIBRARY_PATH
 }
