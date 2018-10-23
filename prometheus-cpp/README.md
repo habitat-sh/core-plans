@@ -13,10 +13,9 @@ Static C++ Library and `include`
 
 ## Usage
 
-If you are building a C++ application and you require a way to provide metrics especially
-for [Prometheus](http://prometheus.io), then add this package to your `pkg_build_deps`.  Habitat
-will then populate the `LD_RUN_PATH`, `CFLAGS`, `CXXFLAGS`, etc. to allow you statically link to
-this library.
+If you are building a C++ application and you require a way to provide metrics especially for
+[Prometheus](http://prometheus.io), then add this package to your `pkg_build_deps`.  Habitat will then populate the
+`LD_RUN_PATH`, `CFLAGS`, `CXXFLAGS`, and `CMAKE_FIND_ROOT_PATH`. to allow you statically link to this library.
 
 ### CMake
 
@@ -25,7 +24,7 @@ For those using `cmake`, this is an example `plan.sh`:
 ```bash
 pkg_name=prometheus-cpp-example
 pkg_origin=bdangit
-pkg_version=0.1.0
+pkg_version=0.1.1
 pkg_license=('MIT')
 pkg_build_deps=(
   core/gcc
@@ -37,40 +36,53 @@ pkg_build_deps=(
 pkg_deps=(
   core/glibc
   core/gcc-libs
+  core/zlib
+  core/protobuf
 )
 
 pkg_bin_dirs=(bin)
 
-BUILDDIR='build'
+do_begin() {
+  export HAB_ENV_CMAKE_FIND_ROOT_PATH_SEPARATOR=";"
+  export HAB_ENV_CMAKE_FIND_ROOT_PATH_TYPE="aggregate"
+}
+
+do_setup_environment() {
+  set_buildtime_env BUILDDIR "_build"
+}
 
 do_prepare() {
-  rm -rf "${BUILDDIR}"
+  mkdir -p "${BUILDDIR}"
 }
 
 do_build() {
-  mkdir -p "${BUILDDIR}"
-  cmake -H./ \
-    -B${BUILDDIR} \
+  pushd "${BUILDDIR}" || exit 1
+  cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-    -Dprometheus-cpp_DIR="$(pkg_path_for core/prometheus-cpp)/lib64/cmake/prometheus-cpp"
-  make -C "${BUILDDIR}" VERBOSE=${DEBUG}
+    -DCMAKE_FIND_ROOT_PATH="${CMAKE_FIND_ROOT_PATH}" \
+    ..
+  make
+  popd || exit 1
 }
 
 do_install() {
-  make -C "${BUILDDIR}" install
+  pushd "${BUILDDIR}" || exit 1
+  make install
+  popd || exit 1
 }
 ```
 
-In your `CMakeLists.txt`, make sure to find the package `prometheus-cpp` and set your target to link against `prometheus-cpp::prometheus-cpp`.
+In your `CMakeLists.txt`, make sure to find the package `prometheus-cpp` and set your target to link against
+`prometheus-cpp::core`, `prometheus-cpp::pull`, and/or `prometheus-cpp::push`.
 
 ```cmake
 find_package(prometheus-cpp REQUIRED)
 
 add_executable(myapp main.cpp)
-target_link_libraries(myapp prometheus-cpp::prometheus-cpp)
+target_link_libraries(myapp prometheus-cpp::core prometheus-cpp::pull)
 ```
 
 ### Example Application
 
-An example application built with Habitat is can be viewed [here](https://github.com/bdangit/prometheus-cpp-example).
+An example application built with Habitat can be viewed [here](https://github.com/bdangit/prometheus-cpp-example).
