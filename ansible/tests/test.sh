@@ -18,6 +18,7 @@ if [ "${SKIPBUILD}" -eq 0 ]; then
   set +e
 fi
 
-export PYTHONPATH="$(hab pkg path core/python2)/lib/python2.7/site-packages:$(hab pkg path ${pkg_origin}/ansible)/lib/python2.7/site-packages"
+PYTHONPATH="$(hab pkg path core/python2)/lib/python2.7/site-packages:$(hab pkg path ${pkg_origin}/ansible)/lib/python2.7/site-packages"
+export PYTHONPATH
 
 bats "${TESTDIR}/test.bats"
