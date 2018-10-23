@@ -9,7 +9,7 @@ global:
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
   external_labels:
-    monitor: 'codelab-monitor'
+      monitor: 'codelab-monitor'
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
@@ -27,15 +27,15 @@ scrape_configs:
 
     static_configs:
       - targets: ['localhost:9090']
-{{#if bind.targets ~}}
+{{~#if bind.targets}}
   - job_name:  'from_hab_ring'
     static_configs:
-{{#each bind.targets.members as |target| ~}}
+{{#each bind.targets.members as |target|}}
       - targets: ['{{target.sys.ip}}:{{target.cfg.metric-http-port}}']
-{{/each ~}}
-{{/if ~}}
+{{/each}}
+{{~/if}}
 
-{{#if svc.me.follower ~}}
+{{#if svc.me.follower}}
 # example from https://prometheus.io/docs/operating/federation/
   - job_name: 'federate'
     scrape_interval: 15s
@@ -51,4 +51,4 @@ scrape_configs:
     static_configs:
       - targets:
         - '{{svc.leader.sys.ip}}:{{svc.leader.cfg.prom_ds_http}}'
-{{/if ~}}
+{{/if}}
