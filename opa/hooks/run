@@ -1,0 +1,7 @@
+#!/bin/sh
+
+exec 2>&1
+exec opa run -s \
+  -l {{cfg.log.level}} \
+  --log-format {{cfg.log.format}} \
+  -a {{cfg.service.address}}
