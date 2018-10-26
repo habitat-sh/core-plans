@@ -19,8 +19,8 @@ Static C++ Library and Include Headers
 ## Usage
 
 If you require `gtest` and `gmock` just include `core/googletest` preferably in `pkg_build_deps`.  
-Habitat will then update `CFLAGS`, `CXXFLAGS`, `CPPFLAGS`, `LDFLAGS` and `PKG_CONFIG_PATH` with
-paths to the libs and includes.
+Habitat will then update `CFLAGS`, `CXXFLAGS`, `CPPFLAGS`, `LDFLAGS`, `PKG_CONFIG_PATH` and
+`CMAKE_FIND_ROOT_PATH` with paths to the libs and includes.
 
 ### CMake
 
@@ -55,12 +55,9 @@ do_prepare() {
 
 do_build() {
   pushd "${BUILD_DIR}" > /dev/null
-
-  _GTEST_PATH="$(pkg_path_for core/googletest)"
-
   cmake \
     -DCMAKE_INSTALL_PREFIX="${pkg_prefix}" \
-    -DGTest_DIR="${_GTEST_PATH}/lib64/cmake/GTest" \
+    -DCMAKE_FIND_ROOT_PATH="${CMAKE_FIND_ROOT_PATH}" \
     ..
   make
 
