@@ -1,12 +1,12 @@
 pkg_name=zerotier-one
 pkg_origin=core
-pkg_version="1.2.10"
+pkg_version="1.2.12"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("GPL-3.0")
 pkg_description="A Smart Ethernet Switch for Earth"
 pkg_upstream_url="https://github.com/zerotier/ZeroTierOne"
 pkg_source="https://github.com/zerotier/ZeroTierOne/archive/${pkg_version}.tar.gz"
-pkg_shasum="1c79ec57e67764079a77704b336e642ae3cf221dc8088b0cf9e9c81e0a9c0c57"
+pkg_shasum="212799bfaeb5e7dff20f2cd83f15742c8e13b8e9535606cfb85abcfb5fb6fed4"
 pkg_dirname="ZeroTierOne-${pkg_version}"
 
 pkg_build_deps=(
