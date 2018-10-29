@@ -1239,6 +1239,8 @@ plan_path = "yarn"
 plan_path = "yasm"
 [zeromq]
 plan_path = "zeromq"
+[zerotier-one]
+plan_path = "zerotier-one"
 [zip]
 plan_path = "zip"
 [zlib]
