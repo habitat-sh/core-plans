@@ -25,7 +25,7 @@ This package contains the [ZeroTierOne](https://github.com/zerotier/ZeroTierOne)
 
 ### Optional next steps
 
--  Verify the service is online
+* Verify the service is online
 
     ```bash
     hab pkg exec core/zerotier-one zerotier-cli info
@@ -37,7 +37,7 @@ This package contains the [ZeroTierOne](https://github.com/zerotier/ZeroTierOne)
     200 info 0fa7fa19b7 1.2.10 ONLINE
     ```
 
--  Use the CLI to join a network, if one was not specified via configuration in step 1 or you want to join additional networks
+* Use the CLI to join a network, if one was not specified via configuration in step 1 or you want to join additional networks
 
     ```bash
     hab pkg exec core/zerotier-one zerotier-cli join 8056c2e21c000001
@@ -49,7 +49,7 @@ This package contains the [ZeroTierOne](https://github.com/zerotier/ZeroTierOne)
     200 join OK
     ```
 
--  List joined networks
+* List joined networks
 
     ```bash
     hab pkg exec core/zerotier-one zerotier-cli listnetworks
