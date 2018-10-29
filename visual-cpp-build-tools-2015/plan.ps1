@@ -33,24 +33,24 @@ $pkg_include_dirs=@(
 
 function Invoke-SetupEnvironment {
    # These variables set up the correct installation directories for the MSBuild scripts
-  Push-BuildtimeEnv "VCTargetsPath" "$pkg_prefix\Program Files\MSBuild\Microsoft.Cpp\v4.0\v140"
-  Push-BuildtimeEnv "VcInstallDir" "$pkg_prefix\Program Files\Microsoft Visual Studio 14.0\VC"
-  Push-BuildtimeEnv "WindowsSdkDir_81" "$pkg_prefix\Windows Kits\8.1"
+  Push-RuntimeEnv "VCTargetsPath" "$pkg_prefix\Program Files\MSBuild\Microsoft.Cpp\v4.0\v140"
+  Push-RuntimeEnv "VcInstallDir" "$pkg_prefix\Program Files\Microsoft Visual Studio 14.0\VC"
+  Push-RuntimeEnv "WindowsSdkDir_81" "$pkg_prefix\Windows Kits\8.1"
 
   # These are so it knows where to find the file tracker (tracker.exe) in all build phases
-  Push-BuildtimeEnv "CLTrackerSdkPath" "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64"
-  Push-BuildtimeEnv "CLTrackerFrameworkPath" "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64"
-  Push-BuildtimeEnv "LinkTrackerSdkPath" "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64"
-  Push-BuildtimeEnv "LinkTrackerFrameworkPath" "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64"
-  Push-BuildtimeEnv "LibTrackerSdkPath" "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64"
-  Push-BuildtimeEnv "LibTrackerFrameworkPath" "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64"
-  Push-BuildtimeEnv "RCTrackerSdkPath" "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64"
-  Push-BuildtimeEnv "RCTrackerFrameworkPath" "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64"
+  Push-RuntimeEnv "CLTrackerSdkPath" "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64"
+  Push-RuntimeEnv "CLTrackerFrameworkPath" "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64"
+  Push-RuntimeEnv "LinkTrackerSdkPath" "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64"
+  Push-RuntimeEnv "LinkTrackerFrameworkPath" "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64"
+  Push-RuntimeEnv "LibTrackerSdkPath" "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64"
+  Push-RuntimeEnv "LibTrackerFrameworkPath" "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64"
+  Push-RuntimeEnv "RCTrackerSdkPath" "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64"
+  Push-RuntimeEnv "RCTrackerFrameworkPath" "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64"
 
   # This forces the MSBuild scripts to look at the environment variables rather than the
   # registry. Both are needed since different scripts use different variables.
-  Push-BuildtimeEnv "DisableRegistryUse" "true"
-  Push-BuildtimeEnv "UseEnv" "true"
+  Push-RuntimeEnv "DisableRegistryUse" "true"
+  Push-RuntimeEnv "UseEnv" "true"
 }
 
 function Invoke-Unpack {
