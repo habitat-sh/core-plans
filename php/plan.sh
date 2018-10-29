@@ -23,6 +23,7 @@ pkg_deps=(
   core/readline
   core/zip
   core/zlib
+  core/gcc-libs
 )
 pkg_build_deps=(
   core/autoconf
@@ -38,11 +39,7 @@ pkg_include_dirs=(include)
 pkg_interpreters=(bin/php)
 
 do_build() {
-  # The configuration scripts unset LD_RUN_PATH when testing linking for configured options,
-  # so the resulting 'conftest' binaries cannot run due to being unable to find libstdc++.so
-  # This allows those binaries to execute while limiting the scope of LD_LIBRARY_PATH
-  # to the execution of `./configure`.
-  LD_LIBRARY_PATH="$(pkg_path_for gcc)/lib" ./configure --prefix="${pkg_prefix}" \
+  ./configure --prefix="${pkg_prefix}" \
     --enable-exif \
     --enable-fpm \
     --with-fpm-user=hab \
