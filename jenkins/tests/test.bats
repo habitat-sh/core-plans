@@ -1,12 +1,12 @@
 source "${BATS_TEST_DIRNAME}/../plan.sh"
 
 @test "Version matches" {
-  result="$(java -jar $(hab pkg path rakops/jenkins)/jenkins.war --version)"
+  result="$(java -jar $(hab pkg path ${HAB_ORIGIN}/jenkins)/jenkins.war --version)"
   [ "$result" = "${pkg_version}" ]
 }
 
 @test "Help command" {
-  run java -jar $(hab pkg path rakops/jenkins)/jenkins.war --help
+  run java -jar $(hab pkg path ${HAB_ORIGIN}/jenkins)/jenkins.war --help
   [ $status -eq 0 ]
 }
 
