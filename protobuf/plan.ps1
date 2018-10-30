@@ -29,14 +29,13 @@ function Invoke-Build {
     cmake -G "Visual Studio 14 2015 Win64" -T "v140" -DCMAKE_SYSTEM_VERSION="8.1" -DCMAKE_INSTALL_PREFIX=../../../../install -DZLIB_LIBRARY_RELEASE="${zlib_libdir}" -DZLIB_INCLUDE_DIR="${zlib_includedir}" ..
     # We'll build the required parts here
     msbuild /p:Configuration=Release /p:Platform=x64 "INSTALL.vcxproj"
+    if($LASTEXITCODE -ne 0) { Write-Error "msbuild failed!" }
 
     .\extract_includes.bat
-
 }
 
 function Invoke-Install {
     Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\$pkg_name-$pkg_version\cmake\build\Release\protoc.exe" "$pkg_prefix\bin\" -Force
     Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\$pkg_name-$pkg_version\cmake\build\Release\*.lib" "$pkg_prefix\lib\" -Force
     Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\$pkg_name-$pkg_version\cmake\build\include\*" "$pkg_prefix\include\" -Force
-
 }
