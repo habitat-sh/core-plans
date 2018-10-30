@@ -20,6 +20,8 @@ pkg_build_deps=(
 
 pkg_deps=(
   core/bash
+  core/curl
+  core/gawk
   core/glibc
   core/python
   core/util-linux
