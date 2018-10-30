@@ -1,10 +1,10 @@
 pkg_name=pngquant
 pkg_origin=core
-pkg_version="2.12.0"
+pkg_version="2.12.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("GPL-3.0-only")
 pkg_source="https://github.com/kornelski/${pkg_name}/archive/${pkg_version}.tar.gz"
-pkg_shasum="53721387e1aa1729ccf20ff8faaf2587ebe4d03faaa0f6235a63070e08105967"
+pkg_shasum="5edf7c5bffd07e5d28fcc6d4d94a187c30b532c52ac986b3e45aff3dce0567dc"
 pkg_deps=(
   core/coreutils
   core/libpng
