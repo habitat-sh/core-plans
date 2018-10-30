@@ -15,6 +15,7 @@ function Invoke-Build {
     $Env:INST_TOP="$pkg_prefix"
     cd perl5-$pkg_version\win32
     dmake
+    if($LASTEXITCODE -ne 0) { Write-Error "dmake failed!" }
 }
 
 function Invoke-Install {
@@ -22,6 +23,7 @@ function Invoke-Install {
     $Env:INST_TOP="$pkg_prefix"
     cd perl5-$pkg_version\win32
     dmake install
+    if($LASTEXITCODE -ne 0) { Write-Error "dmake failed!" }
 }
 
 function Invoke-Check {

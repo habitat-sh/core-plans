@@ -15,6 +15,7 @@ $pkg_include_dirs=@("include")
 function Invoke-Build {
     cd "$pkg_name-$pkg_version"
     msbuild.exe /m /p:Configuration=DynRelease /p:Platform=x64 builds/msvc/vs2015/libsodium.sln
+    if($LASTEXITCODE -ne 0) { Write-Error "msbuild failed!" }
 }
 
 function Invoke-Install {

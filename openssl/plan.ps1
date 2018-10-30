@@ -17,6 +17,7 @@ function Invoke-Build {
     perl Configure VC-WIN64A --prefix=$pkg_prefix
     ms\do_win64a
     nmake -f ms\ntdll.mak
+    if($LASTEXITCODE -ne 0) { Write-Error "nmake failed!" }
 }
 
 function Invoke-Install {

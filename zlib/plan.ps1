@@ -15,6 +15,7 @@ $pkg_include_dirs=@("include")
 function Invoke-Build {
     cd "$pkg_name-$pkg_version"
     msbuild /p:Configuration=Release /p:Platform=x64 "contrib\vstudio\vc14\zlibvc.sln"
+    if($LASTEXITCODE -ne 0) { Write-Error "msbuild failed!" }
 }
 
 function Invoke-Install {

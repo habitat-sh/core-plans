@@ -15,6 +15,7 @@ $pkg_include_dirs=@("include")
 function Invoke-Build {
     cd "$pkg_name-$pkg_version"
     nmake -f makefile.msc
+    if($LASTEXITCODE -ne 0) { Write-Error "nmake failed!" }
 }
 
 function Invoke-Install {

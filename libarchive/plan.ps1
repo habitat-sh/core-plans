@@ -28,6 +28,7 @@ function Invoke-Build {
 
     cmake -G "Visual Studio 14 2015 Win64" -T "v140" -DCMAKE_SYSTEM_VERSION="8.1" -DCMAKE_INSTALL_PREFIX="${prefix_path}\libarchive" -DBZIP2_LIBRARY_RELEASE="${bzip_lib}" -DBZIP2_INCLUDE_DIR="${bzip_includedir}" -DZLIB_LIBRARY_RELEASE="${zlib_libdir}" -DZLIB_INCLUDE_DIR="${zlib_includedir}" -DLIBLZMA_INCLUDE_DIR="${xz_includedir}" -DLIBLZMA_LIBRARY="${xz_libdir}"
     msbuild /p:Configuration=Release /p:Platform=x64 "ALL_BUILD.vcxproj"
+    if($LASTEXITCODE -ne 0) { Write-Error "msbuild failed!" }
 }
 
 function Invoke-Install {
