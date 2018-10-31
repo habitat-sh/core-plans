@@ -27,6 +27,10 @@ pkg_bin_dirs=(bin)
 pkg_binds_optional=(
   [cockroach]="port"
 )
+pkg_exports=(
+    [internal-port]=cockroach.internal-port
+    [http-port]=cockroach.http-port
+)
 
 do_prepare() {
   # The `/usr/bin/env` path is hardcoded in scripts, so we'll add a symlink since we don't want coreutils in prod.

@@ -1,3 +1,4 @@
 insecure = true
-port = 26257
+[cockroach]
+internal-port = 26257
 http-port = 8080
