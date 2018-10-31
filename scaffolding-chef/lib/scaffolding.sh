@@ -52,8 +52,12 @@ export SSL_CERT_FILE="{{pkgPathFor "core/cacerts"}}/ssl/cert.pem"
 cd {{pkg.path}}
 
 exec 2>&1
-chef-client -z -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb --once
-exec chef-client -z -i {{cfg.interval}} -s {{cfg.splay}} -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb
+while true; do
+SPLAY_DURATION=\$({{pkgPathFor "core/coreutils"}}/bin/shuf -i 0-{{cfg.splay}} -n 1)
+sleep \$SPLAY_DURATION
+chef-client -z -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb --once --no-fork --run-lock-timeout {{cfg.interval}}
+sleep {{cfg.interval}}
+done
 EOF
   chown 0755 "$pkg_prefix/hooks/run"
 }
