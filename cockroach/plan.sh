@@ -28,8 +28,8 @@ pkg_binds_optional=(
   [cockroach]="port"
 )
 pkg_exports=(
-    [internal-port]=cockroach.internal-port
-    [http-port]=cockroach.http-port
+    [port]=port
+    [http-port]=http-port
 )
 
 do_prepare() {
