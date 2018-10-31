@@ -1,13 +1,19 @@
 pkg_name=jffi
 pkg_origin=core
-pkg_version="1.2.16"
-pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_version="1.2.18"
 pkg_license=('Apache-2.0')
+pkg_description="Java Foreign Function Interface"
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/jnr/jffi/archive/${pkg_name}-${pkg_version}.tar.gz"
 pkg_dirname="${pkg_name}-${pkg_name}-${pkg_version}"
-pkg_shasum="a116c53f26d13d738aaf6e21fe52231be5f0df6e1007673846fd18a4be875121"
+pkg_shasum="05326c985153e4c86449b9732cbaa39c7570f079cd0f1276c2f5df40ebacbd92"
 pkg_upstream_url="https://github.com/jnr/jffi"
-pkg_deps=(core/glibc core/libffi core/gcc-libs core/jre8)
+pkg_deps=(
+  core/glibc
+  core/libffi
+  core/gcc-libs
+  core/jre8
+)
 pkg_build_deps=(
   core/jdk8
   core/ant
