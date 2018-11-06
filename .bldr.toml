@@ -638,6 +638,8 @@ plan_path = "libimagequant"
 plan_path = "libjpeg-turbo"
 [libksba]
 plan_path = "libksba"
+[libmemcached]
+plan_path = "libmemcached"
 [libmpc]
 plan_path = "libmpc"
 [libnsl]
