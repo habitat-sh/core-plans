@@ -1,4 +1,6 @@
-# clang-tools-extra
+# clang-tools-extra (deprecated)
+
+**Deprecation Notice**: This plan is folded into the `core/clang` package as that is what the normal way to build as defined [here](https://clang.llvm.org/get_started.html)
 
 Clang Tools are standalone command line (and potentially GUI) tools designed for use by C++
 developers who are already using and enjoying Clang as their compiler. These tools provide
