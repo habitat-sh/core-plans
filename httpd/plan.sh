@@ -38,7 +38,32 @@ pkg_svc_user="root"
 pkg_svc_group="root"
 
 do_build() {
-    ./configure --prefix="$pkg_prefix" \
+    echo "
+<Layout Hab>
+	prefix:          ${pkg_prefix}
+	exec_prefix:     ${pkg_prefix}
+	bindir:          ${pkg_prefix}/bin
+	sbindir:         ${pkg_prefix}/bin
+	libdir:          ${pkg_prefix}/lib
+	libexecdir:      ${pkg_prefix}/modules
+	mandir:          /tmp
+	sysconfdir:      ${pkg_prefix}/conf
+	datadir:         ${pkg_svc_data_path}
+	installbuilddir: /tmp
+	errordir:        /tmp
+	iconsdir:        /tmp
+	htdocsdir:       /tmp
+	manualdir:       /tmp
+	cgidir:          /tmp
+	includedir:      ${pkg_prefix}/include
+	localstatedir:   ${pkg_svc_var_path}
+	runtimedir:      ${pkg_svc_var_path}
+	logfiledir:      ${pkg_svc_path}/logs
+	proxycachedir:   ${pkg_svc_data_path}/proxy
+</Layout>
+" >> config.layout
+
+    ./configure --enable-layout=Hab \
                 --with-expat="$(pkg_path_for core/expat)" \
                 --with-iconv="$(pkg_path_for core/libiconv)" \
                 --with-pcre="$(pkg_path_for core/pcre)" \
