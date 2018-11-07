@@ -9,6 +9,7 @@ pkg_source=https://artifacts.elastic.co/downloads/${pkg_name}/${pkg_name}-${pkg_
 pkg_shasum=b26e3546784b39ce3eacc10411e68ada427c5764bcda3064e9bb284eca907983
 pkg_deps=(
   core/coreutils-static
+  core/busybox-static
   core/glibc
   core/jre8
   core/wget
