@@ -1,6 +1,5 @@
 storage "{{cfg.backend.storage}}" {
-  address = "{{cfg.backend.location}}:{{cfg.backend.port}}"
-  path = "{{cfg.backend.path}}"
+  path = "{{pkg.svc_data_path}}/{{cfg.backend.path}}"
 }
 
 listener "{{cfg.listener.type}}" {
