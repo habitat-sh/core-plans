@@ -55,7 +55,7 @@ exec 2>&1
 while true; do
 SPLAY_DURATION=\$({{pkgPathFor "core/coreutils"}}/bin/shuf -i 0-{{cfg.splay}} -n 1)
 sleep \$SPLAY_DURATION
-chef-client -z -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb --once --no-fork --run-lock-timeout {{cfg.interval}}
+chef-client -z -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb --once --no-fork --run-lock-timeout {{cfg.run_lock_timeout}}
 sleep {{cfg.interval}}
 done
 EOF
@@ -119,6 +119,7 @@ EOF
   cat << EOF >> "$pkg_prefix/default.toml"
 interval = 1800
 splay = 180
+run_lock_timeout = 1800
 log_level = "warn"
 env_path_prefix = "/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin"
 ssl_verify_mode = ":verify_peer"
