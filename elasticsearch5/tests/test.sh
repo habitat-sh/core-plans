@@ -28,7 +28,9 @@ if [ "${SKIPBUILD}" -eq 0 ]; then
   set +e
 
   # Give some time for the service to start up
-  sleep 5
+  local _seconds=15
+  echo "Waiting for ${pkg_name} to start up (${_seconds} seconds)"
+  sleep ${_seconds}
 fi
 
 bats "${TESTDIR}/test.bats"
