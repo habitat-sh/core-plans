@@ -13,6 +13,10 @@ $pkg_bin_dirs=("bin")
 $pkg_include_dirs=("include")
 $pkg_lib_dirs=("lib")
 
+function Invoke-SetupEnvironment {
+    . "$(Get-HabPackagePath visual-cpp-build-tools-2015)\setenv.ps1"
+}
+
 function Invoke-Build {
     cd "libzmq-$pkg_version"
 

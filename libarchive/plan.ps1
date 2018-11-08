@@ -16,6 +16,10 @@ $pkg_build_deps=@("core/visual-cpp-build-tools-2015", "core/cmake")
 $pkg_bin_dirs=@("bin")
 $pkg_lib_dirs=@("lib")
 
+function Invoke-SetupEnvironment {
+    . "$(Get-HabPackagePath visual-cpp-build-tools-2015)\setenv.ps1"
+}
+
 function Invoke-Build {
     cd "$pkg_name-$pkg_version"
 
