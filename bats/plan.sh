@@ -13,6 +13,7 @@ pkg_shasum="480d8d64f1681eee78d1002527f3f06e1ac01e173b761bc73d0cf33f4dc1d8d7"
 pkg_deps=(
   core/bash
   core/coreutils
+  core/sed
 )
 pkg_bin_dirs=(bin)
 
