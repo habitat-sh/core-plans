@@ -14,6 +14,7 @@ pkg_shasum="b39212abe1a73f2b28f4c6cb223c738559caac91d6e416a6d91d4b9d55c9faee"
 pkg_deps=(
   core/cacerts
   core/glibc
+  core/libidn2
   core/openssl
   core/pcre
   core/zlib
