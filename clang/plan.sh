@@ -26,10 +26,7 @@ pkg_build_deps=(
   core/ninja
 )
 pkg_lib_dirs=(lib)
-pkg_include_dirs=(
-  include
-  "lib/clang/${pkg_version}/include"
-)
+pkg_include_dirs=(include)
 pkg_bin_dirs=(bin)
 
 do_begin() {
