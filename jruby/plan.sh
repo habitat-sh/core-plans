@@ -1,11 +1,11 @@
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_name=jruby
-pkg_version=9.2.0.0
+pkg_version=9.2.3.0
 pkg_description="A high performance, stable, fully threaded Java implementation of the Ruby programming language."
 pkg_upstream_url=https://github.com/jruby/jruby
 pkg_source=https://github.com/jruby/jruby/archive/${pkg_version}.tar.gz
-pkg_shasum=3d59bde1639c69965664ee46a07be230141ee8e99d2e7f43b574a6a8298c887c
+pkg_shasum=85c2771ba7711220916eeaf67eabd77ab07c29fa623783acc66058e3fe225a79
 pkg_license=('EPL 1.0, GPL 2 and LGPL 2.1')
 pkg_deps=(core/glibc core/jre8 core/bash core/coreutils)
 pkg_build_deps=(core/which core/make core/jdk8)
