@@ -11,6 +11,10 @@ load helpers
 }
 
 @test "OpenID Connect discovery document is returned with issuer set" {
-  curl http://127.0.0.1:5556/dex/.well-known/openid-configuration |
-    jq -e '.issuer | test("https://localhost/dex")'
+  jq -ne --argjson doc "$(curl http://127.0.0.1:5556/dex/.well-known/openid-configuration)" \
+    '$doc.issuer | test("https://localhost/dex")'
+}
+
+@test "'dex version' returns the correct version" {
+  dex version | grep -q "dex Version: v${pkg_version}"
 }
