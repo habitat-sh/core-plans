@@ -2,7 +2,7 @@ gopkg="github.com/dexidp/dex"
 pkg_name=dex
 pkg_description="OpenID Connect Identity (OIDC) and OAuth 2.0 Provider with Pluggable Connectors"
 pkg_origin=core
-pkg_version="v2.12.0"
+pkg_version="2.13.0"
 pkg_maintainer="Chef Software Inc. <support@chef.io>"
 pkg_license=("Apache-2.0")
 pkg_source="https://$gopkg"
@@ -19,8 +19,8 @@ scaffolding_go_base_path=github.com/dexidp
 scaffolding_go_build_deps=()
 
 do_prepare() {
-  build_line "GO_LDFLAGS=\"-w -X $gopkg/version.Version=$pkg_version\""
-  export GO_LDFLAGS="-w -X $gopkg/version.Version=$pkg_version"
+  build_line "GO_LDFLAGS=\"-w -X $gopkg/version.Version=v$pkg_version\""
+  export GO_LDFLAGS="-w -X $gopkg/version.Version=v$pkg_version"
 }
 
 do_download() {
@@ -30,7 +30,7 @@ do_download() {
 
   pushd "${scaffolding_go_gopath:?}/src/$gopkg"
     build_line "checking out $pkg_version"
-    git reset --hard $pkg_version
+    git reset --hard "v$pkg_version"
   popd
 }
 
