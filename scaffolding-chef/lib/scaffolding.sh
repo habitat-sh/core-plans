@@ -139,6 +139,7 @@ interval = 1800
 splay = 180
 run_lock_timeout = 1800
 log_level = "warn"
+chef_client_ident = "" # this is blank by default so it can be populated from the bind
 env_path_prefix = "/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin"
 ssl_verify_mode = ":verify_peer"
 
