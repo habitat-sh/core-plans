@@ -27,3 +27,9 @@ source "${BATS_TEST_DIRNAME}/../plan.sh"
   [ "$(netstat -peanut | grep java | awk '{print $4}' | awk -F':' '{print $2}' | grep 9200)" ]
   [ "$(netstat -peanut | grep java | awk '{print $4}' | awk -F':' '{print $2}' | grep 9300)" ]
 }
+
+@test "Healthy response from status endpoint" {
+  local endpoint=$(netstat -peanut | grep 9200 | grep LISTEN | awk '{print $4}')
+  run curl -s -o /dev/null -w "%{http_code}" http://${endpoint} 
+  [ "$output" = "200" ]
+}
