@@ -9,14 +9,15 @@ pkg_source="https://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="bf5b28bb797e0ace4cfc0766a996339c795d8223bef54158be7887046bc01692"
 pkg_deps=(
   core/expect
+  core/coreutils
+  core/sed
+  core/grep
 )
 pkg_build_deps=(
-  core/coreutils
   core/diffutils
   core/patch
   core/make
   core/gcc
-  core/sed
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
