@@ -1,7 +1,6 @@
-# shellcheck disable=SC2164
 pkg_name=filebeat
 pkg_origin=core
-pkg_version="6.3.1"
+pkg_version="6.4.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_deps=(core/glibc)
@@ -16,9 +15,8 @@ pkg_description="Lightweight shipper for logfiles"
 pkg_upstream_url="https://www.elastic.co/products/beats/filebeat"
 
 do_download() {
-  GOPATH=$(dirname "${HAB_CACHE_SRC_PATH}")
+  GOPATH="$(dirname "${HAB_CACHE_SRC_PATH}")"
   export GOPATH
-  build_line "Fetching Go sources."
   go get github.com/elastic/beats/filebeat
   pushd "${HAB_CACHE_SRC_PATH}/github.com/elastic/beats/filebeat" > /dev/null
   git checkout "v${pkg_version}"
