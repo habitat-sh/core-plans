@@ -12,6 +12,10 @@ $pkg_bin_dirs=@("bin")
 $pkg_include_dirs=@("include")
 $pkg_lib_dirs=@("lib")
 
+function Invoke-SetupEnvironment {
+    . "$(Get-HabPackagePath visual-cpp-build-tools-2015)\setenv.ps1"
+}
+
 function Invoke-Build {
     cd "$pkg_name-OpenSSL_$_pkg_version_text"
     perl Configure VC-WIN64A --prefix=$pkg_prefix
