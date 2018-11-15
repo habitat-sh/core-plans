@@ -30,6 +30,6 @@ source "${BATS_TEST_DIRNAME}/../plan.sh"
 
 @test "Healthy response from status endpoint" {
   local endpoint=$(netstat -peanut | grep 9200 | grep LISTEN | awk '{print $4}')
-  run curl -s -o /dev/null -w "%{http_code}" http://${endpoint} 
+  run curl -s -o /dev/null -w "%{http_code}" http://${endpoint}
   [ "$output" = "200" ]
 }
