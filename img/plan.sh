@@ -1,6 +1,6 @@
 pkg_name="img"
 pkg_origin="core"
-pkg_version=0.5.2
+pkg_version=0.5.4
 pkg_description="Standalone, daemon-less, unprivileged Dockerfile and OCI compatible container image builder."
 pkg_upstream_url="https://github.com/genuinetools/img"
 pkg_license=('MIT')
