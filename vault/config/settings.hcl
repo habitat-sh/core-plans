@@ -1,4 +1,4 @@
-backend "{{cfg.backend.storage}}" {
+storage "{{cfg.backend.storage}}" {
   address = "{{cfg.backend.location}}:{{cfg.backend.port}}"
   path = "{{cfg.backend.path}}"
 }
