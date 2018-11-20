@@ -113,7 +113,6 @@ cache_path "$pkg_svc_data_path/cache"
 node_path "$pkg_svc_data_path/nodes"
 role_path "$pkg_svc_data_path/roles"
 
-ssl_verify_mode ":verify_peer"
 chef_zero.enabled true
 EOF
 
@@ -124,6 +123,7 @@ EOF
 
   cp "$pkg_prefix/.chef/config.rb" "$pkg_prefix/config/client-config.rb"
   cat << EOF >> "$pkg_prefix/config/client-config.rb"
+ssl_verify_mode {{cfg.ssl_verify_mode}}
 ENV['PATH'] = "{{cfg.env_path_prefix}}:#{ENV['PATH']}"
 
 {{#if cfg.data_collector.enable ~}}
