@@ -109,6 +109,8 @@ plan_path = "cerebro"
 plan_path = "certstrap"
 [check]
 plan_path = "check"
+[chrony]
+plan_path = "chrony"
 [clang]
 plan_path = "clang"
 [clang-tools-extra]
