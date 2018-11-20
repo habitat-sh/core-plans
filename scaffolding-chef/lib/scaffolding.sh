@@ -113,7 +113,7 @@ cache_path "$pkg_svc_data_path/cache"
 node_path "$pkg_svc_data_path/nodes"
 role_path "$pkg_svc_data_path/roles"
 
-ssl_verify_mode {{cfg.ssl_verify_mode}}
+ssl_verify_mode ":verify_peer"
 chef_zero.enabled true
 EOF
 
