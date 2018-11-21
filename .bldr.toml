@@ -395,6 +395,8 @@ plan_path = "go"
 plan_path = "go14"
 [go17]
 plan_path = "go17"
+[goaccess]
+plan_path = "goaccess"
 [gocd-server]
 plan_path = "gocd-server"
 [googletest]
