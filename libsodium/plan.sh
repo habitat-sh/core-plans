@@ -1,7 +1,7 @@
 pkg_name=libsodium
 _distname="$pkg_name"
 pkg_origin=core
-pkg_version=1.0.13
+pkg_version=1.0.16
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Sodium is a new, easy-to-use software library for encryption, decryption, \
@@ -11,8 +11,8 @@ API to improve usability even further.\
 "
 pkg_upstream_url="https://github.com/jedisct1/libsodium"
 pkg_license=('ISC')
-pkg_source="https://download.libsodium.org/libsodium/releases/old/${_distname}-${pkg_version}.tar.gz"
-pkg_shasum="9c13accb1a9e59ab3affde0e60ef9a2149ed4d6e8f99c93c7a5b97499ee323fd"
+pkg_source="https://download.libsodium.org/libsodium/releases/${_distname}-${pkg_version}.tar.gz"
+pkg_shasum="eeadc7e1e1bcef09680fb4837d448fbdf57224978f865ac1c16745868fbd0533"
 pkg_dirname="${_distname}-${pkg_version}"
 pkg_deps=(
   core/glibc
