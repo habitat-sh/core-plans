@@ -49,7 +49,7 @@ do_default_build_service() {
 
 chef_client_cmd()
 {
-  chef-client -z -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb --once --no-fork --run-lock-timeout {{cfg.run_lock_timeout}}
+  chef-client -z -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb -j $pkg_svc_config_path/bootstrap.json --once --no-fork --run-lock-timeout {{cfg.run_lock_timeout}}
 }
 
 SPLAY_DURATION=\$({{pkgPathFor "core/coreutils"}}/bin/shuf -i 0-{{cfg.splay}} -n 1)
@@ -149,6 +149,16 @@ token = "set_to_your_token"
 server_url = "set_to_your_url"
 EOF
   chown 0644 "$pkg_prefix/default.toml"
+
+  ## Create bootstrap.json
+  cat << EOF >> "$pkg_prefix/config/bootstrap.json
+{{#if cfg.attributes ~}}
+{{toJson cfg.attributes}}
+{{else ~}}
+{}
+{{/if ~}}
+EOF
+
 }
 
 do_default_strip() {

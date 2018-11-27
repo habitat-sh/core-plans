@@ -1,6 +1,6 @@
 pkg_name=scaffolding-chef
 pkg_description="Scaffolding for Chef Policyfiles"
-pkg_origin=core
+pkg_origin=sandratiffin
 pkg_version="0.2.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
