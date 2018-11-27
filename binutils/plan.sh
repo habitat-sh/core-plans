@@ -83,6 +83,17 @@ do_prepare() {
     | sed "s,@zlib_libs@,$(pkg_path_for zlib)/lib,g" \
     | patch -p1
 
+  # Patch binutils to be able to link static binaries
+  # 
+  # Thanks to: https://git.archlinux.org/svntogit/packages.git/tree/trunk?h=packages/binutils
+  # Thanks to: https://sourceware.org/bugzilla/show_bug.cgi?id=23428
+  # Thanks to: https://sourceware.org/bugzilla/show_bug.cgi?id=23486
+  # TODO:  This should be removed when we update to the release following 2.31.1
+  patch -p1 < $PLAN_CONTEXT/0001-PR23428-x86-Add-a-GNU_PROPERTY_X86_ISA_1_USED-note-if-needed.patch
+  patch -p1 < $PLAN_CONTEXT/0004-PR23486-Properly-merge-GNU_PROPERTY_X86_ISA_1_USED-x86_64.patch
+  patch -p1 < $PLAN_CONTEXT/0005-PR23486-x86-Properly-merge-GNU_PROPERTY_X86_ISA_1_USED.patch
+  patch -p1 < $PLAN_CONTEXT/0006-PR23428-x86-Properly-add-X86_ISA_1_NEEDED-property.patch
+
   # We don't want to search for libraries in system directories such as `/lib`,
   # `/usr/local/lib`, etc.
   echo 'NATIVE_LIB_DIRS=' >> ld/configure.tgt
