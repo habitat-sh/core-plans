@@ -11,7 +11,7 @@ pkg_bin_dirs=(bin sbin libexec)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_deps=(core/glibc core/openssl core/zlib)
-pkg_build_deps=(core/coreutils core/gcc core/make)
+pkg_build_deps=(core/coreutils core/gcc core/make core/e2fsprogs)
 pkg_svc_user="root"
 pkg_svc_group="root"
 
@@ -29,4 +29,5 @@ do_install() {
   make install-nosysconf
   mkdir -p "${pkg_prefix}/var/empty"
   chmod 700 "${pkg_prefix}/var/empty"
+  chattr +i "${pkg_prefix}/var/empty"
 }
