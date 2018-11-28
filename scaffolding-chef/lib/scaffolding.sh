@@ -49,7 +49,7 @@ do_default_build_service() {
 
 chef_client_cmd()
 {
-  chef-client -z -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb --once --no-fork --run-lock-timeout {{cfg.run_lock_timeout}}
+  chef-client -z -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb -j $pkg_svc_config_path/attributes.json --once --no-fork --run-lock-timeout {{cfg.run_lock_timeout}}
 }
 
 SPLAY_DURATION=\$({{pkgPathFor "core/coreutils"}}/bin/shuf -i 0-{{cfg.splay}} -n 1)
@@ -132,6 +132,14 @@ data_collector.server_url "{{cfg.data_collector.server_url}}"
 {{/if ~}}
 EOF
   chown 0644 "$pkg_prefix/config/client-config.rb"
+
+  cat << EOF >> "$pkg_prefix/config/attributes.json"
+{{#if cfg.attributes ~}}
+{{toJson cfg.attributes}}
+{{else ~}}
+{}
+{{/if ~}}
+EOF
 
   ## Create config
   cat << EOF >> "$pkg_prefix/default.toml"
