@@ -15,7 +15,6 @@ To become a maintainer, open a pull request to this list.
 
 * [Tom Duffield](https://github.com/tduffield)
 * [Steven Danna](https://github.com/stevendanna)
-* [Elliott Davis](https://github.com/elliott-davis)
 * [Mike Fiedler](https://github.com/miketheman)
 * [Ian Henry](https://github.com/eeyun)
 * [Scott Macfarlane](https://github.com/smacfarlane)
@@ -42,3 +41,4 @@ To become a maintainer, open a pull request to this list.
 * [Dave Parfitt](https://github.com/metadave)
 * [Nathan L Smith](https://github.com/smith)
 * [Joshua Timberman](https://github.com/jtimberman)
+* [Elliott Davis](https://github.com/elliott-davis)
