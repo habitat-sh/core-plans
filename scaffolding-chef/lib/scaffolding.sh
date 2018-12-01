@@ -127,6 +127,7 @@ ssl_verify_mode {{cfg.ssl_verify_mode}}
 ENV['PATH'] = "{{cfg.env_path_prefix}}:#{ENV['PATH']}"
 
 {{#if cfg.data_collector.enable ~}}
+chef_guid "{{sys.member_id}}"
 data_collector.token "{{cfg.data_collector.token}}"
 data_collector.server_url "{{cfg.data_collector.server_url}}"
 {{/if ~}}
