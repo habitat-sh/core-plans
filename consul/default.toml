@@ -29,4 +29,3 @@ serf_lan = 8301
 serf_wan = 8302
 # Server RPC address
 server = 8300
-
