@@ -1,14 +1,14 @@
 pkg_name=dotnet-core-sdk
 pkg_origin=core
-pkg_version=2.1.403
+pkg_version=2.1.500
 pkg_license=('MIT')
 pkg_upstream_url=https://www.microsoft.com/net/core
 pkg_description=".NET Core is a blazing fast, lightweight and modular platform
   for creating web applications and services that run on Windows,
   Linux and Mac."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source="https://download.visualstudio.microsoft.com/download/pr/e85de743-f80b-481b-b10e-d2e37f05a7ce/0bf3ff93417e19ad8d6b2d3ded84d664/dotnet-sdk-${pkg_version}-linux-x64.tar.gz"
-pkg_shasum=0bc7b42450a6a35f83aa6a7dfdc9cf39f3e1c7488dc1cc085b2f2a84207a3fc5
+pkg_source="https://download.visualstudio.microsoft.com/download/pr/e5eef3df-d2e3-429b-8204-f58372eb6263/20c825ddcc6062e93ff0c60e8354d3af/dotnet-sdk-${pkg_version}-linux-x64.tar.gz"
+pkg_shasum=371f27441914931ed08a0bd2c5f2ea77323e4c9a5fa6b11a92cc5b53e3295073
 pkg_filename="dotnet-dev-debian-x64.${pkg_version}.tar.gz"
 pkg_deps=(
   core/coreutils
