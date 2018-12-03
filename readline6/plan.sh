@@ -1,4 +1,4 @@
-source "${PLAN_CONTEXT}/../readline/plan.sh"
+source "../readline/plan.sh"
 
 pkg_name="readline6"
 pkg_origin="core"
