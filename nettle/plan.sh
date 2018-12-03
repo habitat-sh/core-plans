@@ -1,6 +1,6 @@
 pkg_name=nettle
 pkg_origin=core
-pkg_version="3.4"
+pkg_version="3.4.1"
 pkg_description="a low-level cryptographic library"
 pkg_upstream_url="https://www.lysator.liu.se/~nisse/nettle/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
