@@ -7,7 +7,6 @@ website = true
 expect = "3"
 
 [server]
-bind = "127.0.0.1"
 data-dir = "/hab/svc/consul/data/consul"
 datacenter = "dc1"
 loglevel = "INFO"
@@ -30,6 +29,3 @@ serf_lan = 8301
 serf_wan = 8302
 # Server RPC address
 server = 8300
-
-[client]
-bind = "127.0.0.1"

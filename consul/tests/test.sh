@@ -10,10 +10,11 @@ hab pkg install --binlink core/bats
 
 hab pkg install core/busybox-static
 hab pkg binlink core/busybox-static nc
+hab pkg binlink core/busybox-static ip
 
 # Wait for supervisor to start
 echo "Waiting for supervisor to start"
-wait_listen tcp 9632 30
+wait_listen tcp 9632 30 127.0.0.1
 
 source "${PLANDIR}/plan.sh"
 # Unload the service if its already loaded.
