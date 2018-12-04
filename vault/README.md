@@ -6,7 +6,7 @@
 ## Description
 [Vault](https://www.vaultproject.io/) secures, stores, and tightly controls access to tokens, passwords, certificates, API keys, and other secrets in modern computing. Vault handles leasing, key revocation, key rolling, and auditing.
 
-This plan provides the static binary for execution.
+This plan provides the static binary for execution, as well as the service.
 
 ## Usage
 This package contains Vault. To use Vault properly, you need to provide it
@@ -27,3 +27,11 @@ hab start core/vault
 ## Update Strategy
 
 Recommended update strategy for Vault is `rolling`.
+
+## BREAKING CHANGES FROM 1.0.0
+
+Vault >=1.0.0 introduced changes in the Habitat plan in order to simplify default configuration and reduce dependencies. This makes adoption and maintenance easier, and aligns with recent RFCs for plan development.
+
+If you have upgraded to Vault 1.0.0 from Vault 0.*, you will notice that the default storage backend has changed from consul to file based.
+
+In order to continue using the consul storage backend, a configuration/wrapper plan must be created to provide your own custom configuration.
