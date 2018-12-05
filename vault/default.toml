@@ -4,9 +4,7 @@
 mode = true
 
 [backend]
-storage = "consul"
-location = "127.0.0.1"
-port = "8500"
+storage = "file"
 path = "vault"
 
 [listener]
