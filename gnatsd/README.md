@@ -12,11 +12,10 @@ Service package
 
 ## Usage
 
-Install the package, and laod the gnatsd service:
+Install and load the gnatsd service:
 
 ```
-hab pkg install core/gnatsd
-hab svc load core/gnatsd
+hab svc load core/gnatsd # automatically performs `hab pkg install core/gnatsd`
 ```
 
 This will start gnatsd with the default configuration.
