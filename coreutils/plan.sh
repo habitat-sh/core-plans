@@ -32,6 +32,10 @@ pkg_build_deps=(
 pkg_bin_dirs=(bin)
 pkg_interpreters=(bin/env)
 
+do_prepare() {
+  _patch_files
+}
+
 do_build() {
   # The `FORCE_` variable allows the software to compile with the root user,
   # and the `--enable-no-install-program` flag skips installation of binaries
@@ -46,6 +50,11 @@ do_check() {
   make NON_ROOT_USERNAME=nobody check-root
   make RUN_EXPENSIVE_TESTS=yes check
 }
+
+_patch_files() {
+  patch -p1 < "$PLAN_CONTEXT/skip-tests.patch"
+}
+
 
 # ----------------------------------------------------------------------------
 # **NOTICE:** What follows are implementation details required for building a
