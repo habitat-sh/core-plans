@@ -2,10 +2,10 @@
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_name=jre8
-pkg_version=8.181.0
-pkg_upstream_version=8u181
-pkg_source="http://download.oracle.com/otn-pub/java/jdk/${pkg_upstream_version}-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-${pkg_upstream_version}-linux-x64.tar.gz"
-pkg_shasum="1845567095bfbfebd42ed0d09397939796d05456290fb20a83c476ba09f991d3"
+pkg_version=8.192.0
+pkg_upstream_version=8u192
+pkg_source="http://download.oracle.com/otn-pub/java/jdk/${pkg_upstream_version}-b12/750e1c8617c5452694857ad95c3ee230/jre-${pkg_upstream_version}-linux-x64.tar.gz"
+pkg_shasum="f23a3e2b9decef82b74f850157580d929ab35e9f19be5e0a10c779b68be51d43"
 pkg_filename="jre-${pkg_upstream_version}-linux-x64.tar.gz"
 pkg_license=('Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX')
 pkg_description=('Oracle Java Runtime Environment. This package is made available to you to allow you to run your applications as provided in and subject to the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html')
@@ -76,7 +76,7 @@ do_install() {
   build_line "Setting rpath for '${pkg_prefix}/bin/java' to '$LD_RUN_PATH'"
 
   LD_RUN_PATH=$LD_RUN_PATH:$pkg_prefix/lib/amd64/jli:$pkg_prefix/lib/amd64/server:$pkg_prefix/lib/amd64
-  LD_RUN_PATH=$LD_RUN_PATH:$pkg_prefix/jre/lib/amd64/jli:$pkg_prefix/jre/lib/amd64/server:$pkg_prefix/jre/lib/amd64
+  #LD_RUN_PATH=$LD_RUN_PATH:$pkg_prefix/jre/lib/amd64/jli:$pkg_prefix/jre/lib/amd64/server:$pkg_prefix/jre/lib/amd64
   export LD_RUN_PATH
 
   find "$pkg_prefix"/bin -type f -executable \
@@ -90,8 +90,8 @@ do_install() {
   find "$pkg_prefix/lib/amd64" -type f -name "*.so" \
     -exec patchelf --set-rpath "${LD_RUN_PATH}" {} \;
 
-  find "$pkg_prefix/jre/lib/amd64" -type f -name "*.so" \
-    -exec patchelf --set-rpath "${LD_RUN_PATH}" {} \;
+  #find "$pkg_prefix/jre/lib/amd64" -type f -name "*.so" \
+  #  -exec patchelf --set-rpath "${LD_RUN_PATH}" {} \;
 }
 
 do_strip() {
