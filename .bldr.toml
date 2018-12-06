@@ -890,6 +890,8 @@ plan_path = "nghttp2"
 plan_path = "nginx"
 [ninja]
 plan_path = "ninja"
+[nload]
+plan_path = "nload"
 [nmap]
 plan_path = "nmap"
 [node]
