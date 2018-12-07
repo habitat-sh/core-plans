@@ -54,6 +54,8 @@ chef_client_cmd()
 
 SPLAY_DURATION=\$({{pkgPathFor "core/coreutils"}}/bin/shuf -i 0-{{cfg.splay}} -n 1)
 
+SPLAY_FIRST_RUN_DURATION=\$({{pkgPathFor "core/coreutils"}}/bin/shuf -i 0-{{cfg.splay_first_run}} -n 1)
+
 export SSL_CERT_FILE="{{pkgPathFor "core/cacerts"}}/ssl/cert.pem"
 
 cd {{pkg.path}}
@@ -66,7 +68,7 @@ cd {{pkg.path}}
 # the chef-client run has finished.
 
 exec 2>&1
-sleep \$SPLAY_DURATION
+sleep \$SPLAY_FIRST_RUN_DURATION
 chef_client_cmd
 echo "chef_client_ident = \"{{pkg.ident}}\"" | hab config apply {{svc.service}}.{{svc.group}} $(date +'%s')
 
@@ -137,7 +139,8 @@ EOF
   ## Create config
   cat << EOF >> "$pkg_prefix/default.toml"
 interval = 1800
-splay = 180
+splay = 1800
+splay_first_run = 0
 run_lock_timeout = 1800
 log_level = "warn"
 chef_client_ident = "" # this is blank by default so it can be populated from the bind
