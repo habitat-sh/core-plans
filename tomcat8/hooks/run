@@ -4,13 +4,18 @@ exec 2>&1
 
 echo "Starting Apache Tomcat"
 
-if path={{pkgPathFor "core/jdk8"}}; then
+if path=$(hab pkg path core/jdk8); then
   export JAVA_HOME=$path
-elif path={{pkgPathFor "core/jdk7"}}; then
+elif path=$(hab pkg path core/jdk7); then
   export JAVA_HOME=$path
 fi
-if [ -z ${JAVA_HOME+x} ]; then
-  echo "Cannot start Tomcat without core/jdk8 or core/jdk7"
+if path=$(hab pkg path core/jre8); then
+  export JRE_HOME=$path
+elif path=$(hab pkg path core/jre7); then
+  export JRE_HOME=$path
+fi
+if [ -z ${JAVA_HOME+x} ] || [ -z ${JRE_HOME+x} ]; then
+  echo "Cannot start Tomcat without core/jdk8, core/jdk7, core/jre8, or core/jre7"
   exit 1
 fi
 
