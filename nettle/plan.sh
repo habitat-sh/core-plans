@@ -6,7 +6,7 @@ pkg_upstream_url="https://www.lysator.liu.se/~nisse/nettle/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('LGPL-3.0' 'GPL-2.0' 'GPL-3.0')
 pkg_source="https://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="ae7a42df026550b85daca8389b6a60ba6313b0567f374392e54918588a411e94"
+pkg_shasum="f941cf1535cd5d1819be5ccae5babef01f6db611f9b5a777bae9c7604b8a92ad"
 pkg_deps=(
   core/glibc
   core/gmp
