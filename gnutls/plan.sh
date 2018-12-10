@@ -44,7 +44,6 @@ do_prepare() {
 }
 
 do_build() {
-  attach
   ./configure --prefix="${pkg_prefix}" \
     --with-libseccomp-prefix="$(pkg_path_for "core/libseccomp")" \
     --with-libiconv-prefix="$(pkg_path_for "core/libiconv")" \
