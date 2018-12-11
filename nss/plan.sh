@@ -1,13 +1,13 @@
 #!/bin/bash
 pkg_name=nss
 pkg_origin=core
-pkg_version=3.35
+pkg_version=3.40.1
 pkg_license=("MPL-2.0")
 pkg_description="Network Security Services"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS"
 pkg_source="https://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_${pkg_version//./_}_RTM/src/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="f4127de09bede39f5fd0f789d33c3504c5d261e69ea03022d46b319b3e32f6fa"
+pkg_shasum="5e0e6bae2a79c86e506684955d736bfe875ec5a8e95ed3e4ba0852d1aec2c8f1"
 pkg_deps=(
   core/glibc
   core/nspr
