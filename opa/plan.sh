@@ -1,8 +1,9 @@
+# shellcheck disable=SC2164
 gopkg="github.com/open-policy-agent/opa"
 pkg_name=opa
 pkg_description="Open Policy Agent (OPA) is a lightweight general-purpose policy engine that can be co-located with your service."
 pkg_origin=core
-pkg_version="0.10.1"
+pkg_version="0.10.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_source="https://$gopkg"
@@ -19,6 +20,7 @@ scaffolding_go_build_deps=()
 
 do_prepare() {
   pushd "${scaffolding_go_gopath:?}/src/${gopkg}"
+    # shellcheck disable=SC1117
     sed -e "s#\#\!/usr/bin/env bash#\#\!$(pkg_path_for bash)/bin/bash#" -i build/*.sh
     sed -e "s#hostname -f#echo \"bldr.habitat.sh\"#" -i build/get-build-hostname.sh
   popd
