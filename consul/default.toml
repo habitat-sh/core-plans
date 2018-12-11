@@ -9,12 +9,19 @@ expect = "3"
 [server]
 data-dir = "/hab/svc/consul/data/consul"
 datacenter = "dc1"
+# primary_datacenter
 loglevel = "INFO"
 # Revert back to the Legacy UI
 legacy_ui = false
 # switch this to false you want to start in DEVMODE
 # https://www.consul.io/docs/guides/bootstrapping.html
 mode = true
+
+# Uncomment the following to enable ACLs
+# [acl]
+# enabled = true
+# default_policy = "deny"
+# down_policy = "extend-cache"
 
 [ports]
 # The DNS server, -1 to disable

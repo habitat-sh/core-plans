@@ -1,5 +1,11 @@
 {
   "datacenter": "{{cfg.server.datacenter}}",
+  {{#if cfg.server.primary_datacenter ~}}
+  "primary_datacenter": "{{cfg.server.primary_datacenter}}"
+  {{~/if~}}
+  {{~#unless cfg.server.primary_datacenter ~}}
+  "primary_datacenter": "{{cfg.server.datacenter}}:
+  {{~/unless}}
   "data_dir": "{{cfg.server.data-dir}}",
   "log_level": "{{cfg.server.loglevel}}",
   "bind_addr": "{{sys.ip}}",
@@ -10,6 +16,9 @@
     "{{member.sys.ip}}" {{~#unless @last}},{{/unless}}
   {{/eachAlive ~}}
   ],
+  {{#if cfg.acl.enabled~}}
+   "acl": {{toJson cfg.acl}},
+  {{~/if}}
   "ports": {
     "dns": {{cfg.ports.dns}},
     "http": {{cfg.ports.http}},
