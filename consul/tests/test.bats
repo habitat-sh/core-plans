@@ -17,12 +17,12 @@ load helpers
 }
 
 @test "Port Listen TCP/8500" {
-  test_listen tcp 8500
+  test_listen tcp 8500 30 127.0.0.1
   [ "$?" -eq 0 ]
 }
 
 @test "Port Listen TCP/8600" {
-  test_listen tcp 8600
+  test_listen tcp 8600 30 127.0.0.1
   [ "$?" -eq 0 ]
 }
 

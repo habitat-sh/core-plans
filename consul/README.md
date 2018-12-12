@@ -8,9 +8,39 @@ This plan provides the static binary for execution.
 
 ## Usage
 
+### For development:
 ```
 hab svc load core/consul
 ```
+
+### For a cluster:
+On each node,
+```
+hab svc load core/consul --topology standalone --strategy rolling --group leaders
+```
+additionally, set a config TOML with:
+```
+appmode = "server"
+local_only = false
+[server]
+mode = true
+```
+and any other tweaks you'd like to make. If changing the datacenter, you'll have to delete all data from `/hab/svc/consul` if the service has already been deployed, otherwise set the configuation prior to starting the service and the datacenter setting should work as expected.
+
+### For a client
+On the client node,
+```
+hab svc load core/consul --topology standalone --strategy rolling --group client --bind leaders:consul.habitat
+```
+and set a config TOML with:
+```
+appmode = "client"
+local_only = true
+[server]
+mode = false
+```
+which will cause the client to work as expected.
+
 
 ## Topology
 

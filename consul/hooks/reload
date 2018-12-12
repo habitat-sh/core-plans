@@ -1,4 +1,4 @@
 #!/bin/sh
 
 exec 2>&1
-exec consul reload
+exec consul reload -http-addr={{sys.ip}}

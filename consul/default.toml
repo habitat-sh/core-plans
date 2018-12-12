@@ -1,6 +1,12 @@
 # If you would like the web gui on the agent
 website = true
 
+# Set to true if you want to bind only to 127.0.0.1
+local_client = false
+
+# Set this to the consul mode: dev, server, or client. Defaults to dev.
+appmode = "dev"
+
 # The options for consul are available here
 # https://www.consul.io/docs/agent/options.html
 [bootstrap]

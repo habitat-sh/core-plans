@@ -1,15 +1,20 @@
 {
   "datacenter": "{{cfg.server.datacenter}}",
   "data_dir": "{{cfg.server.data-dir}}",
-  "log_level": "{{cfg.server.loglevel}}",
+  "log_level": "{{cfg.server.loglevel}}",{{#if cfg.local_client}}
   "bind_addr": "{{sys.ip}}",
-  "client_addr": "{{sys.ip}}",
+  "client_addr": "127.0.0.1",{{else}}
+  "bind_addr": "{{sys.ip}}",
+  "client_addr": "{{sys.ip}}",{{/if}}
   "server": {{cfg.server.mode}},
   "retry_join": [
-  {{#eachAlive svc.members as |member| ~}}
+  {{#if bind.leaders.members}}
+    {{#eachAlive bind.leaders.members as |leaders| ~}}
+    "{{leaders.sys.ip}}" {{~#unless @last}},{{/unless}}
+    {{/eachAlive ~}}{{else}}{{#eachAlive svc.members as |member| ~}}
     "{{member.sys.ip}}" {{~#unless @last}},{{/unless}}
-  {{/eachAlive ~}}
-  ],
+    {{/eachAlive ~}}
+  {{/if}}],
   "ports": {
     "dns": {{cfg.ports.dns}},
     "http": {{cfg.ports.http}},

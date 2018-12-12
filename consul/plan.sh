@@ -18,7 +18,16 @@ pkg_exports=(
   [port-serf_wan]=ports.serf_wan
   [port-server]=ports.server
 )
-pkg_exposes=(port-dns port-http port-serf_lan port-serf_wan port-server)
+pkg_exposes=(
+  port-dns
+  port-http
+  port-serf_lan
+  port-serf_wan
+  port-server
+)
+pkg_binds_optional=(
+  [leaders]="port-http port-server"
+)
 
 pkg_svc_user="hab"
 pkg_svc_group="${pkg_svc_user}"
