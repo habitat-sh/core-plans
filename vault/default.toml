@@ -12,3 +12,6 @@ type = "tcp"
 location = "127.0.0.1"
 port = "8200"
 tls_disable = "1"
+
+[server]
+ui = true
