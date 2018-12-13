@@ -71,6 +71,8 @@ plan_path = "boost"
 plan_path = "boost159"
 [boringssl]
 plan_path = "boringssl"
+[buildkite-agent]
+plan_path = "buildkite-agent"
 [bundler]
 plan_path = "bundler"
 [busybox]
