@@ -12,7 +12,7 @@ pkg_exports=(
   [host]=service.host
 )
 pkg_deps=(core/glibc)
-pkg_build_deps=(core/go core/git)
+pkg_build_deps=(core/go core/git core/gcc)
 pkg_bin_dirs=(bin)
 
 do_before() {
