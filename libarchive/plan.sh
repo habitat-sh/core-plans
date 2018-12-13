@@ -26,7 +26,8 @@ pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_build() {
-  ./configure \
+  CFLAGS="$CFLAGS -fPIC" \
+    ./configure \
     --prefix="$pkg_prefix" \
     --without-xml2 \
     --without-lzo2
