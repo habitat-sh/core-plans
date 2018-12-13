@@ -9,13 +9,13 @@ To get started, follow the [official getting started guide](https://www.cockroac
 - Start single node:
 
     ```bash
-    hab pkg exec core/cockroach cockroach start --insecure --host=localhost &
+    hab pkg exec core/cockroach cockroachoss start --insecure --host=localhost &
     ```
 - Open web UI at http://localhost:8080
 - Connect with included command-line SQL client:
 
     ```bash
-    hab pkg exec core/cockroach cockroach sql --insecure
+    hab pkg exec core/cockroach cockroachoss sql --insecure
     ```
 - Test some SQL:
 
