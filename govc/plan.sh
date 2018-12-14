@@ -11,8 +11,11 @@ pkg_bin_dirs=(bin)
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/go core/git)
 
+
 do_before() {
   GOPATH="${HAB_CACHE_SRC_PATH}/govc-${pkg_version}"
+  go_pkg="${pkg_source#https://}"
+  export GOPATH
 }
 
 do_verify() {
@@ -20,10 +23,7 @@ do_verify() {
 }
 
 do_unpack() {
-  git clone "$pkg_source" "$GOPATH"
-  ( cd "$GOPATH" || exit
-    git checkout -q v"$pkg_version"
-  )
+  git clone --quiet --branch v"${pkg_version}" "${pkg_source}" "${GOPATH}"/src/"${go_pkg}"
 }
 
 do_download() {
@@ -31,12 +31,12 @@ do_download() {
 }
 
 do_build() { 
- ( cd "$GOPATH/govc" || exit
+ ( cd "src/${go_pkg}/govc" || exit
    go build
  )
 }
 
 do_install() {
-  cp "${GOPATH}/govc/govc" "${pkg_prefix}/bin/"
+  cp "src/${go_pkg}/govc/govc" "${pkg_prefix}/bin/"
 }
 
