@@ -26,7 +26,10 @@ pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_build() {
-  ./configure \
+  # We force PIC here because all of our rust crates that rely on this expect full
+  # R_X86_64_64 symbols all the way down. By default it will make a 32S symbol table
+  CFLAGS="$CFLAGS -fPIC" \
+    ./configure \
     --prefix="$pkg_prefix" \
     --without-xml2 \
     --without-lzo2
