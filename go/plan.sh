@@ -1,6 +1,6 @@
 pkg_name=go
 pkg_origin=core
-pkg_version=1.11.2
+pkg_version=1.11.3
 pkg_description="Go is an open source programming language that makes it easy to
   build simple, reliable, and efficient software."
 pkg_upstream_url=https://golang.org/
