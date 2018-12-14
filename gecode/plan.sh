@@ -4,11 +4,11 @@ pkg_origin=core
 pkg_version=3.7.3
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
-pkg_source="http://www.gecode.org/download/gecode-${pkg_version}.tar.gz"
-pkg_shasum=e7cc8bcc18b49195fef0544061bdd2e484a1240923e4e85fa39e8d6bb492854c
-pkg_dirname=${pkg_distname}-${pkg_version}
+pkg_source="https://github.com/Gecode/${pkg_name}/archive/release-${pkg_version}.tar.gz"
+pkg_shasum=75faaaa025a154ec0aef8b3b6ed9e78113efb543a92b8f4b2b971a0b0e898108
+pkg_dirname=${pkg_distname}-release-${pkg_version}
 pkg_deps=(
-  core/gcc
+  core/gcc-libs
   core/glibc
 )
 pkg_build_deps=(
