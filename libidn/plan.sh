@@ -9,7 +9,7 @@ and IDNA 2003 specifications.\
 pkg_upstream_url="https://www.gnu.org/software/libidn/"
 pkg_license=('LGPL-2.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="44a7aab635bb721ceef6beecc4d49dfd19478325e1b47f3196f7d2acc4930e19"
+pkg_shasum="f11af1005b46b7b15d057d7f107315a1ad46935c7fcdf243c16e46ec14f0fe1e"
 pkg_deps=(
   core/glibc
 )
@@ -25,17 +25,9 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
-do_prepare() {
-  # Add GCC 7 compatibility
-  #
-  # Thanks to: https://git.archlinux.org/svntogit/packages.git/tree/trunk/gcc7_buildfix.diff?h=packages/libidn
-  patch -p1 -i "$PLAN_CONTEXT/gcc7-buildfix.patch"
-}
-
 do_check() {
   make check
 }
-
 
 # ----------------------------------------------------------------------------
 # **NOTICE:** What follows are implementation details required for building a
