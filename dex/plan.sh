@@ -17,6 +17,7 @@ pkg_bin_dirs=(bin)
 
 do_before() {
   GOPATH=$HAB_CACHE_SRC_PATH/$pkg_dirname
+  export GOPATH
 }
 
 do_prepare() {
@@ -35,8 +36,8 @@ do_verify() {
 # Use unpack instead of download, so that plan-build can manage the
 # source path. This ensures us a clean checkout every time we build.
 do_unpack() {
-  git clone "$pkg_source" "$GOPATH/$gopkg"
-  ( cd "$GOPATH/$gopkg" || exit
+  git clone "$pkg_source" "$GOPATH/src/$gopkg"
+  ( cd "$GOPATH/src/$gopkg" || exit
     build_line "checking out $pkg_version"
     git reset --hard "v$pkg_version"
   )
@@ -49,5 +50,5 @@ do_build() {
 
 do_install() {
   build_line "copying static web content"
-  cp -r "$GOPATH/$gopkg/web" "$pkg_prefix"
+  cp -r "$GOPATH/src/$gopkg/web" "$pkg_prefix"
 }
