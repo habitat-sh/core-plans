@@ -248,7 +248,7 @@ if [[ -z "${1:-}" ]]; then
   # If no arguments were provided, read the input on stdin
   echo "Reading input on stdin..."
   # shellcheck disable=SC2086
-  while read -r plan; do _build $plan; done
+  while read -r plan; do echo "" | _build $plan; done
 else
   case "$1" in
     --help|-h)
