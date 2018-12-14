@@ -107,6 +107,47 @@ _on_exit() {
 # * ERR - when a shell command raises an error. Useful for `set -e; set -E`.
 trap _on_exit 1 2 3 15 ERR
 
+
+# Since we have to execute inside the same studio for every build as part of
+# a refresh (nothing from the outside) _or_ eat the pain of installing every
+# package built previously for each build which would take an unreasonable 
+# amount of time, we'll elect to clean up any cruft a previous build left 
+# behind that might fail a subsequent build. A lot of tools will write to 
+# /root/.directory so this gives us a convenient place to encode what needs
+# to be cleaned
+_clean_studio() {
+  local cleanup_items=(
+    /hab/cache/src
+    /root/.bundle
+    /root/.cabal
+    /root/.cache
+    /root/.cargo
+    /root/.cmake
+    /root/.composer
+    /root/.config
+    /root/.cpan
+    /root/.cpanm
+    /root/.drush
+    /root/.gemrc
+    /root/.gitconfig
+    /root/.glide
+    /root/.gnupg
+    /root/.m2
+    /root/.magefile
+    /root/.mavengem
+    /root/.mono
+    /root/.node-gyp
+    /root/.noderc
+    /root/.npm
+    /root/.npmrc
+    /root/.v8flags.*.json
+  )
+
+  for cruft in "${cleanup_items[@]}"; do 
+    rm -rf $cruft
+  done
+}
+
 # Executes a build on a Plan, assuming that it has not already been built by a
 # previous execution of this program. A very simple, plaintext database is
 # maintained to track every Plan that has successfully completed so that if a
@@ -178,6 +219,9 @@ _build() {
       exit 2
     fi
   fi
+
+  # If we made it here, we're going to build. Clean things up first.
+  _clean_studio
 
   # If extra args are passed to this function, we will treat them all as
   # environment variables.
