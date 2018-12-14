@@ -18,7 +18,7 @@ pkg_build_deps=(
   core/dosfstools
   core/flex
   core/freetype
-  core/gcc
+  core/gcc7
   core/gettext
   core/git
   core/m4
@@ -28,7 +28,7 @@ pkg_build_deps=(
   core/rsync
   core/texinfo
 )
-pkg_deps=(core/glibc core/xz core/gettext core/pcre core/gcc-libs core/devicemapper core/elfutils core/bzip2 core/libcap)
+pkg_deps=(core/glibc core/xz core/gettext core/pcre core/gcc7-libs core/devicemapper core/elfutils core/bzip2 core/libcap)
 
 do_setup() {
   if [[ ! -d /boot ]]; then
