@@ -1,6 +1,6 @@
 pkg_name=db
 pkg_origin=core
-pkg_version=18.1.25
+pkg_version=5.3.28
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Berkeley DB is a family of embedded key-value database libraries providing \
@@ -9,19 +9,19 @@ scalable high-performance data management services to applications.\
 pkg_upstream_url="http://www.oracle.com/technetwork/database/database-technologies/berkeleydb/overview/index.html"
 pkg_license=('custom')
 # Oracle's official download link for Berkeley DB is now behind a login screen
-# So using an alternative one
-pkg_source="https://fossies.org/linux/misc/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="4aed1949fe10a2bf37bc559cdca96ccf93b1d7de4f4dbeb3e5f5224d2c4eb8a7"
+# Pull from LFS mirrors for now
+pkg_source="https://download.oracle.com/berkeley-db/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum="e0a992d740709892e81f9d93f06daf305cf73fb81b545afe72478043172c3628"
 pkg_deps=(
   core/glibc
-  core/gcc-libs
+  core/gcc7-libs
 )
 pkg_build_deps=(
   core/coreutils
   core/diffutils
   core/patch
   core/make
-  core/gcc
+  core/gcc7
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
