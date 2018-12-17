@@ -16,6 +16,9 @@ pkg_bin_dirs=(bin jre/bin)
 pkg_lib_dirs=(lib lib/amd64)
 pkg_include_dirs=(include)
 
+# Hint for rebuild scripts. Not a formal part of plan-build.
+pkg_deprecated="true"
+
 source_dir=$HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_version}
 
 do_setup_environment() {
