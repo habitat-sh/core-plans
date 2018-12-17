@@ -9,7 +9,7 @@ pkg_source="https://github.com/vmware/govmomi"
 pkg_bin_dirs=(bin)
 
 pkg_deps=(core/glibc)
-pkg_build_deps=(core/go core/git)
+pkg_build_deps=(core/go core/git core/gcc)
 
 
 do_before() {
@@ -23,7 +23,12 @@ do_verify() {
 }
 
 do_unpack() {
-  git clone --quiet --branch v"${pkg_version}" "${pkg_source}" "${GOPATH}"/src/"${go_pkg}"
+  git clone \
+    --quiet \
+    --config advice.detachedHead=false \
+    --branch v"${pkg_version}" \
+    "${pkg_source}" \
+    "${GOPATH}"/src/"${go_pkg}"
 }
 
 do_download() {
