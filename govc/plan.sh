@@ -35,7 +35,7 @@ do_download() {
   return 0
 }
 
-do_build() { 
+do_build() {
  ( cd "src/${go_pkg}/govc" || exit
    go build
  )
@@ -44,4 +44,3 @@ do_build() {
 do_install() {
   cp "src/${go_pkg}/govc/govc" "${pkg_prefix}/bin/"
 }
-
