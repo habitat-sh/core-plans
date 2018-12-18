@@ -502,8 +502,6 @@ plan_path = "jbigkit"
 plan_path = "jdk7"
 [jdk8]
 plan_path = "jdk8"
-[jdk9]
-plan_path = "jdk9"
 [jemalloc]
 plan_path = "jemalloc"
 [jenkins]
@@ -522,8 +520,6 @@ plan_path = "jq-static"
 plan_path = "jre7"
 [jre8]
 plan_path = "jre8"
-[jre9]
-plan_path = "jre9"
 [jruby]
 plan_path = "jruby"
 [jruby1]
