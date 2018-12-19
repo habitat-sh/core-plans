@@ -175,6 +175,7 @@ p4broker @dbhagen
 pango @rsertelon
 pngquant @predominant
 postgresql-client @joshbrand @irvingpop
+postgresql11 @irvingpop
 prometheus-cpp @bdangit
 protobuf-cpp @afiune
 rabbitmqadmin @predominant

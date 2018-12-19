@@ -1081,6 +1081,8 @@ paths = [
   "postgresql/*",
   "postgresql96/*",
 ]
+[postgresql11]
+plan_path = "postgresql11"
 [powershell]
 plan_path = "powershell"
 [procps-ng]
