@@ -13,7 +13,7 @@
     sha: 1.0.2
     hooks:
     -   id: shell-lint
-        args: ["--exclude=SC1090,SC1091,SC2034,SC2039,SC2148,SC2153,SC2154,SC2140"]
+        args: ["--exclude=SC1090,SC1091,SC2034,SC2039,SC2140,SC2148,SC2153,SC2154,SC2164"]
         exclude: config/.*$
 -   repo: local
     hooks:
