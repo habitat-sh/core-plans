@@ -26,6 +26,7 @@ pkg_deps=(
   core/glibc
   core/zlib
   core/cacerts
+  core/openssl-fips
 )
 pkg_build_deps=(
   core/coreutils
@@ -70,20 +71,26 @@ do_build() {
   # Set PERL var for scripts in `do_check` that use Perl
   PERL=$(pkg_path_for core/perl)/bin/perl
   export PERL
-  # shellcheck disable=SC2086
-  ./config \
-    --prefix="${pkg_prefix}" \
-    --openssldir=ssl \
+  "$(pkg_path_for core/perl)/bin/perl" ./Configure \
     no-idea \
     no-mdc2 \
     no-rc5 \
+    no-sslv2 \
+    no-sslv3 \
+    no-comp \
     zlib \
     shared \
     disable-gost \
-    $CFLAGS \
-    $LDFLAGS
-  env CC= make depend
-  make CC="$BUILD_CC"
+    --prefix="${pkg_prefix}" \
+    --openssldir=ssl \
+    -I"$(pkg_path_for core/zlib)/include" \
+    -L"$(pkg_path_for core/zlib)/lib" \
+    linux-x86_64 \
+    --with-fipsdir="$(pkg_path_for core/openssl-fips)" \
+    fips
+
+  make CC= depend
+  make --jobs="$(nproc)" CC="$BUILD_CC"
 }
 
 do_check() {

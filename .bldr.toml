@@ -945,8 +945,13 @@ plan_path = "openldap"
 plan_path = "openresty"
 [openssh]
 plan_path = "openssh"
+[openssl-fips]
+plan_path = "openssl-fips"
 [openssl]
 plan_path = "openssl"
+paths = [
+  "openssl-fips/*"
+]
 [openssl-musl]
 plan_path = "openssl-musl"
 paths = [
