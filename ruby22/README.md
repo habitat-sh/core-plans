@@ -1,15 +1,5 @@
 # ruby22
 
-A dynamic, open source programming language with a focus on   simplicity and productivity. It has an elegant syntax that is natural to   read and easy to write.
+This package has been deprecated as it is no longer maintaned by upstream.
 
-## Maintainers
-
-* The Habitat Maintainers: <humans@habitat.sh>
-
-## Type of Package
-
-Binary package
-
-## Usage
-
-*TODO: Add instructions for usage*
+https://www.ruby-lang.org/en/news/2018/06/20/support-of-ruby-2-2-has-ended/
