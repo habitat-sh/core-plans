@@ -816,8 +816,6 @@ plan_path = "mawk"
 plan_path = "mc"
 [memcached]
 plan_path = "memcached"
-[mention-bot]
-plan_path = "mention-bot"
 [mercurial]
 plan_path = "mercurial"
 [mesa]

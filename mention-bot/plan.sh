@@ -22,6 +22,9 @@ pkg_exports=(
 )
 pkg_exposes=(port)
 
+# Hint for rebuild scripts. Not a formal part of plan-build.
+pkg_deprecated="true"
+
 do_prepare() {
   npm config set spin=false
 }
