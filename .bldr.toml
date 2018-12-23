@@ -950,6 +950,8 @@ plan_path = "opam"
 plan_path = "openjpeg"
 [openldap]
 plan_path = "openldap"
+[openjdk11]
+plan_path = "openjdk11"
 [openresty]
 plan_path = "openresty"
 [openssh]
