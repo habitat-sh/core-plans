@@ -274,6 +274,8 @@ plan_path = "exercism"
 plan_path = "expat"
 [expect]
 plan_path = "expect"
+[fail2ban]
+plan_path = "fail2ban"
 [ffmpeg]
 plan_path = "ffmpeg"
 [file]
