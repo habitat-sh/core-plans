@@ -1,19 +1,22 @@
 pkg_name=acl
 pkg_origin=core
-pkg_version=2.2.52
+pkg_version=2.2.53
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Commands for Manipulating POSIX Access Control Lists."
 pkg_upstream_url="https://savannah.nongnu.org/projects/acl"
 pkg_license=('lgpl')
-pkg_source="http://download.savannah.gnu.org/releases/$pkg_name/$pkg_name-${pkg_version}.src.tar.gz"
-pkg_shasum="179074bb0580c06c4b4137be4c5a92a701583277967acdb5546043c7874e0d23"
+pkg_source="http://download.savannah.gnu.org/releases/$pkg_name/$pkg_name-${pkg_version}.tar.gz"
+pkg_shasum="06be9865c6f418d851ff4494e12406568353b891ffe1f596b34693c387af26c7"
 pkg_deps=(
   core/glibc
   core/attr
 )
 pkg_build_deps=(
+  core/autoconf
+  core/automake
   core/coreutils
   core/diffutils
+  core/libtool
   core/patch
   core/make
   core/file
@@ -36,10 +39,12 @@ do_prepare() {
   grep -lr /usr/bin/file ./* | while read -r f; do
     sed -i -e "s,/usr/bin/file,file,g" "$f"
   done
+
+  autoreconf -f -i
 }
 
 do_install() {
-  make install install-dev install-lib
+  make install
   chmod -v 755 "${pkg_prefix}/lib/libacl.so"
 }
 
