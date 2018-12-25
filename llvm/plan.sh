@@ -1,13 +1,13 @@
 pkg_name=llvm
 pkg_origin=core
-pkg_version=7.0.0
+pkg_version=7.0.1
 pkg_license=('NCSA')
 pkg_description="Next-gen compiler infrastructure"
 pkg_upstream_url="http://llvm.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_filename="${pkg_name}-${pkg_version}.src.tar.xz"
 pkg_source="http://llvm.org/releases/${pkg_version}/${pkg_name}-${pkg_version}.src.tar.xz"
-pkg_shasum="8bc1f844e6cbde1b652c19c1edebc1864456fd9c78b8c1bea038e51b363fe222"
+pkg_shasum="a38dfc4db47102ec79dcc2aa61e93722c5f6f06f0a961073bd84b78fb949419b"
 pkg_deps=(
   core/coreutils
   core/gcc-libs
