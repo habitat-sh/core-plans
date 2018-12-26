@@ -1,6 +1,6 @@
-diff -ru binutils-2.29.1.orig/ld/ld.texinfo binutils-2.29.1/ld/ld.texinfo
---- binutils-2.29.1.orig/ld/ld.texinfo	2017-10-19 12:40:00.640806973 +0000
-+++ binutils-2.29.1/ld/ld.texinfo	2017-10-19 12:40:49.770806414 +0000
+diff -ru binutils-2.31.1.orig/ld/ld.texi binutils-2.31.1/ld/ld.texi
+--- binutils-2.31.1.orig/ld/ld.texi	2017-10-19 12:40:00.640806973 +0000
++++ binutils-2.31.1/ld/ld.texi	2017-10-19 12:40:49.770806414 +0000
 @@ -2391,7 +2391,7 @@
  @option{--enable-new-dtags}, the new dynamic tags will be created as needed
  and older dynamic tags will be omitted.
@@ -10,9 +10,9 @@ diff -ru binutils-2.29.1.orig/ld/ld.texinfo binutils-2.29.1/ld/ld.texinfo
  those options are only available for ELF systems.
  
  @kindex --hash-size=@var{number}
-diff -ru binutils-2.29.1.orig/ld/ldmain.c binutils-2.29.1/ld/ldmain.c
---- binutils-2.29.1.orig/ld/ldmain.c	2017-10-19 12:40:00.640806973 +0000
-+++ binutils-2.29.1/ld/ldmain.c	2017-10-19 12:42:09.570805506 +0000
+diff -ru binutils-2.31.1.orig/ld/ldmain.c binutils-2.31.1/ld/ldmain.c
+--- binutils-2.31.1.orig/ld/ldmain.c	2017-10-19 12:40:00.640806973 +0000
++++ binutils-2.31.1/ld/ldmain.c	2017-10-19 12:42:09.570805506 +0000
 @@ -280,6 +280,7 @@
  
    link_info.allow_undefined_version = TRUE;

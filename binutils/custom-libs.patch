@@ -1,6 +1,6 @@
-diff -ru binutils-2.25.1.orig/ld/configure.host binutils-2.25.1/ld/configure.host
---- binutils-2.25.1.orig/ld/configure.host	2014-10-14 07:32:04.000000000 +0000
-+++ binutils-2.25.1/ld/configure.host	2015-12-21 19:20:58.002066137 +0000
+diff -ru binutils-2.31.1.orig/ld/configure.host binutils-2.31.1/ld/configure.host
+--- binutils-2.31.1.orig/ld/configure.host	2014-10-14 07:32:04.000000000 +0000
++++ binutils-2.31.1/ld/configure.host	2015-12-21 19:20:58.002066137 +0000
 @@ -55,10 +55,10 @@
    ;;
  

@@ -1,6 +1,6 @@
-diff -ru binutils-2.29.1.orig/gold/testsuite/debug_msg.sh binutils-2.29.1/gold/testsuite/debug_msg.sh
---- binutils-2.29.1.orig/gold/testsuite/debug_msg.sh	2017-11-29 20:39:38.703170088 +0000
-+++ binutils-2.29.1/gold/testsuite/debug_msg.sh	2017-12-05 22:13:06.386242958 +0000
+diff -ru binutils-2.31.1.orig/gold/testsuite/debug_msg.sh binutils-2.31.1/gold/testsuite/debug_msg.sh
+--- binutils-2.31.1.orig/gold/testsuite/debug_msg.sh	2017-11-29 20:39:38.703170088 +0000
++++ binutils-2.31.1/gold/testsuite/debug_msg.sh	2017-12-05 22:13:06.386242958 +0000
 @@ -27,6 +27,14 @@
  # information and then try to link it, and make sure the proper errors
  # are displayed.  The errors will be found in debug_msg.err.
@@ -16,9 +16,9 @@ diff -ru binutils-2.29.1.orig/gold/testsuite/debug_msg.sh binutils-2.29.1/gold/t
  check()
  {
      if ! grep -q "$2" "$1"
-diff -ru binutils-2.29.1.orig/gold/testsuite/relro_test.sh binutils-2.29.1/gold/testsuite/relro_test.sh
---- binutils-2.29.1.orig/gold/testsuite/relro_test.sh	2017-11-29 20:39:38.707170021 +0000
-+++ binutils-2.29.1/gold/testsuite/relro_test.sh	2017-12-05 22:13:06.386242958 +0000
+diff -ru binutils-2.31.1.orig/gold/testsuite/relro_test.sh binutils-2.31.1/gold/testsuite/relro_test.sh
+--- binutils-2.31.1.orig/gold/testsuite/relro_test.sh	2017-11-29 20:39:38.707170021 +0000
++++ binutils-2.31.1/gold/testsuite/relro_test.sh	2017-12-05 22:13:06.386242958 +0000
 @@ -25,6 +25,8 @@
  # This test checks that the PT_GNU_RELRO segment is properly
  # aligned and is coincident with the beginning of the data segment.
@@ -28,9 +28,9 @@ diff -ru binutils-2.29.1.orig/gold/testsuite/relro_test.sh binutils-2.29.1/gold/
  
  # Cleans a hexadecimal number for input to dc.
  clean_hex()
-diff -ru binutils-2.29.1.orig/ld/testsuite/ld-bootstrap/bootstrap.exp binutils-2.29.1/ld/testsuite/ld-bootstrap/bootstrap.exp
---- binutils-2.29.1.orig/ld/testsuite/ld-bootstrap/bootstrap.exp	2017-11-29 20:39:38.607171696 +0000
-+++ binutils-2.29.1/ld/testsuite/ld-bootstrap/bootstrap.exp	2017-12-05 22:13:06.386242958 +0000
+diff -ru binutils-2.31.1.orig/ld/testsuite/ld-bootstrap/bootstrap.exp binutils-2.31.1/ld/testsuite/ld-bootstrap/bootstrap.exp
+--- binutils-2.31.1.orig/ld/testsuite/ld-bootstrap/bootstrap.exp	2017-11-29 20:39:38.607171696 +0000
++++ binutils-2.31.1/ld/testsuite/ld-bootstrap/bootstrap.exp	2017-12-05 22:13:06.386242958 +0000
 @@ -136,7 +136,7 @@
      if {[file exists ../zlib/Makefile ]} then {
  	set extralibs "$extralibs -L../zlib -lz"
@@ -40,9 +40,9 @@ diff -ru binutils-2.29.1.orig/ld/testsuite/ld-bootstrap/bootstrap.exp binutils-2
      }
  
      # Plugin support requires linking with libdl.
-diff -ru binutils-2.29.1.orig/ld/testsuite/ld-elf/elf.exp binutils-2.29.1/ld/testsuite/ld-elf/elf.exp
---- binutils-2.29.1.orig/ld/testsuite/ld-elf/elf.exp	2017-11-29 20:39:38.599171829 +0000
-+++ binutils-2.29.1/ld/testsuite/ld-elf/elf.exp	2017-12-05 22:14:07.217065259 +0000
+diff -ru binutils-2.31.1.orig/ld/testsuite/ld-elf/elf.exp binutils-2.31.1/ld/testsuite/ld-elf/elf.exp
+--- binutils-2.31.1.orig/ld/testsuite/ld-elf/elf.exp	2017-11-29 20:39:38.599171829 +0000
++++ binutils-2.31.1/ld/testsuite/ld-elf/elf.exp	2017-12-05 22:14:07.217065259 +0000
 @@ -197,20 +197,6 @@
  }
  

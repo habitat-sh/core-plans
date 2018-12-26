@@ -1,6 +1,6 @@
-diff -ru binutils-2.29.1.orig/ld/ldlang.c binutils-2.29.1/ld/ldlang.c
---- binutils-2.29.1.orig/ld/ldlang.c	2017-10-19 12:40:00.640806973 +0000
-+++ binutils-2.29.1/ld/ldlang.c	2017-10-19 12:50:49.341376014 +0000
+diff -ru binutils-2.31.1.orig/ld/ldlang.c binutils-2.31.1/ld/ldlang.c
+--- binutils-2.31.1.orig/ld/ldlang.c	2017-10-19 12:40:00.640806973 +0000
++++ binutils-2.31.1/ld/ldlang.c	2017-10-19 12:50:49.341376014 +0000
 @@ -3181,6 +3181,8 @@
  			   ldfile_output_machine))
      einfo (_("%P%F:%s: can not set architecture: %E\n"), name);
