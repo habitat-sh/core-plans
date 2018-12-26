@@ -1,14 +1,18 @@
 pkg_name=buildkite-agent
 pkg_origin=core
-pkg_version="3.6.1"
+pkg_version="3.7.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("MIT")
 pkg_description="The Buildkite Agent is an open-source toolkit written in Golang for securely running build jobs on any device or network."
-pkg_build_deps=(core/go core/coreutils core/gcc)
+pkg_build_deps=(
+  core/go
+  core/coreutils
+  core/gcc
+)
 pkg_deps=(core/glibc)
 pkg_source="https://github.com/buildkite/agent/archive/v${pkg_version}.zip"
 pkg_filename="${pkg_name}-${pkg_version}.zip"
-pkg_shasum=c13683437a90ea15bfd57b960fdd54a0e4e82392a641a4e261230637d997a9c2
+pkg_shasum=b5c6e676cc901a4ae6b2e6a29ba05a68d4cd349149172eb7c2ed6538263b8cc8
 pkg_upstream_url="https://buildkite.com"
 pkg_bin_dirs=(bin)
 
