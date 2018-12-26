@@ -1,7 +1,7 @@
 pkg_name=busybox
 _distname="$pkg_name"
 pkg_origin=core
-pkg_version=1.28.1
+pkg_version=1.29.3
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 BusyBox is the Swiss Army Knife of embedded Linux. BusyBox combines tiny \
@@ -12,7 +12,7 @@ fileutils, shellutils, etc.\
 pkg_upstream_url="https://www.busybox.net/"
 pkg_license=('gplv2')
 pkg_source="http://www.busybox.net/downloads/${_distname}-${pkg_version}.tar.bz2"
-pkg_shasum="98fe1d3c311156c597cd5cfa7673bb377dc552b6fa20b5d3834579da3b13652e"
+pkg_shasum="97648636e579462296478e0218e65e4bc1e9cd69089a3b1aeb810bff7621efb7"
 pkg_deps=(
   core/glibc
 )
