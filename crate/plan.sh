@@ -1,68 +1,74 @@
 pkg_name=crate
 pkg_origin=core
-pkg_version="1.1.2"
+pkg_version="3.2.5"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://cdn.crate.io/downloads/releases/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="8f22b6531b3d1c8602a880779bbe09e5295ef0959a30aff0986575835aadc937"
+pkg_shasum="b40b066f53155bc13a2289396a9225f7246ad09c2cb95a4c02dc2d093758e56b"
+asc_checksum="4795f66c0a77016ee96c5e62d4c720b3a5ef56752e7aff5a58410bd58b93c132"
 pkg_build_deps=(core/gnupg)
-pkg_deps=(core/jre8 core/curl)
+pkg_deps=(
+  core/jre8
+  core/curl
+  core/bash
+  core/coreutils
+)
 pkg_bin_dirs=(crate/bin)
 pkg_lib_dirs=(crate/lib)
 pkg_exports=(
-    [http]=http.port
-    [transport]=transport.tcp.port
-    [postgres]=psql.port
+  [http]=http.port
+  [transport]=transport.tcp.port
+  [postgres]=psql.port
 )
 pkg_exposes=(http transport postgres)
 pkg_upstream_url="https://crate.io"
 pkg_description="CrateDB is an open source SQL database with a ground-breaking distributed design."
 
 do_download() {
-    # Download the source file, as usual
-    do_default_download
+  # Download the source file, as usual
+  do_default_download
 
-    # Now also grab the signature for the source
-    # Provide the checksum so that file does not get downloaded with every build
-    download_file "https://cdn.crate.io/downloads/releases/${pkg_name}-${pkg_version}.tar.gz.asc" \
-		  "${pkg_name}-${pkg_version}.tar.gz.asc" \
-		  "4e6007a35b99c0da75356cb6cd7aeafd7d380e1a5f5fa26b79a0dfa0a9898924"
+  # Now also grab the signature for the source
+  # Provide the checksum so that file does not get downloaded with every build
+  download_file "https://cdn.crate.io/downloads/releases/${pkg_name}-${pkg_version}.tar.gz.asc" \
+    "${pkg_name}-${pkg_version}.tar.gz.asc" \
+    "${asc_checksum}"
 }
 
 do_verify() {
-    # Firstly perform the standard checksum-based verification
-    do_default_verify
+  # Firstly perform the standard checksum-based verification
+  do_default_verify
 
-    # Now verify the signature file
-    verify_file "${pkg_name}-${pkg_version}.tar.gz.asc" \
-    		"4e6007a35b99c0da75356cb6cd7aeafd7d380e1a5f5fa26b79a0dfa0a9898924"
+  # Now verify the signature file
+  verify_file "${pkg_name}-${pkg_version}.tar.gz.asc" \
+      "${asc_checksum}"
 
-    # Now do the GPG-based verification
-    build_line "Verifying crate-${pkg_version}.tar.gz signature"
-    GNUPGHOME=$(mktemp -d -p "$HAB_CACHE_SRC_PATH")
-    gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 90C23FC6585BC0717F8FBFC37FAAE51A06F6EAEB
-    gpg --batch --verify "${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version}.tar.gz.asc \
-	"${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version}.tar.gz
-    rm -r "$GNUPGHOME"
-    build_line "Signature verified for ${pkg_name}-${pkg_version}.tar.gz"
+  # Now do the GPG-based verification
+  build_line "Verifying crate-${pkg_version}.tar.gz signature"
+  GNUPGHOME=$(mktemp -d -p "$HAB_CACHE_SRC_PATH")
+  gpg --keyserver keyserver.ubuntu.com --recv-keys 90C23FC6585BC0717F8FBFC37FAAE51A06F6EAEB
+  gpg --batch --verify "${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version}.tar.gz.asc \
+"${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version}.tar.gz
+  rm -r "$GNUPGHOME"
+  build_line "Signature verified for ${pkg_name}-${pkg_version}.tar.gz"
 }
 
 do_build() {
-    return 0
+  return 0
 }
 
 do_install() {
-    cd "${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version} || exit
-    install -vDm644 README.rst "${pkg_prefix}"/README.rst
-    install -vDm644 LICENSE.txt "${pkg_prefix}"/LICENSE.txt
-    install -vDm644 NOTICE "${pkg_prefix}"/NOTICE
-    install -vDm644 CHANGES.txt "${pkg_prefix}"/CHANGES.txt
+  cd "${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version} || exit
+  install -vDm644 README.rst "${pkg_prefix}"/README.rst
+  install -vDm644 LICENSE "${pkg_prefix}"/LICENSE
+  install -vDm644 NOTICE "${pkg_prefix}"/NOTICE
+  install -vDm644 CHANGES.txt "${pkg_prefix}"/CHANGES.txt
 
-    mkdir -p "${pkg_prefix}"/crate
-    cp -a bin lib plugins "${pkg_prefix}"/crate
-    rm "${pkg_prefix}"/crate/bin/*.bat
+  mkdir -p "${pkg_prefix}"/crate/logs
+  cp -a bin lib plugins "${pkg_prefix}"/crate
+  rm "${pkg_prefix}"/crate/bin/*.bat
 }
 
 do_strip() {
-    return 0
+  return 0
 }

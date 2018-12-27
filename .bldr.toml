@@ -181,6 +181,8 @@ plan_path = "cppcheck"
 plan_path = "cppunit"
 [cpputest]
 plan_path = "cpputest"
+[crate]
+plan_path = "crate"
 [cuda]
 plan_path = "cuda"
 [cuda-libs]

@@ -38,3 +38,11 @@ On all nodes the following ports are available:
 
 - CrateDB has a _lot_ of configuration. This package has been designed to minimise the amount of configuration that needs to be adjusted by the administrator.
 - The configuration for this plan has been written so that the lead Habitat supervisor will always been the CrateDB master node.
+
+
+### Testing
+
+```
+hab studio enter
+./crate/tests/test.sh
+```
