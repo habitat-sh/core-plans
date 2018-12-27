@@ -1,13 +1,13 @@
 pkg_name=cppcheck
 pkg_origin=core
-pkg_version=1.84
+pkg_version=1.86
 pkg_description="static analysis of C/C++ code"
 pkg_upstream_url="http://cppcheck.sourceforget.net"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("GPL-3.0")
 pkg_source="https://github.com/danmar/cppcheck/archive/${pkg_version}.tar.gz"
 pkg_filename="${pkg_version}.tar.gz"
-pkg_shasum=aaa6293d91505fc6caa6982ca3cd2d949fa1aac603cabad072b705fdda017fc5
+pkg_shasum=86ea85c2ee5ec31a7410bfc7c206b87e600d284089428750d66d1ce1ffa0c9a6
 pkg_deps=(
   core/glibc
   core/gcc-libs
