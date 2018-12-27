@@ -460,6 +460,11 @@ plan_path = "haproxy18"
 paths = [
   "haproxy/*"
 ]
+[haproxy19]
+plan_path = "haproxy19"
+paths = [
+  "haproxy/*"
+]
 [harfbuzz]
 plan_path = "harfbuzz"
 [helm]
