@@ -1,13 +1,13 @@
 pkg_name=cuda
 pkg_origin=core
 pkg_description="GPU-accelerated Libraries for Computing on NVIDIA devices"
-pkg_version=9.2.148
-_driverver=396.37
+pkg_version=10.0.130
+_driverver=410.48
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('custom')
-pkg_source="https://developer.nvidia.com/compute/${pkg_name}/9.2/Prod2/local_installers/${pkg_name}_${pkg_version}_${_driverver}_linux"
+pkg_source="https://developer.nvidia.com/compute/${pkg_name}/10.0/Prod/local_installers/${pkg_name}_${pkg_version}_${_driverver}_linux"
 pkg_filename="${pkg_name}_${pkg_version}_${_driverver}_linux.run"
-pkg_shasum=f5454ec2cfdf6e02979ed2b1ebc18480d5dded2ef2279e9ce68a505056da8611
+pkg_shasum=92351f0e4346694d0fcb4ea1539856c9eb82060c25654463bfd8574ec35ee39a
 pkg_upstream_url="https://developer.nvidia.com/cuda-zone"
 
 ## NOTE: Much of this plan copies what Archlinux did to repackage cuda.
