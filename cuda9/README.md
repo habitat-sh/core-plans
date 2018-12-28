@@ -1,4 +1,6 @@
-# cuda
+# cuda9
+
+This package provides the cuda 9.x libraries and binaries.
 
 [GPU-accelerated Libraries](https://developer.nvidia.com/cuda-zone) for Computing on NVIDIA devices.
 

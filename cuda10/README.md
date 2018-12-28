@@ -1,4 +1,6 @@
-# cuda
+# cuda10
+
+This package provides the cuda 10.x libraries and binaries.
 
 [GPU-accelerated Libraries](https://developer.nvidia.com/cuda-zone) for Computing on NVIDIA devices.
 
