@@ -4,7 +4,7 @@ TESTDIR="$(dirname "${0}")"
 PLANDIR="$(dirname "${TESTDIR}")"
 SKIPBUILD=${SKIPBUILD:-0}
 
-hab pkg install --binlink core/cuda
+hab pkg install --binlink core/bats
 
 source "${PLANDIR}/plan.sh"
 

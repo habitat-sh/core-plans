@@ -164,6 +164,8 @@ plan_path = "cpputest"
 plan_path = "cuda"
 [cuda9]
 plan_path = "cuda9"
+[cuda10]
+plan_path = "cuda10"
 [cuda-libs]
 plan_path = "cuda-libs"
 paths = [

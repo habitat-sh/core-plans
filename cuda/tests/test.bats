@@ -1,6 +1,6 @@
 source "${BATS_TEST_DIRNAME}/../plan.sh"
 
 @test "Version matches" {
-  result="$(cuda -V | head -1 | awk '{print $4}')"
+  result="$(nvcc --version | tail -1 | awk '{print $6}' | tr -d 'V')"
   [ "$result" = "${pkg_version}" ]
 }
