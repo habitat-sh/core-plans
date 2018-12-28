@@ -1,12 +1,12 @@
 pkg_name=docker
 pkg_description="The Docker Engine"
 pkg_origin=core
-pkg_version=18.03.0
+pkg_version=18.09.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2')
-pkg_source=https://download.docker.com/linux/static/stable/x86_64/${pkg_name}-${pkg_version}-ce.tgz
+pkg_source=https://download.docker.com/linux/static/stable/x86_64/${pkg_name}-${pkg_version}.tgz
 pkg_upstream_url=https://docs.docker.com/engine/installation/binaries/
-pkg_shasum=e5dff6245172081dbf14285dafe4dede761f8bc1750310156b89928dbf56a9ee
+pkg_shasum=08795696e852328d66753963249f4396af2295a7fe2847b839f7102e25e47cb9
 pkg_dirname=docker
 pkg_bin_dirs=(bin)
 
