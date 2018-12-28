@@ -1,6 +1,6 @@
 pkg_name=dd-agent
 pkg_origin=core
-pkg_version="0.1.0"
+pkg_version="5.30.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="The Datadog Agent"
 pkg_license=("BSD-3-Clause")
