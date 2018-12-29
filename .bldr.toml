@@ -270,6 +270,8 @@ plan_path = "etcd"
 plan_path = "eudev"
 [exercism]
 plan_path = "exercism"
+[exercism2]
+plan_path = "exercism2"
 [expat]
 plan_path = "expat"
 [expect]
