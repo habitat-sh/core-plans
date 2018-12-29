@@ -1,5 +1,5 @@
 pkg_name=envdir
-pkg_version=0.7.0
+pkg_version=1.0.1
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
