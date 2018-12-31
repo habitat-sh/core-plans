@@ -15,4 +15,12 @@ Binary package
 
 ## Usage
 
-*TODO: Add instructions for usage*
+This package needs the file `/etc/protocols` from the `core/iana-etc` package.
+Add this to your plan/hooks:
+
+```
+if [[ ! -f /etc/protocols ]]; then
+  hab pkg install core/iana-etc
+  ln -s $(hab pkg path core/iana-etc)/etc/protocols /etc/protocols
+fi
+```
