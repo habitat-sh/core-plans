@@ -12,4 +12,4 @@ Binary package
 
 ## Usage
 
-*TODO: Add instructions for usage*
+Add `core/c-ares` if your C/C++ apps depend on this.
