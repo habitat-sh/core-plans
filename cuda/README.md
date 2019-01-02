@@ -1,6 +1,6 @@
 # cuda
 
-This package provides the cuda libraries and binaries. This package tracks the latest major version of llvm.
+This package provides the cuda libraries and binaries. This package tracks the latest major version of cuda.
 
 [GPU-accelerated Libraries](https://developer.nvidia.com/cuda-zone) for Computing on NVIDIA devices.
 
