@@ -1,6 +1,6 @@
 pkg_name=gdbm
 pkg_origin=core
-pkg_version=1.17
+pkg_version=1.18.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 GNU dbm is a set of database routines that use extensible hashing. It works \
@@ -9,17 +9,16 @@ similar to the standard UNIX dbm routines.\
 pkg_upstream_url="http://www.gnu.org/software/gdbm/gdbm.html"
 pkg_license=('gplv3+')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="7cd8cc2e35b1aaede6084ea57cc9447752f498daaea854100a4bad567614977d"
-pkg_deps=(
-  core/glibc
-)
+pkg_shasum="86e613527e5dba544e73208f42b78b7c022d4fa5a6d5498bf18c8d6f745b91dc"
 pkg_build_deps=(
   core/coreutils
+  core/dejagnu
   core/diffutils
-  core/patch
-  core/make
   core/gcc
+  core/make
+  core/patch
 )
+pkg_deps=(core/glibc)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
