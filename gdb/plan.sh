@@ -1,32 +1,32 @@
 pkg_name=gdb
 pkg_origin=core
-pkg_version=8.1
+pkg_version=8.2
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-3.0')
 pkg_description="GDB, the GNU Project debugger, allows you to see what is going on 'inside' another program while it executes -- or what another program was doing at the moment it crashed."
 pkg_upstream_url="https://www.gnu.org/software/gdb/"
 pkg_source="http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum=af61a0263858e69c5dce51eab26662ff3d2ad9aa68da9583e8143b5426be4b34
+pkg_shasum=c3a441a29c7c89720b734e5a9c6289c0a06be7e0c76ef538f7bbcef389347c39
 pkg_deps=(
-  core/glibc
-  core/readline
-  core/zlib
-  core/xz
-  core/ncurses
-  core/expat
-  core/guile
   core/bdwgc
+  core/expat
+  core/glibc
+  core/guile
+  core/ncurses
   core/python
+  core/readline
+  core/xz
+  core/zlib
 )
 pkg_build_deps=(
   core/coreutils
-  core/pkg-config
+  core/dejagnu
   core/diffutils
   core/expect
-  core/dejagnu
-  core/patch
-  core/make
   core/gcc
+  core/make
+  core/patch
+  core/pkg-config
   core/texinfo
 )
 pkg_bin_dirs=(bin)
@@ -37,8 +37,6 @@ do_prepare() {
   export CXXFLAGS="${CXXFLAGS} -O2 -fstack-protector-strong -Wformat -Werror=format-security "
   export CPPFLAGS="${CPPFLAGS} -Wdate-time"
   export LDFLAGS="${LDFLAGS} -Wl,-Bsymbolic-functions -Wl,-z,relro"
-
-  patch -p1 < "${PLAN_CONTEXT}/fix-python37.patch"
 }
 
 do_build() {
