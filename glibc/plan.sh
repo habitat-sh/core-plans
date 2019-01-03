@@ -1,6 +1,6 @@
 pkg_name=glibc
 pkg_origin=core
-pkg_version=2.27
+pkg_version=2.28
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU C Library project provides the core libraries for the GNU system and \
@@ -13,10 +13,7 @@ dlopen, pthread_create, crypt, login, exit and more.\
 pkg_upstream_url="https://www.gnu.org/software/libc"
 pkg_license=('GPL-2.0' 'LGPL-2.0')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="5172de54318ec0b7f2735e5a91d908afe1c9ca291fec16b5374d9faadfc1fc72"
-pkg_deps=(
-  core/linux-headers
-)
+pkg_shasum="b1900051afad76f7a4f73e71413df4826dce085ef8ddb785a945b66d7d513082"
 pkg_build_deps=(
   core/coreutils
   core/bison
@@ -26,6 +23,9 @@ pkg_build_deps=(
   core/gcc
   core/sed
   core/perl
+)
+pkg_deps=(
+  core/linux-headers
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
@@ -113,7 +113,7 @@ do_build() {
       --enable-kernel=2.6.32 \
       --cache-file=config.cache
 
-    make
+    make -j"$(nproc)"
   popd > /dev/null
 }
 
