@@ -13,14 +13,14 @@ pkg_build_deps=(
   core/bison
   core/boost159
   core/cmake
-  core/gcc7
+  core/gcc
   core/make
   core/ncurses
   core/vim
 )
 pkg_deps=(
   core/curl
-  core/gcc7-libs
+  core/gcc-libs
   core/glibc
   core/libaio
   core/libev

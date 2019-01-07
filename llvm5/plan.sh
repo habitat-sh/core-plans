@@ -12,7 +12,7 @@ pkg_source="http://llvm.org/releases/${pkg_version}/llvm-${pkg_version}.src.tar.
 pkg_shasum="5fa7489fc0225b11821cab0362f5813a05f2bcf2533e8a4ea9c9c860168807b0"
 pkg_deps=(
   core/coreutils
-  core/gcc7-libs
+  core/gcc-libs
   core/glibc
   core/libffi
   core/python2
@@ -21,6 +21,6 @@ pkg_deps=(
 pkg_build_deps=(
   core/cmake
   core/diffutils
-  core/gcc7
+  core/gcc
   core/ninja
 )

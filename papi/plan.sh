@@ -11,7 +11,7 @@ pkg_deps=(
   core/glibc
 )
 pkg_build_deps=(
-  core/gcc7
+  core/gcc
   core/linux-headers
   core/make
   core/pkg-config

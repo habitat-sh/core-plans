@@ -9,7 +9,7 @@ pkg_source="http://cdn.postfix.johnriley.me/mirrors/${pkg_name}-release/official
 pkg_shasum="3c93f31eee49a58e592c31e62a058701cadde11e8e066ea441da19fddad7b35b"
 pkg_build_deps=(
   core/make
-  core/gcc7
+  core/gcc
   core/sed
   core/gawk
   core/m4

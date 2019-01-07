@@ -14,14 +14,14 @@ pkg_source="https://download.oracle.com/berkeley-db/${pkg_name}-${pkg_version}.t
 pkg_shasum="e0a992d740709892e81f9d93f06daf305cf73fb81b545afe72478043172c3628"
 pkg_deps=(
   core/glibc
-  core/gcc7-libs
+  core/gcc-libs
 )
 pkg_build_deps=(
   core/coreutils
   core/diffutils
   core/patch
   core/make
-  core/gcc7
+  core/gcc
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
