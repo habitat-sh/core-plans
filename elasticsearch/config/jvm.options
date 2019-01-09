@@ -49,5 +49,6 @@
 -Dlog4j.shutdownHookEnabled=false
 -Dlog4j2.disable.jmx=true
 -Dlog4j.skipJansi=true
+-Djava.io.tmpdir={{pkg.svc_var_path}}
 -XX:+HeapDumpOnOutOfMemoryError
 {{cfg.runtime.es_java_opts}}
