@@ -1,27 +1,31 @@
 pkg_name=cockroach
 pkg_origin=core
-pkg_version=2.0.6
+pkg_version=2.1.3
 pkg_description="CockroachDB is a cloud-native SQL database for building global, scalable cloud services that survive disasters."
 pkg_upstream_url=https://github.com/cockroachdb/cockroach
 pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://binaries.cockroachdb.com/cockroach-v${pkg_version}.src.tgz
-pkg_shasum=fd1d966542565cbeca6c390db6b7afd98bc239e6e2a4602b3edff973be472097
+pkg_shasum=16d851a131e17002af04ad56e4adfec8182bf5ec55496ef2fcefe0461e16933e
 pkg_dirname="${pkg_name}-v${pkg_version}"
+pkg_build_deps=(
+  core/autoconf
+  core/cmake
+  core/coreutils
+  core/diffutils
+  core/go
+  core/gcc
+  core/git
+  core/libedit
+  core/make
+  core/procps-ng
+  core/which
+)
 pkg_deps=(
+  core/chrony
   core/gcc-libs
   core/glibc
   core/ncurses
-)
-pkg_build_deps=(
-  core/coreutils
-  core/libedit
-  core/make
-  core/which
-  core/go
-  core/gcc
-  core/cmake
-  core/autoconf
 )
 pkg_bin_dirs=(bin)
 pkg_binds_optional=(
@@ -48,7 +52,8 @@ do_build() {
 
 do_install() {
   pushd "./src/github.com/cockroachdb/cockroach" > /dev/null
-  cp -v cockroach bin/* "${pkg_prefix}/bin/"
+  cp -v bin/* "${pkg_prefix}/bin/"
+  cp -v cockroachoss "${pkg_prefix}/bin/cockroach"
   popd > /dev/null
 }
 
