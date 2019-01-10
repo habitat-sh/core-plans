@@ -1,0 +1,12 @@
+--- tools/run_tests/python_utils/port_server.py.orig	2019-03-24 03:58:50.047924912 +0000
++++ tools/run_tests/python_utils/port_server.py	2019-03-24 03:56:50.560353909 +0000
+@@ -109,8 +109,7 @@
+                 continue
+             req.log_message("kill old request %d" % i)
+             del in_use[i]
+-        if can_bind(i, socket.AF_INET) and can_bind(
+-                i, socket.AF_INET6) and not can_connect(i):
++        if can_bind(i, socket.AF_INET) and not can_connect(i):
+             req.log_message("found available port %d" % i)
+             pool.append(i)
+ 

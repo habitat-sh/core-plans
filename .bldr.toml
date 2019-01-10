@@ -479,6 +479,8 @@ plan_path = "graphviz"
 plan_path = "grep"
 [groff]
 plan_path = "groff"
+[grpc-cpp]
+plan_path = "grpc-cpp"
 [grpcurl]
 plan_path = "grpcurl"
 [grub]
