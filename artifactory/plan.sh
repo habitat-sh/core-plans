@@ -1,13 +1,13 @@
 pkg_origin=core
 pkg_name=artifactory
-pkg_version=6.5.2
+pkg_version=6.6.5
 pkg_description="Artifactory is an advanced binary repository manager for use by build tools (like Maven and Gradle), dependency management tools (like Ivy and NuGet) and build servers (like Jenkins, Hudson, TeamCity and Bamboo).
 Repository managers serve two purposes: they act as highly configurable proxies between your organization and external repositories and they also provide build servers with a deployment destination for your internally generated artifacts."
 pkg_upstream_url=https://www.jfrog.com/artifactory/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("JFrog Artifactory EULA")
 pkg_source="https://bintray.com/jfrog/${pkg_name}/download_file?file_path=jfrog-artifactory-oss-${pkg_version}.zip"
-pkg_shasum="4116f0948b14b0328d6bde86ea21f18d0edb42e679163839e0e003db6a2ad386"
+pkg_shasum="9ad0ef5360fc725731960aeaece64bef0849393898ec0454b9a660341da5fb74"
 pkg_deps=(core/bash core/jre8)
 pkg_exports=(
   [port]=port
