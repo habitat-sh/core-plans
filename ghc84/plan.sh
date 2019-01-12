@@ -12,4 +12,14 @@ pkg_source="http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-
 pkg_shasum="11117735a58e507c481c09f3f39ae5a314e9fbf49fc3109528f99ea7959004b2"
 pkg_dirname="ghc-${pkg_version}"
 
+pkg_build_deps=(
+  core/coreutils
+  core/binutils
+  core/diffutils
+  core/ghc82
+  core/make
+  core/patch
+  core/sed
+)
+
 pkg_include_dirs=(lib/ghc-${pkg_version}/include)
