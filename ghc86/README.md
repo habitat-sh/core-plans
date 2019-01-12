@@ -1,4 +1,4 @@
-# ghc
+# ghc86
 
 The Glasgow Haskell Compiler
 
