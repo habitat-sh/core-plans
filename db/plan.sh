@@ -30,8 +30,6 @@ pkg_lib_dirs=(lib)
 do_prepare() {
   # Many thanks to Arch Linux
   # https://git.archlinux.org/svntogit/packages.git/plain/trunk/atomic.patch?h=packages/db
-  pwd
-  ls $PLAN_CONTEXT/patches/atomic.patch -la
   patch -p0 < $PLAN_CONTEXT/patches/atomic.patch
 }
 

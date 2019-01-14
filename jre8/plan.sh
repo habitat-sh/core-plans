@@ -76,7 +76,6 @@ do_install() {
   build_line "Setting rpath for '${pkg_prefix}/bin/java' to '$LD_RUN_PATH'"
 
   LD_RUN_PATH=$LD_RUN_PATH:$pkg_prefix/lib/amd64/jli:$pkg_prefix/lib/amd64/server:$pkg_prefix/lib/amd64
-  #LD_RUN_PATH=$LD_RUN_PATH:$pkg_prefix/jre/lib/amd64/jli:$pkg_prefix/jre/lib/amd64/server:$pkg_prefix/jre/lib/amd64
   export LD_RUN_PATH
 
   find "$pkg_prefix"/bin -type f -executable \
@@ -89,9 +88,6 @@ do_install() {
 
   find "$pkg_prefix/lib/amd64" -type f -name "*.so" \
     -exec patchelf --set-rpath "${LD_RUN_PATH}" {} \;
-
-  #find "$pkg_prefix/jre/lib/amd64" -type f -name "*.so" \
-  #  -exec patchelf --set-rpath "${LD_RUN_PATH}" {} \;
 }
 
 do_strip() {
