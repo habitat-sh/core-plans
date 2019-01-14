@@ -1,16 +1,20 @@
 pkg_name=elasticsearch
 pkg_origin=core
-pkg_version=6.2.2
+pkg_version=6.5.4
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Open Source, Distributed, RESTful Search Engine"
 pkg_upstream_url="https://elastic.co"
 pkg_license=('Revised BSD')
 pkg_source=https://artifacts.elastic.co/downloads/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=b26e3546784b39ce3eacc10411e68ada427c5764bcda3064e9bb284eca907983
+pkg_shasum=762e25c036fa2e882cb7e91d83868fa15a1cad8549d279a8c5826a005bb31877
+pkg_build_deps=(
+  core/patchelf
+)
 pkg_deps=(
   core/coreutils-static
   core/busybox-static
   core/glibc
+  core/zlib
   core/jre8
   core/wget
 )
@@ -45,4 +49,21 @@ do_install() {
 
   # Delete unused binaries to save space
   rm "${pkg_prefix}/es/bin/"*.bat "${pkg_prefix}/es/bin/"*.exe
+
+  LD_RUN_PATH=$LD_RUN_PATH:${pkg_prefix}/es/modules/x-pack-ml/platform/linux-x86_64/lib
+  export LD_RUN_PATH
+
+  _es_ml_bins=( "autoconfig" "autodetect" "categorize" "controller" "normalize" )
+  for bin in "${_es_ml_bins[@]}"; do
+    build_line "patch ${pkg_prefix}/es/modules/x-pack-ml/platform/linux-x86_64/bin/${bin}"
+    patchelf --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" --set-rpath "${LD_RUN_PATH}" \
+      "${pkg_prefix}/es/modules/x-pack-ml/platform/linux-x86_64/bin/${bin}"
+
+    find "${pkg_prefix}/es/modules/x-pack-ml/platform/linux-x86_64/lib" -type f -name "*.so" \
+      -exec patchelf --set-rpath "${LD_RUN_PATH}" {} \;
+  done
+}
+
+do_strip() {
+  return 0
 }
