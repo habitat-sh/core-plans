@@ -1,29 +1,28 @@
 pkg_name=erlang
 pkg_origin=core
-pkg_version=21.3
+pkg_version=20.2
 pkg_description="A programming language for massively scalable soft real-time systems."
 pkg_upstream_url="http://www.erlang.org/"
-pkg_dirname="otp_src_${pkg_version}"
+pkg_dirname=otp_src_${pkg_version}
 pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source="https://github.com/erlang/otp/archive/OTP-${pkg_version}.tar.gz"
-pkg_dirname="otp-OTP-${pkg_version}"
-pkg_shasum="64a6eea6c1dc2353ad80e29ef57f6ec4192c91478ac2b854d0417b6b2bf4d9bf"
+pkg_source=http://www.erlang.org/download/otp_src_${pkg_version}.tar.gz
+pkg_filename=otp_src_${pkg_version}.tar.gz
+pkg_shasum=24d9895e84b800bf0145d6b3042c2f2087eb31780a4a45565206844b41eb8f23
 pkg_build_deps=(
-  core/autoconf
   core/coreutils
   core/gcc
-  core/m4
   core/make
   core/openssl
   core/perl
+  core/m4
 )
 pkg_deps=(
   core/glibc
+  core/zlib
   core/ncurses
   core/openssl
   core/sed
-  core/zlib
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
@@ -44,9 +43,7 @@ do_prepare() {
 
 do_build() {
   sed -i 's/std_ssl_locations=.*/std_ssl_locations=""/' erts/configure.in
-
-  ./otp_build autoconf
-
+  sed -i 's/std_ssl_locations=.*/std_ssl_locations=""/' erts/configure
   ./configure --prefix="${pkg_prefix}" \
               --enable-threads \
               --enable-smp-support \

@@ -273,6 +273,10 @@ plan_path = "erlang16"
 plan_path = "erlang18"
 [erlang19]
 plan_path = "erlang19"
+[erlang20]
+plan_path = "erlang20"
+[erlang21]
+plan_path = "erlang21"
 [etcd]
 plan_path = "etcd"
 [eudev]
