@@ -12,16 +12,20 @@ if [ -z "${scaffold_policy_name+x}" ]; then
 fi
 
 scaffolding_load() {
-  parent_deps="${pkg_deps[*]}"
-  pkg_deps=("chef/chef-client" "core/cacerts")
-  for i in $parent_deps; do
-    pkg_deps+=($i)
-  done
-  parent_build_deps="${pkg_build_deps[*]}"
-  pkg_build_deps=("chef/chef-dk" "core/git")
-  for i in $parent_build_deps; do
-    pkg_build_deps+=($i)
-  done
+  : "${scaffold_chef_client:=chef/chef-client}"
+  : "${scaffold_chef_dk:=chef/chef-dk}"
+
+  pkg_deps=(
+    "${pkg_deps[@]}"
+    "$scaffold_chef_client"
+    "core/cacerts"
+  )
+  pkg_build_deps=(
+    "${pkg_build_deps[@]}"
+    "$scaffold_chef_dk"
+    "core/git"
+  )
+
   pkg_svc_user="root"
   pkg_svc_run="set_just_so_you_will_render"
 }
@@ -41,7 +45,7 @@ do_default_unpack() {
 do_default_build_service() {
   ## Create hooks
   mkdir -p "$pkg_prefix/hooks"
-  chown 0644 "$pkg_prefix/hooks"
+  chmod 0750 "$pkg_prefix/hooks"
 
   # Run hook
   cat << EOF >> "$pkg_prefix/hooks/run"
@@ -79,7 +83,7 @@ sleep {{cfg.interval}}
 chef_client_cmd
 done
 EOF
-  chown 0755 "$pkg_prefix/hooks/run"
+  chmod 0750 "$pkg_prefix/hooks/run"
 }
 
 do_default_build() {
@@ -109,7 +113,7 @@ do_default_install() {
   chef export "$_policyfile_path/$scaffold_policy_name.lock.json" "$pkg_prefix"
 
   mkdir -p "$pkg_prefix/config"
-  chown 0755 "$pkg_prefix/config"
+  chmod 0750 "$pkg_prefix/config"
   cat << EOF >> "$pkg_prefix/.chef/config.rb"
 cache_path "$pkg_svc_data_path/cache"
 node_path "$pkg_svc_data_path/nodes"
@@ -134,7 +138,7 @@ data_collector.token "{{cfg.data_collector.token}}"
 data_collector.server_url "{{cfg.data_collector.server_url}}"
 {{/if ~}}
 EOF
-  chown 0644 "$pkg_prefix/config/client-config.rb"
+  chmod 0640 "$pkg_prefix/config/client-config.rb"
 
   cat << EOF >> "$pkg_prefix/config/attributes.json"
 {{#if cfg.attributes ~}}
@@ -160,7 +164,7 @@ enable = false
 token = "set_to_your_token"
 server_url = "set_to_your_url"
 EOF
-  chown 0644 "$pkg_prefix/default.toml"
+  chmod 0640 "$pkg_prefix/default.toml"
 }
 
 do_default_strip() {
