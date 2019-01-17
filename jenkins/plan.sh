@@ -1,12 +1,12 @@
 pkg_name=jenkins
 pkg_origin=core
-pkg_version=2.150.1
+pkg_version=2.150.2
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="The leading open source automation server, Jenkins provides hundreds of plugins to support building, deploying and automating any project."
 pkg_license=('MIT')
 pkg_upstream_url="https://jenkins.io/"
 pkg_source="http://mirrors.jenkins.io/war-stable/${pkg_version}/jenkins.war"
-pkg_shasum="7a38586d5a3a1a83498809a83715728bb2f01b58a7dd3a88366f076efdaf6669"
+pkg_shasum="fab70f4e209855e0806315cc419e0cbbbf1bd9b31c6f221f7702aa21145040f8"
 pkg_deps=(core/jre8 core/curl)
 pkg_exports=(
   [port]=jenkins.http.port
