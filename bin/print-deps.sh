@@ -11,6 +11,7 @@ STUDIO_TYPE=stage1
 FIRST_PASS=true
 # Provide an absolute `PLAN_CONTEXT` path for any Plans that require it
 PLAN_CONTEXT="$(pwd)/$(dirname "$1")"
+SRC_PATH="$PLAN_CONTEXT/.."
 
 # Change directory into the `PLAN_CONTEXT` directory, just like the build
 # progra
