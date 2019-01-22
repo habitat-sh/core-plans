@@ -15,6 +15,7 @@ pkg_build_deps=(
   core/gnupg
   core/go
   core/git
+  core/gcc
 )
 pkg_bin_dirs=(bin)
 
