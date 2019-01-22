@@ -24,7 +24,7 @@ do_build() {
 
 do_install() {
   build_line "Installing from RubyGems"
-  gem install "$pkg_name" -v "$pkg_version" --no-ri --no-rdoc
+  gem install "$pkg_name" -v "$pkg_version" --no-document
   build_line "Cleaning cached gems in $pkg_prefix/cache"
   rm -rf "$pkg_prefix/cache"
   write_shim git-generate-changelog
