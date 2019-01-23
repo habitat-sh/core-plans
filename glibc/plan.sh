@@ -322,6 +322,30 @@ EOF
   popd > /dev/null
 }
 
+do_strip() {
+  build_line "Stripping unneeded symbols from binaries and libraries"
+  find "$pkg_prefix" -type f -perm -u+w -print0 2> /dev/null \
+    | while read -rd '' f; do
+      case "$(basename "$f")" in
+        "ld-${pkg_version}.so"|\
+        "libc-${pkg_version}.so"|\
+        "libpthread-${pkg_version}.so"|\
+        libpthread_db-1.0.so)
+          build_line "Skipping strip for $f"
+          continue
+          ;;
+      esac
+
+      case "$(file -bi "$f")" in
+        *application/x-executable*) strip --strip-all "$f";;
+        *application/x-pie-executable*) strip --strip-all "$f";;
+        *application/x-sharedlib*) strip --strip-unneeded "$f";;
+        *application/x-archive*) strip --strip-debug "$f";;
+        *) continue;;
+      esac
+    done
+}
+
 do_end() {
   # Clean up the `pwd` link, if we set it up.
   if [[ -n "$_clean_pwd" ]]; then
