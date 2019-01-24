@@ -1,0 +1,13 @@
+function Test-Feature {
+    Write-Host "Check if IIS-aspnet45 is enabled..."
+    $(dism /online /get-featureinfo /featurename:IIS-aspnet45) -contains "State : Enabled"
+}
+
+if (!(Test-Feature)) {
+    Write-Host "Enabling IIS-aspnet45..."
+    dism /online /enable-feature /featurename:IIS-aspnet45 /All
+    if (!(Test-Feature)) {
+        Write-Host "IIS-aspnet45 was not enabled!"
+        exit 1
+    }
+}

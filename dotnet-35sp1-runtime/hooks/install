@@ -1,0 +1,21 @@
+function Test-Feature {
+    Write-Host "Check if NetFx3 is enabled..."
+    $(dism /online /get-featureinfo /featurename:NetFx3) -contains "State : Enabled"
+}
+
+function Test-InContainer {
+    (Get-Service -Name cexecsvc -ErrorAction SilentlyContinue) -ne $null
+}
+
+if (!(Test-Feature)) {
+    Write-Host "Enabling NetFx3..."
+    if(Test-InContainer) {
+        dism /Online /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:{{pkg.path}}\bin
+    } else {
+        dism /Online /Enable-Feature /FeatureName:NetFx3
+    }
+    if (!(Test-Feature)) {
+        Write-Host "NetFx3 was not enabled!"
+        exit 1
+    }
+}

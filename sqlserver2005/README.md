@@ -32,7 +32,7 @@ Note that you can supply a `user.toml` with an empty `app_user` and no app user 
 
 The Habitat `run` hook is mainly a wrapper around the named instance's sql engine Windows service. So the hook simply starts, watches, and stops that service.
 
-Note that the installer installs the service with a `manual` startup type. So the database will not startup on server boot. It is intended that Habitat will control start and stop. You may run Habitat as a Windows service which is set to `automatic` by default and will therefore start on boot.
+Note that the installer installs the service with a `manual` startup type. So the database will not startup on server boot. It is intended that Habitat will control start and stop. You may run [Habitat as a Windows service](https://github.com/habitat-sh/windows-service) which is set to `automatic` by default and will therefore start on boot.
 
 ### Port Assignment and Firewall Configuration
 
@@ -61,60 +61,15 @@ An ASP.Net connection string, for example, may be configured like:
 
 ## Sql Server 2005 and Containers
 
-Yes, you can actually run SQL Server 2005 in a container! However there are a few "gotchas" and some unintuitive optimizations to be made to make this work well.
+Yes, you can actually run SQL Server 2005 in a container! It is stronly recomended that you enable the `INSTALL_HOOK` feature before exporting the package by setting the `HAB_FEAT_INSTALL_HOOK` environment variable to any value. This will allow the export process to invoke the `install` hook and install SQL Server during the image build so that a `docker run` will spawn a container with SQL Server installed and ready to run.
 
-The primary problem encountered with Sql Server 2005 in a Container is that when it adds the `WindowsFeature` for .Net 3.5 in the `init` hook, it cannot fetch it from the public Windows Update servers. You have to explicitly point it to a `Source` that provides that feature.
-
-### Finding the netfx3 (.net 3.5) source
-
-If you have a Windows Server 2016 ISO file, this source will be located in the ISO's `sources\sxs` directory. If you do not have this ISO, you can get one for free at https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2016/. The file you need is `microsoft-windows-netfx3-ondemand-package.cab`. Copy that file to a local directory:
+Also note that it is better to use `NT AUTHORITY\SYSTEM` as the `svc_account` for SQL Server in a container environment rather than `NT AUTHORITY\Network Service` specified in the `default.toml` file. Prior to exporting the package, set the `HAB_SQLSERVER2005` environment variable as follows:
 
 ```
-mkdir c:\sxs
-Copy-Item d:\sources\sxs\microsoft-windows-netfx3-ondemand-package.cab c:\sxs
+$env:HAB_SQLSERVER2005="{`"svc_account`":`"NT AUTHORITY\\SYSTEM`"}"
 ```
 
-Next you will need to make sure the local directory with the source is mounted to the container and that the `core/sqlserver2005` `netfx3_source` configuration setting points to the mounted directory.
-
-### Mounting netfx3 in Containerized Studio
-
-We need the studio to mount the above `c:\sxs` directory. You can specify this in the `HAB_DOCKER_OPTS` variable:
-
-```
-$env:HAB_DOCKER_OPTS='--memory 2gb --volume c:\sxs:c:/sxs'
-hab studio enter
-```
-
-Now we need to pass the `netfx3_source` configuration to the supervisor.
-
-```
-'netfx3_source="c:/sxs"' | hab config apply sqlserver2005.default 1
-hab svc load core/sqlserver2005
-```
-
-This will add the mounted source to the `DSC` `WindowsFeature` resource so that it can install the .net 3.5 runtime in the `init` hook.
-
-### Mounting netfx3 to an exported Docker image
-
-If you have exported the `core/sqlserver2005` package to a docker image, you will need to make sure it gets the right mount and Supervisor configuration in order to install .Net 3.5. Use the following example in your `docker run` command:
-
-```
-docker run --memory 2gb -e "HAB_SQLSERVER2005=netfx3_source='c:/sxs'" --volume c:/sxs:c:/sxs -it core/sqlserver2005
-```
-
-### Running an exported Sql Server container "quickly"
-
-The `core/sqlserver2005` `init` hook takes several minutes to run the first time. Given the immutable nature of a container, running an exported image will perform a clean `init` run on every `docker run` making for a very suboptimal experience. To create a `sqlserver2005` image that already has .Net 3.5 and Aql Server 2005 installed and ready to run, perform the following:
-
-```
-# Start a fresh container that will perform the install
-docker run --memory 2gb -e "HAB_SQLSERVER2005=netfx3_source='c:/sxs'" --volume c:/sxs:c:/sxs -it core/sqlserver2005
-# Stop (ctrl-C) the container after it completes the `post-run` hook.
-# Commit this container to a new image
-docker commit <CONTAINER_ID> sqlserver2005
-# Now running sqlserver2005 will have everything already installed
-docker run -it --memory 2GB sqlserver2005
-```
+This will cause the `SYSTEM` account to override the default setting during the image build.
 
 ## Topologies
 

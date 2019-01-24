@@ -63,6 +63,18 @@ An ASP.Net connection string, for example, may be configured like:
 <add name="SchoolContext" connectionString="server={{bind.database.first.sys.ip}},{{bind.database.first.cfg.port}};uid={{bind.database.first.cfg.username}};pwd={{bind.database.first.cfg.password}};database=ContosoUniversity2;" providerName="System.Data.SqlClient" />
 ```
 
+## Sql Server and Containers
+
+It is stronly recomended that you enable the `INSTALL_HOOK` feature before exporting the package by setting the `HAB_FEAT_INSTALL_HOOK` environment variable to any value. This will allow the export process to invoke the `install` hook and install SQL Server during the image build so that a `docker run` will spawn a container with SQL Server installed and ready to run.
+
+Also note that it is better to use `NT AUTHORITY\SYSTEM` as the `svc_account` for SQL Server in a container environment rather than `NT AUTHORITY\Network Service` specified in the `default.toml` file. Prior to exporting the package, set the `HAB_SQLSERVER` environment variable as follows:
+
+```
+$env:HAB_SQLSERVER="{`"svc_account`":`"NT AUTHORITY\\SYSTEM`"}"
+```
+
+This will cause the `SYSTEM` account to override the default setting during the image build.
+
 ## Topologies
 
 This plan will typically only be run in a `standalone` topology. If at least three nodes are running, there is nothing to prohibit running in a `leader` topology but there is no logic in this plan which takes specific advantage of that.
