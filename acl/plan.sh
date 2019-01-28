@@ -25,7 +25,7 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_install() {
-  make install 
+  make install
 }
 
 

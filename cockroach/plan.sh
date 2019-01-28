@@ -50,7 +50,7 @@ do_build() {
   make buildoss
 }
 
-do_install() { 
+do_install() {
   pushd "./src/github.com/cockroachdb/cockroach" > /dev/null
   cp -v bin/* "${pkg_prefix}/bin/"
   cp -v cockroachoss "${pkg_prefix}/bin/cockroach"

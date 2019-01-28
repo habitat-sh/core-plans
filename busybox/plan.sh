@@ -61,17 +61,17 @@ do_install() {
 }
 
 _create_config() {
-  # To update to a new version, 
+  # To update to a new version,
   # Add an "attach" statement in the do_prepare block
   # build busybox
   # when it stops at the attach statement, then
   # run `make defconfig` to generate a new
-  # `.config` file 
-  # then ctrl+c out of the build 
-  # then copy /hab/cache/src/busybox-version/.config 
+  # `.config` file
+  # then ctrl+c out of the build
+  # then copy /hab/cache/src/busybox-version/.config
   # to core-plans/busybox/config.new
   # then compare core-plans/busybox/config to core-plans/busybox/config.new
-  # and resolve any differences 
+  # and resolve any differences
   build_line "Customizing busybox configuration..."
   # shellcheck disable=SC2002
 

@@ -84,7 +84,7 @@ do_prepare() {
     | patch -p1
 
   # Patch binutils to be able to link static binaries
-  # 
+  #
   # Thanks to: https://git.archlinux.org/svntogit/packages.git/tree/trunk?h=packages/binutils
   # Thanks to: https://sourceware.org/bugzilla/show_bug.cgi?id=23428
   # Thanks to: https://sourceware.org/bugzilla/show_bug.cgi?id=23486

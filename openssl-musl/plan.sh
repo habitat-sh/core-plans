@@ -48,4 +48,3 @@ do_build() {
   make CC= depend
   make --jobs="$(nproc)" CC="$BUILD_CC"
 }
-
