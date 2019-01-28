@@ -69,4 +69,3 @@ index 1b32f6725..9668a68c3 100644
  #define GRUB_GPT_PARTITION_TYPE_EMPTY \
 -- 
 cgit v1.1-33-g03f6
-
