@@ -1,6 +1,6 @@
 pkg_name=pcre
 pkg_origin=core
-pkg_version=8.41
+pkg_version=8.42
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The PCRE library is a set of functions that implement regular expression \
@@ -12,7 +12,7 @@ proprietary software.\
 pkg_upstream_url="http://www.pcre.org/"
 pkg_license=('bsd')
 pkg_source="https://ftp.pcre.org/pub/${pkg_name}/${pkg_name}-${pkg_version}.tar.bz2"
-pkg_shasum="e62c7eac5ae7c0e7286db61ff82912e1c0b7a0c13706616e94a7dd729321b530"
+pkg_shasum="2cd04b7c887808be030254e8d77de11d3fe9d4505c39d4b15d2664ffe8bf9301"
 pkg_deps=(
   core/glibc
   core/gcc-libs

@@ -1,12 +1,12 @@
 pkg_origin=core
 pkg_name=gox
-pkg_version=master
+pkg_version=0.4.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="A dead simple, no frills Go cross compile tool"
 pkg_license=("MPL-2.0")
-pkg_source=https://github.com/mitchellh/gox/archive/master.tar.gz # I'm killing a kitten.
+pkg_source="https://github.com/mitchellh/${pkg_name}/archive/v${pkg_version}.tar.gz"
 pkg_upstream_url=https://github.com/mitchellh/gox
-pkg_shasum=62d24ff55069bb3b6d75277585d723fdca6fef524602090c46b466098d49f1ba
+pkg_shasum=2df7439e9901877685ff4e6377de863c3c2ec4cde43d0ca631ff65d1b64774ad
 pkg_build_deps=(core/git core/go)
 pkg_bin_dirs=(bin)
 

@@ -1,7 +1,7 @@
 pkg_name=coreutils
 _distname=$pkg_name
 pkg_origin=core
-pkg_version=8.29
+pkg_version=8.30
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Core Utilities are the basic file, shell and text manipulation \
@@ -11,7 +11,7 @@ expected to exist on every operating system.\
 pkg_upstream_url="https://www.gnu.org/software/coreutils/"
 pkg_license=('GPL-3.0')
 pkg_source="http://ftp.gnu.org/gnu/$_distname/${_distname}-${pkg_version}.tar.xz"
-pkg_shasum="92d0fa1c311cacefa89853bdb53c62f4110cdfda3820346b59cbd098f40f955e"
+pkg_shasum="e831b3a86091496cdba720411f9748de81507798f6130adeaef872d206e1b057"
 pkg_deps=(
   core/glibc
   core/acl

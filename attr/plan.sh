@@ -1,12 +1,12 @@
 pkg_name=attr
 pkg_origin=core
-pkg_version=2.4.47
+pkg_version=2.4.48
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Commands for Manipulating Filesystem Extended Attributes"
 pkg_upstream_url="https://savannah.nongnu.org/projects/attr/"
 pkg_license=('GPL-2.0')
-pkg_source="http://download.savannah.gnu.org/releases/${pkg_name}/${pkg_name}-${pkg_version}.src.tar.gz"
-pkg_shasum="25772f653ac5b2e3ceeb89df50e4688891e21f723c460636548971652af0a859"
+pkg_source="http://download.savannah.gnu.org/releases/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum="5ead72b358ec709ed00bbf7a9eaef1654baad937c001c044fe8b74c57f5324e7"
 pkg_deps=(
   core/glibc
 )
@@ -22,8 +22,7 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_install() {
-  make install install-dev install-lib
-  chmod -v 755 "${pkg_prefix}/lib/libattr.so"
+  make install
 }
 
 

@@ -10,3 +10,17 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_filename="llvm-${pkg_version}.src.tar.xz"
 pkg_source="http://llvm.org/releases/${pkg_version}/llvm-${pkg_version}.src.tar.xz"
 pkg_shasum="5fa7489fc0225b11821cab0362f5813a05f2bcf2533e8a4ea9c9c860168807b0"
+pkg_deps=(
+  core/coreutils
+  core/gcc-libs
+  core/glibc
+  core/libffi
+  core/python2
+  core/zlib
+)
+pkg_build_deps=(
+  core/cmake
+  core/diffutils
+  core/gcc
+  core/ninja
+)

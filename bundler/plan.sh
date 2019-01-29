@@ -22,7 +22,7 @@ do_build() {
 
 do_install() {
   build_line "Installing from RubyGems"
-  gem install "$pkg_name" -v "$pkg_version" --no-ri --no-rdoc
+  gem install "$pkg_name" -v "$pkg_version" --no-document
   # Note: We are not cleaning the gem cache as this artifact
   # is reused by other packages for speed.
   wrap_ruby_bin "$pkg_prefix/bin/bundle"

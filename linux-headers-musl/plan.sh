@@ -1,12 +1,12 @@
 pkg_name=linux-headers-musl
 pkg_origin=core
-pkg_version=3.12.6-5
+pkg_version=3.12.6-6
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Linux kernel headers (sanitized for use with musl)."
 pkg_upstream_url="https://github.com/sabotage-linux/kernel-headers"
 pkg_license=('MIT')
 pkg_source="https://github.com/sabotage-linux/kernel-headers/archive/v${pkg_version}.tar.gz"
-pkg_shasum="ecf4db8781dc50a21cbc4cb17b039f96aede53f9da13435a3201373abb49b96b"
+pkg_shasum="e173fc8db34660a368c1692b3cea2b8a3b2affb3c193ae7195aa251bc1497d57"
 pkg_dirname="kernel-headers-${pkg_version}"
 pkg_deps=()
 pkg_build_deps=(

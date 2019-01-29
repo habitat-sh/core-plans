@@ -55,6 +55,7 @@ core-plans/expect
 core-plans/dejagnu
 core-plans/check
 core-plans/cacerts
+core-plans/openssl-fips
 core-plans/openssl
 core-plans/wget
 core-plans/unzip

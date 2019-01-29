@@ -1,12 +1,12 @@
 pkg_name=doxygen
 pkg_origin=core
-pkg_version=1.8.11
+pkg_version=1.8.14
 pkg_license=('GPL-2.0')
 pkg_description="Generate documentation for several programming languages"
 pkg_upstream_url=http://www.doxygen.org/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source="https://ftp.stack.nl/pub/users/dimitri/${pkg_name}-${pkg_version}.src.tar.gz"
-pkg_shasum=65d08b46e48bd97186aef562dc366681045b119e00f83c5b61d05d37ea154049
+pkg_source="http://doxygen.nl/files/${pkg_name}-${pkg_version}.src.tar.gz"
+pkg_shasum=d1757e02755ef6f56fd45f1f4398598b920381948d6fcfa58f5ca6aa56f59d4d
 pkg_build_deps=(
   core/bison
   core/cmake

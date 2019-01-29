@@ -16,8 +16,8 @@ pkg_shasum="5744cfcbcec2b1b48629f7354203bc1e5e9b5466998bbccc5b5fcde3b18eb684"
 pkg_dirname="${_distname}-${pkg_version}"
 pkg_deps=(
   core/glibc
-  core/zlib
   core/cacerts
+  core/openssl-fips
 )
 pkg_build_deps=(
   core/coreutils
@@ -45,10 +45,15 @@ _common_prepare() {
       "$PLAN_CONTEXT/ca-dir.patch" \
       | patch -p1 --backup
 
-  # Purge the codebase (mostly tests) of the hardcoded reliance on `/bin/rm`.
-  grep -lr '/bin/rm' . | while read -r f; do
-    sed -e 's,/bin/rm,rm,g' -i "$f"
-  done
+  # The openssl build process hard codes /bin/rm in many places. Unfortunately
+  # we cannot modify the contents of the build scripts to fix this or else we
+  # risk violating the sanctity of the official fips build process.
+  # Instead, we link rm to maintain integrity.
+  # Reference: https://www.openssl.org/docs/fips/UserGuide-2.0.pdf
+  if [[ ! -f "/bin/rm" ]]; then
+    hab pkg binlink core/coreutils rm --dest /bin
+    BINLINKED_RM=true
+  fi
 }
 
 do_prepare() {
@@ -62,20 +67,24 @@ do_build() {
   # Set PERL var for scripts in `do_check` that use Perl
   PERL=$(pkg_path_for core/perl)/bin/perl
   export PERL
-  # shellcheck disable=SC2086
-  ./config \
-    --prefix="${pkg_prefix}" \
-    --openssldir=ssl \
+  "$(pkg_path_for core/perl)/bin/perl" ./Configure \
     no-idea \
     no-mdc2 \
     no-rc5 \
-    zlib \
+    no-sslv2 \
+    no-sslv3 \
+    no-comp \
+    no-zlib \
     shared \
     disable-gost \
-    $CFLAGS \
-    $LDFLAGS
-  env CC= make depend
-  make CC="$BUILD_CC"
+    --prefix="${pkg_prefix}" \
+    --openssldir=ssl \
+    linux-x86_64 \
+    --with-fipsdir="$(pkg_path_for core/openssl-fips)" \
+    fips
+
+  make CC= depend
+  make --jobs="$(nproc)" CC="$BUILD_CC"
 }
 
 do_check() {
@@ -101,6 +110,14 @@ do_install() {
   rm -rfv "$pkg_prefix/ssl/misc" "$pkg_prefix/bin/c_rehash"
 }
 
+do_end() {
+  do_default_end
+
+  # Clean up binlinked rm if we made it
+  if [[ $BINLINKED_RM == true ]]; then
+    rm -f /bin/rm
+  fi
+}
 
 # ----------------------------------------------------------------------------
 # **NOTICE:** What follows are implementation details required for building a

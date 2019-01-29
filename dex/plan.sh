@@ -7,16 +7,18 @@ pkg_maintainer="Chef Software Inc. <support@chef.io>"
 pkg_license=("Apache-2.0")
 pkg_source="https://$gopkg"
 pkg_upstream_url=$pkg_source
-pkg_build_deps=()
 pkg_exports=(
   [port]=service.port
   [host]=service.host
 )
-pkg_deps=()
+pkg_deps=(core/glibc)
+pkg_build_deps=(core/go core/git core/gcc)
 pkg_bin_dirs=(bin)
-pkg_scaffolding=core/scaffolding-go
-scaffolding_go_base_path=github.com/dexidp
-scaffolding_go_build_deps=()
+
+do_before() {
+  GOPATH=$HAB_CACHE_SRC_PATH/$pkg_dirname
+  export GOPATH
+}
 
 do_prepare() {
   build_line "GO_LDFLAGS=\"-w -X $gopkg/version.Version=v$pkg_version\""
@@ -24,14 +26,21 @@ do_prepare() {
 }
 
 do_download() {
-  # `-d`: don't let go build it, we'll have to build this ourselves
-  build_line "go get -d $gopkg"
-  go get -d $gopkg
+  return 0
+}
 
-  pushd "${scaffolding_go_gopath:?}/src/$gopkg"
+do_verify() {
+  return 0
+}
+
+# Use unpack instead of download, so that plan-build can manage the
+# source path. This ensures us a clean checkout every time we build.
+do_unpack() {
+  git clone "$pkg_source" "$GOPATH/src/$gopkg"
+  ( cd "$GOPATH/src/$gopkg" || exit
     build_line "checking out $pkg_version"
     git reset --hard "v$pkg_version"
-  popd
+  )
 }
 
 do_build() {
@@ -41,5 +50,5 @@ do_build() {
 
 do_install() {
   build_line "copying static web content"
-  cp -r "${scaffolding_go_gopath:?}/src/$gopkg/web" "$pkg_prefix"
+  cp -r "$GOPATH/src/$gopkg/web" "$pkg_prefix"
 }

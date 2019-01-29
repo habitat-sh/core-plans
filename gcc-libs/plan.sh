@@ -25,7 +25,6 @@ pkg_include_dirs=()
 _gcc_libs=(
   libasan
   libatomic
-  libcilkrts
   libgcc_s
   libgfortran
   libgomp

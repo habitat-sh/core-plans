@@ -26,3 +26,25 @@ do_prepare() {
   export BUILD_CC=musl-gcc
   build_line "Setting BUILD_CC=$BUILD_CC"
 }
+
+do_build() {
+  # Set PERL var for scripts in `do_check` that use Perl
+  PERL=$(pkg_path_for core/perl)/bin/perl
+  export PERL
+  "$(pkg_path_for core/perl)/bin/perl" ./Configure \
+    no-idea \
+    no-mdc2 \
+    no-rc5 \
+    no-sslv2 \
+    no-sslv3 \
+    no-comp \
+    no-zlib \
+    shared \
+    disable-gost \
+    --prefix="${pkg_prefix}" \
+    --openssldir=ssl \
+    linux-x86_64
+
+  make CC= depend
+  make --jobs="$(nproc)" CC="$BUILD_CC"
+}

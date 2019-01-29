@@ -12,6 +12,7 @@ pkg_build_deps=(
   core/go
   core/git
   core/make
+  core/gcc
 )
 
 pkg_exports=(

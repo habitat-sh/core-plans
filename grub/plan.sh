@@ -27,6 +27,7 @@ pkg_build_deps=(
   core/qemu
   core/rsync
   core/texinfo
+  core/patch
 )
 pkg_deps=(core/glibc core/xz core/gettext core/pcre core/gcc-libs core/devicemapper core/elfutils core/bzip2 core/libcap)
 
@@ -35,6 +36,10 @@ do_setup() {
     mkdir /boot
     _GRUB_CLEANUP_BOOT="yes"
   fi
+}
+
+do_prepare() {
+  patch -Np1 < "${PLAN_CONTEXT}/patches/001-fix-packed-not-aligned-error-on-GCC-8.patch"
 }
 
 do_build() {

@@ -1,12 +1,12 @@
 pkg_name=shadow
 pkg_origin=core
-pkg_version=4.5
+pkg_version=4.6
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Password and account management tool suite."
 pkg_upstream_url="https://github.com/shadow-maint/shadow"
 pkg_license=('bsd')
 pkg_source="https://github.com/shadow-maint/${pkg_name}/releases/download/${pkg_version}/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="fc8c858381ad577a5c25ff5beb6ee60a34f8719c73e4e7c61e74188b4e54b741"
+pkg_shasum="0998c8d84242a231ab0acb7f8613927ff5bcff095f8aa6b79478893a03f05583"
 pkg_deps=(
   core/glibc
   core/attr
