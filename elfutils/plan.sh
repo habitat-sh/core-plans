@@ -12,6 +12,7 @@ pkg_shasum=f7ef925541ee32c6d15ae5cb27da5f119e01a5ccdbe9fe57bf836730d7b7a65b
 pkg_deps=(
   core/glibc
   core/zlib
+  core/gcc-libs
 )
 pkg_build_deps=(
   core/gcc
