@@ -30,8 +30,6 @@ do_build() {
     --with-openssl-dir="$(pkg_path_for core/openssl)" \
     --with-libyaml-dir="$(pkg_path_for core/libyaml)"
 
-  patch -p0 < "${PLAN_CONTEXT}/mkmf-ignore-linker-warnings.patch"
-
   make
 }
 
