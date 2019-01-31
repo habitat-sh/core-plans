@@ -74,7 +74,6 @@ cd {{pkg.path}}
 exec 2>&1
 sleep \$SPLAY_FIRST_RUN_DURATION
 chef_client_cmd
-echo "chef_client_ident = \"{{pkg.ident}}\"" | hab config apply {{svc.service}}.{{svc.group}} $(date +'%s')
 
 while true; do
 
