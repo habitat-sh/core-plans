@@ -1202,6 +1202,11 @@ plan_path = "ruby25"
 paths = [
   "ruby/*"
 ]
+[ruby26]
+plan_path = "ruby26"
+paths = [
+  "ruby/*"
+]
 [runc]
 plan_path = "runc"
 [runit]
