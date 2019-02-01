@@ -509,6 +509,8 @@ paths = [
 plan_path = "harfbuzz"
 [helm]
 plan_path = "helm"
+[hspec-discover]
+plan_path = "hspec-discover"
 [htop]
 plan_path = "htop"
 [httpd]
