@@ -11,7 +11,7 @@ source "${BATS_TEST_DIRNAME}/../plan.sh"
   [ "$status" -eq 0 ]
 }
 
-@@test "Status check" {
+@test "Status check" {
     run direnv status
     [ "$status" -eq 0 ]
 }
