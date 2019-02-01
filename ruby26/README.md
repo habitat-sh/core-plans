@@ -12,4 +12,8 @@ Binary package
 
 ## Usage
 
-*TODO: Add instructions for usage*
+hab pkg exec core/ruby26 ruby --help
+
+You can add this as a build dependency to your plan with:
+
+pkg_build_deps=(core/ruby26)
