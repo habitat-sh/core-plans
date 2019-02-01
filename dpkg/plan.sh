@@ -1,12 +1,12 @@
 pkg_name=dpkg
 pkg_origin=core
-pkg_version=1.19.2
+pkg_version=1.19.4
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0')
 pkg_upstream_url=https://wiki.debian.org/dpkg
 pkg_description="dpkg is a package manager for Debian-based systems"
 pkg_source=http://http.debian.net/debian/pool/main/d/${pkg_name}/${pkg_name}_${pkg_version}.tar.xz
-pkg_shasum=f8f2ae2cf8065b81239db960b3794099ec607c94a125cec61c986f68f9861b71
+pkg_shasum=c15234e98655689586bff2d517a6fdc6135d139c54d52ae9cfa6a90007fee0ae
 pkg_deps=(
   core/bzip2
   core/glibc
