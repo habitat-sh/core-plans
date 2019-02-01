@@ -29,7 +29,7 @@ if [ "${SKIPBUILD}" -eq 0 ]; then
   set +e
 
   # Give some time for the service to start up
-  sleep 5
+  sleep 15
 fi
 
 bats "${TESTDIR}/test.bats"
