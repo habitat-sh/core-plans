@@ -30,19 +30,23 @@ do_clean() {
 }
 
 do_build() {
-  cabal sandbox init
-  cabal update
+  cabal v1-sandbox init
+  cabal v1-update
 
   # Install dependencies
-  cabal install --only-dependencies
+  cabal v1-install --only-dependencies --enable-tests
 
   # Configure and Build
-  cabal configure --prefix="$pkg_prefix" \
+  cabal v1-configure --prefix="$pkg_prefix" \
     --disable-executable-dynamic \
     --disable-shared
-  cabal build
+  cabal v1-build
+}
+
+do_check() {
+  cabal v1-test
 }
 
 do_install() {
-  cabal copy
+  cabal v1-copy
 }
