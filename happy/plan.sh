@@ -18,7 +18,9 @@ pkg_deps=(
 
 pkg_build_deps=(
   core/cabal-install
+  core/diffutils
   core/ghc
+  core/make
 )
 
 do_clean() {
@@ -28,18 +30,29 @@ do_clean() {
   rm -rf /root/.cabal
 }
 
+do_prepare() {
+  # Set locale
+  export LANG="en_US.utf8"
+  # Allow newer cabal, so we don't rebuild cabal
+  sed -i -e 's/Cabal <2.2/Cabal <2.5/g' happy.cabal
+}
+
 do_build() {
-  cabal sandbox init
-  cabal update
+  cabal v1-sandbox init
+  cabal v1-update
 
   # Install dependencies
-  cabal install --only-dependencies
+  cabal v1-install --only-dependencies
 
   # Configure and Build
-  cabal configure --prefix="$pkg_prefix"
-  cabal build
+  cabal v1-configure --prefix="$pkg_prefix"
+  cabal v1-build
+}
+
+do_check() {
+  cabal v1-test
 }
 
 do_install() {
-  cabal copy
+  cabal v1-copy
 }
