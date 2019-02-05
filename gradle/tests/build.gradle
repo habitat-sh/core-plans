@@ -1,0 +1,10 @@
+buildScan {
+    termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+    termsOfServiceAgree = 'yes'
+}
+
+task hello {
+    doLast {
+        println 'Hello world!'
+    }
+}

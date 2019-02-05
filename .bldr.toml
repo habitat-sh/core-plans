@@ -422,6 +422,16 @@ plan_path = "gperftools"
 plan_path = "gpgme"
 [gradle]
 plan_path = "gradle"
+[gradle4]
+plan_path = "gradle4"
+paths = [
+  "gradle/*",
+]
+[gradle5]
+plan_path = "gradle5"
+paths = [
+  "gradle/*",
+]
 [grafana]
 plan_path = "grafana"
 [graphviz]
