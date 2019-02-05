@@ -48,4 +48,3 @@ do_install() {
   cd build || exit
   make install
 }
-
