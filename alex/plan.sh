@@ -19,6 +19,8 @@ pkg_deps=(
 pkg_build_deps=(
   core/cabal-install
   core/ghc
+  core/make
+  core/which
 )
 
 do_clean() {
@@ -29,17 +31,22 @@ do_clean() {
 }
 
 do_build() {
-  cabal sandbox init
-  cabal update
+  cabal v1-sandbox init
+  cabal v1-update
 
   # Install dependencies
-  cabal install --only-dependencies
+  cabal v1-install --only-dependencies
 
   # Configure and Build
-  cabal configure --prefix="$pkg_prefix"
-  cabal build
+  cabal v1-configure --prefix="$pkg_prefix"
+  cabal v1-build
+}
+
+do_check() {
+  export PATH="$PWD/dist/build/alex:$PATH"
+  cabal v1-test
 }
 
 do_install() {
-  cabal copy
+  cabal v1-copy
 }
