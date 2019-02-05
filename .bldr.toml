@@ -359,6 +359,11 @@ plan_path = "ghc84"
 paths = [
   "ghc/*",
 ]
+[ghc86]
+plan_path = "ghc86"
+paths = [
+  "ghc/*",
+]
 [giflib]
 plan_path = "giflib"
 [gifsicle]
