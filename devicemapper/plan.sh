@@ -10,7 +10,6 @@ pkg_source="https://mirrors.kernel.org/sourceware/lvm2/releases/LVM2.${pkg_versi
 pkg_shasum="405992bf76960e60c7219d84d5f1e22edc34422a1ea812e21b2ac3c813d0da4e"
 pkg_build_deps=(
   core/gcc
-  core/libaio
   core/make
 )
 pkg_deps=(
