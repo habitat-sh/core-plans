@@ -1,0 +1,33 @@
+function Test-Feature {
+    Write-Host "Check if IIS-aspnet45 is enabled..."
+    $(dism /online /get-featureinfo /featurename:IIS-aspnet45) -contains "State : Enabled"
+}
+
+if (!(Test-Feature)) {
+    if($LASTEXITCODE -ne 0) {
+        # Feature does not exist
+        if(Test-Path "$env:SystemRoot\Microsoft.NET\Framework64\v4.0.30319\aspnet_regiis.exe") {
+            [xml]$x=."$env:SystemRoot\System32\inetsrv\appcmd.exe" list config -section:system.webServer/isapiFilters
+            $node = $null
+            try{
+                $node = $x.'system.webServer'.isapiFilters.SelectSingleNode("filter[@name='ASP.Net_4.0_64bit']")
+            } catch{}
+            if(!$node) {
+                ."$env:SystemRoot\Microsoft.NET\Framework64\v4.0.30319\aspnet_regiis.exe" -ir
+                exit $LASTEXITCODE
+            }
+        }
+        else {
+            Write-Host "Could not locate the .NET 4 CLR."
+            exit 1
+        }
+    }
+    else {
+        Write-Host "Enabling IIS-aspnet45..."
+        dism /online /enable-feature /featurename:IIS-aspnet45 /All
+        if (!(Test-Feature)) {
+            Write-Host "IIS-aspnet45 was not enabled!"
+            exit 1
+        }
+    }
+}

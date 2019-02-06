@@ -1,7 +1,4 @@
 $ProgressPreference="SilentlyContinue"
-
-Import-Module "{{pkgPathFor "core/dsc-core"}}/Modules/DscCore"
-
 $sqlMajorVersion = [Version]::new("{{pkg.version}}").Major
 $setupPath = "{{pkg.path}}\bin"
 if("{{cfg.custom_install_media_dir}}" -ne "") {
@@ -13,18 +10,20 @@ if($setupExe) {
 }
 
 # If the sql instance data is not present, install a new instance
-if (!(Test-Path "{{pkg.svc_path}}/MSSQL.1/MSSQL")) {
-    Write-Host "Installing SQL Server 2005"
-    Start-DscCore (Join-Path {{pkg.svc_config_path}} dotnet2.ps1) DotNet
-    (Get-Content "{{pkg.svc_config_path}}/config.ini" | ? { !$_.EndsWith("`"`"") }) | Set-Content "{{pkg.svc_config_path}}/config.ini"
-    $resolvedSvcPath = (Resolve-Path "{{pkg.svc_path}}").Path
-    (Get-Content "{{pkg.svc_config_path}}/config.ini").replace("{{pkg.svc_path}}", $resolvedSvcPath) | Set-Content "{{pkg.svc_config_path}}/config.ini"
-    Start-Process "$setupExe" -ArgumentList "/settings {{pkg.svc_config_path}}/config.ini /qn" -Wait
+if (!(Test-Path "{{pkg.svc_data_path}}/mssql${sqlMajorVersion}.{{cfg.instance}}")) {
+    (Get-Content "{{pkg.svc_config_install_path}}/config.ini" | ? { !$_.EndsWith("`"`"") }) | Set-Content "{{pkg.svc_config_install_path}}/config.ini"
+    ."$setupExe" /configurationfile={{pkg.svc_config_install_path}}/config.ini /Q
+
+    # This is a workaround for Sql Server 2016 which fails to
+    # create user databases with forward slashes in the Default
+    # data directory. Future Habitat Supervisors will not use
+    # forward slashes and make this workaround unnecessary
+    Set-ItemProperty -Path  "HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL${sqlMajorVersion}.{{cfg.instance}}\MSSQLServer" -Name DefaultData -Value (Resolve-Path "{{pkg.svc_data_path}}").Path
+    Set-ItemProperty -Path  "HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL${sqlMajorVersion}.{{cfg.instance}}\MSSQLServer" -Name DefaultLog -Value (Resolve-Path "{{pkg.svc_data_path}}").Path
 }
 
 # Configure the instance for the configured port
-$instance = (get-itemproperty "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Microsoft SQL Server\Instance Names\sql").{{cfg.instance}}
-Set-ItemProperty -Path  "HKLM:\SOFTWARE\WOW6432Node\Microsoft\Microsoft SQL Server\$instance\MSSQLServer\SuperSocketNetLib\Tcp\IPAll" -Name TcpPort -Value {{cfg.port}}
+Set-ItemProperty -Path  "HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL${sqlMajorVersion}.{{cfg.instance}}\MSSQLServer\SuperSocketNetLib\Tcp\IPAll" -Name TcpPort -Value {{cfg.port}}
 
 # Open port on firewall only if Windows Firewall service is running
 if($(Get-Service 'MpsSvc').Status -eq "Running") {
@@ -42,5 +41,6 @@ if($(Get-Service 'MpsSvc').Status -eq "Running") {
         }
     }
 
-    Start-DscCore (Join-Path {{pkg.svc_config_path}} firewall.ps1) NewFirewallRule
+    Import-Module "{{pkgPathFor "core/dsc-core"}}/Modules/DscCore"
+    Start-DscCore (Join-Path {{pkg.svc_config_install_path}} firewall.ps1) NewFirewallRule
 }

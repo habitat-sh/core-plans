@@ -1,0 +1,13 @@
+function Test-Feature {
+    Write-Host "Check if IIS-WebServerRole is enabled..."
+    $(dism /online /get-featureinfo /featurename:IIS-WebServerRole) -contains "State : Enabled"
+}
+
+if (!(Test-Feature)) {
+    Write-Host "Enabling IIS-WebServerRole..."
+    dism /online /enable-feature /featurename:IIS-WebServerRole
+    if (!(Test-Feature)) {
+        Write-Host "IIS-WebServerRole was not enabled!"
+        exit 1
+    }
+}

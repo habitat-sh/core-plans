@@ -1,0 +1,16 @@
+function Test-Feature {
+    Write-Host "Check if IIS-ASPNET is enabled..."
+    $(dism /online /get-featureinfo /featurename:IIS-ASPNET) -contains "State : Enabled"
+}
+
+if (!(Test-Feature)) {
+    dism /online /enable-feature /featurename:IIS-ISAPIFilter
+    dism /online /enable-feature /featurename:IIS-ISAPIExtensions
+    dism /online /enable-feature /featurename:NetFx4Extended-ASPNET45
+    dism /online /enable-feature /featurename:IIS-NetFxExtensibility
+    dism /online /enable-feature /featurename:IIS-ASPNET
+    if (!(Test-Feature)) {
+        Write-Host "IIS-ASPNET was not enabled!"
+        exit 1
+    }
+}

@@ -17,3 +17,5 @@ Consuming applications will need to register the `sqldmo.dll` with the COM regis
 ```
 ."$env:SystemRoot\SysWow64\regsvr32.exe" /s "{{pkgPathFor "core/sql-dmo"}}\Program Files (x86)\Microsoft SQL Server\80\Tools\Binn\sqldmo.dll"
 ```
+
+**Note:** If you have set the `HAB_FEAT_INSTALL_HOOK` environment variable, then the `install` hook packaged with this plan should automatically register the COM entries upon installation.
