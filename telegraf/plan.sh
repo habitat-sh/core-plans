@@ -1,14 +1,17 @@
 pkg_name=telegraf
 pkg_origin=core
-pkg_version="1.3.5"
+pkg_version="1.9.4"
 pkg_license=('MIT')
 pkg_description="telegraf - client for InfluxDB"
 pkg_upstream_url="https://github.com/influxdata/telegraf/"
 pkg_source="https://dl.influxdata.com/${pkg_name}/releases/${pkg_name}-${pkg_version}-static_linux_amd64.tar.gz"
-pkg_shasum="3c44bf10fc689e723c6f62f28babd8317331af507d1178100cdb16ee15b5a490"
+pkg_shasum="56ec9a88a4f306a79f6dd2503ef358b0e25eba27c8c79dd891171c98973cf116"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_svc_run="telegraf --config $pkg_svc_config_path/telegraf.conf"
-pkg_build_deps=(core/wget core/tar)
+pkg_build_deps=(
+  core/wget
+  core/tar
+)
 pkg_deps=()
 pkg_bin_dirs=(bin)
 
