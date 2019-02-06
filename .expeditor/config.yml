@@ -1,0 +1,6 @@
+---
+project:
+  alias: core-plans
+
+github:
+  delete_branch_on_merge: true
