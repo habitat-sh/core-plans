@@ -1,0 +1,5 @@
+digraph "a graph" {
+a -> b
+a -> c
+b -> c
+}
