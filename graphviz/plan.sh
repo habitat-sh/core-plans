@@ -10,6 +10,7 @@ pkg_source="https://gitlab.com/graphviz/graphviz/-/archive/stable_release_${pkg_
 pkg_shasum="92f654c95b412920777ceddf90e6564ffa871a77e4f6155ab437a2d3a2129e2b"
 pkg_deps=(
   core/glibc
+  core/libtool
 )
 pkg_build_deps=(
     core/autoconf
@@ -19,10 +20,10 @@ pkg_build_deps=(
     core/diffutils
     core/flex
     core/gcc
-    core/libtool
     core/make
     core/pkg-config
 )
+pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 
