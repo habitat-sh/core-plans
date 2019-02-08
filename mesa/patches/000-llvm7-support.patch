@@ -1,0 +1,12 @@
+--- src/gallium/auxiliary/gallivm/lp_bld_init.c	2019-02-08 21:20:46.868917000 +0000
++++ src/gallium/auxiliary/gallivm/lp_bld_init.c	2019-02-08 21:21:38.467729000 +0000
+@@ -40,6 +40,9 @@
+
+ #include <llvm-c/Analysis.h>
+ #include <llvm-c/Transforms/Scalar.h>
++#if HAVE_LLVM >= 0x0700
++#include <llvm-c/Transforms/Utils.h>
++#endif
+ #include <llvm-c/BitWriter.h>
+
+
