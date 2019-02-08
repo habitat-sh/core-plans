@@ -15,6 +15,7 @@ pkg_deps=(
   core/coreutils
   core/sed
 )
+pkg_build_deps=(core/curl)
 pkg_bin_dirs=(bin)
 
 do_build() {
@@ -28,4 +29,21 @@ do_check() {
 
 do_install() {
   ./install.sh "$pkg_prefix"
+
+  _install_library "bats-mock" "https://github.com/lox/bats-mock/archive/master.tar.gz" "stub.bash"
+  _install_library "bats-support" "https://github.com/ztombol/bats-support/archive/v0.3.0.tar.gz"
+  _install_library "bats-assert" "https://github.com/ztombol/bats-assert/archive/v0.3.0.tar.gz"
+}
+
+# private #
+_install_library() {
+  name="$1"
+  source="$2"
+  lib_file="${3:-load.bash}"
+
+  build_line "Installing $name library"
+  mkdir -p "$pkg_prefix/lib/$name"
+  curl -sSL "$source" -o "$HAB_CACHE_SRC_PATH/$name.tgz"
+  tar -zxf "$HAB_CACHE_SRC_PATH/$name.tgz" -C "$pkg_prefix/lib/$name" --strip 1
+  printf 'source "%s"\n' "$pkg_prefix/lib/$name/$lib_file" >> "$pkg_prefix/lib/load.bash"
 }
