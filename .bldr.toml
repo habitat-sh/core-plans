@@ -38,6 +38,8 @@ plan_path = "autogen"
 plan_path = "automake"
 [aws-cli]
 plan_path = "aws-cli"
+[azure-cli]
+plan_path = "azure-cli"
 [bash]
 plan_path = "bash"
 [bash-completion]
