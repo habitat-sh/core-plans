@@ -1,0 +1,51 @@
+# Minio must be started with static number of server/disk by design
+# so there are 3 possible ways to run minio
+
+# --= Standalone mode =--
+#
+# Best for local experiments
+standalone = true
+
+# --= Automatic cluster =--
+#
+# Best for temporary installation, integration test,
+# and when you sure hostname or ipaddress will not change.
+#
+# Just set ~expected~ number of nodes and habitat will do the rest
+# Note: If cluster view changes:
+# * Habitat will validate new view and use if valid
+# * Otherwise, habitat will use last known good configuration
+# Options is ignored when ~standalone~
+# Ignored when ~members~ is defined
+# Ignored when ~standalone~
+# Must be >= 2
+expected = 2
+
+# --= Explicit Cluster =--
+#
+# Recommended for production environments: explicitly set cluster members.
+# From minio server documentation:
+# DIR points to a directory on a filesystem. When you want to combine
+#   multiple drives into a single large system, pass one directory per
+#   filesystem separated by space. You may also use a '...' convention
+#   to abbreviate the directory arguments. Remote directories in a
+#   distributed setup are encoded as HTTP(s) URIs.
+#
+# ~members~ is a ~Array~ of DIRs
+# Ignored when standalone
+members = []
+
+# Admin Account
+key_id = "admin"
+secret_key = "password"
+
+# Enable SSL in your Minio
+# This expects certificates files loaded via ~hab file upload~ or
+# in $pkg_svc_config_path/certs: ~private.key~ and ~public.crt~
+use_ssl = false
+
+# Password for certificate
+ssl_cert_pw = ""
+
+# Default bucket name to create
+bucket_name = "default"

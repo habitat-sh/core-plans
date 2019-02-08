@@ -1,0 +1,8 @@
+This meta file is used to track config changes.
+If something in this file will change then reload hook will restart service.
+We will use sha256sum for that
+=====================================================================
+{{ cfg.key_id}}
+{{ cfg.secret_key }}
+{{ cfg.use_ssl }}
+{{ cfg.ssl_cert_pw }}

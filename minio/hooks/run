@@ -1,7 +1,49 @@
-#!/bin/sh
+#!/bin/bash
+# shellcheck disable=2154
 
 exec 2>&1
 
-exec minio server \
---config-dir {{pkg.svc_config_path}} \
-{{pkg.svc_data_path}}
+source "{{ pkg.svc_config_path }}/hook-helper.sh"
+
+# This is helps to restart service instead of reload
+checksum_restart_hook
+
+if [ "$standalone" == "true" ]; then
+    echo "Starting in standalone mode ..."
+    exec minio server --config-dir "{{pkg.svc_config_path}}" "{{pkg.svc_data_path}}"
+    exit 0 # never get here and its ok
+fi
+
+echo "Entering clustered configuration ..."
+
+if [ "$explicit_count" -eq 0 ]; then
+    echo "Starting automatic cluster ..."
+    members="$svc_members"
+    count=$svc_count
+else
+    echo "Starting explicit cluster ..."
+    members="$explicit_members"
+    # Member can be http://1.2.3.{1...89}
+    # It is hard to calculate count and actually isn't required
+    count=$expected
+fi
+
+if [ "$count" -eq "$expected" ] && [ "$expected" -ge 2 ]; then
+    echo "Valid members count was found. Caching configuration ..."
+    cat <<-EOF > "$run_good_hook"
+      exec minio server --config-dir "{{pkg.svc_config_path}}" $members
+EOF
+fi
+
+if [ -f "$run_good_hook" ]; then
+    echo "Running latest known good configuration ..."
+    source "$run_good_hook"
+    exit 0 # expect exec in source so never get here
+fi
+
+echo "Nor valid members count nor cached configuration was found."
+echo "Members count must be == expected."
+echo "Count: $count. Expected: $expected. Members: $members"
+echo "During initial bootstrap this is ok."
+echo "Sleeping infinity. When full cluster will be ready service will been reloaded."
+sleep infinity

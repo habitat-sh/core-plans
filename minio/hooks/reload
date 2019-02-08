@@ -1,0 +1,30 @@
+#!/bin/bash
+# shellcheck disable=2154
+
+exec 2>&1
+
+source "{{ pkg.svc_config_path }}/hook-helper.sh"
+
+minio_pid=$(minio_pid)
+
+if check_restart_hook; then
+    echo "Settings are up to date."
+else
+    echo "Restart is required."
+    kill "$minio_pid"
+    # Process is still killing but we don't care
+    # and hope supervisor will restart service
+    exit 0
+fi
+
+if [ "$standalone" == "true" ]; then
+    exit 0
+fi
+
+if [ ! -f "$run_good_hook" ]; then
+    echo "Cluster is not configured yet. Restart is required."
+    kill "$minio_pid"
+    # Process is still killing but we don't care
+    # and hope supervisor will restart service
+    exit 0
+fi

@@ -1,0 +1,14 @@
+#!/bin/bash
+# shellcheck disable=2154
+
+exec 2>&1
+
+source "{{ pkg.svc_config_path }}/hook-helper.sh"
+
+minio_splay_delay
+
+if [ "$use_ssl" == "true" ]; then
+    copy_certs
+fi
+
+create_bucket
