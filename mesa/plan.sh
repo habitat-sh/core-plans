@@ -57,6 +57,7 @@ do_prepare() {
     _clean_file=true
   fi
 
+  # https://patchwork.freedesktop.org/patch/214086/
   patch -p0 < "$PLAN_CONTEXT"/patches/000-llvm7-support.patch
 }
 
