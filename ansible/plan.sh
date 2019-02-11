@@ -10,12 +10,12 @@ pkg_deps=(
   core/libffi
   core/python2
   core/sshpass
+  core/openssl
 )
 pkg_build_deps=(
   core/gcc
   core/libyaml
   core/make
-  core/openssl
 )
 pkg_bin_dirs=(bin)
 pkg_description="Ansible is a radically simple IT automation platform that makes your applications and systems easier to deploy."
