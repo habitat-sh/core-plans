@@ -24,3 +24,6 @@ pkg_build_deps=(
   core/gcc
   core/ninja
 )
+
+# Hint for rebuild scripts. Not a formal part of plan-build.
+pkg_deprecated="true"

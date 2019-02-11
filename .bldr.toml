@@ -119,11 +119,6 @@ plan_path = "check"
 plan_path = "chrony"
 [clang]
 plan_path = "clang"
-[clang5]
-plan_path = "clang5"
-paths = [
-  "clang/*"
-]
 [clang7]
 plan_path = "clang7"
 paths = [
@@ -773,11 +768,6 @@ plan_path = "linux-headers-musl"
 plan_path = "linux-pam"
 [llvm]
 plan_path = "llvm"
-[llvm5]
-plan_path = "llvm5"
-paths = [
-  "llvm/*"
-]
 [llvm7]
 plan_path = "llvm7"
 paths = [
