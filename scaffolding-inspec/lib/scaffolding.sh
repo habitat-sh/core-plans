@@ -47,9 +47,28 @@ export HOME={{pkg.svc_var_path}}
 
 exec 2>&1
 
+sleep_check_chef_client_pkg_ident()
+{
+  SLEEP_TOTAL=\$(({{cfg.interval}}/60)) # Bash does a floor on integer division
+  for((i=0;i<=\$SLEEP_TOTAL;i++)) do
+    sleep 60 # sleep first, so we always wait at least 1 minute, for safety
+    UPDATE_CHEF_CLIENT_PKG_IDENT=\$(</hab/svc/chef-client/data/chef_client_pkg_ident.current)
+    if ! ( "\$CURRENT_CHEF_CLIENT_PKG_IDENT" == "\$UPDATE_CHEF_CLIENT_PKG_IDENT"); then
+      break
+    fi
+  done
+}
+
 while true; do
+
 {{pkgPathFor "chef/inspec"}}/bin/inspec exec {{#each cfg.profiles as |profile| ~}} {{profile}} {{/each ~}} --json-config {{pkg.svc_config_path}}/inspec.json --target-id {{sys.member_id}}
-sleep {{cfg.interval}}
+
+if [ -f /hab/svc/hanadb/data/chef_client_pkg_ident.current ]; then
+  CURRENT_CHEF_CLIENT_PKG_IDENT=\$(</hab/svc/chef-client/data/chef_client_pkg_ident.current)
+  sleep_check_chef_client_pkg_ident()
+else
+  sleep {{cfg.interval}}
+fi
 
 done
 EOF

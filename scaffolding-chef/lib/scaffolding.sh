@@ -75,6 +75,8 @@ exec 2>&1
 sleep \$SPLAY_FIRST_RUN_DURATION
 chef_client_cmd
 
+cp {{pkg.svc_config_path}}/chef_client_pkg_ident.current {{pkg.svc_data_path}}/chef_client_pkg_ident.current
+
 while true; do
 
 sleep \$SPLAY_DURATION
@@ -139,6 +141,11 @@ data_collector.server_url "{{cfg.data_collector.server_url}}"
 EOF
   chmod 0640 "$pkg_prefix/config/client-config.rb"
 
+  cat << EOF >> "$pkg_prefix/config/chef_client_pkg_ident.current"
+{{pkg.ident}}
+EOF
+  chmod 0640 "$pkg_prefix/config/chef_client_pkg_ident.current"
+
   cat << EOF >> "$pkg_prefix/config/attributes.json"
 {{#if cfg.attributes ~}}
 {{toJson cfg.attributes}}
@@ -151,7 +158,7 @@ EOF
   cat << EOF >> "$pkg_prefix/default.toml"
 interval = 1800
 splay = 1800
-splay_first_run = 0
+splay_first_run = 1
 run_lock_timeout = 1800
 log_level = "warn"
 chef_client_ident = "" # this is blank by default so it can be populated from the bind
