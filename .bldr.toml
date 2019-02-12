@@ -1233,6 +1233,8 @@ plan_path = "scaffolding-go"
 plan_path = "scaffolding-go17"
 [scaffolding-gradle]
 plan_path = "scaffolding-gradle"
+[scaffolding-inspec]
+plan_path = "scaffolding-inspec"
 [scaffolding-node]
 plan_path = "scaffolding-node"
 [scaffolding-ruby]
