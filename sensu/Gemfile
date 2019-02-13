@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-gem 'sensu', '= 1.4.3'
-gem 'sensu-plugin', '= 2.5.0'
+gem 'sensu', '= 1.6.2'
+gem 'sensu-plugin', '= 3.0.1'
