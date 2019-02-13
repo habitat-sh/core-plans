@@ -1,0 +1,14 @@
+$installed = $false
+if (Test-Path 'HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\') {
+    if (Get-ChildItem 'HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\' | Get-ItemPropertyValue -Name Release | Foreach-Object { $_ -ge 394802 }) {
+        $installed = $true
+        Write-Host ".Net 4.6.2 or greater is already installed"
+    }
+}
+if(!$installed) {
+    Write-Host "Installing .Net Runtime 4.6.2"
+    $proc = Start-Process "NDP462-KB3151800-x86-x64-AllOS-ENU.exe" -ArgumentList "/quiet /norestart /log $env:temp\dotnet462.log" -PassThru
+    Write-Host "Waiting for installer process $($proc.Id) to exit..."
+    $proc.WaitForExit()
+    exit $proc.ExitCode
+}
