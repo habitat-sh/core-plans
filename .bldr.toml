@@ -1083,6 +1083,11 @@ paths = [
 ]
 [postgresql11]
 plan_path = "postgresql11"
+[postgresql11-client]
+plan_path = "postgresql11-client"
+paths = [
+  "postgresql11/*",
+]
 [powershell]
 plan_path = "powershell"
 [procps-ng]
