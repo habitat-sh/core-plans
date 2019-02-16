@@ -2,16 +2,17 @@ pkg_name=boost
 pkg_origin=core
 pkg_description='Boost provides free peer-reviewed portable C++ source libraries.'
 pkg_upstream_url='http://www.boost.org/'
-pkg_version=1.66.0
+pkg_version=1.69.0
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=('Boost Software License')
-pkg_source=http://downloads.sourceforge.net/project/boost/boost/${pkg_version}/boost_1_66_0.tar.gz
-pkg_shasum=bd0df411efd9a585e5a2212275f8762079fed8842264954675a4fddc46cfcf60
-pkg_dirname=boost_1_66_0
+pkg_source=http://downloads.sourceforge.net/project/boost/boost/${pkg_version}/boost_1_69_0.tar.gz
+pkg_shasum=9a2c2819310839ea373f42d69e733c339b4e9a19deab6bfec448281554aa4dbb
+pkg_dirname=boost_1_69_0
 
 pkg_deps=(
   core/glibc
   core/gcc-libs
+  core/zlib
 )
 
 pkg_build_deps=(
@@ -27,7 +28,6 @@ pkg_build_deps=(
   core/libxslt
   core/openssl
   core/which
-  core/zlib
 )
 
 pkg_lib_dirs=(lib)
