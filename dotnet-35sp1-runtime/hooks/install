@@ -12,6 +12,7 @@ if (!(Test-Feature)) {
     if(Test-InContainer) {
         dism /Online /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:{{pkg.path}}\bin
     } else {
+        dism /Online /Enable-Feature /FeatureName:NetFx3ServerFeatures
         dism /Online /Enable-Feature /FeatureName:NetFx3
     }
     if (!(Test-Feature)) {
