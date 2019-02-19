@@ -656,6 +656,8 @@ plan_path = "libjpeg-turbo"
 plan_path = "libksba"
 [libmpc]
 plan_path = "libmpc"
+[libnl]
+plan_path = "libnl"
 [libnsl]
 plan_path = "libnsl"
 [libossp-uuid]
