@@ -85,6 +85,7 @@ do_build() {
   cmake \
     -DCMAKE_INSTALL_PREFIX="${pkg_prefix}" \
     -DCLANG_BUILD_EXAMPLES=ON \
+    -DLLVM_ENABLE_RTTI=ON \
     -DCMAKE_BUILD_TYPE=Release \
     -G "Ninja" \
     ..
