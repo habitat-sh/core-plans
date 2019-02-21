@@ -1,12 +1,12 @@
 pkg_name=elasticsearch
 pkg_origin=core
-pkg_version=6.5.4
+pkg_version=6.6.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Open Source, Distributed, RESTful Search Engine"
 pkg_upstream_url="https://elastic.co"
 pkg_license=('Revised BSD')
 pkg_source=https://artifacts.elastic.co/downloads/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=762e25c036fa2e882cb7e91d83868fa15a1cad8549d279a8c5826a005bb31877
+pkg_shasum=a4fd359facf03272013e3f2bffc846c1e1f8c60b7fb0daf856831f14947ed297
 pkg_build_deps=(
   core/patchelf
 )
@@ -15,7 +15,7 @@ pkg_deps=(
   core/busybox-static
   core/glibc
   core/zlib
-  core/jre8
+  core/openjdk11
   core/wget
 )
 pkg_bin_dirs=(es/bin)
