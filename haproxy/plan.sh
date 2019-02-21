@@ -35,6 +35,7 @@ do_build() {
        TARGET=linux2628 \
        USE_OPENSSL=1 \
        USE_ZLIB=1 \
+       USE_GETADDRINFO=1 \
        ADDINC="$CFLAGS" \
        ADDLIB="$LDFLAGS"
 }
