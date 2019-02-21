@@ -1,0 +1,2 @@
+grep_path: '/bin/grep'
+grep_test: '/bin/grep Sleeping /hab/svc/grep/hooks/run'

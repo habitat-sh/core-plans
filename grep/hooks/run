@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# grep is not a service, therefore the supervisor will exit almost immediately.
+# This hook keeps the supervisor running if needed for development and testing.
+
+exec 2>&1
+
+while true; do
+  echo "Sleeping ..."
+  sleep 10
+done

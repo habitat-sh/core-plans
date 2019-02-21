@@ -1,0 +1,12 @@
+name: grep-integration-tests
+title: Habitat Core Plan grep
+summary: InSpec controls for testing Habitat Core Plan grep
+maintainer: Chef Software, Inc.
+copyright: Chef Software, Inc.
+copyright_email: support@chef.io
+version: 0.1.0
+license: Apache-2.0
+inspec_version: '>= 3.0.25'
+depends:
+    - name: grep
+      path: ../
