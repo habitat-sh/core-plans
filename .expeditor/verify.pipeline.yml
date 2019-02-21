@@ -1,0 +1,8 @@
+steps:
+
+  - label: test_grep
+    command:
+      - export CODE=$PWD/grep && touch attributes.yml && ruby .expeditor/buildkite/test_core_plan_linux.rb -p $CODE
+    plugins:
+      docker#v1.1.1:
+        image: "chefes/buildkite"

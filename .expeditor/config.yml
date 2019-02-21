@@ -2,5 +2,8 @@
 project:
   alias: core-plans
 
+pipelines:
+  - verify
+
 github:
   delete_branch_on_merge: true
