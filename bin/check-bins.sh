@@ -1,9 +1,10 @@
 #!/bin/bash
 #
-# Usage: bin/check-bins.sh PACKAGE_INSTALL_PATH
+# Usage: bin/check-bins.sh PACKAGE
 #
-# Finds any executable or library files that are missing essential
-# dependencies.
+# Finds any executable or library files that are missing essential #
+# dependencies. PACKAGE can be a directory to a package directory or a
+# fully-qualified ident of an installed package.
 #
 set -euo pipefail
 
@@ -14,24 +15,33 @@ error() {
 }
 
 usage() {
-    error "Usage: $0 PACKAGE_INSTALL_PATH"
+    error "Usage: $0 PACKAGE"
+    error ""
+    error "PACKAGE is a fully-qualified ident or the path to the packages install dir."
 }
 
 check_file() {
     local file="$1"
-    missing_libs=$(ldd "$file" | awk '/not found/ {print $1}')
+    missing_libs=$(ldd "$file" | awk '/not found/ {print $1}' | sort | uniq)
     if [[ -n "$missing_libs" ]]; then
         if [[ -z "${_header_printed}" ]]; then
             error "MISSING DEPENDENCIES"
             _header_printed="true"
         fi
         error "$file:"
-        error "      $missing_libs"
+        for lib in $missing_libs; do
+            error "      $lib"
+        done
+
         return 1
     fi
 }
 
 should_check() {
+    if [[ ! -x "$1" ]]; then
+        return 1
+    fi
+
     case "$(file -bi "$1")" in
         *application/x-*executable*) return 0;;
         *application/x-*sharedlib*) return 0;;
@@ -45,8 +55,12 @@ check_files() {
     local files="$dir/FILES"
 
     if [[ ! -f "$files" ]]; then
-        error "could not find FILES manifest in $dir"
-        return 1
+        if [[ -f "/hab/pkgs/$files" ]]; then
+            files="/hab/pkgs/$files"
+        else
+            error "could not find FILES manifest for $dir"
+            return 1
+        fi
     fi
 
     local ret_code=0
@@ -61,7 +75,7 @@ check_files() {
 }
 
 check_prereqs() {
-    for cmd in ldd awk file; do
+    for cmd in ldd awk file sort uniq; do
         if ! command -v $cmd >/dev/null 2>&1; then
             error "error: $cmd required but not found"
             exit 1
