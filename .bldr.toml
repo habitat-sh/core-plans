@@ -57,6 +57,16 @@ plan_path = "bazel"
 plan_path = "bc"
 [bdwgc]
 plan_path = "bdwgc"
+[bdwgc7]
+plan_path = "bdwgc7"
+paths = [
+  "bdwgc/*",
+]
+[bdwgc8]
+plan_path = "bdwgc8"
+paths = [
+  "bdwgc/*",
+]
 [benchmark]
 plan_path = "benchmark"
 [bind]
