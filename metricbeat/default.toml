@@ -1,0 +1,56 @@
+tags = []
+
+[metricbeat]
+max_start_delay = "10s"
+
+#============================  Config Reloading ===============================
+[metricbeat.config]
+[metricbeat.config.modules]
+[metricbeat.config.modules.reload]
+enabled = false
+
+#==========================  Modules configuration ============================
+[[metricbeat.modules]]
+module = "system"
+period = "10s"
+metricsets = [
+  "cpu",
+  "load",
+  "memory",
+  "network",
+  "process",
+  "process_summary"
+]
+[metricbeat.modules.process]
+[metricbeat.modules.process.include_top_n]
+by_cpu = 5
+by_memory = 5
+
+[[metricbeat.modules]]
+module = "system"
+period = "1m"
+metricsets = [
+  "filesystem",
+  "fsstat"
+]
+[[metricbeat.modules.processors]]
+[metricbeat.modules.processors."drop_event.when.regexp"]
+"system.filesystem.mount_point" = "^/(sys|cgroup|proc|dev|etc|host|lib)($|/)"
+
+[[metricbeat.modules]]
+module = "system"
+period = "15m"
+metricsets = ["uptime"]
+
+#================================ Output ======================================
+[output]
+[output.elasticsearch]
+hosts = ["localhost:9200"]
+
+#================================ Logging ======================================
+
+[logging]
+to_files = true
+[logging.files]
+path = "var/logs"
+name = "metricbeat.log"

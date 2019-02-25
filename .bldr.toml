@@ -839,6 +839,8 @@ plan_path = "mercurial"
 plan_path = "mesa"
 [meson]
 plan_path = "meson"
+[metricbeat]
+plan_path = "metricbeat"
 [mg]
 plan_path = "mg"
 [minio]
