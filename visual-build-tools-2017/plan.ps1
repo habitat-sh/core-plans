@@ -9,21 +9,21 @@ $pkg_source="https://download.microsoft.com/download/5/A/8/5A8B8314-CA70-4225-9A
 $pkg_shasum="e77d433c44f3d0cbf7a3efa497101de93918c492c2ebcaec79a1faf593d419bc"
 
 $pkg_bin_dirs=@(
-  "Contents\VC\Tools\MSVC\14.10.25017\bin\HostX64\x64",
-  "Contents\VC\Redist\MSVC\14.10.25008\x64\Microsoft.VC150.CRT",
+  "Contents\VC\Tools\MSVC\14.16.27023\bin\HostX64\x64",
+  "Contents\VC\Redist\MSVC\14.16.27012\x64\Microsoft.VC141.CRT",
   "Contents\MSBuild\15.0\Bin\amd64"
 )
 $pkg_lib_dirs=@(
-  "Contents\VC\Tools\MSVC\14.10.25017\atlmfc\lib\x64",
-  "Contents\VC\Tools\MSVC\14.10.25017\lib\x64"
+  "Contents\VC\Tools\MSVC\14.16.27023\atlmfc\lib\x64",
+  "Contents\VC\Tools\MSVC\14.16.27023\lib\x64"
 )
 $pkg_include_dirs=@(
-  "Contents\VC\Tools\MSVC\14.10.25017\atlmfc\include",
-  "Contents\VC\Tools\MSVC\14.10.25017\include"
+  "Contents\VC\Tools\MSVC\14.16.27023\atlmfc\include",
+  "Contents\VC\Tools\MSVC\14.16.27023\include"
 )
 
 function Invoke-Unpack {
-  Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList "--passive --layout $HAB_CACHE_SRC_PATH/$pkg_dirname --lang en-US"
+  Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList "--quiet --layout $HAB_CACHE_SRC_PATH/$pkg_dirname --lang en-US --add Microsoft.VisualStudio.Workload.MSBuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.ATLMFC"
   Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
   try {
     Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include *.vsix -Exclude @('*x86*', '*.arm.*') -Recurse | % {
