@@ -1,6 +1,6 @@
 source "$(dirname "${BASH_SOURCE[0]}")/../bdwgc/plan.sh"
 
-pkg_name=bdwgc
+pkg_name=bdwgc8
 pkg_origin=core
 pkg_version=8.0.2
 pkg_description="A garbage collector for C and C++"

@@ -1,4 +1,4 @@
-# bdwgc
+# bdwgc8
 
 A garbage collector for C and C++
 
