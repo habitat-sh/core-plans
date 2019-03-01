@@ -1,6 +1,6 @@
-# PostgreSQL
+# PostgreSQL 11
 
-This packages PostgreSQL in a Habitat package that can be run with the Habitat Supervisor.
+This packages PostgreSQL 11 in a Habitat package that can be run with the Habitat Supervisor.
 
 This PostgreSQL plan supports standalone and clustered modes.
 
@@ -14,18 +14,18 @@ Service
 
 ## Usage
 
-You can use this passage by adding core/postgresql to your package dependencies in your plan file:
+You can use this passage by adding core/postgresql11 to your package dependencies in your plan file:
 
 ```
 pkg_deps=(
-  core/postgresql # for psql in hooks/init
+  core/postgresql11 # for psql in hooks/init
 )
 ```
 
 Or you can start the service with:
 
 ```
-$ hab start core/postgresql
+$ hab start core/postgresql11
 ```
 
 And bind another Habitat service to it - see "Binding" below for more details.
@@ -35,7 +35,7 @@ And bind another Habitat service to it - see "Binding" below for more details.
 Consuming services can bind to PostgreSQL via:
 
 ```
-hab start <origin>/<app> --bind database:postgresql.default --peer <pg-host>
+hab start <origin>/<app> --bind database:postgresql11.default --peer <pg-host>
 ```
 
 Superuser access is exposed to consumers when binding and we advise that required databases, schemas and roles be created and migrations get run in the init hook of the consuming service. The created roles (with restricted access) should then be exposed to the application code that will get run.
@@ -76,11 +76,11 @@ However if you're using more of a rigid configuration file syntax then you still
 
 To run a standalone PostgreSQL instance simply run
 ```
-hab start core/postgresql
+hab start core/postgresql11
 ```
 or
 ```
-docker run habitat/postgresql
+docker run habitat/postgresql11
 ```
 if you want to bring up the pre-exported docker image.
 
@@ -93,7 +93,7 @@ You can run an example cluster via docker-compose after exporting a docker conta
 $ hab pkg export docker $(ls -1t results/*.hart | head -1)
 ```
 
-The docker post-process should create a docker image named `core/postgresql` and it should be available on your local machine
+The docker post-process should create a docker image named `core/postgresql11` and it should be available on your local machine
 
 ```
 cat <<EOF > docker-compose.yml
@@ -101,25 +101,25 @@ version: '3'
 
 services:
   pg1:
-    image: habitat/postgresql
+    image: habitat/postgresql11
     command: --group cluster
       --topology leader
     volumes:
-      - pg1-data:/hab/svc/postgresql/data
+      - pg1-data:/hab/svc/postgresql11/data
   pg2:
-    image: habitat/postgresql
+    image: habitat/postgresql11
     command: --group cluster
       --topology leader
       --peer pg1
     volumes:
-      - pg2-data:/hab/svc/postgresql/data
+      - pg2-data:/hab/svc/postgresql11/data
   pg3:
-    image: habitat/postgresql
+    image: habitat/postgresql11
     command: --group cluster
       --topology leader
       --peer pg1
     volumes:
-      - pg3-data:/hab/svc/postgresql/data
+      - pg3-data:/hab/svc/postgresql11/data
 
 volumes:
   pg1-data:

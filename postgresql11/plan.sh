@@ -116,25 +116,3 @@ do_install() {
 
   popd > /dev/null
 }
-
-# Postgresql9X plans source this plan to get build instructions.
-#  This helper method allows those plans to copy hooks and config
-#  from this plan.
-#  This should be run in do_begin()
-_copy_service_files() {
-  build_line "Copying hooks"
-  cp -a "${PLAN_CONTEXT}/../postgresql/hooks" "${PLAN_CONTEXT}/"
-  build_line "Copying config"
-  cp -a "${PLAN_CONTEXT}/../postgresql/config" "${PLAN_CONTEXT}/"
-  build_line "Copying default.toml"
-  cp -a "${PLAN_CONTEXT}/../postgresql/default.toml" "${PLAN_CONTEXT}/"
-}
-
-# Cleanup from the above function.
-# This should be run in do_end()
-_cleanup_copied_service_files() {
-  build_line "Removing copied files"
-  rm -rf "${PLAN_CONTEXT:?}/config"
-  rm -rf "${PLAN_CONTEXT:?}/hooks"
-  rm -f "${PLAN_CONTEXT:?}/default.toml"
-}
