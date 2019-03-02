@@ -1,3 +1,4 @@
 #!/bin/sh
-#
-{{pkgPathFor "core/openvpn"}}/bin/openvpn --config {{pkg.svc_config_path}}/server.conf
+
+exec 2>&1
+exec openvpn --config {{pkg.svc_config_path}}/server.conf

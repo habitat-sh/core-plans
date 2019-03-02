@@ -1,3 +1,3 @@
 #!/bin/sh
 
-mkdir -p {{pkg.svc_path}}/var/log
+mkdir -p {{pkg.svc_data_path}}/ccd

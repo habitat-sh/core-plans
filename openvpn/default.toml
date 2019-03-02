@@ -2,9 +2,15 @@
 # Tunable OpenVPN configuration. Lifted in part from
 # https://openvpn.net/index.php/open-source/documentation/howto.html#examples
 ###################################################
+
 # Which local IP address should OpenVPN
 # listen on? (optional)
-local    = "0.0.0.0"
+# Binds to all interfaces by default
+# local    = "0.0.0.0"
+
+# Specify which auth method to use, set to false to exclude this option.
+# auth = false
+auth = "SHA256"
 
 # Which TCP/UDP port should OpenVPN listen on? If you want to run
 # multiple OpenVPN instances on the same machine, use a different port
@@ -19,6 +25,13 @@ proto = "udp"
 # "dev tap" will create an ethernet tunnel.
 dev = "tun"
 
+# Network topology
+# Should be subnet (addressing via IP)
+# unless Windows clients v2.0.9 and lower have to
+# be supported (then net30, i.e. a /30 per client)
+# Defaults to net30 (not recommended)
+topology = "subnet"
+
 # Non-Windows systems usually don't need this.
 dev-node = false
 
@@ -26,25 +39,34 @@ dev-node = false
 # (key). Each client and the server must have their own cert and key
 # file. The server and all clients will use the same ca file.
 #
-# See the "easy-rsa" directory for a series of scripts for generating
-# RSA certificates and private keys. Remember to use a unique Common
-# Name for the server and each of the client certificates.
-#
 # Any X509 key management system can be used.
 # OpenVPN can also use a PKCS #12 formatted key file
 # (see "pkcs12" directive in man page).
 
-ca = "/hab/svc/openvpn/files/ca.crt"
-cert = "/hab/svc/openvpn/files/server.crt"
-key = "/hab/svc/openvpn/files/server.key"
+# To specify the SSL Certificate files:
+# ca-file = "/hab/svc/openvpn/files/ca.crt"
+# cert-file = "/hab/svc/openvpn/files/server.crt"
+# key-file = "/hab/svc/openvpn/files/server.key"
+
+# To intject the SSL Certificates directly into the config
+# ca = """
+# ---- BEGIN CERT ----
+# CERT HERE
+# ---- END CERT ----
+# """
+# cert = """
+# """
+# key = """
+# """"
 
 # Diffie hellman parameters.
 # Generate your own with:
 #
-#   openssl dhparam -out dh1024.pem 1024
+#   openssl dhparam -out dh.pem 2048
 #
-# Substitute 2048 for 1024 if you are using 2048 bit keys.
-dh = "/hab/svc/openvpn/files/dh1024.pem"
+# dh-file = "/hab/svc/openvpn/files/dh.pem"
+# dh = """
+# """
 
 # Configure server mode and supply a VPN subnet for OpenVPN to draw
 # client addresses from. The server will take 10.8.0.1 for itself, the
@@ -53,11 +75,24 @@ dh = "/hab/svc/openvpn/files/dh1024.pem"
 # ethernet bridging. See the man page for more info.
 server = "10.8.0.0 255.255.255.0"
 
+# To assign specific IP addresses to specific
+# clients or if a connecting client has a private
+# subnet behind it that should also have VPN access,
+# use the subdirectory "ccd" for client-specific
+# configuration files (see man page for more info).
+#
+# To create route statements they can be added as an array
+# route = ["192.168.0.0 255.255.255.0"]
+
 # Maintain a record of client virtual IP address associations in this
 # file. If OpenVPN goes down or is restarted, reconnecting clients can
 # be assigned the same virtual IP address from the pool that was
 # previously assigned.
-ifconfig-pool-persist = "ipp.txt"
+#
+# defaults to openvpn data directory
+# ifconfig-pool-persist-file = "/hab/svc/openvpn/data/ipp.txt"
+
+ifconfig-pool-persist = "true"
 
 # Configure server mode for ethernet bridging. You must first use your
 # OS's bridging capability to bridge the TAP interface with the
@@ -79,7 +114,10 @@ server-bridge = false
 # Push is an array because there's a variety of options that can be
 # specified in the OpenVPN server config. See the OpenVPN
 # documentation for more options.
-push = ["route 192.168.10.0 255.255.255.0"]
+# push = ["route 192.168.10.0 255.255.255.0"]
+
+# Override the default client-config-dir setting
+# client-config-dir = /hab/svc/openvpn/data/ccd
 
 # Suppose that you want to enable different firewall access policies
 # for different groups of clients. There are two methods:
@@ -131,10 +169,14 @@ keepalive = "10 120"
 #
 # The server and each client must have
 # a copy of this key.
-# The second parameter should be '0'
-# on the server and '1' on the clients.
+#
 # for example:
-#tls-auth = "/hab/svc/openvpn/files/ta.key 0"
+# tls-auth = true
+# tls-auth-file = "/hab/svc/openvpn/files/ta.key"
+# or
+# tls-auth-cert = """
+# """
+
 tls-auth = false
 
 # Select a cryptographic cipher.
@@ -144,10 +186,15 @@ tls-auth = false
 #     AES-128-CBC, DES-EDE3-CBC
 cipher = "BF-CBC"
 
-# Enable compression on the VPN link.
+# Enable compression on the VPN link and push the
+# option to the client (v2.4+ only, for earlier
+# versions see below)
+compress = "lz4-v2"
+
+# For compression compatible with older clients use comp-lzo
 # If you enable it here, you must also
 # enable it in the client config file.
-comp-lzo = true
+comp-lzo = false
 
 # The maximum number of concurrently connected
 # clients we want to allow.
@@ -165,7 +212,14 @@ group = "hab"
 persist-key = true
 persist-tun = true
 
-status = "/hab/svc/openvpn/var/log/openvpn-status.log"
+# Output a short status file showing
+# current connections, truncated
+# and rewritten every minute.
+#
+# Uncomment to override the default:
+# status-file = "/hab/svc/openvpn/data/openvpn-status.log"
+
+status = true
 
 # By default, log messages will go to the syslog (or
 # on Windows, if running as a service, they will go to
@@ -174,8 +228,10 @@ status = "/hab/svc/openvpn/var/log/openvpn-status.log"
 # "log" will truncate the log file on OpenVPN startup,
 # while "log-append" will append to it.  Use one
 # or the other (but not both).
-log = false
-log-append = "/hab/svc/openvpn/var/log/openvpn.log"
+# log-file = "/hab/svc/openvpn/var/log/openvpn.log"
+# log-append-file = "/hab/svc/openvpn/var/log/openvpn.log"
+
+log-to-syslog = true
 
 # Set the appropriate level of log
 # file verbosity.
@@ -190,3 +246,7 @@ verb = 3
 # sequential messages of the same message
 # category will be output to the log.
 mute = 20
+
+# Notify the client that when the server restarts so it
+# can automatically reconnect.
+explicit-exit-notify = true
