@@ -1,10 +1,10 @@
 pkg_name=caddy
 pkg_origin=core
-pkg_version="0.11.3"
+pkg_version="0.11.5"
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=("Apache-2.0")
 pkg_source="https://github.com/mholt/caddy/releases/download/v${pkg_version}/caddy_v${pkg_version}_linux_amd64.tar.gz"
-pkg_shasum=1cf27fe26262b94c303bfc72c216aa08662cce3593644520f6b65e8cdf268918
+pkg_shasum=d0ca02afdfd895b8e41051518e3f527185ac64ae6c55ca4e8de677b3d92b678b
 pkg_description="Fast, cross-platform HTTP/2 web server with automatic HTTPS"
 pkg_upstream_url="https://caddyserver.com"
 pkg_svc_run="caddy -conf ${pkg_svc_config_path}/Caddyfile"
