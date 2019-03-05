@@ -10,6 +10,10 @@ pkg_shasum=a67ca9fcf9c4ff59bce7f428a323c8b5e18667fdea7b0ebad47d194371b0a105
 pkg_deps=(
   core/gcc-libs
   core/glibc
+  core/sed
+  core/grep
+  core/binutils
+  core/coreutils
 )
 pkg_build_deps=(
   core/diffutils
