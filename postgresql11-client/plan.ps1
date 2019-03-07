@@ -1,12 +1,12 @@
 $pkg_name="postgresql11-client"
 $pkg_origin="core"
-$pkg_version="11.1"
+$pkg_version="11.2"
 $pkg_license=('PostgreSQL')
 $pkg_upstream_url="https://www.postgresql.org/"
 $pkg_description="PostgreSQL is a powerful, open source object-relational database system."
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_source="https://get.enterprisedb.com/postgresql/postgresql-${pkg_version}-1-windows-x64-binaries.zip"
-$pkg_shasum="e158f4e7b714bde8fa5b37370f8646b31ea9ab87595320d900bea07add4a7887"
+$pkg_shasum="12c361d7a43542e1556f593fe9971463199b73286f5dac6c6bdc83ded45a1ed8"
 
 $pkg_deps=@(
     "core/visual-cpp-redist-2013"
