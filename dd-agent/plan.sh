@@ -1,6 +1,6 @@
 pkg_name=dd-agent
 pkg_origin=core
-pkg_version="5.30.0"
+pkg_version="5.32.1"
 pkg_supervisor_version="3.3.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="The Datadog Agent"
@@ -17,7 +17,11 @@ pkg_build_deps=(
   core/sed
   core/tar
 )
-pkg_deps=(core/python2 core/sysstat core/busybox-static)
+pkg_deps=(
+  core/python2
+  core/sysstat
+  core/busybox-static
+)
 pkg_dirname="datadog-agent"
 pkg_bin_dirs=(
   dd-agent/bin
@@ -36,14 +40,14 @@ do_begin() {
 }
 
 do_build() {
-  mkdir -p "$DD_HOME"
-  env PATH="$(pkg_path_for core/tar)/bin:$PATH" sh -c "$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/setup_agent.sh)"
-  fix_interpreter "$DD_HOME/bin/agent" core/busybox-static bin/env
-  rm -fr "$DD_HOME/logs"
-  ln -s "$pkg_svc_var_path" "$DD_HOME/logs"
-  mkdir -p "$pkg_prefix/config"
-  mv "$DD_HOME/agent/datadog.conf" "$pkg_prefix/config"
-  ln -s "$pkg_svc_config_path/datadog.conf" "$DD_HOME/agent/datadog.conf"
+  mkdir -p "${DD_HOME}"
+  env PATH="$(pkg_path_for core/tar)/bin:${PATH}" sh -c "$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/setup_agent.sh)"
+  fix_interpreter "${DD_HOME}/bin/agent" core/busybox-static bin/env
+  rm -fr "${DD_HOME}/logs"
+  ln -s "${pkg_svc_var_path}" "${DD_HOME}/logs"
+  mkdir -p "${pkg_prefix}/config"
+  mv "${DD_HOME}/agent/datadog.conf" "${pkg_prefix}/config"
+  ln -s "${pkg_svc_config_path}/datadog.conf" "${DD_HOME}/agent/datadog.conf"
 }
 
 do_install() {
