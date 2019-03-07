@@ -1,10 +1,10 @@
 pkg_name=dgraph
 pkg_origin=core
-pkg_version="1.0.11"
+pkg_version="1.0.12"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://github.com/${pkg_name}-io/${pkg_name}/releases/download/v${pkg_version}/${pkg_name}-linux-amd64.tar.gz"
-pkg_shasum="5904e40d63cddc03ea4f76fed38d0e37d0454a3e5cac40d7d5ca82ce0d18902e"
+pkg_shasum="e76412204e45c447084f97d439c2f619955bd2a6643cdb7e9185a020884a1cd8"
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/patchelf)
 pkg_bin_dirs=(bin)
