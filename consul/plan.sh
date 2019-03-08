@@ -1,12 +1,12 @@
 pkg_origin=core
 pkg_name=consul
-pkg_version=1.4.2
+pkg_version=1.4.3
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=("MPL-2.0")
 pkg_description="Consul is a tool for service discovery, monitoring and configuration."
 pkg_upstream_url=https://www.consul.io/
 pkg_source="https://releases.hashicorp.com/${pkg_name}/${pkg_version}/${pkg_name}_${pkg_version}_linux_amd64.zip"
-pkg_shasum=ecdddbc87e7f882c3f9d94e8449865fde553e6f443234a1787414fdacef7af55
+pkg_shasum=8806fdaace8cfca3a0d49a2ef1ea03e5d2b63ff1f3fbe9909dc190637195df5c
 pkg_filename="${pkg_name}-${pkg_version}_linux_amd64.zip"
 pkg_deps=()
 pkg_build_deps=(core/unzip)
@@ -18,10 +18,13 @@ pkg_exports=(
   [port-serf_wan]=ports.serf_wan
   [port-server]=ports.server
 )
-pkg_exposes=(port-dns port-http port-serf_lan port-serf_wan port-server)
-
-pkg_svc_user="hab"
-pkg_svc_group="${pkg_svc_user}"
+pkg_exposes=(
+  port-dns
+  port-http
+  port-serf_lan
+  port-serf_wan
+  port-server
+)
 
 do_unpack() {
   cd "${HAB_CACHE_SRC_PATH}" || exit
