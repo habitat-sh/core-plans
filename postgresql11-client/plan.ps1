@@ -21,12 +21,10 @@ $server_execs=@(
     "initdb.exe"
     "pg_archivecleanup.exe"
     "pg_controldata.exe"
-    "pg_resetxlog.exe"
     "pg_rewind.exe"
     "pg_test_fsync.exe"
     "pg_test_timing.exe"
     "pg_upgrade.exe"
-    "pg_xlogdump.exe"
 )
 
 $server_includes=@(
