@@ -1,25 +1,25 @@
 pkg_name=bind
 pkg_origin=core
-pkg_version=9.13.5
+pkg_version=9.13.7
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Versatile, Classic, Complete Name Server Software"
 pkg_upstream_url="https://www.isc.org/downloads/bind/"
 pkg_license=("MPL-2.0")
 pkg_source="https://ftp.isc.org/isc/bind9/${pkg_version}/bind-${pkg_version}.tar.gz"
-pkg_shasum="bbde0b81c66a7c7f5b074c8f0e714ed8aa235e4b930e28953cab0ae3cae94e4b"
+pkg_shasum="e7f2065c790419d642dc0a32c5652a53b68a7f17c188fe25a20c5984ddfb74e6"
 pkg_build_deps=(
   core/diffutils
   core/file
   core/gcc
-  core/libcap
   core/make
   core/perl
-  core/python2
 )
 pkg_deps=(
   core/glibc
+  core/libcap
   core/libxml2
   core/openssl
+  core/python2
   core/zlib
 )
 pkg_bin_dirs=(
@@ -37,6 +37,7 @@ do_prepare() {
   fi
 
   pip install ply
+  pip install ply -t "$pkg_prefix/bin"
 }
 
 do_build() {
