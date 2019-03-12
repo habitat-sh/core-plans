@@ -8,12 +8,12 @@ pkg_upstream_url="https://ant.apache.org/"
 pkg_source=https://github.com/apache/ant/archive/rel/$pkg_version.tar.gz
 pkg_shasum=372174125cf845d7ce73606187f7a8d35df8237f75af0fdbe846339853807bda
 pkg_build_deps=(
-  core/jdk8
   core/python2
 )
 pkg_deps=(
   core/coreutils
   core/jdk8
+  core/sed
   )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
