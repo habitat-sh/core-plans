@@ -1170,8 +1170,6 @@ plan_path = "readline6"
 paths = [
   "readline/*",
 ]
-[rebar]
-plan_path = "rebar"
 [rebar3]
 plan_path = "rebar3"
 [recordproto]
