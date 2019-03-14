@@ -155,6 +155,7 @@ jdk7 @predominant @rsertelon
 jdk8 @predominant @rsertelon
 jdk9 @predominant @rsertelon
 jenkins @predominant
+journalbeat @thomascate
 jre7 @predominant @rsertelon
 jre8 @predominant @rsertelon
 jre9 @predominant @rsertelon
