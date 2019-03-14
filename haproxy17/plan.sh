@@ -1,4 +1,4 @@
-source ../haproxy/plan.sh
+source "$(dirname "${BASH_SOURCE[0]}")/../haproxy/plan.sh"
 
 pkg_name=haproxy17
 pkg_origin=core
@@ -11,3 +11,11 @@ pkg_source=https://www.haproxy.org/download/1.7/src/${pkg_distname}-${pkg_versio
 pkg_shasum=d564b8e9429d1e8e13cb648bf4694926b472e36da1079df946bb732927b232ea
 pkg_dirname="${pkg_distname}-${pkg_version}"
 pkg_upstream_url="https://www.haproxy.org/"
+pkg_build_deps=(
+  core/coreutils
+  core/gcc
+  core/pcre
+  core/make
+  core/openssl
+  core/zlib
+)
