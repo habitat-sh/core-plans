@@ -1,12 +1,12 @@
 pkg_name=haproxy
 pkg_origin=core
 pkg_description="The Reliable, High Performance TCP/HTTP Load Balancer"
-pkg_version=1.8.14
+pkg_version=1.9.4
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=('GPL-2.0' 'LGPL-2.1')
-pkg_source=https://www.haproxy.org/download/1.8/src/haproxy-${pkg_version}.tar.gz
+pkg_source="https://www.haproxy.org/download/1.9/src/haproxy-${pkg_version}.tar.gz"
 pkg_upstream_url="https://www.haproxy.org/"
-pkg_shasum=b17e402578be85e58af7a3eac99b1f675953bea9f67af2e964cf8bdbd1bd3fdf
+pkg_shasum=8483fe12b30256f83d542b3f699e165d8f71bf2dfac8b16bb53716abce4ba74f
 pkg_svc_run='haproxy -f config/haproxy.conf -db'
 pkg_svc_user=root
 pkg_svc_group=root
@@ -26,6 +26,7 @@ pkg_build_deps=(
   core/make
   core/openssl
   core/zlib
+  core/diffutils
 )
 pkg_bin_dirs=(bin)
 
@@ -36,11 +37,11 @@ do_build() {
        USE_OPENSSL=1 \
        USE_ZLIB=1 \
        USE_GETADDRINFO=1 \
-       ADDINC="$CFLAGS" \
-       ADDLIB="$LDFLAGS"
+       ADDINC="${CFLAGS}" \
+       ADDLIB="${LDFLAGS}"
 }
 
 do_install() {
-  mkdir -p "$pkg_prefix"/bin
-  cp haproxy "$pkg_prefix"/bin
+  mkdir -p "${pkg_prefix}"/bin
+  cp haproxy "${pkg_prefix}"/bin
 }

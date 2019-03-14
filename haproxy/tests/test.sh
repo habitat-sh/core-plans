@@ -25,7 +25,7 @@ port = 81' | hab config apply nginx.default "$(date +%s)"
   set +e
 fi
 
-echo "Waiting 5 seconds hoping haproxy will start..."
+echo "Waiting 5 seconds for haproxy to start..."
 sleep 5
 
 bats "${TESTDIR}/test.bats"
