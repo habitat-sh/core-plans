@@ -1,10 +1,10 @@
 pkg_name=libuv
 pkg_origin=core
-pkg_version="1.24.0"
+pkg_version="1.27.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_source="https://github.com/libuv/libuv/archive/v${pkg_version}.tar.gz"
-pkg_shasum="55587c525196a7a550fa7e5eb61794c377ec23b44adb435fdded86e8f7f31a16"
+pkg_shasum="4afcdc84cd315b77c8e532e7b3fde43d536af0e2e835eafbd0e75518ed26dbed"
 pkg_deps=(core/glibc)
 pkg_build_deps=(
   core/autoconf
