@@ -4,3 +4,8 @@ project:
 
 github:
   delete_branch_on_merge: true
+
+pipelines:
+  - verify:
+      public: true
+      definition: .expeditor/scripts/generate_verify_pipeline.sh

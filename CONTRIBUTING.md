@@ -148,6 +148,12 @@ All plans should have a README. In core plans, it is a hard requirement. Your RE
   - Can a user simply call the package as a dependency of their application?
   - How does the package integrate into their developer workflow?
 
+## Running CI locally
+
+Each script in `bin/ci` will be run in CI when you make a Pull Request.  The scripts are designed to be
+runnable outside of CI as well, so you can invoke `bin/ci/script-to-run plan_name` from the root of the project.
+This allows you to verify that your changes will pass CI before submitting a Pull Request.  
+
 ## Linting Your Plans
 
 It is good it use a tool to lint your plans to ensure you are not making any
