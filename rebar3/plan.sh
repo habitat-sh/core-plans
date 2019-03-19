@@ -1,4 +1,3 @@
-pkg_deprecated=true
 pkg_origin=core
 pkg_name=rebar3
 pkg_version=3.9.0
