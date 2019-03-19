@@ -1,3 +1,4 @@
+pkg_deprecated=true
 pkg_origin=core
 pkg_name=rebar
 pkg_version=2.6.4
