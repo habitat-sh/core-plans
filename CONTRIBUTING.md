@@ -257,3 +257,13 @@ You may optionally add yourself as a CODEOWNER of a plan. Adding yourself as an 
 ## Add yourself to core plans maintainers
 
 You can add yourself to [core plans maintainers](MAINTAINERS.md) to take a greater role and responsibility in the care, feeding, and maintenance of all core plans.
+
+## Base Plans
+
+Some core plans are deeply integrated with how Habitat bootstraps itself. These plans are known as base plans. These plans require more work to ensure they build safely and correctly. Currently, any changes to base plans require a core plans base refresh, where the entire set of base plans is rebuilt, exluding the list of plans below:
+
+```
+openssl
+```
+
+We maintain a list of all of the base plans here: https://github.com/habitat-sh/core-plans/blob/master/base-plans.txt
