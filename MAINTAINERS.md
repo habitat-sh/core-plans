@@ -36,6 +36,7 @@ To become a maintainer, open a pull request to this list.
 * [David Echols](https://github.com/echohack)
 * [Ben Dang](https://github.com/bdangit)
 * [James Stocks](https://github.com/james-stocks)
+* [Gavin Didrichsen](https://github.com/gavindidrichsen)
 
 ## Alumni
 
