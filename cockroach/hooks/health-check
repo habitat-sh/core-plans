@@ -1,0 +1,8 @@
+#!/bin/bash -e
+
+# basic liveness check
+wget -q -O - "http://{{sys.ip}}:{{cfg.http-port}}/health?ready=1"
+
+# TODO: https://www.cockroachlabs.com/docs/stable/monitoring-and-alerting.html#events-to-alert-on
+#  ex: sys_uptime < 30
+# wget -q -O - "http://{{sys.ip}}:{{cfg.http-port}}/_status/vars"

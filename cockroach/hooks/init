@@ -1,0 +1,19 @@
+#!/bin/bash -e
+
+for dir in log tmp certs/private; do
+  mkdir -p "{{pkg.svc_var_path}}/${dir}"
+done
+
+for cert in ca.crt client.root.crt client.root.key; do
+  cp "{{pkg.svc_config_path}}/${cert}" "{{pkg.svc_var_path}}/certs/${cert}"
+  chmod 0600 "{{pkg.svc_var_path}}/certs/${cert}"
+done
+cp "{{pkg.svc_config_path}}/ca.key" "{{pkg.svc_var_path}}/certs/private/ca.key"
+chmod 0600 "{{pkg.svc_var_path}}/certs/private/ca.key"
+
+cockroachoss cert create-node \
+  "{{sys.ip}}" \
+  "{{sys.hostname}}" \
+  "localhost" \
+  --certs-dir="{{pkg.svc_var_path}}/certs" \
+  --ca-key="{{pkg.svc_var_path}}/certs/private/ca.key"
