@@ -14,6 +14,8 @@ Binary package
 
 ## Testing
 
+`test/inspec` contains an InSpec profile that tests the last built executable.  
+These tests require the last built package to be `hab pkg` installed and will intentionally fail if another build of sed is installed.  
 To test the last built package:
 
  1. `hab studio enter`
