@@ -11,7 +11,7 @@ done
 cp "{{pkg.svc_config_path}}/ca.key" "{{pkg.svc_var_path}}/certs/private/ca.key"
 chmod 0600 "{{pkg.svc_var_path}}/certs/private/ca.key"
 
-cockroach cert create-node \
+cockroachoss cert create-node \
   "{{sys.ip}}" \
   "{{sys.hostname}}" \
   "localhost" \

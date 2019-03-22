@@ -56,8 +56,7 @@ do_build() {
 
 do_install() {
   pushd "./src/github.com/cockroachdb/cockroach" > /dev/null
-  cp -v bin/* "${pkg_prefix}/bin/"
-  cp -v cockroachoss "${pkg_prefix}/bin/cockroach"
+  cp -v cockroachoss bin/* "${pkg_prefix}/bin/"
   popd > /dev/null
 }
 
