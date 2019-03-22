@@ -18,6 +18,6 @@ To test the last built package:
 
  1. `hab studio enter`
  2. `source results/last_build.env`
- 3. `hab pkg install -b "results/$pkg_artifact"`
- 4. `hab pkg install -b chef/inspec`
- 5. `inspec exec test/inspec`
+ 3. `hab pkg install "results/$pkg_artifact"`
+ 4. `hab pkg install chef/inspec`
+ 5. `hab pkg exec chef/inspec inspec exec test/inspec`
