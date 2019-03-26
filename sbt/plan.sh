@@ -1,12 +1,12 @@
 pkg_origin=core
 pkg_name=sbt
-pkg_version=1.2.7
+pkg_version=1.2.8
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="A build tool for Scala, Java, and more"
 pkg_upstream_url="https://www.scala-sbt.org"
 pkg_license=("BSD-3-Clause")
 pkg_source="https://github.com/sbt/sbt/releases/download/v${pkg_version}/sbt-${pkg_version}.tgz"
-pkg_shasum=2625cbd8db75ec9b4a57e9a0af55a5ee8ad7700e1eba7d97ad78d9296450e781
+pkg_shasum=9bb9212541176d6fcce7bd12e4cf8a9c9649f5b63f88b3aff474e0b02c7cfe58
 pkg_deps=(
   core/coreutils
   core/jre8
