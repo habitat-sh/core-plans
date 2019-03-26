@@ -21,6 +21,7 @@ pkg_build_deps=(
   core/diffutils
   core/ghc
   core/make
+  core/sed
 )
 
 do_clean() {
