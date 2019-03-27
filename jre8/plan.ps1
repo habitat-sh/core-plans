@@ -1,12 +1,12 @@
 $pkg_name="jre8"
 $pkg_origin="core"
-$pkg_version="8.172.0"
+$pkg_version="8.202.0"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_license=@("Apache-2.0")
-$pkg_upstream_version="8u172"
-$pkg_source="http://download.oracle.com/otn-pub/java/jdk/$pkg_upstream_version-b11/a58eab1ec242421181065cdc37240b08/jre-$pkg_upstream_version-windows-x64.exe"
+$pkg_upstream_version="8u202"
+$pkg_source="https://download.oracle.com/otn-pub/java/jdk/$pkg_upstream_version-b08/1961070e4c9b4e26a04e7f5a083f551e/jre-$pkg_upstream_version-windows-x64.exe"
 $pkg_filename="$pkg_name-$pkg_version.exe"
-$pkg_shasum="580bd9a6da5640661c4dc6ebdb3eac451dbc49f23635728116d90a4d164d3a0f"
+$pkg_shasum="039d5b91e9a52335d7d127ba187640b6fba8195a65e73c135be9c000ea91d4bb"
 $pkg_build_deps=@("core/7zip")
 $pkg_bin_dirs=@("java/bin")
 
