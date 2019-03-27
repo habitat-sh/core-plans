@@ -525,6 +525,8 @@ plan_path = "intltool"
 plan_path = "iproute2"
 [iptables]
 plan_path = "iptables"
+[ipvsadm]
+plan_path = "ipvsadm"
 [jbigkit]
 plan_path = "jbigkit"
 [jdk7]
