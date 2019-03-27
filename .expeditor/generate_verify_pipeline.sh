@@ -14,7 +14,7 @@ set -euo pipefail
 # Group them by plan and use that as the unit of work in
 # downstream steps.
 plans_changed() {
-  git diff --name-only "${BUILDKITE_BRANCH}" "$(git merge-base "${BUILDKITE_BRANCH}" master)" \
+  git diff --name-only ${TEST_BRANCH:-HEAD} "$(git merge-base ${TEST_BRANCH:-HEAD} origin/master)" \
   | cut -f1 -d/ \
   | sort \
   | uniq
