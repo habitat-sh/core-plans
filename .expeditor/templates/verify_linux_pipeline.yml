@@ -28,7 +28,7 @@
 
   - label: "[@@plan@@] :linux: :habicat: Build with DO_CHECK=true"
     command:
-      - bin/ci/pr_verify_build.sh @@plan@@ 
+      - bin/ci/verify-pr-build.sh @@plan@@
     expeditor:
       executor:
         docker:
