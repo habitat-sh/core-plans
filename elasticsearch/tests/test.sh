@@ -4,6 +4,8 @@ TESTDIR="$(dirname "${0}")"
 PLANDIR="$(dirname "${TESTDIR}")"
 SKIPBUILD=${SKIPBUILD:-0}
 
+source "${TESTDIR}/helpers.bash"
+
 hab pkg install --binlink core/bats
 hab pkg install --binlink core/which
 hab pkg install --binlink core/jre8
@@ -12,6 +14,7 @@ hab pkg install --binlink core/jq-static
 
 hab pkg install core/busybox-static
 hab pkg binlink core/busybox-static ps
+hab pkg binlink core/busybox-static nc
 hab pkg binlink core/busybox-static netstat
 
 source "${PLANDIR}/plan.sh"
@@ -27,7 +30,8 @@ if [ "${SKIPBUILD}" -eq 0 ]; then
   set +e
 
   # Give some time for the service to start up
-  sleep 10
+  echo "Waiting for Elasticsearch to start"
+  wait_listen tcp 9200 30
 fi
 
 bats "${TESTDIR}/test.bats"
