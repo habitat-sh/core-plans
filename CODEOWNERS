@@ -122,6 +122,7 @@ concourse @echohack
 concourse-fly @echohack
 consul @defilan
 corretto @johnjelinek
+corretto8 @johnjelinek
 corretto11 @johnjelinek
 cuda @bdangit
 cuda-libs @bdangit
