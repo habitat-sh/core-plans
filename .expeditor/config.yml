@@ -8,4 +8,4 @@ github:
 pipelines:
   - verify:
       public: true
-      definition: .expeditor/scripts/generate_verify_pipeline.sh
+      definition: .expeditor/generate_verify_pipeline.sh

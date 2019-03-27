@@ -57,7 +57,7 @@ if [[ "${#plans[@]}" -gt 10 ]]; then
   exit 1
 fi
 
-cat .expeditor/verify.pipeline.yml
+cat .expeditor/templates/verify.pipeline.yml
 
 # shellcheck disable=SC2068
 for plan in ${plans[@]}; do

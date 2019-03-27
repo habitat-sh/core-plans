@@ -1,7 +1,7 @@
   - label: "[lint] :windows: "
     command:
       - ./test/not-yet-implemented.ps1
-    expecitor:
+    expeditor:
       executor:
         docker:
           host_os: windows
