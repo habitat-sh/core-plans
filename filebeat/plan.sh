@@ -1,10 +1,15 @@
 pkg_name=filebeat
 pkg_origin=core
-pkg_version="6.5.3"
+pkg_version=6.7.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_deps=(core/glibc)
-pkg_build_deps=(core/go core/git core/make core/gcc)
+pkg_build_deps=(
+  core/go
+  core/git
+  core/make
+  core/gcc
+)
 pkg_bin_dirs=(bin)
 pkg_binds_optional=(
   [kibana]="port"
