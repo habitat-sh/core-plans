@@ -1,12 +1,12 @@
 pkg_origin=core
 pkg_name=clojure
-pkg_version=1.9.0.273
+pkg_version=1.10.0.442
 pkg_description="The Clojure programming language"
 pkg_upstream_url=https://clojure.org/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("EPL-1.0")
 pkg_source=https://download.${pkg_name}.org/install/${pkg_name}-tools-${pkg_version}.tar.gz
-pkg_shasum=64d1c714d758feee5fc76f3c044c229965d068f140868af0930280bcfbc0b976
+pkg_shasum=9c3298d9c25de1d21c1f8aae866ff28e73d3478bdaaa8df00386ef3b5a9cf790
 pkg_deps=(
   core/bash
   core/coreutils
