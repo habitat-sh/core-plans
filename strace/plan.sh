@@ -1,7 +1,7 @@
 pkg_name=strace
 pkg_origin=core
 pkg_version=5.0
-pkg_license=("BSD-3-Clause-LBNL")
+pkg_license=("LGPL-2.1-or-later")
 pkg_description="strace is a system call tracer for Linux"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url="https://strace.io/"
