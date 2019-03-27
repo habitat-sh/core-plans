@@ -543,6 +543,8 @@ plan_path = "jffi"
 plan_path = "jfrog-cli"
 [jo]
 plan_path = "jo"
+[journalbeat]
+plan_path = "journalbeat"
 [jq-static]
 plan_path = "jq-static"
 [jre7]
