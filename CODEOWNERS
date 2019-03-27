@@ -118,6 +118,7 @@ benchmark @bdangit
 cabal-install @wduncanfraser
 cairo @rsertelon
 cerebro @predominant
+clojure @johnjelinek
 concourse @echohack
 concourse-fly @echohack
 consul @defilan
