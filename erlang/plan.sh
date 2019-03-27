@@ -1,14 +1,14 @@
 pkg_name=erlang
 pkg_origin=core
-pkg_version=20.2
+pkg_version=21.3
 pkg_description="A programming language for massively scalable soft real-time systems."
 pkg_upstream_url="http://www.erlang.org/"
-pkg_dirname=otp_src_${pkg_version}
+pkg_dirname="otp_src_${pkg_version}"
 pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source=http://www.erlang.org/download/otp_src_${pkg_version}.tar.gz
-pkg_filename=otp_src_${pkg_version}.tar.gz
-pkg_shasum=24d9895e84b800bf0145d6b3042c2f2087eb31780a4a45565206844b41eb8f23
+pkg_source="http://www.erlang.org/download/otp_src_${pkg_version}.tar.gz"
+pkg_filename="otp_src_${pkg_version}.tar.gz"
+pkg_shasum=69a743c4f23b2243e06170b1937558122142e47c8ebe652be143199bfafad6e4
 pkg_build_deps=(
   core/coreutils
   core/gcc
@@ -44,16 +44,17 @@ do_prepare() {
 do_build() {
   sed -i 's/std_ssl_locations=.*/std_ssl_locations=""/' erts/configure.in
   sed -i 's/std_ssl_locations=.*/std_ssl_locations=""/' erts/configure
-  ./configure --prefix="${pkg_prefix}" \
-              --enable-threads \
-              --enable-smp-support \
-              --enable-kernel-poll \
-              --enable-dynamic-ssl-lib \
-              --enable-shared-zlib \
-              --enable-hipe \
-              --with-ssl="$(pkg_path_for openssl)" \
-              --with-ssl-include="$(pkg_path_for openssl)/include" \
-              --without-javac
+  CFLAGS="${CFLAGS} -O2" ./configure \
+    --prefix="${pkg_prefix}" \
+    --enable-threads \
+    --enable-smp-support \
+    --enable-kernel-poll \
+    --enable-dynamic-ssl-lib \
+    --enable-shared-zlib \
+    --enable-hipe \
+    --with-ssl="$(pkg_path_for openssl)" \
+    --with-ssl-include="$(pkg_path_for openssl)/include" \
+    --without-javac
   make
 }
 
