@@ -1,0 +1,11 @@
+  - label: "[lint] :windows: "
+    command:
+      - ./test/not-yet-implemented.ps1
+    expeditor:
+      executor:
+        docker:
+          host_os: windows
+    timeout_in_minutes: 10
+    retry:
+      automatic:
+        limit: 1
