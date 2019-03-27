@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -euo pipefail
+
+cd {{pkg.svc_path}}
+
+curl_opts=""
+
+if [[ "{{cfg.etcd-auto-tls}}" == "true" ]]; then
+	curl_opts="${curl_opts} --insecure"
+elif [[ "{{cfg.etcd-client-cert-auth}}" == "true" ]]; then
+	curl_opts="${curl_opts} --cacert {{cfg.etcd-trusted-ca-file}} --cert {{cfg.etcd-cert-file}} --key {{cfg.etcd-key-file}}"
+fi
+
+if curl -sS ${curl_opts} "{{cfg.etcd-http-proto}}://{{sys.ip}}:{{cfg.etcd-client-end}}/health" | grep -q "true"; then
+  echo "etcd node healthy"
+  exit 0
+fi
+
+echo "etcd node unhealthy"
+exit 2
