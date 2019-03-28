@@ -16,6 +16,10 @@ pkg_deps=(
 pkg_build_deps=(core/ruby)
 pkg_bin_dirs=(bin)
 pkg_interpreters=(bin/env)
+pkg_exports=(
+  [nrepl-port]=nrepl-port
+)
+pkg_svc_user="root"
 
 do_build() {
   fix_interpreter "${HAB_CACHE_SRC_PATH}/${pkg_name}-tools/clj" core/coreutils bin/env

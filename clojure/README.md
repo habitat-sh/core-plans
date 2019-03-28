@@ -28,3 +28,16 @@ pkg_deps=(
   core/clojure
 )
 ```
+
+Start an nrepl:
+```
+hab svc load core/clojure
+hab svc start core/clojure
+```
+
+rebel-readline REPL from an exported docker container:
+```
+docker run -it --rm --entrypoint hab core/clojure pkg exec core/clojure \
+  clojure -Sdeps '{:deps {com.bhauman/rebel-readline {:mvn/version "0.1.4"}}}' \
+  -m rebel-readline.main
+```
