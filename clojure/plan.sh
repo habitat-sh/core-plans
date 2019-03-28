@@ -10,7 +10,7 @@ pkg_shasum=9c3298d9c25de1d21c1f8aae866ff28e73d3478bdaaa8df00386ef3b5a9cf790
 pkg_deps=(
   core/bash
   core/coreutils
-  core/jdk8
+  core/corretto
   core/rlwrap
 )
 pkg_build_deps=(core/ruby)
