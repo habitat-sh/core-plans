@@ -159,6 +159,10 @@ plan_path = "coreutils-static"
 paths = [
   "coreutils/*",
 ]
+[corretto]
+plan_path = "corretto"
+[corretto11]
+plan_path = "corretto11"
 [cpanminus]
 plan_path = "cpanminus"
 [cpio]
