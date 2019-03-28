@@ -26,6 +26,6 @@ source "${BATS_TEST_DIRNAME}/../plan.sh"
 }
 
 @test "Listening on port 80" {
-  result="$(netstat -peanut | grep httpd | awk '{print $4}' | awk -F':' '{print $2}')"
+  result="$(netstat -peanut | grep httpd | awk '{print $4}' | awk -F':' '{print $NF}')"
   [ "${result}" -eq 80 ]
 }
