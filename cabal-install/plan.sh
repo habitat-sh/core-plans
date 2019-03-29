@@ -11,6 +11,7 @@ pkg_shasum="69bcb2b54a064982412e1587c3c5c1b4fada3344b41b568aab25730034cb21ad"
 pkg_bin_dirs=(bin)
 
 pkg_deps=(
+  core/gcc-libs
   core/glibc
   core/gmp
   core/libffi
