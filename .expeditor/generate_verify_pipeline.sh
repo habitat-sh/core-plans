@@ -10,6 +10,9 @@
 
 set -euo pipefail
 
+# Ensure master is always up to date when generating our pipeline
+git fetch origin master --quiet
+
 # Determine the files changed between this PR and master.
 # Group them by plan and use that as the unit of work in
 # downstream steps.
