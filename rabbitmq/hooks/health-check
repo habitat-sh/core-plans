@@ -1,0 +1,4 @@
+#!/bin/sh
+
+. "{{pkg.svc_config_path}}/env"
+rabbitmqctl node_health_check

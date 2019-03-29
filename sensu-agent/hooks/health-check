@@ -1,0 +1,15 @@
+#!/bin/sh
+CHECK_ADDR="{{cfg.api-host}}:{{cfg.api-port}}/healthz"
+raw_data="$(curl -o /dev/null --silent --head --write-out '%{http_code}\n' ${CHECK_ADDR})"
+status="$(echo "${raw_data: : -1}" | awk '{print $3}')"
+
+case $status in
+    "true")
+  rc=0 ;;
+    "false")
+  rc=2 ;;
+    *)
+  rc=3 ;;
+esac
+
+exit $rc
