@@ -12,6 +12,7 @@ set -euo pipefail
 # Exclude the following shellcheck issues since they're pervasive and innocuous:
 # https://github.com/koalaman/shellcheck/wiki/SC1090
 # https://github.com/koalaman/shellcheck/wiki/SC1091
+# https://github.com/koalaman/shellcheck/wiki/SC1117
 # https://github.com/koalaman/shellcheck/wiki/SC2034
 # https://github.com/koalaman/shellcheck/wiki/SC2039
 # https://github.com/koalaman/shellcheck/wiki/SC2140
@@ -20,7 +21,7 @@ set -euo pipefail
 # https://github.com/koalaman/shellcheck/wiki/SC2154
 # https://github.com/koalaman/shellcheck/wiki/SC2164
 
-SHELLCHECK_IGNORE="SC1090,SC1091,SC2034,SC2039,SC2140,SC2148,SC2153,SC2154,SC2164"
+SHELLCHECK_IGNORE="SC1090,SC1091,SC1117,SC2034,SC2039,SC2140,SC2148,SC2153,SC2154,SC2164"
 
 plan_path="$1"
 
