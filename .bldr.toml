@@ -163,6 +163,9 @@ paths = [
 plan_path = "corretto"
 [corretto11]
 plan_path = "corretto11"
+paths = [
+  "corretto/*",
+]
 [cpanminus]
 plan_path = "cpanminus"
 [cpio]
