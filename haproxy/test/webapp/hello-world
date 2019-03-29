@@ -1,0 +1,18 @@
+#!/bin/bash
+echo "Content-type: text/html; charset=iso-8859-1"
+echo
+
+echo "<html>"
+echo "
+  <head>
+    <style>
+  </head>
+"
+echo "<body>"
+echo "<strong style='font-size: 24px;'>Testing Haproxy Load Balancer</strong>"
+echo "<div style='padding-top: 10px;'>"
+echo "The time is <strong>$(date '+%H:%M:%S')</strong>"
+echo "</div>"
+echo "</div>"
+echo "</body>"
+echo "</html>"
