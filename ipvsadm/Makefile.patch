@@ -1,0 +1,14 @@
+--- Makefile.original	2019-01-11 02:31:14.822002000 +0000
++++ Makefile	2019-01-11 02:33:14.604155000 +0000
+@@ -46,9 +46,9 @@
+ STATIC_LIBS	= libipvs/libipvs.a
+ 
+ ifeq "${ARCH}" "sparc64"
+-    CFLAGS = -Wall -Wunused -Wstrict-prototypes -g -m64 -pipe -mcpu=ultrasparc -mcmodel=medlow
++    override CFLAGS += -Wall -Wunused -Wstrict-prototypes -g -m64 -pipe -mcpu=ultrasparc -mcmodel=medlow $(LDFLAGS) -Wl,-R$(shell hab pkg path "core/popt")/lib -Wl,-R$(shell hab pkg path "core/libnl")/lib
+ else
+-    CFLAGS = -Wall -Wunused -Wstrict-prototypes -g
++    override CFLAGS += -Wall -Wunused -Wstrict-prototypes -g $(LDFLAGS) -Wl,-R$(shell hab pkg path "core/popt")/lib -Wl,-R$(shell hab pkg path "core/libnl")/lib
+ endif
+ 
+ 
