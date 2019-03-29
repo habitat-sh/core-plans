@@ -121,6 +121,8 @@ cerebro @predominant
 concourse @echohack
 concourse-fly @echohack
 consul @defilan
+corretto @johnjelinek
+corretto11 @johnjelinek
 cuda @bdangit
 cuda-libs @bdangit
 dep @afiune @nellshamrell
