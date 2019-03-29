@@ -161,6 +161,11 @@ paths = [
 ]
 [corretto]
 plan_path = "corretto"
+[corretto8]
+plan_path = "corretto8"
+paths = [
+  "corretto/*",
+]
 [corretto11]
 plan_path = "corretto11"
 paths = [
