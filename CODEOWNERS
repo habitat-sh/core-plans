@@ -134,8 +134,8 @@ dotnet-core-sdk-lts @mwrock
 dotnet-core-sdk-preview @mwrock
 dotnet-core-sdkdotnet-core @mwrock
 dsc-core @mwrock
-elasticsearch @joshbrand @predominant
-filebeat @predominant
+elasticsearch @joshbrand @predominant @echohack
+filebeat @predominant @echohack
 gdk-pixbuf @rsertelon
 glib @rsertelon
 ghc @wduncanfraser
@@ -158,7 +158,7 @@ jdk7 @predominant @rsertelon
 jdk8 @predominant @rsertelon
 jdk9 @predominant @rsertelon
 jenkins @predominant
-journalbeat @thomascate
+journalbeat @thomascate @echohack
 jre7 @predominant @rsertelon
 jre8 @predominant @rsertelon
 jre9 @predominant @rsertelon
@@ -167,6 +167,7 @@ logstash @joshbrand @predominant
 libimagequant @predominant
 libtalloc @defilan
 mage @predominant
+metricbeat @echohack
 monit @rsertelon
 mosquitto @rsertelon
 mssql @mwrock
