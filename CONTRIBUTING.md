@@ -164,7 +164,7 @@ Some default checks of ShellCheck can be turned off, since they aren't
 necessarily applicable in plans. The following options work well:
 
 ```
-shellcheck --shell=bash --exclude=SC1090,SC1091,SC2034,SC2039,SC2148,SC2153,SC2154,SC2140
+shellcheck --shell=bash --exclude=SC1090,SC1091,SC1117,SC2034,SC2039,SC2140,SC2148,SC2153,SC2154,SC2164
 ```
 
 If ShellCheck is installed, you can run this (and other checks) locally with:
