@@ -19,6 +19,9 @@ if [ "${SKIPBUILD}" -eq 0 ]; then
   hab svc load "${pkg_ident}"
   popd > /dev/null
   set +e
+
+  # Wait for service to start
+  sleep 10
 fi
 
 bats "${TESTDIR}/test.bats"
