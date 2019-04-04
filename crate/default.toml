@@ -33,7 +33,7 @@
 	high = "90%"
 
 [node]
-  name = ""
+  name = "crate-node"
   data = "true"
   client = "false"
   local = "false"
@@ -42,12 +42,12 @@
     read_only = "false"
 
 [network]
-  bind_host = ""
-  publish_host = ""
+  bind_host = "localhost"
+  publish_host = "localhost"
 
 [http]
   port = 4200
-  publish_port = ""
+  publish_port = 80
 
   [http.cors]
     enabled = "false"
@@ -58,7 +58,7 @@
     allow-credentials = "false"
 
 [transport]
-  publish_port = ""
+  publish_port = "4400"
 
   [transport.tcp]
     port = 4300
@@ -67,7 +67,7 @@
   port = 5432
 
 [path]
-  repo = ""
+  repo = "{{pkg.svc_data_path}}/repo"
 
 [plugins]
   mandatory = ""
@@ -93,7 +93,7 @@
     enabled = "false"
 
 [blobs]
-  path = ""
+  path = "{{pkg.svc_data_path}}/blobs"
 
 [repositories]
   [repositories.url]

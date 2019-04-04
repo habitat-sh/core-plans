@@ -5,3 +5,6 @@ exec 2>&1
 mkdir -p {{pkg.svc_var_path}}/data/blobs
 mkdir -p {{pkg.svc_var_path}}/work
 mkdir -p {{pkg.svc_var_path}}/logs
+mkdir -p {{pkg.svc_data_path}}/logs
+mkdir -p {{pkg.svc_data_path}}/repo
+mkdir -p {{pkg.svc_data_path}}/blobs

@@ -1,17 +1,18 @@
 pkg_name=crate
 pkg_origin=core
-pkg_version="3.2.5"
+pkg_version="3.2.6"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://cdn.crate.io/downloads/releases/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="b40b066f53155bc13a2289396a9225f7246ad09c2cb95a4c02dc2d093758e56b"
-asc_checksum="4795f66c0a77016ee96c5e62d4c720b3a5ef56752e7aff5a58410bd58b93c132"
+pkg_shasum="d29eeff596eec58ed41be9c65b0d99b3e28c20fcf97f3fbd6591b28a7352800b"
+asc_checksum="f6e286b4128e47f82de70c16738918edf523266aea0a5872ca4f201febfb1f39"
 pkg_build_deps=(core/gnupg)
 pkg_deps=(
   core/jre8
   core/curl
   core/bash
   core/coreutils
+  core/gawk
 )
 pkg_bin_dirs=(crate/bin)
 pkg_lib_dirs=(crate/lib)
@@ -24,6 +25,10 @@ pkg_exposes=(http transport postgres)
 pkg_upstream_url="https://crate.io"
 pkg_description="CrateDB is an open source SQL database with a ground-breaking distributed design."
 
+do_prepare() {
+  do_default_prepare
+  set_runtime_env CRATE_GC_LOG_DIR "$pkg_svc_data_path/logs"
+}
 do_download() {
   # Download the source file, as usual
   do_default_download
@@ -65,7 +70,7 @@ do_install() {
   install -vDm644 CHANGES.txt "${pkg_prefix}"/CHANGES.txt
 
   mkdir -p "${pkg_prefix}"/crate/logs
-  cp -a bin lib plugins "${pkg_prefix}"/crate
+  cp -a bin lib plugins config "${pkg_prefix}"/crate
   rm "${pkg_prefix}"/crate/bin/*.bat
 }
 
