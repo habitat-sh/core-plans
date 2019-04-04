@@ -21,7 +21,7 @@ fi
 
 hab svc load "${pkg_ident}"
 hab svc start "${pkg_ident}"
-sleep 120
+sleep 30
 
 bats "${TESTDIR}/test.bats"
 
