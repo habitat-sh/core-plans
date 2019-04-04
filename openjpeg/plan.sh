@@ -1,20 +1,18 @@
 pkg_name=openjpeg
 pkg_origin=core
-pkg_version=2.1.2
+pkg_version=2.3.1
 pkg_description="An open source JPEG 2000 codec"
 pkg_upstream_url=http://www.openjpeg.org/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('BSD-2-Clause')
-pkg_source=https://github.com/uclouvain/openjpeg/archive/v${pkg_version}.tar.gz
-pkg_shasum=4ce77b6ef538ef090d9bde1d5eeff8b3069ab56c4906f083475517c2c023dfa7
-
+pkg_source="https://github.com/uclouvain/openjpeg/archive/v${pkg_version}.tar.gz"
+pkg_shasum=63f5a4713ecafc86de51bfad89cc07bb788e9bba24ebbf0c4ca637621aadb6a9
 pkg_deps=(
   core/lcms2
   core/libpng
   core/libtiff
   core/zlib
 )
-
 pkg_build_deps=(
   core/cmake
   core/gcc
