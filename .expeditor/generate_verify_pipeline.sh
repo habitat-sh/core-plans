@@ -17,7 +17,7 @@ git fetch origin master --quiet
 # Group them by plan and use that as the unit of work in
 # downstream steps.
 plans_changed() {
-  git diff --name-only ${TEST_BRANCH:-HEAD} "$(git merge-base ${TEST_BRANCH:-HEAD} origin/master)" \
+  git diff --name-only "${TEST_BRANCH:-HEAD}" "$(git merge-base "${TEST_BRANCH:-HEAD}" origin/master)" \
   | cut -f1 -d/ \
   | sort \
   | uniq
@@ -26,25 +26,17 @@ plans_changed() {
 # This uses token replacement from a pipeline template to generate steps for each changed Plan
 # that is part of a PR. This allows us to define in a generic form what linting, tests and other
 # actions we should take on a Plan, without having to define the same set of actions individually
-# for each core-plan. The generic shape of Windows plan validation is slightly different (we need
-# to execute on Windows hosts using powershell, for example) but the mechanism for generating the
-# pipeline is the same.
-create_linux_verify_pipeline_for() {
+# for each core-plan.
+emit_pipeline() {
+  local pipeline_template
   local plan
-  plan=$1
 
-  sed "s|@@plan@@|$plan|" .expeditor/templates/verify_linux_pipeline.yml
+  pipeline_template="$1"
+  plan="$2"
+
+  sed "s|@@plan@@|$plan|" "$pipeline_template"
 }
 
-create_windows_verify_pipeline_for() {
-  local plan
-  plan=$1
-
-  ######################################################
-  # "Windows pipelines are currently not implemented." #
-  ######################################################
-  # sed -i "|@@plan@@|$plan|" .buildkite/templates/verify_windows_pipeline.yml
-}
 
 # If there were more than 10 plans affected by a change we're not going to run any verify builds
 # In most cases, there should only be one affected Plan. If there are more than one the PR should be
@@ -64,15 +56,22 @@ cat .expeditor/templates/verify.pipeline.yml
 
 # shellcheck disable=SC2068
 for plan in ${plans[@]}; do
-  if [[ -f $plan/plan.sh ]]; then
-    create_linux_verify_pipeline_for "$plan"
+  if [[ -f $plan/plan.sh ]] || [[ -f $plan/plan.ps1 ]]; then
+    emit_pipeline .expeditor/templates/verify_shared_pipeline.yml "$plan"
   fi
 
-  if [[ -f $plan/plan.ps1 ]]; then
-    create_windows_verify_pipeline_for "$plan"
+  if [[ -f $plan/plan.sh ]]; then
+    emit_pipeline .expeditor/templates/verify_linux_pipeline.yml "$plan"
   fi
+
+  ######################################################
+  # "Windows pipelines are currently not implemented." #
+  ######################################################
+  # if [[ -f $plan/plan.ps1 ]]; then
+    # emit_pipeline .buildkite/templates/verify_windows_pipeline.yml "$plan"
+  # fi
 
   # TODO(SM): Handle queuing based on .bldr.toml
-  # ex: postgres change _should_ also verify builds of postgresql9x
+  # example: postgres change _should_ also verify builds of postgresql9x
   # since they share definitions
 done
