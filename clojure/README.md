@@ -8,7 +8,7 @@ Clojure is a robust, practical, and fast programming language with a set of usef
 
 ## Type of Package
 
-Binary package
+Service package
 
 ## Usage
 
@@ -33,6 +33,12 @@ Start an nrepl:
 ```
 hab svc load core/clojure
 hab svc start core/clojure
+```
+
+Validate connectivity to nrepl service:
+```
+hab pkg exec core/clojure clj -Sdeps '{:deps {nrepl {:mvn/version "0.6.0"}}}' \
+  -m nrepl.cmdline --connect --host localhost --port 31337
 ```
 
 rebel-readline REPL from an exported docker container:
