@@ -14,6 +14,7 @@ $pkg_build_deps = @("core/7zip")
 
 function Invoke-Unpack {
   Push-Location (Resolve-Path $HAB_CACHE_SRC_PATH).Path
+  Write-Host "Silly change to test things"
   Try {
     $tar = $pkg_filename.Substring(0, $pkg_filename.LastIndexOf('.'))
     7z x -y (Resolve-Path $HAB_CACHE_SRC_PATH/$pkg_filename).Path
