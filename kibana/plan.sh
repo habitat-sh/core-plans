@@ -1,21 +1,21 @@
 pkg_name=kibana
-pkg_version=6.1.0
+pkg_version=6.5.4
 pkg_origin=core
 pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Kibana is a browser based analytics and search dashboard for Elasticsearch."
-pkg_upstream_url=https://www.elastic.co/products/kibana
-pkg_source=https://github.com/elastic/${pkg_name}/archive/v${pkg_version}.tar.gz
-pkg_shasum=3f9b9179bae432e45411f7b207578d8232ca2d6fc184a5780b6d696d6037b55a
-pkg_filename=${pkg_name}-${pkg_version}.tar.gz
-pkg_deps=(core/node)
+pkg_upstream_url="https://www.elastic.co/products/kibana"
+pkg_source="https://github.com/elastic/${pkg_name}.git"
+pkg_shasum=2c966a0f0c99d60816fdd056d49a9c7fed782c48e64e15e66ede81a244c807a2
+pkg_deps=(core/node8/8.14.0)
 pkg_build_deps=(
   core/cacerts
   core/coreutils
   core/gcc
   core/git
   core/make
-  core/node
+  core/yarn
+  core/node8/8.14.0
   core/python2
 )
 pkg_exports=(
@@ -28,8 +28,8 @@ pkg_binds_optional=(
 pkg_bin_dirs=(bin)
 
 do_prepare() {
-  # The `/usr/bin/env` path is hardcoded in some node modules, so we'll add a
-  # symlink if needed.
+  # The `/usr/bin/env` path is hardcoded in some node modules
+  # so we'll add a symlink if needed.
   if [[ ! -r /usr/bin/env ]]; then
     ln -svf "$(pkg_path_for coreutils)/bin/env" /usr/bin/env
     _clean_env=true
@@ -38,17 +38,44 @@ do_prepare() {
   # Make sure git has CA certs when downloading
   git config --global http.sslCAInfo "$(pkg_path_for cacerts)/ssl/certs/cacert.pem"
 
-  npm config set progress=false
+  #npm config set progress=false
+}
+
+do_download() {
+  GIT_SSL_CAINFO="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+  export GIT_SSL_CAINFO
+
+  REPO_PATH="${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}"
+  rm -rf "${REPO_PATH}"
+  git clone "${pkg_source}" "${REPO_PATH}"
+  pushd "${REPO_PATH}" || exit 1
+  git checkout "tags/v${pkg_version}"
+  popd || exit 1
+}
+
+do_unpack() {
+  return 0
+}
+
+do_clean() {
+  return 0
+}
+
+do_verify() {
+  return 0
 }
 
 do_build () {
-  npm install
+  pushd "${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}" || exit 1
+  yarn kbn bootstrap
+  yarn build --skip-os-packages
+  popd || exit 1
 }
 
 do_install() {
   cp -r ./* "${pkg_prefix}/"
-  # Delete the /config directory created by Kibana installer; habitat lays down
-  # /config/kibana.yml
+  # Delete the /config directory created by Kibana installer
+  # Habitat creates /config/kibana.yml
   rm -rv "${pkg_prefix}/config/"
 }
 
