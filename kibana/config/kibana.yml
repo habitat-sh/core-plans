@@ -46,7 +46,7 @@ elasticsearch.pingTimeout: {{cfg.elasticsearch.pingTimeout}}
 elasticsearch.requestTimeout: {{cfg.elasticsearch.requestTimeout}}
 elasticsearch.shardTimeout: {{cfg.elasticsearch.shardTimeout}}
 elasticsearch.startupTimeout: {{cfg.elasticsearch.startupTimeout}}
-pid.file: {{cfg.pid.file}}
+pid.file: {{pkg.svc_pid_file}}
 logging.dest: {{cfg.logging.dest}}
 logging.silent: {{cfg.logging.silent}}
 logging.quiet: {{cfg.logging.quiet}}

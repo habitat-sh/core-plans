@@ -2,6 +2,8 @@
 
 exec 2>&1
 
+mkdir -p {{pkg.svc_static_path}}
+
 # Move directories that ship in the package into place
 for dir in config etc node_modules package.json src bin tasks webpackShims ui_framework plugins test
 do
