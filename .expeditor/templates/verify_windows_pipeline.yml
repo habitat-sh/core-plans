@@ -1,12 +1,12 @@
   - label: "[@@plan@@] :windows: :habicat: Build with DO_CHECK=true"
-      command:
-        - bin/ci/verify-pr-build.ps1 @@plan@@
-      expeditor:
-        executor:
-          docker:
-            host_os: windows
-      timeout_in_minutes: 60
-      retry:
-        automatic:
-          limit: 1
+    command:
+      - bin/ci/verify-pr-build.ps1 @@plan@@
+    expeditor:
+      executor:
+        docker:
+          host_os: windows
+    timeout_in_minutes: 60
+    retry:
+      automatic:
+        limit: 1
 
