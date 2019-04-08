@@ -1,11 +1,11 @@
 pkg_name=cerebro
 pkg_origin=core
-pkg_version="0.8.2"
+pkg_version="0.8.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_filename="${pkg_name}-${pkg_version}.tgz"
 pkg_source="https://github.com/lmenezes/cerebro/releases/download/v${pkg_version}/${pkg_filename}"
-pkg_shasum="c9212ada47ff77f7f6fca2be13d65471b2a8e03a0b9e393bda4b17a030bc2df3"
+pkg_shasum="fdda73f7d56c4ead29590a8b1567d0bbfc3b39c14d2b7bde75a440954e2f435b"
 pkg_deps=(core/coreutils core/jre8)
 pkg_bin_dirs=(bin)
 pkg_exports=(
