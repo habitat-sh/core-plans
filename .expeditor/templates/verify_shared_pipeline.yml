@@ -1,4 +1,3 @@
-steps:
   - label: "[@@plan@@] :habicat: Check for .bldr.toml entry"
     command:
       - bin/ci/check-bldr-toml.sh @@plan@@
