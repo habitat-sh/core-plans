@@ -31,4 +31,3 @@ do_prepare() {
   perl_path="$(pkg_path_for perl)/bin/perl"
   sed -e "s#/usr/bin/perl#$perl_path#g" -i Makefile
 }
-
