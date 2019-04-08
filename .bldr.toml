@@ -691,6 +691,8 @@ plan_path = "libimagequant"
 plan_path = "libjpeg-turbo"
 [libksba]
 plan_path = "libksba"
+[libmaxminddb]
+plan_path = "libmaxminddb"
 [libmpc]
 plan_path = "libmpc"
 [libnl]
