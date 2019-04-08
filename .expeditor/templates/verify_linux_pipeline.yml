@@ -19,13 +19,6 @@
       executor:
         docker:
 
-  - label: "[@@plan@@] :linux: :habicat: Check for .bldr.toml entry"
-    command:
-      - bin/ci/check-bldr-toml.sh @@plan@@
-    expeditor:
-      executor:
-        docker:
-
   - label: "[@@plan@@] :linux: :habicat: Build with DO_CHECK=true"
     command:
       - bin/ci/verify-pr-build.sh @@plan@@
