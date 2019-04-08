@@ -1,7 +1,7 @@
 pkg_origin=core
 pkg_name=libmaxminddb
 pkg_version=1.3.2
-pkg_license=('Apache')
+pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/maxmind/libmaxminddb/releases/download/${pkg_version}/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="e6f881aa6bd8cfa154a44d965450620df1f714c6dc9dd9971ad98f6e04f6c0f0"
