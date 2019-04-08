@@ -117,9 +117,9 @@ Enter habitat studio  and choose one of the following options
 
 2. To test an already built git
 
-```bash
-   SKIPBUILD=1 ./git/test/test.sh
-```
+    ```bash
+    SKIPBUILD=1 ./git/test/test.sh
+    ```
 
 # Testing git on Windows
 
