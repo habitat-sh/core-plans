@@ -18,7 +18,7 @@ pkg_build_deps=(
 )
 pkg_deps=(
   core/glibc
-  core/geoip
+  core/libmaxminddb
   core/ncurses
 )
 pkg_bin_dirs=(bin)
@@ -28,7 +28,7 @@ do_build() {
   ./configure \
     --prefix="${pkg_prefix}" \
     --enable-utf8 \
-    --enable-geoip=legacy
+    --enable-geoip=mmdb
   make
 }
 
