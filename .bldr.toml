@@ -237,6 +237,8 @@ plan_path = "docker-compose"
 plan_path = "docutils"
 [dosfstools]
 plan_path = "dosfstools"
+[dotnet-472-dev-pack]
+plan_path = "dotnet-472-dev-pack"
 [dotnet-asp-core]
 path_plan = "dotnet-asp-core"
 [dotnet-core]
