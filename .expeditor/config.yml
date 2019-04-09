@@ -5,6 +5,11 @@ project:
 github:
   delete_branch_on_merge: true
 
+subscriptions:
+  - workload: pull_request_opened:{{agent_id}}:*
+    actions:
+      - post_github_comment:.expeditor/templates/welcome.mustache
+
 pipelines:
   - verify:
       public: true
