@@ -21,7 +21,7 @@ pkg_build_deps=(core/ant)
 You will also need to set the `JAVA_HOME` environment variable, for example:
 
 ```
-export JAVA_HOME=$(hab pkg path core/jdk8)
+export JAVA_HOME="$(hab pkg path core/jdk8)"
 ```
 
 [1]: https://ant.apache.org/index.html
