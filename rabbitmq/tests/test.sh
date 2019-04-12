@@ -18,7 +18,7 @@ if [ "${SKIPBUILD}" -eq 0 ]; then
 
   set -e
   pushd "${PLANDIR}" > /dev/null
-  build
+  DO_CHECK=1 build
   source results/last_build.env
   hab pkg install --binlink --force "results/${pkg_artifact}"
   hab svc load "${pkg_ident}"
@@ -26,7 +26,7 @@ if [ "${SKIPBUILD}" -eq 0 ]; then
   set +e
 
   # Give some time for the service to start up
-  sleep 6
+  sleep 30
 fi
 
 bats "${TESTDIR}/test.bats"
