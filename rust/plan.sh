@@ -29,7 +29,7 @@ pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 
 _target_sources=(
-  $_url_base/${pkg_name}-std-${pkg_version}-x86_64-unknown-linux-musl.tar.gz
+  "${_url_base}/${pkg_name}-std-${pkg_version}-x86_64-unknown-linux-musl.tar.gz"
 )
 
 _target_shasums=(
