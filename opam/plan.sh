@@ -29,7 +29,9 @@ pkg_bin_dirs=(bin)
 
 do_build() {
   ./configure --prefix "${pkg_prefix}"
-  make lib-ext
+  # This is a copy/paste from https://opam.ocaml.org/doc/Install.html#From-Sources
+  # to fix builds with ocaml >= 4.06.0
+  OCAMLPARAM="safe-string=0,_" make lib-ext
   make
 }
 
