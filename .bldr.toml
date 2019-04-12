@@ -1360,6 +1360,8 @@ plan_path = "swig"
 plan_path = "sysstat"
 [systemd]
 plan_path = "systemd"
+[tap-xunit]
+plan_path = "tap-xunit"
 [tar]
 plan_path = "tar"
 [tcl]
