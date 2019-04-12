@@ -1,6 +1,6 @@
 pkg_name=systemd
 pkg_origin=core
-pkg_version="239"
+pkg_version=242
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="systemd is an init system used in Linux distributions to \
 bootstrap the user space. Subsequently to booting, it is used to manage system \
@@ -8,10 +8,14 @@ processes."
 pkg_license=('LGPL-2.1')
 pkg_source="https://github.com/systemd/${pkg_name}/archive/v${pkg_version}.tar.gz"
 pkg_upstream_url="https://github.com/systemd/systemd"
-pkg_shasum="8a11b1b07d620f4c06a16e95bba4dd2a97e90efdf2a5ba47ed0a935085787a14"
+pkg_shasum=ec22be9a5dd94c9640e6348ed8391d1499af8ca2c2f01109198a414cff6c6cba
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
-pkg_lib_dirs=(lib var/lib usr/lib)
+pkg_lib_dirs=(
+  lib
+  var/lib
+  usr/lib
+)
 pkg_deps=(
   core/glibc
   core/libcap
