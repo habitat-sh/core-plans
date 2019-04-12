@@ -1276,8 +1276,18 @@ plan_path = "runc"
 plan_path = "runit"
 [rust]
 plan_path = "rust"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2",
+  "x86_64-windows"
+]
 [rust-nightly]
 plan_path = "rust-nightly"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2",
+  "x86_64-windows"
+]
 [sassc]
 plan_path = "sassc"
 [sbt]
