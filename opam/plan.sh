@@ -29,7 +29,7 @@ pkg_bin_dirs=(bin)
 
 do_build() {
   ./configure --prefix "${pkg_prefix}"
-  make lib-ext
+  OCAMLPARAM="safe-string=0,_" make lib-ext
   make
 }
 
