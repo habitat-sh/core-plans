@@ -5,7 +5,7 @@
       executor:
         docker:
 
-  - label: "[@@plan@@] :linux: :habicat: Check for bad patterns"
+  - label: "[@@plan@@] :habicat: Check for bad patterns"
     command:
       - bin/ci/check-bad-patterns.sh @@plan@@
     expeditor:
