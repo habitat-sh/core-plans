@@ -8,98 +8,77 @@
 
 set -eu
 plan_path=$1
-# If we source files in our hook scripts, we need to check them too.
-additional=()
-sleeps=0
-habs=0
 
-# Obviously we shouldn't hit any missing sources, but it's easy enough to check
-missing_source=()
+hab_usage=()
+sleep_usage=()
+exit_code=0
 
-add_sourced() {
-  sourced=${1//\"}
-  # we can't do much with template expansion here.
-  if [[ $sourced =~ ^\{\{ ]]; then
-    echo "Unable to check included file: ${sourced}"
-    return
+# Until the following PRs land, we cannot sleep in a lifecycle hook
+# with the exception of 'run'
+# habitat-sh/habitat#5954
+# habitat-sh/habitat#5955
+# habitat-sh/habitat#5956
+# habitat-sh/habitat#5957
+# habitat-sh/habitat#5958
+# habitat-sh/habitat#5959
+check_for_sleep() {
+  local file
+
+  file="$1"
+  # Match lines containing `sleep N`, ignoring comments
+  match="^([^#])*sleep [0-9]+"
+
+  if grep -qE "$match" "$file"; then
+    sleep_usage+=("$file")
+    exit_code=1
   fi
-  additional+=($sourced)
 }
 
-file_check() {
-  if [ ! -f "$1" ]; then
-    missing_source+=($1)
-    return 1
+check_for_hab() {
+  local file
+
+  file="$1"
+  # Match anything that looks like we're attempting to call the hab cli
+  # inoring comments
+  match="^([^#])*(\(\s*|\s+)hab\s"
+  if grep -E -q "$match" "$file"; then
+    hab_usage+=("$file")
+    exit_code=1
   fi
-  while read -r line; do
-    # skip comments
-    if [[ $line =~ ^\#.* ]]; then continue; fi
-
-    # we're sourcing another file, so we need to check that file too
-    if [[ $line == ". "* ]]; then
-      sourced=${line##. }
-      add_sourced "$sourced"
-      continue
-    fi
-
-    if [[ $line == "source "* ]]; then
-      sourced=${line##source }
-      add_sourced "$sourced"
-      continue
-    fi
-
-    # It's OK to block in the run hook, but nowhere else.
-    if [[ ${1##*/} != "run" && $line == *"sleep"* ]]; then
-      sleeps=$((sleeps + 1))
-      continue
-    fi
-
-    if [[ $line == *"\$(hab "* || $line == *"\`hab "* ]]; then
-      habs=$((habs + 1))
-      continue
-    fi
-  done < "$1"
 }
 
 echo "--- :thinking_face: [$plan_path] Checking for bad patterns"
+readarray -t files < <(find "$plan_path" -type f)
 
-file_check "$plan_path"/plan.sh
+for file in "${files[@]}"; do
+  case $file in
+    */plan.sh | */plan.ps1 )
+      check_for_sleep "$file"
+      ;;
+    *hooks/run )
+      check_for_hab "$file"
+      ;;
+    *hooks/*)
+      check_for_hab "$file"
+      check_for_sleep "$file"
+      ;;
+    **)
+      echo "Skipping $file"
+      ;;
+  esac
+done
 
-if [[ ${#additional[@]} -gt 0 ]]; then
-  for file in "${additional[@]}"; do
-    file_check "$file"
-  done
+if [[ "${#hab_usage[@]}" -ne 0 ]]; then
+  echo "--- :habicat: The following files appear to be calling 'hab'"
+  printf "%s\n" "${hab_usage[@]}"
 fi
 
-if [[ $sleeps -gt 0 || $habs -gt 0 || ${#missing_source[@]} -gt 0 ]]; then
-  files=$(printf "; %s" "${requested[@]}")
-  if [[ ${#additional[@]} -gt 0 ]]; then
-    files+=$(printf "; %s" "${additional[@]}")
-  fi
-  files=${files:2}
-  if [[ ${#missing_source[@]} -gt 0 ]]; then
-    sourced=$(printf ", %s" "${missing_source[@]}")
-    sourced=${sourced:2}
-  fi
-  echo "--- :octagonal_sign: Error detected by Check Bad Patterns."
-  echo "We checked these files: ${files}."
-  echo ""
-  if [[ ${#missing_source[@]} -gt 0 ]]; then
-    echo "  Found sourced files that don't exist: ${sourced}"
-    echo ""
-  fi
-  if [[ $sleeps -gt 0 ]]; then
-    echo "  Found sleep $sleeps times in hook scripts"
-    echo ""
-  fi
-  if [[ $habs -gt 0 ]]; then
-    echo "  Found shell out to hab command $habs times"
-    echo ""
-  fi
-  echo ""
-  exit 1
+if [[ "${#sleep_usage[@]}" -ne 0 ]]; then
+  echo "--- :sleep: The following files appear to be calling 'sleep'"
+  printf "%s\n" "${sleep_usage[@]}"
 fi
 
-echo "--- :smiling_face: No bad patterns found"
-
-exit 0
+if [[ "$exit_code" -eq 0 ]]; then
+  echo "--- :smiling_face: [$plan_path] No bad patterns found!"
+fi
+exit "$exit_code"
