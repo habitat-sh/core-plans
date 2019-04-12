@@ -11,7 +11,7 @@ plan_path=$1
 
 hab_usage=()
 sleep_usage=()
-exit_code=0 
+exit_code=0
 
 # Until the following PRs land, we cannot sleep in a lifecycle hook
 # with the exception of 'run'
@@ -28,8 +28,7 @@ check_for_sleep() {
   # Match lines containing `sleep N`, ignoring comments
   match="^([^#])*sleep [0-9]+"
 
-  if grep -qE "$match" "$file"; then 
-    echo "$file contains 'sleep'"
+  if grep -qE "$match" "$file"; then
     sleep_usage+=("$file")
     exit_code=1
   fi
@@ -42,8 +41,7 @@ check_for_hab() {
   # Match anything that looks like we're attempting to call the hab cli
   # inoring comments
   match="^([^#])*(\(\s*|\s+)hab\s"
-  if egrep -q "$match" "$file"; then
-    echo "$file appears to call 'hab'"
+  if grep -E -q "$match" "$file"; then
     hab_usage+=("$file")
     exit_code=1
   fi
@@ -52,17 +50,17 @@ check_for_hab() {
 echo "--- :thinking_face: [$plan_path] Checking for bad patterns"
 readarray -t files < <(find "$plan_path" -type f)
 
-for file in "${files[@]}"; do 
+for file in "${files[@]}"; do
   case $file in
     */plan.sh | */plan.ps1 )
-      check_for_sleep $file
+      check_for_sleep "$file"
       ;;
     *hooks/run )
-      check_for_hab $file
+      check_for_hab "$file"
       ;;
     *hooks/*)
-      check_for_hab $file 
-      check_for_sleep $file
+      check_for_hab "$file"
+      check_for_sleep "$file"
       ;;
     **)
       echo "Skipping $file"
@@ -70,17 +68,17 @@ for file in "${files[@]}"; do
   esac
 done
 
-if [[ "${#hab_usage[@]}" -ne 0 ]]; then 
+if [[ "${#hab_usage[@]}" -ne 0 ]]; then
   echo "--- :habicat: The following files appear to be calling 'hab'"
   printf "%s\n" "${hab_usage[@]}"
 fi
 
-if [[ "${#sleep_usage[@]}" -ne 0 ]]; then 
+if [[ "${#sleep_usage[@]}" -ne 0 ]]; then
   echo "--- :sleep: The following files appear to be calling 'sleep'"
-  printf "%s\n" $sleep_usage
+  printf "%s\n" "${sleep_usage[@]}"
 fi
 
-if [[ "$exit_code" -eq 0 ]]; then 
+if [[ "$exit_code" -eq 0 ]]; then
   echo "--- :smiling_face: [$plan_path] No bad patterns found!"
 fi
 exit "$exit_code"
