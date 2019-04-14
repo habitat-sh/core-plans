@@ -18,7 +18,7 @@ if [ "${SKIPBUILD}" -eq 0 ]; then
 
   set -e
   pushd "${PLANDIR}" > /dev/null
-  DO_CHECK=1 build
+  build
   source results/last_build.env
   hab pkg install --binlink --force "results/${pkg_artifact}"
   hab svc load "${pkg_ident}"
