@@ -1441,6 +1441,8 @@ paths = [
 ]
 [which]
 plan_path = "which"
+[windows-10-sdk]
+plan_path = "windows-10-sdk"
 [wordpress]
 plan_path = "wordpress"
 [wordpress-proxy]
