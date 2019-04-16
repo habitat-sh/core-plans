@@ -305,6 +305,16 @@ plan_path = "expat"
 plan_path = "expect"
 [ffmpeg]
 plan_path = "ffmpeg"
+[ffmpeg3]
+plan_path = "ffmpeg3"
+paths = [
+  "ffmpeg/*"
+]
+[ffmpeg4]
+plan_path = "ffmpeg4"
+paths = [
+  "ffmpeg/*"
+]
 [file]
 plan_path = "file"
 [filebeat]
