@@ -3,6 +3,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/../prometheus/plan.sh"
 pkg_name=prometheus2
 pkg_origin=core
 pkg_version=2.9.0
+pkg_upstream_url=http://prometheus.io
 pkg_description="Prometheus monitoring"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
