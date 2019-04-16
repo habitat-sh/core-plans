@@ -39,6 +39,6 @@ do_check() {
 
 do_install() {
   do_default_install
-  gem update --system 2.7.8 --no-document
+  gem update --system 2.7.9 --no-document
   gem install rb-readline --no-document
 }
