@@ -21,5 +21,5 @@ source "${BATS_TEST_DIRNAME}/../plan.sh"
 }
 
 @test "Listening on port 9000" {
-  [ "$(netstat -peanut | grep minio | awk '{print $4}' | awk -F':' '{print $2}' | grep 9000)" ]
+  [ "$(netstat -peanut | grep minio | awk '{print $4}' | awk -F':' '{print $NF}' | grep 9000)" ]
 }
