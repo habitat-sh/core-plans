@@ -19,11 +19,19 @@ pkg_build_deps=(
   core/diffutils
   core/make
   core/gcc
+  core/patch
 )
 
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_bin_dirs=(bin)
+
+do_prepare() {
+  # This disables a test that incorrectly detects that a file has write access
+  patch -p0 < "$PLAN_CONTEXT"/patches/000-disable_test_file_access.patch
+  # This disables two tests that will always fail in a Habitat build environment
+  patch -p0 < "$PLAN_CONTEXT"/patches/001-disable-failing-bundleutlities-tests.patch
+}
 
 do_build() {
   ZLIB=$(pkg_path_for core/zlib)
