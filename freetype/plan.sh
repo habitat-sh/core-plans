@@ -28,9 +28,9 @@ pkg_bin_dirs=(bin)
 
 do_install() {
   do_default_install
- 
+
   build_line "Remove space from freetype-config interperter"
-  sed -i 's@ /bin/sh@/bin/sh@'  $CACHE_PATH/builds/unix/freetype-config
+  sed -i 's@ /bin/sh@/bin/sh@' "$CACHE_PATH/builds/unix/freetype-config"
 
   build_line "Copy freetype-config to bin"
   install "$CACHE_PATH/builds/unix/freetype-config" "$pkg_prefix/bin/"
