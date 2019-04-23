@@ -2,8 +2,10 @@ pkg_name=gnupg
 pkg_distname=$pkg_name
 pkg_origin=core
 pkg_version=1.4.20
-pkg_license=('gplv3+')
+pkg_license=('GPL-3.0-or-later')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="GnuPG is a complete and free implementation of the OpenPGP standard as defined by RFC4880 (also known as PGP)"
+pkg_upstream_url="https://gnupg.org/"
 pkg_source=ftp://ftp.gnupg.org/gcrypt/${pkg_distname}/${pkg_distname}-${pkg_version}.tar.bz2
 pkg_shasum=04988b1030fa28ddf961ca8ff6f0f8984e0cddcb1eb02859d5d8fe0fe237edcc
 pkg_deps=(core/glibc core/zlib core/bzip2 core/readline)
@@ -12,14 +14,14 @@ pkg_bin_dirs=(bin)
 
 do_build() {
   ./configure \
-    --prefix=${pkg_prefix} \
-    --sbindir=$pkg_prefix/bin
+    --prefix="$pkg_prefix" \
+    --sbindir="$pkg_prefix/bin"
   make
 }
 
 do_check() {
-  find tests -type f \
-    | xargs sed -e "s,/bin/pwd,$(pkg_path_for coreutils)/bin/pwd,g" -i
+  find tests -type f -print0 \
+    | xargs -0 sed -e "s,/bin/pwd,$(pkg_path_for coreutils)/bin/pwd,g" -i
 
   make check
 }
