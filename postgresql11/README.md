@@ -104,27 +104,17 @@ services:
     image: habitat/postgresql11
     command: --group cluster
       --topology leader
-    volumes:
-      - pg1-data:/hab/svc/postgresql11/data
   pg2:
     image: habitat/postgresql11
     command: --group cluster
       --topology leader
       --peer pg1
-    volumes:
-      - pg2-data:/hab/svc/postgresql11/data
   pg3:
     image: habitat/postgresql11
     command: --group cluster
       --topology leader
       --peer pg1
-    volumes:
-      - pg3-data:/hab/svc/postgresql11/data
 
-volumes:
-  pg1-data:
-  pg2-data:
-  pg3-data:
 EOF
 
 docker-compose up
