@@ -29,7 +29,7 @@ pkg_build_deps=(
   core/texinfo
   core/patch
 )
-pkg_deps=(core/glibc core/xz core/gettext core/pcre core/gcc-libs core/devicemapper core/elfutils core/bzip2 core/libcap)
+pkg_deps=(core/glibc core/xz core/gettext core/pcre core/gcc-libs core/devicemapper core/elfutils core/bzip2 core/libcap core/zlib core/libpng)
 
 do_setup() {
   if [[ ! -d /boot ]]; then
