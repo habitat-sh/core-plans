@@ -15,14 +15,17 @@ scaffolding_load() {
   : "${scaffold_chef_client:=chef/chef-client}"
   : "${scaffold_chef_dk:=chef/chef-dk}"
 
+  : "${scaffold_policyfiles_path:=$PLAN_CONTEXT/../policyfiles}"
+  : "${scaffold_data_bags_path:=$PLAN_CONTEXT/../data_bags}"
+
   pkg_deps=(
     "${pkg_deps[@]}"
-    "$scaffold_chef_client"
+    "${scaffold_chef_client}"
     "core/cacerts"
   )
   pkg_build_deps=(
     "${pkg_build_deps[@]}"
-    "$scaffold_chef_dk"
+    "${scaffold_chef_dk}"
     "core/git"
   )
 
@@ -44,11 +47,11 @@ do_default_unpack() {
 
 do_default_build_service() {
   ## Create hooks
-  mkdir -p "$pkg_prefix/hooks"
-  chmod 0750 "$pkg_prefix/hooks"
+  mkdir -p "${pkg_prefix}/hooks"
+  chmod 0750 "${pkg_prefix}/hooks"
 
   # Run hook
-  cat << EOF >> "$pkg_prefix/hooks/run"
+  cat << EOF >> "${pkg_prefix}/hooks/run"
 #!/bin/sh
 
 chef_client_cmd()
@@ -82,38 +85,32 @@ sleep {{cfg.interval}}
 chef_client_cmd
 done
 EOF
-  chmod 0750 "$pkg_prefix/hooks/run"
+  chmod 0750 "${pkg_prefix}/hooks/run"
 }
 
 do_default_build() {
-  if [ -d "$PLAN_CONTEXT/../policyfiles" ]; then
-    _policyfile_path="$PLAN_CONTEXT/../policyfiles"
-  else
-    if [ -d "$PLAN_CONTEXT/../../policyfiles" ]; then
-      _policyfile_path="$PLAN_CONTEXT/../../policyfiles"
-    else
-      if [ -d "$PLAN_CONTEXT/../../../policyfiles" ]; then
-        _policyfile_path="$PLAN_CONTEXT/../../../policyfiles"
-      else
-        echo "Cannot detect a policyfiles directory!"
-        exit 1
-      fi
-    fi
+  if [ ! -d "${scaffold_policyfiles_path}" ]; then
+    echo "Cannot detect a policyfiles directory!"
+    exit 1
   fi
-  rm -f "$_policyfile_path"/*.lock.json
-  policyfile="$_policyfile_path/$scaffold_policy_name.rb"
-  for x in $(grep include_policy "$policyfile" | awk -F "," '{print $1}' | awk -F '"' '{print $2}' | tr -d " "); do
-    chef install "$_policyfile_path/$x.rb"
+
+  rm -f "${scaffold_policyfiles_path}"/*.lock.json
+
+  policyfile="${scaffold_policyfiles_path}/${scaffold_policy_name}.rb"
+
+  for p in $(grep include_policy "${policyfile}" | awk -F "," '{print $1}' | awk -F '"' '{print $2}' | tr -d " "); do
+    chef install "${scaffold_policyfiles_path}/${p}.rb"
   done
-  chef install "$policyfile"
+
+  chef install "${policyfile}"
 }
 
 do_default_install() {
-  chef export "$_policyfile_path/$scaffold_policy_name.lock.json" "$pkg_prefix"
+  chef export "${scaffold_policyfiles_path}/${scaffold_policy_name}.lock.json" "${pkg_prefix}"
 
-  mkdir -p "$pkg_prefix/config"
-  chmod 0750 "$pkg_prefix/config"
-  cat << EOF >> "$pkg_prefix/.chef/config.rb"
+  mkdir -p "${pkg_prefix}/config"
+  chmod 0750 "${pkg_prefix}/config"
+  cat << EOF >> "${pkg_prefix}/.chef/config.rb"
 cache_path "$pkg_svc_data_path/cache"
 node_path "$pkg_svc_data_path/nodes"
 role_path "$pkg_svc_data_path/roles"
@@ -121,13 +118,13 @@ role_path "$pkg_svc_data_path/roles"
 chef_zero.enabled true
 EOF
 
-  cp "$pkg_prefix/.chef/config.rb" "$pkg_prefix/config/bootstrap-config.rb"
-  cat << EOF >> "$pkg_prefix/config/bootstrap-config.rb"
+  cp "${pkg_prefix}/.chef/config.rb" "${pkg_prefix}/config/bootstrap-config.rb"
+  cat << EOF >> "${pkg_prefix}/config/bootstrap-config.rb"
 ENV['PATH'] = "/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:#{ENV['PATH']}"
 EOF
 
-  cp "$pkg_prefix/.chef/config.rb" "$pkg_prefix/config/client-config.rb"
-  cat << EOF >> "$pkg_prefix/config/client-config.rb"
+  cp "${pkg_prefix}/.chef/config.rb" "${pkg_prefix}/config/client-config.rb"
+  cat << EOF >> "${pkg_prefix}/config/client-config.rb"
 ssl_verify_mode {{cfg.ssl_verify_mode}}
 ENV['PATH'] = "{{cfg.env_path_prefix}}:#{ENV['PATH']}"
 
@@ -137,9 +134,9 @@ data_collector.token "{{cfg.data_collector.token}}"
 data_collector.server_url "{{cfg.data_collector.server_url}}"
 {{/if ~}}
 EOF
-  chmod 0640 "$pkg_prefix/config/client-config.rb"
+  chmod 0640 "${pkg_prefix}/config/client-config.rb"
 
-  cat << EOF >> "$pkg_prefix/config/attributes.json"
+  cat << EOF >> "${pkg_prefix}/config/attributes.json"
 {{#if cfg.attributes ~}}
 {{toJson cfg.attributes}}
 {{else ~}}
@@ -148,7 +145,7 @@ EOF
 EOF
 
   ## Create config
-  cat << EOF >> "$pkg_prefix/default.toml"
+  cat << EOF >> "${pkg_prefix}/default.toml"
 interval = 1800
 splay = 1800
 splay_first_run = 0
@@ -163,7 +160,11 @@ enable = false
 token = "set_to_your_token"
 server_url = "set_to_your_url"
 EOF
-  chmod 0640 "$pkg_prefix/default.toml"
+  chmod 0640 "${pkg_prefix}/default.toml"
+
+  if [ -d "${scaffold_data_bags_path}" ]; then
+    cp -a "${scaffold_data_bags_path}" "${pkg_prefix}"
+  fi
 }
 
 do_default_strip() {
