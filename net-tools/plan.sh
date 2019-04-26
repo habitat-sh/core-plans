@@ -1,12 +1,12 @@
 pkg_name=net-tools
-pkg_distname=$pkg_name
 pkg_origin=core
 pkg_version=1.60
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('GPL-2.0')
-pkg_source=http://downloads.sourceforge.net/net-tools/${pkg_name}-${pkg_version}.tar.bz2
+pkg_license=('GPL-2.0-or-later')
+pkg_source=http://downloads.sourceforge.net/net-tools/"${pkg_name}"-"${pkg_version}".tar.bz2
+pkg_upstream_url="https://sourceforge.net/projects/net-tools/"
+pkg_description="The Net-tools package is a collection of programs for controlling the network subsystem of the Linux kernel."
 pkg_shasum=7ae4dd6d44d6715f18e10559ffd270511b6e55a8900ca54fbebafe0ae6cf7d7b
-pkg_dirname=${pkg_distname}-${pkg_version}
 pkg_deps=(core/glibc core/coreutils)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc)
 pkg_lib_dirs=(lib)
