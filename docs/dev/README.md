@@ -8,3 +8,4 @@ This directory contains a collection of design documents relating to contributin
 ### Policy Documents
 
 - [Deprecating Packages](./policy_documents/deprecating-packages.md)
+- [Testing Pull Requests](./policy_documents/testing-pull-requests.md)
