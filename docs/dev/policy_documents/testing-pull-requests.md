@@ -39,7 +39,7 @@ This does put more of a burden on the person who is opening the pull request - t
 ## Rationale and alternatives
 [alternatives]: #alternatives
 
-There is an automated testing framework in the works, which will be very helpful with this. That said, as of the time of writing this pull request, that framework is not yet ready. Additionally, even when that framework is ready, we still need to know how to manually test a plan before we can automate those tests. The best person to guide how to test a change is the person who made that change.
+There is an automated testing framework in the works, which will be very helpful with this. This framework has been designed (see [core-plans testing standards](./standards-for-tests.md)) but has not yet been implemented. Additionally, even when that framework is ready, we still need to know how to manually test a plan before we can automate those tests. The best person to guide how to test a change is the person who made that change.
 
 ## Unresolved questions
 [unresolved]: #unresolved-questions

@@ -12,4 +12,5 @@ This directory contains a collection of design documents relating to contributin
 - [Plan Configuration Complexity](./policy_documents/deprecating-packages.md)
 - [Shebang Line Conventions](./policy_documents/shebang-line-conventions.md)
 - [Testing Pull Requests](./policy_documents/testing-pull-requests.md)
+- [Testing standards](./policy_documents/standards-for-tests.md)
 - [Tracking Package Versions](./policy_documents/tracking-package-versions.md)
