@@ -1,6 +1,6 @@
 . "..\node\plan.ps1"
 
-$pkg_name="node11"
+$pkg_name="node12"
 $pkg_origin="core"
 $pkg_version="12.0.0"
 $pkg_description="Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine."
