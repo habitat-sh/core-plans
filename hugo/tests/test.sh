@@ -14,5 +14,5 @@ fi
 PKGIDENT="${1}"
 export PKGIDENT
 hab pkg install --binlink core/bats
-hab pkg install "${PKG_IDENT}"
+hab pkg install "${PKGIDENT}"
 bats "$(dirname "${0}")/test.bats"
