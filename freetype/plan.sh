@@ -10,6 +10,7 @@ pkg_filename=${pkg_name}-${pkg_version}.tar.gz
 pkg_shasum=db8d87ea720ea9d5edc5388fc7a0497bb11ba9fe972245e0f7f4c7e8b1e1e84d
 pkg_build_deps=(
   core/diffutils
+  core/bats
   core/gcc
   core/make
 )
@@ -38,4 +39,13 @@ do_install() {
   install "$CACHE_PATH/builds/unix/freetype-config" "$pkg_prefix/bin/"
 
   fix_interpreter "$pkg_prefix/bin/freetype-config" "core/bash" "bin/sh"
+
+  build_line "Copy tests to installation"
+  mkdir -p "$pkg_prefix/test/bats"
+  cp -R $PLAN_CONTEXT/test/bats "$pkg_prefix/test/."
+}
+
+do_after() {
+  build_line "Running sanity tests against the build"
+  bats "$PLAN_CONTEXT/test/bats/unit"
 }
