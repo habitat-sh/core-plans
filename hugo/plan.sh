@@ -1,6 +1,6 @@
 pkg_name=hugo
 pkg_origin=core
-pkg_version="0.55.4"
+pkg_version="0.55.5"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_description="Hugo is one of the most popular open-source static site generators."
