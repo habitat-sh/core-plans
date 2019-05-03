@@ -5,6 +5,7 @@ SKIPBUILD=${SKIPBUILD:-0}
 
 hab pkg install core/busybox-static
 hab pkg binlink core/busybox-static netstat
+hab pkg binlink core/busybox-static ps
 
 hab pkg install --binlink core/bats
 source "${PLANDIR}/plan.sh"

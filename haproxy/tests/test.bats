@@ -19,3 +19,8 @@ source "${BATS_TEST_DIRNAME}/../plan.sh"
   result="$(netstat -peanut | grep haproxy | awk '{print $4}' | awk -F':' '{print $2}')"
   [ "${result}" -eq 80 ]
 }
+
+@test "Process user has successfully switched to 'hab'" {
+  result="$(ps | grep [h]aproxy | awk '{print $2}')"
+  [ "$result" = "hab" ]
+}

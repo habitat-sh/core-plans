@@ -1,5 +1,6 @@
-maxconn = 32
 httpchk = "GET /"
+maxconn = 32
+user = "hab"
 
 [front-end]
 listen = "*"
