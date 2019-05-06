@@ -1,31 +1,33 @@
-# If you would like the web gui on the agent
-website = true
-
 # The options for consul are available here
 # https://www.consul.io/docs/agent/options.html
-[bootstrap]
-expect = "3"
 
-[server]
-data-dir = "/hab/svc/consul/data/consul"
+# These defaults are setup for Consul Server mode
+
+[agent]
+enable_encryption = false
 datacenter = "dc1"
-loglevel = "INFO"
-# Revert back to the Legacy UI
-legacy_ui = false
-# switch this to false you want to start in DEVMODE
-# https://www.consul.io/docs/guides/bootstrapping.html
-mode = true
+data_dir = "/hab/svc/consul/data/consul"
+log_level = "INFO"
+server = true
+ui = true
 
 [ports]
-# The DNS server, -1 to disable
 dns = 8600
-# The HTTP API, -1 to disable
 http = 8500
-# The HTTPS API, -1 to disable
 https = -1
-# The Serf LAN port
 serf_lan = 8301
-# The Serf WAN port
 serf_wan = 8302
-# Server RPC address
 server = 8300
+
+[encryption]
+gossip = false
+#gossip_key = false
+#verify_gossip_incoming = false
+#verify_gossip_outgoing = false
+tls = false
+#verify_incoming = false
+#verify_outgoing = false
+#verify_server_hostname = false
+#ca_file = ""
+#cert_file = ""
+#key_file = ""
