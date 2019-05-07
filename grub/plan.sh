@@ -17,6 +17,8 @@ pkg_build_deps=(
   core/diffutils
   core/dosfstools
   core/flex
+  core/zlib
+  core/libpng
   core/freetype
   core/gcc
   core/gettext
@@ -71,6 +73,10 @@ do_check() {
 
 do_after() {
   if [[ -n "${_GRUB_CLEANUP_BOOT}" ]]; then
+    # Although this looks dangerous, it shouldn't be
+    # because this should only every run in a habitat studio environment and
+    # the /boot directory is both created and destroyed by the plan
+    # shellcheck disable=SC2114
     rm -rf /boot
     info "Cleanup /boot"
   fi
