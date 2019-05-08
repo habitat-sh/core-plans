@@ -12,9 +12,14 @@ The Habitat Maintainers humans@habitat.sh
 
 ## Usage
 
+### Unix
 ```bash
 hab pkg install core/aws-cli
-hab pkg binlink core/aws-cli aws   # do not try to binlink all the python deps
+hab pkg exec core/aws-cli aws --version
+```
 
-aws --version
+### Windows
+```powershell
+hab pkg install core/aws-cli
+hab pkg exec core/aws-cli aws.cmd --version
 ```
