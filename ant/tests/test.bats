@@ -1,6 +1,5 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
-
 @test "Version matches" {
+  version="$(echo ${PKGIDENT} | cut -d/ -f3)"
   result="$(hab pkg exec "${PKGIDENT}" ant -version | awk '{print $4}')"
-  [ "$result" = "${pkg_version}" ]
+  [ "$result" = "${version}" ]
 }
