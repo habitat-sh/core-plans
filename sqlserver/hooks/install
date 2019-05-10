@@ -40,7 +40,4 @@ if($(Get-Service 'MpsSvc').Status -eq "Running") {
             Install-Module xNetworking -Force | Out-Null
         }
     }
-
-    Import-Module "{{pkgPathFor "core/dsc-core"}}/Modules/DscCore"
-    Start-DscCore (Join-Path {{pkg.svc_config_install_path}} firewall.ps1) NewFirewallRule
 }

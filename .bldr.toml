@@ -1362,6 +1362,10 @@ plan_path = "sqitch"
 plan_path = "sqitch_pg"
 [sqlite]
 plan_path = "sqlite"
+[sqlserver]
+plan_path = "sqlserver"
+[sqlserver-ha-ag]
+plan_path = "sqlserver-ha-ag"
 [sshpass]
 plan_path = "sshpass"
 [storm]
