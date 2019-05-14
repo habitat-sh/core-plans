@@ -57,7 +57,7 @@ do_default_build_service() {
 
 chef_client_cmd()
 {
-  chef-client -z -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb -j $pkg_svc_config_path/attributes.json --once --no-fork --run-lock-timeout {{cfg.run_lock_timeout}}
+  chef-client -z -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb -j $pkg_svc_config_path/attributes.json --once --no-fork --run-lock-timeout {{cfg.run_lock_timeout}} --chef-license "{{cfg.chef_license.acceptance}}"
 }
 
 SPLAY_DURATION=\$({{pkgPathFor "core/coreutils"}}/bin/shuf -i 0-{{cfg.splay}} -n 1)
@@ -155,6 +155,10 @@ EOF
 
   build_line "Generating Chef Habitat configuration, default.toml"
   cat << EOF >> "${pkg_prefix}/default.toml"
+
+# You must accept the Chef License to use this software: https://www.chef.io/end-user-license-agreement/
+# Change [chef_license] from acceptance = "undefined" to acceptance = "accept-no-persist" if you agree to the license.
+
 interval = 1800
 splay = 1800
 splay_first_run = 0
@@ -163,6 +167,9 @@ log_level = "warn"
 chef_client_ident = "" # this is blank by default so it can be populated from the bind
 env_path_prefix = "/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin"
 ssl_verify_mode = ":verify_peer"
+
+[chef_license]
+acceptance = "undefined"
 
 [data_collector]
 enable = false
