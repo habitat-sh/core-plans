@@ -1,0 +1,33 @@
+#!/bin/bash
+
+exec 2>&1
+set -x
+echo "Starting Apache Tomcat"
+
+# initialize
+JAVA_HOME=''
+JRE_HOME=''
+
+if hab pkg path core/jdk8; then
+  export JAVA_HOME="$( hab pkg path core/jdk8 )"
+elif hab pkg path core/jdk7; then
+  export JAVA_HOME="$( hab pkg path core/jdk7 )"
+fi
+
+if hab pkg path core/jre8; then
+  export JRE_HOME="$( hab pkg path core/jre8 )"
+elif hab pkg path core/jre7; then
+  export JRE_HOME="$( hab pkg path core/jre7 )"
+fi
+
+if [ -z "${JAVA_HOME}" ] && [ -z "${JRE_HOME}" ]; then
+  echo "Cannot start Tomcat without core/jdk8, core/jdk7, core/jre8, or core/jre7"
+  exit 1
+fi
+
+export TOMCAT_HOME="{{pkg.svc_var_path}}/tc"
+export CATALINA_OPTS="{{cfg.server.catalina-opts}}"
+
+echo "Executing Tomcat here: ${TOMCAT_HOME}/bin/catalina.sh"
+exec ${TOMCAT_HOME}/bin/catalina.sh run
+set +x
