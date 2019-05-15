@@ -64,26 +64,32 @@ Sample output:
 To run tests of an already built package in a new studio instance:
 
 ```powershell
-hab studio enter
-hab pkg install core/7zip/16.04/20190513101258
-$Arguments = @{ PackageIdentifier =  "core/7zip/16.04/20190513101258" }
-Install-Module -Name Pester -Force
-.\7zip\tests\test.ps1 @Arguments
+. .\results\last_build.ps1
+hab studio run "& ./7zip/tests/test.ps1 $pkg_ident"
 ```
 
 Sample output:
 
 ```powershell
-[HAB-STUDIO] Habitat:\src> .\7zip\tests\test.ps1 @Arguments
-Executing all tests in 'C:\src\7zip\tests/test.pester.ps1'
+PS C:\projects\core-plans> hab studio run "& ./7zip/tests/test.ps1 $pkg_ident"
 
-Executing script C:\src\7zip\tests/test.pester.ps1
+Id     Name            PSJobTypeName   State         HasMoreData     Location             Command
+--     ----            -------------   -----         -----------     --------             -------
+1      Job1            BackgroundJob   Running       True            localhost            Microsoft.PowerShell.M...
+core/7zip/16.04/20190513101258
+» Installing core/7zip/16.04/20190513101258
+→ Using core/7zip/16.04/20190513101258
+≡ Install of core/7zip/16.04/20190513101258 complete with 0 new packages installed.
+Executing all tests in 'C:\projects\core-plans\7zip\tests/test.pester.ps1'
+
+Executing script C:\projects\core-plans\7zip\tests/test.pester.ps1
 
   Describing The 7z bin
 
     Context 7z invoked without options
-      [+] Runs and exits successfully 295ms
-      [+] Mentions the expected version number on stdout 215ms
-Tests completed in 1.13s
+      [+] Runs and exits successfully 278ms
+      [+] Mentions the expected version number on stdout 207ms
+Tests completed in 1.03s
 Tests Passed: 2, Failed: 0, Skipped: 0, Pending: 0, Inconclusive: 0
+
 ```

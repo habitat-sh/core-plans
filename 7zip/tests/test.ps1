@@ -1,30 +1,20 @@
-#!/usr/bin/env pwsh
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Validate Input Parameters and System Software
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Ensure package ident has been passed
 param (
-    [Parameter(Mandatory=$true)]
-    [string]$PackageIdentifier = ""
+    [Parameter()]
+    [string]$PackageIdentifier = $(throw "Usage: test.ps1 [test_pgk_ident] e.g. test.ps1 core/7zip/16.04/20190513101258")
 )
 
-# validate pre-requisite software on test system
+# Ensure Pester is installed
 if (-Not (Get-Module -ListAvailable -Name Pester)) {
-    $message = -join @(
-        "Pester module must be installed before proceeding. "
-        "Refer to the following URL to install Pester: "
-        "https://github.com/pester/Pester/wiki/Installation-and-Update"
-    )
-    throw $message
+    Install-Module -Name Pester -Force
 }
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# MAIN
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Install the package
+hab pkg install $PackageIdentifier
 
-# test the package
+# Test the package
 $__dir=(Get-Item $PSScriptRoot)
-Invoke-Pester -Script @{
+Invoke-Pester -EnableExit -Script @{
     Path = "$__dir/test.pester.ps1";
     Parameters = @{PackageIdentifier=$PackageIdentifier}
 }
