@@ -35,28 +35,40 @@ hab pkg install core/7zip --binlink
 To run tests of an already built package in a new studio instance:
 
 ```bash
-hab studio enter
-hab pkg install core/7zip/16.02/20190513161338
-./7zip/tests/test.sh core/7zip/16.02/20190513161338
+source results/last_build.env
+hab studio run "./7zip/tests/test.sh $pkg_ident"
 ```
 
 Sample output:
 
 ```bash
-[21][default:/src:0]# ./7zip/tests/test.sh core/7zip/16.02/20190513161338
+➜  core-plans git:(7zip) ✗ hab studio run "./7zip/tests/test.sh $pkg_ident"
+   hab-studio: Importing 'core' secret origin key
+» Importing origin key from standard input
+★ Imported secret origin key core-20190311142149.
+   hab-studio: Importing 'core' public origin key
+» Importing origin key from standard input
+★ Imported public origin key core-20190311142149.
+   hab-studio: Exported: HAB_ORIGIN=core
 » Installing core/bats
 ☁ Determining latest version of core/bats in the 'stable' channel
-→ Using core/bats/0.4.0/20190115015448
-★ Install of core/bats/0.4.0/20190115015448 complete with 0 new packages installed.
+☛ Verifying core/bats/0.4.0/20190115015448
+...
+✓ Installed core/bats/0.4.0/20190115015448
+★ Install of core/bats/0.4.0/20190115015448 complete with 1 new packages installed.
 » Binlinking bats from core/bats/0.4.0/20190115015448 into /bin
 ★ Binlinked bats from core/bats/0.4.0/20190115015448 to /bin/bats
- ✓ package directory for package ident core/7zip/16.02/20190513161338 exists
- ✓ 7z exe runs
- ✓ 7z exe output mentions expected version 16.02
- ✓ 7za exe runs
- ✓ 7za exe output mentions expected version 16.02
-
-5 tests, 0 failures
+» Installing core/7zip/16.02/20190513161338
+☛ Verifying core/7zip/16.02/20190513161338
+...
+✓ Installed core/7zip/16.02/20190513161338
+★ Install of core/7zip/16.02/20190513161338 complete with 1 new packages installed.
+1..5
+ok 1 package directory for package ident core/7zip/16.02/20190513161338 exists
+ok 2 7z exe runs
+ok 3 7z exe output mentions expected version 16.02
+ok 4 7za exe runs
+ok 5 7za exe output mentions expected version 16.02
 ```
 
 ### Windows
