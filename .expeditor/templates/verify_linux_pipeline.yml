@@ -19,4 +19,8 @@
       executor:
         docker:
           privileged: true
+    soft_fail:
+      - exit_status: "*"
+    retry:
+      manual:
     timeout_in_minutes: 60
