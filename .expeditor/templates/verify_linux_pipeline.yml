@@ -20,3 +20,12 @@
         docker:
           privileged: true
     timeout_in_minutes: 60
+
+  - label: "[@@plan@@] :linux: :habicat: Build and run tests"
+    command:
+      - bin/ci/build-and-run-tests.sh @@plan@@
+    expeditor:
+      executor:
+        docker:
+          privileged: true
+    timeout_in_minutes: 60
