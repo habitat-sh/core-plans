@@ -17,6 +17,7 @@ pkg_exports=(
 pkg_exposes=(port status-port)
 pkg_binds_optional=(
   [backend]="port"
+  [tls_certificates]="domain fullchain privkey"
 )
 pkg_deps=(core/zlib core/pcre core/openssl)
 pkg_build_deps=(
