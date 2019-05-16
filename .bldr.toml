@@ -1053,6 +1053,8 @@ plan_path = "pcre"
 plan_path = "percona-xtrabackup"
 [perl]
 plan_path = "perl"
+[pester]
+plan_path = "pester"
 [phantomjs]
 plan_path = "phantomjs"
 [php]
