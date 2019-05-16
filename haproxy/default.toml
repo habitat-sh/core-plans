@@ -1,5 +1,6 @@
 httpchk = "GET /"
 maxconn = 32
+tls = false  # if set to 'true', ensure you bind to a `tls_certificates` export
 user = "hab"
 
 [front-end]

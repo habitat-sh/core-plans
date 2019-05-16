@@ -1,5 +1,5 @@
 pkg_name=haproxy
-pkg_origin=core
+pkg_origin=smartb
 pkg_description="The Reliable, High Performance TCP/HTTP Load Balancer"
 pkg_version=1.9.6
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
@@ -15,7 +15,7 @@ pkg_exports=(
   [status-port]=status.port
 )
 pkg_exposes=(port status-port)
-pkg_binds=(
+pkg_binds_optional=(
   [backend]="port"
 )
 pkg_deps=(core/zlib core/pcre core/openssl)
