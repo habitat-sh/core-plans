@@ -1,6 +1,6 @@
 # Apache Tomcat 8
 
-A plan for Apache Tomcat 8 web server. 
+A plan for Apache Tomcat 8 web server.
 
 ## Maintainers
 
@@ -25,5 +25,3 @@ An example of using the core/tomcat8 with core/jre8 is found [here](examples/usi
 ## Exports
 
 This packages exports a `server.port` in the plan.
-
-
