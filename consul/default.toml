@@ -4,7 +4,9 @@
 # These defaults are setup for Consul Server mode
 
 [agent]
+client_addr = "0.0.0.0"
 enable_encryption = false
+enable_script_checks = true
 datacenter = "dc1"
 data_dir = "/hab/svc/consul/data/consul"
 log_level = "INFO"
