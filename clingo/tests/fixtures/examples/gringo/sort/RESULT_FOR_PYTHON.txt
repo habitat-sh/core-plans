@@ -1,0 +1,9 @@
+p(1).
+p(a).
+p(b).
+p(s(f)).
+gather(1).
+enumerate(0,1).
+enumerate(1,a).
+enumerate(2,b).
+enumerate(3,s(f)).

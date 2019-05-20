@@ -16,6 +16,8 @@ pkg_build_deps=(
 pkg_deps=(
   core/gcc-libs
   core/glibc
+  core/python
+  core/lua
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
@@ -28,7 +30,9 @@ do_build() {
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
     -DCLINGO_MANAGE_RPATH=YES \
-    -DCLINGO_BUILD_APPS=YES
+    -DCLINGO_BUILD_APPS=YES \
+    -DLUA_LIBRARIES="$(pkg_path_for core/lua)/lib/liblua.a" \
+    -DLUA_INCLUDE_DIR="$(pkg_path_for core/lua)/include"
   make -C build
 }
 
