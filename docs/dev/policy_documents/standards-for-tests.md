@@ -174,7 +174,7 @@ fi
 
 TEST_PKG_IDENT="$1"
 
-hab pkg install --binlink core/bats
+hab pkg install core/bats --binlink
 hab pkg install "$TEST_PKG_IDENT"
 
 export TEST_PKG_IDENT
