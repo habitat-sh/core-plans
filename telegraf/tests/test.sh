@@ -4,7 +4,7 @@ TESTDIR="$(dirname "${0}")"
 PLANDIR="$(dirname "${TESTDIR}")"
 SKIPBUILD=${SKIPBUILD:-0}
 
-hab pkg install --binlink core/bats
+hab pkg install core/bats --binlink
 
 if [ "${SKIPBUILD}" -eq 0 ]; then
   source "${PLANDIR}/plan.sh"

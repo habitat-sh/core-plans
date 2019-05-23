@@ -17,7 +17,7 @@ This package can be used as binary or service package.
 Usage as a binary package is simply running the command after installation:
 
 ```
-hab pkg install --binlink core/caddy
+hab pkg install core/caddy --binlink
 caddy
 ```
 

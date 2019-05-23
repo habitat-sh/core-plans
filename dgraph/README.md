@@ -15,7 +15,7 @@ Binary package
 Usage instructions for Dgraph specifically can be found in their [documentation](https://docs.dgraph.io/get-started/). This package provides the binary only, and can be used as follows:
 
 ```
-hab pkg install --binlink core/dgraph
+hab pkg install core/dgraph --binlink
 dgraph help
 ```
 

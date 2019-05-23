@@ -15,7 +15,7 @@ Binary package
 Install this package to run the binary, or include it as a dependency of your own plan to allow it to be called from some other process.
 
 ```
-hab pkg install --binlink core/pngcrush
+hab pkg install core/pngcrush --binlink
 pngcrush --help
 ```
 

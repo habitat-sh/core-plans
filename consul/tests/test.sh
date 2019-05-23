@@ -6,7 +6,7 @@ SKIPBUILD=${SKIPBUILD:-0}
 
 source "${TESTDIR}/helpers.bash"
 
-hab pkg install --binlink core/bats
+hab pkg install core/bats --binlink
 
 hab pkg install core/busybox-static
 hab pkg binlink core/busybox-static nc

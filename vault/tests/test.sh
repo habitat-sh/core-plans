@@ -4,9 +4,9 @@ TESTDIR="$(dirname "${0}")"
 PLANDIR="$(dirname "${TESTDIR}")"
 SKIPBUILD=${SKIPBUILD:-0}
 
-hab pkg install --binlink core/bats
-hab pkg install --binlink core/curl
-hab pkg install --binlink core/jq-static
+hab pkg install core/bats --binlink
+hab pkg install core/curl --binlink
+hab pkg install core/jq-static --binlink
 
 hab pkg install core/busybox-static
 hab pkg binlink core/busybox-static ps

@@ -25,6 +25,6 @@ pkg_deps=(
 Or to just use the binary:
 
 ```
-hab pkg install --binlink core/optipng
+hab pkg install core/optipng --binlink
 optipng myfile.png
 ```

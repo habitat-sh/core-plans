@@ -4,8 +4,8 @@ TESTDIR="$(dirname "${0}")"
 PLANDIR="$(dirname "${TESTDIR}")"
 SKIPBUILD=${SKIPBUILD:-0}
 
-hab pkg install --binlink core/bats
-hab pkg install --binlink core/jre8
+hab pkg install core/bats --binlink
+hab pkg install core/jre8 --binlink
 
 source "${PLANDIR}/plan.sh"
 

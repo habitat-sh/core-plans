@@ -25,13 +25,13 @@ if [ "${SKIPBUILD}" -eq 0 ]; then
   sleep ${_seconds}
 fi
 
-hab pkg install --binlink core/coreutils-static
-hab pkg install --binlink core/glibc
-hab pkg install --binlink core/jre8
-hab pkg install --binlink core/wget
-hab pkg install --binlink core/curl
-hab pkg install --binlink core/busybox-static
+hab pkg install core/coreutils-static --binlink
+hab pkg install core/glibc --binlink
+hab pkg install core/jre8 --binlink
+hab pkg install core/wget --binlink
+hab pkg install core/curl --binlink
+hab pkg install core/busybox-static --binlink
 
-hab pkg install --binlink core/bats
+hab pkg install core/bats --binlink
 
 bats "${TESTDIR}/test.bats"
