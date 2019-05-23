@@ -1,11 +1,11 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
+TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Version matches" {
-  result="$(strace -V | head -1 | awk '{print $4}')"
-  [ "$result" = "${pkg_version}" ]
+  result="$(hab pkg exec "${TEST_PKG_IDENT}" strace -V | head -1 | awk '{print $4}')"
+  [ "$result" = "${TEST_PKG_VERSION}" ]
 }
 
 @test "Can strace" {
-  run strace strace -h
+  run hab pkg exec "${TEST_PKG_IDENT}" strace strace -h
   [ $status -eq 0 ]
 }
