@@ -29,7 +29,7 @@ if [ "${SKIPBUILD}" -eq 0 ]; then
 fi
 
 source "${PLANDIR}/results/last_build.env"
-hab pkg install --binlink --force "${PLANDIR}/results/${pkg_artifact}"
+hab pkg install "${PLANDIR}/results/${pkg_artifact}" --binlink --force
 hab svc load "${pkg_ident}"
 
 # Wait for 5 seconds on first check, to ensure service is up.
