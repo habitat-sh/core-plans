@@ -8,7 +8,7 @@ load helpers
 
 @test "/v1/data/system/version endpoint returns version" {
   curl -f http://127.0.0.1:8181/v1/data/system/version |
-    jq -e --arg vsn "$pkg_version" '.result.Version == $vsn'
+    jq -e --arg vsn "$pkg_version" '.result.version == $vsn'
 }
 
 @test "/v1/query endpoint returns an answer" {
