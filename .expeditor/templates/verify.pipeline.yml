@@ -8,5 +8,5 @@ expeditor:
 
 steps:
   - label: "Testing"
-  commands:
-    - "exit 52"
+    commands:
+      - "exit 52"
