@@ -8,5 +8,6 @@ expeditor:
 
 steps:
   - label: "Testing"
-    commands:
-      - "exit 52"
+    command: ".expeditor/soft_fail.sh"
+    soft_fail:
+      - exit_status: 52
