@@ -1,4 +1,12 @@
+expeditor:
+  defaults:
+    buildkite:
+      timeout_in_minutes: 10
+      retry:
+        automatic:
+          limit: 1
+
 steps:
-  label: "Testing"
+  - label: "Testing"
   commands:
     - "exit 52"
