@@ -681,7 +681,7 @@ _detect_pg() {
   for gem in "${_pg_gems[@]}"; do
     if _has_gem "$gem"; then
       build_line "Detected '$gem' gem in Gemfile.lock, adding postgresql package"
-      pkg_deps=(core/postgresql ${pkg_deps[@]})
+      pkg_deps=(core/postgresql-client ${pkg_deps[@]})
       debug "Updating pkg_deps=(${pkg_deps[*]}) from Scaffolding detection"
       _uses_pg=true
       return 0
