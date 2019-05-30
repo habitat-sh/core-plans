@@ -12,4 +12,13 @@ Binary package
 
 ## Usage
 
-*TODO: Add instructions for usage*
+See https://www.haskell.org/alex
+
+## Testing
+
+To run tests of an already built package in a new studio instance:
+
+```bash
+source results/last_build.env
+hab studio run "./alex/tests/test.sh $pkg_ident"
+```
