@@ -1,12 +1,12 @@
 pkg_name=tmux
 pkg_origin=core
-pkg_version=2.8
+pkg_version=2.9a
 pkg_description="A terminal multiplexer"
 pkg_upstream_url=https://tmux.github.io/
 pkg_license=('MIT')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/tmux/tmux/releases/download/${pkg_version}/tmux-${pkg_version}.tar.gz"
-pkg_shasum=7f6bf335634fafecff878d78de389562ea7f73a7367f268b66d37ea13617a2ba
+pkg_shasum=839d167a4517a6bffa6b6074e89a9a8630547b2dea2086f1fad15af12ab23b25
 pkg_deps=(
   core/glibc
   core/libevent
