@@ -22,3 +22,13 @@ TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
   run hab pkg exec "${TEST_PKG_IDENT}" arpaname 127.0.0.1
   [ $status -eq 0 ]
 }
+
+@test "DNSSec Keygen" {
+  result="$(hab pkg exec "${TEST_PKG_IDENT}" dnssec-keygen -a RSASHA512 test)"
+  status=$?
+  [ $status -eq 0 ]
+
+  keyname="$(echo "${result}" | tail -1)"
+  [ -f "${keyname}.key" ]
+  [ -f "${keyname}.private" ]
+}
