@@ -46,12 +46,14 @@ do_prepare() {
 }
 
 do_build() {
+  attach
+  PYTHONPATH="${pkg_prefix}/pip"
+  export PYTHONPATH
   ./configure \
     --prefix="${pkg_prefix}" \
     --with-libxml2="$(pkg_path_for "core/libxml2")" \
     --with-openssl="$(pkg_path_for "core/openssl")" \
-    --with-python="$(pkg_path_for core/python)/bin/python" \
-    --with-python-install-dir="${pkg_prefix}/pip"
+    --with-python="$(pkg_path_for core/python)/bin/python"
   make
 }
 
