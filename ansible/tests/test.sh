@@ -1,24 +1,18 @@
 #!/bin/sh
 
+set -euo pipefail
+
 TESTDIR="$(dirname "${0}")"
-PLANDIR="$(dirname "${TESTDIR}")"
-SKIPBUILD=${SKIPBUILD:-0}
 
-hab pkg install --binlink core/bats
-
-source "${PLANDIR}/plan.sh"
-
-if [ "${SKIPBUILD}" -eq 0 ]; then
-  set -e
-  pushd "${PLANDIR}" > /dev/null
-  build
-  source results/last_build.env
-  hab pkg install --binlink --force "results/${pkg_artifact}"
-  popd > /dev/null
-  set +e
+if [ -z "${1:-}" ]; then
+  echo "Usage: $0 FULLY_QUALIFIED_PACKAGE_IDENT"
+  exit 1
 fi
 
-PYTHONPATH="$(hab pkg path core/python2)/lib/python2.7/site-packages:$(hab pkg path "${HAB_ORIGIN}/${pkg_name}")/lib/python2.7/site-packages"
-export PYTHONPATH
+TEST_PKG_IDENT="$1"
 
+hab pkg install core/bats --binlink
+hab pkg install "$TEST_PKG_IDENT"
+
+export TEST_PKG_IDENT
 bats "${TESTDIR}/test.bats"

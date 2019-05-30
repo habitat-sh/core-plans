@@ -1,11 +1,11 @@
 pkg_name=ansible
 pkg_origin=core
-pkg_version="2.7.6"
+pkg_version="2.7.11"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("GPL-3.0")
 pkg_source="https://github.com/${pkg_name}/${pkg_name}/archive/v${pkg_version}.tar.gz"
 pkg_filename="${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="f37b83e614ec1b004714456e99ed8cad66541e0739bd5765b71caa541c7f9861"
+pkg_shasum="1112f0d1295cd121b7f997141402e3a4506ffd6bbc8eb4b2ba5de1eb0aa5e536"
 pkg_deps=(
   core/libffi
   core/python2
