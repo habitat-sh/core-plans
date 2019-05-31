@@ -1,17 +1,20 @@
 pkg_name=bind
 pkg_origin=core
-pkg_version=9.11.2
+pkg_version=9.14.2
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Versatile, Classic, Complete Name Server Software"
 pkg_upstream_url="https://www.isc.org/downloads/bind/"
 pkg_license=("MPL-2.0")
-pkg_source="https://ftp.isc.org/isc/bind9/9.11.2/bind-${pkg_version}.tar.gz"
-pkg_shasum="7f46ad8620f7c3b0ac375d7a5211b15677708fda84ce25d7aeb7222fe2e3c77a"
+pkg_source="https://ftp.isc.org/isc/bind9/${pkg_version}/bind-${pkg_version}.tar.gz"
+pkg_shasum="0e4027573726502ec038db3973a086c02508671723a4845e21da1769a5c27f0c"
 pkg_deps=(
   core/glibc
   core/libxml2
   core/openssl
   core/zlib
+  core/libcap
+  core/busybox-static
+  core/python
 )
 pkg_build_deps=(
   core/diffutils
@@ -27,18 +30,29 @@ pkg_bin_dirs=(
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
+ply_version="3.11"
+
 do_prepare() {
   # The configure script expects `file` binaries to be in `/usr/bin`
   if [[ ! -r /usr/bin/file ]]; then
     ln -sv "$(pkg_path_for file)/bin/file" /usr/bin/file
     _clean_file=true
   fi
+
+  pip install \
+    --target "${pkg_prefix}/pip" \
+    --ignore-installed \
+    "ply==${ply_version}"
 }
 
 do_build() {
-  ./configure --prefix="${pkg_prefix}" \
+  PYTHONPATH="${pkg_prefix}/pip"
+  export PYTHONPATH
+  ./configure \
+    --prefix="${pkg_prefix}" \
     --with-libxml2="$(pkg_path_for "core/libxml2")" \
-    --with-openssl="$(pkg_path_for "core/openssl")"
+    --with-openssl="$(pkg_path_for "core/openssl")" \
+    --with-python="$(pkg_path_for core/python)/bin/python"
   make
 }
 
