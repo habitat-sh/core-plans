@@ -53,13 +53,13 @@ do_prepare() {
 
   # Add `cacerts` to the SSL certificate lookup chain
   # shellcheck disable=SC2002
-  cat "$PLAN_CONTEXT/cacerts.patch" \
+  cat "${PLAN_CONTEXT}/cacerts.patch" \
     | sed -e "s,@cacerts@,$(pkg_path_for cacerts)/ssl/cert.pem,g" \
     | patch -p1
 
   # Set the dynamic linker from `glibc`
   dynamic_linker="$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2"
-  sed -e "s,/lib64/ld-linux-x86-64.so.2,$dynamic_linker," \
+  sed -e "s,/lib64/ld-linux-x86-64.so.2,${dynamic_linker}," \
     -i src/cmd/link/internal/amd64/obj.go
 
   # Use the services database from `iana-etc`
@@ -97,35 +97,35 @@ do_check() {
 
   # Clean up any symlinks that were added to support the build's test suite.
   for cmd in "${_clean_cmds[@]}"; do
-    rm -fv "$cmd"
+    rm -fv "${cmd}"
   done
 }
 
 do_install() {
-  cp -av bin src lib doc misc "$pkg_prefix/"
+  cp -av bin src lib doc misc "${pkg_prefix}/"
 
-  mkdir -pv "$pkg_prefix/bin" "$pkg_prefix/pkg"
-  cp -av pkg/{linux_$GOARCH,tool} "$pkg_prefix/pkg/"
+  mkdir -pv "${pkg_prefix}/bin" "${pkg_prefix}/pkg"
+  cp -av pkg/{linux_${GOARCH},tool} "${pkg_prefix}/pkg/"
   if [[ -d "pkg/linux_${GOARCH}_race" ]]; then
-    cp -av pkg/linux_${GOARCH}_race "$pkg_prefix/pkg/"
+    cp -av pkg/linux_${GOARCH}_race "${pkg_prefix}/pkg/"
   fi
 
   # For godoc
-  install -v -Dm644 favicon.ico "$pkg_prefix/favicon.ico"
+  install -v -Dm644 favicon.ico "${pkg_prefix}/favicon.ico"
 
   # Install the license
-  install -v -Dm644 LICENSE "$pkg_prefix/share/licenses/LICENSE"
+  install -v -Dm644 LICENSE "${pkg_prefix}/share/licenses/LICENSE"
 
   # Remove unneeded Windows files
-  rm -fv "$pkg_prefix/src/*.bat"
+  rm -fv "${pkg_prefix}/src/*.bat"
 
   # Move header files to the correct place
-  cp -arv "$pkg_prefix/src/runtime" "$pkg_prefix/pkg/include"
+  cp -arv "${pkg_prefix}/src/runtime" "${pkg_prefix}/pkg/include"
 }
 
 do_strip() {
   # Strip manually since `strip` will not process Go's static libraries.
-  for f in $pkg_prefix/bin/* $pkg_prefix/pkg/tool/linux_$GOARCH/*; do
-    strip -s "$f"
+  for f in "${pkg_prefix}/bin/"* "${pkg_prefix}/pkg/tool/linux_${GOARCH}/"*; do
+    strip -s "${f}"
   done
 }
