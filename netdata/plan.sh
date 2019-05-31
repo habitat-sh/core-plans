@@ -6,7 +6,7 @@ pkg_license=("GPL-3.0-or-later")
 pkg_description="netdata is a system for distributed real-time performance and health monitoring."
 pkg_upstream_url="https://github.com/firehol/netdata"
 pkg_source="https://github.com/firehol/${pkg_name}/archive/v${pkg_version}.tar.gz"
-pkg_shasum="bc8ed3b3670ca63ede6be1775ee073ee580ede1a2425fc06c5ed407537fc3e9c"
+pkg_shasum="60cf4a15c25c828e25ae1218a485c21ef23423f7b6a9a1148ce9eea9c9726a39"
 pkg_build_deps=(
   core/autoconf
   core/autogen
