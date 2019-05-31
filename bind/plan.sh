@@ -46,7 +46,6 @@ do_prepare() {
 }
 
 do_build() {
-  attach
   PYTHONPATH="${pkg_prefix}/pip"
   export PYTHONPATH
   ./configure \
