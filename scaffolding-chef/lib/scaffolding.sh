@@ -14,7 +14,6 @@ fi
 scaffolding_load() {
   : "${scaffold_chef_client:=chef/chef-client}"
   : "${scaffold_chef_dk:=chef/chef-dk}"
-
   : "${scaffold_policyfiles_path:=$PLAN_CONTEXT/../policyfiles}"
   : "${scaffold_data_bags_path:=$PLAN_CONTEXT/../data_bags}"
 
@@ -55,25 +54,35 @@ do_default_build_service() {
   cat << EOF >> "${pkg_prefix}/hooks/run"
 #!/bin/sh
 
+CFG_ENV_PATH_PREFIX={{cfg.env_path_prefix}}
+CFG_ENV_PATH_PREFIX="\${CFG_ENV_PATH_PREFIX:-/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin}"
+CFG_INTERVAL={{cfg.interval}}
+CFG_INTERVAL="\${CFG_INTERVAL:-1800}"
+CFG_LOG_LEVEL={{cfg.log_level}}
+CFG_LOG_LEVEL="\${CFG_LOG_LEVEL:-warn}"
+CFG_RUN_LOCK_TIMEOUT={{cfg.run_lock_timeout}}
+CFG_RUN_LOCK_TIMEOUT="\${CFG_RUN_LOCK_TIMEOUT:-1800}"
+CFG_SPLAY={{cfg.splay}}
+CFG_SPLAY="\${CFG_SPLAY:-1800}"
+CFG_SPLAY_FIRST_RUN={{cfg.splay_first_run}}
+CFG_SPLAY_FIRST_RUN="\${CFG_SPLAY_FIRST_RUN:-0}"
+CFG_SSL_VERIFY_MODE={{cfg.ssl_verify_mode}}
+CFG_SSL_VERIFY_MODE="\${CFG_SSL_VERIFY_MODE:-:verify_peer}"
+CFG_CHEF_LICENSE={{cfg.chef_license.acceptance}}
+CFG_CHEF_LICENSE="\${CFG_CHEF_LICENSE:-undefined}"
+
 chef_client_cmd()
 {
-  chef-client -z -l {{cfg.log_level}} -c $pkg_svc_config_path/client-config.rb -j $pkg_svc_config_path/attributes.json --once --no-fork --run-lock-timeout {{cfg.run_lock_timeout}} --chef-license "{{cfg.chef_license.acceptance}}"
+  chef-client -z -l \$CFG_LOG_LEVEL -c $pkg_svc_config_path/client-config.rb -j $pkg_svc_config_path/attributes.json --once --no-fork --run-lock-timeout \$CFG_RUN_LOCK_TIMEOUT --chef-license "\$CFG_CHEF_LICENSE"
 }
 
-SPLAY_DURATION=\$({{pkgPathFor "core/coreutils"}}/bin/shuf -i 0-{{cfg.splay}} -n 1)
+SPLAY_DURATION=\$(shuf -i 0-\$CFG_SPLAY -n 1)
 
-SPLAY_FIRST_RUN_DURATION=\$({{pkgPathFor "core/coreutils"}}/bin/shuf -i 0-{{cfg.splay_first_run}} -n 1)
+SPLAY_FIRST_RUN_DURATION=\$(shuf -i 0-\$CFG_SPLAY_FIRST_RUN -n 1)
 
 export SSL_CERT_FILE="{{pkgPathFor "core/cacerts"}}/ssl/cert.pem"
 
 cd {{pkg.path}}
-
-# After the first run of the chef-client,
-# export the new package ident so that
-# other software can bind to it.
-# For example, this is useful for InSpec
-# to execute its run hook immediately after
-# the chef-client run has finished.
 
 exec 2>&1
 sleep \$SPLAY_FIRST_RUN_DURATION
@@ -82,7 +91,7 @@ chef_client_cmd
 while true; do
 
 sleep \$SPLAY_DURATION
-sleep {{cfg.interval}}
+sleep \$CFG_INTERVAL
 chef_client_cmd
 done
 EOF
