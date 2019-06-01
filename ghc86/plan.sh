@@ -11,4 +11,4 @@ pkg_source="http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-
 pkg_shasum="4d4aa1e96f4001b934ac6193ab09af5d6172f41f5a5d39d8e43393b9aafee361"
 pkg_dirname="ghc-${pkg_version}"
 
-pkg_include_dirs=(lib/ghc-${pkg_version}/include)
+pkg_include_dirs=("lib/ghc-${pkg_version}/include")
