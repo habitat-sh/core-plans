@@ -1,16 +1,28 @@
 pkg_name=go
 pkg_origin=core
-pkg_version=1.12
+pkg_version=1.12.5
 pkg_description="Go is an open source programming language that makes it easy to
   build simple, reliable, and efficient software."
 pkg_upstream_url=https://golang.org/
 pkg_license=('BSD')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source=https://storage.googleapis.com/golang/go${pkg_version}.src.tar.gz
-pkg_shasum=09c43d3336743866f2985f566db0520b36f4992aea2b4b2fd9f52f17049e88f2
+pkg_source="https://storage.googleapis.com/golang/go${pkg_version}.src.tar.gz"
+pkg_shasum=2aa5f088cbb332e73fc3def546800616b38d3bfe6b8713b8a6404060f22503e8
 pkg_dirname=go
-pkg_deps=(core/glibc core/iana-etc core/cacerts)
-pkg_build_deps=(core/coreutils core/inetutils core/bash core/patch core/gcc core/go17 core/perl)
+pkg_deps=(
+  core/glibc
+  core/iana-etc
+  core/cacerts
+)
+pkg_build_deps=(
+  core/coreutils
+  core/inetutils
+  core/bash
+  core/patch
+  core/gcc
+  core/go17
+  core/perl
+)
 pkg_bin_dirs=(bin)
 
 do_prepare() {
@@ -41,13 +53,13 @@ do_prepare() {
 
   # Add `cacerts` to the SSL certificate lookup chain
   # shellcheck disable=SC2002
-  cat "$PLAN_CONTEXT/cacerts.patch" \
+  cat "${PLAN_CONTEXT}/cacerts.patch" \
     | sed -e "s,@cacerts@,$(pkg_path_for cacerts)/ssl/cert.pem,g" \
     | patch -p1
 
   # Set the dynamic linker from `glibc`
   dynamic_linker="$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2"
-  sed -e "s,/lib64/ld-linux-x86-64.so.2,$dynamic_linker," \
+  sed -e "s,/lib64/ld-linux-x86-64.so.2,${dynamic_linker}," \
     -i src/cmd/link/internal/amd64/obj.go
 
   # Use the services database from `iana-etc`
@@ -85,35 +97,35 @@ do_check() {
 
   # Clean up any symlinks that were added to support the build's test suite.
   for cmd in "${_clean_cmds[@]}"; do
-    rm -fv "$cmd"
+    rm -fv "${cmd}"
   done
 }
 
 do_install() {
-  cp -av bin src lib doc misc "$pkg_prefix/"
+  cp -av bin src lib doc misc "${pkg_prefix}/"
 
-  mkdir -pv "$pkg_prefix/bin" "$pkg_prefix/pkg"
-  cp -av pkg/{linux_$GOARCH,tool} "$pkg_prefix/pkg/"
+  mkdir -pv "${pkg_prefix}/bin" "${pkg_prefix}/pkg"
+  cp -av pkg/{linux_${GOARCH},tool} "${pkg_prefix}/pkg/"
   if [[ -d "pkg/linux_${GOARCH}_race" ]]; then
-    cp -av pkg/linux_${GOARCH}_race "$pkg_prefix/pkg/"
+    cp -av pkg/linux_${GOARCH}_race "${pkg_prefix}/pkg/"
   fi
 
   # For godoc
-  install -v -Dm644 favicon.ico "$pkg_prefix/favicon.ico"
+  install -v -Dm644 favicon.ico "${pkg_prefix}/favicon.ico"
 
   # Install the license
-  install -v -Dm644 LICENSE "$pkg_prefix/share/licenses/LICENSE"
+  install -v -Dm644 LICENSE "${pkg_prefix}/share/licenses/LICENSE"
 
   # Remove unneeded Windows files
-  rm -fv "$pkg_prefix/src/*.bat"
+  rm -fv "${pkg_prefix}/src/*.bat"
 
   # Move header files to the correct place
-  cp -arv "$pkg_prefix/src/runtime" "$pkg_prefix/pkg/include"
+  cp -arv "${pkg_prefix}/src/runtime" "${pkg_prefix}/pkg/include"
 }
 
 do_strip() {
   # Strip manually since `strip` will not process Go's static libraries.
-  for f in $pkg_prefix/bin/* $pkg_prefix/pkg/tool/linux_$GOARCH/*; do
-    strip -s "$f"
+  for f in "${pkg_prefix}/bin/"* "${pkg_prefix}/pkg/tool/linux_${GOARCH}/"*; do
+    strip -s "${f}"
   done
 }
