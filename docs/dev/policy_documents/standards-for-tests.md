@@ -184,10 +184,6 @@ bats "${TESTDIR}/test.bats"
 BATS test script `7zip/tests/test.bats`:
 
 ```bash
-@test "package directory for package ident ${TEST_PKG_IDENT} exists" {
-  [ -d "/hab/pkgs/${TEST_PKG_IDENT}" ]
-}
-
 expected_version="$(echo $TEST_PKG_IDENT | cut -d/ -f 3)"
 @test "7z exe runs" {
   run hab pkg exec $TEST_PKG_IDENT 7z
@@ -242,12 +238,11 @@ Sample output:
 ...
 ✓ Installed core/7zip/16.02/20190513161338
 ★ Install of core/7zip/16.02/20190513161338 complete with 1 new packages installed.
-1..5
-ok 1 package directory for package ident core/7zip/16.02/20190513161338 exists
-ok 2 7z exe runs
-ok 3 7z exe output mentions expected version 16.02
-ok 4 7za exe runs
-ok 5 7za exe output mentions expected version 16.02
+1..4
+ok 1 7z exe runs
+ok 2 7z exe output mentions expected version 16.02
+ok 3 7za exe runs
+ok 4 7za exe output mentions expected version 16.02
 ```
 
 ### Examples of why `hab pkg exec` should be used
