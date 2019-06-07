@@ -18,3 +18,18 @@ hab pkg binlink core/azure-cli az   # do not try to binlink all the python deps
 
 az --version
 ```
+
+## Testing
+```
+hab studio build azure-cli
+source results/last_build.env
+hab studo run ./azure-cli/tests/test.sh ${pkg_ident}
+```
+
+## Sample Output
+```
+ ✓ az exe runs
+ ✓ az exe outputs the expected version 2.0.57
+
+2 tests, 0 failures
+```
