@@ -1,16 +1,12 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
-
-@test "Command is on path" {
-  [ "$(command -v journalbeat)" ]
-}
+TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Version matches" {
-  result="$(journalbeat version | awk '{print $3}')"
-  [ "$result" = "${pkg_version}" ]
+  result="$(hab pkg exec "${TEST_PKG_IDENT}" journalbeat version | awk '{print $3}')"
+  [ "$result" = "${TEST_PKG_VERSION}" ]
 }
 
 @test "Help command" {
-  run journalbeat --help
+  run hab pkg exec "${TEST_PKG_IDENT}" journalbeat --help
   [ $status -eq 0 ]
 }
 
