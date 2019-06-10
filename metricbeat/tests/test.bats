@@ -1,16 +1,12 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
-
-@test "Command is on path" {
-  [ "$(command -v metricbeat)" ]
-}
+TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Version matches" {
-  result="$(metricbeat version | awk '{print $3}')"
-  [ "$result" = "${pkg_version}" ]
+  result="$(hab pkg exec ${TEST_PKG_IDENT} metricbeat version | awk '{print $3}')"
+  [ "$result" = "${TEST_PKG_VERSION}" ]
 }
 
 @test "Help command" {
-  run metricbeat --help
+  run hab pkg exec ${TEST_PKG_IDENT} metricbeat --help
   [ $status -eq 0 ]
 }
 
