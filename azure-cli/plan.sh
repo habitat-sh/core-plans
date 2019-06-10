@@ -6,8 +6,8 @@ pkg_description="The Azure command-line interface (CLI) is Microsoft's cross-pla
   command-line experience for managing Azure resources. Use it in your browser with Azure \
   Cloud Shell, or install it on macOS, Linux, or Windows and run it from the command line."
 pkg_upstream_url=https://docs.microsoft.com/en-us/cli/azure
-pkg_version=2.0.57
-pkg_shasum="0777d6c301bf741a2fdf9d2053a3a9285a4e0f5a067b64659e77c1ca9ed71e7a"
+pkg_version=2.0.66
+pkg_shasum="6b46c45d4f1773bd7c2299a4d2676b050c25beecd0e1d944b1fb95614ae5c5f3"
 pkg_source="https://github.com/Azure/azure-cli/archive/azure-cli-${pkg_version}.tar.gz"
 pkg_dirname=${pkg_name}-${pkg_name}-${pkg_version}
 pkg_build_deps=(
