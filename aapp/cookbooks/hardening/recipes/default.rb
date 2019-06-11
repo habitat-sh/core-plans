@@ -1,1 +1,0 @@
-directory 'C:/test'
