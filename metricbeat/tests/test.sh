@@ -1,32 +1,34 @@
 #!/bin/sh
+#/ Usage: test.sh <pkg_ident>
+#/
+#/ Example: test.sh core/php/7.2.8/20181108151533
+#/
 
-TESTDIR="$(dirname "${0}")"
-PLANDIR="$(dirname "${TESTDIR}")"
-SKIPBUILD=${SKIPBUILD:-0}
+set -euo pipefail
 
-hab pkg install --binlink core/bats
+if [[ -z "${1:-}" ]]; then
+  grep '^#/' < "${0}" | cut -c4-
+	exit 1
+fi
 
+TEST_PKG_IDENT="${1}"
+export TEST_PKG_IDENT
+hab pkg install core/bats --binlink
 hab pkg install core/busybox-static
 hab pkg binlink core/busybox-static ps
 hab pkg binlink core/busybox-static wc
+hab pkg install "${TEST_PKG_IDENT}"
 
-source "${PLANDIR}/plan.sh"
+hab sup term
+hab sup run &
+sleep 5
+hab svc load "${TEST_PKG_IDENT}"
 
-if [ "${SKIPBUILD}" -eq 0 ]; then
-    # Unload the service if its already loaded.
-    hab svc unload "${HAB_ORIGIN}/${pkg_name}"
+# Allow service start
+WAIT_SECONDS=5
+echo "Waiting ${WAIT_SECONDS} seconds for service to start..."
+sleep "${WAIT_SECONDS}"
 
-    set -e
-    pushd "${PLANDIR}" > /dev/null
-    build
-    source results/last_build.env
-    hab pkg install --binlink --force "results/${pkg_artifact}"
-    hab svc load "${pkg_ident}"
-    popd > /dev/null
-    set +e
+bats "$(dirname "${0}")/test.bats"
 
-    # Give some time for the service to start up
-    sleep 5
-fi
-
-bats "${TESTDIR}/test.bats"
+hab svc unload "${TEST_PKG_IDENT}" || true

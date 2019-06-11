@@ -48,7 +48,6 @@ metricsets = ["uptime"]
 hosts = ["localhost:9200"]
 
 #================================ Logging ======================================
-
 [logging]
 to_files = true
 [logging.files]
