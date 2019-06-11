@@ -110,7 +110,7 @@ wix @mwrock
 # inclusion here is voluntary.
 # This list shall be alphabetical, for sanity purposes.
 
-acbuild @rsertelon
+acbuild @rsertelon @echohack
 alex @wduncanfraser
 artifactory-pro @defilan
 atk @rsertelon
