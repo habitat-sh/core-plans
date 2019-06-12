@@ -305,6 +305,8 @@ plan_path = "exercism"
 plan_path = "expat"
 [expect]
 plan_path = "expect"
+[fd]
+plan_path = "fd"
 [ffmpeg]
 plan_path = "ffmpeg"
 [ffmpeg3]
