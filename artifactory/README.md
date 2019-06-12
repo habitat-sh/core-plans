@@ -35,5 +35,5 @@ Build the package and run tests like so:
 ```bash
 hab studio build artifactory
 source results/last_build.env
-hab studio run "./artifactory/tests/test.sh $pkg_ident"
+hab studio run "./artifactory/tests/test.sh ${pkg_ident}"
 ```
