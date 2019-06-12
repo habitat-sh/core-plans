@@ -1,12 +1,12 @@
 pkg_name=haproxy
 pkg_origin=core
 pkg_description="The Reliable, High Performance TCP/HTTP Load Balancer"
-pkg_version=1.9.6
+pkg_version=1.9.8
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=('GPL-2.0' 'LGPL-2.1')
 pkg_source="https://www.haproxy.org/download/1.9/src/haproxy-${pkg_version}.tar.gz"
 pkg_upstream_url="https://www.haproxy.org/"
-pkg_shasum=0837c35e2914d40f685740487886e86b1b16132b81ecb60a3be66cf9a6f19bef
+pkg_shasum=2d9a3300dbd871bc35b743a83caaf50fecfbf06290610231ca2d334fd04c2aee
 pkg_svc_run='haproxy -f config/haproxy.conf -db'
 pkg_svc_user=root
 pkg_svc_group=root
@@ -18,7 +18,11 @@ pkg_exposes=(port status-port)
 pkg_binds=(
   [backend]="port"
 )
-pkg_deps=(core/zlib core/pcre core/openssl)
+pkg_deps=(
+  core/zlib
+  core/pcre
+  core/openssl
+)
 pkg_build_deps=(
   core/coreutils
   core/gcc
@@ -31,14 +35,15 @@ pkg_build_deps=(
 pkg_bin_dirs=(bin)
 
 do_build() {
-  make USE_PCRE=1 \
-       USE_PCRE_JIT=1 \
-       TARGET=linux2628 \
-       USE_OPENSSL=1 \
-       USE_ZLIB=1 \
-       USE_GETADDRINFO=1 \
-       ADDINC="${CFLAGS}" \
-       ADDLIB="${LDFLAGS}"
+  make \
+    USE_PCRE=1 \
+    USE_PCRE_JIT=1 \
+    TARGET=linux2628 \
+    USE_OPENSSL=1 \
+    USE_ZLIB=1 \
+    USE_GETADDRINFO=1 \
+    ADDINC="${CFLAGS}" \
+    ADDLIB="${LDFLAGS}"
 }
 
 do_install() {
