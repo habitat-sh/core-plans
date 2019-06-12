@@ -90,7 +90,8 @@ param (
 
 # Ensure Pester is installed
 if (-Not (Get-Module -ListAvailable -Name Pester)) {
-    Install-Module -Name Pester -Force
+    hab pkg install core/pester
+    Import-Module "$(hab pkg path core/pester)\module\pester.psd1"
 }
 
 # Install the package
@@ -98,10 +99,11 @@ hab pkg install $PackageIdentifier
 
 # Test the package
 $__dir=(Get-Item $PSScriptRoot)
-Invoke-Pester -EnableExit -Script @{
+$test_result = Invoke-Pester -PassThru -Script @{
     Path = "$__dir/test.pester.ps1";
     Parameters = @{PackageIdentifier=$PackageIdentifier}
 }
+Exit $test_result.FailedCount
 ```
 
 Pester test file `7zip/tests/test.pester.ps1`:
@@ -130,9 +132,10 @@ Describe "The 7z bin" {
 Running the tests:
 
 ```powershell
-hab pkg build 7zip
+hab studio run -D "hab pkg build 7zip"
 . .\results\last_build.ps1
-hab studio run "& ./7zip/tests/test.ps1 $pkg_ident"
+hab studio run -D "hab pkg install results/$pkg_artifact"
+hab studio run -D "& 7zip/tests/test.ps1 $pkg_ident"
 ```
 
 Sample output:
