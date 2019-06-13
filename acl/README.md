@@ -13,3 +13,7 @@ Binary package
 ## Usage
 
 *TODO: Add instructions for usage*
+
+# Testing
+
+To run tests follow the example in the latest [test standards document](https://github.com/habitat-sh/core-plans/blob/master/docs/dev/policy_documents/standards-for-tests.md).
