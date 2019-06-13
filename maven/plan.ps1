@@ -9,11 +9,16 @@ $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_source="http://mirrors.gigenet.com/apache/${pkg_name}/maven-3/${pkg_version}/binaries/apache-maven-${pkg_version}-bin.zip"
 $pkg_shasum="7e6cfe98dc9c16ae6aa267db277860594695144d719c99d1fc519e89346a8edf"
 $pkg_dirname="apache-$pkg_name-$pkg_version"
+$pkg_bin_dirs=@("bin")
+$pkg_lib_dirs=@("lib")
 
-function Invoke-SetupEnvironment {
-    Set-RuntimeEnv MAVEN_HOME "$pkg_prefix" [-force]
- }
-
+function Invoke-Prepare {
+  $env:JAVA_HOME = "$(Get-HabPackagePath corretto8)"
+  Write-BuildLine "Setting JAVA_HOME=$env:JAVA_HOME"
+}
 function Invoke-Build {
     Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/*" "$pkg_prefix" -Recurse -Force
+}
+function Invoke-Check{
+  (& "$HAB_CACHE_SRC_PATH/$pkg_dirname/bin/mvn.cmd" -v).StartsWith("Apache Maven $pkg_version")
 }
