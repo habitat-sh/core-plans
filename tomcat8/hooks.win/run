@@ -1,0 +1,14 @@
+
+Write-Host "Starting Apache Tomcat ..."
+
+$env:JRE_HOME="{{pkgPathFor "core/corretto8"}}\jre"
+$env:CATALINA_HOME="{{pkg.svc_var_path}}\tc"
+$env:CATALINA_OPTS="{{cfg.server.catalina-opts}}"
+
+Write-Host "JRE_HOME = " $env:JRE_HOME
+Write-Host "CATALINA_HOME = " $env:CATALINA_HOME
+Write-Host "CATALINA_OPTS = " $env:CATALINA_OPTS
+
+Write-Host "Executing Tomcat here: " $env:CATALINA_HOME"\bin\catalina.bat"
+
+Start-Process -FilePath "{{pkg.svc_var_path}}\tc\bin\catalina.bat" -ArgumentList "run" -Wait -NoNewWindow

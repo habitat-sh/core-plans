@@ -1,0 +1,32 @@
+Write-Host "Preparing TOMCAT_HOME..."
+
+Write-Host "sys.ip        = {{sys.ip}}"
+Write-Host "sys.hostname  = {{sys.hostname}}"
+Write-Host "pkg.origin    = {{pkg.origin}}"
+Write-Host "pkg.name      = {{pkg.name}}"
+Write-Host "pkg.version   = {{pkg.version}}"
+Write-Host "pkg.release   = {{pkg.release}}"
+Write-Host "pkg.ident     = {{pkg.ident}}"
+Write-Host "pkg.deps      = {{pkg.deps}}"
+Write-Host "pkg.exposes   = {{pkg.exposes}}"
+Write-Host "pkg.svc_path          = {{pkg.svc_path}}"
+Write-Host "pkg.svc_config_path   = {{pkg.svc_config_path}}"
+Write-Host "pkg.svc_data_path     = {{pkg.svc_data_path}}"
+Write-Host "pkg.svc_files_path    = {{pkg.svc_files_path}}"
+Write-Host "pkg.svc_static_path   = {{pkg.svc_static_path}}"
+Write-Host "pkg.svc_var_path      = {{pkg.svc_var_path}}"
+
+# Move directories that ship in the package into place
+Write-Host "Copying files and directories ..."
+Copy-Item -Recurse -Force "{{pkg.path}}/tc" "{{pkg.svc_var_path}}/"
+Write-Host "Copy complete."
+
+# Symlink config files into $TOMCAT_HOME/conf
+Get-ChildItem "{{pkg.svc_config_path}}" |
+Foreach-Object {
+    $file = $_.Name -replace "_","/"
+    Write-Host "Linking: " {{pkg.svc_var_path}}/tc/$file to $_.FullName
+    New-Item -Force -ItemType SymbolicLink -Path {{pkg.svc_config_path}}/$file -Value $_.FullName
+}
+
+Write-Host "Done preparing TOMCAT_HOME"
