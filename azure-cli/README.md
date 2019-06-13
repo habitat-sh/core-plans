@@ -23,7 +23,7 @@ az --version
 ```
 hab studio build azure-cli
 source results/last_build.env
-hab studo run ./azure-cli/tests/test.sh ${pkg_ident}
+hab studio run "./azure-cli/tests/test.sh ${pkg_ident}"
 ```
 
 ## Sample Output
