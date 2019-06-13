@@ -4,8 +4,12 @@ services:
     image: core/zookeeper
     ports:
       - "2181:2181"
+    environment:
+      - HAB_LICENSE=accept-no-persist
   kafka:
     image: core/kafka
     links:
       - zookeeper
-    command: start core/kafka --peer zookeeper --bind zookeeper:zookeeper.default
+    command: --peer zookeeper --bind zookeeper:zookeeper.default
+    environment:
+      - HAB_LICENSE=accept-no-persist
