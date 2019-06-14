@@ -9,6 +9,9 @@
 
 set -euo pipefail
 
+export HAB_NONINTERACTIVE=true
+export HAB_NOCOLORING=true
+
 usage() {
   grep '^#/' < "${0}" | cut -c4-
   exit 1
@@ -69,4 +72,3 @@ while read -r plan; do
     )
   fi
 done < "$build_log_dir"/build_order
-
