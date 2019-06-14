@@ -195,6 +195,7 @@ sqitch_pg @irvingpop
 sqlserver @mwrock
 sqlserver-ha-ag @mwrock
 terraform @defilan @echohack @predominant
+tlog @jasonwbarnett
 vault @defilan @predominant
 visual-build-tools-2017 @mwrock
 wrk @afiune
