@@ -595,6 +595,8 @@ plan_path = "jre8"
 plan_path = "jruby"
 [jruby1]
 plan_path = "jruby1"
+[json-c]
+plan_path = "json-c"
 [json-glib]
 plan_path = "json-glib"
 [kafka]

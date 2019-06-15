@@ -164,6 +164,7 @@ journalbeat @thomascate @echohack
 jre7 @rsertelon
 jre8 @rsertelon
 jre9 @rsertelon
+json-c @jasonwbarnett
 kibana @joshbrand @predominant
 logstash @joshbrand @predominant
 libimagequant @predominant
