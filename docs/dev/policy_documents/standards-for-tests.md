@@ -132,7 +132,7 @@ Describe "The 7z bin" {
 Running the tests:
 
 ```powershell
-hab studio run -D "hab pkg build 7zip"
+hab pkg build 7zip
 . .\results\last_build.ps1
 hab studio run -D "hab pkg install results/$pkg_artifact"
 hab studio run -D "& 7zip/tests/test.ps1 $pkg_ident"
