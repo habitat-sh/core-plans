@@ -1,12 +1,12 @@
 $pkg_name="ghc"
 $pkg_origin="core"
-$pkg_version="8.6.3"
+$pkg_version="8.6.5"
 $pkg_license=@("BSD-3-Clause")
 $pkg_upstream_url="https://www.haskell.org/ghc/"
 $pkg_description="The Glasgow Haskell Compiler"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_source="https://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-x86_64-unknown-mingw32.tar.xz"
-$pkg_shasum="2fec383904e5fa79413e9afd328faf9bc700006c8c3d4bcdd8d4f2ccf0f7fa2a"
+$pkg_shasum="457024c6ea43bdce340af428d86319931f267089398b859b00efdfe2fd4ce93f"
 
 $pkg_bin_dirs=@("bin")
 $pkg_lib_dirs=@("lib")
