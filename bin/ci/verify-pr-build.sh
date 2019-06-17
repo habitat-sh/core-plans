@@ -5,6 +5,7 @@ set -u
 # Don't attempt to build the following plans. They have resource requirements
 # or build times that exceed the currently available resources on our CI
 # infrastructure.
+# See also: #2759 and #2065
 PLAN_BLACKLIST=(
  glibc
  gcc
@@ -19,6 +20,7 @@ PLAN_BLACKLIST=(
  kubernetes
  mongodb
  mysql
+ opendistro-for-elasticsearch
 )
 plan="$(basename "$1")"
 
