@@ -1,4 +1,4 @@
-source "$(dirname "${BASH_SOURCE[0]}")/../haproxy16/plan.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../haproxy19/plan.sh"
 
 pkg_name=haproxy17
 pkg_origin=core
