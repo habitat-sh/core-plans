@@ -513,15 +513,23 @@ paths = [
 [haproxy17]
 plan_path = "haproxy17"
 paths = [
-  "haproxy/*"
+  "haproxy/*",
+  "haproxy16/*"
 ]
 [haproxy18]
 plan_path = "haproxy18"
 paths = [
-  "haproxy/*"
+  "haproxy/*",
+  "haproxy16/*"
 ]
 [haproxy19]
 plan_path = "haproxy19"
+paths = [
+  "haproxy/*",
+  "haproxy16/*"
+]
+[haproxy20]
+plan_path = "haproxy20"
 paths = [
   "haproxy/*"
 ]
