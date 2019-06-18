@@ -52,7 +52,7 @@ while read -r plan; do
     echo "Skipping $plan."
     continue
   fi
-  if [[ -n "${BASE_ONLY:-}" ]] && ! grep -q "$plan" base-plans.txt; then
+  if [[ -n "${BASE_ONLY:-}" ]] && ! grep -qx "core-plans/$plan" base-plans.txt; then
     echo "Not a base plan, skipping: $plan"
   else
     build "$plan" | tee "${build_log_dir}/${plan}.build.log"
