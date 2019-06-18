@@ -29,7 +29,7 @@ When we become aware that a piece of software we package in core plans has been 
 
 1. Delist the package in builder by setting it to "private" (that will make it invisible to anyone outside of the core org, as mentioned [in this issue](https://github.com/habitat-sh/builder/issues/18)
 
-2. Add a "Deprecated" notice to the core plan's README in the [core plans repo](https://github.com/habitat-sh/core-plans)
+2. Move the plan directory into `.deprecated` at the root of the repository
 
 3. Add some sort of indication to the core plan's view page in Builder (remember, even if it is set to private and not viewable publicly, it will still be viewable to members of the core origin) (this will likely require some feature work)
 
