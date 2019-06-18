@@ -13,6 +13,7 @@ pkg_deps=(
   core/groff
   core/gzip
   core/libiconv
+  core/libpipeline
 )
 pkg_build_deps=(
   core/coreutils
