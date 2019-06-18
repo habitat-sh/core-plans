@@ -1423,6 +1423,8 @@ plan_path = "terraform"
 plan_path = "tesseract"
 [texinfo]
 plan_path = "texinfo"
+[tlog]
+plan_path = "tlog"
 [tmux]
 plan_path = "tmux"
 [tomcat-native]
