@@ -8,7 +8,7 @@ TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Service is running" {
   echo -e "$(hab svc status)"
-  [ "$(hab svc status | grep "haproxy\.default" | awk '{print $4}' | grep up)" ]
+  [ "$(hab svc status | grep "haproxy[0-9]*\.default" | awk '{print $4}' | grep up)" ]
 }
 
 @test "Listening on port 80" {
