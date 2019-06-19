@@ -65,7 +65,7 @@ for plan in ${plans[@]}; do
   fi
 
   if [[ -f $plan/plan.ps1 ]]; then
-    emit_pipeline .buildkite/templates/verify_windows_pipeline.yml "$plan"
+    emit_pipeline .expeditor/templates/verify_windows_pipeline.yml "$plan"
   fi
 
   # TODO(SM): Handle queuing based on .bldr.toml
