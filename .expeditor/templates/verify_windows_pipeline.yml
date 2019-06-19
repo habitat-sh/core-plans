@@ -5,6 +5,7 @@
       executor:
         docker:
           host_os: windows
+          shell: ["powershell", "-Command"]
     timeout_in_minutes: 60
     retry:
       automatic:
