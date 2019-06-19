@@ -13,7 +13,7 @@ pkg_deps=(
   core/jdk8
   core/which
 )
-pkg_build_deps=(core/maven/3.3.9)
+pkg_build_deps=(core/maven)
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 
