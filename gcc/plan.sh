@@ -22,7 +22,6 @@ pkg_deps=(
   core/binutils
 )
 pkg_build_deps=(
-  core/coreutils
   core/diffutils
   core/patch
   core/file

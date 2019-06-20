@@ -10,8 +10,6 @@ pkg_shasum="c098e2e4dcb64f8e3fb5cec35e872ff383edefa18532744ddf35bbba829cb5a3"
 pkg_dirname="linux-$pkg_version"
 pkg_deps=()
 pkg_build_deps=(
-  core/coreutils
-  core/diffutils
   core/patch
   core/make
   core/gcc
