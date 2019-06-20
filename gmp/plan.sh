@@ -14,7 +14,6 @@ pkg_deps=(
   core/glibc
 )
 pkg_build_deps=(
-  core/coreutils
   core/diffutils
   core/patch
   core/make
