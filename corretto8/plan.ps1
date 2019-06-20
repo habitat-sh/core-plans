@@ -3,6 +3,7 @@ $pkg_origin="core"
 $pkg_version="8.212.04.2"
 $pkg_description="Corretto is a build of the Open Java Development Kit (OpenJDK) with long-term support from Amazon"
 $pkg_upstream_url="https://aws.amazon.com/corretto/"
+$pkg_license=@("GPL-2.0-only")
 $pkg_license=@("GPLv2+CE")
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_source="https://d3pxv6yz143wms.cloudfront.net/${pkg_version}/amazon-corretto-${pkg_version}-windows-x64-jdk.zip"
