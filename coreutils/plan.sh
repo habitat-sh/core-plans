@@ -20,14 +20,11 @@ pkg_deps=(
   core/libcap
 )
 pkg_build_deps=(
-  core/coreutils
-  core/diffutils
   core/patch
   core/make
   core/gcc
   core/m4
   core/perl
-  core/inetutils
 )
 pkg_bin_dirs=(bin)
 pkg_interpreters=(bin/env)
