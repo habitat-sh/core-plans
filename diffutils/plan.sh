@@ -15,7 +15,6 @@ pkg_deps=(
 )
 pkg_build_deps=(
   core/coreutils
-  core/patch
   core/make
   core/gcc
   core/sed
