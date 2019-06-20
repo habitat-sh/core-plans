@@ -30,3 +30,8 @@ pkg_deps=(
   core/corretto
 )
 ```
+
+## Note
+
+Unlike Amazon Corretto 8, there is no JRE included with this release.
+```

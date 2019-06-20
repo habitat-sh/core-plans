@@ -1,4 +1,4 @@
-$pkg_name="corretto11"
+$pkg_name="corretto"
 $pkg_origin="core"
 $pkg_version="11.0.3.7.1"
 $pkg_description="Corretto is a build of the Open Java Development Kit (OpenJDK) with long-term support from Amazon"
