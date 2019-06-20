@@ -9,7 +9,7 @@ $pkg_source="https://d3pxv6yz143wms.cloudfront.net/${pkg_version}/amazon-corrett
 $pkg_shasum="3c867c861f7aaf04f7d87dbc51e4075e0c45066e8a4b0ab2ac8cece8aa575c7e"
 $pkg_dirname="amazon-corretto-$pkg_version"
 $pkg_bin_dirs=@("bin")
-$pkg_lib_dis=@("lib")
+$pkg_lib_dirs=@("lib")
 
 function Invoke-Build {
     Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/*" "$pkg_prefix" -Recurse -Force
