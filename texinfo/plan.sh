@@ -18,8 +18,6 @@ pkg_deps=(
   core/perl
 )
 pkg_build_deps=(
-  core/coreutils
-  core/diffutils
   core/patch
   core/make
   core/gcc
@@ -42,9 +40,7 @@ do_check() {
 if [[ "$STUDIO_TYPE" = "stage1" ]]; then
   pkg_build_deps=(
     core/gcc
-    core/coreutils
     core/sed
-    core/diffutils
     core/make
     core/patch
   )
