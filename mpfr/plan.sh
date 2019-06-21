@@ -16,12 +16,9 @@ pkg_deps=(
   core/gmp
 )
 pkg_build_deps=(
-  core/coreutils
-  core/diffutils
   core/patch
   core/make
   core/gcc
-  core/binutils
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)

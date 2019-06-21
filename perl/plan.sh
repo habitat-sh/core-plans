@@ -20,14 +20,10 @@ pkg_deps=(
   core/less
 )
 pkg_build_deps=(
-  core/coreutils
-  core/diffutils
   core/patch
   core/make
   core/gcc
   core/procps-ng
-  core/inetutils
-  core/iana-etc
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
