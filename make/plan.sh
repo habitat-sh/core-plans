@@ -14,14 +14,9 @@ pkg_deps=(
   core/glibc
 )
 pkg_build_deps=(
-  core/coreutils
-  core/diffutils
   core/patch
   core/make
   core/gcc
-  core/bash
-  core/gettext
-  core/gzip
   core/perl
   core/binutils
 )
@@ -48,7 +43,7 @@ do_check() {
   # Thanks to: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=782750
   mkdir -pv wrappers
   cat <<EOF > wrappers/ar
-#!$(pkg_path_for bash)/bin/sh
+#!/bin/sh
 exec $(pkg_path_for binutils)/bin/ar U\$@
 EOF
   chmod -v 0744 wrappers/ar
@@ -74,12 +69,8 @@ if [[ "$STUDIO_TYPE" = "stage1" ]]; then
   pkg_build_deps=(
     core/binutils
     core/gcc
-    core/coreutils
     core/sed
     core/bash
     core/perl
-    core/diffutils
-    core/gettext
-    core/gzip
   )
 fi
