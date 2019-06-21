@@ -3,7 +3,7 @@
 This directory contains a collection of design documents relating to contributing and the use of core-plans.
 
 ### How-to Guides
-
+- [Verifying Base Plan Updates](./howto_documents/verifying-base-plan-updates.md)
 
 ### Policy Documents
 
