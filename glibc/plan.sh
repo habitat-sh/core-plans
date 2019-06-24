@@ -106,6 +106,7 @@ do_build() {
       --disable-profile \
       --enable-kernel=3.2 \
       --enable-stack-protector=strong \
+      --enable-cet \
       --cache-file=config.cache
 
     make
