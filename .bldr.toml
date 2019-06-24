@@ -1274,9 +1274,6 @@ plan_path = "rngd"
 plan_path = "rpm"
 [rpm2cpio]
 plan_path = "rpm2cpio"
-paths = [
-  "rpm2cpio/*"
-]
 [rq]
 plan_path = "rq"
 [rsync]
