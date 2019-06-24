@@ -94,7 +94,6 @@ do_build() {
   pushd ../${pkg_name}-build > /dev/null
     # Configure Glibc to install its libraries into `$pkg_prefix/lib`
     echo "libc_cv_slibdir=$pkg_prefix/lib" >> config.cache
-    echo "libc_cv_ssp=no" >> config.cache
 
     "../$pkg_dirname/configure" \
       --prefix="$pkg_prefix" \
@@ -106,6 +105,7 @@ do_build() {
       --enable-obsolete-rpc \
       --disable-profile \
       --enable-kernel=3.2 \
+      --enable-stack-protector=strong \
       --cache-file=config.cache
 
     make
