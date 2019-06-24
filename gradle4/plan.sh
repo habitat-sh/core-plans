@@ -11,3 +11,16 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="A powerful build system for the JVM"
 pkg_upstream_url=http://gradle.org
 pkg_license=('Apache-2.0')
+
+native_platform_version="0.14"
+do_build() {
+  mkdir patching
+  pushd patching
+  jar xf "../lib/native-platform-linux-amd64-${native_platform_version}.jar"
+  patchelf --set-rpath "${LD_RUN_PATH}" net/rubygrapefruit/platform/linux-amd64/libnative-platform.so
+  jar cf "native-platform-linux-amd64-${native_platform_version}.jar" .
+  mv "native-platform-linux-amd64-${native_platform_version}.jar" ../lib/
+  popd
+  rm -rf patching
+  fix_interpreter bin/gradle core/coreutils bin/env
+}
