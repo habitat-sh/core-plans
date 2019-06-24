@@ -1,6 +1,6 @@
 $pkg_name="jq-static"
 $pkg_origin="core"
-$pkg_version="1.5"
+$pkg_version="1.6"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_license=@("MIT")
 $pkg_upstream_url="https://stedolan.github.io/jq/"
