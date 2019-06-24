@@ -1,6 +1,6 @@
 pkg_name=glibc
 pkg_origin=core
-pkg_version=2.27
+pkg_version=2.29
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU C Library project provides the core libraries for the GNU system and \
@@ -11,9 +11,9 @@ foundational facilities as open, read, write, malloc, printf, getaddrinfo, \
 dlopen, pthread_create, crypt, login, exit and more.\
 "
 pkg_upstream_url="https://www.gnu.org/software/libc"
-pkg_license=('GPL-2.0' 'LGPL-2.0')
+pkg_license=('GPL-2.0-or-later' 'LGPL-2.1-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="5172de54318ec0b7f2735e5a91d908afe1c9ca291fec16b5374d9faadfc1fc72"
+pkg_shasum="f3eeb8d57e25ca9fc13c2af3dae97754f9f643bc69229546828e3a240e2af04b"
 pkg_deps=(
   core/linux-headers
 )
@@ -26,6 +26,8 @@ pkg_build_deps=(
   core/gcc
   core/sed
   core/perl
+  core/m4
+  core/python
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
@@ -81,13 +83,6 @@ do_prepare() {
     | sed "s,@prefix@,$pkg_prefix,g" \
     | patch -p1
 
-  # Fix for the scanf15 and scanf17 tests for arches that need
-  # misc/bits/syscall.h. This problem is present once a custom location is used
-  # for the Linux Kernel headers.
-  #
-  # Source: https://lists.debian.org/debian-glibc/2013/11/msg00116.html
-  patch -p1 < "$PLAN_CONTEXT/testsuite-fix.patch"
-
   # Adjust `scripts/test-installation.pl` to use our new dynamic linker
   sed -i "s|libs -o|libs -L${pkg_prefix}/lib -Wl,-dynamic-linker=${dynamic_linker} -o|" \
     scripts/test-installation.pl
@@ -110,7 +105,7 @@ do_build() {
       --sysconfdir="$pkg_prefix/etc" \
       --enable-obsolete-rpc \
       --disable-profile \
-      --enable-kernel=2.6.32 \
+      --enable-kernel=3.2 \
       --cache-file=config.cache
 
     make
