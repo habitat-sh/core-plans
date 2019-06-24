@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-TESTDIR="$(dirname $0)"
- 
+TESTDIR="$(dirname "$0")"
+
 
 TEST_PKG_IDENT="$1"
 
