@@ -19,20 +19,14 @@ export TEST_PKG_IDENT
 hab pkg install core/bats --binlink
 hab pkg install core/busybox-static
 hab pkg binlink core/busybox-static nc
-hab pkg binlink core/busybox-static netstat
 hab pkg install core/curl --binlink
 hab pkg install core/jq-static --binlink
 hab pkg install "${TEST_PKG_IDENT}"
-
-hab sup term
 hab sup run &
+sleep 5
 echo "Waiting for supervisor to start"
-wait_listen tcp 9632 30
-
 hab svc load "${TEST_PKG_IDENT}"
-
 echo "Waiting for Artifactory to start"
-wait_listen tcp 8081 90
 sleep 60
 
 bats "${TESTDIR}/test.bats"

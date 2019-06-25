@@ -7,7 +7,6 @@ load helpers
 }
 
 @test "API is functional" {
-  local addr="$(netstat -lnp | grep 8081 | head -1 | awk '{print $4}')"
-  result="$(curl -s http://${addr}/artifactory/api/repositories | jq -r '.[].key')"
+  result="$(curl -s http://0.0.0.0:8081/artifactory/api/repositories | jq -r '.[].key')"
   [ "${result}" = "example-repo-local" ]
 }
