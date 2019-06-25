@@ -75,7 +75,12 @@ There should be no negative downstream impacts. Builder will continue to build n
 
 ### Example - 7Zip
 
-7Zip is used as an example because it has both Linux and Windows tests. Note that the plan builds different executables for Linux and Windows and therefore the tests differ.
+7Zip is used as an example because it has both Linux and Windows tests.
+
+Note that:
+
+* the plan builds different executables for Linux and Windows and therefore the tests differ.
+* the 7Zip README contains a "Testing" section according to the [readme template here](https://github.com/habitat-sh/core-plans/blob/master/README_TEMPLATE_FOR_PLANS.md).
 
 #### Windows/Pester tests
 

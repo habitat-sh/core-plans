@@ -18,6 +18,10 @@ A binary package is something that packages up a standalone binary, something th
 
 How would a user use this package?  i.e. can a user simply call the package as a dependency of their application?  Or is there more they need to do?
 
+## Testing
+
+To run tests follow the example in the latest [test standards document](https://github.com/habitat-sh/core-plans/blob/master/docs/dev/policy_documents/standards-for-tests.md).
+
 ## Bindings
 
 *(This is only required for service packages, not [binary wrapper packages](https://www.habitat.sh/docs/best-practices/#binary-wrapper-packages)))*
