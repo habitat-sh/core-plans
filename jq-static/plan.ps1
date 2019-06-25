@@ -6,7 +6,7 @@ $pkg_license=@("MIT")
 $pkg_upstream_url="https://stedolan.github.io/jq/"
 $pkg_description="jq is a lightweight and flexible command-line JSON processor."
 $pkg_source="https://github.com/stedolan/jq/releases/download/jq-$pkg_version/jq-win64.exe"
-$pkg_shasum="ebecd840ba47efbf66822868178cc721a151060937f7ac406e3d31bd015bde94"
+$pkg_shasum="a51d36968dcbdeabb3142c6f5cf9b401a65dc3a095f3144bd0c118d5bb192753"
 $pkg_bin_dirs=@("bin")
 
 function Invoke-Unpack { }

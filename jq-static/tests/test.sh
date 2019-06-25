@@ -1,7 +1,7 @@
 #!/bin/sh
 #/ Usage: test.sh <pkg_ident>
 #/
-#/ Example: test.sh core/tlog/6/20181108151533
+#/ Example: test.sh origin/package/1.2.3/20181108151533
 #/
 
 set -euo pipefail
