@@ -1,13 +1,13 @@
 pkg_name=filebeat
 pkg_origin=core
-pkg_version=6.7.1
+pkg_version=7.1.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_deps=(core/glibc)
 pkg_build_deps=(
   core/go
   core/git
-  core/make
+  core/mage
   core/gcc
 )
 pkg_bin_dirs=(bin)
@@ -34,7 +34,7 @@ do_unpack() {
 
 do_build() {
   pushd "${HAB_CACHE_SRC_PATH}/github.com/elastic/beats/filebeat" > /dev/null
-  make
+  mage build
   popd > /dev/null
 }
 

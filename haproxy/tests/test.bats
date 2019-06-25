@@ -1,18 +1,14 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
-
-@test "Command is on path" {
-  [ "$(command -v haproxy)" ]
-}
+TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Version matches" {
-  result="$(haproxy -v 2>&1 | head -n 1 | awk '{print $3}' | \
-          awk --field-separator '-' '{print $1}')"
-  [ "$result" = "${pkg_version}" ]
+  result="$(hab pkg exec ${TEST_PKG_IDENT} haproxy -v 2>&1 | head -n 1 | awk '{print $3}' | \
+    awk --field-separator '-' '{print $1}')"
+  [ "$result" = "${TEST_PKG_VERSION}" ]
 }
 
 @test "Service is running" {
   echo -e "$(hab svc status)"
-  [ "$(hab svc status | grep "haproxy\.default" | awk '{print $4}' | grep up)" ]
+  [ "$(hab svc status | grep "haproxy[0-9]*\.default" | awk '{print $4}' | grep up)" ]
 }
 
 @test "Listening on port 80" {

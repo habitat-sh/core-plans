@@ -1,27 +1,25 @@
 #!/bin/sh
+#/ Usage: test.sh <pkg_ident>
+#/
+#/ Example: test.sh core/php/7.2.8/20181108151533
+#/
 
-TESTDIR="$(dirname "${0}")"
 PLANDIR="$(dirname "${TESTDIR}")"
-SKIPBUILD=${SKIPBUILD:-0}
 
-hab pkg install --binlink core/bats
-hab pkg install --binlink --force "core/jre8"
+set -euo pipefail
 
-source "${PLANDIR}/plan.sh"
-
-if [ "${SKIPBUILD}" -eq 0 ]; then
-  set -e
-  pushd "${PLANDIR}" > /dev/null
-  build
-  source results/last_build.env
-  hab pkg install --binlink --force "results/${pkg_artifact}"
-  popd > /dev/null
-  set +e
+if [[ -z "${1:-}" ]]; then
+  grep '^#/' < "${0}" | cut -c4-
+	exit 1
 fi
 
-JAVA_HOME="$(hab pkg path core/jre8)"
+TEST_PKG_IDENT="${1}"
+export TEST_PKG_IDENT
+hab pkg install core/bats --binlink
+hab pkg install core/openjdk11
+hab pkg install "${TEST_PKG_IDENT}"
+
+JAVA_HOME="$(hab pkg path core/openjdk11)"
 export JAVA_HOME
-
-bats "${TESTDIR}/test.bats"
-
+bats "$(dirname "${0}")/test.bats"
 rm -rf "${PLANDIR}/../.gradle"

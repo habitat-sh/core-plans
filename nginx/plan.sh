@@ -46,7 +46,6 @@ do_build() {
     --http-fastcgi-temp-path="${pkg_svc_var_path}/fastcgi" \
     --http-scgi-temp-path="${pkg_svc_var_path}/scgi" \
     --http-uwsgi-temp-path="${pkg_svc_var_path}/uwsgi" \
-    --with-ipv6 \
     --with-pcre \
     --with-pcre-jit \
     --with-file-aio \
