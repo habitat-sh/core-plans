@@ -1,7 +1,3 @@
-@test "package directory for package ident ${TEST_PKG_IDENT} exists" {
-  [ -d "/hab/pkgs/${TEST_PKG_IDENT}" ]
-}
-
 expected_version="$(echo $TEST_PKG_IDENT | cut -d/ -f 3)"
 @test "7z exe runs" {
   run hab pkg exec $TEST_PKG_IDENT 7z

@@ -1,6 +1,6 @@
 param (
-    [Parameter(Mandatory=$true)]
-    [string]$PackageIdentifier = ""
+    [Parameter()]
+    [string]$PackageIdentifier = $(throw "Fully qualified package identifier must be given as a parameter.")
 )
 
 Describe "The 7z bin" {
