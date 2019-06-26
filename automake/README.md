@@ -17,16 +17,6 @@ plan.sh:
 
     pkg_build_deps=(core/automake)
 
-## Testing
-
-Build the package and then run the tests:
-
-```bash
-hab studio build automake
-source results/last_build.env
-hab studio run "./automake/tests/test.sh $pkg_ident"
-```
-
 ## TODO
 
 `make check` do not pass all tests, here are the ones that fail as of 2017-12-13:
