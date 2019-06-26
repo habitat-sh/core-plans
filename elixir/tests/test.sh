@@ -1,23 +1,19 @@
 #!/bin/sh
+#/ Usage: test.sh <pkg_ident>
+#/
+#/ Example: test.sh core/php/7.2.8/20181108151533
+#/
 
-TESTDIR="$(dirname "${0}")"
-PLANDIR="$(dirname "${TESTDIR}")"
-SKIPBUILD=${SKIPBUILD:-0}
+set -euo pipefail
 
-hab pkg install core/bats --binlink
-
-source "${PLANDIR}/plan.sh"
-
-if [ "${SKIPBUILD}" -eq 0 ]; then
-  set -e
-  pushd "${PLANDIR}" > /dev/null
-  build
-  source results/last_build.env
-  hab pkg install "results/${pkg_artifact}" --binlink --force
-  popd > /dev/null
-  set +e
+if [[ -z "${1:-}" ]]; then
+  grep '^#/' < "${0}" | cut -c4-
+	exit 1
 fi
 
-hab pkg install core/erlang --binlink
-
-bats "${TESTDIR}/test.bats"
+TEST_PKG_IDENT="${1}"
+export TEST_PKG_IDENT
+hab pkg install core/bats --binlink
+hab pkg install "${TEST_PKG_IDENT}"
+export LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+bats "$(dirname "${0}")/test.bats"
