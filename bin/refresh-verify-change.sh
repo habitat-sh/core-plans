@@ -6,6 +6,7 @@
 #/ refresh-verify-change.sh NAME
 #/
 #/ ex: refresh-verify-change.sh glibc
+#/
 
 set -euo pipefail
 
@@ -22,6 +23,7 @@ need_cmd() {
 
   if ! command -v "$cmd" >/dev/null; then
     echo "Could not find $cmd; Please install it first"
+    exit 1
   fi
 }
 
@@ -34,8 +36,8 @@ need_cmd "curl"
 need_cmd "jq"
 need_cmd "tee"
 
-rdeps_url="https://bldr.habitat.sh/v1/rdeps/core/$changed_plan/group"
-query='.rdeps | .[] | .idents | map(select(startswith("core"))) |select(length > 0) | .[] | ltrimstr("core/")'
+rdeps_url="https://bldr.habitat.sh/v1/rdeps/core/$changed_plan"
+query='.rdeps | map(select(startswith("core"))) | select(length > 0) | .[] | ltrimstr("core/")'
 build_id="$(date -u +%Y%m%d%H%M%S)"
 build_log_dir="results/$changed_plan-$build_id"
 
