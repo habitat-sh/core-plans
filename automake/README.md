@@ -1,5 +1,7 @@
 # automake
 
+A tool for automatically generating Makefile.in files compliant with the GNU Coding Standards
+
 ## Maintainers
 
 * The Habitat Maintainers: <humans@habitat.sh>
@@ -7,10 +9,6 @@
 ## Type of Package
 
 Binary package
-
-## Usage
-
-This package provides `automake` the GNU tool to generate make files.
 
 ## Usage
 
