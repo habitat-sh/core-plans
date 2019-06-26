@@ -4,7 +4,7 @@
 #/ Example: test.sh core/php/7.2.8/20181108151533
 #/
 
-PLANDIR="$(dirname "${TESTDIR}")"
+PLANDIR="$(dirname "${0}")"
 
 set -euo pipefail
 

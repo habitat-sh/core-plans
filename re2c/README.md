@@ -34,6 +34,6 @@ hab pkg exec core/re2c re2c
 On Linux systems, you can binlink instead, and then simply run the command:
 
 ```
-hab pkg install --binlink core/re2c
+hab pkg install core/re2c --binlink
 re2c
 ```

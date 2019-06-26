@@ -15,7 +15,7 @@ Binary package
 ### Installation
 
 ```
-hab pkg install --binlink core/ipvsadm
+hab pkg install core/ipvsadm --binlink
 ```
 
 You can then interact with the binary on path:

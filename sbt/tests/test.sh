@@ -4,8 +4,8 @@ TESTDIR="$(dirname "${0}")"
 PLANDIR="$(dirname "${TESTDIR}")"
 SKIPBUILD=${SKIPBUILD:-0}
 
-hab pkg install --binlink core/bats
-hab pkg install --binlink core/jre8
+hab pkg install core/bats --binlink
+hab pkg install core/jre8 --binlink
 
 source "${PLANDIR}/plan.sh"
 
@@ -14,7 +14,7 @@ if [ "${SKIPBUILD}" -eq 0 ]; then
   pushd "${PLANDIR}" > /dev/null
   build
   source results/last_build.env
-  hab pkg install --binlink --force "results/${pkg_artifact}"
+  hab pkg install "results/${pkg_artifact}" --binlink --force
   popd > /dev/null
   set +e
 fi
