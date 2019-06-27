@@ -1,7 +1,7 @@
 pkg_name=bzip2
 _distname=$pkg_name
 pkg_origin=core
-pkg_version=1.0.6
+pkg_version=1.0.8
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 bzip2 is a free and open-source file compression program that uses the \
@@ -10,8 +10,8 @@ archiver.\
 "
 pkg_upstream_url="http://www.bzip.org/"
 pkg_license=('bzip2')
-pkg_source="https://github.com/nemequ/${pkg_name}/releases/download/v${pkg_version}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="a2848f34fcd5d6cf47def00461fcb528a0484d8edef8208d6d2e2909dc61d9cd"
+pkg_source="https://fossies.org/linux/misc/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum="ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269"
 pkg_dirname="${_distname}-${pkg_version}"
 pkg_deps=(
   core/glibc
