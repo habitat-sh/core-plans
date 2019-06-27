@@ -81,3 +81,11 @@ You can work around this by explicitly importing the module before using the com
 Import-Module "{{pkgPathFor "core/dsc-core"}}/Modules/DscCore"
 Start-DscCore (Join-Path {{pkg.svc_config_path}} firewall.ps1) NewFirewallRule
 ```
+
+# Testing
+
+```
+hab pkg build dsc-core
+. .\results\last_build.ps1
+hab studio run -D "hab pkg install results/$pkg_artifact;& dsc-core/tests/test.ps1 $pkg_ident"
+```

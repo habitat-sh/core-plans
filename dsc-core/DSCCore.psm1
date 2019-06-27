@@ -35,27 +35,31 @@ function Start-DscCore {
 
         $configurationData = New-ConfigurationData (Get-Content $Path | Out-String) $ConfigFunction
 
-        Wait-LCMReady
+        if($configurationData) {
+            Wait-LCMReady
 
-        Enter-PSLock -Name $(Get-DscLock) {
-            $conf = Get-LcmMetaConfig
-            $currentRefreshMode = $conf.RefreshMode
-            try {
-                # Now that we have the lock, check once more just in case
-                Wait-LCMReady
-                Set-LcmRefreshMode "Push"
-                Write-Output "Applying DSC configuration for $Path ..."
-                Invoke-CimMethod    -ComputerName localhost `
-                                    -Namespace "root/Microsoft/Windows/DesiredStateConfiguration" `
-                                    -ClassName "MSFT_DSCLocalConfigurationManager" `
-                                    -MethodName "SendConfigurationApply" `
-                                    -Arguments @{ConfigurationData = $configurationData; Force = $true} `
-                                    -ErrorAction Stop | Out-Null
+            Enter-PSLock -Name $(Get-DscLock) {
+                $conf = Get-LcmMetaConfig
+                $currentRefreshMode = $conf.RefreshMode
+                try {
+                    # Now that we have the lock, check once more just in case
+                    Wait-LCMReady
+                    Set-LcmRefreshMode "Push"
+                    Write-Output "Applying DSC configuration for $Path ..."
+                    Invoke-CimMethod    -ComputerName localhost `
+                                        -Namespace "root/Microsoft/Windows/DesiredStateConfiguration" `
+                                        -ClassName "MSFT_DSCLocalConfigurationManager" `
+                                        -MethodName "SendConfigurationApply" `
+                                        -Arguments @{ConfigurationData = $configurationData; Force = $true} `
+                                        -ErrorAction Stop | Out-Null
+                }
+                finally {
+                    Wait-LCMReady
+                    Set-LcmRefreshMode $currentRefreshMode
+                }
             }
-            finally {
-                Wait-LCMReady
-                Set-LcmRefreshMode $currentRefreshMode
-            }
+        } else {
+            Write-Warning "No MOF was generated from configuration. Perhaps your configuration does not include resources."
         }
     }
 }
@@ -84,14 +88,15 @@ function New-ConfigurationData($configuration, $ConfigFunction) {
             & $func -OutputPath $tempDir
         }
 
-        $configurationData = Get-Content $mof.FullName -AsByteStream -ReadCount 0
+        if($mof) {
+            $configurationData = Get-Content $mof.FullName -AsByteStream -ReadCount 0
+            $totalSize = [System.BitConverter]::GetBytes($configurationData.Length + 4)
+            $totalSize + $configurationData
+        }
     }
     finally {
         if($mof) { Remove-Item $mof.Directory -Recurse -Force | Out-Null }
     }
-
-    $totalSize = [System.BitConverter]::GetBytes($configurationData.Length + 4)
-    $totalSize + $configurationData
 }
 
 function Enter-QuietProgress([ScriptBlock]$block) {
