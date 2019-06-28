@@ -26,6 +26,8 @@ plan_path = "aspcud"
 plan_path = "at-spi2-core"
 [atk]
 plan_path = "atk"
+[atlantis]
+plan_path = "atlantis"
 [at-spi2-atk]
 plan_path = "at-spi2-atk"
 [attr]
