@@ -6,6 +6,7 @@ $pkg_upstream_url="http://www.perl.org/"
 $pkg_license=@("gpl", "perlartistic")
 $pkg_source="https://github.com/Perl/perl5/archive/v$pkg_version.zip"
 $pkg_shasum="2b3747deadea0510ef9e567e6a8b692e7dd4ecad024f1a5a6108b971093a95fd"
+$pkg_deps=@("core/visual-cpp-redist-2015")
 $pkg_build_deps=@("core/visual-cpp-build-tools-2015", "core/dmake")
 $pkg_bin_dirs=@("bin")
 $pkg_lib_dirs=@("lib")

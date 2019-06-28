@@ -7,6 +7,7 @@ $pkg_upstream_url="http://www.bzip.org/"
 $pkg_license=("bzip2")
 $pkg_source="https://github.com/nemequ/$pkg_name/archive/v${pkg_version}.zip"
 $pkg_shasum="1ac730150d4c13a6933101c8d21acc6de258503ae8a6a049e948a47749ddcc81"
+$pkg_deps=@("core/visual-cpp-redist-2015")
 $pkg_build_deps=@("core/visual-cpp-build-tools-2015")
 $pkg_bin_dirs=@("bin")
 $pkg_lib_dirs=@("lib")
