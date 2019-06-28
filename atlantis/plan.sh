@@ -14,6 +14,7 @@ pkg_exports=(
   [port]=http.port
 )
 pkg_bin_dirs=(bin)
+pkg_upstream_url=https://runatlantis.io
 
 do_unpack() {
   cd "${HAB_CACHE_SRC_PATH}" || exit
