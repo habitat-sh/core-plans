@@ -1,4 +1,3 @@
-
 pkg_name=atlantis
 pkg_origin=core
 pkg_version=0.8.2
