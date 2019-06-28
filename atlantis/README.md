@@ -2,11 +2,11 @@
 
 A self-hosted golang application that listens for Terraform pull request events via webhooks.
 
-## What does it do?
+## What does it do
 
 Runs terraform plan and apply remotely and comments back on the pull request with the output.
 
-## Why should you use it?
+## Why should you use it
 
 Make Terraform changes visible to your whole team.
 Enable non-operations engineers to collaborate on Terraform.
@@ -22,4 +22,4 @@ Binary package
 
 ## Usage
 
-*TODO: Add instructions for usage*
+**TODO**: Add instructions for usage
