@@ -1,10 +1,7 @@
 #
+# For more information about the config file go to
+# https://www.runatlantis.io/docs/server-configuration.html#config-file
+#
+# For more information about the config file flags go to
 # https://www.runatlantis.io/docs/server-configuration.html#flags
 #
-
-atlantis-url: http://my-domain.com:9000/basepath
-
-# bitbucket-base-url: 
-# bitbucket-user
-# bitbucket-token: 
-# bitbucket-webhook-secret: 

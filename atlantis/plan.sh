@@ -17,7 +17,6 @@ pkg_bin_dirs=(bin)
 pkg_upstream_url=https://runatlantis.io
 pkg_description="A self-hosted golang application that listens for Terraform pull request events via webhooks."
 
-
 do_unpack() {
   cd "${HAB_CACHE_SRC_PATH}" || exit
   unzip "${pkg_filename}" -d "${pkg_dirname}"
