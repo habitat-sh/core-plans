@@ -300,7 +300,17 @@ ethers: files
 rpc: files
 EOF
 
-    extract_src tzdata
+    
+    # Install timezone data. 
+    # We set --sysconfdir=$pkg_prefix/etc during our build, so we need to
+    # embed timezone data in this package.
+    # 
+    # zic /dev/null creates posix timezones without leapseconds
+    # zic leapseconds creates right timezones with leapseconds
+    # zic -d "$ZONEINFO" creates  posixrules file. We use New York because POSIX 
+    #   requires the daylight savings time rules to be in accordance with US rules.
+
+    extract_src tzdatak
     pushd ./tzdata > /dev/null
       ZONEINFO="$pkg_prefix/share/zoneinfo"
       mkdir -p "$ZONEINFO"/{posix,right}
