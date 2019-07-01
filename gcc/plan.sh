@@ -1,7 +1,7 @@
 pkg_name=gcc
 _distname=$pkg_name
 pkg_origin=core
-pkg_version=8.2.0
+pkg_version=9.1.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Compiler Collection (GCC) is a compiler system produced by the GNU \
@@ -10,9 +10,9 @@ the GNU toolchain and the standard compiler for most Unix-like operating \
 systems.\
 "
 pkg_upstream_url="https://gcc.gnu.org/"
-pkg_license=('GPL-2.0')
+pkg_license=('GPL-3.0-or-later' 'GCC Runtime Library Exception')
 pkg_source="http://ftp.gnu.org/gnu/$_distname/${_distname}-${pkg_version}/${_distname}-${pkg_version}.tar.xz"
-pkg_shasum="196c3c04ba2613f893283977e6011b2345d1cd1af9abeac58e916b1aab3e0080"
+pkg_shasum="79a66834e96a6050d8fe78db2c3b32fb285b230b855d0a66288235bc04b327a0"
 pkg_deps=(
   core/glibc
   core/zlib
@@ -176,6 +176,7 @@ do_build() {
       --disable-werror \
       --disable-multilib \
       --with-system-zlib \
+      --enable-cet \
       --disable-libstdcxx-pch
 
     # Don't store the configure flags in the resulting executables.
