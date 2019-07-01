@@ -8,11 +8,11 @@ get_ip_address() {
 }
 
 check_ip() {
-  if [ -z $1 ]
+  if [ -z "${1}" ]
   then
-    echo $(get_ip_address)
+    get_ip_address
   else
-    echo $1
+    echo "${1}"
   fi
 }
 
@@ -21,19 +21,22 @@ test_listen() {
   if [ "${1}" == "udp" ]; then
     proto="-u"
   fi
-  local ip_address=$(check_ip $4)
-  local wait=${3:-3}
+  local ip_address
+  ip_address="$(check_ip "${4}")"
+
+  local wait="${3:-3}"
   nc "${proto}" -w"${wait}" "${ip_address}" "${2}"
   return $?
 }
 
 wait_listen() {
-  echo $4
+  echo "${4}"
   local proto="-z"
   if [ "${1}" == "udp" ]; then
     proto="-u"
   fi
-  local ip_address=$(check_ip $4)
+  local ip_address
+  ip_address="$(check_ip "${4}")"
   local wait=${3:-1}
   while ! nc "${proto}" -w"${wait}" "${ip_address}" "${2}"; do
     sleep 1
