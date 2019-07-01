@@ -1,4 +1,3 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
 load helpers
 
 @test "Port Listen TCP/8300" {
