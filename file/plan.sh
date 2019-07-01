@@ -1,6 +1,8 @@
+# Stop shellcheck requiring quotes around pkg_name
+# shellcheck disable=SC2209
 pkg_name=file
 pkg_origin=core
-pkg_version=5.36
+pkg_version=5.37
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 file is a standard Unix program for recognizing the type of data contained in \
@@ -9,7 +11,7 @@ a computer file.\
 pkg_upstream_url="https://www.darwinsys.com/file/"
 pkg_license=('custom')
 pkg_source="ftp://ftp.astron.com/pub/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="fb608290c0fd2405a8f63e5717abf6d03e22e183fb21884413d1edd918184379"
+pkg_shasum="e9c13967f7dd339a3c241b7710ba093560b9a33013491318e88e6b8b57bae07f"
 pkg_deps=(
   core/glibc
   core/zlib
