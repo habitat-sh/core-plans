@@ -1,16 +1,35 @@
 pkg_name=openresty
 pkg_origin=core
-pkg_version=1.13.6.2
+pkg_version=1.15.8.1
 pkg_description="Scalable Web Platform by Extending NGINX with Lua"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('BSD-2-Clause')
 pkg_source="https://openresty.org/download/${pkg_name}-${pkg_version}.tar.gz"
 pkg_upstream_url=http://openresty.org/
-pkg_shasum=946e1958273032db43833982e2cec0766154a9b5cb8e67868944113208ff2942
-pkg_deps=(core/glibc core/gcc-libs core/libxml2 core/libxslt core/zlib core/bzip2 core/openssl core/pcre core/coreutils core/perl core/which)
-pkg_build_deps=(core/gcc core/make)
+pkg_shasum=89a1238ca177692d6903c0adbea5bdf2a0b82c383662a73c03ebf5ef9f570842
+pkg_deps=(
+  core/glibc
+  core/gcc-libs
+  core/libxml2
+  core/libxslt
+  core/zlib
+  core/bzip2
+  core/openssl
+  core/pcre
+  core/coreutils
+  core/perl
+  core/which
+)
+pkg_build_deps=(
+  core/gcc
+  core/make
+)
 pkg_lib_dirs=(lib)
-pkg_bin_dirs=(bin nginx/sbin luajit/bin)
+pkg_bin_dirs=(
+  bin
+  nginx/sbin
+  luajit/bin
+)
 pkg_include_dirs=(include)
 pkg_svc_user="root"
 pkg_exports=(
@@ -27,7 +46,8 @@ do_prepare() {
 }
 
 do_build() {
-  ./configure --prefix="${pkg_prefix}" \
+  ./configure \
+    --prefix="${pkg_prefix}" \
     --user=hab \
     --group=hab \
     --http-log-path=/dev/stdout \
