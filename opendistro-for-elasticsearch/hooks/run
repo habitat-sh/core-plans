@@ -1,0 +1,50 @@
+#!/bin/bash
+
+exec 2>&1
+
+# Don't use the default password, ok?
+if [ "{{cfg.securityconfig.internal_users.admin.hash}}" = '$2a$12$VcCDgh2NDk07JGN0rjGbM.Ad41qVR/YFJcgHp0UGns5JDymv..TOG' ]; then
+    echo "=================================================="
+    echo "WARNING: UNSAFE DEFAULT PASSWORD FOR ADMIN USER!!!"
+    echo "WARNING: USE FOR TESTING PURPOSES ONLY!!!"
+    echo "WARNING: UNSAFE DEFAULT PASSWORD FOR ADMIN USER!!!"
+    echo "=================================================="
+fi
+
+free_mem="$(free -m | grep Mem | awk '{print $2}')"
+computed_mem="$(( $free_mem / 2 ))"
+half_mem="$(echo $computed_mem)"
+if [ $half_mem -lt 26624 ]; then
+    heapsize=$half_mem; heapsize+=m;
+else
+    heapsize=26624m;
+fi
+export ES_JAVA_HEAP="-Xms$heapsize -Xmx$heapsize"
+
+{{#if cfg.runtime.es_startup_sleep_time ~}}
+export ES_STARTUP_SLEEP_TIME={{cfg.runtime.es_startup_sleep_time}}
+{{/if ~}}
+{{#if cfg.runtime.max_locked_memory ~}}
+ulimit -l {{cfg.runtime.max_locked_memory}}
+{{/if ~}}
+{{#if cfg.runtime.max_open_files ~}}
+ulimit -n {{cfg.runtime.max_open_files}}
+{{/if ~}}
+{{#if cfg.runtime.es_java_opts ~}}
+export ES_JAVA_OPTS="{{cfg.runtime.es_java_opts}}"
+{{else ~}}
+export ES_JAVA_OPTS="${ES_JAVA_HEAP}"
+{{/if ~}}
+
+export ES_PATH_CONF="{{pkg.svc_config_path}}"
+
+# Clean up any elasticsearch temp dirs
+# this prevents the service from filling up /tmp if it's in a bootloop
+rmdir {{pkg.svc_path}}/tmp/elasticsearch.*
+# Create a temporary folder for Elastic Search ourselves.
+# Ref: https://github.com/elastic/elasticsearch/pull/27659
+export TMPDIR="{{pkg.svc_path_config_path}}/tmp"
+ES_TMPDIR=$(mktemp -d -t elasticsearch.XXXXXXXX)
+export ES_TMPDIR
+
+exec elasticsearch

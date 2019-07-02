@@ -1,0 +1,60 @@
+# ======================== Elasticsearch Configuration =========================
+#
+[es_yaml]
+[es_yaml.bootstrap]
+memory_lock = false
+[es_yaml.cluster]
+name = "example-cluster"
+[es_yaml.discovery.zen]
+minimum_master_nodes = 1
+[es_yaml.http]
+port = 9200
+[es_yaml.transport.tcp]
+port = 9300
+[es_yaml.network]
+host = "0.0.0.0"
+[es_yaml.node]
+max_local_storage_nodes = 1
+[es_yaml.path]
+data = "/hab/svc/opendistro-for-elasticsearch/data"
+logs = "/hab/svc/opendistro-for-elasticsearch/logs"
+[es_yaml.opendistro_security]
+allow_unsafe_democertificates = "true"
+# These are example DN generated certificates. Override if you're generating your own
+nodes_dn = [ "CN=node,O=example.com,L=example_city,ST=example_state,C=CC" ]
+[es_yaml.opendistro_security.authcz]
+admin_dn = [ "CN=admin,O=example.com,L=example_city,ST=example_state,C=CC" ]
+[es_yaml.opendistro_security.ssl]
+[es_yaml.opendistro_security.ssl.http]
+enabled = true
+pemcert_filepath = "certificates/admin.pem"
+pemkey_filepath = "certificates/admin.key"
+pemtrustedcas_filepath = "certificates/MyRootCA.pem"
+[es_yaml.opendistro_security.ssl.transport]
+enabled = true
+pemcert_filepath = "certificates/node.pem"
+pemkey_filepath = "certificates/node.key"
+pemtrustedcas_filepath = "certificates/MyRootCA.pem"
+enforce_hostname_verification = false
+
+[securityconfig]
+[securityconfig.internal_users]
+[securityconfig.internal_users.admin]
+readonly = true
+hash = "$2a$12$VcCDgh2NDk07JGN0rjGbM.Ad41qVR/YFJcgHp0UGns5JDymv..TOG" #password is: admin
+roles = [ "admin" ]
+# Runtime settings for jvm.options and the systemd service
+[runtime]
+  max_open_files = ""
+  max_locked_memory = ""
+  es_startup_sleep_time = ""
+  # This config variable becomes the value of ES_JAVA_OPTS.
+  # Note: JVM values for -Xms and -Xmx are auto calculated in the run hook.
+  # Any value defined here will override the calculation in the hook.
+  es_java_opts = ""
+
+# This section contains any settings that need to applied on startup for opendistro.
+# Any values put under this hash will be rendered into yaml and applied with
+# securityadmin.sh. These should be your basic admin credentials, as long term you
+# can manage your creds outside of habitat with securityadmin.sh.
+[odconfig_yaml]

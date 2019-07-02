@@ -1,0 +1,4 @@
+UNLIMITED:
+  readonly: true
+  permissions:
+    - "*"

@@ -1,0 +1,4 @@
+# This is the internal user database
+# The hash value is a bcrypt hash and can be generated with plugin/tools/hash.sh
+
+{{toYaml cfg.securityconfig.internal_users}}

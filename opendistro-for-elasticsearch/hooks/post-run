@@ -1,0 +1,7 @@
+#!/bin/bash
+
+exec 2>&1
+
+source "{{pkg.svc_config_path}}/hook-helper.sh"
+
+create_credentials_delay

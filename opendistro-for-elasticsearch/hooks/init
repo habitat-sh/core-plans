@@ -1,0 +1,39 @@
+#!/bin/sh
+
+mkdir -p {{pkg.svc_path_config_path}}/tmp
+mkdir -p {{pkg.svc_data_path}}/{{cfg.es_yaml.cluster.name}}
+
+#This section makes sure that the admin key exists.
+
+#if [ ! -s {{pkg.svc_config_path}}/certificates/MyRootCA.key ]; then
+
+{{#unless cfg.opendistro_ssl.rootCA}}
+  RANDFILE={{pkg.svc_config_path}}/certificates/.rnd
+
+  mkdir -p {{pkg.svc_config_path}}
+  #First, create a private key for the CA:
+  openssl genrsa -out {{pkg.svc_config_path}}/certificates/MyRootCA.key 2048
+
+  #Create the CA and enter the Organization details:
+  openssl req -x509 -new -key {{pkg.svc_config_path}}/certificates/MyRootCA.key -sha256 -out {{pkg.svc_config_path}}/certificates/MyRootCA.pem -subj '/C=CC/ST=example_state/L=example_city/O=example.com/CN=rootca'
+
+  #the rsa keys
+  openssl genrsa -out {{pkg.svc_config_path}}/certificates/node-pkcs12.key 2048
+  openssl genrsa -out {{pkg.svc_config_path}}/certificates/admin-pkcs12.key 2048
+
+  #IMPORTANT: Convert these to PKCS#5 v1.5 to work correctly with the JDK.
+  openssl pkcs8 -v1 "PBE-SHA1-3DES" -in "{{pkg.svc_config_path}}/certificates/node-pkcs12.key" -topk8 -out "{{pkg.svc_config_path}}/certificates/node.key" -nocrypt
+  openssl pkcs8 -v1 "PBE-SHA1-3DES" -in "{{pkg.svc_config_path}}/certificates/admin-pkcs12.key" -topk8 -out "{{pkg.svc_config_path}}/certificates/admin.key" -nocrypt
+
+  #Create the CSR and enter the organization and server details for the node key
+  openssl req -new -key {{pkg.svc_config_path}}/certificates/node.key -out {{pkg.svc_config_path}}/certificates/node.csr -subj '/C=CC/ST=example_state/L=example_city/O=example.com/CN=node'
+
+  #Create the CSR and enter the organization and server details for the admin key
+  openssl req -new -key {{pkg.svc_config_path}}/certificates/admin.key -out {{pkg.svc_config_path}}/certificates/admin.csr -subj '/C=CC/ST=example_state/L=example_city/O=example.com/CN=admin'
+
+  #Use the CSR to generate the signed node Certificate:
+  openssl x509 -req -in {{pkg.svc_config_path}}/certificates/node.csr -CA {{pkg.svc_config_path}}/certificates/MyRootCA.pem -CAkey {{pkg.svc_config_path}}/certificates/MyRootCA.key -CAcreateserial -out {{pkg.svc_config_path}}/certificates/node.pem -sha256
+
+  #Use the CSR to generate the signed admin Certificate:
+  openssl x509 -req -in {{pkg.svc_config_path}}/certificates/admin.csr -CA {{pkg.svc_config_path}}/certificates/MyRootCA.pem -CAkey {{pkg.svc_config_path}}/certificates/MyRootCA.key -CAcreateserial -out {{pkg.svc_config_path}}/certificates/admin.pem -sha256
+{{/unless}}
