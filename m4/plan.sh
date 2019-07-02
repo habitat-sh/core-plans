@@ -1,3 +1,5 @@
+# Disable shellcheck that would require quotes around pkg_name
+# shellcheck disable=SC2209
 pkg_name=m4
 pkg_origin=core
 pkg_version=1.4.18
@@ -20,6 +22,7 @@ pkg_build_deps=(
   core/make
   core/gcc
   core/binutils
+  core/diffutils
 )
 pkg_bin_dirs=(bin)
 
@@ -28,11 +31,25 @@ do_prepare() {
   # working against Glibc 2.26.
   #
   # TODO fn: when glibc package is upgraded, see if this patch is still
-  # required (it may be fixed in the near future)
+  # required (it may be fixed in the near future).
+  # SM: This is still required as of glibc 2.29
   #
   # Thanks to:
   # https://www.redhat.com/archives/libvir-list/2017-September/msg01054.html
   patch -p1 < "$PLAN_CONTEXT/fix-test-getopt-posix-with-glibc-2.26.patch"
+
+  # After updating to glibc 2.29, m4 fails to build with the following error:
+  #
+  # freadahead.c:92:3: error:
+  # error "Please port gnulib freadahead.c to your platform!
+  # Look at the definition of fflush, fread, ungetc on your system,
+  # then report this to bug-gnulib."
+  #
+  # This patch adds the neccessary workarounds in order to build m4 with newer
+  # versions of glibc. When m4 is updated, this patch can be evaluated for removal
+  # Thanks to:
+  # https://git.archlinux.org/svntogit/packages.git/tree/trunk/m4-1.4.18-glibc-change-work-around.patch?h=packages/m4
+  patch -p1 < "$PLAN_CONTEXT/glibc-change-workaround.patch"
 
   # Force gcc to use our ld wrapper from binutils when calling `ld`
   CFLAGS="$CFLAGS -B$(pkg_path_for binutils)/bin/"
