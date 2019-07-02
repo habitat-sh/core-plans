@@ -14,7 +14,7 @@
 
   - label: "[@@plan@@] :habicat: Check for bad patterns"
     command:
-      - bin/ci/pre-commit.sh @@plan@@
+      - bin/ci/check-pre-commit.sh @@plan@@
     expeditor:
       executor:
         docker:
