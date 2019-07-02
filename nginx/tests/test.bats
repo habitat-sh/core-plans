@@ -1,16 +1,12 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
-
-@test "Command is on path" {
-  [ "$(command -v nginx)" ]
-}
+TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Version matches" {
-  result="$(nginx -v 2>&1 | awk -F'/' '{print $2}')"
-  [ "$result" = "${pkg_version}" ]
+  result="$(hab pkg exec ${TEST_PKG_IDENT} nginx -v 2>&1 | awk -F'/' '{print $2}')"
+  [ "$result" = "${TEST_PKG_VERSION}" ]
 }
 
 @test "Help command" {
-  run nginx -h
+  run hab pkg exec ${TEST_PKG_IDENT} nginx -h
   [ $status -eq 0 ]
 }
 

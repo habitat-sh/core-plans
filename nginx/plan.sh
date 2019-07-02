@@ -1,12 +1,12 @@
 pkg_name=nginx
 pkg_origin=core
-pkg_version=1.16.0
+pkg_version=1.17.1
 pkg_description="NGINX web server."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('BSD-2-Clause')
 pkg_source="https://nginx.org/download/nginx-${pkg_version}.tar.gz"
 pkg_upstream_url=https://nginx.org/
-pkg_shasum=4fd376bad78797e7f18094a00f0f1088259326436b537eb5af69b01be2ca1345
+pkg_shasum=6f1825b4514e601579986035783769c456b888d3facbab78881ed9b58467e73e
 pkg_deps=(
   core/glibc
   core/libedit
@@ -32,7 +32,8 @@ pkg_exports=(
 pkg_exposes=(port)
 
 do_build() {
-  ./configure --prefix="${pkg_prefix}" \
+  ./configure \
+    --prefix="${pkg_prefix}" \
     --conf-path="${pkg_svc_config_path}/nginx.conf" \
     --sbin-path="${pkg_prefix}/bin/nginx" \
     --pid-path="${pkg_svc_var_path}/nginx.pid" \
