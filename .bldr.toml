@@ -1319,16 +1319,12 @@ plan_path = "sassc"
 plan_path = "sbt"
 [scaffolding-base]
 plan_path = "scaffolding-base"
-[scaffolding-chef]
-plan_path = "scaffolding-chef"
 [scaffolding-go]
 plan_path = "scaffolding-go"
 [scaffolding-go17]
 plan_path = "scaffolding-go17"
 [scaffolding-gradle]
 plan_path = "scaffolding-gradle"
-[scaffolding-inspec]
-plan_path = "scaffolding-inspec"
 [scaffolding-node]
 plan_path = "scaffolding-node"
 [scaffolding-ruby]
