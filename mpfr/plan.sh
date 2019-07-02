@@ -8,7 +8,7 @@ C library for arbitrary-precision binary floating-point computation with \
 correct rounding, based on GNU Multi-Precision Library.\
 "
 pkg_upstream_url="http://www.mpfr.org/"
-pkg_license=('lgpl')
+pkg_license=('LGPL-3.0-or-later')
 pkg_source="http://www.mpfr.org/${pkg_name}-${pkg_version}/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="67874a60826303ee2fb6affc6dc0ddd3e749e9bfcb4c8655e3953d0458a6e16e"
 pkg_deps=(
@@ -28,6 +28,15 @@ do_prepare() {
 
   LDFLAGS="$LDFLAGS -Wl,-rpath=${LD_RUN_PATH},--enable-new-dtags"
   build_line "Updating LDFLAGS=$LDFLAGS"
+
+  # GCC will set the dynamic linker if we don't provide it. Since this package
+  # is built after glibc, but before GCC, we would end with segfaults during the
+  # build process because it will set the RPATH to look at _new_ glibc, but the
+  # dynamic linker will be the _old_ glibc. By setting it here, we ensure that
+  # all the versions line up.
+  dynamic_linker="$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2"
+  CFLAGS="$CFLAGS -Wl,--dynamic-linker=$dynamic_linker"
+  build_line "Updating CFLAGS=$CFLAGS"
 }
 
 do_build() {
