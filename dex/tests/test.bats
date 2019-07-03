@@ -16,5 +16,5 @@ load helpers
 }
 
 @test "'dex version' returns the correct version" {
-  dex version | grep -q "dex Version: v${pkg_version}"
+  hab pkg exec "${TEST_PKG_IDENT}" dex version | grep -q "dex Version: v${pkg_version}"
 }
