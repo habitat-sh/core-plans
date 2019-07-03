@@ -21,6 +21,13 @@ hab pkg install core/busybox-static
 hab pkg binlink core/busybox-static nc
 hab pkg install core/bats core/curl core/jq-static --binlink
 
+# if the supervisor isn't running, start it
+if ! hab sup status 2>/dev/null; then
+  hab sup run &
+fi
+
+echo "Waiting for supervisor to start (30s)"
+wait_listen tcp 9632 30
 hab svc load "${TEST_PKG_IDENT}"
 
 # Wait for 5 seconds on first check, to ensure service is up.
