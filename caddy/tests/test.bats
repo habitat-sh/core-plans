@@ -1,22 +1,17 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
-
-@test "Command is on path" {
-  [ "$(command -v caddy)" ]
-}
+TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Version matches" {
-  skip
-  result="$(caddy -version | head -1 | awk '{print $2}')"
+  result="$(hab pkg exec ${TEST_PKG_IDENT} caddy -version | head -1 | awk '{print $2}')"
   [ "$result" = "${pkg_version}" ]
 }
 
 @test "Help command" {
-  run caddy -help
+  run hab pkg exec ${TEST_PKG_IDENT} caddy -help
   [ $status -eq 2 ]
 }
 
 @test "Basic config validation" {
-  run caddy -validate
+  run hab pkg exec ${TEST_PKG_IDENT} caddy -validate
   [ $status -eq 0 ]
 }
 
