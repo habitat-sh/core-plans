@@ -1,10 +1,10 @@
 pkg_name=packer
 pkg_origin=core
-pkg_version=1.3.5
+pkg_version=1.4.2
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MPL2')
 pkg_source="https://releases.hashicorp.com/${pkg_name}/${pkg_version}/${pkg_name}_${pkg_version}_linux_amd64.zip"
-pkg_shasum="14922d2bca532ad6ee8e936d5ad0788eba96f773bcdcde8c2dc7c95f830841ec"
+pkg_shasum=2fcbd1662ac76dc4dec381bdc7b5e6316d5b9d48e0774a32fe6ef9ec19f47213
 pkg_description="Packer is a tool for creating machine and container images for multiple platforms from a single source configuration."
 pkg_upstream_url=https://packer.io
 pkg_build_deps=(core/unzip)
@@ -20,5 +20,5 @@ do_build() {
 }
 
 do_install() {
-  install -D packer "$pkg_prefix/bin/packer"
+  install -D packer "${pkg_prefix}/bin/packer"
 }
