@@ -1,11 +1,13 @@
 pkg_name=ansible
 pkg_origin=core
-pkg_version="2.8.1"
+pkg_version=2.8.2
+pkg_description="Ansible is a radically simple IT automation platform that makes your applications and systems easier to deploy."
+pkg_upstream_url="https://www.ansible.com/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=("GPL-3.0")
+pkg_license=("GPL-3.0-only")
 pkg_source="https://github.com/${pkg_name}/${pkg_name}/archive/v${pkg_version}.tar.gz"
 pkg_filename="${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="0f06a784e138244491c74409240b4a0ee495e2f349cdda67398837c5915bb556"
+pkg_shasum=17239947c2bc13abcbb3fe9ce61c227e4b3a1018da84d58a82c33e41e677ddbc
 pkg_deps=(
   core/libffi
   core/python2
@@ -18,8 +20,6 @@ pkg_build_deps=(
   core/make
 )
 pkg_bin_dirs=(bin)
-pkg_description="Ansible is a radically simple IT automation platform that makes your applications and systems easier to deploy."
-pkg_upstream_url="https://www.ansible.com/"
 
 do_setup_environment() {
   push_runtime_env PYTHONPATH "$(pkg_path_for python2)/lib/python2.7/site-packages"
