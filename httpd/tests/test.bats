@@ -1,16 +1,12 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
-
-@test "Command is on path" {
-  [ "$(command -v httpd)" ]
-}
+TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Version matches" {
-  result="$(httpd -v | head -1 | awk '{print $3}')"
-  [ "$result" = "Apache/${pkg_version}" ]
+  result="$(hab pkg exec ${TEST_PKG_IDENT} httpd -v | head -1 | awk '{print $3}')"
+  [ "$result" = "Apache/${TEST_PKG_VERSION}" ]
 }
 
 @test "Help command" {
-  run httpd -h
+  run hab pkg exec ${TEST_PKG_IDENT} httpd -h
   # httpd help command exits with status 1, for some reason
   [ $status -eq 1 ]
 }

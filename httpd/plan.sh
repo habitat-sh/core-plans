@@ -1,12 +1,12 @@
 pkg_name=httpd
 pkg_origin=core
-pkg_version=2.4.38
+pkg_version=2.4.39
 pkg_description="The Apache HTTP Server"
 pkg_upstream_url="http://httpd.apache.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://archive.apache.org/dist/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=38d0b73aa313c28065bf58faf64cec12bf7c7d5196146107df2ad07541aa26a6
+pkg_shasum=8b95fe249f3a6c50aad3ca125eef3e02d619116cde242e1bc3c266b7b5c37c30
 pkg_deps=(
   core/apr
   core/apr-util
@@ -33,23 +33,23 @@ pkg_exports=(
   [port]=serverport
 )
 pkg_exposes=(port)
-pkg_svc_run="httpd -DFOREGROUND -f $pkg_svc_config_path/httpd.conf"
+pkg_svc_run="httpd -DFOREGROUND -f ${pkg_svc_config_path}/httpd.conf"
 pkg_svc_user="root"
 pkg_svc_group="root"
 
 do_build() {
-    ./configure \
-      --prefix="$pkg_prefix" \
-      --with-expat="$(pkg_path_for core/expat)" \
-      --with-iconv="$(pkg_path_for core/libiconv)" \
-      --with-pcre="$(pkg_path_for core/pcre)" \
-      --with-apr="$(pkg_path_for core/apr)" \
-      --with-apr-util="$(pkg_path_for core/apr-util)" \
-      --with-z="$(pkg_path_for core/zlib)" \
-      --with-ssl="$(pkg_path_for core/openssl)" \
-      --enable-modules="none" \
-      --enable-mods-static="none" \
-      --enable-mods-shared="reallyall" \
-      --enable-mpms-shared="prefork event worker"
-    make
+  ./configure \
+    --prefix="$pkg_prefix" \
+    --with-expat="$(pkg_path_for core/expat)" \
+    --with-iconv="$(pkg_path_for core/libiconv)" \
+    --with-pcre="$(pkg_path_for core/pcre)" \
+    --with-apr="$(pkg_path_for core/apr)" \
+    --with-apr-util="$(pkg_path_for core/apr-util)" \
+    --with-z="$(pkg_path_for core/zlib)" \
+    --with-ssl="$(pkg_path_for core/openssl)" \
+    --enable-modules="none" \
+    --enable-mods-static="none" \
+    --enable-mods-shared="reallyall" \
+    --enable-mpms-shared="prefork event worker"
+  make
 }
