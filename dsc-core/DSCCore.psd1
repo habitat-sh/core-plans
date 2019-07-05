@@ -1,6 +1,6 @@
 @{
     RootModule = 'DSCCore.psm1'
-    ModuleVersion = '0.2.0'
+    ModuleVersion = '0.3.0'
     GUID = '56ecd704-4603-4790-a0c9-99f057027202'
     Author = 'The Habitat Maintainers'
     CompanyName = 'Chef Software Inc.'
