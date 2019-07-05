@@ -27,13 +27,17 @@ function Start-DscCore {
 
         [Parameter(Mandatory = $true)]
         [System.String]
-        $ConfigFunction
+        $ConfigFunction,
+
+        [Parameter(Mandatory = $false)]
+        [Hashtable]
+        $ConfigData
     )
 
     Enter-QuietProgress {
         Write-Output "Compiling DSC mof for $ConfigFunction ..."
 
-        $configurationData = New-ConfigurationData (Get-Content $Path | Out-String) $ConfigFunction
+        $configurationData = New-ConfigurationData (Get-Content $Path | Out-String) $ConfigFunction $ConfigData
 
         Wait-LCMReady
 
@@ -44,13 +48,13 @@ function Start-DscCore {
                 # Now that we have the lock, check once more just in case
                 Wait-LCMReady
                 Set-LcmRefreshMode "Push"
-                Write-Output "Applying DSC configuration for $Path ..."
+                Write-Output "Applying DSC configuration for '$ConfigFunction' in $Path ..."
                 Invoke-CimMethod    -ComputerName localhost `
-                                    -Namespace "root/Microsoft/Windows/DesiredStateConfiguration" `
-                                    -ClassName "MSFT_DSCLocalConfigurationManager" `
-                                    -MethodName "SendConfigurationApply" `
-                                    -Arguments @{ConfigurationData = $configurationData; Force = $true} `
-                                    -ErrorAction Stop | Out-Null
+                    -Namespace "root/Microsoft/Windows/DesiredStateConfiguration" `
+                    -ClassName "MSFT_DSCLocalConfigurationManager" `
+                    -MethodName "SendConfigurationApply" `
+                    -Arguments @{ConfigurationData = $configurationData; Force = $true} `
+                    -ErrorAction Stop | Out-Null
             }
             finally {
                 Wait-LCMReady
@@ -61,13 +65,13 @@ function Start-DscCore {
 }
 
 function Wait-LCMReady {
-    while((Get-LcmMetaConfig).LCMState -eq "Busy") {
+    while ((Get-LcmMetaConfig).LCMState -eq "Busy") {
         Write-Host "Waiting for LCM to become available. Current state: $((Get-LcmMetaConfig).LCMState)..."
         Start-Sleep -Seconds 5
     }
 }
 
-function New-ConfigurationData($configuration, $ConfigFunction) {
+function New-ConfigurationData($configuration, $ConfigFunction, $ConfigData) {
     # Because the DSC configuration will be applied by the Local Configuration
     # Manager in the context of a Windows Powershell session (not the same
     # Powershell Core session of the hook), we want to compile the configuration
@@ -75,19 +79,61 @@ function New-ConfigurationData($configuration, $ConfigFunction) {
     # are discovered from the same PSModulePath. To do this we compile the mof
     # in a local Windows Powershell session.
     try {
-        $mof = Invoke-Command -ComputerName localhost -EnableNetworkAccess -ArgumentList $configuration, $ConfigFunction {
-            param ($config, $func)
+        $mof = Invoke-Command -ComputerName localhost -EnableNetworkAccess -ArgumentList $configuration, $ConfigFunction, $ConfigData {
+            param ($config, $func, $ConfigData)
             $global:WarningPreference = "SilentlyContinue"
-            Invoke-Expression $config
+            function ConvertPSObjectToHashtable {
+                param (
+                    [Parameter(ValueFromPipeline)]
+                    $InputObject
+                )
+
+                process {
+                    if ($null -eq $InputObject) { return $null }
+
+                    if ($InputObject -is [System.Collections.IEnumerable] -and $InputObject -isnot [string]) {
+                        $collection = @(
+                            foreach ($object in $InputObject) { ConvertPSObjectToHashtable $object }
+                        )
+
+                        Write-Output -NoEnumerate $collection
+                    } elseif ($InputObject -is [psobject]) {
+                        $hash = @{}
+
+                        foreach ($property in $InputObject.PSObject.Properties) {
+                            $hash[$property.Name] = ConvertPSObjectToHashtable $property.Value
+                        }
+
+                        $hash
+                    } else {
+                        $InputObject
+                    }
+                }
+            }
             $tempDir = Join-Path $env:TEMP ([System.IO.Path]::GetRandomFileName())
+            $dscParam = @{OutputPath = $tempDir}
+
+            # $ConfigData has been changed by Invoke-Command and will throw an error when
+            # we invoke DSC unless we recursively convert it back to a PowerShell hashtable
+            if ($ConfigData) {
+                # Simple trick to make $ConfigData a native PowerShell Object
+                $object = $ConfigData | ConvertTo-Json | ConvertFrom-Json
+                $psd1 = ConvertPSObjectToHashtable $object
+                $dscParam.add('ConfigurationData', $psd1)
+            }
+
+            Invoke-Expression $config
             New-Item -ItemType Directory -Path $tempDir | Out-Null
-            & $func -OutputPath $tempDir
+            & $func @dscParam
         }
 
         $configurationData = Get-Content $mof.FullName -AsByteStream -ReadCount 0
-    }
-    finally {
-        if($mof) { Remove-Item $mof.Directory -Recurse -Force | Out-Null }
+    } finally {
+        if ($mof) {
+            Remove-Item $mof.Directory -Recurse -Force | Out-Null
+        } else {
+            Write-Error "Failed to apply '$ConfigFunction' from DSC configuration file!"
+        }
     }
 
     $totalSize = [System.BitConverter]::GetBytes($configurationData.Length + 4)
@@ -102,8 +148,7 @@ function Enter-QuietProgress([ScriptBlock]$block) {
 
     try {
         Invoke-Command -ScriptBlock $block
-    }
-    finally {
+    } finally {
         $global:ProgressPreference = $currentProgPref
     }
 }
@@ -111,9 +156,9 @@ function Enter-QuietProgress([ScriptBlock]$block) {
 function Get-LcmMetaConfig {
     Enter-QuietProgress {
         $lcm = Invoke-CimMethod -ComputerName localhost `
-                                -Namespace "root/Microsoft/Windows/DesiredStateConfiguration" `
-                                -ClassName "MSFT_DSCLocalConfigurationManager" `
-                                -MethodName "GetMetaConfiguration"
+            -Namespace "root/Microsoft/Windows/DesiredStateConfiguration" `
+            -ClassName "MSFT_DSCLocalConfigurationManager" `
+            -MethodName "GetMetaConfiguration"
         $lcm.MetaConfiguration
     }
 }
@@ -121,11 +166,11 @@ function Get-LcmMetaConfig {
 function Set-LcmMetaConfig($configData) {
     Enter-QuietProgress {
         Invoke-CimMethod -ComputerName localhost `
-                         -Namespace "root/Microsoft/Windows/DesiredStateConfiguration" `
-                         -ClassName "MSFT_DSCLocalConfigurationManager" `
-                         -MethodName "SendMetaConfigurationApply" `
-                         -Arguments @{ConfigurationData = $configData} `
-                         -ErrorAction Stop | Out-Null
+            -Namespace "root/Microsoft/Windows/DesiredStateConfiguration" `
+            -ClassName "MSFT_DSCLocalConfigurationManager" `
+            -MethodName "SendMetaConfigurationApply" `
+            -Arguments @{ConfigurationData = $configData} `
+            -ErrorAction Stop | Out-Null
     }
 }
 
