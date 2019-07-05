@@ -117,7 +117,7 @@ function New-ConfigurationData($configuration, $ConfigFunction, $ConfigData) {
             # we invoke DSC unless we recursively convert it back to a PowerShell hashtable
             if ($ConfigData) {
                 # Simple trick to make $ConfigData a native PowerShell Object
-                $object = $ConfigData | ConvertTo-Json | ConvertFrom-Json
+                $object = $ConfigData | ConvertTo-Json -Depth 6 | ConvertFrom-Json
                 $psd1 = ConvertPSObjectToHashtable $object
                 $dscParam.add('ConfigurationData', $psd1)
             }
