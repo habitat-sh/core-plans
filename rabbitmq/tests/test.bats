@@ -1,10 +1,3 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
-
-@test "Command is on path" {
-  [ "$(command -v rabbitmqctl)" ]
-  [ "$(command -v rabbitmq-server)" ]
-}
-
 @test "Service is running" {
   [ "$(hab svc status | grep "rabbitmq\.default" | awk '{print $4}' | grep up)" ]
 }
