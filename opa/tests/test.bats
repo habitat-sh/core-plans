@@ -1,4 +1,4 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
+TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 load helpers
 
 @test "Port Listen TCP/8181" {
@@ -8,7 +8,7 @@ load helpers
 
 @test "/v1/data/system/version endpoint returns version" {
   curl -f http://127.0.0.1:8181/v1/data/system/version |
-    jq -e --arg vsn "$pkg_version" '.result.version == $vsn'
+    jq -e --arg vsn "$TEST_PKG_VERSION" '.result.version == $vsn'
 }
 
 @test "/v1/query endpoint returns an answer" {

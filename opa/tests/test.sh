@@ -15,18 +15,16 @@ TESTDIR="$(dirname "${0}")"
 source "${TESTDIR}/helpers.bash"
 
 export TEST_PKG_IDENT="${1}"
-hab pkg install "${TEST_PKG_IDENT}"
-
 hab pkg install core/busybox-static
 hab pkg binlink core/busybox-static nc
 hab pkg install core/bats core/curl core/jq-static --binlink
+hab pkg install "${TEST_PKG_IDENT}"
 
 hab sup term
 while hab sup status 2>/dev/null; do
   echo "Waiting for supervisor to terminate"
   sleep 1
 done
-
 hab sup run &
 
 echo "Waiting for supervisor to start (30s)"
