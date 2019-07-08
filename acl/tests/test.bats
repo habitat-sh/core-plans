@@ -1,5 +1,5 @@
-@test "Version matches plan" {
-  TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
+expected_version="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
+@test "getfacl version matches ${expected_version}" {
   actual_version="$(hab pkg exec "${TEST_PKG_IDENT}" getfacl --version | awk '{print $2}')"
-  [[ "$actual_version" = "${TEST_PKG_VERSION}" ]]
+  diff <(echo "$actual_version") <(echo "${expected_version}")
 }
