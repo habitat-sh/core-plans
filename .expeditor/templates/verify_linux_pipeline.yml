@@ -12,15 +12,6 @@
       executor:
         docker:
 
-  - label: "[@@plan@@] :linux: :habicat: Build with DO_CHECK=true"
-    command:
-      - bin/ci/verify-pr-build.sh @@plan@@
-    expeditor:
-      executor:
-        docker:
-          privileged: true
-    timeout_in_minutes: 60
-
   - label: "[@@plan@@] :linux: :habicat: Build and run tests"
     command:
       - bin/ci/build-and-run-tests.sh @@plan@@
