@@ -11,6 +11,7 @@ PLAN_BLACKLIST=(
  elasticsearch
  glibc
  gcc
+ gcc-libs
  ghc
  ghc710
  ghc710-bootstrap
