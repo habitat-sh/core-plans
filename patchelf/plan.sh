@@ -1,14 +1,14 @@
 pkg_name=patchelf
 pkg_origin=core
-pkg_version=0.9
+pkg_version=0.10
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 A small utility to modify the dynamic linker and RPATH of ELF executables.\
 "
 pkg_upstream_url="https://nixos.org/patchelf.html"
-pkg_license=('gplv3')
+pkg_license=('GPL-3.0-or-later')
 pkg_source="http://nixos.org/releases/$pkg_name/${pkg_name}-$pkg_version/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="f2aa40a6148cb3b0ca807a1bf836b081793e55ec9e5540a5356d800132be7e0a"
+pkg_shasum="b2deabce05c34ce98558c0efb965f209de592197b2c88e930298d740ead09019"
 pkg_build_deps=(
   core/coreutils
   core/diffutils
