@@ -1,19 +1,21 @@
 source ../gcc/plan.sh
 
 pkg_name=gcc-libs
+pkg_version=9.1.0
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Runtime libraries shipped by GCC."
 pkg_upstream_url="https://gcc.gnu.org/"
-pkg_license=('GPL-2.0')
+pkg_license=('GPL-3.0-or-later' 'GCC Runtime Library Exception')
 
 # The shared libraries only depend on core/glibc
 pkg_deps=(
   core/glibc
+  core/zlib
 )
 # Add the same version of the full gcc package as a build dep
 pkg_build_deps=(
-  core/gcc/$pkg_version
+  core/gcc/"$pkg_version"
   core/patchelf
 )
 
@@ -55,7 +57,7 @@ do_install() {
   find "$pkg_prefix/lib" \
     -type f \
     -name '*.so.*' \
-    -exec patchelf --set-rpath "$(pkg_path_for glibc)/lib:$pkg_prefix/lib" {} \;
+    -exec patchelf --set-rpath "$(pkg_path_for glibc)/lib:$(pkg_path_for zlib)/lib:$pkg_prefix/lib" {} \;
   find "$pkg_prefix/lib" \
     -type f \
     -name '*.so.*' \
