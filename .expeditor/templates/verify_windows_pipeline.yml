@@ -1,11 +1,13 @@
-  - label: "[lint] :windows: "
+  - label: "[@@plan@@] :windows: :habicat: PowerShell linting"
     command:
-      - ./test/not-yet-implemented.ps1
+      - bin/ci/powershell-linting.ps1 @@plan@@
     expeditor:
       executor:
         docker:
-          host_os: windows
-    timeout_in_minutes: 10
+          environment:
+            - BUILDKITE
+          host_os: windows 
+          shell: ["powershell", "-Command"]
     retry:
       automatic:
         limit: 1
