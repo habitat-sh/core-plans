@@ -1,6 +1,6 @@
 # netdata
 
-[netdata](https://github.com/firehol/netdata) is a system for distributed real-time performance and health monitoring.
+[Netdata](https://github.com/firehol/netdata) is a system for distributed real-time performance and health monitoring.
 
 ## Maintainers
 
@@ -8,7 +8,7 @@
 
 ## Usage
 
-netdata strives to be as useful as possible without configuration, so to get started you just need to load the service:
+Netdata strives to be as useful as possible without configuration, so to get started you just need to load the service:
 
 ```bash
 hab svc load core/netdata
