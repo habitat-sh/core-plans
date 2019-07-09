@@ -646,6 +646,8 @@ plan_path = "kubernetes-scheduler"
 paths = [
   "kubernetes/*",
 ]
+[lastpass-cli]
+plan_path = "lastpass-cli"
 [lcms2]
 plan_path = "lcms2"
 [leiningen]
