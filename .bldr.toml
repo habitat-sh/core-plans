@@ -1387,8 +1387,6 @@ plan_path = "sshpass"
 plan_path = "storm"
 [strace]
 plan_path = "strace"
-[stringencoders]
-plan_path = "stringencoders"
 [subversion]
 plan_path = "subversion"
 [sudo]
