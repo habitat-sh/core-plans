@@ -87,7 +87,6 @@ Configuration NewTask
         RepeatInterval      = '00:15:00'
         RepetitionDuration  = 'Indefinitely'
         ExecuteAsCredential = $Credential
-        #RunLevel            = 'Highest'
       }
   }
 }

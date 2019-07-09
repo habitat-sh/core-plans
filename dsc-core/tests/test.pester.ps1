@@ -42,7 +42,7 @@ InModuleScope -ModuleName DSCCore {
             }
         }
     }
-    Describe "Enter-PSLock" -tag Unit {
+    Describe "Start-DscCore" -tag Unit {
         Mock Enter-PSLock {Invoke-Command -ScriptBlock $ScriptBlock}
         Mock Enter-QuietProgress {Invoke-Command -ScriptBlock $block}
         Mock Wait-LCMReady {}
