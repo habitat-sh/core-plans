@@ -1,12 +1,12 @@
 pkg_name=dpkg
 pkg_origin=core
-pkg_version=1.19.4
+pkg_version=1.19.7
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('GPL-2.0')
+pkg_license=('GPL-2.0-or-later')
 pkg_upstream_url="https://wiki.debian.org/dpkg"
 pkg_description="dpkg is a package manager for Debian-based systems"
 pkg_source="http://http.debian.net/debian/pool/main/d/${pkg_name}/${pkg_name}_${pkg_version}.tar.xz"
-pkg_shasum="c15234e98655689586bff2d517a6fdc6135d139c54d52ae9cfa6a90007fee0ae"
+pkg_shasum="4c27fededf620c0aa522fff1a48577ba08144445341257502e7730f2b1a296e8"
 pkg_deps=(
   core/bzip2
   core/glibc
@@ -14,6 +14,7 @@ pkg_deps=(
   core/tar
   core/zlib
   core/xz
+  core/gcc-libs
 )
 pkg_build_deps=(
   core/autoconf
@@ -28,13 +29,12 @@ pkg_build_deps=(
   core/pkg-config
   core/xz
   core/zlib
+  core/diffutils
 )
 pkg_bin_dirs=(bin sbin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
-do_build() {
-  ./configure --prefix="${pkg_prefix}"
-
-  make
+do_check() {
+	make check
 }
