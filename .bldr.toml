@@ -265,6 +265,8 @@ plan_path = "dri2proto"
 plan_path = "drupal"
 [drush]
 plan_path = "drush"
+[dsc-core]
+plan_path = "dsc-core"
 [e2fsprogs]
 plan_path = "e2fsprogs"
 [ed]
