@@ -1,12 +1,12 @@
 pkg_name=tor
-pkg_version=0.3.3.6
+pkg_version=0.4.0.5
 pkg_origin=core
 pkg_license=('BSD-3-Clause')
 pkg_description="Free software and an open network that helps you defend against traffic analysis"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url="https://www.torproject.org/"
 pkg_source="https://www.torproject.org/dist/tor-${pkg_version}.tar.gz"
-pkg_shasum=99bc59f6dbf395894de12f3a83b3251a82dfd93dc7f6d3afcbbd80f6111433b7
+pkg_shasum=b5a2cbf0dcd3f1df2675dbd5ec10bbe6f8ae995c41b68cebe2bc95bffc90696e
 pkg_deps=(
   core/glibc
   core/gcc-libs
