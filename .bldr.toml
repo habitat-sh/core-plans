@@ -1080,8 +1080,6 @@ plan_path = "pester"
 plan_path = "phantomjs"
 [php]
 plan_path = "php"
-[php5]
-plan_path = "php5"
 [pixman]
 plan_path = "pixman"
 [pkg-config]
