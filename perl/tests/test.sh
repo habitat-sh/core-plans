@@ -1,18 +1,23 @@
 #!/bin/sh
-#/ Usage: test.sh <pkg_ident>
-#/
-#/ Example: test.sh core/php/7.2.8/20181108151533
-#/
 
 set -euo pipefail
 
+#/ Usage: test.sh <pkg_ident>
+#/
+#/ Example: test.sh core/opa/0.11.0/20190531065119
+#/
+
+TESTDIR="$(dirname "${0}")"
+
 if [[ -z "${1:-}" ]]; then
   grep '^#/' < "${0}" | cut -c4-
-	exit 1
+  exit 1
 fi
 
-TEST_PKG_IDENT="${1}"
-export TEST_PKG_IDENT
+TEST_PKG_IDENT="$1"
+
 hab pkg install core/bats --binlink
 hab pkg install "${TEST_PKG_IDENT}"
-bats "$(dirname "${0}")/test.bats"
+
+export TEST_PKG_IDENT
+bats "${TESTDIR}/test.bats"
