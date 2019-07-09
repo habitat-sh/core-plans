@@ -1188,6 +1188,8 @@ plan_path = "protobuf-cpp"
 plan_path = "protobuf-rust"
 [psmisc]
 plan_path = "psmisc"
+[psscriptanalyzer]
+plan_path = "psscriptanalyzer"
 [pv]
 plan_path = "pv"
 [python]
