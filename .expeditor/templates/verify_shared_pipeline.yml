@@ -12,7 +12,7 @@
       executor:
         docker:
 
-  - label: "[@@plan@@] :habicat: Check for bad patterns"
+  - label: "[@@plan@@] :habicat: Check for extraneous whitespace"
     command:
       - bin/ci/check-pre-commit.sh @@plan@@
     expeditor:
