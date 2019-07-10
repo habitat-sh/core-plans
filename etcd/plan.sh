@@ -27,7 +27,7 @@ do_download() {
                 "cc4bdd4f0a83efa46a34b590544ba7bb3ad494d07d43cf3f85933b660b97638a"
   download_file "https://coreos.com/dist/pubkeys/app-signing-pubkey.gpg" \
 	        "app-signing-pubkey.gpg" \
-                "16b93904e4b3133fe4b5f95f46e3db998c3b2f9d9cee6d4c2eb531f98028bcb3"
+                "b7a769456e62d10a042a4fad79f1fe595d8c392490a6ff611c759c0669d99a97"
 }
 
 do_verify() {
@@ -36,7 +36,7 @@ do_verify() {
   verify_file "${pkg_name}-${pkg_version}-linux-amd64.tar.gz.asc" \
               "cc4bdd4f0a83efa46a34b590544ba7bb3ad494d07d43cf3f85933b660b97638a"
   verify_file "app-signing-pubkey.gpg" \
-	      "16b93904e4b3133fe4b5f95f46e3db998c3b2f9d9cee6d4c2eb531f98028bcb3"
+	      "b7a769456e62d10a042a4fad79f1fe595d8c392490a6ff611c759c0669d99a97"
 
   # GPG verification
   build_line "Verifying ${pkg_name}-${pkg_version}-linux-amd64.tar.gz signature"
