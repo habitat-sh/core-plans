@@ -1,13 +1,13 @@
 pkg_name=ffmpeg
 pkg_origin=core
-pkg_version=4.1.3
+pkg_version=4.1.4
 pkg_description="A complete, cross-platform solution to record, convert and \
 stream audio and video."
 pkg_upstream_url=https://ffmpeg.org/
-pkg_license=('LGPL-2.1+' 'GPL-2.0+')
+pkg_license=('LGPL-2.1-or-later' 'GPL-2.0-or-later')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://ffmpeg.org/releases/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=2f5b24f30e41963ce80f0ab7c78a1b91e86fb3fbb4a7661147c572c587177eee
+pkg_shasum=7570d3403e26b34873090a5904cb513b130425972cfcff8d9ea59df5e88846d1
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
