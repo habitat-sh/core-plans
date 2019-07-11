@@ -158,12 +158,10 @@ hugo @tduffield @cnunciato @predominant
 innounp @mwrock
 jdk7 @rsertelon
 jdk8 @rsertelon
-jdk9 @rsertelon
 jenkins @predominant
 journalbeat @thomascate @echohack
 jre7 @rsertelon
 jre8 @rsertelon
-jre9 @rsertelon
 json-c @jasonwbarnett
 kibana @joshbrand @predominant
 logstash @joshbrand @predominant

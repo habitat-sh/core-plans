@@ -1,5 +1,3 @@
-source ../jdk8/plan.sh
-
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_name=jdk9
@@ -16,16 +14,54 @@ pkg_bin_dirs=(bin jre/bin)
 pkg_lib_dirs=(lib lib/amd64)
 pkg_include_dirs=(include)
 
-# Hint for rebuild scripts. Not a formal part of plan-build.
-pkg_deprecated="true"
-
 source_dir=$HAB_CACHE_SRC_PATH/${pkg_name}-${pkg_version}
 
 do_setup_environment() {
  set_runtime_env JAVA_HOME "$pkg_prefix"
 }
 
-# Most steps sourced from ../jdk8/plan.sh
+## Refer to habitat/components/plan-build/bin/hab-plan-build.sh for help
+
+# Customomized download_file() to work around the Oracle EULA Cookie-wall
+#  See: http://stackoverflow.com/questions/10268583/downloading-java-jdk-on-linux-via-wget-is-shown-license-page-instead
+download_file() {
+  local url="$1"
+  local dst="$2"
+  local sha="$3"
+
+  build_line "By including the JDK you accept the terms of the Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX, which can be found at http://www.oracle.com/technetwork/java/javase/terms/license/index.html"
+
+  pushd "$HAB_CACHE_SRC_PATH" > /dev/null
+  if [[ -f $dst && -n "$sha" ]]; then
+    build_line "Found previous file '$dst', attempting to re-use"
+    if verify_file "$dst" "$sha"; then
+      build_line "Using cached and verified '$dst'"
+      return 0
+    else
+      build_line "Clearing previous '$dst' file and re-attempting download"
+      rm -fv "$dst"
+    fi
+  fi
+
+  build_line "Downloading '$url' to '$dst'"
+  $_wget_cmd --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie"  "$url" -O "$dst"
+  build_line "Downloaded '$dst'";
+  popd > /dev/null
+}
+
+do_unpack() {
+  local unpack_file="$HAB_CACHE_SRC_PATH/$pkg_filename"
+  mkdir "$source_dir"
+  pushd "$source_dir" >/dev/null
+  tar xz --strip-components=1 -f "$unpack_file"
+
+  popd > /dev/null
+  return 0
+}
+
+do_build() {
+  return 0
+}
 
 do_install() {
   cd "$source_dir" || exit
@@ -42,4 +78,8 @@ do_install() {
 
   find "$pkg_prefix"/lib/*.so -type f \
     -exec patchelf --set-rpath "${LD_RUN_PATH}" {} \;
+}
+
+do_strip() {
+  return 0
 }
