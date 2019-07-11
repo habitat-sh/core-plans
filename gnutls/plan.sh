@@ -1,12 +1,12 @@
 pkg_name=gnutls
 pkg_origin=core
-pkg_version="3.6.5"
+pkg_version="3.6.8"
 pkg_description="GnuTLS is a secure communications library implementing the SSL, TLS and DTLS protocols and technologies around them"
 pkg_upstream_url="https://www.gnutls.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('LGPL-2.1-or-later')
 pkg_source="ftp://ftp.gnutls.org/gcrypt/gnutls/v3.6/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="073eced3acef49a3883e69ffd5f0f0b5f46e2760ad86eddc6c0866df4e7abb35"
+pkg_shasum="aa81944e5635de981171772857e72be231a7e0f559ae0292d2737de475383e83"
 pkg_deps=(
   core/glibc
   core/gmp
