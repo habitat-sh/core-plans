@@ -27,7 +27,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
   core/autoconf
-  core/bison2
+  core/bison
   core/gcc
   core/libgd
   core/make
