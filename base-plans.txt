@@ -50,6 +50,7 @@ core-plans/make
 core-plans/patch
 core-plans/texinfo
 core-plans/util-linux
+core-plans/python-minimal
 core-plans/tcl
 core-plans/expect
 core-plans/dejagnu
