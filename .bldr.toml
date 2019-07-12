@@ -1253,6 +1253,8 @@ plan_path = "python37"
 paths = [
   "python/*"
 ]
+[python-minimal]
+plan_path = "python-minimal"
 [qemu]
 plan_path = "qemu"
 [R]
