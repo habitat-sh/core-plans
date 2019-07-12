@@ -352,8 +352,7 @@ scaffolding_vendor_bundler() {
     --local "$(pkg_path_for bundler)/cache/bundler-${_bundler_version}.gem" \
     --install-dir "$GEM_HOME" \
     --bindir "$scaffolding_app_prefix/binstubs" \
-    --no-ri \
-    --no-rdoc
+    --no-document
   _wrap_ruby_bin "$scaffolding_app_prefix/binstubs/bundle"
   _wrap_ruby_bin "$scaffolding_app_prefix/binstubs/bundler"
 }
