@@ -95,6 +95,7 @@ vim @fnichol @nellshamrell @smacfarlane
 libbsd @fnichol @smacfarlane
 clens @fnichol @smacfarlane
 mg @fnichol @smacfarlane
+python-minimal @smacfarlane
 powershell @mwrock
 7zip @mwrock
 docker-credential-helper @mwrock
