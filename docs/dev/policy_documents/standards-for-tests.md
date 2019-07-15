@@ -162,47 +162,47 @@ Test launcher script `7zip/tests/test.sh`:
 
 ```bash
 #!/bin/sh
+#/ Usage: test.sh <pkg_ident>
+#/
+#/ Example: test.sh core/7zip/1.2.3/20181108151533
+#/
 
 set -euo pipefail
 
-TESTDIR="$(dirname "${0}")"
-
-if [ -z "${1:-}" ]; then
-  echo "Usage: $0 FULLY_QUALIFIED_PACKAGE_IDENT"
+if [[ -z "${1:-}" ]]; then
+  grep '^#/' < "${0}" | cut -c4-
   exit 1
 fi
 
-TEST_PKG_IDENT="$1"
-
-hab pkg install core/bats --binlink
-hab pkg install "$TEST_PKG_IDENT"
-
+TEST_PKG_IDENT="${1}"
 export TEST_PKG_IDENT
-bats "${TESTDIR}/test.bats"
+hab pkg install core/bats --binlink
+hab pkg install "${TEST_PKG_IDENT}"
+bats "$(dirname "${0}")/test.bats"
 ```
 
 BATS test script `7zip/tests/test.bats`:
 
 ```bash
-expected_version="$(echo $TEST_PKG_IDENT | cut -d/ -f 3)"
+TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 @test "7z exe runs" {
-  run hab pkg exec $TEST_PKG_IDENT 7z
+  run hab pkg exec ${TEST_PKG_IDENT} 7z
   [ $status -eq 0 ]
 }
 
-@test "7z exe output mentions expected version $expected_version" {
-  run hab pkg exec $TEST_PKG_IDENT 7z
-  [[ "$output" =~ 7-Zip\ \[64\]\ $expected_version ]]
+@test "7z version matches ${TEST_PKG_VERSION}" {
+  run hab pkg exec ${TEST_PKG_IDENT} 7z
+  [[ "$output" =~ 7-Zip\ \[64\]\ ${TEST_PKG_VERSION} ]]
 }
 
 @test "7za exe runs" {
-  run hab pkg exec $TEST_PKG_IDENT 7za
+  run hab pkg exec ${TEST_PKG_IDENT} 7za
   [ $status -eq 0 ]
 }
 
-@test "7za exe output mentions expected version $expected_version" {
-  run hab pkg exec $TEST_PKG_IDENT 7za
-  [[ "$output" =~ 7-Zip\ \(a\)\ \[64\]\ $expected_version ]]
+@test "7za version matches ${TEST_PKG_VERSION}" {
+  run hab pkg exec ${TEST_PKG_IDENT} 7za
+  [[ "$output" =~ 7-Zip\ \(a\)\ \[64\]\ ${TEST_PKG_VERSION} ]]
 }
 ```
 
@@ -211,7 +211,7 @@ Running the tests:
 ```bash
 hab pkg build 7zip
 source results/last_build.env
-hab studio run "./7zip/tests/test.sh $pkg_ident"
+hab studio run "./7zip/tests/test.sh ${pkg_ident}"
 ```
 
 Sample output:
@@ -240,9 +240,9 @@ Sample output:
 ★ Install of core/7zip/16.02/20190513161338 complete with 1 new packages installed.
 1..4
 ok 1 7z exe runs
-ok 2 7z exe output mentions expected version 16.02
+ok 2 7z version matches 16.02
 ok 3 7za exe runs
-ok 4 7za exe output mentions expected version 16.02
+ok 4 7za version matches 16.02
 ```
 
 ### Examples of why `hab pkg exec` should be used
