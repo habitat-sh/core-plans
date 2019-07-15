@@ -3,4 +3,3 @@ SOCKSPolicy {{cfg.socks_policy}}
 
 Log {{cfg.log_level}} stdout
 DataDirectory {{pkg.svc_var_path}}
-
