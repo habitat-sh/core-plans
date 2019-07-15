@@ -1,15 +1,15 @@
 pkg_name=psmisc
 pkg_origin=core
-pkg_version=23.1
+pkg_version=23.2
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The PSmisc package is a set of some small useful utilities that use the proc \
 filesystem.\
 "
 pkg_upstream_url="http://psmisc.sourceforge.net/index.html"
-pkg_license=('gpl')
+pkg_license=('GPL-2.0-or-later')
 pkg_source="http://downloads.sourceforge.net/psmisc/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="2e84d474cf75dfbe3ecdacfb797bbfab71a35c7c2639d1b9f6d5f18b2149ba30"
+pkg_shasum="4b7cbffdc9373474da49b85dc3457ae511c43dc7fa7d94513fe06f89dcb87880"
 pkg_deps=(
   core/glibc
   core/ncurses
