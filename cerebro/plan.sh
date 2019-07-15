@@ -7,11 +7,8 @@ pkg_upstream_url="https://github.com/lmenezes/cerebro"
 pkg_license=("Apache-2.0")
 pkg_filename="${pkg_name}-${pkg_version}.tgz"
 pkg_source="https://github.com/lmenezes/cerebro/releases/download/v${pkg_version}/${pkg_filename}"
-pkg_shasum=a36c5d4dd335bbf50fa19fe8efd3cb1c8cb49d7093f0486f06f5fd05c1397cbe
-pkg_deps=(
-	core/coreutils
-	core/openjdk11
-)
+pkg_shasum="a36c5d4dd335bbf50fa19fe8efd3cb1c8cb49d7093f0486f06f5fd05c1397cbe"
+pkg_deps=(core/coreutils core/openjdk11)
 pkg_bin_dirs=(bin)
 pkg_exports=(
   [port]=port
