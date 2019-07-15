@@ -32,6 +32,8 @@ do_build() {
 do_install() {
   do_default_install
 
+  install --mode 0644 COPYING "$pkg_prefix"/
+
   # A few programs do not know about `flex` yet and try to run its predecessor,
   # `lex`
   ln -sv flex "$pkg_prefix/bin/lex"
