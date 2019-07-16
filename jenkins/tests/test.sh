@@ -1,35 +1,45 @@
 #!/bin/sh
+set -euo pipefail
 
-TESTDIR="$(dirname "${0}")"
-PLANDIR="$(dirname "${TESTDIR}")"
-SKIPBUILD=${SKIPBUILD:-0}
+#/ Usage: test.sh <pkg_ident>
+#/
+#/ Example: test.sh core/php/7.2.8/20181108151533
+#/
 
-hab pkg install core/bats --binlink
-hab pkg install core/jre8 --binlink
+source "$(dirname "${0}")/../../bin/ci/test_helpers.sh"
 
-hab pkg install core/busybox-static
-hab pkg binlink core/busybox-static ps
-hab pkg binlink core/busybox-static netstat
-hab pkg binlink core/busybox-static wc
-hab pkg binlink core/busybox-static uniq
-
-source "${PLANDIR}/plan.sh"
-
-if [ "${SKIPBUILD}" -eq 0 ]; then
-  # Unload the service if its already loaded.
-  hab svc unload "${HAB_ORIGIN}/${pkg_name}"
-
-  set -e
-  pushd "${PLANDIR}" > /dev/null
-  build
-  source results/last_build.env
-  hab pkg install "results/${pkg_artifact}" --binlink --force
-  hab svc load "${pkg_ident}"
-  popd > /dev/null
-  set +e
-
-  # Give some time for the service to start up
-  sleep 15
+if [[ -z "${1:-}" ]]; then
+  grep '^#/' < "${0}" | cut -c4-
+	exit 1
 fi
 
-bats "${TESTDIR}/test.bats"
+TEST_PKG_IDENT="${1}"
+export TEST_PKG_IDENT
+hab pkg install core/bats --binlink
+hab pkg install core/corretto8 --binlink
+hab pkg install core/curl --binlink
+hab pkg install core/busybox-static
+hab pkg binlink core/busybox-static nc
+hab pkg binlink core/busybox-static netstat
+hab pkg binlink core/busybox-static ifconfig
+hab pkg install core/iproute2
+hab pkg binlink core/iproute2 ip
+
+hab pkg install "${TEST_PKG_IDENT}"
+
+ci_ensure_supervisor_running
+ci_load_service "${TEST_PKG_IDENT}"
+
+# wait for the service to start
+DEFAULT_INTERFACE="$(ip route list | grep "default"  | awk '{print $5}')"
+ETH0_IP_ADDRESS="$(ifconfig "${DEFAULT_INTERFACE}" | grep "inet addr" | cut -d ':' -f 2 | cut -d ' ' -f 1)"
+until nc -z "${ETH0_IP_ADDRESS}" 80; do
+  echo "Waiting for jenkins endpoint to be ready"
+  sleep 2
+done
+
+# run the tests
+bats "$(dirname "${0}")/test.bats"
+
+# unload the service
+hab svc unload "${TEST_PKG_IDENT}" || true
