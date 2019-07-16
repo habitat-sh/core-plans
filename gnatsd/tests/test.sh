@@ -6,6 +6,8 @@
 
 set -euo pipefail
 
+source bin/ci/test_helpers.sh
+
 if [[ -z "${1:-}" ]]; then
   grep '^#/' < "${0}" | cut -c4-
 	exit 1
@@ -21,8 +23,9 @@ hab pkg binlink core/busybox-static wc
 hab pkg binlink core/busybox-static uniq
 hab pkg install "${TEST_PKG_IDENT}"
 
-hab svc load "${TEST_PKG_IDENT}"
-sleep 5
+
+ci_ensure_supervisor_running
+ci_ensure_service_loaded "$TEST_PKG_IDENT"
 
 bats "$(dirname "${0}")/test.bats"
 
