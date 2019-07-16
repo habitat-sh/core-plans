@@ -8,8 +8,9 @@ pkg_license=(Apache-2.0)
 pkg_source=https://artifacts.elastic.co/downloads/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz
 pkg_shasum=72dcd1cf21e55cd44503ca7c452aaaa88286564ba1450d5d05941f88e2699cc3
 pkg_deps=(core/bash
-  core/jre8
+  core/corretto8
   core/coreutils
+  core/sed
 )
 pkg_build_deps=(core/bash)
 pkg_bin_dirs=(bin)

@@ -1,34 +1,38 @@
 #!/bin/sh
+set -euo pipefail
 
-TESTDIR="$(dirname "${0}")"
-PLANDIR="$(dirname "${TESTDIR}")"
-SKIPBUILD=${SKIPBUILD:-0}
+#/ Usage: test.sh <pkg_ident>
+#/
+#/ Example: test.sh core/php/7.2.8/20181108151533
+#/
 
-hab pkg install core/bats --binlink
+source "$(dirname "${0}")/../../bin/ci/test_helpers.sh"
 
-hab pkg install core/jre8 --binlink
-
-hab pkg install core/busybox-static
-hab pkg binlink core/busybox-static ps
-hab pkg binlink core/busybox-static wc
-
-source "${PLANDIR}/plan.sh"
-
-if [ "${SKIPBUILD}" -eq 0 ]; then
-  # Unload the service if its already loaded.
-  hab svc unload "${HAB_ORIGIN}/${pkg_name}"
-
-  set -e
-  pushd "${PLANDIR}" > /dev/null
-  build
-  source results/last_build.env
-  hab pkg install "results/${pkg_artifact}" --binlink --force
-  hab svc load "${pkg_ident}"
-  popd > /dev/null
-  set +e
-
-  # Give some time for the service to start up
-  sleep 5
+if [[ -z "${1:-}" ]]; then
+  grep '^#/' < "${0}" | cut -c4-
+	exit 1
 fi
 
-bats "${TESTDIR}/test.bats"
+TEST_PKG_IDENT="${1}"
+export TEST_PKG_IDENT
+hab pkg install core/bats --binlink
+hab pkg install core/corretto8 --binlink
+hab pkg install core/busybox-static
+hab pkg binlink core/busybox-static nc
+hab pkg binlink core/busybox-static netstat
+hab pkg binlink core/busybox-static ifconfig
+hab pkg binlink core/busybox-static wc
+hab pkg binlink core/busybox-static ps
+
+hab pkg install "${TEST_PKG_IDENT}"
+
+
+ci_ensure_supervisor_running
+ci_load_service "$TEST_PKG_IDENT"
+
+# run the tests
+bats "$(dirname "${0}")/test.bats"
+
+# unload the service
+hab svc unload "${TEST_PKG_IDENT}" || true
+# kill %1
