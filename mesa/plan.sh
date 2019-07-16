@@ -6,6 +6,7 @@ pkg_upstream_url="https://www.mesa3d.org"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_source="https://mesa.freedesktop.org/archive/${pkg_name}-${pkg_version}.tar.xz"
+pkg_source="https://mesa.freedesktop.org/archive/older-versions/17.x/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum=7f7f914b7b9ea0b15f2d9d01a4375e311b0e90e55683b8e8a67ce8691eb1070f
 pkg_deps=(
   core/elfutils
