@@ -1,10 +1,10 @@
 pkg_name=libcerf
 pkg_origin=core
-pkg_version="1.5"
+pkg_version="1.13"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
-pkg_source="http://apps.jcns.fz-juelich.de/src/$pkg_name/old/$pkg_name-$pkg_version.tgz"
-pkg_shasum="e36dc147e7fff81143074a21550c259b5aac1b99fc314fc0ae33294231ca5c86"
+pkg_source="https://jugit.fz-juelich.de/mlz/$pkg_name/uploads/924b8d245ad3461107ec630734dfc781/$pkg_name-$pkg_version.tgz"
+pkg_shasum="011303e59ac63b280d3d8b10c66b07eb02140fcb75954d13ec26bf830e0ea2f9"
 pkg_deps=(
   core/bzip2
   core/expat
@@ -18,6 +18,8 @@ pkg_build_deps=(
   core/file
   core/gcc
   core/make
+  core/cmake
+  core/perl
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
@@ -34,8 +36,28 @@ do_prepare() {
   fi
 }
 
+do_build() {
+  mkdir -p build
+  (
+    cd build
+    cmake .. -DCMAKE_INSTALL_PREFIX="$pkg_prefix"
+    make
+  )
+}
+
+do_install() {
+  (
+    cd build
+    make install
+  )
+}
+
+
 do_check() {
-  make check
+  (
+    cd build
+    make test
+  )
 }
 
 do_end() {
