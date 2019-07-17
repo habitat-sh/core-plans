@@ -1,12 +1,12 @@
 pkg_name=dotnet-asp-core
 pkg_origin=core
-pkg_version=2.2.3
+pkg_version=2.2.6
 pkg_license=('MIT')
 pkg_upstream_url=https://docs.microsoft.com/en-us/aspnet/core
 pkg_description="ASP.NET Core is a cross-platform, high-performance, open-source framework for building modern, cloud-based, Internet-connected applications."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source="https://download.visualstudio.microsoft.com/download/pr/dabca6d9-19e5-44b6-a402-a627fae42d26/e36d703f5d281ec8662422bfa62c2fdd/aspnetcore-runtime-${pkg_version}-linux-x64.tar.gz"
-pkg_shasum=9d71c8312ec3448ae957cfbf4d4777c1924e34cb287d0f0d0f4853ce4ffc5355
+pkg_source="https://download.visualstudio.microsoft.com/download/pr/5d59077f-07f3-4997-b514-d88bce8cdcbf/3729ac370c4b96720829e098bee7ee5e/aspnetcore-runtime-${pkg_version}-linux-x64.tar.gz"
+pkg_shasum=1e5687ab1b52fc342211607af829d847b96976737f187394b468d27b9f3ae7af
 pkg_filename="aspnetcore-runtime-${pkg_version}-linux-x64.tar.gz"
 pkg_deps=(
   core/curl
