@@ -25,7 +25,7 @@ hab pkg install "${TEST_PKG_IDENT}"
 
 
 ci_ensure_supervisor_running
-ci_ensure_service_loaded "$TEST_PKG_IDENT"
+ci_load_service "$TEST_PKG_IDENT"
 
 bats "$(dirname "${0}")/test.bats"
 

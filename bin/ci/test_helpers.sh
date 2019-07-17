@@ -26,7 +26,7 @@ ci_ensure_supervisor_running() {
     hab sup run > /hab/sup/default/sup.log 2>&1 &
   fi
 
-  for retry in {1..5}; do
+  for retry in {1..20}; do
     sleep 1
     hab sup status > /dev/null 2>&1 && break
     echo "Waiting for Supervisor to start: $retry"
@@ -41,7 +41,7 @@ ci_ensure_supervisor_running() {
 # Loads the specified service
 # Retries until the service shows running or it specified timeout (default 5 seconds)
 # period has passed.
-ci_ensure_service_loaded() {
+ci_load_service() {
   service="$1"
   timeout="${2:-5}"
 
