@@ -10,7 +10,7 @@ pkg_shasum=025921fff6ba827a25413ffc08fb1933565eb1f07ee2d3f228911913ee4f3c3f
 pkg_dirname="apache-$pkg_name-$pkg_version"
 pkg_deps=(
   core/coreutils
-  core/jdk8
+  core/corretto8
   core/which
 )
 pkg_build_deps=(core/maven)
@@ -19,7 +19,7 @@ pkg_lib_dirs=(lib)
 
 do_prepare() {
   export JAVA_HOME
-  JAVA_HOME="$(pkg_path_for jdk8)"
+  JAVA_HOME="$(pkg_path_for corretto8)"
   build_line "Setting JAVA_HOME=$JAVA_HOME"
 }
 

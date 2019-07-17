@@ -12,14 +12,14 @@ pkg_build_deps=(
 )
 pkg_deps=(
   core/coreutils
-  core/jdk8
+  core/corretto8
   core/sed
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
-  JAVA_HOME="$(pkg_path_for core/jdk8)"
+  JAVA_HOME="$(pkg_path_for core/corretto8)"
   export JAVA_HOME
   cd "${HAB_CACHE_SRC_PATH}/${pkg_name}-rel-${pkg_version}"
   sed -i 's|/usr/bin/python|/usr/bin/python2|' src/script/runant.py
