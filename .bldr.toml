@@ -372,8 +372,6 @@ plan_path = "gdbm"
 plan_path = "gdk-pixbuf"
 [gecode]
 plan_path = "gecode"
-[geoip]
-plan_path = "geoip"
 [geos]
 plan_path = "geos"
 [gettext]
