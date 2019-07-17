@@ -1,8 +1,8 @@
 pkg_name=readline
 _distname="$pkg_name"
 pkg_origin=core
-_base_version=7.0
-pkg_version=${_base_version}.3
+_base_version=8.0
+pkg_version=${_base_version}
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Readline library provides a set of functions for use by applications \
@@ -12,7 +12,7 @@ pkg_upstream_url="http://tiswww.case.edu/php/chet/readline/rltop.html"
 pkg_license=('GPL-3.0')
 _url_base="http://ftp.gnu.org/gnu/${_distname}"
 pkg_source="${_url_base}/${_distname}-${_base_version}.tar.gz"
-pkg_shasum="750d437185286f40a369e1e4f4764eda932b9459b5ec9a731628393dd3d32334"
+pkg_shasum="e339f51971478d369f8a053a330a190781acb9864cf4c541060f12078948e461"
 pkg_dirname="${_distname}-${_base_version}"
 pkg_deps=(
   core/glibc
