@@ -229,6 +229,8 @@ plan_path = "dgraph-ratel"
 plan_path = "diffutils"
 [direnv]
 plan_path = "direnv"
+[dmake]
+plan_path = "dmake"
 [docker]
 plan_path = "docker"
 [docker17]
