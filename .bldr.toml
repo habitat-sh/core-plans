@@ -75,8 +75,6 @@ plan_path = "bind"
 plan_path = "binutils"
 [bison]
 plan_path = "bison"
-[bison2]
-plan_path = "bison2"
 [boost]
 plan_path = "boost"
 [boost159]
