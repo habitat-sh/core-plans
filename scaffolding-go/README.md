@@ -1,8 +1,16 @@
 # Go Scaffolding
-The go scaffolding can be use to package application from a remote repository or from local source. It automatically configures the `GOPATH` environment variable and can download Go dependendencies via `go get`.
+The go scaffolding can be use to package application from a remote repository or
+from local source. It has two available modes:
+* GOPATH Mode
+* Module Mode
+
+## GOPATH Mode
+In this mode, the Go Scaffolding will automatically configure
+the `GOPATH` environment variable and directory structure.
 
 ### From a remote repository
-By adding the `pkg_source` variable you will be telling the go scaffolding to package the application from a remote repository.
+By adding the `pkg_source` variable you will be telling the go scaffolding to
+package the application from a remote repository.
 
 An example of a `plan.sh`:
 ```
@@ -14,9 +22,12 @@ pkg_source="http://github.com/afiune/hello-go"
 ```
 
 ### From local source
-If you are building an application from local source, you have to avoid defining the `pkg_source` variable, this way the go scaffolding will prapare the Go Workspace to build and package your local application.
+If you are building an application from local source, you have to avoid defining
+the `pkg_source` variable, this way the go scaffolding will prapare a Go Workspace
+to build and package your local application.
 
-Optionally, you can define the `scaffolding_go_base_path` if you are planning to keep your code in a source repository somewhere.
+Optionally, you can define the `scaffolding_go_base_path` if you are planning to
+keep your code in a source repository somewhere.
 
 An example of a `plan.sh`:
 ```
@@ -27,15 +38,30 @@ pkg_scaffolding=core/scaffolding-go
 scaffolding_go_base_path=github.com/afiune
 ```
 
+## Go Module Mode
+This mode allows you to build your go application outside a Go
+Workspace, it requires the existence of the [`go.mod` file.](https://golang.org/cmd/go/#hdr-The_go_mod_file)
+
+An example of a `plan.sh`:
+```
+pkg_name=hello-go
+pkg_origin=afiune
+pkg_version="0.1.0"
+pkg_scaffolding=core/scaffolding-go
+scaffolding_go_module=on
+```
+
 ## Getting Started with Scaffolding
-See https://www.habitat.sh/docs/concepts-scaffolding/ to learn how to get started with Scaffolding.
+See https://www.habitat.sh/docs/concepts-scaffolding/ to learn how to get started
+with Scaffolding.
 
 ## Variables
 | Variable | Type | Value | Default |
 | -------- | ---- | ----- | ------- |
-|`scaffolding_go_gopath`| String |_(Optional)_ Value for `GOPATH`|`$SRC_PATH`|
+|`scaffolding_go_gopath`| String | _(Optional)_ Value for `GOPATH` | `$SRC_PATH` |
 |`scaffolding_go_base_path`| String | _(Optional)_  The base path that will be used in the import path construction. Eg: `github.com/myorg`| `localhost/user`|
 |`scaffolding_go_build_deps`| Array  | _(Optional)_ Array of URLs to `go get` | Undefined |
+|`scaffolding_go_module`| String  | _(Optional)_  Enable or disable go module support: `off` or `on`| `auto` |
 
 ## Callbacks
 ### Scaffolding
