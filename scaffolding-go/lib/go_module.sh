@@ -36,5 +36,7 @@ do_default_build() {
 }
 
 do_default_install() {
+  # Avoids the need to have pkg_bin_dirs=(bin) on every plan
+  mkdir -p "${pkg_prefix}/bin/"
   mv "${SRC_PATH}/${pkg_name}" "${pkg_prefix}/bin/"
 }

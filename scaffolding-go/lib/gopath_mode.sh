@@ -114,6 +114,8 @@ scaffolding_go_install() {
   pushd "$scaffolding_go_pkg_path" >/dev/null
   go install
   popd >/dev/null
+  # Avoids the need to have pkg_bin_dirs=(bin) on every plan
+  mkdir -p "${pkg_prefix}/bin/"
   cp -r "${scaffolding_go_gopath:?}/bin" "${pkg_prefix}/${bin}"
 }
 
