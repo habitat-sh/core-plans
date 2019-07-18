@@ -66,7 +66,7 @@ scaffolding_go_before() {
 
 scaffolding_go_get() {
   local deps
-  deps=($pkg_source ${scaffolding_go_build_deps[@]})
+  deps=("$pkg_source" "${scaffolding_go_build_deps[@]}")
   build_line "Downloading Go build dependencies"
   if [[ "${#deps[@]}" -gt 0 ]] ; then
     for dependency in "${deps[@]}" ; do
