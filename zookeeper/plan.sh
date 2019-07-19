@@ -11,7 +11,7 @@ pkg_build_deps=()
 pkg_deps=(
   core/bash-static
   core/coreutils
-  core/jre8
+  core/openjdk11
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
