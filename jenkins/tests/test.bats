@@ -1,12 +1,12 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
+TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Version matches" {
-  result="$(java -jar $(hab pkg path ${HAB_ORIGIN}/jenkins)/jenkins.war --version)"
-  [ "$result" = "${pkg_version}" ]
+  result="$(hab pkg exec core/openjdk11 java -jar $(hab pkg path ${TEST_PKG_IDENT})/jenkins.war --version)"
+  [ "$result" = "${TEST_PKG_VERSION}" ]
 }
 
 @test "Help command" {
-  run java -jar $(hab pkg path ${HAB_ORIGIN}/jenkins)/jenkins.war --help
+  run hab pkg exec core/openjdk11 java -jar $(hab pkg path ${TEST_PKG_IDENT})/jenkins.war --help
   [ $status -eq 0 ]
 }
 
