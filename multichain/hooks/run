@@ -1,0 +1,7 @@
+#!/bin/sh
+
+exec 2>&1
+
+exec multichaind \
+  {{cfg.system.chain-name}}{{#if bind.multichain}}@{{#with bind.muiltichain.first as |mc|}}{{mc.sys.ip}}:{{mc.cfg.port}}{{/with}}{{/if}} \
+  -datadir={{pkg.svc_data_path}}

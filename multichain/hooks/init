@@ -1,0 +1,5 @@
+#!/bin/sh
+
+multichain-util create {{cfg.system.chain-name}} -datadir={{pkg.svc_data_path}}
+rm {{pkg.svc_data_path}}/multichain.conf
+ln -s {{pkg.svc_config_path}}/multichain.conf {{pkg.svc_data_path}}/

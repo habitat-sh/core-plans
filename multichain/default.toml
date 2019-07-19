@@ -1,0 +1,79 @@
+[user]
+rpcuser = "multichainrpc"
+rpcpassword = "CwcAgE6YS8BdEUKowLJwArBdTucBo1nA99C1oVP2boeB"
+
+[basic]
+chain-protocol = "multichain"
+chain-description = "MultiChain based chain"
+root-stream-name = "root"
+root-stream-open = true
+chain-is-testnet = false
+target-block-time = 15
+maximum-block-size = 8388608
+
+[permissions]
+anyone-can-connect = false
+anyone-can-send = false
+anyone-can-receive = false
+anyone-can-receive-empty = true
+anyone-can-create = false
+anyone-can-issue = false
+anyone-can-mine = false
+anyone-can-activate = false
+anyone-can-admin = false
+support-miner-precheck = true
+allow-arbitrary-outputs = false
+allow-p2sh-outputs = true
+allow-multisig-outputs = true
+
+[consensus]
+setup-first-blocks = 60
+mining-diversity = 0.3
+admin-consensus-upgrade = 0.5
+admin-consensus-admin = 0.5
+admin-consensus-activate = 0.5
+admin-consensus-mine = 0.5
+admin-consensus-create = 0.0
+admin-consensus-issue = 0.0
+
+[runtime]
+lock-admin-mine-rounds = 10
+mining-requires-peers = true
+mine-empty-rounds = 10
+mining-turnover = 0.5
+
+[native]
+initial-block-reward = 0
+first-block-reward = -1
+reward-halving-interval = 52560000
+reward-spendable-delay = 1
+minimum-per-output = 0
+maximum-per-output = 100000000000000
+minimum-relay-fee = 0
+native-currency-multiple = 100000000
+
+[mining]
+skip-pow-check = false
+pow-minimum-bits = 8
+target-adjust-freq = -1
+allow-min-difficulty-blocks = false
+
+[transactions]
+only-accept-std-txs = true
+max-std-tx-size = 4194304
+max-std-op-returns-count = 32
+max-std-op-return-size = 2097152
+max-std-op-drops-count = 5
+max-std-element-size = 8192
+
+[system]
+port = 2781
+rpcport = 2780
+chain-name = "chain1"
+protocol-version = 10011
+network-message-start = "fbe0f9fc"
+address-pubkeyhash-version = "008ee913"
+address-scripthash-version = "05cba56a"
+private-key-version = "809297fc"
+address-checksum-value = "9fb48503"
+rpcallowip="127.0.0.1"
