@@ -1,12 +1,12 @@
 $pkg_name="zeromq"
 $pkg_origin="core"
-$pkg_version="4.2.5"
+$pkg_version="4.3.1"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_description="ZeroMQ core engine in C++, implements ZMTP/3.1"
 $pkg_upstream_url="http://zeromq.org"
-$pkg_license=("LGPL")
+$pkg_license=("LGPL-3.0-only")
 $pkg_source="https://github.com/zeromq/libzmq/archive/v$pkg_version.zip"
-$pkg_shasum="4fe4c9c5e3f18971ca18a290c509ddac9e64c599abdec3fb60e4e4fc8fa39d6d"
+$pkg_shasum="7bd60654ad122cff5c217a83442c1e1748a86b08e53cd96f6242404cb571ede8"
 $pkg_deps=("core/libsodium")
 $pkg_build_deps=("core/visual-cpp-build-tools-2015", "core/cmake")
 $pkg_bin_dirs=("bin")

@@ -1,14 +1,27 @@
 pkg_name=zeromq
 pkg_origin=core
-pkg_version=4.2.5
+pkg_version=4.3.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="ZeroMQ core engine in C++, implements ZMTP/3.1"
 pkg_upstream_url=http://zeromq.org
-pkg_license=('LGPL')
-pkg_source=https://github.com/zeromq/libzmq/releases/download/v${pkg_version}/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=cc9090ba35713d59bb2f7d7965f877036c49c5558ea0c290b0dcc6f2a17e489f
-pkg_deps=(core/glibc core/gcc-libs core/libsodium)
-pkg_build_deps=(core/gcc core/diffutils core/coreutils core/make core/pkg-config core/patchelf core/busybox-static core/shadow)
+pkg_license=('LGPL-3.0-only')
+pkg_source="https://github.com/zeromq/libzmq/releases/download/v${pkg_version}/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum=bcbabe1e2c7d0eec4ed612e10b94b112dd5f06fcefa994a0c79a45d835cd21eb
+pkg_deps=(
+  core/glibc
+  core/gcc-libs
+  core/libsodium
+)
+pkg_build_deps=(
+  core/gcc
+  core/diffutils
+  core/coreutils
+  core/make
+  core/pkg-config
+  core/patchelf
+  core/busybox-static
+  core/shadow
+)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
