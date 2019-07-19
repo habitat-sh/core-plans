@@ -1,6 +1,6 @@
 pkg_name=gawk
 pkg_origin=core
-pkg_version=4.2.1
+pkg_version=5.0.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The awk utility interprets a special-purpose programming language that makes \
@@ -8,9 +8,9 @@ it possible to handle simple data-reformatting jobs with just a few lines of \
 code.\
 "
 pkg_upstream_url="http://www.gnu.org/software/gawk/"
-pkg_license=('gplv3+')
+pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="2b23d51503b2df9a41aa6fddc6002ad7ebf2a386ac19dc1b6be0dd48b0acf6db"
+pkg_shasum="625bf3718e25a84dc4486135d5cb5388174682362c70107fd13f21572f5603bb"
 pkg_deps=(
   core/glibc
   core/mpfr
@@ -27,6 +27,8 @@ pkg_bin_dirs=(bin)
 pkg_interpreters=(bin/awk bin/gawk)
 
 do_check() {
+  # This currently passes in core-plans CI but may fail on some workstations.
+  # Ref: https://github.com/habitat-sh/core-plans/issues/2879
   make check
 }
 
