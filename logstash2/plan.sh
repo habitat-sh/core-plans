@@ -9,7 +9,7 @@ pkg_source=https://download.elastic.co/logstash/logstash/logstash-${pkg_version}
 pkg_shasum=957647af07e54c7d18c6e3b543030edae461d447d27412ebb7637cd7eb109f4f
 pkg_deps=(
   core/coreutils
-  core/jre8
+  core/corretto8
   core/jruby1
 )
 pkg_build_deps=()
