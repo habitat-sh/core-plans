@@ -1,15 +1,15 @@
 pkg_name=tar
 pkg_origin=core
-pkg_version=1.30
+pkg_version=1.32
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 GNU Tar provides the ability to create tar archives, as well as various other \
 kinds of manipulation.\
 "
 pkg_upstream_url="https://www.gnu.org/software/tar/"
-pkg_license=('GPL-3.0')
+pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="4725cc2c2f5a274b12b39d1f78b3545ec9ebb06a6e48e8845e1995ac8513b088"
+pkg_shasum="b59549594d91d84ee00c99cf2541a3330fed3a42c440503326dab767f2fbb96c"
 pkg_deps=(
   core/glibc
   core/acl
@@ -25,16 +25,6 @@ pkg_build_deps=(
 )
 pkg_bin_dirs=(bin)
 
-do_prepare() {
-  # Test #92 "link mismatch" expects "a/z: Not linked to a/y" but gets "a/y:
-  # Not linked to a/z" and fails, presumably due to differences in the order in
-  # which 'diff' traverses directories. That leads to a test failure even
-  # though conceptually the test passes. Skip it.
-  #
-  # Thanks to: http://lists.gnu.org/archive/html/guix-commits/2018-02/msg01321.html
-  patch -p1 < "$PLAN_CONTEXT/skip-test.patch"
-}
-
 do_build() {
   # * `FORCE_UNSAFE_CONFIGURE` forces the test for `mknod` to be run as root
   FORCE_UNSAFE_CONFIGURE=1 ./configure \
@@ -43,6 +33,8 @@ do_build() {
 }
 
 do_check() {
+  # Test listed04.at will fail on some machines (OSX laptops are known to have this issue)
+  # Ref: https://github.com/habitat-sh/core-plans/issues/1636
   make check
 }
 
