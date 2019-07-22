@@ -1,16 +1,11 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
-
-@test "Command is on path" {
-  [ "$(command -v gnatsd)" ]
-}
-
 @test "Version matches" {
-  result="$(gnatsd -v)"
-  [ "$result" = "nats-server version ${pkg_version}" ]
+  expected_version="$(cut -d/ -f3 <<< "$TEST_PKG_IDENT")"
+  result="$(hab pkg exec $TEST_PKG_IDENT gnatsd -v)"
+  [ "$result" = "nats-server version ${expected_version}" ]
 }
 
 @test "Help command" {
-  run gnatsd -h
+  run hab pkg exec $TEST_PKG_IDENT gnatsd -h
   [ $status -eq 0 ]
 }
 
