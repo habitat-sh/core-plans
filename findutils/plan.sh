@@ -9,7 +9,7 @@ programs to provide modular and powerful directory search and file locating \
 capabilities to other commands.\
 "
 pkg_upstream_url="http://www.gnu.org/software/findutils"
-pkg_license=('gplv3+')
+pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="ded4c9f73731cd48fec3b6bdaccce896473b6d8e337e9612e16cf1431bb1169d"
 pkg_deps=(
@@ -22,10 +22,34 @@ pkg_build_deps=(
   core/make
   core/gcc
   core/sed
+  core/pkg-config
+  core/m4
+  core/autoconf
+  core/automake
 )
 pkg_bin_dirs=(bin)
 
+do_prepare() {
+  # Glibc 2.28 removed headers that findutils expects.
+  # These patches correct findutils to allow it to build with
+  # the latest glibc.
+  # Thanks to Arch Linux for pulling these together
+  # https://git.archlinux.org/svntogit/packages.git/tree/trunk?h=packages/findutils
+  patch -p1 < "$PLAN_CONTEXT"/correct-glibc-fflush.patch
+  patch -p1 < "$PLAN_CONTEXT"/correct-glibc-makedev.patch
+  
+  # The Makefiles were generated with aclocal-1.14, and the above patches
+  # force it to want to regenerate. The following four lines can be removed
+  # if findutils releases a new version that no longer requries the patches
+  ACLOCAL_PATH="$ACLOCAL_PATH:$(pkg_path_for core/autoconf)/share/autoconf"
+  ACLOCAL_PATH="$ACLOCAL_PATH:$HAB_CACHE_SRC_PATH/$pkg_dirname/m4"
+  export ACLOCAL_PATH
+  aclocal
+}
+
 do_build() {
+
+  automake
   ./configure \
     --prefix="$pkg_prefix" \
     --localstatedir="$pkg_svc_var_path/locate"
