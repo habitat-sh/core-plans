@@ -3,4 +3,4 @@
 # Move directories that ship in the package into place
 cp -a "{{pkg.path}}/jetty" "{{pkg.svc_var_path}}/"
 
-chown -R hab:hab "{{pkg.svc_path}}/var/*"
+chown -R hab:hab "{{pkg.svc_var_path}}"
