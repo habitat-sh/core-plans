@@ -11,7 +11,7 @@ The Habitat Maintainers: <humans@habitat.sh>
 This is a binary package. To use `sbt` in the dev shell:
 
 ```
-hab pkg install core/jre8 --binlink
+hab pkg install core/openjdk11 --binlink
 hab pkg install core/sbt --binlink
 ```
 

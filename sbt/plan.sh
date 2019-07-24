@@ -9,7 +9,7 @@ pkg_source="https://github.com/sbt/sbt/releases/download/v${pkg_version}/sbt-${p
 pkg_shasum=9bb9212541176d6fcce7bd12e4cf8a9c9649f5b63f88b3aff474e0b02c7cfe58
 pkg_deps=(
   core/coreutils
-  core/jre8
+  core/openjdk11
   core/bash
   core/sed
   core/grep
@@ -17,7 +17,7 @@ pkg_deps=(
 pkg_bin_dirs=(bin)
 
 do_prepare() {
-  JAVA_HOME="$(pkg_path_for core/jre8)"
+  JAVA_HOME="$(pkg_path_for core/openjdk11)"
   export JAVA_HOME
 }
 
