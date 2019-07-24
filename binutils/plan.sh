@@ -1,6 +1,6 @@
 pkg_name=binutils
 pkg_origin=core
-pkg_version=2.31.1
+pkg_version=2.32
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Binary Utilities, or binutils, are a set of programming tools for \
@@ -8,9 +8,9 @@ creating and managing binary programs, object files, libraries, profile data, \
 and assembly source code.\
 "
 pkg_upstream_url="https://www.gnu.org/software/binutils/"
-pkg_license=('gpl')
+pkg_license=('GPL-2.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.bz2"
-pkg_shasum="ffcc382695bf947da6135e7436b8ed52d991cf270db897190f19d6f9838564d0"
+pkg_shasum="de38b15c902eb2725eac6af21183a5f34ea4634cb0bcef19612b50e5ed31072d"
 pkg_deps=(
   core/glibc
   core/zlib
@@ -82,17 +82,6 @@ do_prepare() {
   cat "$PLAN_CONTEXT/disable_failing_tests.patch" \
     | sed "s,@zlib_libs@,$(pkg_path_for zlib)/lib,g" \
     | patch -p1
-
-  # Patch binutils to be able to link static binaries
-  #
-  # Thanks to: https://git.archlinux.org/svntogit/packages.git/tree/trunk?h=packages/binutils
-  # Thanks to: https://sourceware.org/bugzilla/show_bug.cgi?id=23428
-  # Thanks to: https://sourceware.org/bugzilla/show_bug.cgi?id=23486
-  # TODO:  This should be removed when we update to the release following 2.31.1
-  patch -p1 < $PLAN_CONTEXT/0001-PR23428-x86-Add-a-GNU_PROPERTY_X86_ISA_1_USED-note-if-needed.patch
-  patch -p1 < $PLAN_CONTEXT/0004-PR23486-Properly-merge-GNU_PROPERTY_X86_ISA_1_USED-x86_64.patch
-  patch -p1 < $PLAN_CONTEXT/0005-PR23486-x86-Properly-merge-GNU_PROPERTY_X86_ISA_1_USED.patch
-  patch -p1 < $PLAN_CONTEXT/0006-PR23428-x86-Properly-add-X86_ISA_1_NEEDED-property.patch
 
   # We don't want to search for libraries in system directories such as `/lib`,
   # `/usr/local/lib`, etc.
