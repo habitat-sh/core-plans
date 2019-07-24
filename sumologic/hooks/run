@@ -4,7 +4,7 @@ exec 2>&1
 
 exec {{pkg.path}}/{{pkg.name}}/wrapper {{pkg.svc_config_path}}/wrapper.conf \
 wrapper.syslog.ident=collector \
-wrapper.java.command="{{pkgPathFor "core/jre8"}}/bin/java" \
+wrapper.java.command="{{pkgPathFor "core/openjdk11"}}/bin/java" \
 wrapper.daemonize=FALSE \
 wrapper.lockfile="{{pkg.svc_var_path}}/collector" \
 wrapper.statusfile="{{pkg.svc_data_path}}/collector.status" \
