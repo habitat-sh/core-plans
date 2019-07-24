@@ -52,7 +52,8 @@ before+=("-dynamic-linker @dynamic_linker@")
 #
 # Sidenote: why the process substitution strangeness? Learn more:
 # http://mywiki.wooledge.org/BashFAQ/024
-while read path; do
+# shellcheck disable=SC2086
+while read -r path; do
   if [ -n "$path" ]; then
     after+=("-rpath $path")
   fi
@@ -65,14 +66,18 @@ if [ -n "$DEBUG" ]; then
     echo "  $i" >&2
   done
   echo "before flags to @program@:" >&2
+  # shellcheck disable=SC2068
   for i in ${before[@]}; do
     echo "  $i" >&2
   done
   echo "after flags to @program@:" >&2
+  # shellcheck disable=SC2068
   for i in ${after[@]}; do
     echo "  $i" >&2
   done
 fi
 
 # Become the underlying real program
+# Note: $before and $after must *not* be quoted
+# shellcheck disable=SC2068
 exec @program@ ${before[@]} "${params[@]}" ${after[@]}
