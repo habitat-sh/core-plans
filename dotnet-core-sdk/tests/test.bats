@@ -1,11 +1,11 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
+TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Version matches" {
-  result="$(dotnet --version)"
-  [ "$result" = "${pkg_version}" ]
+  result="$(hab pkg exec ${TEST_PKG_IDENT} dotnet --version)"
+  [ "$result" = "${TEST_PKG_VERSION}" ]
 }
 
 @test "Info command" {
-  run dotnet --info
+  run hab pkg exec ${TEST_PKG_IDENT} dotnet --info
   [ $status -eq 0 ]
 }
