@@ -1,16 +1,12 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
-
-@test "Command is on path" {
-  [ "$(command -v cockroachoss)" ]
-}
+TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Version matches" {
-  result="$(cockroachoss version | head -1 | awk '{print $3}')"
-  [ "$result" = "v${pkg_version}" ]
+  result="$(hab pkg exec ${TEST_PKG_IDENT} cockroachoss version | head -1 | awk '{print $3}')"
+  [ "$result" = "v${TEST_PKG_VERSION}" ]
 }
 
 @test "Help command" {
-  run cockroachoss help
+  run hab pkg exec ${TEST_PKG_IDENT} cockroachoss help
   [ $status -eq 0 ]
 }
 
