@@ -2,7 +2,7 @@
 
 exec 2>&1
 
-export JAVA_HOME="{{ pkgPathFor "core/jre8" }}"
+export JAVA_HOME="{{ pkgPathFor "core/openjdk11" }}"
 export SPARK_CONF_DIR="{{pkg.svc_config_path}}"
 export SPARK_LOG_DIR="{{pkg.svc_var_path}}/logs"
 export SPARK_WORKER_DIR="{{pkg.svc_var_path}}/work"
