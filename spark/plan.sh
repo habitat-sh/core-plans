@@ -11,7 +11,7 @@ pkg_dirname="${pkg_name}-${pkg_version}-bin-hadoop2.7"
 pkg_build_deps=()
 pkg_deps=(
   core/bash
-  core/jre8
+  core/openjdk11
   core/procps-ng
 )
 pkg_bin_dirs=(bin sbin)
