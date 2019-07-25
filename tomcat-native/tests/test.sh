@@ -1,17 +1,22 @@
 #!/bin/sh
-
 set -euo pipefail
+
+#/ Usage: test.sh <pkg_ident>
+#/
+#/ Example: test.sh core/opa/0.11.0/20190531065119
+#/
 
 TESTDIR="$(dirname "${0}")"
 
-if [ -z "${1:-}" ]; then
-  echo "Usage: tomcat-native/tests/test.sh FULLY_QUALIFIED_PACKAGE_IDENT"
+if [[ -z "${1:-}" ]]; then
+  grep '^#/' < "${0}" | cut -c4-
   exit 1
 fi
 
-PKG_IDENT="$1"
+TEST_PKG_IDENT="${1}"
 
-hab pkg install core/bats
+hab pkg install core/bats --binlink
+hab pkg install "${TEST_PKG_IDENT}"
 
-export PKG_IDENT
-hab pkg exec core/bats bats "${TESTDIR}/test.bats"
+export TEST_PKG_IDENT
+bats "${TESTDIR}/test.bats"
