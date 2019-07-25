@@ -7,20 +7,22 @@ pkg_upstream_url=https://github.com/jruby/jruby
 pkg_source="https://github.com/jruby/jruby/archive/${pkg_version}.tar.gz"
 pkg_shasum=9b926cbca56faa9d724753c044c89d86bb48c0b5c26c5bf39120e89dc2fb0c69
 pkg_license=('EPL 1.0, GPL 2 and LGPL 2.1')
-pkg_deps=(core/glibc core/jre8 core/bash core/coreutils)
-pkg_build_deps=(core/which core/make core/jdk8)
+pkg_deps=(core/glibc core/corretto11 core/bash core/coreutils)
+pkg_build_deps=(core/which core/make)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_build() {
   export JAVA_HOME
-  JAVA_HOME="$(pkg_path_for core/jdk8)"
+  JAVA_HOME="$(pkg_path_for core/corretto11)"
   ./mvnw
 }
 
 do_install() {
   cp -R ./* "${pkg_prefix}/"
+
+  # shellcheck disable=SC2231
   for binstub in ${pkg_prefix}/bin/*; do
     [[ -f ${binstub} ]] && sed -e "s#/usr/bin/env bash#$(pkg_path_for bash)/bin/bash#" -i "${binstub}"
     [[ -f ${binstub} ]] && sed -e "s#/usr/bin/env jruby#${pkg_prefix}/bin/jruby#" -i "${binstub}"
