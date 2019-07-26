@@ -1,4 +1,4 @@
-@test "package directory for package ident ${PACKAGE_IDENT} exists" {
+@test "package directory for package ident ${TEST_PKG_IDENT} exists" {
   [ -d "/hab/pkgs/${TEST_PKG_IDENT}" ]
 }
 
