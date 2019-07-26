@@ -1,7 +1,7 @@
 pkg_name=libtool
 pkg_origin=core
 pkg_version=2.4.6
-pkg_license=('gplv2+')
+pkg_license=('GPL-2.0-or-later')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 GNU libtool is a generic library support script. Libtool hides the complexity \
