@@ -8,7 +8,7 @@ client and server, a telnet client and server, an rsh client and server, an \
 rlogin client and server, a tftp client and server, and much more...\
 "
 pkg_upstream_url="http://www.gnu.org/software/inetutils/"
-pkg_license=('gplv3+')
+pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="849d96f136effdef69548a940e3e0ec0624fc0c81265296987986a0dd36ded37"
 pkg_deps=(
