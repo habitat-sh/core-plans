@@ -12,7 +12,7 @@ pkg_bin_dirs=(bin)
 pkg_deps=(
   core/bash-static
   core/coreutils
-  core/jre8
+  core/corretto8
 )
 pkg_binds=(
   [zookeeper]="port"

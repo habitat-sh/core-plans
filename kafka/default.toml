@@ -57,7 +57,7 @@ socket_request_max_bytes=104857600
 ############################# Log Basics #############################
 [log]
 # A comma seperated list of directories under which to store log files
-#log_dirs=""
+log_dirs="/hab/svc/kafka/var"
 
 # The default number of log partitions per topic. More partitions allow greater
 # parallelism for consumption, but this will also result in more files across
