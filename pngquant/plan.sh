@@ -1,10 +1,12 @@
 pkg_name=pngquant
 pkg_origin=core
-pkg_version="2.12.2"
+pkg_version=2.12.5
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("GPL-3.0-only")
+pkg_description="Lossy PNG compressor"
+pkg_upstream_url="https://pngquant.org"
 pkg_source="https://github.com/kornelski/${pkg_name}/archive/${pkg_version}.tar.gz"
-pkg_shasum="5edf7c5bffd07e5d28fcc6d4d94a187c30b532c52ac986b3e45aff3dce0567dc"
+pkg_shasum=9d2c5197b21c42931623fb3e6064b91c133bfb52c84428ee1bf9b84712c9b83c
 pkg_deps=(
   core/coreutils
   core/libpng
@@ -17,8 +19,6 @@ pkg_build_deps=(
   core/pkg-config
 )
 pkg_bin_dirs=(bin)
-pkg_description="Lossy PNG compressor"
-pkg_upstream_url="https://pngquant.org"
 
 do_build() {
   fix_interpreter "configure" core/coreutils bin/env
