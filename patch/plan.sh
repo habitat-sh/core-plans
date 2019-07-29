@@ -1,3 +1,5 @@
+# Disable shellcheck that would require quotes around pkg_name
+# shellcheck disable=SC2209
 pkg_name=patch
 pkg_origin=core
 pkg_version=2.7.6
@@ -8,7 +10,7 @@ program and applies those differences to one or more original files, producing \
 patched versions.\
 "
 pkg_upstream_url="https://www.gnu.org/software/patch/"
-pkg_license=('gplv3+')
+pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="ac610bda97abe0d9f6b7c963255a11dcb196c25e337c61f94e4778d632f1d8fd"
 pkg_deps=(
