@@ -1,6 +1,6 @@
 pkg_name=expat
 pkg_origin=core
-pkg_version=2.2.6
+pkg_version=2.2.7
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Expat is a stream-oriented XML parser library written in C. Expat excels with \
@@ -9,7 +9,7 @@ files too large to fit RAM, and where performance and flexibility are crucial.\
 pkg_upstream_url="https://libexpat.github.io/"
 pkg_license=('MIT')
 pkg_source="https://downloads.sourceforge.net/project/${pkg_name}/${pkg_name}/${pkg_version}/${pkg_name}-${pkg_version}.tar.bz2"
-pkg_shasum="17b43c2716d521369f82fc2dc70f359860e90fa440bea65b3b85f0b246ea81f2"
+pkg_shasum="cbc9102f4a31a8dafd42d642e9a3aa31e79a0aedaa1f6efd2795ebc83174ec18"
 pkg_deps=(
   core/glibc
   core/gcc-libs
