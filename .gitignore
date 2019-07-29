@@ -6,3 +6,4 @@ log/
 results/
 tmp/
 tags
+*.swp
