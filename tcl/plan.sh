@@ -1,12 +1,12 @@
 pkg_name=tcl
 pkg_origin=core
-pkg_version=8.6.8
+pkg_version=8.6.9
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Tool Command Language -- A dynamic programming language."
 pkg_upstream_url="http://tcl.sourceforge.net/"
 pkg_license=('custom')
 pkg_source="http://downloads.sourceforge.net/sourceforge/${pkg_name}/${pkg_name}${pkg_version}-src.tar.gz"
-pkg_shasum="c43cb0c1518ce42b00e7c8f6eaddd5195c53a98f94adc717234a65cbcfd3f96a"
+pkg_shasum="ad0cd2de2c87b9ba8086b43957a0de3eb2eb565c7159d5f53ccbba3feb915f4e"
 pkg_dirname="${pkg_name}${pkg_version}"
 pkg_deps=(
   core/glibc
@@ -44,8 +44,8 @@ do_build() {
     # Thanks to: https://projects.archlinux.org/svntogit/packages.git/tree/trunk/PKGBUILD?h=packages/tcl
     local srcdir
     srcdir=$(abspath ..)
-    local tdbcver=tdbc1.0.6
-    local itclver=itcl4.1.1
+    local tdbcver=tdbc1.1.0
+    local itclver=itcl4.1.2
     sed \
       -e "s#$srcdir/unix#$pkg_prefix/lib#" \
       -e "s#$srcdir#$pkg_prefix/include#" \
