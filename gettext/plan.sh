@@ -1,12 +1,12 @@
 pkg_name=gettext
 pkg_origin=core
-pkg_version=0.19.8
+pkg_version=0.20.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="GNU internationalization library."
 pkg_upstream_url="http://www.gnu.org/software/gettext/"
-pkg_license=('gplv2+' 'lgpl2+')
+pkg_license=('GPL-2.0-or-later' 'LGPL-2.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="3da4f6bd79685648ecf46dab51d66fcdddc156f41ed07e580a696a38ac61d48f"
+pkg_shasum="66415634c6e8c3fa8b71362879ec7575e27da43da562c798a8a2f223e6e47f5c"
 pkg_deps=(
   core/glibc
   core/gcc-libs
