@@ -11,8 +11,8 @@ if [[ -z "${1:-}" ]]; then
 	exit 1
 fi
 
-PKGIDENT="${1}"
-export PKGIDENT
+TEST_PKG_IDENT="${1}"
+export TEST_PKG_IDENT
 hab pkg install core/bats --binlink
-hab pkg install "${PKGIDENT}"
+hab pkg install "${TEST_PKG_IDENT}"
 bats "$(dirname "${0}")/test.bats"
