@@ -8,14 +8,13 @@ pkg_upstream_url=https://www.elastic.co/products/kibana
 pkg_source=https://github.com/elastic/${pkg_name}/archive/v${pkg_version}.tar.gz
 pkg_shasum=3f9b9179bae432e45411f7b207578d8232ca2d6fc184a5780b6d696d6037b55a
 pkg_filename=${pkg_name}-${pkg_version}.tar.gz
-pkg_deps=(core/node)
+pkg_deps=(core/node11)
 pkg_build_deps=(
   core/cacerts
   core/coreutils
   core/gcc
   core/git
   core/make
-  core/node
   core/python2
 )
 pkg_exports=(
