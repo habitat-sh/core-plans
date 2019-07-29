@@ -26,6 +26,7 @@ pkg_build_deps=(
   core/gcc
   core/sed
   core/perl
+  core/m4
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
