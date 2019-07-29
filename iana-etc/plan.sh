@@ -7,7 +7,7 @@ The iana-etc package provides the Unix/Linux /etc/services and /etc/protocols \
 files.\
 "
 pkg_upstream_url="http://sethwklein.net/iana-etc"
-pkg_license=('gplv3+')
+pkg_license=('GPL-3.0-or-later')
 pkg_source="http://sethwklein.net/${pkg_name}-${pkg_version}.tar.bz2"
 pkg_shasum="b9a6874fb20012836efef75452ef2acae624022d680feeb1994d73facba3f20d"
 pkg_deps=()
