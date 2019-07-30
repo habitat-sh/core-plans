@@ -13,14 +13,13 @@ fi
 hab pkg install "${1}"
 
 # Testing Go Path apps
-build ${TESTDIR}/go-path-app
+build "${TESTDIR}/go-path-app"
 source "results/last_build.env"
 hab pkg install -b -f "results/${pkg_artifact}"
 go-path-app
 
 # Testing Go Module apps
-build ${TESTDIR}/go-module-app
+build "${TESTDIR}/go-module-app"
 source "results/last_build.env"
 hab pkg install -b -f "results/${pkg_artifact}"
 go-module-app
-

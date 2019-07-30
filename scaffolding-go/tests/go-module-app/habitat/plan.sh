@@ -1,5 +1,5 @@
 pkg_name=go-module-app
-pkg_origin=test
+pkg_origin="test"
 pkg_description="Go Application to test scaffolding-go"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_version="0.1.0"

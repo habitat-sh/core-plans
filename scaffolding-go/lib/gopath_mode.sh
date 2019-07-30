@@ -65,11 +65,14 @@ scaffolding_go_before() {
 }
 
 scaffolding_go_get() {
-  local deps
-  deps=($pkg_source "${scaffolding_go_build_deps[@]}")
-  build_line "Downloading Go build dependencies"
-  if [ "${#deps[@]}" -gt 0 ] ; then
-    for dependency in "${deps[@]}" ; do
+  if [ "$pkg_source" ]; then
+    build_line "Downloading package from source. ($pkg_source)"
+    go get "$(_sanitize_pkg_source "$pkg_source")"
+  fi
+
+  if [ "${#scaffolding_go_build_deps[@]}" -gt 0 ] ; then
+    build_line "Downloading Go build dependencies speficied inside 'scaffolding_go_build_deps'"
+    for dependency in "${scaffolding_go_build_deps[@]}" ; do
       go get "$(_sanitize_pkg_source "$dependency")"
     done
   fi
