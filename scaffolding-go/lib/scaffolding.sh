@@ -4,7 +4,7 @@
 # after the scaffolding is loaded.
 scaffolding_load() {
   local lib_dir
-  lib_dir="$(_pkg_path_for_build_deps "$pkg_scaffolding")/lib"
+  lib_dir="$(pkg_path_for "$pkg_scaffolding")/lib"
 
   # When the user enables go module support,
   # we don't need to setup the GOPATH
