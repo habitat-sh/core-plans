@@ -10,6 +10,7 @@ set -euo pipefail
 # Exclude hooks and config because the handlebars syntax confuses shellcheck
 #
 # Exclude the following shellcheck issues since they're pervasive and innocuous:
+# https://github.com/koalaman/shellcheck/wiki/SC1008
 # https://github.com/koalaman/shellcheck/wiki/SC1090
 # https://github.com/koalaman/shellcheck/wiki/SC1091
 # https://github.com/koalaman/shellcheck/wiki/SC1117
@@ -20,9 +21,10 @@ set -euo pipefail
 # https://github.com/koalaman/shellcheck/wiki/SC2153
 # https://github.com/koalaman/shellcheck/wiki/SC2154
 # https://github.com/koalaman/shellcheck/wiki/SC2164
+# https://github.com/koalaman/shellcheck/wiki/SC2239
 
-SHELLCHECK_IGNORE="SC1090,SC1091,SC1117,SC2034,SC2039,SC2140,SC2148,SC2153,SC2154,SC2164"
-
+SHELLCHECK_IGNORE="SC1008,SC1090,SC1091,SC1117,SC2034,SC2039"
+SHELLCHECK_IGNORE="${SHELLCHECK_IGNORE},SC2140,SC2148,SC2153,SC2154,SC2164,SC2239"
 plan_path="$1"
 
 echo "--- :bash: [$plan_path] Running shellcheck"
