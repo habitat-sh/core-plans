@@ -1,12 +1,12 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
+TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Version matches" {
-  result="$(vault version | awk '{print $2}')"
-  [ "$result" = "v${pkg_version}" ]
+  result="$(hab pkg exec ${TEST_PKG_IDENT} vault version | awk '{print $2}')"
+  [ "$result" = "v${TEST_PKG_VERSION}" ]
 }
 
 @test "Help command" {
-  run vault --help
+  run hab pkg exec ${TEST_PKG_IDENT} vault --help
   [ $status -eq 0 ]
   [ "${lines[0]}" = "Usage: vault <command> [args]" ]
 }
@@ -35,5 +35,5 @@ source "${BATS_TEST_DIRNAME}/../plan.sh"
   local sealed_result="$(echo "${health}" | jq '.sealed == false')"
   [ "${sealed_result}" = "true" ]
   local version_result="$(echo "${health}" | jq -r '.version')"
-  [ "${version_result}" = "${pkg_version}" ]
+  [ "${version_result}" = "${TEST_PKG_VERSION}" ]
 }
