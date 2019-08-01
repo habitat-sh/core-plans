@@ -1,14 +1,9 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
-
-@test "Command is on path" {
-  [ "$(command -v minio)" ]
-}
+TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Version matches, via help output" {
-  run minio --help
-  [ "$status" -eq 0 ]
-  version="$(echo "${lines[-1]}" | sed 's/:/-/g')"
-  [ "$version" = "  ${pkg_version}" ]
+  result=$(hab pkg exec ${TEST_PKG_IDENT} minio --help | tail -1 | tr -d ' ' | sed 's/:/-/g')
+  [ "$?" -eq 0 ]
+  [ "$result" = "${TEST_PKG_VERSION}" ]
 }
 
 @test "Service is running" {
