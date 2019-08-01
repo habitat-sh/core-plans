@@ -1,6 +1,6 @@
 pkg_name=glibc
 pkg_origin=core
-pkg_version=2.27
+pkg_version=2.29
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU C Library project provides the core libraries for the GNU system and \
@@ -11,9 +11,9 @@ foundational facilities as open, read, write, malloc, printf, getaddrinfo, \
 dlopen, pthread_create, crypt, login, exit and more.\
 "
 pkg_upstream_url="https://www.gnu.org/software/libc"
-pkg_license=('GPL-2.0' 'LGPL-2.0')
+pkg_license=('GPL-2.0-or-later' 'LGPL-2.1-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="5172de54318ec0b7f2735e5a91d908afe1c9ca291fec16b5374d9faadfc1fc72"
+pkg_shasum="f3eeb8d57e25ca9fc13c2af3dae97754f9f643bc69229546828e3a240e2af04b"
 pkg_deps=(
   core/linux-headers
 )
@@ -26,6 +26,8 @@ pkg_build_deps=(
   core/gcc
   core/sed
   core/perl
+  core/m4
+  core/python-minimal
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
@@ -81,13 +83,6 @@ do_prepare() {
     | sed "s,@prefix@,$pkg_prefix,g" \
     | patch -p1
 
-  # Fix for the scanf15 and scanf17 tests for arches that need
-  # misc/bits/syscall.h. This problem is present once a custom location is used
-  # for the Linux Kernel headers.
-  #
-  # Source: https://lists.debian.org/debian-glibc/2013/11/msg00116.html
-  patch -p1 < "$PLAN_CONTEXT/testsuite-fix.patch"
-
   # Adjust `scripts/test-installation.pl` to use our new dynamic linker
   sed -i "s|libs -o|libs -L${pkg_prefix}/lib -Wl,-dynamic-linker=${dynamic_linker} -o|" \
     scripts/test-installation.pl
@@ -99,7 +94,6 @@ do_build() {
   pushd ../${pkg_name}-build > /dev/null
     # Configure Glibc to install its libraries into `$pkg_prefix/lib`
     echo "libc_cv_slibdir=$pkg_prefix/lib" >> config.cache
-    echo "libc_cv_ssp=no" >> config.cache
 
     "../$pkg_dirname/configure" \
       --prefix="$pkg_prefix" \
@@ -110,7 +104,9 @@ do_build() {
       --sysconfdir="$pkg_prefix/etc" \
       --enable-obsolete-rpc \
       --disable-profile \
-      --enable-kernel=2.6.32 \
+      --enable-kernel=3.2 \
+      --enable-stack-protector=strong \
+      --enable-cet \
       --cache-file=config.cache
 
     make
@@ -304,15 +300,25 @@ ethers: files
 rpc: files
 EOF
 
+
+    # Install timezone data.
+    # We set --sysconfdir=$pkg_prefix/etc during our build, so we need to
+    # embed timezone data in this package.
+    #
+    # zic /dev/null creates posix timezones without leapseconds
+    # zic leapseconds creates right timezones with leapseconds
+    # zic -d "$ZONEINFO" creates  posixrules file. We use New York because POSIX
+    #   requires the daylight savings time rules to be in accordance with US rules.
+
     extract_src tzdata
     pushd ./tzdata > /dev/null
       ZONEINFO="$pkg_prefix/share/zoneinfo"
       mkdir -p "$ZONEINFO"/{posix,right}
       for tz in etcetera southamerica northamerica europe africa antarctica \
           asia australasia backward pacificnew systemv; do
-        zic -L /dev/null -d "$ZONEINFO" -y "sh yearistype.sh" ${tz}
-        zic -L /dev/null -d "$ZONEINFO/posix" -y "sh yearistype.sh" ${tz}
-        zic -L leapseconds -d "$ZONEINFO/right" -y "sh yearistype.sh" ${tz}
+        zic -L /dev/null -d "$ZONEINFO" ${tz}
+        zic -L /dev/null -d "$ZONEINFO/posix" ${tz}
+        zic -L leapseconds -d "$ZONEINFO/right" ${tz}
       done
       cp -v zone.tab zone1970.tab iso3166.tab "$ZONEINFO"
       zic -d "$ZONEINFO" -p America/New_York
