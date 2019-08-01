@@ -15,7 +15,7 @@ pkg_deps=(
   core/busybox-static
   core/glibc
   core/zlib
-  core/jre8
+  core/openjdk11
   core/wget
 )
 pkg_bin_dirs=(es/bin)

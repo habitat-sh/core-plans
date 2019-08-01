@@ -1,12 +1,18 @@
 #!/bin/sh
+set -euo pipefail
 
-TESTDIR="$(dirname "${0}")"
-PLANDIR="$(dirname "${TESTDIR}")"
-SKIPBUILD=${SKIPBUILD:-0}
+source bin/ci/test_helpers.sh
+
+if [[ -z "${1:-}" ]]; then
+  grep '^#/' < "${0}" | cut -c4-
+	exit 1
+fi
+
+TEST_PKG_IDENT="${1}"
+export TEST_PKG_IDENT
 
 hab pkg install core/bats --binlink
 hab pkg install core/which --binlink
-hab pkg install core/jre8 --binlink
 hab pkg install core/curl --binlink
 hab pkg install core/jq-static --binlink
 
@@ -15,20 +21,8 @@ hab pkg binlink core/busybox-static ps
 hab pkg binlink core/busybox-static nc
 hab pkg binlink core/busybox-static netstat
 
-source "${PLANDIR}/plan.sh"
+ci_ensure_supervisor_running
+ci_load_service "$TEST_PKG_IDENT"
+sleep 45
 
-if [ "${SKIPBUILD}" -eq 0 ]; then
-  set -e
-  pushd "${PLANDIR}" > /dev/null
-  build
-  source results/last_build.env
-  hab pkg install "results/${pkg_artifact}" --binlink --force
-  hab svc load "${pkg_ident}"
-  popd > /dev/null
-  set +e
-
-  # Give some time for the service to start up
-  sleep 30
-fi
-
-bats "${TESTDIR}/test.bats"
+bats "$(dirname "${0}")/test.bats"
