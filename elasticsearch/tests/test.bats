@@ -1,7 +1,6 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
-
 @test "Version matches" {
-  result="$(elasticsearch --version | awk '{print $2}' | tr -d ',')"
+  expected_version=$(cut -d/ -f3 $TEST_PKG_IDENT)
+  result="$(hab pkg exec $TEST_PKG_IDENT elasticsearch --version | awk '{print $2}' | tr -d ',')"
   [ "$result" = "${pkg_version}" ]
 }
 
