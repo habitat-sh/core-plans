@@ -1,24 +1,14 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
-
-@test "Command is on path" {
-  [ "$(command -v logstash)" ]
+expected_version="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
+@test "logstash binary matches version ${expected_version}" {
+  local actual_version="$(hab pkg exec "${TEST_PKG_IDENT}" logstash --version | awk '{print $2}')"
+  diff <(echo "${actual_version}") <(echo "${expected_version}")
 }
 
-@test "Version matches" {
-  result="$(logstash --version | awk '{print $2}')"
-  [ "$result" = "${pkg_version}" ]
-}
-
-@test "Help command" {
-  run logstash --help
-  [ $status -eq 0 ]
-}
-
-@test "Service is running" {
+@test "service is running" {
   [ "$(hab svc status | grep "logstash\.default" | awk '{print $4}' | grep up)" ]
 }
 
-@test "A single process" {
+@test "service has single process" {
   result="$(ps aux | grep -v grep | grep -v "test" | grep logstash | wc -l)"
   [ "${result}" -eq 1 ]
 }
