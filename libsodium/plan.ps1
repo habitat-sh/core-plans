@@ -1,12 +1,12 @@
 $pkg_name="libsodium"
 $pkg_origin="core"
-$pkg_version="1.0.13"
+$pkg_version="1.0.18"
 $_pkg_version_text=($pkg_version).Replace(".", "_")
 $pkg_description="Sodium is a new, easy-to-use software library for encryption, decryption, signatures, password hashing and more. It is a portable, cross-compilable, installable, packageable fork of NaCl, with a compatible API, and an extended API to improve usability even further."
 $pkg_upstream_url="https://github.com/jedisct1/libsodium"
 $pkg_license=@("ISC")
 $pkg_source="https://github.com/jedisct1/libsodium/archive/$pkg_version.zip"
-$pkg_shasum="1a9d20aa5f06ad208dee765fd6ce7a2b06eab067ed5ca15f9caaf247f4358e67"
+$pkg_shasum="1b72c0cdbc535ce42e14ac15e8fc7c089a3ee9ffe5183399fd77f0f3746ea794"
 $pkg_build_deps=@("core/visual-cpp-build-tools-2015")
 $pkg_bin_dirs=@("bin")
 $pkg_lib_dirs=@("lib")
