@@ -25,6 +25,7 @@ pkg_build_deps=(
   core/gcc
   core/m4
   core/perl
+  core/diffutils
 )
 pkg_bin_dirs=(bin)
 pkg_interpreters=(bin/env)
