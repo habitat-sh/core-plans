@@ -1,6 +1,7 @@
 source ../libsodium/plan.sh
 
 pkg_name=libsodium-musl
+pkg_verson="1.0.18"
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
@@ -11,6 +12,7 @@ API to improve usability even further.\
 "
 pkg_upstream_url="https://github.com/jedisct1/libsodium"
 pkg_license=('libsodium')
+pkg_dirname="libsodium-$pkg_version"
 pkg_deps=(
   core/musl
 )
