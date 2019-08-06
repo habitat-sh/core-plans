@@ -35,4 +35,3 @@ bats "$(dirname "${0}")/test.bats"
 
 # unload the service
 hab svc unload "${TEST_PKG_IDENT}" || true
-# kill %1
