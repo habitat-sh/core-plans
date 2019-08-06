@@ -11,10 +11,9 @@ pkg_deps=(
   core/bash
   core/coreutils
   core/glibc
-  core/jre8
+  core/corretto8
 )
 pkg_build_deps=(
-  core/jdk8
   core/make
   core/which
 )
@@ -25,7 +24,7 @@ pkg_dirname=jruby-${pkg_version}
 
 do_build() {
   export JAVA_HOME
-  JAVA_HOME=$(pkg_path_for core/jdk8)
+  JAVA_HOME=$(pkg_path_for core/corretto8)
   ./mvnw
 }
 
