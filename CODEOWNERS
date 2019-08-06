@@ -78,6 +78,9 @@ check @fnichol @smacfarlane
 libidn @fnichol @smacfarlane
 cacerts @fnichol @smacfarlane
 openssl @fnichol @reset @echohack @smacfarlane
+libiconv @smacfarlane
+libunistring @smacfarlane
+libidn2 @smacfarlane
 wget @fnichol @smacfarlane
 unzip @fnichol @nellshamrell @smacfarlane
 rq @fnichol @smacfarlane
