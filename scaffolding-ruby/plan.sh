@@ -47,7 +47,7 @@ wrap_ruby_bin() {
   cat <<EOF > "$bin"
 #!$(pkg_path_for busybox-static)/bin/sh
 set -e
-if test -n "$DEBUG"; then set -x; fi
+if test -n "\$DEBUG"; then set -x; fi
 
 export GEM_HOME="$GEM_HOME"
 export GEM_PATH="$GEM_PATH"
