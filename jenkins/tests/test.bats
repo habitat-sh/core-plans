@@ -1,13 +1,7 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
-
-@test "Version matches" {
-  result="$(java -jar $(hab pkg path ${HAB_ORIGIN}/jenkins)/jenkins.war --version)"
-  [ "$result" = "${pkg_version}" ]
-}
-
-@test "Help command" {
-  run java -jar $(hab pkg path ${HAB_ORIGIN}/jenkins)/jenkins.war --help
-  [ $status -eq 0 ]
+expected_version="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
+@test "jenkins binary version matches ${expected_version}" {
+  actual_version="$(java -jar $(hab pkg path ${HAB_ORIGIN}/jenkins)/jenkins.war --version)"
+  diff <( echo "$actual_version") <( echo "${expected_version}")
 }
 
 @test "Service is running" {
@@ -15,5 +9,6 @@ source "${BATS_TEST_DIRNAME}/../plan.sh"
 }
 
 @test "Listening on port 80 (HTTP)" {
-  [ "$(netstat -peanut | grep java | awk '{print $4}' | awk -F':' '{print $2}' | grep 80)" ]
+  # ensure that both ipv6 "::ffff:172.17.0.2:80" and ipv4 "172.17.0.2:80" will match
+  [ "$(netstat -peanutl | grep java | awk '{print $4}' | awk -F':' '{print $NF}' | grep 80 )" ]
 }

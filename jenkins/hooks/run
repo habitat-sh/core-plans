@@ -2,7 +2,7 @@
 
 exec 2>&1
 
-export JAVA_HOME="{{pkgPathFor "core/jre8"}}"
+export JAVA_HOME="{{pkgPathFor "core/corretto8"}}"
 export JENKINS_HOME="{{pkg.svc_data_path}}"
 
 exec java \
