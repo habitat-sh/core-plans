@@ -1453,6 +1453,8 @@ plan_path = "vde2"
 plan_path = "vim"
 [virtualenv]
 plan_path = "virtualenv"
+[visual-build-tools-2017]
+plan_path = "visual-build-tools-2017"
 [vmtouch]
 plan_path = "vmtouch"
 [wal-e]
