@@ -32,7 +32,7 @@ do_default_prepare() {
   _detect_git
 
   # Determine Ruby engine, ABI version, and Gem path by running `ruby` itself.
-  eval "$(ruby -rubygems -rrbconfig - <<-'EOF'
+  eval "$(ruby -r rubygems -rrbconfig - <<-'EOF'
     puts "local ruby_engine=#{defined?(RUBY_ENGINE) ? RUBY_ENGINE : 'ruby'}"
     puts "local ruby_version=#{RbConfig::CONFIG['ruby_version']}"
     puts "local gem_path='#{Gem.path.join(':')}'"
@@ -352,8 +352,7 @@ scaffolding_vendor_bundler() {
     --local "$(pkg_path_for bundler)/cache/bundler-${_bundler_version}.gem" \
     --install-dir "$GEM_HOME" \
     --bindir "$scaffolding_app_prefix/binstubs" \
-    --no-ri \
-    --no-rdoc
+    --no-document
   _wrap_ruby_bin "$scaffolding_app_prefix/binstubs/bundle"
   _wrap_ruby_bin "$scaffolding_app_prefix/binstubs/bundler"
 }
