@@ -1,10 +1,10 @@
 pkg_name=mysql
 pkg_origin=core
-pkg_version=5.7.21
+pkg_version=5.7.27
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=('GPL-2.0')
 pkg_source=http://dev.mysql.com/get/Downloads/MySQL-5.7/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=fa205079c27a39c24f3485e7498dd0906a6e0b379b4f99ebc0ec38a9ec5b09b7
+pkg_shasum=f8b65872a358d6f5957de86715c0a3ef733b60451dad8d64a8fd1a92bf091bba
 pkg_upstream_url=https://www.mysql.com/
 pkg_description=$(cat << EOF
 Starts MySQL with a basic configuration. Configurable at run time:
@@ -39,6 +39,8 @@ pkg_build_deps=(
   core/gcc
   core/make
   core/patch
+  core/pkg-config
+  core/libtirpc
 )
 pkg_svc_user="hab"
 pkg_bin_dirs=(bin)
