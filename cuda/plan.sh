@@ -19,7 +19,7 @@ pkg_deps=(
   core/ncurses
   core/gcc
   core/python2
-  core/jre8
+  core/corretto8
   core/coreutils
   core/busybox-static
 )
@@ -131,7 +131,7 @@ EOF
 
   # Remove included copy of java and link to system java
   rm -fr "${pkg_prefix}/jre"
-  sed "s|../jre/bin/java|$(pkg_path_for core/jre8)/bin/java|g" \
+  sed "s|../jre/bin/java|$(pkg_path_for core/corretto8)/bin/java|g" \
     -i "${pkg_prefix}/libnsight/nsight.ini" \
     -i "${pkg_prefix}/libnvvp/nvvp.ini"
 
