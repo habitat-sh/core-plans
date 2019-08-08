@@ -17,7 +17,7 @@ pkg_build_deps=(
 )
 pkg_deps=(
   core/glibc
-  core/jdk8
+  core/corretto8
   core/gcc-libs
   core/zip
   core/unzip
