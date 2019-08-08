@@ -12,7 +12,7 @@ pkg_filename="go-server-${pkg_version}-${pkg_buildnumber}.zip"
 pkg_dirname="go-server-${pkg_version}"
 pkg_deps=(
   core/git
-  core/jre8
+  core/corretto8
 )
 pkg_bin_dirs=(bin)
 pkg_exports=(
