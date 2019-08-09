@@ -165,6 +165,7 @@ Test launcher script `7zip/tests/test.sh`:
 
 ```bash
 #!/bin/sh
+
 #/ Usage: test.sh <pkg_ident>
 #/
 #/ Example: test.sh core/7zip/1.2.3/20181108151533
@@ -179,33 +180,36 @@ fi
 
 TEST_PKG_IDENT="${1}"
 export TEST_PKG_IDENT
+
 hab pkg install core/bats --binlink
 hab pkg install "${TEST_PKG_IDENT}"
-bats "$(dirname "${0}")/test.bats"
+
+bats "$(dirname "${0}")"/test.bats
 ```
 
 BATS test script `7zip/tests/test.bats`:
 
 ```bash
-TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
+expected_version="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
+
 @test "7z exe runs" {
   run hab pkg exec ${TEST_PKG_IDENT} 7z
-  [ $status -eq 0 ]
+  [ ${status} -eq 0 ]
 }
 
-@test "7z version matches ${TEST_PKG_VERSION}" {
-  run hab pkg exec ${TEST_PKG_IDENT} 7z
-  [[ "$output" =~ 7-Zip\ \[64\]\ ${TEST_PKG_VERSION} ]]
+@test "7z version matches ${expected_version}" {
+  run hab pkg exec "${TEST_PKG_IDENT}" 7z
+  grep -Eo "7-Zip \[64\] ${expected_version}" <<< "${output}"
 }
 
 @test "7za exe runs" {
   run hab pkg exec ${TEST_PKG_IDENT} 7za
-  [ $status -eq 0 ]
+  [ ${status} -eq 0 ]
 }
 
-@test "7za version matches ${TEST_PKG_VERSION}" {
-  run hab pkg exec ${TEST_PKG_IDENT} 7za
-  [[ "$output" =~ 7-Zip\ \(a\)\ \[64\]\ ${TEST_PKG_VERSION} ]]
+@test "7za version matches ${expected_version}" {
+  run hab pkg exec "${TEST_PKG_IDENT}" 7za
+  grep -Eo "7-Zip \(a\) \[64\] ${expected_version}"  <<< "${output}"
 }
 ```
 
