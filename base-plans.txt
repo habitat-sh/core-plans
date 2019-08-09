@@ -1,4 +1,5 @@
 core-plans/linux-headers
+core-plans/python-minimal
 core-plans/glibc
 core-plans/zlib
 core-plans/file
@@ -8,8 +9,8 @@ core-plans/gmp
 core-plans/mpfr
 core-plans/libmpc
 core-plans/gcc
-core-plans/patchelf FIRST_PASS=true
 core-plans/gcc-libs
+core-plans/patchelf FIRST_PASS=true
 core-plans/patchelf
 core-plans/bzip2
 core-plans/pkg-config
@@ -58,6 +59,9 @@ core-plans/check
 core-plans/cacerts
 core-plans/openssl-fips
 core-plans/openssl
+core-plans/libunistring
+core-plans/libiconv
+core-plans/libidn2
 core-plans/wget
 core-plans/unzip
 core-plans/rq
