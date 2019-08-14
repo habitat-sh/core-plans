@@ -1,15 +1,15 @@
 pkg_name=diffutils
 pkg_origin=core
-pkg_version=3.6
+pkg_version=3.7
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 GNU Diffutils is a package of several programs related to finding differences \
 between files.\
 "
 pkg_upstream_url="https://www.gnu.org/software/diffutils"
-pkg_license=('gplv3+')
+pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="d621e8bdd4b573918c8145f7ae61817d1be9deb4c8d2328a65cea8e11d783bd6"
+pkg_shasum="b3a7a6221c3dc916085f0d205abf6b8e1ba443d4dd965118da364a1dc1cb3a26"
 pkg_deps=(
   core/glibc
 )
