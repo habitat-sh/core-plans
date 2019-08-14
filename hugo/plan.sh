@@ -5,11 +5,12 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_description="Hugo is one of the most popular open-source static site generators."
 pkg_build_deps=(
-  core/go
-  core/git
   core/gcc
+  core/git
+  core/go
 )
 pkg_deps=(
+  core/gcc-libs
   core/glibc
 )
 pkg_bin_dirs=(bin)
@@ -24,12 +25,15 @@ do_build() {
     --config advice.detachedHead=false \
     "${pkg_repository}" \
     "${hugo_dir}"
+
   pushd "${hugo_dir}" > /dev/null
-  go install --tags extended
-  go build -o hugo main.go
+  go install -tags extended
+  local build_date
+  build_date=$(date -Iseconds -u)
+  go build -o hugo -ldflags "-X github.com/gohugoio/hugo/common/hugo.buildDate=${build_date}" -tags extended main.go
   popd > /dev/null
 }
 
 do_install() {
-  cp "${HAB_CACHE_SRC_PATH}/hugo-${pkg_version}/hugo" "${pkg_prefix}/bin/"
+  install -D "${HAB_CACHE_SRC_PATH}/hugo-${pkg_version}/${pkg_name}" "${pkg_prefix}/bin/${pkg_name}"
 }
