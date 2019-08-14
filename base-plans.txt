@@ -57,6 +57,9 @@ core-plans/check
 core-plans/cacerts
 core-plans/openssl-fips
 core-plans/openssl
+core-plans/libiconv
+core-plans/libunistring
+core-plans/libidn2
 core-plans/wget
 core-plans/unzip
 core-plans/rq
