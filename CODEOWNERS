@@ -8,7 +8,7 @@ scaffolding-* @habitat-sh/scaffolding-maintainers
 
 libarchive @reset @fnichol
 libsodium @reset @fnichol
-nginx @reset @fnichol  @predominant
+nginx @reset @fnichol @predominant
 postgresql @reset @fnichol @irvingpop
 protobuf @reset @fnichol
 protobuf-rust @reset @fnichol
@@ -93,7 +93,7 @@ xz-musl @fnichol @smacfarlane
 libsodium-musl @fnichol @reset @smacfarlane
 openssl-musl @fnichol @smacfarlane
 libarchive-musl @fnichol @reset @smacfarlane
-rust @fnichol @reset @smacfarlane
+rust @fnichol @reset @habitat-core-team
 vim @fnichol @smacfarlane
 libbsd @fnichol @smacfarlane
 clens @fnichol @smacfarlane
