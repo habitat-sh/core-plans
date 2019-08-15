@@ -6,13 +6,13 @@ scaffolding-* @habitat-sh/scaffolding-maintainers
 #
 # All of these plans are critical for Builder's operation and build
 
-libarchive @reset @fnichol @raskchanky @nellshamrell
-libsodium @reset @fnichol @raskchanky @nellshamrell
-nginx @reset @fnichol @raskchanky @nellshamrell @predominant
-postgresql @reset @fnichol @irvingpop @raskchanky @nellshamrell
-protobuf @reset @fnichol @raskchanky @nellshamrell
-protobuf-rust @reset @fnichol @raskchanky @nellshamrell
-zeromq @reset @fnichol @raskchanky @nellshamrell
+libarchive @reset @fnichol @raskchanky
+libsodium @reset @fnichol @raskchanky
+nginx @reset @fnichol @raskchanky @predominant
+postgresql @reset @fnichol @irvingpop @raskchanky
+protobuf @reset @fnichol @raskchanky
+protobuf-rust @reset @fnichol @raskchanky
+zeromq @reset @fnichol @raskchanky
 
 # # Base Plans
 #
@@ -48,9 +48,9 @@ flex @fnichol @smacfarlane
 pcre @fnichol @smacfarlane
 grep @fnichol @smacfarlane
 readline @fnichol @smacfarlane
-bash @fnichol @nellshamrell @smacfarlane
+bash @fnichol @smacfarlane
 bc @fnichol @smacfarlane
-tar @fnichol @nellshamrell @smacfarlane
+tar @fnichol @smacfarlane
 gawk @fnichol @smacfarlane
 libtool @fnichol @smacfarlane
 gdbm @fnichol @smacfarlane
@@ -82,10 +82,10 @@ libiconv @smacfarlane
 libunistring @smacfarlane
 libidn2 @smacfarlane
 wget @fnichol @smacfarlane
-unzip @fnichol @nellshamrell @smacfarlane
+unzip @fnichol @smacfarlane
 rq @fnichol @smacfarlane
-linux-headers-musl @fnichol @nellshamrell @smacfarlane
-musl @fnichol @nellshamrell @smacfarlane
+linux-headers-musl @fnichol @smacfarlane
+musl @fnichol @smacfarlane
 busybox-static @fnichol @smacfarlane
 zlib-musl @fnichol @smacfarlane
 bzip2-musl @fnichol @smacfarlane
@@ -93,8 +93,8 @@ xz-musl @fnichol @smacfarlane
 libsodium-musl @fnichol @reset @smacfarlane
 openssl-musl @fnichol @smacfarlane
 libarchive-musl @fnichol @reset @smacfarlane
-rust @fnichol @reset @raskchanky @nellshamrell @smacfarlane
-vim @fnichol @nellshamrell @smacfarlane
+rust @fnichol @reset @raskchanky @smacfarlane
+vim @fnichol @smacfarlane
 libbsd @fnichol @smacfarlane
 clens @fnichol @smacfarlane
 mg @fnichol @smacfarlane
@@ -130,7 +130,7 @@ corretto8 @johnjelinek
 corretto11 @johnjelinek
 cuda @bdangit
 cuda-libs @bdangit
-dep @afiune @nellshamrell
+dep @afiune
 dotnet-47-dev-pack @mwrock
 dotnet-asp-core @defilan
 dotnet-core-lts @mwrock
@@ -150,7 +150,7 @@ ghc80 @wduncanfraser
 ghc82 @wduncanfraser
 ghc82-bootstrap @wduncanfraser
 ghc84 @wduncanfraser
-go @afiune @nellshamrell
+go @afiune
 gocd-server @predominant
 googletest @bdangit
 grpcurl @afiune
