@@ -14,6 +14,7 @@ pkg_deps=(
   core/libffi
   core/libiconv
   core/pcre
+  core/zlib
 )
 pkg_build_deps=(
   core/diffutils
