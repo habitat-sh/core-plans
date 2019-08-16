@@ -231,6 +231,8 @@ plan_path = "diffutils"
 plan_path = "direnv"
 [dmake]
 plan_path = "dmake"
+[dnsmasq]
+plan_path = "dnsmasq"
 [docker]
 plan_path = "docker"
 [docker17]
