@@ -93,7 +93,7 @@ xz-musl @fnichol @smacfarlane
 libsodium-musl @fnichol @reset @smacfarlane
 openssl-musl @fnichol @smacfarlane
 libarchive-musl @fnichol @reset @smacfarlane
-rust @fnichol @reset @habitat-core-maintainers
+rust @fnichol @reset @habitat-sh/habitat-core-maintainers
 vim @fnichol @smacfarlane
 libbsd @fnichol @smacfarlane
 clens @fnichol @smacfarlane
