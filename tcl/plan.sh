@@ -1,3 +1,5 @@
+# Stop shellcheck requiring quotes around pkg_name
+# shellcheck disable=SC2209
 pkg_name=tcl
 pkg_origin=core
 pkg_version=8.6.8
