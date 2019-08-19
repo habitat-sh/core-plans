@@ -1,3 +1,5 @@
+# Stop shellcheck requiring quotes around pkg_name
+# shellcheck disable=SC2209
 pkg_name=make
 pkg_origin=core
 pkg_version=4.2.1
