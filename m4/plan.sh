@@ -1,3 +1,5 @@
+# Stop shellcheck requiring quotes around pkg_name
+# shellcheck disable=SC2209
 pkg_name=m4
 pkg_origin=core
 pkg_version=1.4.18
