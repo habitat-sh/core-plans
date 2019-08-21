@@ -6,7 +6,7 @@
 
 set -euo pipefail
 
-source bin/ci/test_helpers.sh
+source "$(dirname "${0}")/../../bin/ci/test_helpers.sh"
 
 if [[ -z "${1:-}" ]]; then
   grep '^#/' < "${0}" | cut -c4-
