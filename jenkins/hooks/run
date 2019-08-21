@@ -11,19 +11,19 @@ exec java \
   --prefix={{cfg.jenkins.prefix}} \
   {{~#if cfg.jenkins.http.enabled}}
   --httpPort={{cfg.jenkins.http.port}} \
-  --httpListenAddress={{sys.ip}} \
+  --httpListenAddress=0.0.0.0 \
   {{~/if}}
   {{~#if cfg.jenkins.https.enabled}}
   --httpsPort={{cfg.jenkins.https.port}} \
-  --httpsListenAddress={{sys.ip}} \
+  --httpsListenAddress=0.0.0.0 \
   {{~/if}}
   {{~#if cfg.jenkins.http2.enabled}}
   --http2Port={{cfg.jenkins.http2.port}} \
-  --http2ListenAddress={{sys.ip}} \
+  --http2ListenAddress=0.0.0.0 \
   {{~/if}}
   {{~#if cfg.jenkins.ajp13.enabled}}
   --ajp13Port={{cfg.jenkins.ajp13.port}} \
-  --ajp13ListenAddress={{sys.ip}} \
+  --ajp13ListenAddress=0.0.0.0 \
   {{~else}}
   --ajp13Port=-1 \
   {{~/if}}
