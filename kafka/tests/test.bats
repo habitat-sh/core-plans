@@ -6,6 +6,6 @@ TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 }
 
 @test "Listening on port 9092" {
-  result="$(netstat -peanut | grep LISTEN | grep -o 9092 || echo '-1')"
+  result="$(netstat -at | grep LISTEN | grep -o 9092 || echo '-1')"
   [ "${result}" -eq 9092 ]
 }
