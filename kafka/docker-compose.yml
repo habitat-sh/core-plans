@@ -12,4 +12,4 @@ services:
       - zookeeper
     command: --peer zookeeper --bind zookeeper:zookeeper.default
     environment:
-      - HAB_LICENSE=accept-no-persist
+      - HAB_LICENSE=${HAB_LICENSE}
