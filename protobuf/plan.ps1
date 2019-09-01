@@ -1,12 +1,12 @@
 $pkg_name="protobuf"
 $pkg_origin="core"
-$pkg_version="3.6.1"
+$pkg_version="3.9.1"
 $pkg_file_name=$pkg_name + ($pkg_version).Replace(".", "")
 $pkg_description="Protocol buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data."
 $pkg_upstream_url="https://developers.google.com/protocol-buffers/"
 $pkg_license=("BSD")
 $pkg_source="https://github.com/google/${pkg_name}/releases/download/v${pkg_version}/${pkg_name}-all-${pkg_version}.zip"
-$pkg_shasum="0a4c6d0678eb2f063df332cff1a41647ef692c067b5cfb19e51bca778e79d9e0"
+$pkg_shasum="aed089110977f7cabda19d550b4d503eb93fa0f73c7a470c4695f27b63029544"
 $pkg_deps=@(
     "core/zlib"
 )
