@@ -13,7 +13,7 @@ if [[ -z "${1:-}" ]]; then
 	exit 1
 fi
 
-function tear_down {
+tear_down() {
   #Unload kafka and zookeeper
   hab svc unload "${TEST_PKG_IDENT}" || true
   hab svc unload core/zookeeper || true
