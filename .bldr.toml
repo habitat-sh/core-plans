@@ -697,6 +697,8 @@ plan_path = "libedit"
 plan_path = "libepoxy"
 [liberation-fonts-ttf]
 plan_path = "liberation-fonts-ttf"
+[libestr]
+plan_path = "libestr"
 [libev]
 plan_path = "libev"
 [libevent]
