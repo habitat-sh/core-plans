@@ -130,7 +130,7 @@ corretto8 @johnjelinek
 corretto11 @johnjelinek
 cuda @bdangit
 cuda-libs @bdangit
-dep @afiune
+dep @afiune @predominant
 dotnet-47-dev-pack @mwrock
 dotnet-asp-core @defilan
 dotnet-core-lts @mwrock
@@ -150,7 +150,7 @@ ghc80 @wduncanfraser
 ghc82 @wduncanfraser
 ghc82-bootstrap @wduncanfraser
 ghc84 @wduncanfraser
-go @afiune
+go @afiune @predominant
 gocd-server @predominant
 googletest @bdangit
 grpcurl @afiune
@@ -199,4 +199,4 @@ terraform @defilan @echohack @predominant
 tlog @jasonwbarnett
 vault @defilan @predominant
 visual-build-tools-2017 @mwrock
-wrk @afiune
+wrk @afiune @predominant
