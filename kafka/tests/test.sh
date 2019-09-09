@@ -13,6 +13,13 @@ if [[ -z "${1:-}" ]]; then
 	exit 1
 fi
 
+tear_down() {
+  #Unload kafka and zookeeper
+  hab svc unload "${TEST_PKG_IDENT}" || true
+  hab svc unload core/zookeeper || true
+}
+trap tear_down EXIT
+
 TEST_PKG_IDENT="${1}"
 export TEST_PKG_IDENT
 hab pkg install core/bats --binlink
@@ -34,7 +41,7 @@ ci_load_service "core/zookeeper"
 # wait for the service to start
 countdown=50
 hab svc status "${TEST_PKG_IDENT}" 2>/dev/null || hab svc load "${TEST_PKG_IDENT}" --bind zookeeper:zookeeper.default
-until ( (nc -z localhost 9092) && (grep -q "INFO Kafka version :" "${SUP_LOG}" ) ) \
+until ( (nc -z localhost 9092) && (grep -q "INFO Kafka version:" "${SUP_LOG}" ) ) \
   || (( countdown <= 0 )); do
   echo "Waiting for core/kafka service to start ${countdown}"
   sleep 2
@@ -43,7 +50,3 @@ done
 
 # run the tests
 bats "$(dirname "${0}")/test.bats"
-
-# unload the services
-hab svc unload "${TEST_PKG_IDENT}" || true
-hab svc unload core/zookeeper || true
