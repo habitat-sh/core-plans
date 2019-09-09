@@ -44,6 +44,13 @@ get_latest_stable() {
     curl "$url" 2>/dev/null | jq -r .ident.version
 }
 
+for cmd in curl jq dirname; do
+    if ! command -v $cmd >/dev/null 2>&1; then
+        echo "error: $cmd required but not found"
+        exit 1
+    fi
+done
+
 declare -a plans_to_check
 if [[ "$#" -ne 0 ]]; then
     mapfile -t plans_to_check < <(clean_args "$@")
