@@ -29,7 +29,7 @@ pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 
 _target_sources=(
-  $_url_base/${_distname}-std-nightly-x86_64-unknown-linux-musl.tar.gz
+  "${_url_base}/${_distname}-std-nightly-x86_64-unknown-linux-musl.tar.gz"
 )
 
 # Will be populated in `_download_shasums()`
@@ -90,21 +90,23 @@ do_install() {
   ./install.sh --prefix="$pkg_prefix" --disable-ldconfig
 
   # Update the dynamic linker & set `RUNPATH` for all ELF binaries under `bin/`
-  for b in rustc cargo rustdoc; do
-    patchelf \
+  build_line "Fixing rpath for bins:"
+  find "$pkg_prefix/bin" -type f -perm /0100 \
+    -exec sh -c 'file -i "$1" | grep -v .so | grep -q "executable; charset=binary"' _ {} \; \
+    -print0 \
+    | xargs -0 -n 1 patchelf \
       --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" \
-      --set-rpath "$LD_RUN_PATH" \
-      "$pkg_prefix/bin/$b"
-  done; unset b
+      --set-rpath "$LD_RUN_PATH"
 
   # Going to want to write a cargo wrapper
   #    SSL_CERT_FILE=$(pkg_path_for cacerts)/ssl/cert.pem \
 
-    # Set `RUNPATH` for all shared libraries under `lib/`
-  find "$pkg_prefix/lib" -name "*.so" -print0 \
-    | xargs -0 -I '%' patchelf \
-      --set-rpath "$LD_RUN_PATH" \
-      %
+  # Set `RUNPATH` for all shared libraries under `lib/`
+  build_line "Fixing rpath for libs:"
+  find "$pkg_prefix/lib" -name "*.so" \
+    -print0 \
+    | xargs -0 -n 1 patchelf \
+      --set-rpath "$LD_RUN_PATH"
 
   # Install all targets
   local dir

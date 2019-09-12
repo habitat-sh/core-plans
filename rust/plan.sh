@@ -75,18 +75,20 @@ do_install() {
   ./install.sh --prefix="$pkg_prefix" --disable-ldconfig
 
   # Update the dynamic linker & set `RUNPATH` for all ELF binaries under `bin/`
-  for b in rustc cargo rustdoc cargo-fmt rls rustfmt; do
-    patchelf \
+  build_line "Fixing rpath for bins:"
+  find "$pkg_prefix/bin" -type f -perm /0100 \
+    -exec sh -c 'file -i "$1" | grep -v .so | grep -q "executable; charset=binary"' _ {} \; \
+    -print0 \
+    | xargs -0 -n 1 patchelf \
       --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" \
-      --set-rpath "$LD_RUN_PATH" \
-      "$pkg_prefix/bin/$b"
-  done; unset b
+      --set-rpath "$LD_RUN_PATH"
 
   # Set `RUNPATH` for all shared libraries under `lib/`
-  find "$pkg_prefix/lib" -name "*.so" -print0 \
-    | xargs -0 -I '%' patchelf \
-      --set-rpath "$LD_RUN_PATH" \
-      %
+  build_line "Fixing rpath for libs:"
+  find "$pkg_prefix/lib" -name "*.so" \
+    -print0 \
+    | xargs -0 -n 1 patchelf \
+      --set-rpath "$LD_RUN_PATH"
 
   # Install all targets
   local dir
