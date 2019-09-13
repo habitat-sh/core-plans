@@ -1,0 +1,13 @@
+pkg_name=libestr
+pkg_origin=core
+pkg_version=0.1.11
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_license=("Apache-2.0")
+pkg_description="A library for some string essentials"
+pkg_upstream_url="https://libestr.adiscon.com/"
+pkg_source="http://libestr.adiscon.com/files/download/libestr-${pkg_version}.tar.gz"
+pkg_shasum=46632b2785ff4a231dcf241eeb0dcb5fc0c7d4da8ee49cf5687722cdbe8b2024
+pkg_deps=(core/glibc)
+pkg_build_deps=(core/make core/gcc)
+pkg_lib_dirs=(lib)
+pkg_include_dirs=(include)
