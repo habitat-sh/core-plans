@@ -44,6 +44,11 @@ get_latest_stable() {
     curl "$url" 2>/dev/null | jq -r .ident.version
 }
 
+if [[ "${BASH_VERSINFO[0]}" -lt 4 ]]; then
+    echo "error: Bash 4 or greater is required. Found ${BASH_VERSINFO[0]}."
+    exit 1
+fi
+
 for cmd in curl jq dirname; do
     if ! command -v $cmd >/dev/null 2>&1; then
         echo "error: $cmd required but not found"
