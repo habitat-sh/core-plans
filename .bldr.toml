@@ -703,6 +703,8 @@ plan_path = "libestr"
 plan_path = "libev"
 [libevent]
 plan_path = "libevent"
+[libfastjson]
+plan_path = "libfastjson"
 [libfcgi]
 plan_path = "libfcgi"
 [libffi]
