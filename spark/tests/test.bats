@@ -13,6 +13,7 @@
 #         /_/
 expected_version="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 @test "spark-submit matches version ${expected_version}" {
-  actual_version="$(hab pkg exec core/spark spark-submit --version 2>&1 | grep -A 5 "Welcome to" | grep "version" | awk -F'version ' '{print $2}')"
+  #actual_version="$(hab pkg exec core/spark spark-submit --version 2>&1 | grep "version")"
+  actual_version="$(hab pkg exec core/spark spark-submit --version 2>&1 )"
   diff <(echo "$actual_version") <(echo "${expected_version}")
 }
