@@ -26,7 +26,7 @@ hab pkg install "${TEST_PKG_IDENT}"
 
 ci_ensure_supervisor_running
 ci_load_service "$TEST_PKG_IDENT"
-ci_wait_for_port 8080
+ci_wait_for_port 6066
 
 # run the tests
 bats "$(dirname "${0}")/test.bats"
