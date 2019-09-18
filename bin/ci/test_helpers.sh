@@ -62,3 +62,30 @@ ci_load_service() {
     exit 1
   fi
 }
+
+# Waits until specified port is listening or until timeout (default 50 seconds)
+# If timeout countdown reaches 0, then exits with an error
+ci_wait_for_port() {
+  set -x
+  local port=${1}
+  local host=${2:-"127.0.0.1"}
+  local timeout=${3:-50}
+
+  echo "--- :habicat: Verifying listener on port ${port}"
+  netstat -tulpn
+
+  DEFAULT_INTERFACE="$(ip route list | grep "default"  | awk '{print $5}')"
+  ETH0_IP_ADDRESS="$(ifconfig "${DEFAULT_INTERFACE}" | grep "inet addr" | cut -d ':' -f 2 | cut -d ' ' -f 1)"
+  until ( nc -z "${ETH0_IP_ADDRESS}" "${port}" ) || (( timeout <= 0 )); do
+  # until (nc -z -w 1 "${host}" "${port}") || (( timeout <= 0 )); do
+    sleep 1
+    timeout=$((timeout-1))
+    echo "Waiting for port ${port} to listen: ${timeout}"
+    netstat -tulpn
+  done
+
+  if (( timeout <= 0 )); then
+    echo "--- :boomboom: Unable to detect a listener at port ${port}"
+    exit 1
+  fi
+}
