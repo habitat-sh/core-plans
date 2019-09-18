@@ -12,8 +12,9 @@
 #      /___/ .__/\_,_/_/ /_/\_\   version 2.1.2
 #         /_/
 expected_version="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
+expected="version ${expected_version}"
 @test "spark-submit matches version ${expected_version}" {
-  #actual_version="$(hab pkg exec core/spark spark-submit --version 2>&1 | grep "version")"
-  actual_version="$(hab pkg exec core/spark spark-submit --version 2>&1 )"
-  diff <(echo "$actual_version") <(echo "${expected_version}")
+  # actual="$( hab pkg exec "${TEST_PKG_IDENT}" spark-submit --version 2>&1 | grep -o "${expected}" )"
+  actual_version="$(hab pkg exec "${TEST_PKG_IDENT}" spark-submit --version 2>&1 )"
+  diff <(echo "${actual}") <(echo "${expected}")
 }
