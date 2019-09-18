@@ -25,8 +25,22 @@ hab pkg binlink core/iproute2 ip
 hab pkg install "${TEST_PKG_IDENT}"
 
 ci_ensure_supervisor_running
+
+# clear the supervisor output
+export SUP_LOG="/hab/sup/default/sup.log"
+cat /dev/null > "${SUP_LOG}"
+
 ci_load_service "$TEST_PKG_IDENT"
-ci_wait_for_port 6066
+
+# wait for the service to start
+countdown=50
+hab svc status "${TEST_PKG_IDENT}" 2>/dev/null || hab svc load "${TEST_PKG_IDENT}" --bind zookeeper:zookeeper.default
+until (grep -q "I have been elected leader! New state: ALIVE" "${SUP_LOG}" ) \
+  || (( countdown <= 0 )); do
+  echo "Waiting for core/spark service to start ${countdown}"
+  sleep 2
+  countdown=$((countdown-1))
+done
 
 # run the tests
 bats "$(dirname "${0}")/test.bats"
