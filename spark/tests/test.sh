@@ -18,6 +18,7 @@ export TEST_PKG_IDENT
 hab pkg install core/bats --binlink
 hab pkg install core/busybox-static
 hab pkg binlink core/busybox-static nc
+hab pkg binlink core/busybox-static netstat
 hab pkg install "${TEST_PKG_IDENT}"
 
 ci_ensure_supervisor_running

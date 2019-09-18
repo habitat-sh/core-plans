@@ -66,15 +66,18 @@ ci_load_service() {
 # Waits until specified port is listening or until timeout (default 50 seconds)
 # If timeout countdown reaches 0, then exits with an error
 ci_wait_for_port() {
+  set -x
   local port=${1}
   local host=${2:-"127.0.0.1"}
   local timeout=${3:-50}
 
   echo "--- :habicat: Verifying listener on port ${port}"
+  netstat -tulpn
   until (nc -z -w 1 "${host}" "${port}") || (( timeout <= 0 )); do
     sleep 1
     timeout=$((timeout-1))
     echo "Waiting for port ${port} to listen: ${timeout}"
+    netstat -tulpn
   done
 
   if (( timeout <= 0 )); then
