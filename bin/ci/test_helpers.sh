@@ -73,7 +73,11 @@ ci_wait_for_port() {
 
   echo "--- :habicat: Verifying listener on port ${port}"
   netstat -tulpn
-  until (nc -z -w 1 "${host}" "${port}") || (( timeout <= 0 )); do
+
+  DEFAULT_INTERFACE="$(ip route list | grep "default"  | awk '{print $5}')"
+  ETH0_IP_ADDRESS="$(ifconfig "${DEFAULT_INTERFACE}" | grep "inet addr" | cut -d ':' -f 2 | cut -d ' ' -f 1)"
+  until ( nc -z "${ETH0_IP_ADDRESS}" "${port}" ) || (( timeout <= 0 )); do
+  # until (nc -z -w 1 "${host}" "${port}") || (( timeout <= 0 )); do
     sleep 1
     timeout=$((timeout-1))
     echo "Waiting for port ${port} to listen: ${timeout}"

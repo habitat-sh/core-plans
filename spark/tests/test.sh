@@ -19,6 +19,9 @@ hab pkg install core/bats --binlink
 hab pkg install core/busybox-static
 hab pkg binlink core/busybox-static nc
 hab pkg binlink core/busybox-static netstat
+hab pkg binlink core/busybox-static ifconfig
+hab pkg install core/iproute2
+hab pkg binlink core/iproute2 ip
 hab pkg install "${TEST_PKG_IDENT}"
 
 ci_ensure_supervisor_running
