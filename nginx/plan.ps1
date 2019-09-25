@@ -1,12 +1,12 @@
 $pkg_name="nginx"
 $pkg_origin="core"
-$pkg_version="1.17.3"
+$pkg_version="1.17.4"
 $pkg_description="NGINX web server."
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_license=('BSD-2-Clause')
 $pkg_source="https://nginx.org/download/nginx-$pkg_version.zip"
 $pkg_upstream_url="https://nginx.org/"
-$pkg_shasum="f70a06fcaa0eecee1af3b39836bdf6c750175dc9e0e3380b07b754f19c284707"
+$pkg_shasum="4101197c88ea11f609a665bffbed3ee13ced345f51b711a61a30328b66381c44"
 $pkg_bin_dirs=@('bin')
 $pkg_exports=@{port="http.listen.port"}
 $pkg_exposes=@('port')
