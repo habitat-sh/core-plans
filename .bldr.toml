@@ -1038,6 +1038,8 @@ plan_path = "openjpeg"
 plan_path = "openldap"
 [openjdk11]
 plan_path = "openjdk11"
+[openjdk13]
+plan_path = "openjdk13"
 [openresty]
 plan_path = "openresty"
 [openssh]
