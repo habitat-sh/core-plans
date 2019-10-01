@@ -1,12 +1,12 @@
 pkg_name=netdata
 pkg_origin=core
-pkg_version=1.16.1
+pkg_version=1.17.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("GPL-3.0-or-later")
 pkg_description="netdata is a system for distributed real-time performance and health monitoring."
 pkg_upstream_url="https://github.com/netdata/netdata"
 pkg_source="https://github.com/netdata/${pkg_name}/archive/v${pkg_version}.tar.gz"
-pkg_shasum=94492108a6e24e8b39c011ae35ff6f50a848d816af396fdf2b44655cecd78672
+pkg_shasum=2dc0d510a31655bab4c269b78e1619fcdce38bf79335966d61d6bbd7bed736c5
 pkg_build_deps=(
   core/autoconf
   core/autogen
