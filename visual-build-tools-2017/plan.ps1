@@ -23,7 +23,17 @@ $pkg_include_dirs=@(
 )
 
 function Invoke-Unpack {
-  Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList "--quiet --layout $HAB_CACHE_SRC_PATH/$pkg_dirname --lang en-US --add Microsoft.VisualStudio.Workload.MSBuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.VC.ATLMFC --add Microsoft.VisualStudio.Component.NuGet.BuildTools"
+  $installArgs = "--quiet --layout $HAB_CACHE_SRC_PATH/$pkg_dirname --lang en-US"
+  @(
+    "Microsoft.VisualStudio.Workload.MSBuildTools",
+    "Microsoft.VisualStudio.Workload.VCTools",
+    "Microsoft.VisualStudio.Component.SQL.SSDTBuildSku",
+    "Microsoft.VisualStudio.Component.VC.ATLMFC",
+    "Microsoft.VisualStudio.Component.NuGet.BuildTools"
+  ) | % {
+    $installArgs += " --add $_"
+  }
+  Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList $installArgs
   Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
   try {
     Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include *.vsix -Exclude @('*x86*', '*.arm.*') -Recurse | % {
