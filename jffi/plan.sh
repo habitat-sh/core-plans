@@ -1,12 +1,12 @@
 pkg_name=jffi
 pkg_origin=core
-pkg_version=1.2.20
+pkg_version=1.2.21
 pkg_license=('Apache-2.0')
 pkg_description="Java Foreign Function Interface"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/jnr/jffi/archive/${pkg_name}-${pkg_version}.tar.gz"
 pkg_dirname="${pkg_name}-${pkg_name}-${pkg_version}"
-pkg_shasum=e1a3148e9ac83eff29dab9423e81c8ff91431c172ce5e5d1e1c800f178cfcf77
+pkg_shasum=aef40357b0f5c6a7996f462f40a301cd3557a370a43c3a977050199b8ce43121
 pkg_upstream_url="https://github.com/jnr/jffi"
 pkg_deps=(
   core/glibc
