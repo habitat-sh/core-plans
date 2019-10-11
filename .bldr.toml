@@ -20,6 +20,8 @@ plan_path = "apr-util"
 plan_path = "artifactory"
 [artifactory-pro]
 plan_path = "artifactory-pro"
+[asciinema]
+plan_path = "asciinema"
 [aspcud]
 plan_path = "aspcud"
 [at-spi2-core]
