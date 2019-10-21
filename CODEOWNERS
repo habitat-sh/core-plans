@@ -6,13 +6,13 @@ scaffolding-* @habitat-sh/scaffolding-maintainers
 #
 # All of these plans are critical for Builder's operation and build
 
-libarchive @reset @fnichol
-libsodium @reset @fnichol
-nginx @reset @fnichol @predominant
-postgresql @reset @fnichol @irvingpop
-protobuf @reset @fnichol
-protobuf-rust @reset @fnichol
-zeromq @reset @fnichol
+libarchive @fnichol
+libsodium @fnichol
+nginx @fnichol @predominant
+postgresql @fnichol @irvingpop
+protobuf @fnichol
+protobuf-rust @fnichol
+zeromq @fnichol
 
 # # Base Plans
 #
@@ -21,7 +21,7 @@ zeromq @reset @fnichol
 # accepting changes, updating versions, etc.
 
 linux-headers @fnichol @smacfarlane
-glibc @fnichol @reset @smacfarlane
+glibc @fnichol @smacfarlane
 zlib @fnichol @smacfarlane
 file @fnichol @smacfarlane
 binutils @fnichol @smacfarlane
@@ -30,7 +30,7 @@ gmp @fnichol @smacfarlane
 mpfr @fnichol @smacfarlane
 libmpc @fnichol @smacfarlane
 gcc @fnichol @smacfarlane
-gcc-libs @fnichol @reset @smacfarlane
+gcc-libs @fnichol @smacfarlane
 patchelf @fnichol @smacfarlane
 bzip2 @fnichol @smacfarlane
 pkg-config @fnichol @smacfarlane
@@ -77,7 +77,7 @@ dejagnu @fnichol @smacfarlane
 check @fnichol @smacfarlane
 libidn @fnichol @smacfarlane
 cacerts @fnichol @smacfarlane
-openssl @fnichol @reset @echohack @smacfarlane
+openssl @fnichol @echohack @smacfarlane
 libiconv @smacfarlane
 libunistring @smacfarlane
 libidn2 @smacfarlane
@@ -90,10 +90,10 @@ busybox-static @fnichol @smacfarlane
 zlib-musl @fnichol @smacfarlane
 bzip2-musl @fnichol @smacfarlane
 xz-musl @fnichol @smacfarlane
-libsodium-musl @fnichol @reset @smacfarlane
+libsodium-musl @fnichol @smacfarlane
 openssl-musl @fnichol @smacfarlane
-libarchive-musl @fnichol @reset @smacfarlane
-rust @fnichol @reset @habitat-sh/habitat-core-maintainers
+libarchive-musl @fnichol @smacfarlane
+rust @fnichol @habitat-sh/habitat-core-maintainers
 vim @fnichol @smacfarlane
 libbsd @fnichol @smacfarlane
 clens @fnichol @smacfarlane
