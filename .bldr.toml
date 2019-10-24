@@ -447,6 +447,11 @@ plan_path = "gnuplot"
 plan_path = "gnutls"
 [go]
 plan_path = "go"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-windows"
+]
+
 [go14]
 plan_path = "go14"
 [go17]
