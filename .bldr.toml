@@ -1022,6 +1022,12 @@ plan_path = "npth"
 plan_path = "nspr"
 [nss]
 plan_path = "nss"
+[nss-myhostname]
+plan_path = "nss-myhostname"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [numactl]
 plan_path = "numactl"
 [ocaml]

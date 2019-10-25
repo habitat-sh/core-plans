@@ -165,6 +165,7 @@ metricbeat @echohack
 mssql @mwrock
 nano @predominant
 nmap @defilan
+nss-myhostname @robbkidd
 nuget @mwrock
 openjdk11 @irvingpop
 optipng @predominant
