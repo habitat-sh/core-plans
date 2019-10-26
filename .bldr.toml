@@ -211,6 +211,8 @@ plan_path = "damageproto"
 plan_path = "db"
 [dbus]
 plan_path = "dbus"
+[dcrpm]
+plan_path = "dcrpm"
 [dd-agent]
 plan_path = "dd-agent"
 [dejagnu]
