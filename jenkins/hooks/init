@@ -1,0 +1,5 @@
+#!/bin/sh
+
+exec 2>&1
+
+ln -vsf {{pkg.svc_config_path}}/fontconfig.properties {{pkgPathFor "core/openjdk11"}}/lib/fontconfig.properties
