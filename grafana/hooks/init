@@ -2,3 +2,9 @@
 
 mkdir -p {{pkg.svc_var_path}}/dashboards
 
+mkdir -p {{pkg.svc_var_path}}/provisioning/dashboards
+mkdir -p {{pkg.svc_var_path}}/provisioning/datasources
+mkdir -p {{pkg.svc_var_path}}/provisioning/notifiers
+
+# install config to look for dashboard configs
+install -Dm644 {{pkg.svc_config_path}}/dashboard.yaml {{pkg.svc_var_path}}/provisioning/dashboards/dashboard.yaml
