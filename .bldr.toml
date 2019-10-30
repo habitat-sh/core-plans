@@ -978,6 +978,8 @@ plan_path = "nettle"
 plan_path = "nghttp2"
 [nginx]
 plan_path = "nginx"
+[nginx-prometheus-exporter]
+plan_path = "nginx-prometheus-exporter"
 [ninja]
 plan_path = "ninja"
 [nload]
