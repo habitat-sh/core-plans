@@ -29,6 +29,7 @@ pkg_exposes=(grafana_port)
 
 pkg_binds_optional=(
   [prom]="prom_ds_http"
+  [loki]="loki_ds_http"
 )
 
 # we're using prebuilt binaries; no build stage required

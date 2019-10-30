@@ -1,23 +1,32 @@
-Grafana in habitat.sh
-====
+# Grafana
 
-This Habitat plan installs stock grafana and optionally adds a bound prometheus datasource along with some sample dashboards
+This Habitat plan installs stock [grafana](http://grafana.com) and has the following optional binds:
 
-Config
----
+- a [prometheus](../prometheus/README.md) datasource along with some sample prometheus dashboards
+- a [loki](../grafana-loki/README.md) datasource
 
-If run with `--bind prom:<prometheus_service_group` a post-run hook will wait till the grafana service has started then use the API to add the prometheus data source as well as the stock prometheus and node_exporter dashboards.
+## Maintainers
 
-Basic Usage
-----
+The Habitat Maintainers humans@habitat.sh
 
-1) clone this repo
-2) install the hab binary from https://habitat.sh
-3) Run these commands:
+## Type of Package
+
+Service
+
+## Usage
+
+```bash
+hab svc load core/grafana
 ```
-hab studio enter # stay in studio
- build grafana
- hab pkg export docker <yourOrg>/grafana
- # exit studio
-docker run -p 3000:80 --name my_grafana <yourOrg>/grafana
-```
+
+This will load up the grafana service on port 80.
+
+## Bindings
+
+### `--bind prom:<prometheus_svc_group>`
+
+A post-run hook will install the prometheus datasource and copy stock prometheus and node_exporter dashboards.
+
+### `--bind loki:<loki_svc_group>`
+
+A post-run hook will install the loki datasource.  No stock datasources avaliable.

@@ -485,6 +485,8 @@ paths = [
 ]
 [grafana]
 plan_path = "grafana"
+[grafana-loki]
+plan_path = "grafana-loki"
 [graphviz]
 plan_path = "graphviz"
 [grep]

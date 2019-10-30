@@ -7,3 +7,8 @@ cp {{pkg.svc_config_path}}/datasource-prometheus.yaml {{pkg.svc_var_path}}/provi
 # now cp the rendered dashboards to the var/dashboards/ dir
 cp -rf {{pkg.svc_config_path}}/prometheus-*.json {{pkg.svc_var_path}}/dashboards/
 {{~/if}}
+
+{{~#if bind.loki}}
+# setup a loki datasource
+cp {{pkg.svc_config_path}}/datasource-loki.yaml {{pkg.svc_var_path}}/provisioning/datasources
+{{~/if}}
