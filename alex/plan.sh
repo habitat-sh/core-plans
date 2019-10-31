@@ -18,7 +18,8 @@ pkg_deps=(
 
 pkg_build_deps=(
   core/cabal-install
-  core/ghc
+  # tests fail if we try and build with ghc 8.8
+  core/ghc86
   core/make
   core/which
 )
