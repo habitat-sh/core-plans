@@ -25,6 +25,10 @@ pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
+do_setup_environment() {
+  set_runtime_env MAGIC "${pkg_prefix}/share/misc/magic.mgc"
+}
+
 do_prepare() {
   do_default_prepare
 
