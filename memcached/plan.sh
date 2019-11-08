@@ -11,6 +11,7 @@ pkg_deps=(
   core/glibc
   core/cyrus-sasl
   core/libevent
+  core/openssl11
 )
 pkg_build_deps=(
   core/git
@@ -29,7 +30,8 @@ pkg_exposes=(port)
 do_build() {
   ./configure \
     --prefix="${pkg_prefix}" \
-    --enable-sasl
+    --enable-sasl \
+    --enable-tls
   make
 }
 
