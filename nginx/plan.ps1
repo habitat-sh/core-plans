@@ -11,6 +11,10 @@ $pkg_bin_dirs=@('bin')
 $pkg_exports=@{port="http.listen.port"}
 $pkg_exposes=@('port')
 
+$pkg_binds_optional=@{
+    "backend"="port"
+}
+  
 function Invoke-Install {
     $source = "$HAB_CACHE_SRC_PATH/$pkg_name-$pkg_version/$pkg_name-$pkg_version"
     Copy-Item "$source/$pkg_name.exe" "$pkg_prefix\bin"
