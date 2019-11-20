@@ -69,6 +69,7 @@ core-plans/bzip2-musl
 core-plans/xz-musl
 core-plans/libsodium-musl
 core-plans/openssl-musl
+core-plans/libarchive
 core-plans/libarchive-musl
 core-plans/rust
 habitat/components/hab
