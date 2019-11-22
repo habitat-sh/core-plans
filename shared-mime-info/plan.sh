@@ -28,6 +28,5 @@ pkg_bin_dirs=(bin)
 
 do_prepare() {
   do_default_prepare
-
-  cpanm XML::Parser --configure-args="EXPATLIBPATH=$(pkg_path_for core/expat)/lib export EXPATINCPATH=$(pkg_path_for core/expat)/include"
+  cpanm TODDR/XML-Parser-2.44.tar.gz --configure-args="EXPATLIBPATH=$(pkg_path_for core/expat)/lib EXPATINCPATH=$(pkg_path_for core/expat)/include"
 }
