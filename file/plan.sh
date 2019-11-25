@@ -1,4 +1,4 @@
-pkg_name=file
+pkg_name="file"
 pkg_origin=core
 pkg_version=5.34
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
