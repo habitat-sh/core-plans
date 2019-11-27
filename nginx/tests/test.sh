@@ -25,7 +25,7 @@ ci_ensure_supervisor_running
 ci_load_service "${TEST_PKG_IDENT}"
 
 # Allow service start
-WAIT_SECONDS=5
+WAIT_SECONDS=10
 echo "Waiting ${WAIT_SECONDS} seconds for service to start..."
 sleep "${WAIT_SECONDS}"
 
