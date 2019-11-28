@@ -65,6 +65,7 @@ core-plans/unzip
 core-plans/rq
 core-plans/linux-headers-musl
 core-plans/musl
+core-plans/busybox
 core-plans/busybox-static
 core-plans/zlib-musl
 core-plans/bzip2-musl
