@@ -3,7 +3,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/../curl/plan.sh"
 pkg_name=curl-static-musl
 pkg_distname=curl
 pkg_origin=core
-pkg_version=7.65.1
+pkg_version=7.67.0
 pkg_description="curl is an open source command line tool and library for
   transferring data with URL syntax."
 pkg_upstream_url=https://curl.haxx.se/
