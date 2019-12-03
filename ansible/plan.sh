@@ -16,6 +16,7 @@ pkg_deps=(
 )
 pkg_build_deps=(
   core/gcc
+  core/cacerts
   core/libyaml
   core/make
 )
@@ -26,6 +27,7 @@ do_setup_environment() {
   push_runtime_env PYTHONPATH "${pkg_prefix}/lib/python2.7/site-packages"
   push_runtime_env ANSIBLE_CONFIG "${pkg_prefix}/etc/ansible.cfg"
   push_buildtime_env LD_LIBRARY_PATH "$(pkg_path_for libffi)/lib"
+  push_buildtime_env SSL_CERT_FILE "$(pkg_path_for cacerts)/ssl/cert.pem"
 }
 
 do_prepare() {
