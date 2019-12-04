@@ -44,6 +44,12 @@ echo "--- :key: Generating fake origin key"
 # we won't have access to any valid signing keys. j
 hab origin key generate "$HAB_ORIGIN"
 
+echo "--- Installing the studio" 
+# Work around https://github.com/habitat-sh/habitat/issues/7219
+# This will ensure the correct version of the studio for the `hab` 
+# on our path is installed, and provide some informational output
+# about what version we intend to use. 
+hab studio version
 
 echo "--- :construction: Starting build for $plan"
 # Build with DO_CHECK=true.
