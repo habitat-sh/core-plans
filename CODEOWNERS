@@ -98,6 +98,7 @@ vim @smacfarlane
 libbsd @smacfarlane
 clens @smacfarlane
 mg @smacfarlane
+python-minimal @smacfarlane
 powershell @mwrock
 7zip @mwrock
 docker-credential-helper @mwrock
