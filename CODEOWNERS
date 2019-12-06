@@ -98,6 +98,7 @@ vim @smacfarlane
 libbsd @smacfarlane
 clens @smacfarlane
 mg @smacfarlane
+python-minimal @smacfarlane
 powershell @mwrock
 7zip @mwrock
 docker-credential-helper @mwrock
@@ -113,11 +114,14 @@ wix @mwrock
 # inclusion here is voluntary.
 # This list shall be alphabetical, for sanity purposes.
 
+acbuild @rsertelon
 alex @wduncanfraser
 artifactory-pro @defilan
 asciinema @jasonwbarnett
+atk @rsertelon
 benchmark @bdangit
 cabal-install @wduncanfraser
+cairo @rsertelon
 cerebro @predominant
 clojure @johnjelinek
 concourse @echohack
@@ -140,6 +144,8 @@ dsc-core @mwrock
 elasticsearch @joshbrand @predominant @echohack
 fd @jasonwbarnett
 filebeat @predominant @echohack
+gdk-pixbuf @rsertelon
+glib @rsertelon
 ghc @wduncanfraser
 ghc710 @wduncanfraser
 ghc710-bootstrap @wduncanfraser
@@ -151,7 +157,9 @@ go @afiune @predominant
 gocd-server @predominant
 googletest @bdangit
 grpcurl @afiune
+gtk2 @rsertelon
 happy @wduncanfraser
+harfbuzz @rsertelon
 hugo @tduffield @cnunciato @predominant
 innounp @mwrock
 jenkins @predominant
@@ -163,6 +171,8 @@ libimagequant @predominant
 libtalloc @defilan
 mage @predominant
 metricbeat @echohack
+monit @rsertelon
+mosquitto @rsertelon
 mssql @mwrock
 nano @predominant
 nmap @defilan
@@ -171,6 +181,7 @@ nuget @mwrock
 openjdk11 @irvingpop
 optipng @predominant
 p4broker @dbhagen
+pango @rsertelon
 pngquant @predominant
 postgresql-client @joshbrand @irvingpop
 postgresql11 @irvingpop
@@ -178,6 +189,7 @@ postgresql11-client @irvingpop
 prometheus-cpp @bdangit
 protobuf-cpp @afiune
 redis @irvingpop
+shared-mime-info @rsertelon
 shellcheck @wduncanfraser
 sqitch @irvingpop
 sqitch_pg @irvingpop
