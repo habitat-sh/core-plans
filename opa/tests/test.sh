@@ -23,7 +23,7 @@ hab pkg install core/bats core/curl core/jq-static --binlink
 hab pkg install "${TEST_PKG_IDENT}"
 
 ci_ensure_supervisor_running
-ci_load_service "${TEST_PKG_IDENT}"
+ci_load_service "${TEST_PKG_IDENT}" 15
 
 # Wait for 5 seconds on first check, to ensure service is up.
 echo "Waiting for opa to start (5s)"
