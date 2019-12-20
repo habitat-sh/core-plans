@@ -211,6 +211,8 @@ plan_path = "damageproto"
 plan_path = "db"
 [dbus]
 plan_path = "dbus"
+[dcrpm]
+plan_path = "dcrpm"
 [dd-agent]
 plan_path = "dd-agent"
 [dejagnu]
@@ -413,6 +415,11 @@ plan_path = "ghc86"
 paths = [
   "ghc/*",
 ]
+[ghc88]
+plan_path = "ghc88"
+paths = [
+  "ghc/*",
+]
 [giflib]
 plan_path = "giflib"
 [gifsicle]
@@ -488,6 +495,10 @@ paths = [
 ]
 [grafana]
 plan_path = "grafana"
+[grafana-loki]
+plan_path = "grafana-loki"
+[grafana-promtail]
+plan_path = "grafana-promtail"
 [graphviz]
 plan_path = "graphviz"
 [grep]
@@ -981,6 +992,8 @@ plan_path = "nettle"
 plan_path = "nghttp2"
 [nginx]
 plan_path = "nginx"
+[nginx-prometheus-exporter]
+plan_path = "nginx-prometheus-exporter"
 [ninja]
 plan_path = "ninja"
 [nload]
@@ -1027,6 +1040,12 @@ plan_path = "npth"
 plan_path = "nspr"
 [nss]
 plan_path = "nss"
+[nss-myhostname]
+plan_path = "nss-myhostname"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [numactl]
 plan_path = "numactl"
 [ocaml]

@@ -128,6 +128,7 @@ corretto8 @johnjelinek
 corretto11 @johnjelinek
 cuda @bdangit
 cuda-libs @bdangit
+dcrpm @jasonwbarnett
 dep @afiune @predominant
 dotnet-47-dev-pack @mwrock
 dotnet-asp-core @defilan
@@ -165,6 +166,7 @@ metricbeat @echohack
 mssql @mwrock
 nano @predominant
 nmap @defilan
+nss-myhostname @robbkidd
 nuget @mwrock
 openjdk11 @irvingpop
 optipng @predominant

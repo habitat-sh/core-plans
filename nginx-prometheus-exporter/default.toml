@@ -1,0 +1,12 @@
+[nginx]
+plus = false
+retries = 5
+retry-interval = "5s"
+scrape-uri = "http://127.0.0.1:8080/stub_status"
+ssl-verify = false
+timeout = "5s"
+
+[web]
+address = "0.0.0.0"
+port = 9113
+telemetry-path = "/metrics"

@@ -1,0 +1,24 @@
+server:
+  http_listen_host: {{sys.ip}}
+  http_listen_port: {{cfg.http_listening_port}}
+  grpc_listen_port: 0
+
+client:
+  {{~#with bind.loki.first as |ds| }}
+  url: http://{{ds.sys.ip}}:{{ds.cfg.loki_ds_http}}/loki/api/v1/push
+  {{~/with}}
+
+positions:
+  filename: {{pkg.svc_var_path}}/positions.yaml
+
+scrape_configs:
+  - job_name: hab-sup
+    pipeline_stages:
+      - regex:
+          expression: "./*"
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: hab-sup
+          __path__: /hab/sup/default/sup.log
