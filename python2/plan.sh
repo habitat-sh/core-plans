@@ -14,19 +14,28 @@ pkg_description="Python is a programming language that lets you work quickly \
 pkg_upstream_url="https://www.python.org"
 pkg_dirname="${pkg_distname}-${pkg_version}"
 pkg_source="https://www.python.org/ftp/python/${pkg_version}/${pkg_dirname}.tgz"
-pkg_shasum="18617d1f15a380a919d517630a9cd85ce17ea602f9bbdc58ddc672df4b0239db"
+pkg_shasum=18617d1f15a380a919d517630a9cd85ce17ea602f9bbdc58ddc672df4b0239db
+pkg_interpreters=(
+  bin/python
+  bin/python2
+  bin/python2.7
+)
 
-pkg_interpreters=(bin/python bin/python2 bin/python2.7)
+do_prepare() {
+  sed -i.bak 's/#zlib/zlib/' Modules/Setup.dist
+  sed -i -re "/(SSL=|_ssl|-DUSE_SSL|-lssl).*/ s|^#||" Modules/Setup.dist
+}
 
 do_build() {
     # TODO: We should build with `--enable-optimizations`
-    ./configure --prefix="$pkg_prefix" \
-                --enable-shared \
-                --enable-unicode=ucs4 \
-                --with-threads \
-                --with-system-expat \
-                --with-system-ffi \
-                --with-ensurepip
+    ./configure \
+      --prefix="${pkg_prefix}" \
+      --enable-shared \
+      --enable-unicode=ucs4 \
+      --with-threads \
+      --with-system-expat \
+      --with-system-ffi \
+      --with-ensurepip
 
     make
 }

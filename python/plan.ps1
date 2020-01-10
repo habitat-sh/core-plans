@@ -1,5 +1,5 @@
 $pkg_name="python"
-$pkg_version="3.7.3"
+$pkg_version="3.8.1"
 $pkg_origin="core"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_license=@('Python-2.0')

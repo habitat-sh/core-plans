@@ -1,21 +1,23 @@
 pkg_name=python
 pkg_distname=Python
-pkg_version=3.7.0
+pkg_version=3.8.1
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Python-2.0')
 pkg_description="Python is a programming language that lets you work quickly \
   and integrate systems more effectively."
-pkg_upstream_url="https://www.python.org"
+pkg_upstream_url=https://www.python.org
 pkg_dirname="${pkg_distname}-${pkg_version}"
 pkg_source="https://www.python.org/ftp/python/${pkg_version}/${pkg_dirname}.tgz"
-pkg_shasum="85bb9feb6863e04fb1700b018d9d42d1caac178559ffa453d7e6a436e259fd0d"
-
+pkg_shasum=c7cfa39a43b994621b245e029769e9126caa2a93571cee2e743b213cceac35fb
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
-pkg_interpreters=(bin/python bin/python3 bin/python3.7)
-
+pkg_interpreters=(
+  bin/python
+  bin/python3
+  bin/python3.8
+)
 pkg_deps=(
   core/bzip2
   core/expat
@@ -29,7 +31,6 @@ pkg_deps=(
   core/sqlite
   core/zlib
 )
-
 pkg_build_deps=(
   core/coreutils
   core/diffutils
@@ -40,21 +41,21 @@ pkg_build_deps=(
 )
 
 do_prepare() {
-  sed -i.bak 's/#zlib/zlib/' Modules/Setup.dist
-  sed -i -re "/(SSL=|_ssl|-DUSE_SSL|-lssl).*/ s|^#||" Modules/Setup.dist
+  sed -i.bak 's/#zlib/zlib/' Modules/Setup
+  sed -i -re "/(SSL=|_ssl|-DUSE_SSL|-lssl).*/ s|^#||" Modules/Setup
 }
 
 do_build() {
   export LDFLAGS="$LDFLAGS -lgcc_s"
-
   # TODO: We should build with `--enable-optimizations`
-  ./configure --prefix="$pkg_prefix" \
-              --enable-loadable-sqlite-extensions \
-              --enable-shared \
-              --with-threads \
-              --with-system-expat \
-              --with-system-ffi \
-              --with-ensurepip
+  ./configure \
+    --prefix="$pkg_prefix" \
+    --enable-loadable-sqlite-extensions \
+    --enable-shared \
+    --with-threads \
+    --with-system-expat \
+    --with-system-ffi \
+    --with-ensurepip
 
   make
 }

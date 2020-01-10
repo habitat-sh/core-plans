@@ -1235,15 +1235,23 @@ paths = [
 [python35]
 plan_path = "python35"
 paths = [
-  "python/*"
+  "python/*",
+  "python34/*"
 ]
 [python36]
 plan_path = "python36"
 paths = [
-  "python/*"
+  "python/*",
+  "python34/*"
 ]
 [python37]
 plan_path = "python37"
+paths = [
+  "python/*",
+  "python34/*"
+]
+[python38]
+plan_path = "python38"
 paths = [
   "python/*"
 ]
