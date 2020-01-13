@@ -1,12 +1,12 @@
 pkg_name=nginx
 pkg_origin=core
-pkg_version=1.17.4
+pkg_version=1.17.7
 pkg_description="NGINX web server."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('BSD-2-Clause')
 pkg_source="https://nginx.org/download/nginx-${pkg_version}.tar.gz"
 pkg_upstream_url=https://nginx.org/
-pkg_shasum=62854b365e66670ef4f1f8cc79124f914551444da974207cd5fe22d85710e555
+pkg_shasum=b62756842807e5693b794e5d0ae289bd8ae5b098e66538b2a91eb80f25c591ff
 pkg_deps=(
   core/glibc
   core/libedit

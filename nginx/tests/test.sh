@@ -22,7 +22,7 @@ hab pkg binlink core/busybox-static ps
 hab pkg install "${TEST_PKG_IDENT}"
 
 ci_ensure_supervisor_running
-ci_load_service "${TEST_PKG_IDENT}"
+ci_load_service "${TEST_PKG_IDENT}" 10
 
 # Allow service start
 WAIT_SECONDS=5
