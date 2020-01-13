@@ -339,6 +339,10 @@ plan_path = "findutils"
 plan_path = "fish"
 [fixesproto]
 plan_path = "fixesproto"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [flatbuffers]
 plan_path = "flatbuffers"
 [flex]
@@ -587,6 +591,10 @@ plan_path = "inetutils"
 plan_path = "inotify-tools"
 [inputproto]
 plan_path = "inputproto"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [intltool]
 plan_path = "intltool"
 [iproute2]
@@ -621,6 +629,10 @@ plan_path = "jq-static"
 plan_path = "jre7"
 [jre8]
 plan_path = "jre8"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [jruby]
 plan_path = "jruby"
 [jruby1]
@@ -633,6 +645,10 @@ plan_path = "json-glib"
 plan_path = "kafka"
 [kbproto]
 plan_path = "kbproto"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [kibana]
 plan_path = "kibana"
 [kmod]
@@ -771,6 +787,10 @@ plan_path = "libpng"
 plan_path = "libpq"
 [libpthread-stubs]
 plan_path = "libpthread-stubs"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [libressl]
 plan_path = "libressl"
 [libressl-musl]
@@ -817,8 +837,16 @@ plan_path = "libvterm"
 plan_path = "libwebp"
 [libxau]
 plan_path = "libxau"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [libxcb]
 plan_path = "libxcb"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [libxcomposite]
 plan_path = "libxcomposite"
 [libxcursor]
@@ -827,12 +855,28 @@ plan_path = "libxcursor"
 plan_path = "libxdamage"
 [libxdmcp]
 plan_path = "libxdmcp"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [libxext]
 plan_path = "libxext"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [libxfixes]
 plan_path = "libxfixes"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [libxi]
 plan_path = "libxi"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [libxml2]
 plan_path = "libxml2"
 [libxmu]
@@ -841,6 +885,10 @@ plan_path = "libxmu"
 plan_path = "libxrandr"
 [libxrender]
 plan_path = "libxrender"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [libxscrnsaver]
 plan_path = "libxscrnsaver"
 [libxshmfence]
@@ -1272,6 +1320,10 @@ paths = [
 plan_path = "rebar3"
 [recordproto]
 plan_path = "recordproto"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [redis]
 plan_path = "redis"
 [redis3]
@@ -1288,6 +1340,10 @@ paths = [
 plan_path = "relx"
 [renderproto]
 plan_path = "renderproto"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [repo]
 plan_path = "repo"
 [restic]
@@ -1473,6 +1529,10 @@ plan_path = "userspace-rcu"
 plan_path = "util-linux"
 [util-macros]
 plan_path = "util-macros"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [valgrind]
 plan_path = "valgrind"
 [varnish]
@@ -1510,16 +1570,36 @@ plan_path = "wordpress-proxy"
 plan_path = "wrk"
 [xcb-proto]
 plan_path = "xcb-proto"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [xextproto]
 plan_path = "xextproto"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [xeyes]
 plan_path = "xeyes"
 [xlib]
 plan_path = "xlib"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [xproto]
 plan_path = "xproto"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [xtrans]
 plan_path = "xtrans"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [xz]
 plan_path = "xz"
 [xz-musl]
