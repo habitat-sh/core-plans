@@ -28,7 +28,7 @@ hab pkg binlink core/iproute2 ip
 hab pkg install "${TEST_PKG_IDENT}"
 
 ci_ensure_supervisor_running
-ci_load_service "${TEST_PKG_IDENT}"
+ci_load_service "${TEST_PKG_IDENT}" 10
 
 # wait for the service to start
 DEFAULT_INTERFACE="$(ip route list | grep "default"  | awk '{print $5}')"
