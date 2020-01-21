@@ -1,15 +1,11 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
-
-@test "Command is on path" {
-  [ "$(command -v gifsicle)" ]
-}
+TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Version matches" {
-  result="$(gifsicle --version | head -1 | awk '{print $3}')"
-  [ "$result" = "${pkg_version}" ]
+  result="$(hab pkg exec ${TEST_PKG_IDENT} gifsicle --version | head -1 | awk '{print $3}')"
+  [ "$result" = "${TEST_PKG_VERSION}" ]
 }
 
 @test "Help Command Check" {
-  run gifsicle --help
+  run hab pkg exec ${TEST_PKG_IDENT} gifsicle --help
   [ $status -eq 0 ]
 }
