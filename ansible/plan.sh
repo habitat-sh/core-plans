@@ -1,13 +1,13 @@
 pkg_name=ansible
 pkg_origin=core
-pkg_version=2.9.1
+pkg_version=2.9.2
 pkg_description="Ansible is a radically simple IT automation platform that makes your applications and systems easier to deploy."
 pkg_upstream_url="https://www.ansible.com/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("GPL-3.0-only")
 pkg_source="https://github.com/${pkg_name}/${pkg_name}/archive/v${pkg_version}.tar.gz"
 pkg_filename="${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=087a7644890e27c26171b0d24fc5d64024f12201ffb81d222aaa5704987e4c12
+pkg_shasum=27673726435e8773ef031ef6ffb121b8ec75b85b07b7684454b430c3c9a848a9
 pkg_deps=(
   core/libffi
   core/python2
