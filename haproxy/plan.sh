@@ -1,12 +1,12 @@
 pkg_name=haproxy
 pkg_origin=core
 pkg_description="The Reliable, High Performance TCP/HTTP Load Balancer"
-pkg_version=2.0.9
+pkg_version=2.1.2
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=('GPL-2.0' 'LGPL-2.1')
-pkg_source="https://www.haproxy.org/download/2.0/src/haproxy-${pkg_version}.tar.gz"
+pkg_source="https://www.haproxy.org/download/2.1/src/haproxy-${pkg_version}.tar.gz"
 pkg_upstream_url="https://www.haproxy.org/"
-pkg_shasum=35692801abfd6dde4976cb42fe5cee8aaf61959e743003426073c3141494c589
+pkg_shasum=6079b08a8905ade5a9a2835ead8963ee10a855d8508a85efb7181eea2d310b77
 pkg_svc_run='haproxy -f config/haproxy.conf -db'
 pkg_svc_user=root
 pkg_svc_group=root
