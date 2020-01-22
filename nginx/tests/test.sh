@@ -21,11 +21,11 @@ hab pkg binlink core/busybox-static netstat
 hab pkg binlink core/busybox-static ps
 hab pkg install "${TEST_PKG_IDENT}"
 
-ci_ensure_supervisor_running
-ci_load_service "${TEST_PKG_IDENT}" 10
+WAIT_SECONDS=10
 
-# Allow service start
-WAIT_SECONDS=5
+ci_ensure_supervisor_running
+ci_load_service "${TEST_PKG_IDENT}" "${WAIT_SECONDS}"
+
 echo "Waiting ${WAIT_SECONDS} seconds for service to start..."
 sleep "${WAIT_SECONDS}"
 
