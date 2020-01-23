@@ -1054,6 +1054,8 @@ plan_path = "ocaml"
 plan_path = "ocamlbuild"
 [omniORB]
 plan_path = "omniORB"
+[oniguruma]
+plan_path = "oniguruma"
 [opa]
 plan_path = "opa"
 [opam]
