@@ -1,9 +1,9 @@
 $secondary = @()
 $primary = '{{bind.database.first.sys.hostname}}'
 $instance="{{bind.database.first.cfg.instance}}"
-{{~#eachAlive bind.database.members as |member|}}
-if($primary -ne '{{member.sys.hostname}}') {
-    $secondary += '{{member.sys.hostname}}'
+{{~#eachAlive bind.database.members as |m|}}
+if($primary -ne '{{m.sys.hostname}}') {
+    $secondary += '{{m.sys.hostname}}'
 }
 {{~/eachAlive}}
 

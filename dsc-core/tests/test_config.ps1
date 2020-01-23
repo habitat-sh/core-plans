@@ -13,6 +13,9 @@ Configuration test_with_resource
 
 Configuration test_with_resource_config_data
 {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingConvertToSecureStringWithPlainText", "")]
+    param()
+
     Node 'localhost'
     {
         $password = ConvertTo-SecureString $node.Password -AsPlainText -Force
