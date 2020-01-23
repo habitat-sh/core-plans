@@ -1,4 +1,4 @@
-$pkg_name="libsodium"
+﻿$pkg_name="libsodium"
 $pkg_origin="core"
 $pkg_version="1.0.18"
 $_pkg_version_text=($pkg_version).Replace(".", "_")
@@ -17,7 +17,7 @@ function Invoke-SetupEnvironment {
 }
 
 function Invoke-Build {
-    cd "$pkg_name-$pkg_version"
+    Set-Location "$pkg_name-$pkg_version"
     msbuild.exe /m /p:Configuration=DynRelease /p:Platform=x64 builds/msvc/vs2015/libsodium.sln
     if($LASTEXITCODE -ne 0) { Write-Error "msbuild failed!" }
 }

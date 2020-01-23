@@ -1,4 +1,4 @@
-$pkg_name="sql-dmo"
+﻿$pkg_name="sql-dmo"
 $pkg_origin="core"
 $pkg_version="8.05.2004"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
@@ -20,7 +20,7 @@ function Invoke-Unpack() {
 
 function Invoke-Install() {
     $resolved = (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_dirname/SQLServer2005_BC_x64/SourceDir").Path
-    Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname/SQLServer2005_BC_x64/SourceDir/*" -Recurse -Include @("*dmo*") | % {
+    Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname/SQLServer2005_BC_x64/SourceDir/*" -Recurse -Include @("*dmo*") | ForEach-Object {
         $newDir = $_.Directory.Fullname.Replace($resolved, $pkg_prefix)
         if(!(Test-Path $newDir)) {
             New-Item -ItemType Directory $newDir

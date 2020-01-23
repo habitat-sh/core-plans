@@ -1,4 +1,4 @@
-$pkg_name="reportviewer2010"
+﻿$pkg_name="reportviewer2010"
 $pkg_origin="core"
 $pkg_version="0.1.0"
 $pkg_description="Microsoft Report Viewer 2010 Redistributable Package"
@@ -20,7 +20,7 @@ function Invoke-Unpack {
 }
 
 function Invoke-Install {
-  Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include "Microsoft.ReportViewer.*.dll" -Recurse | % {
+  Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include "Microsoft.ReportViewer.*.dll" -Recurse | ForEach-Object {
     Copy-Item $_ "$pkg_prefix/bin" -Recurse -Force
   }
 }

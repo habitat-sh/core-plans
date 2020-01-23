@@ -1,4 +1,4 @@
-$pkg_name="protobuf"
+﻿$pkg_name="protobuf"
 $pkg_origin="core"
 $pkg_version="3.9.2"
 $pkg_file_name=$pkg_name + ($pkg_version).Replace(".", "")
@@ -23,13 +23,13 @@ function Invoke-SetupEnvironment {
 }
 
 function Invoke-Build {
-    cd "$pkg_name-$pkg_version\cmake"
+    Set-Location "$pkg_name-$pkg_version\cmake"
 
     $zlib_libdir = "$(Get-HabPackagePath zlib)\lib\zlibwapi.lib"
     $zlib_includedir = "$(Get-HabPackagePath zlib)\include"
 
     mkdir build
-    cd build
+    Set-Location build
     cmake -G "Visual Studio 14 2015 Win64" -T "v140" -DCMAKE_SYSTEM_VERSION="8.1" -DCMAKE_INSTALL_PREFIX=../../../../install -DZLIB_LIBRARY_RELEASE="${zlib_libdir}" -DZLIB_INCLUDE_DIR="${zlib_includedir}" ..
     # We'll build the required parts here
     msbuild /p:Configuration=Release /p:Platform=x64 "INSTALL.vcxproj"

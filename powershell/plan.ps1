@@ -1,4 +1,4 @@
-$pkg_name="powershell"
+﻿$pkg_name="powershell"
 $pkg_origin="core"
 $pkg_version="6.2.1"
 $pkg_license=@("MIT")
@@ -22,7 +22,7 @@ function Invoke-Check() {
   $versionTable = ./powershell.exe -command '$PSVersionTable'
   $passed = $false
 
-  $versionTable | % {
+  $versionTable | ForEach-Object {
     if($_.Trim().StartsWith('GitCommitId')) {
         $passed = $_.Trim().EndsWith($pkg_version)
     }

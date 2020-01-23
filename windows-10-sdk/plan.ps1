@@ -1,4 +1,4 @@
-$pkg_name="windows-10-sdk"
+﻿$pkg_name="windows-10-sdk"
 $pkg_origin="core"
 $pkg_version="10.0.17763"
 $pkg_description="The Windows 10 SDK for Windows 10, version 1809 (servicing release 10.0.17763.132) provides the latest headers, libraries, metadata, and tools for building Windows 10 apps"
@@ -28,18 +28,18 @@ function Invoke-Unpack {
   Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList "/features OptionId.DesktopCPPx64 /quiet /layout $HAB_CACHE_SRC_PATH/$pkg_dirname"
   Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
   try {
-    Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname/installers" -Include *.msi -Recurse | % {
+    Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname/installers" -Include *.msi -Recurse | ForEach-Object {
       lessmsi x $_
     }
   }
   finally { Pop-Location }
-  Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include @("x86", "arm", "arm64") -Recurse | % {
+  Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include @("x86", "arm", "arm64") -Recurse | ForEach-Object {
     Remove-Item $_ -Recurse -Force
   }
 }
 
 function Invoke-Install {
-  Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include "Windows Kits" -Recurse | % {
+  Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include "Windows Kits" -Recurse | ForEach-Object {
     Copy-Item $_ "$pkg_prefix" -Exclude "*.duplicate*" -Recurse -Force
   }
 }

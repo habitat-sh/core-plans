@@ -1,4 +1,4 @@
-$pkg_name="dotnet-45-dev-pack"
+﻿$pkg_name="dotnet-45-dev-pack"
 $pkg_origin="core"
 $pkg_version="0.1.0"
 $pkg_description=".net framework 4.5 with dev pack"
@@ -16,7 +16,7 @@ function Invoke-Unpack {
   Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList "/features OptionId.NetFxSoftwareDevelopmentKit /layout $HAB_CACHE_SRC_PATH/$pkg_dirname /quiet"
   Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname/Redistributable/4.5.50710"
   try {
-    Get-ChildItem "*.msi" | % {
+    Get-ChildItem "*.msi" | ForEach-Object {
         lessmsi x $_
     }
   }
@@ -24,7 +24,7 @@ function Invoke-Unpack {
 }
 
 function Invoke-Install {
-  Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include "Program Files" -Recurse | % {
+  Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include "Program Files" -Recurse | ForEach-Object {
     Copy-Item $_ "$pkg_prefix" -Recurse -Force
   }
   Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/Redistributable/4.5.50710/netfx45_dtp/SourceDir/ProgramFilesFolder/*" "$pkg_prefix/Program Files" -Recurse

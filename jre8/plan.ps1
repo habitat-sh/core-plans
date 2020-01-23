@@ -1,4 +1,4 @@
-$pkg_name="jre8"
+﻿$pkg_name="jre8"
 $pkg_origin="core"
 $pkg_version="8.172.0"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
@@ -33,7 +33,7 @@ function Invoke-Unpack() {
         7z x data1.cab
         7z x installerexe -ojava
 
-        Get-ChildItem java\lib -Include *.pack -Recurse | % {
+        Get-ChildItem java\lib -Include *.pack -Recurse | ForEach-Object {
             Write-Host "Unpacking $_"
             ."java\bin\unpack200.exe" $_.FullName $_.FullName.Replace(".pack", ".jar")
             Remove-Item $_

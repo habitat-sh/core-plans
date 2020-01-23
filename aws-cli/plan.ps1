@@ -1,4 +1,4 @@
-$pkg_name="aws-cli"
+﻿$pkg_name="aws-cli"
 $pkg_origin="core"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_license=('Apache-2.0')
@@ -13,7 +13,7 @@ $pkg_deps=@(
 $pkg_bin_dirs=@("Scripts")
 
 function pkg_version {
-  python -m pip search --disable-pip-version-check awscli | %{ if( $_ -match "^awscli \((.+)\)") { $matches[1]; } }
+  python -m pip search --disable-pip-version-check awscli | ForEach-Object{ if( $_ -match "^awscli \((.+)\)") { $matches[1]; } }
 }
 
 function Invoke-Before {

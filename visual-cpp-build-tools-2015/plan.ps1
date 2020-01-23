@@ -1,4 +1,4 @@
-$pkg_name="visual-cpp-build-tools-2015"
+﻿$pkg_name="visual-cpp-build-tools-2015"
 $pkg_origin="core"
 $pkg_version="14.0.25420"
 $pkg_description="Standalone compiler, libraries and scripts"
@@ -35,10 +35,10 @@ function Invoke-Unpack {
   Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList "/passive /layout $HAB_CACHE_SRC_PATH/$pkg_dirname"
   Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
   try {
-    Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname/packages" -Include *.msi -Exclude @('*x86*', '*.arm.*') -Recurse | % {
+    Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname/packages" -Include *.msi -Exclude @('*x86*', '*.arm.*') -Recurse | ForEach-Object {
       lessmsi x $_
     }
-    Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname/packages/*SDK" -Include *.msi -Recurse | % {
+    Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname/packages/*SDK" -Include *.msi -Recurse | ForEach-Object {
       lessmsi x $_
     }
     lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_dirname/OfflineCache/installers/Win10SDK_Hidden_10.0.10240/en/0/Redistributable/4.6.00079/sdk_tools46.msi")
@@ -48,10 +48,10 @@ function Invoke-Unpack {
 }
 
 function Invoke-Install {
-  Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include "Program Files" -Recurse | % {
+  Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include "Program Files" -Recurse | ForEach-Object {
     Copy-Item $_ "$pkg_prefix" -Exclude "*.duplicate*" -Recurse -Force
   }
-  Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include "Windows Kits" -Recurse | % {
+  Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include "Windows Kits" -Recurse | ForEach-Object {
     Copy-Item $_ "$pkg_prefix" -Exclude "*.duplicate*" -Recurse -Force
   }
 

@@ -1,4 +1,4 @@
-$pkg_name="zeromq"
+﻿$pkg_name="zeromq"
 $pkg_origin="core"
 $pkg_version="4.3.1"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
@@ -18,12 +18,12 @@ function Invoke-SetupEnvironment {
 }
 
 function Invoke-Build {
-    cd "libzmq-$pkg_version"
+    Set-Location "libzmq-$pkg_version"
 
     $sodium_includedir = "$(Get-HabPackagePath libsodium)\include"
 
     mkdir cmake-build
-    cd cmake-build
+    Set-Location cmake-build
     cmake -G "Visual Studio 14 2015 Win64" -T "v140" -DCMAKE_SYSTEM_VERSION="8.1" -DCMAKE_INSTALL_PREFIX="${prefix_path}\zeromq" -DWITH_LIBSODIUM="true" -DSODIUM_INCLUDE_DIRS="${sodium_includedir}" -DENABLE_CURVE="false" ..
 
     msbuild /p:Configuration=Release /p:Platform=x64 "ZeroMQ.sln"

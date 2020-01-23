@@ -1,4 +1,4 @@
-$pkg_name="cacerts"
+﻿$pkg_name="cacerts"
 $pkg_origin="core"
 $pkg_version="_set_from_downloaded_cacerts_file_"
 $pkg_license=@('MPL-2.0')
@@ -24,7 +24,7 @@ function Invoke-Install {
 function Set-PackageVersion {
   # Extract the build date of the certificates file
   $datePrefix = "## Certificate data from Mozilla as of: "
-  $dateLine = Get-Content "$HAB_CACHE_SRC_PATH/$pkg_filename" | ? {
+  $dateLine = Get-Content "$HAB_CACHE_SRC_PATH/$pkg_filename" | Where-Object {
     $_.StartsWith($datePrefix)
   }
   $buildDate = $dateLine.Substring($datePrefix.Length)

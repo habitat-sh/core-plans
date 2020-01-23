@@ -1,4 +1,4 @@
-$pkg_name="visual-build-tools-2017"
+﻿$pkg_name="visual-build-tools-2017"
 $pkg_origin="core"
 $pkg_version="15"
 $pkg_description="Standalone compiler, libraries and scripts"
@@ -30,13 +30,13 @@ function Invoke-Unpack {
     "Microsoft.VisualStudio.Component.SQL.SSDTBuildSku",
     "Microsoft.VisualStudio.Component.VC.ATLMFC",
     "Microsoft.VisualStudio.Component.NuGet.BuildTools"
-  ) | % {
+  ) | ForEach-Object {
     $installArgs += " --add $_"
   }
   Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList $installArgs
   Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
   try {
-    Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include *.vsix -Exclude @('*x86*', '*.arm.*') -Recurse | % {
+    Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include *.vsix -Exclude @('*x86*', '*.arm.*') -Recurse | ForEach-Object {
       Rename-Item $_ "$_.zip"
       Expand-Archive "$_.zip" expanded -force
     }
