@@ -1,4 +1,4 @@
-﻿$pkg_name="libarchive"
+$pkg_name="libarchive"
 $pkg_origin="core"
 $pkg_version="3.4.0"
 $pkg_description="Multi-format archive and compression library"

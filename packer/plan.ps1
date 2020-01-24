@@ -8,5 +8,5 @@ $pkg_source="https://releases.hashicorp.com/packer/${pkg_version}/packer_${pkg_v
 $pkg_shasum="5da1b38beaad735a8b7390865d33e5f60d830fa93e5485f593aae2254dcc4ad8"
 
 function Invoke-Install {
-  Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_name-$pkg_version/$pkg_name.exe" $pkg_prefix\bin
+    Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_name-$pkg_version/$pkg_name.exe" $pkg_prefix\bin
 }

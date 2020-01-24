@@ -1,4 +1,4 @@
-﻿$pkg_name="aws-cli"
+$pkg_name="aws-cli"
 $pkg_origin="core"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_license=('Apache-2.0')
@@ -8,26 +8,26 @@ $pkg_description="The AWS Command Line Interface (CLI) is a unified tool to \
   through scripts."
 $pkg_upstream_url="https://aws.amazon.com/cli/"
 $pkg_deps=@(
-  "core/python"
+    "core/python"
 )
 $pkg_bin_dirs=@("Scripts")
 
 function pkg_version {
-  python -m pip search --disable-pip-version-check awscli | ForEach-Object{ if( $_ -match "^awscli \((.+)\)") { $matches[1]; } }
+    python -m pip search --disable-pip-version-check awscli | ForEach-Object{ if( $_ -match "^awscli \((.+)\)") { $matches[1]; } }
 }
 
 function Invoke-Before {
-  Set-PkgVersion
+    Set-PkgVersion
 }
 
 function Invoke-Prepare {
-  python -m pip install virtualenv
-  python -m virtualenv "$pkg_prefix"
-  ."$pkg_prefix/Scripts/activate"
+    python -m pip install virtualenv
+    python -m virtualenv "$pkg_prefix"
+    ."$pkg_prefix/Scripts/activate"
 }
 
 function Invoke-Install {
-  python -m pip install "awscli==$pkg_version"
-  # Write out versions of all pip packages to package
-  python -m pip freeze > "$pkg_prefix/requirements.txt"
+    python -m pip install "awscli==$pkg_version"
+    # Write out versions of all pip packages to package
+    python -m pip freeze > "$pkg_prefix/requirements.txt"
 }

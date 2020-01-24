@@ -1,8 +1,8 @@
-﻿$pkg_name="bzip2"
+$pkg_name="bzip2"
 $pkg_origin="core"
 $pkg_version="1.0.6"
 $pkg_file_name=$pkg_name + ($pkg_version).Replace(".", "")
-$pkg_description="bzip2 is a free and open-source file compression program that uses the Burrows–Wheeler algorithm. It only compresses single files and is not a file archiver."
+$pkg_description="bzip2 is a free and open-source file compression program that uses the Burrows-Wheeler algorithm. It only compresses single files and is not a file archiver."
 $pkg_upstream_url="http://www.bzip.org/"
 $pkg_license=("bzip2")
 $pkg_source="https://github.com/nemequ/$pkg_name/archive/v${pkg_version}.zip"

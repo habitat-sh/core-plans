@@ -13,18 +13,17 @@ $pkg_bin_dirs=@("bin")
 $pkg_lib_dirs=@("lib")
 
 function Invoke-Unpack {
-  mkdir "$HAB_CACHE_SRC_PATH/$pkg_dirname"
-  Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
-  try {
-    lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_filename").Path
-  }
-  finally { Pop-Location }
+    mkdir "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+    Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+    try {
+        lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_filename").Path
+    } finally { Pop-Location }
 }
 
 function Invoke-Install {
-  Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/go$pkg_version.windows-amd64/SourceDir/Go/*" "$pkg_prefix" -Recurse -Force
+    Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/go$pkg_version.windows-amd64/SourceDir/Go/*" "$pkg_prefix" -Recurse -Force
 }
 
 function Invoke-Check() {
-  (& "$HAB_CACHE_SRC_PATH/$pkg_dirname/Go/bin/go.exe" version).StartsWith("go version go$pkg_version")
+    (& "$HAB_CACHE_SRC_PATH/$pkg_dirname/Go/bin/go.exe" version).StartsWith("go version go$pkg_version")
 }

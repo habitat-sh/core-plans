@@ -12,14 +12,13 @@ $pkg_build_deps=@("core/lessmsi")
 $pkg_bin_dirs=@("bin")
 
 function Invoke-Unpack {
-  mkdir "$HAB_CACHE_SRC_PATH/$pkg_dirname"
-  Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
-  try {
-    lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_filename").Path
-  }
-  finally { Pop-Location }
+    mkdir "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+    Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+    try {
+        lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_filename").Path
+    } finally { Pop-Location }
 }
 
 function Invoke-Install {
-  Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/cmake-$pkg_version-win64-x64/SourceDir/cmake/*" "$pkg_prefix" -Recurse -Force
+    Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/cmake-$pkg_version-win64-x64/SourceDir/cmake/*" "$pkg_prefix" -Recurse -Force
 }

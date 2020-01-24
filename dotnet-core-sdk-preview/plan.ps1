@@ -12,5 +12,5 @@ $pkg_shasum="9c9066e27d24fdc04c0845fbec57d7239d52b84732a090e6b69acacbf95878f3"
 $pkg_bin_dirs=@("bin")
 
 function Invoke-Install {
-  Copy-Item * "$pkg_prefix/bin" -Recurse -Force
+    Copy-Item * "$pkg_prefix/bin" -Recurse -Force
 }

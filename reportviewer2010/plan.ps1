@@ -1,4 +1,4 @@
-﻿$pkg_name="reportviewer2010"
+$pkg_name="reportviewer2010"
 $pkg_origin="core"
 $pkg_version="0.1.0"
 $pkg_description="Microsoft Report Viewer 2010 Redistributable Package"
@@ -11,16 +11,15 @@ $pkg_build_deps=@("core/lessmsi")
 $pkg_bin_dirs=@("bin")
 
 function Invoke-Unpack {
-  Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList "/createlayout $HAB_CACHE_SRC_PATH/$pkg_dirname /q"
-  Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
-  try {
-      lessmsi x reportviewer_redist2010core.msi
-  }
-  finally { Pop-Location }
+    Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList "/createlayout $HAB_CACHE_SRC_PATH/$pkg_dirname /q"
+    Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+    try {
+        lessmsi x reportviewer_redist2010core.msi
+    } finally { Pop-Location }
 }
 
 function Invoke-Install {
-  Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include "Microsoft.ReportViewer.*.dll" -Recurse | ForEach-Object {
-    Copy-Item $_ "$pkg_prefix/bin" -Recurse -Force
-  }
+    Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include "Microsoft.ReportViewer.*.dll" -Recurse | ForEach-Object {
+        Copy-Item $_ "$pkg_prefix/bin" -Recurse -Force
+    }
 }

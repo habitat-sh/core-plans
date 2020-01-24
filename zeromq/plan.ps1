@@ -1,4 +1,4 @@
-﻿$pkg_name="zeromq"
+$pkg_name="zeromq"
 $pkg_origin="core"
 $pkg_version="4.3.1"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"

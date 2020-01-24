@@ -13,16 +13,15 @@ $pkg_bin_dirs = @("bin")
 $pkg_build_deps = @("core/7zip")
 
 function Invoke-Unpack {
-  Push-Location (Resolve-Path $HAB_CACHE_SRC_PATH).Path
-  Try {
-    $tar = $pkg_filename.Substring(0, $pkg_filename.LastIndexOf('.'))
-    7z x -y (Resolve-Path $HAB_CACHE_SRC_PATH/$pkg_filename).Path
-    7z x -y -o"$pkg_dirname" (Resolve-Path $HAB_CACHE_SRC_PATH/$tar).Path
-  }
-  Finally { Pop-Location }
+    Push-Location (Resolve-Path $HAB_CACHE_SRC_PATH).Path
+    Try {
+        $tar = $pkg_filename.Substring(0, $pkg_filename.LastIndexOf('.'))
+        7z x -y (Resolve-Path $HAB_CACHE_SRC_PATH/$pkg_filename).Path
+        7z x -y -o"$pkg_dirname" (Resolve-Path $HAB_CACHE_SRC_PATH/$tar).Path
+    } finally { Pop-Location }
 }
 
 function Invoke-Install {
-  Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/bin/*" "$pkg_prefix/bin"
-  Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/mingw64" "$pkg_prefix/" -Recurse
+    Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/bin/*" "$pkg_prefix/bin"
+    Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/mingw64" "$pkg_prefix/" -Recurse
 }

@@ -1,4 +1,4 @@
-﻿$pkg_name="sql-dmo"
+$pkg_name="sql-dmo"
 $pkg_origin="core"
 $pkg_version="8.05.2004"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
@@ -14,8 +14,7 @@ function Invoke-Unpack() {
     Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
     try {
         lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/SQLServer2005_BC_x64.msi").Path
-    }
-    finally { Pop-Location }
+    } finally { Pop-Location }
 }
 
 function Invoke-Install() {

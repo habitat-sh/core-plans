@@ -1,7 +1,7 @@
 $pkg_name="yarn"
 $pkg_origin="core"
 $pkg_version="1.19.1"
-$pkg_description="Yarn is a package manager for your code. It allows you to use and share code with other developers from around the world. Yarn does this quickly, securely, and reliably so you don’t ever have to worry."
+$pkg_description="Yarn is a package manager for your code. It allows you to use and share code with other developers from around the world. Yarn does this quickly, securely, and reliably so you don't ever have to worry."
 $pkg_maintainer="The Habitat Maintainers humans@habitat.sh"
 $pkg_upstream_url="https://yarnpkg.com/"
 $pkg_license=@("BSD-2-Clause")
@@ -16,8 +16,7 @@ function Invoke-Unpack {
     Push-Location "$HAB_CACHE_SRC_PATH"
     try {
         lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_filename").Path
-    }
-    finally {
+    } finally {
         Pop-Location
     }
 }

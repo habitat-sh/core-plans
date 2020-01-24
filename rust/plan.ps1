@@ -1,4 +1,4 @@
-﻿$pkg_name="rust"
+$pkg_name="rust"
 $pkg_origin="core"
 $pkg_version="1.40.0"
 $pkg_description="Safe, concurrent, practical language"
@@ -13,18 +13,17 @@ $pkg_bin_dirs=@("bin")
 $pkg_lib_dirs=@("lib")
 
 function Invoke-Unpack {
-  mkdir "$HAB_CACHE_SRC_PATH/$pkg_dirname"
-  Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
-  try {
-    lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_filename").Path
-  }
-  finally { Pop-Location }
+    mkdir "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+    Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+    try {
+        lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_filename").Path
+    } finally { Pop-Location }
 }
 
 function Invoke-Install {
-  Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/rust-$pkg_version-x86_64-pc-windows-msvc/SourceDir/Rust/*" "$pkg_prefix" -Recurse -Force
+    Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/rust-$pkg_version-x86_64-pc-windows-msvc/SourceDir/Rust/*" "$pkg_prefix" -Recurse -Force
 }
 
 function Invoke-Check() {
-  (& "$HAB_CACHE_SRC_PATH/$pkg_dirname/Rust/bin/rustc.exe" --version).StartsWith("rustc $pkg_version")
+    (& "$HAB_CACHE_SRC_PATH/$pkg_dirname/Rust/bin/rustc.exe" --version).StartsWith("rustc $pkg_version")
 }

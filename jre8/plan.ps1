@@ -1,4 +1,4 @@
-﻿$pkg_name="jre8"
+$pkg_name="jre8"
 $pkg_origin="core"
 $pkg_version="8.172.0"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
@@ -11,18 +11,18 @@ $pkg_build_deps=@("core/7zip")
 $pkg_bin_dirs=@("java/bin")
 
 function Invoke-Download() {
-     $Cookie  = New-Object -TypeName System.Net.Cookie
-     $Cookie.Domain = 'oracle.com'
-     $Cookie.Name   = 'oraclelicense'
-     $Cookie.Value  = 'accept-securebackup-cookie'
-     $Session = New-Object -TypeName Microsoft.PowerShell.Commands.WebRequestSession
-     $Session.Cookies.Add($Cookie)
-     try {
+    $Cookie  = New-Object -TypeName System.Net.Cookie
+    $Cookie.Domain = 'oracle.com'
+    $Cookie.Name   = 'oraclelicense'
+    $Cookie.Value  = 'accept-securebackup-cookie'
+    $Session = New-Object -TypeName Microsoft.PowerShell.Commands.WebRequestSession
+    $Session.Cookies.Add($Cookie)
+    try {
         Invoke-WebRequest -Uri $pkg_source -WebSession $Session -OutFile $HAB_CACHE_SRC_PATH/$pkg_filename
-     } catch {
+    } catch {
         $pkg_source = $_.Exception.Response.Headers.Location
         Invoke-WebRequest -Uri $pkg_source -WebSession $Session -OutFile $HAB_CACHE_SRC_PATH/$pkg_filename
-     }
+    }
 }
 
 function Invoke-Unpack() {
@@ -38,8 +38,7 @@ function Invoke-Unpack() {
             ."java\bin\unpack200.exe" $_.FullName $_.FullName.Replace(".pack", ".jar")
             Remove-Item $_
         }
-    }
-    finally { Pop-Location }
+    } finally { Pop-Location }
 }
 
 function Invoke-Install() {

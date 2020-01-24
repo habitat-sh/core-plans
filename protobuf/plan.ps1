@@ -1,4 +1,4 @@
-﻿$pkg_name="protobuf"
+$pkg_name="protobuf"
 $pkg_origin="core"
 $pkg_version="3.9.2"
 $pkg_file_name=$pkg_name + ($pkg_version).Replace(".", "")

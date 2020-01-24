@@ -10,5 +10,5 @@ $pkg_shasum="94304685630dc21d4077508c8d3c10aed17976ed2c5e41426793dc33c4e289c8"
 $pkg_bin_dirs=@("module/bin")
 
 function Invoke-Install {
-  Copy-Item "pester-$pkg_version\*" "$pkg_prefix/module" -Recurse -Force
+    Copy-Item "pester-$pkg_version\*" "$pkg_prefix/module" -Recurse -Force
 }

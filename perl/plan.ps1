@@ -1,4 +1,4 @@
-﻿$pkg_name="perl"
+$pkg_name="perl"
 $pkg_origin="core"
 $pkg_version="5.26.1"
 $pkg_description="Perl 5 is a highly capable, feature-rich programming language with over 29 years of development."

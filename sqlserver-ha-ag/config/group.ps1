@@ -13,30 +13,30 @@ Configuration NewAvailabilityGroup
     Node 'localhost' {
         SqlServerEndpoint 'AddEndpoint'
         {
-            EndpointName         = "HADR-${env:computername}"
-            InstanceName         = $instance
-            ServerName           = $env:computername
-            Port                 = '{{cfg.endpoint_port}}'
+            EndpointName = "HADR-${env:computername}"
+            InstanceName = $instance
+            ServerName   = $env:computername
+            Port         = '{{cfg.endpoint_port}}'
         }
 
         SqlAG 'AddAG'
         {
-            Ensure               = 'Present'
-            Name                 = '{{cfg.availability_group_name}}'
-            InstanceName         = $instance
-            ServerName           = $env:computername
-            FailoverMode         = "{{cfg.failover_mode}}"
-            AvailabilityMode     = "{{cfg.availability_mode}}"
+            Ensure           = 'Present'
+            Name             = '{{cfg.availability_group_name}}'
+            InstanceName     = $instance
+            ServerName       = $env:computername
+            FailoverMode     = "{{cfg.failover_mode}}"
+            AvailabilityMode = "{{cfg.availability_mode}}"
         }
 
         foreach($s in $secondary) {
 
             SqlServerEndpoint "AddEndpoint-$s"
             {
-                EndpointName         = "HADR-$s"
-                InstanceName         = $instance
-                ServerName           = $s
-                Port                 = '{{cfg.endpoint_port}}'
+                EndpointName = "HADR-$s"
+                InstanceName = $instance
+                ServerName   = $s
+                Port         = '{{cfg.endpoint_port}}'
             }
 
             SqlAGReplica "AddReplica-$s"
@@ -69,13 +69,13 @@ Configuration NewAvailabilityGroup
         if('{{cfg.availability_group_ip}}' -ne '') {
             SqlAGListener 'AddListener'
             {
-                Ensure               = 'Present'
-                ServerName           = $env:computername
-                InstanceName         = $instance
-                AvailabilityGroup    = '{{cfg.availability_group_name}}'
-                Name                 = '{{cfg.availability_group_name}}'
-                IpAddress            = '{{cfg.availability_group_ip}}/255.255.255.0'
-                Port                 = {{bind.database.first.cfg.port}}
+                Ensure            = 'Present'
+                ServerName        = $env:computername
+                InstanceName      = $instance
+                AvailabilityGroup = '{{cfg.availability_group_name}}'
+                Name              = '{{cfg.availability_group_name}}'
+                IpAddress         = '{{cfg.availability_group_ip}}/255.255.255.0'
+                Port              = {{bind.database.first.cfg.port}}
             }
         }
     }

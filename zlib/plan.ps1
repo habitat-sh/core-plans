@@ -1,4 +1,4 @@
-﻿$pkg_name="zlib"
+$pkg_name="zlib"
 $pkg_origin="core"
 $pkg_version="1.2.11"
 $pkg_file_name=$pkg_name + ($pkg_version).Replace(".", "")

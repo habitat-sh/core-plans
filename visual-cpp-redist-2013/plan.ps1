@@ -11,12 +11,12 @@ $pkg_build_deps=@("core/lessmsi", "core/wix")
 $pkg_bin_dirs=@("bin")
 
 function Invoke-Unpack {
-  dark -x "$HAB_CACHE_SRC_PATH/$pkg_dirname" "$HAB_CACHE_SRC_PATH/$pkg_filename"
-  lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_dirname/AttachedContainer\packages\vcRuntimeMinimum_amd64\vc_runtimeMinimum_x64.msi").Path
-  Move-Item "vc_runtimeMinimum_x64/SourceDir/system64" "$HAB_CACHE_SRC_PATH/$pkg_dirname/bin"
-  Remove-Item vc_runtimeMinimum_x64 -Recurse -Force
+    dark -x "$HAB_CACHE_SRC_PATH/$pkg_dirname" "$HAB_CACHE_SRC_PATH/$pkg_filename"
+    lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_dirname/AttachedContainer\packages\vcRuntimeMinimum_amd64\vc_runtimeMinimum_x64.msi").Path
+    Move-Item "vc_runtimeMinimum_x64/SourceDir/system64" "$HAB_CACHE_SRC_PATH/$pkg_dirname/bin"
+    Remove-Item vc_runtimeMinimum_x64 -Recurse -Force
 }
 
 function Invoke-Install {
-  Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/bin/*.dll" "$pkg_prefix/bin" -Recurse
+    Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/bin/*.dll" "$pkg_prefix/bin" -Recurse
 }

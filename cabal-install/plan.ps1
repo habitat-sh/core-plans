@@ -11,14 +11,14 @@ $pkg_shasum="8889963ebef5e829d86329fdb59832c107efd117cf7862a605f2fe2d2360de1f"
 $pkg_bin_dirs=@("bin")
 
 $pkg_build_deps=@(
-  "core/ghc86"
+    "core/ghc86"
 )
 
 function Invoke-Check {
-  ./cabal.exe v1-update
-  ./cabal.exe info cabal
+    ./cabal.exe v1-update
+    ./cabal.exe info cabal
 }
 
 function Invoke-Install {
-  Copy-Item "cabal.exe" "$pkg_prefix/bin/" -Force
+    Copy-Item "cabal.exe" "$pkg_prefix/bin/" -Force
 }

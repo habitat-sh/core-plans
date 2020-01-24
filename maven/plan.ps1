@@ -13,12 +13,12 @@ $pkg_bin_dirs=@("bin")
 $pkg_lib_dirs=@("lib")
 
 function Invoke-Prepare {
-  $env:JAVA_HOME = "$(Get-HabPackagePath corretto8)"
-  Write-BuildLine "Setting JAVA_HOME=$env:JAVA_HOME"
+    $env:JAVA_HOME = "$(Get-HabPackagePath corretto8)"
+    Write-BuildLine "Setting JAVA_HOME=$env:JAVA_HOME"
 }
 function Invoke-Build {
     Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/*" "$pkg_prefix" -Recurse -Force
 }
 function Invoke-Check{
-  (& "$HAB_CACHE_SRC_PATH/$pkg_dirname/bin/mvn.cmd" -v).StartsWith("Apache Maven $pkg_version")
+    (& "$HAB_CACHE_SRC_PATH/$pkg_dirname/bin/mvn.cmd" -v).StartsWith("Apache Maven $pkg_version")
 }

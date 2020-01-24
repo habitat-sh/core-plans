@@ -11,13 +11,13 @@ $pkg_shasum="bbf8970a08a0bc825cf8521ce617dd6ad5eec04b5c9bf7d5e0fd1c06acf90a57"
 $pkg_build_deps=@("core/lessmsi")
 
 function Invoke-Unpack {
-  lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_filename").Path
-  mkdir "$HAB_CACHE_SRC_PATH/$pkg_dirname"
-  Move-Item "AspNetMVC1/SourceDir/PFiles/Microsoft ASP.NET/ASP.NET MVC 1.0" "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+    lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_filename").Path
+    mkdir "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+    Move-Item "AspNetMVC1/SourceDir/PFiles/Microsoft ASP.NET/ASP.NET MVC 1.0" "$HAB_CACHE_SRC_PATH/$pkg_dirname"
 
-  Remove-Item -Recurse -Force .\AspNetMVC1
+    Remove-Item -Recurse -Force .\AspNetMVC1
 }
 
 function Invoke-Install {
-  Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/ASP.NET MVC 1.0/*" "$pkg_prefix" -Recurse -Force
+    Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/ASP.NET MVC 1.0/*" "$pkg_prefix" -Recurse -Force
 }

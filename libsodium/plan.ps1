@@ -1,4 +1,4 @@
-﻿$pkg_name="libsodium"
+$pkg_name="libsodium"
 $pkg_origin="core"
 $pkg_version="1.0.18"
 $_pkg_version_text=($pkg_version).Replace(".", "_")

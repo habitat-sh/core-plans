@@ -11,5 +11,5 @@ $pkg_upstream_url="https://buildkite.com"
 $pkg_bin_dirs=@("bin")
 
 function Invoke-Install {
-  Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/buildkite-agent.exe" "$pkg_prefix/bin"
+    Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/buildkite-agent.exe" "$pkg_prefix/bin"
 }
