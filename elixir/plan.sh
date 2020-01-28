@@ -1,12 +1,12 @@
 pkg_origin=core
 pkg_name=elixir
-pkg_version=1.9.1
+pkg_version=1.10.0
 pkg_description="A dynamic, functional language designed for building scalable and maintainable applications. Elixir leverages the Erlang VM, known for running low-latency, distributed and fault-tolerant systems, while also being successfully used in web development and the embedded software domain."
 pkg_upstream_url=http://elixir-lang.org
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://github.com/elixir-lang/elixir/archive/v${pkg_version}.tar.gz"
-pkg_shasum=94daa716abbd4493405fb2032514195077ac7bc73dc2999922f13c7d8ea58777
+pkg_shasum=6f0d35acfcbede5ef7dced3e37f016fd122c2779000ca9dcaf92975b220737b7
 pkg_deps=(
   core/busybox
   core/cacerts
