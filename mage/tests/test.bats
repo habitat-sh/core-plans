@@ -1,30 +1,18 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
-
-@test "Binlink dependencies" {
-  run hab pkg binlink core/go
-  [ $status -eq 0 ]
-
-  run hab pkg binlink core/git
-  [ $status -eq 0 ]
-}
-
-@test "Command is on path" {
-  [ "$(command -v mage)" ]
-}
+TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Version matches" {
-  result="$(mage --version 2>&1 | head -1)"
-  [ "${result}" = "Mage Build Tool v${pkg_version}" ]
+  result="$(hab pkg exec ${TEST_PKG_IDENT} mage --version 2>&1 | head -1)"
+  [ "${result}" = "Mage Build Tool v${TEST_PKG_VERSION}" ]
 }
 
 @test "Help command" {
-  run mage --help
+  run hab pkg exec ${TEST_PKG_IDENT} mage --help
   [ $status -eq 0 ]
 }
 
 @test "Mage init works" {
   [ ! -f magefile.go ]
-  mage -init
+  hab pkg exec ${TEST_PKG_IDENT} mage -init
   [ -f magefile.go ]
   rm -f magefile.go
 }
