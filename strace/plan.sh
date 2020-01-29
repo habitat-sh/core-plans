@@ -1,12 +1,12 @@
 pkg_name=strace
 pkg_origin=core
-pkg_version=5.3
+pkg_version=5.4
 pkg_license=("LGPL-2.1-or-later")
 pkg_description="strace is a system call tracer for Linux"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url="https://strace.io/"
 pkg_source="https://github.com/strace/strace/releases/download/v${pkg_version}/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum=6c131198749656401fe3efd6b4b16a07ea867e8f530867ceae8930bbc937a047
+pkg_shasum=f7d00514d51290b6db78ad7a9de709baf93caa5981498924cbc9a744cfd2a741
 pkg_deps=(
   core/glibc
   core/libunwind
