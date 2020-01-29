@@ -1,12 +1,12 @@
 pkg_origin=core
 pkg_name=libev
-pkg_version=4.23
+pkg_version=4.31
 pkg_description="A full-featured and high-performance (see benchmark) event loop that is loosely modelled after libevent."
 pkg_upstream_url=http://software.schmorp.de/pkg/libev.html
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh"
 pkg_license=('BSD-2-Clause')
-pkg_source=http://dist.schmorp.de/libev/Attic/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=c7fe743e0c3b50dd34bf222ebdba4e8acac031d41ce174f17890f8f84eeddd7a
+pkg_source="http://dist.schmorp.de/libev/Attic/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum=ed855d2b52118e32c0c1a6a32bd18c97f9e6711ca511f5ee12de3b9eccc66e5a
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/cacerts core/gcc core/make)
 pkg_bin_dirs=(bin)
