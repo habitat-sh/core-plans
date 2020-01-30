@@ -9,7 +9,7 @@ employing LALR(1) parser tables.\
 "
 pkg_upstream_url="https://www.gnu.org/software/bison/"
 pkg_license=('GPL-3.0')
-pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
+pkg_source="https://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="075cef2e814642e30e10e8155e93022e4a91ca38a65aa1d5467d4e969f97f338"
 pkg_deps=(
   core/glibc

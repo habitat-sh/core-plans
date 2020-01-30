@@ -9,7 +9,7 @@ code.\
 "
 pkg_upstream_url="http://www.gnu.org/software/gawk/"
 pkg_license=('gplv3+')
-pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
+pkg_source="https://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="2b23d51503b2df9a41aa6fddc6002ad7ebf2a386ac19dc1b6be0dd48b0acf6db"
 pkg_deps=(
   core/glibc

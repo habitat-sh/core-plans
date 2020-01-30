@@ -18,7 +18,7 @@ pkg_name=hello-go
 pkg_origin=afiune
 pkg_version="0.1.0"
 pkg_scaffolding=core/scaffolding-go
-pkg_source="http://github.com/afiune/hello-go"
+pkg_source="https://github.com/afiune/hello-go"
 ```
 
 ### From local source

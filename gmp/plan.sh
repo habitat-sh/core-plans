@@ -8,7 +8,7 @@ integers, rational numbers, and floating-point numbers.\
 "
 pkg_upstream_url="https://gmplib.org"
 pkg_license=('gplv3')
-pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
+pkg_source="https://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="87b565e89a9a684fe4ebeeddb8399dce2599f9c9049854ca8c0dfbdea0e21912"
 pkg_deps=(
   core/glibc

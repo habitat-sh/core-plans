@@ -10,7 +10,7 @@ that allow users to edit command lines as they are typed in.\
 "
 pkg_upstream_url="http://tiswww.case.edu/php/chet/readline/rltop.html"
 pkg_license=('GPL-3.0')
-_url_base="http://ftp.gnu.org/gnu/${_distname}"
+_url_base="https://ftp.gnu.org/gnu/${_distname}"
 pkg_source="${_url_base}/${_distname}-${_base_version}.tar.gz"
 pkg_shasum="750d437185286f40a369e1e4f4764eda932b9459b5ec9a731628393dd3d32334"
 pkg_dirname="${_distname}-${_base_version}"

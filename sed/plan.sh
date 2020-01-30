@@ -11,7 +11,7 @@ substituting multiple occurrences of a string within a file.\
 "
 pkg_upstream_url="https://www.gnu.org/software/sed/"
 pkg_license=('gplv3')
-pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
+pkg_source="https://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="7aad73c8839c2bdadca9476f884d2953cdace9567ecd0d90f9959f229d146b40"
 pkg_deps=(
   core/glibc

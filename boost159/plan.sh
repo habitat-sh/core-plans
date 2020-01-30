@@ -6,7 +6,7 @@ pkg_version=1.59.0
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=('Boost Software License')
 pkg_dirname="boost_${pkg_version//./_}"
-pkg_source="http://downloads.sourceforge.net/project/boost/boost/${pkg_version}/${pkg_dirname}.tar.gz"
+pkg_source="https://downloads.sourceforge.net/project/boost/boost/${pkg_version}/${pkg_dirname}.tar.gz"
 pkg_shasum="47f11c8844e579d02691a607fbd32540104a9ac7a2534a8ddaef50daf502baac"
 pkg_deps=(
   core/glibc

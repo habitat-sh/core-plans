@@ -1,7 +1,7 @@
 pkg_name=galera
 pkg_origin=core
 pkg_version=25.3.19
-pkg_source=http://github.com/codership/galera/archive/release_${pkg_version}.tar.gz
+pkg_source=https://github.com/codership/galera/archive/release_${pkg_version}.tar.gz
 pkg_upstream_url=https://github.com/codership/galera
 pkg_shasum=068b074ca5a5c2a5a3f799422650e7c5e5c9012ddfa1c18c30feab7f9aa9611d
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"

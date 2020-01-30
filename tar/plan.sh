@@ -8,7 +8,7 @@ kinds of manipulation.\
 "
 pkg_upstream_url="https://www.gnu.org/software/tar/"
 pkg_license=('GPL-3.0')
-pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
+pkg_source="https://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="4725cc2c2f5a274b12b39d1f78b3545ec9ebb06a6e48e8845e1995ac8513b088"
 pkg_deps=(
   core/glibc

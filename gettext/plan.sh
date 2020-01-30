@@ -5,7 +5,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="GNU internationalization library."
 pkg_upstream_url="http://www.gnu.org/software/gettext/"
 pkg_license=('gplv2+' 'lgpl2+')
-pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
+pkg_source="https://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="3da4f6bd79685648ecf46dab51d66fcdddc156f41ed07e580a696a38ac61d48f"
 pkg_deps=(
   core/glibc

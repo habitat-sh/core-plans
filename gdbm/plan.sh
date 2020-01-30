@@ -8,7 +8,7 @@ similar to the standard UNIX dbm routines.\
 "
 pkg_upstream_url="http://www.gnu.org/software/gdbm/gdbm.html"
 pkg_license=('gplv3+')
-pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
+pkg_source="https://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="7cd8cc2e35b1aaede6084ea57cc9447752f498daaea854100a4bad567614977d"
 pkg_deps=(
   core/glibc

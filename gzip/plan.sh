@@ -8,7 +8,7 @@ Gailly for the GNU project.\
 "
 pkg_upstream_url="https://www.gnu.org/software/gzip/"
 pkg_license=('gplv3+')
-pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
+pkg_source="https://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="ae506144fc198bd8f81f1f4ad19ce63d5a2d65e42333255977cf1dcf1479089a"
 pkg_deps=(
   core/glibc

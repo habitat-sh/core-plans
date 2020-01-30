@@ -3,7 +3,7 @@ pkg_version=1.14
 pkg_origin=core
 pkg_license=('GPL-3.0-or-later')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source=http://ftp.gnu.org/pub/gnu/"${pkg_name}"/"${pkg_name}"-"${pkg_version}".tar.gz
+pkg_source=https://ftp.gnu.org/pub/gnu/"${pkg_name}"/"${pkg_name}"-"${pkg_version}".tar.gz
 pkg_upstream_url="https://www.gnu.org/software/libiconv/"
 pkg_description="Some programs, like mailers and web browsers, must be able to convert \
 between a given text encoding and the user's encoding.  Other programs \

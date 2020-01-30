@@ -9,7 +9,7 @@ pkg_upstream_url="https://www.gnu.org/software/ncurses/"
 pkg_license=('ncurses')
 pkg_dirname="ncurses-${pkg_version}"
 pkg_filename="${pkg_dirname}.tar.gz"
-pkg_source="http://ftp.gnu.org/gnu/ncurses/${pkg_filename}"
+pkg_source="https://ftp.gnu.org/gnu/ncurses/${pkg_filename}"
 pkg_shasum="aa057eeeb4a14d470101eff4597d5833dcef5965331be3528c08d99cebaa0d17"
 
 do_build() {

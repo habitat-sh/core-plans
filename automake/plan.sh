@@ -8,7 +8,7 @@ with the GNU Coding Standards.\
 "
 pkg_upstream_url="https://www.gnu.org/software/automake/"
 pkg_license=("GPL-2.0")
-pkg_source="http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz"
+pkg_source="https://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="f98f2d97b11851cbe7c2d4b4eaef498ae9d17a3c2ef1401609b7b4ca66655b8a"
 pkg_deps=(
   core/perl

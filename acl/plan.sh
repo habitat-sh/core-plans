@@ -5,7 +5,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Commands for Manipulating POSIX Access Control Lists."
 pkg_upstream_url="https://savannah.nongnu.org/projects/acl"
 pkg_license=('lgpl')
-pkg_source="http://download.savannah.gnu.org/releases/$pkg_name/$pkg_name-${pkg_version}.tar.gz"
+pkg_source="https://download.savannah.gnu.org/releases/$pkg_name/$pkg_name-${pkg_version}.tar.gz"
 pkg_shasum="06be9865c6f418d851ff4494e12406568353b891ffe1f596b34693c387af26c7"
 pkg_deps=(
   core/glibc

@@ -9,7 +9,7 @@ patched versions.\
 "
 pkg_upstream_url="https://www.gnu.org/software/patch/"
 pkg_license=('gplv3+')
-pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
+pkg_source="https://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="ac610bda97abe0d9f6b7c963255a11dcb196c25e337c61f94e4778d632f1d8fd"
 pkg_deps=(
   core/glibc

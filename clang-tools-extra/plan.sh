@@ -6,7 +6,7 @@ pkg_description="Clang Tools are standalone command line (and potentially GUI) t
 pkg_upstream_url="https://clang.llvm.org/docs/ClangTools.html#extra-clang-tools"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_filename="${pkg_name}-${pkg_version}.src.tar.xz"
-pkg_source="http://llvm.org/releases/${pkg_version}/${pkg_name}-${pkg_version}.src.tar.xz"
+pkg_source="https://releases.llvm.org/${pkg_version}/${pkg_name}-${pkg_version}.src.tar.xz"
 pkg_shasum="937c5a8c8c43bc185e4805144744799e524059cac877a44d9063926cd7a19dbe"
 pkg_deps=(
   core/gcc-libs
@@ -35,7 +35,7 @@ do_unpack() {
 
   # Download Clang frontend and place it in the correct place
   build_line "Unpacking Clang FrontEnd Source to custom cache dir"
-  download_file http://llvm.org/releases/${pkg_version}/cfe-${pkg_version}.src.tar.xz \
+  download_file https://releases.llvm.org/${pkg_version}/cfe-${pkg_version}.src.tar.xz \
     cfe-${pkg_version}.src.tar.xz \
     135f6c9b0cd2da1aff2250e065946258eb699777888df39ca5a5b4fe5e23d0ff
 

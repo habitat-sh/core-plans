@@ -6,7 +6,7 @@ pkg_description="A new implementation of the C++ standard library, targeting C++
 pkg_upstream_url=http://libcxxabi.llvm.org/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_filename=${pkg_name}-${pkg_version}.src.tar.xz
-pkg_source=http://llvm.org/releases/${pkg_version}/${pkg_name}-${pkg_version}.src.tar.xz
+pkg_source=https://releases.llvm.org/${pkg_version}/${pkg_name}-${pkg_version}.src.tar.xz
 pkg_shasum=5a25152cb7f21e3c223ad36a1022faeb8a5ac27c9e75936a5ae2d3ac48f6e854
 pkg_build_deps=(
   core/clang
@@ -32,7 +32,7 @@ do_download() {
   do_default_download
 
   build_line "Downloading libcxx source"
-  download_file http://llvm.org/releases/${pkg_version}/libcxx-${pkg_version}.src.tar.xz \
+  download_file https://releases.llvm.org/${pkg_version}/libcxx-${pkg_version}.src.tar.xz \
     libcxx-${pkg_version}.src.tar.xz \
     5a25152cb7f21e3c223ad36a1022faeb8a5ac27c9e75936a5ae2d3ac48f6e854
 }

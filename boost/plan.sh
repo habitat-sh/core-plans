@@ -5,7 +5,7 @@ pkg_upstream_url='http://www.boost.org/'
 pkg_version=1.69.0
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=('Boost Software License')
-pkg_source=http://downloads.sourceforge.net/project/boost/boost/${pkg_version}/boost_1_69_0.tar.gz
+pkg_source=https://downloads.sourceforge.net/project/boost/boost/${pkg_version}/boost_1_69_0.tar.gz
 pkg_shasum=9a2c2819310839ea373f42d69e733c339b4e9a19deab6bfec448281554aa4dbb
 pkg_dirname=boost_1_69_0
 

@@ -8,7 +8,7 @@ pkg_license=('BSD-3-Clause')
 pkg_upstream_url="https://www.haskell.org/ghc/"
 pkg_description="The Glasgow Haskell Compiler"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source="http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-src.tar.xz"
+pkg_source="https://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-src.tar.xz"
 pkg_shasum="11625453e1d0686b3fa6739988f70ecac836cadc30b9f0c8b49ef9091d6118b1"
 pkg_dirname="ghc-${pkg_version}"
 

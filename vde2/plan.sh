@@ -1,7 +1,7 @@
 pkg_name=vde2
 pkg_origin=core
 pkg_version=2.3.2
-pkg_source=http://downloads.sourceforge.net/vde/${pkg_name}-${pkg_version}.tar.bz2
+pkg_source=https://downloads.sourceforge.net/vde/${pkg_name}-${pkg_version}.tar.bz2
 pkg_shasum=cbea9b7e03097f87a6b5e98b07890d2275848f1fe4b9fcda77b8994148bc9542
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="VDE is an ethernet compliant virtual network that can be spawned over a set of physical computer over the Internet."

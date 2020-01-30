@@ -6,7 +6,7 @@ pkg_description="LLVM native C/C++/Objective-C compiler"
 pkg_upstream_url="http://clang.llvm.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_filename="cfe-${pkg_version}.src.tar.xz"
-pkg_source="http://llvm.org/releases/${pkg_version}/cfe-${pkg_version}.src.tar.xz"
+pkg_source="https://releases.llvm.org/${pkg_version}/cfe-${pkg_version}.src.tar.xz"
 pkg_shasum="135f6c9b0cd2da1aff2250e065946258eb699777888df39ca5a5b4fe5e23d0ff"
 clang_tools_extra_shasum="9aada1f9d673226846c3399d13fab6bba4bfd38bcfe8def5ee7b0ec24f8cd225"
 pkg_deps=(
@@ -63,7 +63,7 @@ do_unpack() {
   popd > /dev/null || exit 1
 
   # Download clang-tools-extra (intended to be built together with clang)
-  download_file http://llvm.org/releases/$pkg_version/clang-tools-extra-$pkg_version.src.tar.xz \
+  download_file https://releases.llvm.org/$pkg_version/clang-tools-extra-$pkg_version.src.tar.xz \
     clang-tools-extra-$pkg_version.src.tar.xz \
     "${clang_tools_extra_shasum}"
   build_line "Unpacking clang-tools-extra to custom cache dir"

@@ -14,7 +14,7 @@ most sh scripts can be run by Bash without modification.\
 "
 pkg_upstream_url="http://www.gnu.org/software/bash/bash.html"
 pkg_license=('gplv3+')
-_url_base="http://ftp.gnu.org/gnu/$_distname"
+_url_base="https://ftp.gnu.org/gnu/$_distname"
 pkg_source="$_url_base/${_distname}-${_base_version}.tar.gz"
 pkg_shasum="d86b3392c1202e8ff5a423b302e6284db7f8f435ea9f39b5b1b20fd3ac36dfcb"
 pkg_dirname="${_distname}-$_base_version"

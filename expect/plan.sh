@@ -9,7 +9,7 @@ is also useful for testing these same applications.\
 "
 pkg_upstream_url="https://www.nist.gov/services-resources/software/expect"
 pkg_license=('custom')
-pkg_source="http://downloads.sourceforge.net/project/$pkg_name/Expect/${pkg_version}/${pkg_name}${pkg_version}.tar.gz"
+pkg_source="https://downloads.sourceforge.net/project/$pkg_name/Expect/${pkg_version}/${pkg_name}${pkg_version}.tar.gz"
 pkg_shasum="49a7da83b0bdd9f46d04a04deec19c7767bb9a323e40c4781f89caf760b92c34"
 pkg_dirname=${pkg_name}${pkg_version}
 pkg_deps=(

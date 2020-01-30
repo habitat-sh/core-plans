@@ -9,7 +9,7 @@ and assembly source code.\
 "
 pkg_upstream_url="https://www.gnu.org/software/binutils/"
 pkg_license=('gpl')
-pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.bz2"
+pkg_source="https://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.bz2"
 pkg_shasum="ffcc382695bf947da6135e7436b8ed52d991cf270db897190f19d6f9838564d0"
 pkg_deps=(
   core/glibc

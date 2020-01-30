@@ -8,7 +8,7 @@ pkg_version="1.7.7"
 traefik_codename="maroilles"
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=("MIT")
-pkg_source="http://github.com/containous/traefik"
+pkg_source="https://github.com/containous/traefik"
 pkg_build_deps=(
   core/node6
   core/sed

@@ -11,7 +11,7 @@ pkg_description="$(cat << EOF
   pthread_create, crypt, login, exit and more.
 EOF
 )"
-pkg_source=http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz
+pkg_source=https://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz
 pkg_shasum=94efeb00e4603c8546209cefb3e1a50a5315c86fa9b078b6fad758e187ce13e9
 pkg_upstream_url=https://www.gnu.org/software/libc
 pkg_deps=(core/linux-headers)

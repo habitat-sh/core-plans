@@ -12,7 +12,7 @@ dlopen, pthread_create, crypt, login, exit and more.\
 "
 pkg_upstream_url="https://www.gnu.org/software/libc"
 pkg_license=('GPL-2.0' 'LGPL-2.0')
-pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
+pkg_source="https://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum="5172de54318ec0b7f2735e5a91d908afe1c9ca291fec16b5374d9faadfc1fc72"
 pkg_deps=(
   core/linux-headers

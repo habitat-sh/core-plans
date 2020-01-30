@@ -6,7 +6,7 @@ pkg_license=('BSD-3-Clause')
 pkg_upstream_url="https://www.haskell.org/ghc/"
 pkg_description="The Glasgow Haskell Compiler - Binary Bootstrap"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source="http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${patched_version}-x86_64-deb8-linux.tar.xz"
+pkg_source="https://downloads.haskell.org/~ghc/${pkg_version}/ghc-${patched_version}-x86_64-deb8-linux.tar.xz"
 pkg_shasum="804c75c4635353bf987c1ca120b8531c7bb4957c5b84d29c7adc4894b6fd579d"
 pkg_dirname="ghc-${pkg_version}"
 

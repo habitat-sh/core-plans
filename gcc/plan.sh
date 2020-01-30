@@ -11,7 +11,7 @@ systems.\
 "
 pkg_upstream_url="https://gcc.gnu.org/"
 pkg_license=('GPL-2.0')
-pkg_source="http://ftp.gnu.org/gnu/$_distname/${_distname}-${pkg_version}/${_distname}-${pkg_version}.tar.xz"
+pkg_source="https://ftp.gnu.org/gnu/$_distname/${_distname}-${pkg_version}/${_distname}-${pkg_version}.tar.xz"
 pkg_shasum="196c3c04ba2613f893283977e6011b2345d1cd1af9abeac58e916b1aab3e0080"
 pkg_deps=(
   core/glibc

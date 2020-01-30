@@ -6,7 +6,7 @@ pkg_description="A new implementation of the C++ standard library, targeting C++
 pkg_upstream_url=http://libcxx.llvm.org/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_filename=${pkg_name}-${pkg_version}.src.tar.xz
-pkg_source=http://llvm.org/releases/${pkg_version}/${pkg_name}-${pkg_version}.src.tar.xz
+pkg_source=https://releases.llvm.org/${pkg_version}/${pkg_name}-${pkg_version}.src.tar.xz
 pkg_shasum=fa8f99dd2bde109daa3276d529851a3bce5718d46ce1c5d0806f46caa3e57c00
 pkg_build_deps=(
   core/clang

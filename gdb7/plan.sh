@@ -7,7 +7,7 @@ pkg_description="GDB, the GNU Project debugger, allows you to see what is going 
 pkg_upstream_url="https://www.gnu.org/software/gdb/"
 pkg_dirname="gdb-${pkg_version}"
 pkg_filename="${pkg_dirname}.tar.xz"
-pkg_source="http://ftp.gnu.org/gnu/gdb/${pkg_filename}"
+pkg_source="https://ftp.gnu.org/gnu/gdb/${pkg_filename}"
 pkg_shasum=834ff3c5948b30718343ea57b11cbc3235d7995c6a4f3a5cecec8c8114164f94
 pkg_deps=(
   core/glibc

@@ -10,7 +10,7 @@ capabilities to other commands.\
 "
 pkg_upstream_url="http://www.gnu.org/software/findutils"
 pkg_license=('gplv3+')
-pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
+pkg_source="https://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum="ded4c9f73731cd48fec3b6bdaccce896473b6d8e337e9612e16cf1431bb1169d"
 pkg_deps=(
   core/glibc

@@ -6,7 +6,7 @@ pkg_description="Next-gen compiler infrastructure"
 pkg_upstream_url="http://llvm.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_filename="${pkg_name}-${pkg_version}.src.tar.xz"
-pkg_source="http://llvm.org/releases/${pkg_version}/${pkg_name}-${pkg_version}.src.tar.xz"
+pkg_source="https://releases.llvm.org/${pkg_version}/${pkg_name}-${pkg_version}.src.tar.xz"
 pkg_shasum="a38dfc4db47102ec79dcc2aa61e93722c5f6f06f0a961073bd84b78fb949419b"
 pkg_deps=(
   core/coreutils
