@@ -18,7 +18,7 @@ function Invoke-SetupEnvironment {
 }
 
 function Invoke-Build {
-    cd "$pkg_name-OpenSSL_$_pkg_version_text"
+    Set-Location "$pkg_name-OpenSSL_$_pkg_version_text"
     perl Configure VC-WIN64A --prefix=$pkg_prefix
     ms\do_win64a
     nmake -f ms\ntdll.mak
@@ -26,11 +26,11 @@ function Invoke-Build {
 }
 
 function Invoke-Install {
-    cd "$pkg_name-OpenSSL_$_pkg_version_text"
+    Set-Location "$pkg_name-OpenSSL_$_pkg_version_text"
     ms\do_win64a
     nmake -f ms\ntdll.mak install
 }
 function Invoke-Check {
-    cd "$pkg_name-OpenSSL_$_pkg_version_text"
+    Set-Location "$pkg_name-OpenSSL_$_pkg_version_text"
     nmake -f ms\ntdll.mak test
 }

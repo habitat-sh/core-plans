@@ -8,10 +8,10 @@ $pkg_shasum="2dfa6c1a0cd07e3aa0a343758fec77f3673442b41542cef6e3837c722c49393e"
 $pkg_bin_dirs=@("bin")
 $pkg_deps=@("core/dsc-core")
 $pkg_exports=@{
-  port="port"
-  password="app_password"
-  username="app_user"
-  instance="instance"
+    port     ="port"
+    password ="app_password"
+    username ="app_user"
+    instance ="instance"
 }
 $pkg_description = "Microsoft SQL Server"
 $pkg_upstream_url="https://www.microsoft.com/en-us/sql-server/sql-server-editions-express"

@@ -14,13 +14,12 @@ function Invoke-Unpack() {
     Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
     try {
         lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/SQLServer2005_BC_x64.msi").Path
-    }
-    finally { Pop-Location }
+    } finally { Pop-Location }
 }
 
 function Invoke-Install() {
     $resolved = (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_dirname/SQLServer2005_BC_x64/SourceDir").Path
-    Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname/SQLServer2005_BC_x64/SourceDir/*" -Recurse -Include @("*dmo*") | % {
+    Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname/SQLServer2005_BC_x64/SourceDir/*" -Recurse -Include @("*dmo*") | ForEach-Object {
         $newDir = $_.Directory.Fullname.Replace($resolved, $pkg_prefix)
         if(!(Test-Path $newDir)) {
             New-Item -ItemType Directory $newDir

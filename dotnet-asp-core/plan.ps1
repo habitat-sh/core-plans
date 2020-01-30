@@ -11,5 +11,5 @@ $pkg_filename="asp-dotnet-win-x64.$pkg_version.zip"
 $pkg_bin_dirs=@("bin")
 
 function Invoke-Install {
-  Copy-Item * "$pkg_prefix/bin" -Recurse -Force
+    Copy-Item * "$pkg_prefix/bin" -Recurse -Force
 }

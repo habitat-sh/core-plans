@@ -14,37 +14,36 @@ $pkg_dirname="${hkg_name}-${pkg_version}"
 $pkg_bin_dirs=@("bin")
 
 $pkg_build_deps=@(
-  "core/7zip"
-  "core/cabal-install"
-  "core/ghc86"
+    "core/7zip"
+    "core/cabal-install"
+    "core/ghc86"
 )
 
 function Invoke-Unpack {
-  Push-Location (Resolve-Path $HAB_CACHE_SRC_PATH).Path
-  Try {
-    $tar = $pkg_filename.Substring(0, $pkg_filename.LastIndexOf('.'))
-    7z x -y (Resolve-Path $HAB_CACHE_SRC_PATH/$pkg_filename).Path
-    7z x -y -o"." (Resolve-Path $HAB_CACHE_SRC_PATH/$tar).Path
-  }
-  Finally { Pop-Location }
+    Push-Location (Resolve-Path $HAB_CACHE_SRC_PATH).Path
+    Try {
+        $tar = $pkg_filename.Substring(0, $pkg_filename.LastIndexOf('.'))
+        7z x -y (Resolve-Path $HAB_CACHE_SRC_PATH/$pkg_filename).Path
+        7z x -y -o"." (Resolve-Path $HAB_CACHE_SRC_PATH/$tar).Path
+    } Finally { Pop-Location }
 }
 
 function Invoke-Build {
-  cabal v1-sandbox init
-  cabal v1-update
+    cabal v1-sandbox init
+    cabal v1-update
 
-  # Install dependencies
-  cabal v1-install --only-dependencies
+    # Install dependencies
+    cabal v1-install --only-dependencies
 
-  # Configure and Build
-  cabal v1-configure --prefix="$pkg_prefix" --disable-executable-dynamic --disable-shared
-  cabal v1-build
+    # Configure and Build
+    cabal v1-configure --prefix="$pkg_prefix" --disable-executable-dynamic --disable-shared
+    cabal v1-build
 }
 
 function Invoke-Check {
-  cabal v1-test
+    cabal v1-test
 }
 
 function Invoke-Install {
-  cabal v1-copy
+    cabal v1-copy
 }

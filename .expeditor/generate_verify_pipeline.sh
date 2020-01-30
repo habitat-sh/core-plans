@@ -64,12 +64,9 @@ for plan in ${plans[@]}; do
     emit_pipeline .expeditor/templates/verify_linux_pipeline.yml "$plan"
   fi
 
-  ######################################################
-  # "Windows pipelines are currently not implemented." #
-  ######################################################
-  # if [[ -f $plan/plan.ps1 ]]; then
-    # emit_pipeline .buildkite/templates/verify_windows_pipeline.yml "$plan"
-  # fi
+  if [[ -f $plan/plan.ps1 ]]; then
+    emit_pipeline .expeditor/templates/verify_windows_pipeline.yml "$plan"
+  fi
 
   # TODO(SM): Handle queuing based on .bldr.toml
   # example: postgres change _should_ also verify builds of postgresql9x

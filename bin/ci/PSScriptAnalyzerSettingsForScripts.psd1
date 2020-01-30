@@ -1,0 +1,5 @@
+@{
+    ExcludeRules=@('PSAvoidUsingWriteHost',
+                'PSUseBOMForUnicodeEncodedFile',
+                'PSUseShouldProcessForStateChangingFunctions')
+}

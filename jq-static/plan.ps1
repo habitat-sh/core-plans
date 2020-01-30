@@ -12,5 +12,5 @@ $pkg_bin_dirs=@("bin")
 function Invoke-Unpack { }
 
 function Invoke-Install {
-  Copy-Item $HAB_CACHE_SRC_PATH/$pkg_filename $pkg_prefix/bin/jq.exe
+    Copy-Item $HAB_CACHE_SRC_PATH/$pkg_filename $pkg_prefix/bin/jq.exe
 }

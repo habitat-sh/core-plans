@@ -18,7 +18,7 @@ function Invoke-SetupEnvironment {
 function Invoke-Build {
     $Env:CCTYPE="MSVC140"
     $Env:INST_TOP="$pkg_prefix"
-    cd perl5-$pkg_version\win32
+    Set-Location perl5-$pkg_version\win32
     dmake
     if($LASTEXITCODE -ne 0) { Write-Error "dmake failed!" }
 }
@@ -26,13 +26,13 @@ function Invoke-Build {
 function Invoke-Install {
     $Env:CCTYPE="MSVC140"
     $Env:INST_TOP="$pkg_prefix"
-    cd perl5-$pkg_version\win32
+    Set-Location perl5-$pkg_version\win32
     dmake install
     if($LASTEXITCODE -ne 0) { Write-Error "dmake failed!" }
 }
 
 function Invoke-Check {
     $Env:CCTYPE="MSVC140"
-    cd perl5-$pkg_version\win32
+    Set-Location perl5-$pkg_version\win32
     dmake test
 }

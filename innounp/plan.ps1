@@ -12,13 +12,12 @@ $pkg_build_deps = @("core/7zip")
 $pkg_bin_dirs=@("bin")
 
 function Invoke-Unpack {
-  Push-Location (Resolve-Path $HAB_CACHE_SRC_PATH).Path
-  Try {
-    7z x -y -o"$pkg_dirname" (Resolve-Path $HAB_CACHE_SRC_PATH/$pkg_filename).Path
-  }
-  Finally { Pop-Location }
+    Push-Location (Resolve-Path $HAB_CACHE_SRC_PATH).Path
+    Try {
+        7z x -y -o"$pkg_dirname" (Resolve-Path $HAB_CACHE_SRC_PATH/$pkg_filename).Path
+    } finally { Pop-Location }
 }
 
 function Invoke-Install {
-  Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/*.exe" "$pkg_prefix/bin"
+    Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/*.exe" "$pkg_prefix/bin"
 }

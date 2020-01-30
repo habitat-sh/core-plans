@@ -12,17 +12,17 @@ $pkg_shasum="abcd034b230365d9454459e271e118a851969d82516b1529ee0bfea07f7aae52"
 $pkg_bin_dirs=@("bin")
 
 function Invoke-Install {
-  Copy-Item * "$pkg_prefix/bin" -Recurse -Force
+    Copy-Item * "$pkg_prefix/bin" -Recurse -Force
 }
 
 function Invoke-Check() {
-  mkdir dotnet-new
-  Push-Location dotnet-new
-  ../dotnet.exe new web
-  if(!(Test-Path "program.cs")) {
+    mkdir dotnet-new
+    Push-Location dotnet-new
+    ../dotnet.exe new web
+    if(!(Test-Path "program.cs")) {
+        Pop-Location
+        Write-Error "dotnet app was not generated"
+    }
     Pop-Location
-    Write-Error "dotnet app was not generated"
-  }
-  Pop-Location
-  Remove-Item -Recurse -Force dotnet-new
+    Remove-Item -Recurse -Force dotnet-new
 }

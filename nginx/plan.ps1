@@ -8,7 +8,7 @@ $pkg_source="https://nginx.org/download/nginx-$pkg_version.zip"
 $pkg_upstream_url="https://nginx.org/"
 $pkg_shasum="de82e682a147da48e0cd8c4c2a905d69ddb8836cdbbe04d630e69c7a410fdfe1"
 $pkg_bin_dirs=@('bin')
-$pkg_exports=@{port="http.listen.port"}
+$pkg_exports=@{port ="http.listen.port"}
 $pkg_exposes=@('port')
 
 function Invoke-Install {
@@ -19,9 +19,9 @@ function Invoke-Install {
     } | ForEach-Object {
         Copy-Item $_.FullName $pkg_prefix
     }
-    mkdir "$pkg_prefix\hooks"
+mkdir "$pkg_prefix\hooks"
 
-    @"
+@"
 Set-Location {{pkg.svc_path}}
 mkdir temp -ErrorAction SilentlyContinue
 if(Test-Path conf) { Remove-Item conf -Recurse -Force }

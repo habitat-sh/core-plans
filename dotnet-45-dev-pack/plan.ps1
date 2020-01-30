@@ -13,19 +13,18 @@ $pkg_lib_dirs=@("Program Files\Windows Kits\8.0\Lib\Win8\um\x64")
 $pkg_include_dirs=@("Program Files\Windows Kits\8.0\Include\um")
 
 function Invoke-Unpack {
-  Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList "/features OptionId.NetFxSoftwareDevelopmentKit /layout $HAB_CACHE_SRC_PATH/$pkg_dirname /quiet"
-  Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname/Redistributable/4.5.50710"
-  try {
-    Get-ChildItem "*.msi" | % {
-        lessmsi x $_
-    }
-  }
-  finally { Pop-Location }
+    Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList "/features OptionId.NetFxSoftwareDevelopmentKit /layout $HAB_CACHE_SRC_PATH/$pkg_dirname /quiet"
+    Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname/Redistributable/4.5.50710"
+    try {
+        Get-ChildItem "*.msi" | ForEach-Object {
+            lessmsi x $_
+        }
+    } finally { Pop-Location }
 }
 
 function Invoke-Install {
-  Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include "Program Files" -Recurse | % {
-    Copy-Item $_ "$pkg_prefix" -Recurse -Force
-  }
-  Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/Redistributable/4.5.50710/netfx45_dtp/SourceDir/ProgramFilesFolder/*" "$pkg_prefix/Program Files" -Recurse
+    Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include "Program Files" -Recurse | ForEach-Object {
+        Copy-Item $_ "$pkg_prefix" -Recurse -Force
+    }
+    Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/Redistributable/4.5.50710/netfx45_dtp/SourceDir/ProgramFilesFolder/*" "$pkg_prefix/Program Files" -Recurse
 }

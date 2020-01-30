@@ -21,7 +21,7 @@ function Invoke-SetupEnvironment {
 }
 
 function Invoke-Build {
-    cd "$pkg_name-$pkg_version"
+    Set-Location "$pkg_name-$pkg_version"
 
     $bzip_lib = "$(Get-HabPackagePath bzip2)\lib\libbz2.lib"
     $bzip_includedir = "$(Get-HabPackagePath bzip2)\include"
