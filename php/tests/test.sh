@@ -13,6 +13,6 @@ fi
 
 TEST_PKG_IDENT="${1}"
 export TEST_PKG_IDENT
-# hab pkg install core/bats --binlink
+hab pkg install core/bats --binlink
 hab pkg install "${TEST_PKG_IDENT}"
-hab pkg exec "${TEST_PKG_IDENT}" php "$(dirname "${0}")/libzip_support.php"
+bats "$(dirname "${0}")/test.bats"
