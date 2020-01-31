@@ -1,4 +1,8 @@
 <?php
-# The below will exit with a fatal error if libzip is not supported.
-$za = new ZipArchive;
-echo(" ✓ Libzip is supported.\n");
+try {
+  $za = new ZipArchive;
+} catch (Exception $e) {
+  echo $e;
+  exit(1);
+}
+exit(0);
