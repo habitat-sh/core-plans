@@ -10,7 +10,7 @@ This policy defines a 'fast-track' merge and promote policy for a subset of core
 
 Our code review process is currently slow, frustrating core-plan maintainers who are donating their personal time or their employer's time to the project. One contributor (Graham Wilson, predominant) has hundreds of updates in his backlog, but has been holding back because of delays in the review process.
 
-If someone who contributes heavily to core plans has a pull request (PR) for a minor change open for 7+ days, the automated testing already in place and the small scope of the change makes the limited value of additional code-review small compared to the cost it is imposing on some maintainers.  In this situation, allowing 'aprover' maintainers to use their own judgement and immediately merge the PR will help ensure core-plan maintainers can make the most of the time they spend on this project.
+If someone who contributes heavily to core plans has a pull request (PR) for a minor change open for 7+ days, the automated testing already in place and the small scope of the change makes the value of additional code-review small compared to the cost it is imposing on some maintainers.  In this situation, allowing 'approver' maintainers to use their own judgement and immediately merge the PR will help ensure core-plan maintainers can make the most of the time they spend on this project.
 
 ## Guide-level explanation
 [guide-level-explanation]: #guide-level-explanation
