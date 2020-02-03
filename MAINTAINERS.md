@@ -45,3 +45,10 @@ To become a maintainer, open a pull request to this list.
 * [Fletcher Nichol](https://github.com/fnichol)
 * [Romain Sertelon](https://github.com/rsertelon)
 * [Scott Hain](https://github.com/scotthain)
+
+## Approvers
+
+* [Graham Weldon](https://github.com/predominant)
+* [Gavin Didrichsen](https://github.com/gavindidrichsen)
+
+This section has been added for the benefit of those who contribute heavily to the core-plan's and are eligible for 'fastrack' promotion.  See [fastrack policy document](https://github.com/habitat-sh/core-plans/blob/master/docs/dev/policy_documents/merging-and-promoting-conventions.md).  See also [here](https://github.com/chef/chef-oss-practices/blob/master/project-membership.md) for Chef's policy regarding project membership.
