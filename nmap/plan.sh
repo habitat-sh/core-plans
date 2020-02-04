@@ -1,12 +1,12 @@
 pkg_name=nmap
 pkg_origin=core
-pkg_version=7.70
+pkg_version=7.80
 pkg_description="nmap is a free security scanner for network exploration and security audits"
 pkg_upstream_url="https://nmap.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0')
 pkg_source="https://nmap.org/dist/${pkg_name}-${pkg_version}.tar.bz2"
-pkg_shasum="847b068955f792f4cc247593aca6dc3dc4aae12976169873247488de147a6e18"
+pkg_shasum=fcfa5a0e42099e12e4bf7a68ebe6fde05553383a682e816a7ec9256ab4773faa
 pkg_deps=(
   core/glibc
   core/gcc-libs
