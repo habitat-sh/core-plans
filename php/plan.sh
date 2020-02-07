@@ -24,7 +24,7 @@ pkg_deps=(
   core/zip
   core/zlib
   core/gcc-libs
-  rakops/oniguruma
+  core/oniguruma
   core/sqlite
 )
 pkg_build_deps=(
