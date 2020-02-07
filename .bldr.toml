@@ -1473,6 +1473,8 @@ plan_path = "unixodbc"
 plan_path = "unzip"
 [userspace-rcu]
 plan_path = "userspace-rcu"
+[utf8proc]
+plan_path = "utf8proc"
 [util-linux]
 plan_path = "util-linux"
 [util-macros]
