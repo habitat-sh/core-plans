@@ -25,5 +25,5 @@ function Invoke-Install {
 }
 
 function Invoke-Check() {
-    (& "$HAB_CACHE_SRC_PATH/$pkg_dirname/Rust/bin/rustc.exe" --version).StartsWith("rustc $pkg_version")
+    (& "$HAB_CACHE_SRC_PATH/$pkg_dirname/rust-$pkg_version-x86_64-pc-windows-msvc/SourceDir/Rust/bin/rustc.exe" --version).StartsWith("rustc $pkg_version")
 }
