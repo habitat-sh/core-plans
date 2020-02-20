@@ -3,25 +3,29 @@ _patch_url_base="$_url_base/${_distname}-${_base_version}-patches/${_distname}${
 
 # All official patch file URLs
 _patch_files=(
-  ${_patch_url_base}-001
-  ${_patch_url_base}-002
-  ${_patch_url_base}-003
-  ${_patch_url_base}-004
-  ${_patch_url_base}-005
-  ${_patch_url_base}-006
-  ${_patch_url_base}-007
-  ${_patch_url_base}-008
-  ${_patch_url_base}-009
-  ${_patch_url_base}-010
-  ${_patch_url_base}-011
-  ${_patch_url_base}-012
-  ${_patch_url_base}-013
-  ${_patch_url_base}-014
-  ${_patch_url_base}-015
-  ${_patch_url_base}-016
-  ${_patch_url_base}-017
-  ${_patch_url_base}-018
-  ${_patch_url_base}-019
+  "${_patch_url_base}-001"
+  "${_patch_url_base}-002"
+  "${_patch_url_base}-003"
+  "${_patch_url_base}-004"
+  "${_patch_url_base}-005"
+  "${_patch_url_base}-006"
+  "${_patch_url_base}-007"
+  "${_patch_url_base}-008"
+  "${_patch_url_base}-009"
+  "${_patch_url_base}-010"
+  "${_patch_url_base}-011"
+  "${_patch_url_base}-012"
+  "${_patch_url_base}-013"
+  "${_patch_url_base}-014"
+  "${_patch_url_base}-015"
+  "${_patch_url_base}-016"
+  "${_patch_url_base}-017"
+  "${_patch_url_base}-018"
+  "${_patch_url_base}-019"
+  "${_patch_url_base}-020"
+  "${_patch_url_base}-021"
+  "${_patch_url_base}-022"
+  "${_patch_url_base}-023"
 )
 
 # All official patch file shasums
@@ -45,4 +49,8 @@ _patch_shasums=(
   773f90b98768d4662a22470ea8eec5fdd8e3439f370f94638872aaf884bcd270
   5bc494b42f719a8b0d844b7bd9ad50ebaae560e97f67c833c9e7e9d53981a8cc
   27170d6edfe8819835407fdc08b401d2e161b1400fe9d0c5317a51104c89c11e
+  1840e2cbf26ba822913662f74037594ed562361485390c52813b38156c99522c
+  bd8f59054a763ec1c64179ad5cb607f558708a317c2bdb22b814e3da456374c1
+  45331f0936e36ab91bfe44b936e33ed8a1b1848fa896e8a1d0f2ef74f297cb79
+  4fec236f3fbd3d0c47b893fdfa9122142a474f6ef66c20ffb6c0f4864dd591b6
 )

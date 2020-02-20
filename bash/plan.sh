@@ -2,7 +2,7 @@ pkg_name=bash
 _distname="$pkg_name"
 pkg_origin=core
 _base_version=4.4
-pkg_version=${_base_version}.19
+pkg_version=${_base_version}.23
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
  Bash is the GNU Project's shell. Bash is the Bourne Again SHell. Bash is an \
@@ -90,9 +90,9 @@ do_check() {
   # those as symlinks before the tests.
   local clean_cmds=()
   for cmd in /bin/rm /bin/cat /bin/touch /bin/chmod /usr/bin/printf /bin/echo; do
-    if [[ ! -r "$cmd" ]]; then
-      ln -sv "$(pkg_path_for coreutils)/bin/$(basename "$cmd")" "$cmd"
-      clean_cmds+=($cmd)
+    if [[ ! -r "${cmd}" ]]; then
+      ln -sv "$(pkg_path_for coreutils)/bin/$(basename "${cmd}")" "${cmd}"
+      clean_cmds+=("${cmd}")
     fi
   done
 
@@ -100,7 +100,7 @@ do_check() {
 
   # Clean up any symlinks that were added to support the test suite.
   for cmd in "${clean_cmds[@]}"; do
-    rm -fv "$cmd"
+    rm -fv "${cmd}"
   done
 }
 
