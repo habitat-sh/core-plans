@@ -34,6 +34,7 @@ To become a maintainer, open a pull request to this list.
 * [Ben Dang](https://github.com/bdangit)
 * [James Stocks](https://github.com/james-stocks)
 * [Gavin Didrichsen](https://github.com/gavindidrichsen)
+* [Steven Marshall](https://github.com/MindNumbing)
 
 ## Alumni
 
