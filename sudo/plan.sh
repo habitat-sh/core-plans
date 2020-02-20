@@ -1,12 +1,12 @@
 pkg_name=sudo
 pkg_origin=core
-pkg_version=1.8.18p1
+pkg_version=1.8.31
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Execute a command as another user"
-pkg_upstream_url="https://www.sudo.ws/"
+pkg_upstream_url=https://www.sudo.ws/
 pkg_license=('ISC')
-pkg_source=ftp://ftp.sudo.ws/pub/sudo/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=e5a0471c721281a693025bbde33ebd9d3db43245d83ab8516bbfc23980379434
+pkg_source="https://www.sudo.ws/dist/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum=7ea8d97a3cee4c844e0887ea7a1bd80eb54cc98fd77966776cb1a80653ad454f
 pkg_build_deps=(
   core/diffutils
   core/file
@@ -18,7 +18,10 @@ pkg_deps=(
   core/glibc
   core/vim
 )
-pkg_bin_dirs=(bin sbin)
+pkg_bin_dirs=(
+  bin
+  sbin
+)
 pkg_include_dirs=(include)
 
 do_prepare() {
@@ -35,7 +38,7 @@ do_prepare() {
 }
 
 do_build() {
-  ./configure --prefix="$pkg_prefix" --with-editor="$VIPROG" --with-env-editor
+  ./configure --prefix="${pkg_prefix}" --with-editor="${VIPROG}" --with-env-editor
   make
 }
 
@@ -45,7 +48,6 @@ do_check() {
   # regression test, which compares sudo permissions against a file with
   # root ownership.
   chown root:root plugins/sudoers/regress/testsudoers/test3.d/root
-
   make check
 }
 

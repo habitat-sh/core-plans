@@ -1,11 +1,11 @@
 $pkg_name="libarchive"
 $pkg_origin="core"
-$pkg_version="3.3.3"
+$pkg_version="3.4.0"
 $pkg_description="Multi-format archive and compression library"
 $pkg_upstream_url="https://www.libarchive.org"
 $pkg_license=@("BSD")
 $pkg_source="http://www.libarchive.org/downloads/${pkg_name}-${pkg_version}.zip"
-$pkg_shasum="9b1c4f5f92c527f4767bb4806f083a765affbdbd915e6be0345a0be97d833dca"
+$pkg_shasum="d893507dca992d0ea70c4354f01e385cbf0ee8e544c1611d3d432d6359fd59e0"
 $pkg_deps=@(
     "core/openssl",
     "core/bzip2",
@@ -21,7 +21,7 @@ function Invoke-SetupEnvironment {
 }
 
 function Invoke-Build {
-    cd "$pkg_name-$pkg_version"
+    Set-Location "$pkg_name-$pkg_version"
 
     $bzip_lib = "$(Get-HabPackagePath bzip2)\lib\libbz2.lib"
     $bzip_includedir = "$(Get-HabPackagePath bzip2)\include"

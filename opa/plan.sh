@@ -2,7 +2,7 @@ gopkg="github.com/open-policy-agent/opa"
 pkg_name=opa
 pkg_description="Open Policy Agent (OPA) is a lightweight general-purpose policy engine that can be co-located with your service."
 pkg_origin=core
-pkg_version="0.13.0"
+pkg_version="0.16.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_source="https://$gopkg"
@@ -37,7 +37,7 @@ do_download() {
 
 do_build() {
   pushd "${scaffolding_go_gopath:?}/src/${gopkg}"
-    PATH="${scaffolding_go_gopath:?}/bin:$PATH" make deps build
+    PATH="${scaffolding_go_gopath:?}/bin:$PATH" make build
   popd
 }
 

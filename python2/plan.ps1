@@ -20,10 +20,9 @@ function Invoke-Unpack {
 
     Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
     try {
-      lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_filename").Path
-    }
-    finally { Pop-Location }
-  }
+        lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_filename").Path
+    } finally { Pop-Location }
+}
 
 function Invoke-Build {
     $getPipScript = "$HAB_CACHE_SRC_PATH/$pkg_dirname/get-pip.py"

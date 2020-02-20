@@ -8,10 +8,10 @@ $pkg_shasum="9f333f5e4b501d7a303ea3dfa0afcb88c20d8fb7b10e9c60869830b4c996c444"
 $pkg_bin_dirs=@("bin")
 $pkg_deps=@("core/dotnet-35sp1-runtime", "core/dsc-core")
 $pkg_exports=@{
-  port="port"
-  password="app_password"
-  username="app_user"
-  instance="instance"
+    port     ="port"
+    password ="app_password"
+    username ="app_user"
+    instance ="instance"
 }
 $pkg_description = "Microsoft SQL Server 2005"
 $pkg_upstream_url="https://www.microsoft.com/en-us/sql-server/sql-server-editions-express"

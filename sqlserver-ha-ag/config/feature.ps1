@@ -5,9 +5,9 @@ Configuration EnableAlwaysOn
     Node 'localhost' {
         SqlAlwaysOnService 'EnableAlwaysOn'
         {
-            Ensure               = 'Present'
-            InstanceName         = "{{bind.database.first.cfg.instance}}"
-            ServerName           = $env:computername
+            Ensure       = 'Present'
+            InstanceName = "{{bind.database.first.cfg.instance}}"
+            ServerName   = $env:computername
         }
     }
 }

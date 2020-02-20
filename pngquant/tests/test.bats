@@ -1,15 +1,11 @@
-source "${BATS_TEST_DIRNAME}/../plan.sh"
-
-@test "Command is on path" {
-  [ "$(command -v pngquant)" ]
-}
+TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Version matches" {
-  result="$(pngquant --version | head -1 | awk '{print $1}')"
-  [ "$result" = "${pkg_version}" ]
+  result="$(hab pkg exec ${TEST_PKG_IDENT} pngquant --version | head -1 | awk '{print $1}')"
+  [ "$result" = "${TEST_PKG_VERSION}" ]
 }
 
 @test "Help Command Check" {
-  run pngquant --help
+  run hab pkg exec ${TEST_PKG_IDENT} pngquant --help
   [ $status -eq 0 ]
 }

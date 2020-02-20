@@ -6,11 +6,11 @@ $pkg_license=@("SQL Server 2017 License")
 
 $pkg_deps=@("core/dsc-core")
 $pkg_exports=@{
-  name="availability_group_name"
-  ip="availability_group_ip"
+    name ="availability_group_name"
+    ip   ="availability_group_ip"
 }
 $pkg_binds=@{
-  "database"="instance port"
+    "database" ="instance port"
 }
 
 $pkg_description = "Microsoft SQL Server Always On Availability Group"

@@ -20,6 +20,8 @@ plan_path = "apr-util"
 plan_path = "artifactory"
 [artifactory-pro]
 plan_path = "artifactory-pro"
+[asciinema]
+plan_path = "asciinema"
 [aspcud]
 plan_path = "aspcud"
 [at-spi2-core]
@@ -209,6 +211,8 @@ plan_path = "damageproto"
 plan_path = "db"
 [dbus]
 plan_path = "dbus"
+[dcrpm]
+plan_path = "dcrpm"
 [dd-agent]
 plan_path = "dd-agent"
 [dejagnu]
@@ -231,6 +235,8 @@ plan_path = "diffutils"
 plan_path = "direnv"
 [dmake]
 plan_path = "dmake"
+[dnsmasq]
+plan_path = "dnsmasq"
 [docker]
 plan_path = "docker"
 [docker17]
@@ -409,6 +415,11 @@ plan_path = "ghc86"
 paths = [
   "ghc/*",
 ]
+[ghc88]
+plan_path = "ghc88"
+paths = [
+  "ghc/*",
+]
 [giflib]
 plan_path = "giflib"
 [gifsicle]
@@ -443,6 +454,11 @@ plan_path = "gnuplot"
 plan_path = "gnutls"
 [go]
 plan_path = "go"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-windows"
+]
+
 [go14]
 plan_path = "go14"
 [go17]
@@ -479,6 +495,10 @@ paths = [
 ]
 [grafana]
 plan_path = "grafana"
+[grafana-loki]
+plan_path = "grafana-loki"
+[grafana-promtail]
+plan_path = "grafana-promtail"
 [graphviz]
 plan_path = "graphviz"
 [grep]
@@ -695,10 +715,14 @@ plan_path = "libedit"
 plan_path = "libepoxy"
 [liberation-fonts-ttf]
 plan_path = "liberation-fonts-ttf"
+[libestr]
+plan_path = "libestr"
 [libev]
 plan_path = "libev"
 [libevent]
 plan_path = "libevent"
+[libfastjson]
+plan_path = "libfastjson"
 [libfcgi]
 plan_path = "libfcgi"
 [libffi]
@@ -968,6 +992,8 @@ plan_path = "nettle"
 plan_path = "nghttp2"
 [nginx]
 plan_path = "nginx"
+[nginx-prometheus-exporter]
+plan_path = "nginx-prometheus-exporter"
 [ninja]
 plan_path = "ninja"
 [nload]
@@ -1014,6 +1040,12 @@ plan_path = "npth"
 plan_path = "nspr"
 [nss]
 plan_path = "nss"
+[nss-myhostname]
+plan_path = "nss-myhostname"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [numactl]
 plan_path = "numactl"
 [ocaml]
@@ -1022,6 +1054,8 @@ plan_path = "ocaml"
 plan_path = "ocamlbuild"
 [omniORB]
 plan_path = "omniORB"
+[oniguruma]
+plan_path = "oniguruma"
 [opa]
 plan_path = "opa"
 [opam]
@@ -1048,6 +1082,8 @@ plan_path = "openssl-musl"
 paths = [
   "openssl/*",
 ]
+[openssl11]
+plan_path = "openssl11"
 [openvpn]
 plan_path = "openvpn"
 [optipng]
@@ -1186,6 +1222,8 @@ plan_path = "protobuf-cpp"
 plan_path = "protobuf-rust"
 [psmisc]
 plan_path = "psmisc"
+[psscriptanalyzer]
+plan_path = "psscriptanalyzer"
 [pv]
 plan_path = "pv"
 [python]
@@ -1437,6 +1475,8 @@ plan_path = "unixodbc"
 plan_path = "unzip"
 [userspace-rcu]
 plan_path = "userspace-rcu"
+[utf8proc]
+plan_path = "utf8proc"
 [util-linux]
 plan_path = "util-linux"
 [util-macros]

@@ -16,7 +16,7 @@ fi
 TEST_PKG_IDENT="${1}"
 export TEST_PKG_IDENT
 hab pkg install core/bats --binlink
-hab pkg install core/corretto8 --binlink
+hab pkg install core/openjdk11 --binlink
 hab pkg install core/curl --binlink
 hab pkg install core/busybox-static
 hab pkg binlink core/busybox-static nc
@@ -28,7 +28,7 @@ hab pkg binlink core/iproute2 ip
 hab pkg install "${TEST_PKG_IDENT}"
 
 ci_ensure_supervisor_running
-ci_load_service "${TEST_PKG_IDENT}"
+ci_load_service "${TEST_PKG_IDENT}" 10
 
 # wait for the service to start
 DEFAULT_INTERFACE="$(ip route list | grep "default"  | awk '{print $5}')"

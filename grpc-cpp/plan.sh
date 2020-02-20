@@ -1,7 +1,7 @@
 pkg_name=grpc-cpp
 pkg_distname=grpc
 pkg_origin=core
-pkg_version="1.19.1"
+pkg_version="1.25.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_source="https://github.com/grpc/grpc.git"
@@ -22,6 +22,8 @@ pkg_build_deps=(
     core/gcc
     core/cmake
     core/pkg-config
+    core/llvm
+    core/python
     core/virtualenv
     core/busybox-static
 )
@@ -63,10 +65,17 @@ do_unpack() {
   git checkout "tags/v${pkg_version}"
   git submodule init
   git submodule update
+  popd || exit 1
 }
 
 do_prepare() {
   mkdir -p "${BUILDDIR}"
+
+  # fix interpreter for benchmark
+  pushd "$HAB_CACHE_SRC_PATH/$pkg_dirname/third_party/benchmark/tools" || exit 1
+  _pythonpath="$(pkg_path_for core/python)"
+  sed -e "s#/usr/bin/env python.*#${_pythonpath}/bin/python#" -i strip_asm.py
+  popd || exit 1
 }
 
 do_build() {

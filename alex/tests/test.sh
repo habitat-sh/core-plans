@@ -1,18 +1,18 @@
 #!/bin/sh
+#/ Usage: test.sh <pkg_ident>
+#/
+#/ Example: test.sh core/php/7.2.8/20181108151533
+#/
 
 set -euo pipefail
 
-TESTDIR="$(dirname "${0}")"
-
-if [ -z "${1:-}" ]; then
-  echo "Usage: $0 FULLY_QUALIFIED_PACKAGE_IDENT"
-  exit 1
+if [[ -z "${1:-}" ]]; then
+  grep '^#/' < "${0}" | cut -c4-
+	exit 1
 fi
 
-TEST_PKG_IDENT="$1"
-
-hab pkg install --binlink core/bats
-hab pkg install "$TEST_PKG_IDENT"
-
+TEST_PKG_IDENT="${1}"
 export TEST_PKG_IDENT
-bats "${TESTDIR}/test.bats"
+hab pkg install --binlink core/bats
+hab pkg install "${TEST_PKG_IDENT}"
+bats "$(dirname "${0}")/test.bats"

@@ -1,12 +1,12 @@
 pkg_name=happy
 pkg_origin=core
-pkg_version=1.19.9
+pkg_version=1.19.12
 pkg_license=('BSD-3-Clause')
 pkg_upstream_url="https://www.haskell.org/happy/"
 pkg_description="Happy is a parser generator for Haskell. Given a grammar specification in BNF, Happy generates Haskell code to parse the grammar. Happy works in a similar way to the yacc tool for C."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://hackage.haskell.org/package/${pkg_name}-${pkg_version}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="3e81a3e813acca3aae52721c412cde18b7b7c71ecbacfaeaa5c2f4b35abf1d8d"
+pkg_shasum="fb9a23e41401711a3b288f93cf0a66db9f97da1ce32ec4fffea4b78a0daeb40f"
 
 pkg_bin_dirs=(bin)
 
@@ -34,8 +34,6 @@ do_clean() {
 do_prepare() {
   # Set locale
   export LANG="en_US.utf8"
-  # Allow newer cabal, so we don't rebuild cabal
-  sed -i -e 's/Cabal <2.2/Cabal <2.5/g' happy.cabal
 }
 
 do_build() {

@@ -10,9 +10,9 @@ $pkg_shasum="540b8801e08ec39ba26a100c855898f455410cecbae4991afae7bb2b4df026c7"
 $pkg_bin_dirs=@("bin")
 
 function Invoke-Unpack {
-  Expand-Archive -Path "$HAB_CACHE_SRC_PATH/lessmsi-v${pkg_version}.zip" -DestinationPath "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+    Expand-Archive -Path "$HAB_CACHE_SRC_PATH/lessmsi-v${pkg_version}.zip" -DestinationPath "$HAB_CACHE_SRC_PATH/$pkg_dirname"
 }
 
 function Invoke-Install {
-  Copy-Item * "$pkg_prefix/bin" -Recurse -Force
+    Copy-Item * "$pkg_prefix/bin" -Recurse -Force
 }

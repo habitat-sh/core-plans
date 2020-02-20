@@ -35,22 +35,19 @@ $server_includes=@(
 function Invoke-Install {
     Push-Location "pgsql"
 
-    foreach ($dir in @("bin","include","lib"))
-    {
+    foreach ($dir in @("bin","include","lib")) {
         Copy-Item $dir "$pkg_prefix" -Recurse -Force
     }
 
     Write-Host "Purging unneeded execs"
-    foreach ($unneeded in $server_execs)
-    {
+    foreach ($unneeded in $server_execs) {
         $target = "$pkg_prefix\bin\$unneeded"
         Write-Host "Removing $target"
         Remove-Item -Path $target -Force
     }
 
     Write-Host "Purging Unneeded includes"
-    foreach ($unneeded in $server_includes)
-    {
+    foreach ($unneeded in $server_includes) {
         $target = "$pkg_prefix\include\$unneeded"
         Write-Host "Removing $target"
         Remove-Item -Path $target -Force -Recurse

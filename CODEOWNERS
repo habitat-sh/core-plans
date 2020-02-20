@@ -6,13 +6,13 @@ scaffolding-* @habitat-sh/scaffolding-maintainers
 #
 # All of these plans are critical for Builder's operation and build
 
-libarchive @reset @fnichol @raskchanky @nellshamrell
-libsodium @reset @fnichol @raskchanky @nellshamrell
-nginx @reset @fnichol @raskchanky @nellshamrell @predominant
-postgresql @reset @fnichol @irvingpop @raskchanky @nellshamrell
-protobuf @reset @fnichol @raskchanky @nellshamrell
-protobuf-rust @reset @fnichol @raskchanky @nellshamrell
-zeromq @reset @fnichol @raskchanky @nellshamrell
+libarchive @smacfarlane
+libsodium @smacfarlane
+nginx @predominant
+postgresql @irvingpop @habitat-sh/habitat-core-plans-maintainers
+protobuf @smacfarlane @habitat-sh/habitat-core-plans-maintainers
+protobuf-rust @smacfarlane @habitat-sh/habitat-core-plans-maintainers
+zeromq @smacfarlane @habitat-sh/habitat-core-plans-maintainers
 
 # # Base Plans
 #
@@ -20,84 +20,85 @@ zeromq @reset @fnichol @raskchanky @nellshamrell
 # nothing and are in build order. Consequently, these need a closer look when
 # accepting changes, updating versions, etc.
 
-linux-headers @fnichol @smacfarlane
-glibc @fnichol @reset @smacfarlane
-zlib @fnichol @smacfarlane
-file @fnichol @smacfarlane
-binutils @fnichol @smacfarlane
-m4 @fnichol @smacfarlane
-gmp @fnichol @smacfarlane
-mpfr @fnichol @smacfarlane
-libmpc @fnichol @smacfarlane
-gcc @fnichol @smacfarlane
-gcc-libs @fnichol @reset @smacfarlane
-patchelf @fnichol @smacfarlane
-bzip2 @fnichol @smacfarlane
-pkg-config @fnichol @smacfarlane
-ncurses @fnichol @smacfarlane
-attr @fnichol @smacfarlane
-acl @fnichol @smacfarlane
-libcap @fnichol @smacfarlane
-sed @fnichol @smacfarlane
-shadow @fnichol @smacfarlane
-psmisc @fnichol @smacfarlane
-procps-ng @fnichol @smacfarlane
-coreutils @fnichol @smacfarlane
-bison @fnichol @smacfarlane
-flex @fnichol @smacfarlane
-pcre @fnichol @smacfarlane
-grep @fnichol @smacfarlane
-readline @fnichol @smacfarlane
-bash @fnichol @nellshamrell @smacfarlane
-bc @fnichol @smacfarlane
-tar @fnichol @nellshamrell @smacfarlane
-gawk @fnichol @smacfarlane
-libtool @fnichol @smacfarlane
-gdbm @fnichol @smacfarlane
-expat @fnichol @smacfarlane
-db @fnichol @smacfarlane
-inetutils @fnichol @smacfarlane
-iana-etc @fnichol @smacfarlane
-less @fnichol @smacfarlane
-perl @fnichol @smacfarlane
-diffutils @fnichol @smacfarlane
-autoconf @fnichol @smacfarlane
-automake @fnichol @smacfarlane
-findutils @fnichol @smacfarlane
-xz @fnichol @smacfarlane
-gettext @fnichol @smacfarlane
-gzip @fnichol @smacfarlane
-make @fnichol @smacfarlane
-patch @fnichol @smacfarlane
-texinfo @fnichol @smacfarlane
-util-linux @fnichol @smacfarlane
-tcl @fnichol @smacfarlane
-expect @fnichol @smacfarlane
-dejagnu @fnichol @smacfarlane
-check @fnichol @smacfarlane
-libidn @fnichol @smacfarlane
-cacerts @fnichol @smacfarlane
-openssl @fnichol @reset @echohack @smacfarlane
+linux-headers @smacfarlane
+glibc @smacfarlane
+zlib @smacfarlane
+file @smacfarlane
+binutils @smacfarlane
+m4 @smacfarlane
+gmp @smacfarlane
+mpfr @smacfarlane
+libmpc @smacfarlane
+gcc @smacfarlane
+gcc-libs @smacfarlane
+patchelf @smacfarlane
+bzip2 @smacfarlane
+pkg-config @smacfarlane
+ncurses @smacfarlane
+attr @smacfarlane
+acl @smacfarlane
+libcap @smacfarlane
+sed @smacfarlane
+shadow @smacfarlane
+psmisc @smacfarlane
+procps-ng @smacfarlane
+coreutils @smacfarlane
+bison @smacfarlane
+flex @smacfarlane
+pcre @smacfarlane
+grep @smacfarlane
+readline @smacfarlane
+bash @smacfarlane
+bc @smacfarlane
+tar @smacfarlane
+gawk @smacfarlane
+libtool @smacfarlane
+gdbm @smacfarlane
+expat @smacfarlane
+db @smacfarlane
+inetutils @smacfarlane
+iana-etc @smacfarlane
+less @smacfarlane
+perl @smacfarlane
+diffutils @smacfarlane
+autoconf @smacfarlane
+automake @smacfarlane
+findutils @smacfarlane
+xz @smacfarlane
+gettext @smacfarlane
+gzip @smacfarlane
+make @smacfarlane
+patch @smacfarlane
+texinfo @smacfarlane
+util-linux @smacfarlane
+tcl @smacfarlane
+expect @smacfarlane
+dejagnu @smacfarlane
+check @smacfarlane
+libidn @smacfarlane
+cacerts @smacfarlane
+openssl @echohack @smacfarlane
 libiconv @smacfarlane
 libunistring @smacfarlane
 libidn2 @smacfarlane
-wget @fnichol @smacfarlane
-unzip @fnichol @nellshamrell @smacfarlane
-rq @fnichol @smacfarlane
-linux-headers-musl @fnichol @nellshamrell @smacfarlane
-musl @fnichol @nellshamrell @smacfarlane
-busybox-static @fnichol @smacfarlane
-zlib-musl @fnichol @smacfarlane
-bzip2-musl @fnichol @smacfarlane
-xz-musl @fnichol @smacfarlane
-libsodium-musl @fnichol @reset @smacfarlane
-openssl-musl @fnichol @smacfarlane
-libarchive-musl @fnichol @reset @smacfarlane
-rust @fnichol @reset @raskchanky @nellshamrell @smacfarlane
-vim @fnichol @nellshamrell @smacfarlane
-libbsd @fnichol @smacfarlane
-clens @fnichol @smacfarlane
-mg @fnichol @smacfarlane
+wget @smacfarlane
+unzip @smacfarlane
+rq @smacfarlane
+linux-headers-musl @smacfarlane
+musl @smacfarlane
+busybox-static @smacfarlane
+zlib-musl @smacfarlane
+bzip2-musl @smacfarlane
+xz-musl @smacfarlane
+libsodium-musl @smacfarlane
+openssl-musl @smacfarlane
+libarchive-musl @smacfarlane
+rust @habitat-sh/habitat-core-maintainers
+vim @smacfarlane
+libbsd @smacfarlane
+clens @smacfarlane
+mg @smacfarlane
+python-minimal @smacfarlane
 powershell @mwrock
 7zip @mwrock
 docker-credential-helper @mwrock
@@ -113,13 +114,11 @@ wix @mwrock
 # inclusion here is voluntary.
 # This list shall be alphabetical, for sanity purposes.
 
-acbuild @rsertelon
 alex @wduncanfraser
 artifactory-pro @defilan
-atk @rsertelon
+asciinema @jasonwbarnett
 benchmark @bdangit
 cabal-install @wduncanfraser
-cairo @rsertelon
 cerebro @predominant
 clojure @johnjelinek
 concourse @echohack
@@ -130,7 +129,8 @@ corretto8 @johnjelinek
 corretto11 @johnjelinek
 cuda @bdangit
 cuda-libs @bdangit
-dep @afiune @nellshamrell
+dcrpm @jasonwbarnett
+dep @afiune @predominant
 dotnet-47-dev-pack @mwrock
 dotnet-asp-core @defilan
 dotnet-core-lts @mwrock
@@ -141,8 +141,6 @@ dsc-core @mwrock
 elasticsearch @joshbrand @predominant @echohack
 fd @jasonwbarnett
 filebeat @predominant @echohack
-gdk-pixbuf @rsertelon
-glib @rsertelon
 ghc @wduncanfraser
 ghc710 @wduncanfraser
 ghc710-bootstrap @wduncanfraser
@@ -150,21 +148,15 @@ ghc80 @wduncanfraser
 ghc82 @wduncanfraser
 ghc82-bootstrap @wduncanfraser
 ghc84 @wduncanfraser
-go @afiune @nellshamrell
+go @afiune @predominant
 gocd-server @predominant
 googletest @bdangit
 grpcurl @afiune
-gtk2 @rsertelon
 happy @wduncanfraser
-harfbuzz @rsertelon
 hugo @tduffield @cnunciato @predominant
 innounp @mwrock
-jdk7 @rsertelon
-jdk8 @rsertelon
 jenkins @predominant
 journalbeat @thomascate @echohack
-jre7 @rsertelon
-jre8 @rsertelon
 json-c @jasonwbarnett
 kibana @joshbrand @predominant
 logstash @joshbrand @predominant
@@ -172,16 +164,14 @@ libimagequant @predominant
 libtalloc @defilan
 mage @predominant
 metricbeat @echohack
-monit @rsertelon
-mosquitto @rsertelon
 mssql @mwrock
 nano @predominant
 nmap @defilan
+nss-myhostname @robbkidd
 nuget @mwrock
 openjdk11 @irvingpop
 optipng @predominant
 p4broker @dbhagen
-pango @rsertelon
 pngquant @predominant
 postgresql-client @joshbrand @irvingpop
 postgresql11 @irvingpop
@@ -189,7 +179,6 @@ postgresql11-client @irvingpop
 prometheus-cpp @bdangit
 protobuf-cpp @afiune
 redis @irvingpop
-shared-mime-info @rsertelon
 shellcheck @wduncanfraser
 sqitch @irvingpop
 sqitch_pg @irvingpop
@@ -199,4 +188,4 @@ terraform @defilan @echohack @predominant
 tlog @jasonwbarnett
 vault @defilan @predominant
 visual-build-tools-2017 @mwrock
-wrk @afiune
+wrk @afiune @predominant

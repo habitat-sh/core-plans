@@ -1,0 +1,17 @@
+#!/bin/sh
+
+exec 2>&1
+exec nginx-prometheus-exporter \
+  -nginx.retries {{cfg.nginx.retries}} \
+  -nginx.retry-interval {{cfg.nginx.retry-interval}} \
+  {{~#if bind.nginx}}{{~#with bind.nginx.first}}
+  -nginx.scrape-uri "http://{{sys.ip}}:{{cfg.stub_status_port}}/{{cfg.stub_status_path}}" \
+  {{~/with}}{{~else}}
+  -nginx.scrape-uri "{{cfg.nginx.scrape-uri}}" \
+  {{~/if}}
+  {{~#if cfg.nginx.ssl-verify}}
+  -nginx.ssl-verify \
+  {{~/if}}
+  -nginx.timeout {{cfg.nginx.timeout}} \
+  -web.listen-address "{{cfg.web.address}}:{{cfg.web.port}}" \
+  -web.telemetry-path "{{cfg.web.telemetry-path}}"

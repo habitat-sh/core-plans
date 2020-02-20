@@ -1,23 +1,14 @@
 #!/bin/sh
 
-# haaaaaaaaaaaaack. Grafana takes about 5s to come up.
-sleep 10
-
 {{~#if bind.prom}}
-
-if has_prom="$(curl -s  http://{{cfg.admin_user}}:{{cfg.admin_pass}}@localhost:{{cfg.listening_port}}/api/datasources | grep Prometheus)"; then
-  echo "Prometheus Datasource already installed"
-else
-  curl -s http://{{cfg.admin_user}}:{{cfg.admin_pass}}@localhost:{{cfg.listening_port}}/api/datasources \
-    -X POST -H 'Content-Type: application/json;charset=UTF-8' \
-{{~#with bind.prom.first as |ds| }}
-    --data-binary '{"name":"Prometheus","type":"prometheus","url":"http://{{ds.sys.ip}}:{{ds.cfg.prom_ds_http}}","access":"proxy","isDefault":true}'
-{{~/with}}
-fi
-
-echo "I saw bind.prom in post-run and tried to connect to port {{cfg.listening_port}}."
+# setup a prometheus datasource
+cp {{pkg.svc_config_path}}/datasource-prometheus.yaml {{pkg.svc_var_path}}/provisioning/datasources
 
 # now cp the rendered dashboards to the var/dashboards/ dir
-cp  {{pkg.svc_config_path}}/*.json {{pkg.svc_var_path}}/dashboards/
+cp -rf {{pkg.svc_config_path}}/prometheus-*.json {{pkg.svc_var_path}}/dashboards/
+{{~/if}}
 
+{{~#if bind.loki}}
+# setup a loki datasource
+cp {{pkg.svc_config_path}}/datasource-loki.yaml {{pkg.svc_var_path}}/provisioning/datasources
 {{~/if}}

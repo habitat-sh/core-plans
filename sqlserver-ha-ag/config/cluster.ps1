@@ -1,20 +1,17 @@
 Configuration EnableFailover
 {
     Node 'localhost' {
-        WindowsFeature FailoverFeature
-        {
+        WindowsFeature FailoverFeature {
             Ensure = "Present"
-            Name      = "Failover-clustering"
+            Name   = "Failover-clustering"
         }
 
-        WindowsFeature RSATClusteringManagement
-        {
+        WindowsFeature RSATClusteringManagement {
             Ensure = "Present"
             Name   = "RSAT-Clustering-Mgmt"
         }
 
-        WindowsFeature RSATClusteringPowerShell
-        {
+        WindowsFeature RSATClusteringPowerShell {
             Ensure = "Present"
             Name   = "RSAT-Clustering-PowerShell"
         }

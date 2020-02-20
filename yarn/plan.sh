@@ -1,12 +1,12 @@
 pkg_name=yarn
 pkg_origin=core
-pkg_version=1.17.3
+pkg_version=1.22.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Yarn is a package manager for your code. It allows you to use and share code with other developers from around the world. Yarn does this quickly, securely, and reliably so you don’t ever have to worry."
 pkg_upstream_url=https://yarnpkg.com/
 pkg_license=('BSD-2-Clause')
-pkg_source="https://yarnpkg.com/downloads/${pkg_version}/yarn-v${pkg_version}.tar.gz"
-pkg_shasum=e3835194409f1b3afa1c62ca82f561f1c29d26580c9e220c36866317e043c6f3
+pkg_source="https://github.com/yarnpkg/yarn/releases/download/v${pkg_version}/yarn-v${pkg_version}.tar.gz"
+pkg_shasum=de8871c4e2822cba80d58c2e72366fb78567ec56e873493c9ca0cca76c60f9a5
 pkg_bin_dirs=(bin)
 pkg_build_deps=()
 pkg_deps=(
