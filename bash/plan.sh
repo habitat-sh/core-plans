@@ -1,8 +1,8 @@
 pkg_name=bash
 _distname="$pkg_name"
 pkg_origin=core
-_base_version=4.4
-pkg_version=${_base_version}.19
+_base_version=5.0
+pkg_version=${_base_version}.16
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
  Bash is the GNU Project's shell. Bash is the Bourne Again SHell. Bash is an \
@@ -16,7 +16,7 @@ pkg_upstream_url="http://www.gnu.org/software/bash/bash.html"
 pkg_license=('gplv3+')
 _url_base="http://ftp.gnu.org/gnu/$_distname"
 pkg_source="$_url_base/${_distname}-${_base_version}.tar.gz"
-pkg_shasum="d86b3392c1202e8ff5a423b302e6284db7f8f435ea9f39b5b1b20fd3ac36dfcb"
+pkg_shasum="b4a80f2ac66170b2913efbfb9f2594f1f76c7b1afd11f799e22035d63077fb4d"
 pkg_dirname="${_distname}-$_base_version"
 pkg_deps=(
   core/glibc
@@ -90,9 +90,9 @@ do_check() {
   # those as symlinks before the tests.
   local clean_cmds=()
   for cmd in /bin/rm /bin/cat /bin/touch /bin/chmod /usr/bin/printf /bin/echo; do
-    if [[ ! -r "$cmd" ]]; then
-      ln -sv "$(pkg_path_for coreutils)/bin/$(basename "$cmd")" "$cmd"
-      clean_cmds+=($cmd)
+    if [[ ! -r "${cmd}" ]]; then
+      ln -sv "$(pkg_path_for coreutils)/bin/$(basename "${cmd}")" "${cmd}"
+      clean_cmds+=("${cmd}")
     fi
   done
 
@@ -100,7 +100,7 @@ do_check() {
 
   # Clean up any symlinks that were added to support the test suite.
   for cmd in "${clean_cmds[@]}"; do
-    rm -fv "$cmd"
+    rm -fv "${cmd}"
   done
 }
 
