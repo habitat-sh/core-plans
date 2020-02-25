@@ -1,12 +1,12 @@
 $pkg_name="go"
 $pkg_origin="core"
-$pkg_version="1.13.7"
+$pkg_version="1.14"
 $pkg_description="Go is an open source programming language that makes it easy to build simple, reliable, and efficient software."
 $pkg_upstream_url="https://golang.org/"
 $pkg_license="BSD"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_source="https://dl.google.com/go/go$pkg_version.windows-amd64.msi"
-$pkg_shasum="d47ee6c131ff0ac62a086e4aaef6cae380db4cb379dcbd75648ef764e99be90d"
+$pkg_shasum="5d3b87736bf9e86e971055e5db61e8b4ec31405f42d954ad3a71ac758876685e"
 $pkg_build_deps=@("core/lessmsi")
 $pkg_dirname="go"
 $pkg_bin_dirs=@("bin")
@@ -25,5 +25,5 @@ function Invoke-Install {
 }
 
 function Invoke-Check() {
-    (& "$HAB_CACHE_SRC_PATH/$pkg_dirname/Go/bin/go.exe" version).StartsWith("go version go$pkg_version")
+    (& "$HAB_CACHE_SRC_PATH/$pkg_dirname/go$pkg_version.windows-amd64/SourceDir/Go/bin/go.exe" version).StartsWith("go version go$pkg_version")
 }
