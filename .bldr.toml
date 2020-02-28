@@ -458,7 +458,6 @@ build_targets = [
   "x86_64-linux",
   "x86_64-windows"
 ]
-
 [go14]
 plan_path = "go14"
 [go17]
@@ -552,6 +551,11 @@ paths = [
 ]
 [haproxy20]
 plan_path = "haproxy20"
+paths = [
+  "haproxy/*"
+]
+[haproxy21]
+plan_path = "haproxy21"
 paths = [
   "haproxy/*"
 ]
