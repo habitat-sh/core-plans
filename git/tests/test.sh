@@ -18,6 +18,5 @@ TEST_PKG_IDENT="$1"
 
 hab pkg install core/bats --binlink
 hab pkg install "${TEST_PKG_IDENT}"
-
 export TEST_PKG_IDENT
 bats "${TESTDIR}/test.bats"
