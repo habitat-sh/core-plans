@@ -1,8 +1,17 @@
+# Progress Output looks strange emited by the supervisor
+# so we will turn it off because some of the clustering
+# commands print to the progress stream
 $ProgressPreference="SilentlyContinue"
 
+# instance name will be the same for all nodes. We use 'first' because
+# we need to choose one and the first is just as good as any
+$instance="{{bind.database.first.cfg.instance}}"
+
+# It will be usefull to pick a "primary" and list of all secondary members
+# We will just choose 'bind.database.first' as primary since that will
+# be the same on all instances
 $secondary = @()
 $primary = '{{bind.database.first.sys.hostname}}'
-$instance="{{bind.database.first.cfg.instance}}"
 {{~#eachAlive bind.database.members as |member|}}
 if($primary -ne '{{member.sys.hostname}}') {
     $secondary += '{{member.sys.hostname}}'
@@ -16,6 +25,9 @@ if($(Get-Service 'MpsSvc').Status -eq "Running") {
     Start-DscCore (Join-Path {{pkg.svc_config_path}} firewall.ps1) NewFirewallRule
 }
 
+# We are about to configure all of the always on availability group
+# plumbning. We will drive this from the primary node so all other
+# nodes do nothing from this point forward
 if($env:ComputerName -eq $primary) {
     $domain = (Get-ciminstance win32_computersystem).Domain.Split(".")[0]
     $login = "$domain\${env:ComputerName}`$"
@@ -25,6 +37,9 @@ if($env:ComputerName -eq $primary) {
         $ProgressPreference="SilentlyContinue"
         Import-Module SqlServer -DisableNameChecking
 
+        # we already know we have enabled HADR for ourselves (primary)
+        # but we cant proceed to join everyone to the availability group
+        # until it has been enabled for everyone
         foreach($s in $secondary) {
             Write-Host "Waiting for HADR to be enabled on $s"
             $hadrEnabled = $false
@@ -36,7 +51,7 @@ if($env:ComputerName -eq $primary) {
         }
 
         # The DSC will run under the machine account so we need to add
-        # that login to the secondary replicas
+        # that login as a sysadmin to the secondary replicas
         foreach($s in $secondary) {
             if(!(Get-SqlLogin -LoginName $login -ServerInstance "$s\$instance" -ErrorAction SilentlyContinue)) {
                 Write-Host "Adding machine account login to $s"
@@ -59,6 +74,8 @@ if($env:ComputerName -eq $primary) {
         }
     }
 
+    # This DSC configuration sets up all the always on plumbing and also
+    # backs up the db and restores it to the secondary DBs
     Start-DscCore (Join-Path {{pkg.svc_config_path}} group.ps1) NewAvailabilityGroup
 }
 
