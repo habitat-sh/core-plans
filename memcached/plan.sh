@@ -1,12 +1,12 @@
 pkg_origin=core
 pkg_name=memcached
-pkg_version=1.5.22
+pkg_version=1.6.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Distributed memory object caching system"
 pkg_upstream_url=https://memcached.org/
 pkg_license=('BSD-3-Clause')
 pkg_source="http://www.memcached.org/files/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=c2b47e9d20575a2367087c229636ffc3fb699a6c3a7f3a22f44402f25f5f1f93
+pkg_shasum=881c30a222e019657e53b12230aaf629d7b5c080e4b74378c2eb5e78800d57d6
 pkg_deps=(
   core/glibc
   core/cyrus-sasl
