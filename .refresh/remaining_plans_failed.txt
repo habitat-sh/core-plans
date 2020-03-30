@@ -19,7 +19,6 @@ core-plans/msgpack
 core-plans/libyajl2
 core-plans/libksba
 core-plans/libgcrypt
-core-plans/kubernetes
 core-plans/intltool
 core-plans/img
 core-plans/gdb7
@@ -32,11 +31,6 @@ core-plans/rabbitmq
 core-plans/psscriptanalyzer
 core-plans/percona-xtrabackup
 core-plans/opam
-core-plans/kubernetes-scheduler
-core-plans/kubernetes-proxy
-core-plans/kubernetes-kubelet
-core-plans/kubernetes-controller-manager
-core-plans/kubernetes-apiserver
 core-plans/shared-mime-info
 core-plans/gdk-pixbuf
 core-plans/subversion
