@@ -45,4 +45,3 @@ core-plans/php
 core-plans/wordpress
 core-plans/composer
 core-plans/drush
-core-plans/drupal
