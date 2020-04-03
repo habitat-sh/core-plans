@@ -73,7 +73,7 @@ core-plans/polipo
 core-plans/pngcrush
 core-plans/packer
 core-plans/optipng
-core-plans/openssl11
+core-plans/openssl
 core-plans/openldap
 core-plans/opa
 core-plans/oniguruma
