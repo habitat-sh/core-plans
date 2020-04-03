@@ -234,6 +234,7 @@ core-plans/concourse-fly
 core-plans/concourse
 core-plans/compositeproto
 core-plans/rlwrap
+core-plans/doxygen
 core-plans/lua
 core-plans/nss
 core-plans/nettle
@@ -266,6 +267,7 @@ core-plans/autogen
 core-plans/dbus
 core-plans/re2c
 core-plans/boost
+core-plans/clingo
 core-plans/asciinema
 core-plans/apr
 core-plans/libyaml
@@ -298,6 +300,7 @@ core-plans/metricbeat
 core-plans/lzop
 core-plans/lsyncd
 core-plans/linux
+core-plans/libyajl2
 core-plans/recordproto
 core-plans/libxshmfence
 core-plans/scrnsaverproto
@@ -349,6 +352,7 @@ core-plans/bdwgc7
 core-plans/glib
 core-plans/atk
 core-plans/at-spi2-core
+core-plans/aspcud
 core-plans/apr-util
 core-plans/wordpress-proxy
 core-plans/wal-e
@@ -359,6 +363,7 @@ core-plans/scaffolding-ruby
 core-plans/relx
 core-plans/prometheus-cpp
 core-plans/pester
+core-plans/opam
 core-plans/omniORB
 core-plans/msodbcsql17
 core-plans/mc
@@ -383,8 +388,6 @@ core-plans/dotnet-core
 core-plans/dd-agent
 core-plans/cppunit
 core-plans/cppcheck
-core-plans/php
-core-plans/composer
 core-plans/llvm7
 core-plans/clang7
 core-plans/llvm
@@ -398,7 +401,6 @@ core-plans/at-spi2-atk
 core-plans/ghc86
 core-plans/cabal-install
 core-plans/alex
-core-plans/wordpress
 core-plans/tlog
 core-plans/shellcheck
 core-plans/mysql
@@ -416,7 +418,6 @@ core-plans/harfbuzz
 core-plans/ffmpeg4
 core-plans/ffmpeg3
 core-plans/ffmpeg
-core-plans/drush
 core-plans/libxrender
 core-plans/libxi
 core-plans/clang-tools-extra
