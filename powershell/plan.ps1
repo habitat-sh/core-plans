@@ -19,7 +19,7 @@ function Invoke-Install {
 }
 
 function Invoke-Check() {
-    $versionTable = ./powershell.exe -command '$PSVersionTable'
+    $versionTable = ./pwsh.exe -command '$PSVersionTable'
     $passed = $false
 
     $versionTable | ForEach-Object {
