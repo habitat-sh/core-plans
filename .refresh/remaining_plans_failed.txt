@@ -32,7 +32,6 @@ core-plans/subversion
 core-plans/drupal
 core-plans/maven
 core-plans/jffi
-core-plans/jetty
 core-plans/gtk2
 core-plans/gtk
 core-plans/logback

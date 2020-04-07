@@ -446,6 +446,7 @@ core-plans/R
 core-plans/mesa
 core-plans/leiningen
 core-plans/kafka
+core-plans/jetty
 core-plans/jenkins
 core-plans/libepoxy
 core-plans/gradle5
