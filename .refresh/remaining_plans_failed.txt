@@ -30,7 +30,6 @@ core-plans/shared-mime-info
 core-plans/gdk-pixbuf
 core-plans/subversion
 core-plans/drupal
-core-plans/sumologic
 core-plans/maven
 core-plans/jffi
 core-plans/jetty
