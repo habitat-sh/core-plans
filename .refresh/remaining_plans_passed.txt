@@ -438,6 +438,7 @@ core-plans/corretto8
 core-plans/ant
 core-plans/zookeeper
 core-plans/tomcat-native
+core-plans/sumologic
 core-plans/storm
 core-plans/spark
 core-plans/sbt
