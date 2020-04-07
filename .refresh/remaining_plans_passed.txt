@@ -435,7 +435,6 @@ core-plans/clojure
 core-plans/openjdk11
 core-plans/artifactory
 core-plans/corretto8
-core-plans/bazel
 core-plans/ant
 core-plans/zookeeper
 core-plans/tomcat-native
