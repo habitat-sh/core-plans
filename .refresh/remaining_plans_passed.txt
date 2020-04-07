@@ -71,6 +71,7 @@ core-plans/postgresql-client
 core-plans/ponysay
 core-plans/polipo
 core-plans/pngcrush
+core-plans/pax-utils
 core-plans/packer
 core-plans/optipng
 core-plans/openssl11
