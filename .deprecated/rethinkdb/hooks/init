@@ -1,9 +1,0 @@
-#!/bin/sh
-
-exec 2>&1
-
-if [ -f "{{pkg.svc_data_path}}/metadata" ]; then
-  echo "Data directory already initialized"
-else
-  rethinkdb create -d {{pkg.svc_data_path}}
-fi
