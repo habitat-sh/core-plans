@@ -1,5 +1,0 @@
-#!/bin/sh
-
-exec 2>&1
-
-exec rethinkdb --config-file {{pkg.svc_config_path}}/default.conf

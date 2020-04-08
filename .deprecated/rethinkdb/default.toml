@@ -1,4 +1,0 @@
-http-port=8080
-driver-port=28015
-cluster-port=29015
-bind="all"
