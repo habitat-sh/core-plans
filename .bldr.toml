@@ -593,6 +593,8 @@ plan_path = "inotify-tools"
 plan_path = "inputproto"
 [intltool]
 plan_path = "intltool"
+[iperf]
+plan_path = "iperf"
 [iproute2]
 plan_path = "iproute2"
 [iptables]
