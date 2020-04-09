@@ -158,6 +158,7 @@ core-plans/libpthread-stubs
 core-plans/gsl
 core-plans/grafana-loki
 core-plans/grafana
+core-plans/libgpg-error
 core-plans/graphviz
 core-plans/gperftools
 core-plans/govc

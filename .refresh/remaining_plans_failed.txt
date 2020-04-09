@@ -1,6 +1,5 @@
 core-plans/libnsl
 core-plans/grpcurl
-core-plans/libgpg-error
 core-plans/libassuan
 core-plans/gpgme
 core-plans/gox
