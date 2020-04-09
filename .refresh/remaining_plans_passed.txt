@@ -118,6 +118,7 @@ core-plans/libressl
 core-plans/libpq
 core-plans/libpipeline
 core-plans/libpcap
+core-plans/libnsl
 core-plans/nasm
 core-plans/libimagequant
 core-plans/libidn
