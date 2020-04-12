@@ -10,16 +10,24 @@ CHECK_ADDR="{{sys.ip}}:{{cfg.jenkins.https.port}}"
 CHECK_ADDR="{{sys.ip}}:{{cfg.jenkins.http2.port}}"
 {{~/if}}
 
-raw_data="$(curl -o /dev/null --silent --head --write-out '%{http_code}\n' ${CHECK_ADDR})"
-status="$(echo "${raw_data: : -1}" | awk '{print $3}')"
+#curl jenkins login page - 200 code is "ok"
+STATUS="$(curl -o /dev/null --silent --head --write-out '%{http_code}\n' ${CHECK_ADDR}/login)"
 
-case $status in
-    "true")
-	rc=0 ;;
-    "false")
-	rc=2 ;;
-    *)
-	rc=3 ;;
+case $STATUS in
+  200)
+    rc=0 ;;
+  1)
+    rc=1 ;;
+  2)
+    rc=2 ;;
+  *)
+    rc=3 ;;
 esac
+
+# hab error codes
+# 0- ok
+# 1- warning
+# 2- critical
+# 3- unknown
 
 exit $rc
