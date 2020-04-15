@@ -298,6 +298,7 @@ core-plans/openvpn
 core-plans/openresty
 core-plans/nmap
 core-plans/netdata
+core-plans/msgpack
 core-plans/mongodb
 core-plans/metricbeat
 core-plans/lzop
