@@ -35,7 +35,10 @@ do_build() {
     PREFIX="$pkg_prefix" \
     APR="$(pkg_path_for apr)" \
     APU="$(pkg_path_for apr-util)" \
-    OPENSSL="$(pkg_path_for openssl)"
+    ZLIB="$(pkg_path_for zlib)" \
+    OPENSSL="$(pkg_path_for openssl)" \
+    CFLAGS="$CFLAGS" \
+    LINKFLAGS="$LDFLAGS"
 }
 
 # Currently errors out on a comment style in a test suite, of all things.
