@@ -15,7 +15,6 @@ core-plans/postfix
 core-plans/msgpack
 core-plans/libksba
 core-plans/libgcrypt
-core-plans/intltool
 core-plans/img
 core-plans/gdb7
 core-plans/cockroach
