@@ -365,6 +365,7 @@ core-plans/shield-proxy
 core-plans/sensu
 core-plans/scaffolding-ruby
 core-plans/relx
+core-plans/rabbitmq
 core-plans/prometheus-cpp
 core-plans/pester
 core-plans/opam

@@ -19,7 +19,6 @@ core-plans/cockroach
 core-plans/buildkite-cli
 core-plans/shield
 core-plans/serf
-core-plans/rabbitmq
 core-plans/psscriptanalyzer
 core-plans/percona-xtrabackup
 core-plans/shared-mime-info
