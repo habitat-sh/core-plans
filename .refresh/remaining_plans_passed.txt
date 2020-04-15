@@ -487,3 +487,4 @@ core-plans/kubernetes-proxy
 core-plans/kubernetes-kubelet
 core-plans/kubernetes-controller-manager
 core-plans/kubernetes-apiserver
+core-plans/logback

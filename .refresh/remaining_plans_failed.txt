@@ -28,7 +28,6 @@ core-plans/maven
 core-plans/jffi
 core-plans/gtk2
 core-plans/gtk
-core-plans/logback
 core-plans/happy
 core-plans/ghc88
 core-plans/ghc
