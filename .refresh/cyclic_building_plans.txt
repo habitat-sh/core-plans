@@ -1,0 +1,4 @@
+core-plans/maven PASS=1
+core-plans/maven PASS=2
+core-plans/maven PASS=3
+core-plans/jffi
