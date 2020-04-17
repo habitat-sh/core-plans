@@ -1,0 +1,10 @@
+download,core-plans/maven
+upload,core-plans/maven
+build,core-plans/maven
+build,core-plans/jffi
+build,core-plans/maven
+build,core-plans/jffi
+build,core-plans/maven
+build,core-plans/jffi
+upload,core-plans/maven
+upload,core-plans/jffi
