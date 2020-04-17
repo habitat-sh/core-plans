@@ -160,6 +160,8 @@ core-plans/gsl
 core-plans/grafana-loki
 core-plans/grafana
 core-plans/libgpg-error
+core-plans/libassuan
+core-plans/gpgme
 core-plans/graphviz
 core-plans/gperftools
 core-plans/govc
@@ -292,6 +294,7 @@ core-plans/ruby27
 core-plans/rebar3
 core-plans/rebar
 core-plans/vde2
+core-plans/postfix
 core-plans/pngquant
 core-plans/powershell
 core-plans/openvpn
@@ -309,7 +312,9 @@ core-plans/recordproto
 core-plans/libxshmfence
 core-plans/scrnsaverproto
 core-plans/randrproto
+core-plans/libksba
 core-plans/xtrans
+core-plans/libgcrypt
 core-plans/libpciaccess
 core-plans/kubectl
 core-plans/kibana
@@ -363,12 +368,15 @@ core-plans/wordpress-proxy
 core-plans/wal-e
 core-plans/sqitch_pg
 core-plans/shield-proxy
+core-plans/serf
 core-plans/sensu
 core-plans/scaffolding-ruby
 core-plans/relx
 core-plans/rabbitmq
+core-plans/psscriptanalyzer
 core-plans/prometheus-cpp
 core-plans/pester
+core-plans/percona-xtrabackup
 core-plans/opam
 core-plans/omniORB
 core-plans/msodbcsql17
@@ -385,6 +393,8 @@ core-plans/libgd
 core-plans/github_changelog_generator
 core-plans/ghc84
 core-plans/ghc80
+core-plans/shared-mime-info
+core-plans/gdk-pixbuf
 core-plans/gamin
 core-plans/fluentd
 core-plans/openjpeg
@@ -394,6 +404,8 @@ core-plans/dotnet-core
 core-plans/dd-agent
 core-plans/cppunit
 core-plans/cppcheck
+core-plans/php
+core-plans/composer
 core-plans/llvm7
 core-plans/clang7
 core-plans/llvm
@@ -407,7 +419,9 @@ core-plans/at-spi2-atk
 core-plans/ghc86
 core-plans/cabal-install
 core-plans/alex
+core-plans/wordpress
 core-plans/tlog
+core-plans/subversion
 core-plans/shellcheck
 core-plans/mysql
 core-plans/mosquitto
@@ -424,6 +438,7 @@ core-plans/harfbuzz
 core-plans/ffmpeg4
 core-plans/ffmpeg3
 core-plans/ffmpeg
+core-plans/drush
 core-plans/libxrender
 core-plans/libxi
 core-plans/clang-tools-extra
@@ -454,7 +469,9 @@ core-plans/leiningen
 core-plans/kafka
 core-plans/jetty
 core-plans/jenkins
+core-plans/gtk2
 core-plans/libepoxy
+core-plans/gtk
 core-plans/gradle5
 core-plans/gradle4
 core-plans/gradle
