@@ -8,9 +8,6 @@ core-plans/ansible
 core-plans/shield-agent
 core-plans/rethinkdb
 core-plans/img
-core-plans/gdb7
 core-plans/cockroach
 core-plans/buildkite-cli
-core-plans/maven
-core-plans/jffi
 core-plans/drupal
