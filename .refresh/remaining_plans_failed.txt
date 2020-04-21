@@ -13,8 +13,4 @@ core-plans/cockroach
 core-plans/buildkite-cli
 core-plans/maven
 core-plans/jffi
-core-plans/happy
-core-plans/ghc88
-core-plans/ghc
-core-plans/hspec-discover
 core-plans/drupal

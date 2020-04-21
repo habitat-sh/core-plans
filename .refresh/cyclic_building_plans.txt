@@ -1,0 +1,8 @@
+core-plans/ghc PASS=1
+core-plans/happy PASS=1
+core-plans/ghc PASS=2
+core-plans/happy PASS=2
+core-plans/ghc PASS=3
+core-plans/happy PASS=3
+core-plans/ghc88
+core-plans/hspec-discover
