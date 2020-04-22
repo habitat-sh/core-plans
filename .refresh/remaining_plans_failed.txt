@@ -8,8 +8,4 @@ core-plans/shield-agent
 core-plans/rethinkdb
 core-plans/img
 core-plans/cockroach
-core-plans/happy
-core-plans/ghc88
-core-plans/ghc
-core-plans/hspec-discover
 core-plans/drupal
