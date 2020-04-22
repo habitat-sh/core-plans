@@ -1,5 +1,4 @@
 core-plans/grpcurl
-core-plans/gox
 core-plans/libmaxminddb
 core-plans/goaccess
 core-plans/envoy
