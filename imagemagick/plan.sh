@@ -26,7 +26,7 @@ pkg_build_deps=(
   core/pkg-config
 )
 pkg_bin_dirs=(bin)
-pkg_include_dirs=(include/ImageMagick-6)
+pkg_include_dirs=(include/ImageMagick-7)
 pkg_lib_dirs=(lib)
 pkg_dirname="ImageMagick-${pkg_version}"
 
