@@ -49,7 +49,7 @@ echo "--- Installing the studio"
 # This will ensure the correct version of the studio for the `hab` 
 # on our path is installed, and provide some informational output
 # about what version we intend to use. 
-hab studio version
+hab studio run "hab studio version"
 
 echo "--- :construction: Starting build for $plan"
 # Build with DO_CHECK=true.

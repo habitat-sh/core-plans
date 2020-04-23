@@ -50,7 +50,7 @@ echo "--- Installing the studio"
 # This will ensure the correct version of the studio for the `hab` 
 # on our path is installed, and provide some informational output
 # about what version we intend to use. 
-hab studio version
+hab studio run "hab studio version"
 
 # We want to ensure that we build from the project root. This
 # creates a subshell so that the cd will only affect that process
