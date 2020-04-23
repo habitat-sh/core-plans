@@ -319,6 +319,7 @@ core-plans/libpciaccess
 core-plans/kubectl
 core-plans/kibana
 core-plans/intltool
+core-plans/img
 core-plans/imagemagick
 core-plans/renderproto
 core-plans/kbproto
