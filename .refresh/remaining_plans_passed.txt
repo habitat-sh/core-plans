@@ -256,6 +256,7 @@ core-plans/libxdmcp
 core-plans/libxau
 core-plans/caddy
 core-plans/busybox
+core-plans/buildkite-agent
 core-plans/libxslt
 core-plans/libuv
 core-plans/bind
@@ -354,6 +355,7 @@ core-plans/libxcb
 core-plans/libice
 core-plans/ruby
 core-plans/bundler
+core-plans/buildkite-cli
 core-plans/ninja
 core-plans/boringssl
 core-plans/boost159
