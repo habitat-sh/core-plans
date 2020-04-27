@@ -32,7 +32,9 @@ do_prepare() {
   mkdir -p "${pkg_prefix}/lib/python2.7/site-packages"
   mkdir -p "${pkg_prefix}/share"
   mkdir -p "${pkg_prefix}/etc"
+  # Fixes encoding error: Installed from requirements: MarkupSafe, jinja2, PyYAML, pycparser, cffi, enum34, ipaddress, cryptography
   pip install -r requirements.txt
+  # Fixes version_helper issue converting between python 2to3
   pip install packaging
 }
 
@@ -41,8 +43,10 @@ do_build() {
 }
 
 do_install() {
-  make install  
+  python setup.py install \
+    --prefix="${pkg_prefix}" \
+    --optimize=1 \
+    --skip-build
   cp -dpr examples/* "${pkg_prefix}/share/"
   install -Dm644 examples/ansible.cfg "${pkg_prefix}/etc/ansible.cfg"
-  return 0
 }
