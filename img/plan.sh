@@ -43,11 +43,12 @@ do_unpack() {
 }
 
 do_prepare() {
+  # This changes the version of containerd that is added to fix invalid pseudo version caused by version in go.mod file.
+  # This should be fixed with the next release.
   pushd "${pkg_cache_path}" >/dev/null
     go mod edit -replace github.com/containerd/containerd@3a3f0aac8819=github.com/containerd/containerd@814b795
     go get github.com/go-bindata/go-bindata/go-bindata
   popd >/dev/null
-  return 0
 }
 
 do_build() {
