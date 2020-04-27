@@ -5,6 +5,5 @@ core-plans/envoy
 core-plans/ansible
 core-plans/shield-agent
 core-plans/rethinkdb
-core-plans/img
 core-plans/cockroach
 core-plans/drupal

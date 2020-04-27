@@ -1,6 +1,6 @@
 pkg_name="img"
 pkg_origin="core"
-pkg_version=0.5.4
+pkg_version=0.5.7
 pkg_description="Standalone, daemon-less, unprivileged Dockerfile and OCI compatible container image builder."
 pkg_upstream_url="https://github.com/genuinetools/img"
 pkg_license=('MIT')
@@ -40,6 +40,15 @@ do_verify() {
 
 do_unpack() {
   return 0
+}
+
+do_prepare() {
+  # This changes the version of containerd that is added to fix invalid pseudo version caused by version in go.mod file.
+  # This should be fixed with the next release.
+  pushd "${pkg_cache_path}" >/dev/null
+    go mod edit -replace github.com/containerd/containerd@3a3f0aac8819=github.com/containerd/containerd@814b795
+    go get github.com/go-bindata/go-bindata/go-bindata
+  popd >/dev/null
 }
 
 do_build() {
