@@ -164,6 +164,7 @@ core-plans/libassuan
 core-plans/gpgme
 core-plans/graphviz
 core-plans/gperftools
+core-plans/gox
 core-plans/govc
 core-plans/googlemock
 core-plans/iproute2
@@ -256,6 +257,7 @@ core-plans/libxdmcp
 core-plans/libxau
 core-plans/caddy
 core-plans/busybox
+core-plans/buildkite-agent
 core-plans/libxslt
 core-plans/libuv
 core-plans/bind
@@ -320,6 +322,7 @@ core-plans/libpciaccess
 core-plans/kubectl
 core-plans/kibana
 core-plans/intltool
+core-plans/img
 core-plans/imagemagick
 core-plans/renderproto
 core-plans/kbproto
@@ -355,6 +358,7 @@ core-plans/libxcb
 core-plans/libice
 core-plans/ruby
 core-plans/bundler
+core-plans/buildkite-cli
 core-plans/ninja
 core-plans/boringssl
 core-plans/boost159
