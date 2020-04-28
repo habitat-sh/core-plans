@@ -53,8 +53,6 @@ paths = [
 ]
 [bats]
 plan_path = "bats"
-[bazel]
-plan_path = "bazel"
 [bc]
 plan_path = "bc"
 [bdwgc]
@@ -372,8 +370,6 @@ paths = [
 plan_path = "gdal"
 [gdb]
 plan_path = "gdb"
-[gdb7]
-plan_path = "gdb7"
 [gdbm]
 plan_path = "gdbm"
 [gdk-pixbuf]
@@ -601,10 +597,6 @@ plan_path = "iptables"
 plan_path = "ipvsadm"
 [jbigkit]
 plan_path = "jbigkit"
-[jdk7]
-plan_path = "jdk7"
-[jdk8]
-plan_path = "jdk8"
 [jemalloc]
 plan_path = "jemalloc"
 [jenkins]
@@ -621,10 +613,6 @@ plan_path = "jo"
 plan_path = "journalbeat"
 [jq-static]
 plan_path = "jq-static"
-[jre7]
-plan_path = "jre7"
-[jre8]
-plan_path = "jre8"
 [jruby]
 plan_path = "jruby"
 [jruby1]
@@ -1094,8 +1082,6 @@ plan_path = "openvpn"
 plan_path = "optipng"
 [p11-kit]
 plan_path = "p11-kit"
-[p4broker]
-plan_path = "p4broker"
 [packer]
 plan_path = "packer"
 [pango]
@@ -1257,6 +1243,8 @@ plan_path = "python37"
 paths = [
   "python/*"
 ]
+[python-minimal]
+plan_path = "python-minimal"
 [qemu]
 plan_path = "qemu"
 [R]

@@ -1,12 +1,12 @@
 $pkg_name="bzip2"
 $pkg_origin="core"
-$pkg_version="1.0.6"
+$pkg_version="1.0.8"
 $pkg_file_name=$pkg_name + ($pkg_version).Replace(".", "")
 $pkg_description="bzip2 is a free and open-source file compression program that uses the Burrows-Wheeler algorithm. It only compresses single files and is not a file archiver."
 $pkg_upstream_url="http://www.bzip.org/"
 $pkg_license=("bzip2")
-$pkg_source="https://github.com/nemequ/$pkg_name/archive/v${pkg_version}.zip"
-$pkg_shasum="1ac730150d4c13a6933101c8d21acc6de258503ae8a6a049e948a47749ddcc81"
+$pkg_source="https://fossies.org/linux/misc/${pkg_name}-${pkg_version}.zip"
+$pkg_shasum="7585f461a58476bb2697642b5bd4e6fb173404a5e59ae8cd557226b0fd388405"
 $pkg_deps=@("core/visual-cpp-redist-2015")
 $pkg_build_deps=@("core/visual-cpp-build-tools-2015")
 $pkg_bin_dirs=@("bin")

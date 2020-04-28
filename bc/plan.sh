@@ -1,3 +1,5 @@
+# Disable shellcheck that would require quotes around pkg_name
+# shellcheck disable=SC2209
 pkg_name=bc
 pkg_origin=core
 pkg_version=1.07.1

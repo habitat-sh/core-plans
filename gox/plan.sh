@@ -12,3 +12,11 @@ scaffolding_go_build_deps=(
   github.com/mitchellh/iochan # AKA Leftpad of the Go world
   github.com/hashicorp/go-version
 )
+
+do_clean() {
+  pushd "$scaffolding_go_pkg_path" >/dev/null
+    go mod tidy -v
+    go mod vendor -v
+  popd >/dev/null
+  do_default_clean
+}
