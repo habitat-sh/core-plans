@@ -279,6 +279,7 @@ core-plans/asciinema
 core-plans/apr
 core-plans/libyaml
 core-plans/sshpass
+core-plans/ansible
 core-plans/alsa-lib
 core-plans/7zip
 core-plans/varnish

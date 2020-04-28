@@ -2,7 +2,6 @@ core-plans/grpcurl
 core-plans/libmaxminddb
 core-plans/goaccess
 core-plans/envoy
-core-plans/ansible
 core-plans/shield-agent
 core-plans/rethinkdb
 core-plans/cockroach
