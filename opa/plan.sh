@@ -5,43 +5,30 @@ pkg_origin=core
 pkg_version="0.16.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
-pkg_source="https://$gopkg"
+pkg_source="https://$gopkg/archive/v${pkg_version}.tar.gz"
 pkg_upstream_url="https://www.openpolicyagent.org/"
 pkg_build_deps=(core/bash)
 pkg_exports=(
   [address]=service.address
 )
-pkg_deps=()
 pkg_bin_dirs=(bin)
-pkg_scaffolding=core/scaffolding-go
-scaffolding_go_base_path=github.com/open-policy-agent
-scaffolding_go_build_deps=()
+pkg_build_deps=(
+    core/make
+    core/git
+    core/go
+)
+pkg_shasum="f71b0532790962fb2b19b18acab21f8303c1e25f1a6822f461f006a3f47f0c93"
 
 do_prepare() {
-  pushd "${scaffolding_go_gopath:?}/src/${gopkg}"
-    sed -e "s#\#\!/usr/bin/env bash#\#\!$(pkg_path_for bash)/bin/bash#" -i build/*.sh
-    sed -e "s#hostname -f#echo \"bldr.habitat.sh\"#" -i build/get-build-hostname.sh
-  popd
-}
-
-do_download() {
-  # `-d`: don't let go build it, we'll have to build this ourselves
-  build_line "go get -d ${gopkg}"
-  go get -d "$gopkg"
-
-  pushd "${scaffolding_go_gopath:?}/src/${gopkg}"
-    build_line "checking out $pkg_version"
-    git reset --hard "v${pkg_version}"
-  popd
+  sed -e "s#\#\!/usr/bin/env bash#\#\!$(pkg_path_for bash)/bin/bash#" -i build/*.sh
+  sed -e "s#hostname -f#echo \"bldr.habitat.sh\"#" -i build/get-build-hostname.sh
 }
 
 do_build() {
-  pushd "${scaffolding_go_gopath:?}/src/${gopkg}"
-    PATH="${scaffolding_go_gopath:?}/bin:$PATH" make build
-  popd
+    return 0
 }
 
 do_install() {
-  build_line "copying binary"
-  cp "${scaffolding_go_gopath:?}/src/${gopkg}/opa_linux_amd64" "${pkg_prefix}/bin/opa"
+  build_line "copying binary: $pwd"
+  make build BIN="${pkg_prefix}/bin/opa" CGO_ENABLED=0 BUILD_COMMIT="" VERSION="${pkg_version}"
 }
