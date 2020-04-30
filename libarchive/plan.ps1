@@ -1,11 +1,11 @@
 $pkg_name="libarchive"
 $pkg_origin="core"
-$pkg_version="3.4.0"
+$pkg_version="3.4.2"
 $pkg_description="Multi-format archive and compression library"
 $pkg_upstream_url="https://www.libarchive.org"
 $pkg_license=@("BSD")
 $pkg_source="http://www.libarchive.org/downloads/${pkg_name}-${pkg_version}.zip"
-$pkg_shasum="d893507dca992d0ea70c4354f01e385cbf0ee8e544c1611d3d432d6359fd59e0"
+$pkg_shasum="9af28a8e88baa0d25123122ea4661478726f0544cee826a22b1db1feed3c01e2"
 $pkg_deps=@(
     "core/openssl",
     "core/bzip2",
