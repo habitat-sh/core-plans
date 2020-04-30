@@ -14,3 +14,4 @@ This directory contains a collection of design documents relating to contributin
 - [Testing Pull Requests](./policy_documents/testing-pull-requests.md)
 - [Testing standards](./policy_documents/standards-for-tests.md)
 - [Tracking Package Versions](./policy_documents/tracking-package-versions.md)
+- [Default Build Flags](./policy_documents/default-build-flags.md)
