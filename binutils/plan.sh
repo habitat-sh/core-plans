@@ -58,14 +58,6 @@ do_prepare() {
   # path to bash. Until a bash plan is created, we're going to wing this...
   bash=/bin/bash
 
-  # Make `--enable-new-dtags` the default so that the linker sets `RUNPATH`
-  # instead of `RPATH` in ELF binaries. This is important as `RPATH` is
-  # overridden if `LD_LIBRARY_PATH` is set at runtime.
-  #
-  # Thanks to: https://github.com/NixOS/nixpkgs/blob/2524504/pkgs/development/tools/misc/binutils/new-dtags.patch
-  # Thanks to: https://build.opensuse.org/package/view_file?file=ld-dtags.diff&package=binutils&project=devel%3Agcc&srcmd5=011dbdef56800d1cd2fa8c585b3dd7db
-  patch -p1 < "$PLAN_CONTEXT/new-dtags.patch"
-
   # Since binutils 2.22, DT_NEEDED flags aren't copied for dynamic outputs.
   # That requires upstream changes for things to work. So we can patch it to
   # get the old behaviour fo now.
@@ -106,6 +98,7 @@ do_build() {
       --enable-plugins \
       --enable-deterministic-archives \
       --enable-threads \
+      --enable-new-dtags \
       --disable-werror \
       --with-system-zlib
 
