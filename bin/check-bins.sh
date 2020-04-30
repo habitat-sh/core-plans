@@ -20,10 +20,25 @@ usage() {
     error "PACKAGE is a fully-qualified ident or the path to the packages install dir."
 }
 
+pkg_in_deps() {
+    local dir="$1"
+    local needle="$2"
+    local dep_file="$dir/DEPS"
+    local pkg_name
+    pkg_name=$(echo "$dir" | cut -d/ -f4-7)
+    if grep "^${needle}\$" "$dep_file" >/dev/null 2>&1; then
+        return 0
+    elif [[ "$needle" = "$pkg_name" ]]; then
+        # If we are looking for ourselves, find ourselves.
+        return 0
+    else
+        return 1
+    fi
+}
+
 check_file() {
     local dir="$1"
     local file="$2"
-    local dep_file="$dir/DEPS"
 
     local ret=0
     local _header_printed="false"
@@ -64,8 +79,8 @@ check_file() {
        fi
 
        interp_pkg=$(echo "$interp" | cut -d/ -f4-7)
-       if ! grep "^${interp_pkg}\$" "$dep_file" >/dev/null 2>&1; then
-           interp_error="$interp_pkg needed by interperter ($interp) but not present in $dep_file"
+       if ! pkg_in_deps "$dir" "$interp_pkg"; then
+           interp_error="$interp_pkg needed by interperter ($interp) but not present in DEPS"
        fi
 
        if [[ -n "$interp_error" ]]; then
@@ -145,7 +160,7 @@ check_file() {
     referenced_packages=$(echo "$resolved_libs" | cut -d/ -f4-7 | sort | uniq)
     if [[ -n "$referenced_packages" ]]; then
         for pkg in $referenced_packages; do
-            if grep "^${pkg}\$" "$dep_file" >/dev/null 2>&1; then
+            if pkg_in_deps "$dir" "$pkg"; then
                 continue
             fi
             ret=1
@@ -153,7 +168,7 @@ check_file() {
                 error "$file:"
                 _header_printed="true"
             fi
-            error "      $pkg is not listed in $dep_file but is used as a dependency"
+            error "      $pkg is not listed in DEPS but is used as a dependency"
         done
     fi
 
