@@ -23,7 +23,12 @@ usage() {
 pkg_in_deps() {
     local dir="$1"
     local needle="$2"
-    local dep_file="$dir/DEPS"
+    # NOTE(ssd) 2020-05-01: We check TDEPS rather than DEPS because
+    # `ldd` is going to show us everything we link against, even
+    # things pulled in via transitive deps, so checking DEPS would
+    # produce too many false-positives without more sophsiticated
+    # logic
+    local dep_file="$dir/TDEPS"
     local pkg_name
     pkg_name=$(echo "$dir" | cut -d/ -f4-7)
     if grep "^${needle}\$" "$dep_file" >/dev/null 2>&1; then
@@ -80,7 +85,7 @@ check_file() {
 
        interp_pkg=$(echo "$interp" | cut -d/ -f4-7)
        if ! pkg_in_deps "$dir" "$interp_pkg"; then
-           interp_error="$interp_pkg needed by interperter ($interp) but not present in DEPS"
+           interp_error="$interp_pkg needed by interperter ($interp) but not present in TDEPS"
        fi
 
        if [[ -n "$interp_error" ]]; then
@@ -144,7 +149,7 @@ check_file() {
     # We want to check for resolved libs that aren't in rooted in
     # /hab/pkgs and ensure that all referenced packages are in in DEPS
     # file.
-    resolved_libs=$(echo "$ldd_output" | awk '/ => / {print $3}')
+    resolved_libs=$(echo "$ldd_output" | grep -v 'not found' | awk '/ => / {print $3}')
     non_hab_libs=$(echo "$resolved_libs" | grep -v '^/hab/pkgs')
     if [[ -n "$non_hab_libs" ]]; then
         ret=1
@@ -168,7 +173,7 @@ check_file() {
                 error "$file:"
                 _header_printed="true"
             fi
-            error "      $pkg is not listed in DEPS but is used as a dependency"
+            error "      $pkg is not listed in TDEPS but is used as a dependency"
         done
     fi
 
