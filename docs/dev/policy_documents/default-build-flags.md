@@ -113,7 +113,7 @@ pull-request process to update the above mentioned script.
 # Reference-level explanation
 [reference-level-explanation]: #reference-level-explanation
 
-A mutli-phased approach will help us quickly improve the quality of
+A multi-phased approach will help us quickly improve the quality of
 core-plans while working on a feature robust enough for inclusion in
 hab-plan-build.
 
@@ -129,7 +129,7 @@ range of software without substantial problems:
   attack mitigation with performance.
 
 - `-D_FORTIFY_SOURCE=2`: A glibc macro that adds checks to commonly
-  misused functions in order to prevent buffe oveflow errors.
+  misused functions in order to prevent buffer overflow errors.
 
 These would be applied on a per-plan basis via the sourcing of a bash
 script that sets `CFLAGS`, `LDFLAGS`, `CPPFLAGS`, and `CXXFLAGS` as
