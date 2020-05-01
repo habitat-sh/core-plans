@@ -8,8 +8,6 @@
 #
 set -euo pipefail
 
-_header_printed=""
-
 error() {
     echo "$@" >&2
 }
@@ -19,6 +17,12 @@ usage() {
     error ""
     error "PACKAGE is a fully-qualified ident or the path to the packages install dir."
 }
+
+if ! [[ "${BASH_VERSINFO[0]}" -gt 4 || ( "${BASH_VERSINFO[0]}" -eq 4 && "${BASH_VERSINFO[1]}" -ge 4 ) ]]; then
+    error "Minimum version of bash 4.4 or greater is required. Found ${BASH_VERSION}."
+    error "Try running inside the hab studio"
+    exit 1
+fi
 
 pkg_in_deps() {
     local dir="$1"
@@ -45,28 +49,33 @@ check_file() {
     local dir="$1"
     local file="$2"
 
-    local ret=0
-    local _header_printed="false"
+    local _warnings=()
+    local _errors=()
 
-    #
+    local readelf_output
+    readelf_output=$(readelf -d -l "$file")
     # We are looking for a line that looks like this:
     #
     #     0x000000000000000f (RPATH)              Library rpath: [/hab/pkgs/core/glibc/2.27/20190115002733/lib:/hab/pkgs/core/pcre/8.42/20190115012526/lib]
     #
-    # TODO(ssd) 2020-04-29: We could also check that all members of
-    # the RPATH are in DEPS
-    if ! readelf -d "$file" | grep -E "(RPATH|RUNPATH)" >/dev/null 2>&1; then
-        if [[ "${_header_printed}" != "true" ]]; then
-            error "$file:"
-            _header_printed="true"
+    # TODO(ssd) 2020-05-01: We currently omit this warning if there
+    # aren't any other problems found in the output. A number of
+    # packages at the moment have nested libraries which don't set
+    # rpath.
+    #
+    # TODO(ssd) 2020-05-01: We can't check the RPATH entries against
+    # the dep list without a lot of noise because a number of packages
+    # currently have core/gcc in their RPATH in addition to
+    # core/gcc-libs. core/gcc isn't a runtime dep but gcc-libs is in
+    # most of these cases.
+    if echo "$readelf_output" | grep '\bDYNAMIC\b' >/dev/null; then
+        if ! echo "$readelf_output" | grep -E "(RPATH|RUNPATH)" >/dev/null 2>&1; then
+            _warnings+=("no RPATH set, resolved libraries might not be trustworthy")
         fi
-        error "      warning: no RPATH set, resolved libraries might not be trustworthy"
     fi
 
     local interp
     local interp_pkg
-    local interp_error=""
-
     # We are looking for a line that looks like this:
     #
     #       [Requesting program interpreter: /hab/pkgs/core/glibc/2.27/20190115002733/lib/ld-linux-x86-64.so.2]
@@ -77,24 +86,15 @@ check_file() {
     #
     # not all files we are checking will have an interpreter.
     #
-    interp=$(readelf -l "$file" | awk -F: '/interpreter: / {print $2}' | sed -e 's/]$//' -e 's/^ //')
+    interp=$(echo "$readelf_output" | awk -F: '/interpreter: / {print $2}' | sed -e 's/]$//' -e 's/^ //')
     if [[ -n "$interp" ]]; then
        if [[ ! "$interp" =~ /hab/pkg.* ]]; then
-           interp_error="$interp not in /hab/pkgs"
+           _errors+=("$interp not in /hab/pkgs")
        fi
 
        interp_pkg=$(echo "$interp" | cut -d/ -f4-7)
        if ! pkg_in_deps "$dir" "$interp_pkg"; then
-           interp_error="$interp_pkg needed by interperter ($interp) but not present in TDEPS"
-       fi
-
-       if [[ -n "$interp_error" ]]; then
-           ret=1
-           if [[ "${_header_printed}" != "true" ]]; then
-               error "$file:"
-               _header_printed="true"
-           fi
-           error "      $interp_error"
+           _errors+=("$interp_pkg needed by interperter ($interp) but not present in TDEPS")
        fi
     fi
 
@@ -114,18 +114,11 @@ check_file() {
 
     missing_libs=$(echo "$ldd_output" | awk '/not found/ {print $1}' | sort | uniq)
     if [[ -n "$missing_libs" ]]; then
-        ret=1
-        if [[ "${_header_printed}" != "true" ]]; then
-            error "$file:"
-            _header_printed="true"
-        fi
-
         for lib in $missing_libs; do
-            error "      $lib missing"
+            _errors+=("$lib missing")
         done
     fi
 
-    #
     # Our ldd output looks like this:
     #
     # 	linux-vdso.so.1 (0x00007ffc10933000)
@@ -152,13 +145,8 @@ check_file() {
     resolved_libs=$(echo "$ldd_output" | grep -v 'not found' | awk '/ => / {print $3}')
     non_hab_libs=$(echo "$resolved_libs" | grep -v '^/hab/pkgs')
     if [[ -n "$non_hab_libs" ]]; then
-        ret=1
-        if [[ "${_header_printed}" != "true" ]]; then
-            error "$file:"
-            _header_printed="true"
-        fi
         for lib in $non_hab_libs; do
-            error "      $lib is not in /hab/pkgs"
+            _errors+=("$lib is not in /hab/pkgs")
         done
     fi
 
@@ -168,15 +156,21 @@ check_file() {
             if pkg_in_deps "$dir" "$pkg"; then
                 continue
             fi
-            ret=1
-            if [[ "${_header_printed}" != "true" ]]; then
-                error "$file:"
-                _header_printed="true"
-            fi
-            error "      $pkg is not listed in TDEPS but is used as a dependency"
+            _errors+=("$pkg is not listed in TDEPS but is used as a dependency")
         done
     fi
 
+    local ret=0
+    if [[ "${#_errors[@]}" -gt 0 ]]; then
+        ret=1
+        error "$file:"
+        for warn in "${_warnings[@]}"; do
+            error "    warning: $warn"
+        done
+        for err in "${_errors[@]}"; do
+            error "    $err"
+        done
+    fi
     return $ret
 }
 
