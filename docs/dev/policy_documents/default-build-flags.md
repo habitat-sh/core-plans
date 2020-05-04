@@ -65,10 +65,10 @@ various exploits harder to write.
 These mitigations are enabled via compiler and linker flags.  Most
 distributions have made such flags their default:
 
-https://fedoraproject.org/wiki/Changes/Harden_All_Packages
-https://wiki.debian.org/HardeningWalkthrough
-https://nixos.org/nixpkgs/manual/#sec-hardening-in-nixpkgs
-https://wiki.gentoo.org/wiki/Project:Hardened
+- https://fedoraproject.org/wiki/Changes/Harden_All_Packages
+- https://wiki.debian.org/HardeningWalkthrough
+- https://nixos.org/nixpkgs/manual/#sec-hardening-in-nixpkgs
+- https://wiki.gentoo.org/wiki/Project:Hardened
 
 ## Why a Policy?
 
