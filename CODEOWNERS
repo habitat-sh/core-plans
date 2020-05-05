@@ -15,11 +15,10 @@ protobuf-rust @smacfarlane @habitat-sh/habitat-core-plans-maintainers
 zeromq @smacfarlane @habitat-sh/habitat-core-plans-maintainers
 
 # # Base Plans
-#
-# These plans are known as "base" plans which are used to build Habitat from
-# nothing and are in build order. Consequently, these need a closer look when
-# accepting changes, updating versions, etc.
+# The following plans are collectively known as the "base" plans.
+# For more information see `docs/dev/guide_documents/base-plans.md` in this repository.
 
+# These packages should not be updated outside of a base plans refresh.
 linux-headers @smacfarlane
 glibc @smacfarlane
 zlib @smacfarlane
@@ -31,49 +30,56 @@ mpfr @smacfarlane
 libmpc @smacfarlane
 gcc @smacfarlane
 gcc-libs @smacfarlane
+gdbm @smacfarlane
 patchelf @smacfarlane
-bzip2 @smacfarlane
 pkg-config @smacfarlane
 ncurses @smacfarlane
 attr @smacfarlane
 acl @smacfarlane
 libcap @smacfarlane
 sed @smacfarlane
-shadow @smacfarlane
-psmisc @smacfarlane
 procps-ng @smacfarlane
 coreutils @smacfarlane
 bison @smacfarlane
 flex @smacfarlane
 pcre @smacfarlane
 grep @smacfarlane
-readline @smacfarlane
-bash @smacfarlane
-bc @smacfarlane
-tar @smacfarlane
 gawk @smacfarlane
-libtool @smacfarlane
-gdbm @smacfarlane
-expat @smacfarlane
 db @smacfarlane
 inetutils @smacfarlane
-iana-etc @smacfarlane
-less @smacfarlane
-perl @smacfarlane
 diffutils @smacfarlane
 autoconf @smacfarlane
 automake @smacfarlane
 findutils @smacfarlane
 xz @smacfarlane
 gettext @smacfarlane
-gzip @smacfarlane
 make @smacfarlane
 patch @smacfarlane
 texinfo @smacfarlane
 util-linux @smacfarlane
 tcl @smacfarlane
+bzip2 @smacfarlane
 expect @smacfarlane
+less @smacfarlane
+perl @smacfarlane
 dejagnu @smacfarlane
+python-minimal @smacfarlane
+
+# These packages are generally safe to update in a normal builder workflow, but still
+# require additional care when updating. Updates to these plans should be coordinated
+# with the Habitat team when possible. See `docs/dev/guide_documents/base-plans.md` in this repository
+# for more information
+
+shadow @smacfarlane
+psmisc @smacfarlane
+readline @smacfarlane
+bash @smacfarlane
+bc @smacfarlane
+tar @smacfarlane
+libtool @smacfarlane
+expat @smacfarlane
+iana-etc @smacfarlane
+gzip @smacfarlane
 check @smacfarlane
 libidn @smacfarlane
 cacerts @smacfarlane
@@ -98,7 +104,6 @@ vim @smacfarlane
 libbsd @smacfarlane
 clens @smacfarlane
 mg @smacfarlane
-python-minimal @smacfarlane
 powershell @mwrock
 7zip @mwrock
 docker-credential-helper @mwrock
