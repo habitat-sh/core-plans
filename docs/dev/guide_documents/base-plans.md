@@ -80,6 +80,18 @@ If the dependencies of these plans change, which is rare but does happen, they s
 be checked to see if it moves the plan in to the 'Gang of 4X' cycle. If it does, 
 then that update should be made as part of the next base plans refresh.
 
+Additional things to consider when updating these plans include:
+
+* Number of reverse depenencies
+  * What parts of the ecosystem does it impact? Languages? Databases? etc.
+  * Can affect timing, large numbers of rebuilds could hold up other critical updates if there is overlap
+* Does the changelog indicate any changes that might impact downstream usage?
+* Why is the software being updated?
+  * CVE
+  * New features
+  * Bug fixes
+* Does the plan README contain any additional instructions?
+
 ```
 shadow 
 psmisc 
