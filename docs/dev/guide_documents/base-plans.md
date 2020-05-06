@@ -3,9 +3,9 @@ The following plans are collectively known as the "base" plans. They are the
 the minimum set of packages required in order to build the Habitat cli, 
 plan-build and the studio. Habitat is a self-hosting system; The build system, 
 plan-build, is a Habitat package that depends on other Habitat packages to run.
-Those packages were build with plan-build. If a change were to produce a studio 
+Those packages were built with plan-build. If a change were to produce a studio 
 or plan-build package that failed at run time, it would require manual 
-intervetion and builds to correct.  As such plans in this list require 
+intervention and builds to correct.  As such plans in this list require 
 additional care when merging.
 
 The base plans can be further divided into two groups. 
