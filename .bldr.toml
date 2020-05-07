@@ -83,6 +83,8 @@ plan_path = "boost159"
 plan_path = "boringssl"
 [btrfs-progs]
 plan_path = "btrfs-progs"
+[buildah]
+plan_path = "buildah"
 [buildkite-agent]
 plan_path = "buildkite-agent"
 [buildkite-cli]
