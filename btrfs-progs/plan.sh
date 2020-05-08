@@ -26,6 +26,6 @@ do_build() {
     AL_OPTS="-I $(pkg_path_for core/pkg-config)/share/aclocal -I$(pkg_path_for core/automake)/share/aclocal-1.16"
     export AL_OPTS
     ./autogen.sh
-    ./configure --disable-documentation --disable-convert --prefix="${pkg_prefix}"
+    ./configure --disable-documentation --prefix="${pkg_prefix}"
     make
 }
