@@ -7,6 +7,18 @@ pkg_source="https://git.kernel.org/pub/scm/linux/kernel/git/kdave/btrfs-progs.gi
 pkg_shasum="1b13aa66f7dbf409a61a2e18533e5455daa0116cbd78f4e9676ceb71cab9d002"
 pkg_deps=(core/glibc
           core/util-linux
+          # NOTE(ssd) 2020-05-11: This dependency must be listed
+          # _after_ core/util-linux in the runtime deps even though it
+          # only ships static libraries.
+          #
+          # Both core/util-linux and core/e2fsprogs ship the blkid.h
+          # header file, but with incompatible
+          # definitions. btrfs-progs requires the one in
+          # core/util-linux.
+          #
+          # When generating CFLAGS hab-plan-build puts all build-time
+          # dependencies before any runtime dependencies.
+          core/e2fsprogs
           core/lzo
           core/zlib
           core/zstd)
