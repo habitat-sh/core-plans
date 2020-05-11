@@ -19,3 +19,9 @@ pkg_deps=(
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_bin_dirs=(sbin)
+pkg_pconfig_dirs=(lib/pkgconfig)
+
+do_build() {
+    ./configure --prefix="$pkg_prefix" --enable-pkgconfig
+    make
+}
