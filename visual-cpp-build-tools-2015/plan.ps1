@@ -46,6 +46,25 @@ function Invoke-Unpack {
     } finally { Pop-Location }
 }
 
+function Invoke-SetupEnvironment {
+    Set-BuildtimeEnv VisualStudioVersion "14.0"
+
+    Set-BuildtimeEnv VCTargetsPath "$pkg_prefix\Program Files\MSBuild\Microsoft.Cpp\v4.0\v140" -IsPath
+    Set-BuildtimeEnv VcInstallDir "$pkg_prefix\Program Files\Microsoft Visual Studio 14.0\VC" -IsPath
+    Set-BuildtimeEnv WindowsSdkDir_81 "$pkg_prefix\Windows Kits\8.1" -IsPath
+    Set-BuildtimeEnv CLTrackerSdkPath "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64" -IsPath
+    Set-BuildtimeEnv CLTrackerFrameworkPath "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64" -IsPath
+    Set-BuildtimeEnv LinkTrackerSdkPath "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64" -IsPath
+    Set-BuildtimeEnv LinkTrackerFrameworkPath "$$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64" -IsPath
+    Set-BuildtimeEnv LibTrackerSdkPath "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64" -IsPath
+    Set-BuildtimeEnv LibTrackerFrameworkPath "$$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64" -IsPath
+    Set-BuildtimeEnv RCTrackerSdkPath "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64" -IsPath
+    Set-BuildtimeEnv RCTrackerFrameworkPath "$pkg_prefix\Program Files\MSBuild\14.0\bin\amd64" -IsPath
+    Set-BuildtimeEnv DisableRegistryUse "true"
+    Set-BuildtimeEnv UseEnv "true"
+}
+
+
 function Invoke-Install {
     Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include "Program Files" -Recurse | ForEach-Object {
         Copy-Item $_ "$pkg_prefix" -Exclude "*.duplicate*" -Recurse -Force
