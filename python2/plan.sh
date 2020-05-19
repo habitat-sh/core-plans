@@ -5,7 +5,7 @@ source ../python/plan.sh
 # If so, the python2 namespace would need to be deprecated per RFC 0007
 pkg_name=python2
 pkg_distname=Python
-pkg_version=2.7.15
+pkg_version=2.7.18
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Python-2.0')
@@ -14,7 +14,7 @@ pkg_description="Python is a programming language that lets you work quickly \
 pkg_upstream_url="https://www.python.org"
 pkg_dirname="${pkg_distname}-${pkg_version}"
 pkg_source="https://www.python.org/ftp/python/${pkg_version}/${pkg_dirname}.tgz"
-pkg_shasum="18617d1f15a380a919d517630a9cd85ce17ea602f9bbdc58ddc672df4b0239db"
+pkg_shasum="da3080e3b488f648a3d7a4560ddee895284c3380b11d6de75edb986526b9a814"
 
 pkg_interpreters=(bin/python bin/python2 bin/python2.7)
 
