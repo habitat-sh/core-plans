@@ -1314,8 +1314,6 @@ plan_path = "rq"
 plan_path = "rsync"
 [ruby]
 plan_path = "ruby"
-[ruby24]
-plan_path = "ruby24"
 paths = [
   "ruby/*"
 ]
