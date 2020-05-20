@@ -54,5 +54,5 @@ bats "$(dirname "${0}")/test.bats"
 hab svc unload "${TEST_PKG_IDENT}" || true
 hab svc unload core/zookeeper || true
 
-# cleanup local message file
+# clean up local message file
 rm kafka_messages

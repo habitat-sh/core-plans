@@ -1,5 +1,5 @@
 @test "kafka service is running" {
-  [ "$(hab svc status | grep "kafka\.default" | awk '{print $4}' | grep up)" ]
+  [ "$(hab svc status | grep "kafka2\.default" | awk '{print $4}' | grep up)" ]
 }
 
 expected_version="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
