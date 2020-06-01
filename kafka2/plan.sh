@@ -1,5 +1,5 @@
+pkg_name=kafka2
 pkg_root_name="kafka"
-pkg_name=${pkg_root_name}2
 pkg_origin=core
 pkg_version=2.5.0
 pkg_source="https://downloads.apache.org/${pkg_root_name}/${pkg_version}/${pkg_root_name}_2.13-${pkg_version}.tgz"
