@@ -627,6 +627,16 @@ plan_path = "json-c"
 plan_path = "json-glib"
 [kafka]
 plan_path = "kafka"
+[kafka0]
+plan_path = "kafka0"
+paths = [
+  "kafka/*",
+]
+[kafka2]
+plan_path = "kafka2"
+paths = [
+  "kafka/*",
+]
 [kbproto]
 plan_path = "kbproto"
 [kibana]
