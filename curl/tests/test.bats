@@ -9,3 +9,8 @@ expected_version=$(cut -d/ -f3 <<< $TEST_PKG_IDENT)
   run hab pkg exec $TEST_PKG_IDENT curl -s -o /dev/null -w "%{http_code}" "https://www.example.org/"
   [ "$output" -eq 200 ]
 }
+
+@test "JSON output" {
+  run hab pkg exec ${TEST_PKG_IDENT} curl -s -o /dev/null -w "%{json}" "https://www.example.org/"
+  jq -ne --argjson output "$output" '$output.http_code == 200'
+}
