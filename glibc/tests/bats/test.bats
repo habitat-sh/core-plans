@@ -1,6 +1,7 @@
 setup() {
   TEST_PKG_PATH="/hab/pkgs/$TEST_PKG_IDENT"
   GLIBC_VERSION="$(cut -d/ -f3 $TEST_PKG_PATH/IDENT)"
+  ORIGIN="$(cut -d/ -f1 $TEST_PKG_PATH/IDENT)"
 }
 
 @test "its abi version is 3.2.0" {
@@ -11,11 +12,11 @@ setup() {
 
 # This is a test performed as part of `make check` but will always be a false positive
 # https://sourceware.org/glibc/wiki/Testing/Testsuite#abi-check
-# We expect this to always be 54 for us:
 # /hab/pkgs/core/glibc/2.29/20190624135026/share/locale
 @test "it has the correct length for _dl_default_dirname" {
+  LENGTH=$(( 50 + ${#ORIGIN} ))
   length="$(readelf -s "$TEST_PKG_PATH/lib/libc-$GLIBC_VERSION.so" | grep -E "_nl_default_dirname" | awk '{ print $3 }' | tail -n1)"
-  [ "$length" -eq 54 ]
+  [ "$length" -eq $((LENGTH)) ]
 }
 
 # RTLDLIST contains elements we don't care about but aren't harmful to include. The first element should _ALWAYS_
