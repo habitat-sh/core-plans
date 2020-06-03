@@ -1,7 +1,7 @@
 # shellcheck disable=SC2034
 pkg_name=go
 pkg_origin=core
-pkg_version=1.14
+pkg_version=1.14.4
 # Rolled back recent change to core/go17 to facillitate a from-scratch
 # base-plan refresh.
 pkg_bootstrap_pkg="core/go17"
@@ -11,8 +11,8 @@ pkg_description="Go is an open source programming language that makes it easy to
 pkg_upstream_url=https://golang.org/
 pkg_license=('BSD')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source="https://storage.googleapis.com/golang/go${pkg_version}.src.tar.gz"
-pkg_shasum=6d643e46ad565058c7a39dac01144172ef9bd476521f42148be59249e4b74389
+pkg_source="https://dl.google.com/go/go${pkg_version}.src.tar.gz"
+pkg_shasum=7011af3bbc2ac108d1b82ea8abb87b2e63f78844f0259be20cde4d42c5c40584
 pkg_dirname=go
 pkg_deps=(
   core/glibc
