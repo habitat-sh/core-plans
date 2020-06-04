@@ -6,6 +6,8 @@ Note that this plan takes a dependency on the `core/ps-lock` plan to ensure that
 
 The plan puts its `psd1` and `psm1` files in the `PSModulePath` so that its function `Start-DscCore` is automatically discoverable.
 
+Calls to `Start-DscCore` will set the LCM's `RefreshMode` to `Push` and `ConfigurationMode` to `ApplyOnly`. These properties are reset to their original values after `Start-DscCore` completes.
+
 ## Maintainers
 
 The Habitat Maintainers humans@habitat.sh
@@ -123,17 +125,6 @@ Enter-PSLock -Name $(Get-DscLock) -Interval 10 -Splay 10 {
 ```
 
 If the `chef-client` only needs to run once, you can ommit the `-Interval` and `-Splay` arguments.
-
-### Problems using in a local Windows Studio
-
-The `PSModulePath` in a local Windows studio (one started with `hab studio enter -w`) will get assigned the wrong package path and thus simply calling `Start-DscCore` will not automatically import this module.
-
-You can work around this by explicitly importing the module before using the command:
-
-```PowerShell
-Import-Module "{{pkgPathFor "core/dsc-core"}}/Modules/DscCore"
-Start-DscCore (Join-Path {{pkg.svc_config_path}} firewall.ps1) NewFirewallRule
-```
 
 # Testing
 
