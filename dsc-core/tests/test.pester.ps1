@@ -125,7 +125,7 @@ InModuleScope -ModuleName DSCCore {
             $results = Invoke-DSCCommandFile -config "function test_dsc_function (`$OutputPath, `$ConfigurationData){@{Directory = `$OutputPath;ConfigurationData = `$ConfigurationData}}" -func test_dsc_function -ConfigData $cd
             Remove-Item $results.directory -Recurse
             It "should have initial configuration data of type ArrayList" {
-                $cd.AllNodes -is [System.Collections.ArrayList] | should be $true
+                $cd.AllNodes -is [System.Collections.ArrayList] | Should be $true
             }
         }
     }
@@ -135,13 +135,10 @@ Describe "dsc-core" -tag Functional {
     BeforeAll {
         Invoke-Command -EnableNetworkAccess -computername localhost {
             [DSCLocalConfigurationManager()]
-            configuration LCMConfig
-            {
-                Node localhost
-                {
-                    Settings
-                    {
-                        RefreshMode = "Disabled"
+            configuration LCMConfig {
+                Node localhost {
+                    Settings {
+                        RefreshMode       = "Disabled"
                         ConfigurationMode = "ApplyAndMonitor"
                     }
                 }
