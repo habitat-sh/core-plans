@@ -1224,6 +1224,8 @@ plan_path = "protobuf-c"
 plan_path = "protobuf-cpp"
 [protobuf-rust]
 plan_path = "protobuf-rust"
+[ps-lock]
+plan_path = "ps-lock"
 [psmisc]
 plan_path = "psmisc"
 [psscriptanalyzer]
