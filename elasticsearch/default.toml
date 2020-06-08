@@ -141,7 +141,7 @@
   #
   # Set the bind address to a specific IP (IPv4 or IPv6):
   #
-  host =  "_site_"
+  host =  "127.0.0.1"
   #
   # Set a custom port for HTTP:
   #
@@ -160,7 +160,7 @@
   # Pass an initial list of hosts to perform discovery when new node is started:
   # The default list of hosts is ["127.0.0.1", "[::1]"]
   #
-  ping_unicast_hosts = "[]"
+  ping_unicast_hosts = ["127.0.0.1"]
   #
   # Prevent the "split brain" by configuring the majority of nodes (total number of nodes / 2 + 1):
   #
