@@ -24,6 +24,10 @@ $pkg_include_dirs=@(
     "Windows Kits\10\Include\10.0.17763.0\winrt"
 )
 
+function Invoke-SetupEnvironment {
+    Set-RuntimeEnv -IsPath "WindowsSdkDir_10" "$pkg_prefix\Windows Kits\10"
+}
+
 function Invoke-Unpack {
     Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList "/features OptionId.DesktopCPPx64 /quiet /layout $HAB_CACHE_SRC_PATH/$pkg_dirname"
     Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
