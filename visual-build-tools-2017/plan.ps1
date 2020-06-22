@@ -29,14 +29,15 @@ function Invoke-SetupEnvironment {
 
 function Invoke-Unpack {
     $installArgs = "--quiet --layout $HAB_CACHE_SRC_PATH/$pkg_dirname --lang en-US"
-    @(
+    $components = @(
         "Microsoft.VisualStudio.Workload.MSBuildTools",
         "Microsoft.VisualStudio.Workload.VCTools",
         "Microsoft.VisualStudio.Component.SQL.SSDTBuildSku",
         "Microsoft.VisualStudio.Component.VC.ATLMFC",
         "Microsoft.VisualStudio.Component.NuGet.BuildTools"
-    ) | ForEach-Object {
-        $installArgs += " --add $_"
+    )
+    foreach ($component in $components) {
+        $installArgs += " --add $component"
     }
     Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList $installArgs
     Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
