@@ -22,6 +22,11 @@ $pkg_include_dirs=@(
     "Contents\VC\Tools\MSVC\14.16.27023\include"
 )
 
+function Invoke-SetupEnvironment {
+    Set-RuntimeEnv "DisableRegistryUse" "true"
+    Set-RuntimeEnv "UseEnv" "true"
+}
+
 function Invoke-Unpack {
     $installArgs = "--quiet --layout $HAB_CACHE_SRC_PATH/$pkg_dirname --lang en-US"
     @(
@@ -33,14 +38,14 @@ function Invoke-Unpack {
     ) | ForEach-Object {
         $installArgs += " --add $_"
     }
-Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList $installArgs
-Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
-try {
-    Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include *.vsix -Exclude @('*x86*', '*.arm.*') -Recurse | ForEach-Object {
-        Rename-Item $_ "$_.zip"
-        Expand-Archive "$_.zip" expanded -force
-    }
-} finally { Pop-Location }
+    Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList $installArgs
+    Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+    try {
+        Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include *.vsix -Exclude @('*x86*', '*.arm.*') -Recurse | ForEach-Object {
+            Rename-Item $_ "$_.zip"
+            Expand-Archive "$_.zip" expanded -force
+        }
+    } finally { Pop-Location }
 }
 
 function Invoke-Install {
