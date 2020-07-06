@@ -12,6 +12,10 @@ $pkg_bin_dirs=@("Program Files\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.2 Too
 $pkg_lib_dirs=@("Program Files\Windows Kits\NETFXSDK\4.6.2\Lib\um\x64")
 $pkg_include_dirs=@("Program Files\Windows Kits\NETFXSDK\4.6.2\Include\um")
 
+function Invoke-SetupEnvironment {
+    Set-RuntimeEnv -IsPath "TargetFrameworkRootPath" "$pkg_prefix\Program Files\Reference Assemblies\Microsoft\Framework"
+}
+
 function Invoke-Unpack {
     dark -x "$HAB_CACHE_SRC_PATH/$pkg_dirname" "$HAB_CACHE_SRC_PATH/$pkg_filename"
     Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"

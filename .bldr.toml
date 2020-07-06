@@ -249,6 +249,12 @@ plan_path = "docker-compose"
 plan_path = "docutils"
 [dosfstools]
 plan_path = "dosfstools"
+[dotnet-45-dev-pack]
+path_plan = "dotnet-45-dev-pack"
+[dotnet-462-dev-pack]
+path_plan = "dotnet-462-dev-pack"
+[dotnet-47-dev-pack]
+path_plan = "dotnet-47-dev-pack"
 [dotnet-471-dev-pack]
 path_plan = "dotnet-471-dev-pack"
 [dotnet-472-dev-pack]
