@@ -1108,6 +1108,8 @@ plan_path = "packer"
 plan_path = "pango"
 [papi]
 plan_path = "papi"
+[parallel]
+plan_path = "parallel"
 [patch]
 plan_path = "patch"
 [patchelf]
