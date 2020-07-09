@@ -3,8 +3,8 @@ pkg_origin=core
 pkg_version=1.7.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Apache Portable Runtime"
-pkg_upstream_url="https://apr.apache.org/"
-pkg_license=('Apache-2.0')
+pkg_upstream_url=https://apr.apache.org/
+pkg_license=("Apache-2.0")
 pkg_source="https://archive.apache.org/dist/apr/${pkg_name}-${pkg_version}.tar.bz2"
 pkg_shasum=e2e148f0b2e99b8e5c6caa09f6d4fb4dd3e83f744aa72a952f94f5a14436f7ea
 pkg_deps=(
@@ -47,13 +47,13 @@ do_check() {
 
   make test
 
-  if [[ -n "$clean_services" ]]; then
+  if [[ -n "${clean_services}" ]]; then
     rm -fv /etc/services
   fi
 }
 
 do_end() {
-  if [[ -n "$_clean_file" ]]; then
+  if [[ -n "${_clean_file}" ]]; then
     rm -fv /usr/bin/file
   fi
 }
