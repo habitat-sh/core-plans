@@ -1,10 +1,8 @@
 pkg_name=azure-cli
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=('MIT')
-pkg_description="The Azure command-line interface (CLI) is Microsoft's cross-platform \
-  command-line experience for managing Azure resources. Use it in your browser with Azure \
-  Cloud Shell, or install it on macOS, Linux, or Windows and run it from the command line."
+pkg_license=("MIT")
+pkg_description="The Azure command-line interface (CLI) is Microsoft's cross-platform command-line experience for managing Azure resources."
 pkg_upstream_url=https://docs.microsoft.com/en-us/cli/azure
 pkg_version=2.0.77
 pkg_shasum=9d2867b2a93d506eeba3b1b4d5234ccf9b49c9b5465d8fe4b2f4919c5f3de511
