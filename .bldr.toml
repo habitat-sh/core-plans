@@ -156,6 +156,8 @@ plan_path = "concourse"
 plan_path = "concourse-fly"
 [consul]
 plan_path = "consul"
+[coredns]
+plan_path = "coredns"
 [coreutils]
 plan_path = "coreutils"
 [coreutils-static]
