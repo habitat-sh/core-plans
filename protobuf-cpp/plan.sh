@@ -1,13 +1,13 @@
 pkg_name=protobuf-cpp
 pkg_distname=protobuf
 pkg_origin=core
-pkg_version=3.9.2
+pkg_version=3.12.3
 pkg_license=('BSD')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Google's language-neutral, platform-neutral, extensible mechanism for serializing structured data."
 pkg_upstream_url="https://github.com/google/${pkg_distname}"
 pkg_source="https://github.com/google/${pkg_distname}/releases/download/v${pkg_version}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=1891110cce323fe56b509da3589f03756c7eaf462a60971cb1c4af4efb154f69
+pkg_shasum=4ef97ec6a8e0570d22ad8c57c99d2055a61ea2643b8e1a0998d2c844916c4968
 pkg_dirname="${pkg_distname}-${pkg_version}"
 pkg_deps=(core/gcc-libs core/zlib)
 pkg_build_deps=(core/make core/gcc)
