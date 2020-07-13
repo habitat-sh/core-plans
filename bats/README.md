@@ -12,4 +12,8 @@ Binary package
 
 ## Usage
 
-*TODO: Add instructions for usage*
+```
+hab pkg install core/bats
+hab pkg binlink core/bats bats
+bats <path to bats file>
+```
