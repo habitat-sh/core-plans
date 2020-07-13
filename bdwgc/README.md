@@ -12,4 +12,6 @@ Binary package
 
 ## Usage
 
-*TODO: Add instructions for usage*
+```
+hab pkg install --binlink core/bdwgc
+```
