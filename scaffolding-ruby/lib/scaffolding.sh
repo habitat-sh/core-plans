@@ -392,8 +392,9 @@ scaffolding_run_assets_precompile() {
 
   if _has_gem rake && _has_rakefile; then
     pushd "$scaffolding_app_prefix" > /dev/null
-    if _rake -P --trace | grep -q '^rake assets:precompile$'; then
-      build_line "Detected and running Rake 'assets:precompile'"
+    build_line "Detecting if there's a precompile rake task"
+    if [ "$(_rake --tasks assets:precompile | grep -c assets:precompile)" -ge 1 ]; then
+      build_line "...running 'rake assets:precompile'"
       export DATABASE_URL=${DATABASE_URL:-"postgresql://nobody@nowhere/fake_db_to_appease_rails_env"}
       _rake assets:precompile
     fi
