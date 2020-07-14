@@ -654,7 +654,8 @@ _add_git() {
 _detect_execjs() {
   if _has_gem execjs; then
     build_line "Detected 'execjs' gem in Gemfile.lock, adding node packages"
-    pkg_deps=(core/node "${pkg_deps[@]}")
+    : "${scaffolding_node_pkg:="core/node"}"
+    pkg_deps=("${scaffolding_node_pkg}" "${pkg_deps[@]}")
     debug "Updating pkg_deps=(${pkg_deps[*]}) from Scaffolding detection"
   fi
 }

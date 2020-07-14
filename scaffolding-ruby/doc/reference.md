@@ -51,7 +51,7 @@ The following gems will checked for in the `Gemfile.lock` to conditionally injec
 * If the `sqlite3` gem is detected, then sqlite-related Habitat packages will be injected into your Plan's `pkg_deps` array.
 * If any of several PostgreSQL-related gems are detected, then PostgreSQL-related Habitat packages will be injected into your Plan's `pkg_deps` array. See the PostgreSQL Database Detection section for more details.
 * If the `nokogiri` gem is detected, then XML/XSLT-related Habitat packages will be injected into your Plan's `pkg_deps` array.
-* If the `execjs` gem is detected, then Node-related Habitat packages will be injected into your Plan's `pkg_deps` array.
+* If the `execjs` gem is detected, then Node-related Habitat packages will be injected into your Plan's `pkg_deps` array.  By default this will be the `core/node` package.  To override this, set `scaffolding_node_pkg` within your plan file.  For example to use node 10 add  `scaffolding_node_pkg=core/node10`
 * If the `webpacker` gem is detected, then Yarn-related Habitat packages will be injected into your Plan's `pkg_deps` array.
 
 Additional checks performed by this scaffolding are:
