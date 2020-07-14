@@ -120,7 +120,7 @@ $(
 
 $(
   case "$_app_type" in
-    (rails5|rails42|rails41)
+    (rails6|rails5|rails42|rails41)
       cat <<_RAILS_
 
 # Check that the 'SECRET_KEY_BASE' environment variable is non-empty
@@ -492,7 +492,8 @@ _detect_gemfile() {
 }
 
 _detect_app_type() {
-  _detect_rails5_app \
+  _detect_rails6_app \
+    || _detect_rails5_app \
     || _detect_rails42_app \
     || _detect_rails41_app \
     || _detect_rails4_app \
@@ -760,7 +761,7 @@ _detect_rails42_app() {
     return 0
   else
     return 1
-  fi
+fi
 }
 
 _detect_rails5_app() {
@@ -773,6 +774,17 @@ _detect_rails5_app() {
     return 1
   fi
 }
+_detect_rails6_app() {
+  if _has_gem railties && _compare_gem railties \
+      --greater-than-eq 6.0.0 --less-than 6.1.0; then
+    build_line "Detected Rails 6 app type"
+    _app_type="rails6"
+    return 0
+  else
+    return 1
+  fi
+}
+
 
 _detect_ruby_app() {
   build_line "Detected Ruby app type"

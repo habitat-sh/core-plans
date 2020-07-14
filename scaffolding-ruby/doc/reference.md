@@ -314,6 +314,15 @@ hab start acmecorp/my_app --bind elastic search:es.my_app
 
 Several popular Ruby-based frameworks are detected and supported with additional dependencies, configurations, etc. See below for details on the state of each app type.
 
+
+### Rails 6.0 Applications
+
+#### Detection
+
+Rails 6 app type will be detected if the app's `Gemfile.lock` contains a `railties` gem with a version greater than `6.0.0` but less than `6.1.0`.
+
+At the moment the default process bin, environment variables and config will mirror those of a [Rails 5.x App](#rails-5x-applications)
+
 ### Rails 5.x Applications
 
 #### Detection
