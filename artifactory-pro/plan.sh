@@ -6,9 +6,12 @@ Repository managers serve two purposes: they act as highly configurable proxies 
 pkg_upstream_url=https://www.jfrog.com/artifactory/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("JFrog Artifactory EULA")
-pkg_source=https://dl.bintray.com/jfrog/${pkg_name}/org/artifactory/pro/jfrog-${pkg_name}/${pkg_version}/jfrog-${pkg_name}-${pkg_version}.zip
+pkg_source="https://dl.bintray.com/jfrog/${pkg_name}/org/artifactory/pro/jfrog-${pkg_name}/${pkg_version}/jfrog-${pkg_name}-${pkg_version}.zip"
 pkg_shasum=61cc41c177cf34780e643759157971a81ce6c72fe73ea2f182b9a79dfbcfc028
-pkg_deps=(core/bash core/openjdk11)
+pkg_deps=(
+  core/bash
+  core/openjdk11
+)
 pkg_exports=(
   [port]=port
 )
@@ -21,6 +24,6 @@ do_build() {
 }
 
 do_install() {
-  build_line "Copying files from $PWD"
-  cp -R ./* "$pkg_prefix/"
+  build_line "Copying files from ${PWD}"
+  cp -R ./* "${pkg_prefix}/"
 }
