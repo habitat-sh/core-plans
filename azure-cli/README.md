@@ -8,7 +8,7 @@ The Habitat Maintainers humans@habitat.sh
 
 ## Type of Package
 
-[binary wrapper package](https://www.habitat.sh/docs/best-practices/#binary-wrapper-packages)
+Binary package
 
 ## Usage
 
@@ -20,6 +20,7 @@ az --version
 ```
 
 ## Testing
+
 ```
 hab studio build azure-cli
 source results/last_build.env
@@ -27,6 +28,7 @@ hab studio run "./azure-cli/tests/test.sh ${pkg_ident}"
 ```
 
 ## Sample Output
+
 ```
  ✓ az exe runs
  ✓ az exe outputs the expected version 2.0.57
