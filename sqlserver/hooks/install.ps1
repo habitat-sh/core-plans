@@ -11,7 +11,7 @@ if($setupExe) {
 
 # If the sql instance data is not present, install a new instance
 if (!(Test-Path "{{pkg.svc_data_path}}/mssql${sqlMajorVersion}.{{cfg.instance}}")) {
-    (Get-Content "{{pkg.svc_config_install_path}}/config.ini" | ? { !$_.EndsWith("`"`"") }) | Set-Content "{{pkg.svc_config_install_path}}/config.ini"
+    (Get-Content "{{pkg.svc_config_install_path}}/config.ini" | Where-Object { !$_.EndsWith("`"`"") }) | Set-Content "{{pkg.svc_config_install_path}}/config.ini"
     ."$setupExe" /configurationfile={{pkg.svc_config_install_path}}/config.ini /Q
 
     # This is a workaround for Sql Server 2016 which fails to
@@ -27,7 +27,7 @@ Set-ItemProperty -Path  "HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL${sq
 
 # Open port on firewall only if Windows Firewall service is running
 if($(Get-Service 'MpsSvc').Status -eq "Running") {
-    Invoke-Command -ComputerName localhost -EnableNetworkAccess {    Write-Host "Checking for xNetworking PS module..."
+    Invoke-Command -ComputerName localhost -EnableNetworkAccess {
         $ProgressPreference="SilentlyContinue"
         Write-Host "Checking for nuget package provider..."
         if(!(Get-PackageProvider -Name nuget -ErrorAction SilentlyContinue -ListAvailable)) {
@@ -40,4 +40,10 @@ if($(Get-Service 'MpsSvc').Status -eq "Running") {
             Install-Module xNetworking -Force | Out-Null
         }
     }
+}
+
+Write-Host "Checking for SqlServer PS module in core environment..."
+if(!(Get-Module SqlServer -ListAvailable)) {
+    Write-Host "Installing SqlServer PS Module in core environment..."
+    Install-Module SqlServer -Force -Scope AllUsers
 }
