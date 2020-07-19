@@ -10,4 +10,11 @@ Binary package
 
 ## Usage
 
-*TODO: Add instructions for usage*
+Install the package, and binlink any commands you want to use from `busybox-static`.
+
+Note that because most of these commands are present on existing distributions, you may need to use `--force` while using the binlink command.
+
+```
+hab pkg install core/busybox-static
+hab pkg binlink core/busybox-static telnet --force
+```
