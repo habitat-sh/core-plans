@@ -5,8 +5,7 @@ try {
     while($(Get-Service 'MSSQL${{cfg.instance}}').Status -eq "Running") {
         Start-Sleep -Seconds 1
     }
-}
-finally {
+} finally {
     $currentStatus = (Get-Service 'MSSQL${{cfg.instance}}').Status
     if($currentStatus -eq "Running") {
         Write-Host "{{pkg.name}} stopping..."
