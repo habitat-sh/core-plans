@@ -16,9 +16,9 @@ Import the pester module:
 
 ```
 # From a powershell prompt
-Import-Module "$(hab pkg path core/pester)\module\pester.psd1"
+Import-Module "$(hab pkg path core/pester)\module\Pester.psd1"
 # From a plan.ps1
-Import-Module "$(Get-HabPackagePath pester)\module\pester.psd1"
+Import-Module "$(Get-HabPackagePath pester)\module\Pester.psd1"
 ```
 
 Now you can call pester functions like `Invoke-Pester`.

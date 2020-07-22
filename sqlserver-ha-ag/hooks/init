@@ -1,5 +1,11 @@
+# Progress Output looks strange emited by the supervisor
+# so we will turn it off because some of the clustering
+# commands print to the progress stream
 $ProgressPreference="SilentlyContinue"
 
+# It will be usefull to pick a "primary" and list of all secondary members
+# We will just choose 'bind.database.first' as primary since that will
+# be the same on all instances
 $secondary = @()
 $primary = '{{bind.database.first.sys.hostname}}'
 {{~#eachAlive bind.database.members as |member|}}
@@ -8,6 +14,12 @@ if($primary -ne '{{member.sys.hostname}}') {
 }
 {{~/eachAlive}}
 
+# There are a few powershell modules that we will use so lets
+# just install them all now.
+# We use Invoke-Command this way as a means of running inside
+# of Windows Powershell (vs. Powershell Core) because the modules
+# will be used inside of DSC which runs in a separate process under
+# windows powershell
 Invoke-Command -ComputerName localhost -EnableNetworkAccess {
     $ProgressPreference="SilentlyContinue"
     Write-Host "Checking for nuget package provider..."
@@ -32,11 +44,16 @@ Invoke-Command -ComputerName localhost -EnableNetworkAccess {
     }
 }
 
+# Invoke this DSC which simply enables the clustering windows features
 Import-Module "{{pkgPathFor "core/dsc-core"}}/Modules/DscCore"
 Start-DscCore (Join-Path {{pkg.svc_config_path}} cluster.ps1) EnableFailover
 
-# Adding a cluster here because DSC requires us to pass
-# credentials.
+# Now we create the cluster and add ourself to it. These commands
+# are all windows powershell only commands so we use Invoke-Command again.
+# While one can use DSC to do all of this. That is awkward because we would
+# have to pass our credentials (which should have AD admin rights) to the DSC
+# because DSC runs under the machine account by default. By running the
+# commands here instead, we can operate under our current identity.
 Invoke-Command -ComputerName localhost -EnableNetworkAccess -ArgumentList (,($secondary + $primary)) {
     param ($nodes)
     $ProgressPreference="SilentlyContinue"
@@ -48,12 +65,23 @@ Invoke-Command -ComputerName localhost -EnableNetworkAccess -ArgumentList (,($se
 
     $needToAddNode = $true
     $domain = (Get-ciminstance win32_computersystem).Domain.Split(".")[0]
+
+    # running this hook on multiple nodes (why would you NOT?), you cannot
+    # know who will create the cluster first or if it was created on a previous
+    # 'hab svc load'
     if(!(Get-Cluster -Name {{cfg.cluster_name}} -Domain $domain)) {
         Write-Host "Creating new {{cfg.cluster_name}} cluster"
         $cluster = New-Cluster -Name {{cfg.cluster_name}} -Node $env:ComputerName -NoStorage -StaticAddress {{cfg.cluster_ip}} -ErrorAction SilentlyContinue
         if ($cluster) {
+            # we got back a cluster object so we know we were succesful.
+            # This also adds us to the cluster so we are basically done
+            # and can flag ourselves as added.
             $needToAddNode = $false
         } else {
+            # We did not get back a cluster object which means the command failed.
+            # this most likely means that another node won the race and beat us to
+            # creating the cluster but we should wait until we see that node
+            # fully joined to the cluster
             Write-Host "Cluster already created"
             do {
                 write-host "waiting for nodes to come online..."
@@ -62,6 +90,8 @@ Invoke-Command -ComputerName localhost -EnableNetworkAccess -ArgumentList (,($se
         }
     } else {
         Write-Host "Cluster {{cfg.cluster_name}} already created"
+        # the cluster may have been created long ago in a previous 'hab svc load'
+        # lets make sure we are not already a member, if so we flag ourself as joined
         if(Get-ClusterNode -Cluster $env:ComputerName -ErrorAction SilentlyContinue) {
             Write-Host "$env:ComputerName already added to cluster"
             $needToAddNode = $false
@@ -77,4 +107,5 @@ Invoke-Command -ComputerName localhost -EnableNetworkAccess -ArgumentList (,($se
     }
 }
 
+# use DSC to enable sql server always on
 Start-DscCore (Join-Path {{pkg.svc_config_path}} feature.ps1) EnableAlwaysOn

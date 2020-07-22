@@ -1,6 +1,6 @@
 pkg_name=ruby26
 pkg_origin=core
-pkg_version=2.6.3
+pkg_version=2.6.6
 pkg_description="A dynamic, open source programming language with a focus on \
   simplicity and productivity. It has an elegant syntax that is natural to \
   read and easy to write."
@@ -8,8 +8,8 @@ pkg_license=("Ruby")
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://cache.ruby-lang.org/pub/ruby/2.6/ruby-${pkg_version}.tar.gz
 pkg_upstream_url=https://www.ruby-lang.org/en/
-pkg_shasum=577fd3795f22b8d91c1d4e6733637b0394d4082db659fccf224c774a2b1c82fb
-pkg_deps=(core/glibc core/ncurses core/zlib core/openssl core/libyaml core/libffi core/readline)
+pkg_shasum=364b143def360bac1b74eb56ed60b1a0dca6439b00157ae11ff77d5cd2e92291
+pkg_deps=(core/glibc core/ncurses core/zlib core/openssl core/libyaml core/libffi core/readline core/nss-myhostname)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)

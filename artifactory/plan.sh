@@ -8,7 +8,10 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("JFrog Artifactory EULA")
 pkg_source="https://bintray.com/jfrog/${pkg_name}/download_file?file_path=jfrog-artifactory-oss-${pkg_version}.zip"
 pkg_shasum=fc2277fa4da9cfd83ca3af9ca94b2b03717e3df60573ab19f0281c9954117eda
-pkg_deps=(core/bash core/openjdk11)
+pkg_deps=(
+  core/bash
+  core/openjdk11
+)
 pkg_exports=(
   [port]=port
 )
@@ -21,6 +24,6 @@ do_build() {
 }
 
 do_install() {
-  build_line "Copying files from $PWD"
+  build_line "Copying files from ${PWD}"
   cp -rv "${HAB_CACHE_SRC_PATH}/${pkg_name}-oss-${pkg_version}"/* "${PREFIX}"/
 }

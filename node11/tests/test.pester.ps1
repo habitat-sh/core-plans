@@ -11,8 +11,8 @@ Describe "node bin" {
             $output | Out-String | Should -Match "v${expected_version}"
         }
         It "help command" {
-          hab pkg exec $PackageIdentifier node --help
-          $? | Should be $true
+            hab pkg exec $PackageIdentifier node --help
+            $? | Should be $true
         }
     }
 }

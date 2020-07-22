@@ -29,5 +29,11 @@ pkg_bin_dirs=(bin)
 do_prepare() {
   do_default_prepare
 
-  cpanm XML::Parser --configure-args="EXPATLIBPATH=$(pkg_path_for core/expat)/lib export EXPATINCPATH=$(pkg_path_for core/expat)/include"
+  # cpanm requires core/expat in the LD_LIBRARY_PATH when it installs XML::Parser.
+  # Normally it is best to avoid setting the LD_LIBRARY_PATH in the habitat plan. However
+  # since cpanm/perl needs it for building the XML::Parser, then passing it in via
+  # the 'env' limits it to the actual cpanm process.  This workaround is done in similar
+  # fashion to core/ffmpeg.
+  env LD_LIBRARY_PATH="$(pkg_path_for core/expat)/lib:${LD_LIBRARY_PATH}" \
+    cpanm XML::Parser --configure-args="EXPATLIBPATH=$(pkg_path_for core/expat)/lib export EXPATINCPATH=$(pkg_path_for core/expat)/include"
 }

@@ -1,13 +1,13 @@
 pkg_name=curl
 pkg_origin=core
-pkg_version=7.65.3
+pkg_version=7.70.0
 pkg_description="curl is an open source command line tool and library for
   transferring data with URL syntax."
 pkg_upstream_url=https://curl.haxx.se/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('curl')
-pkg_source=https://curl.haxx.se/download/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=4376ac72b95572fb6c4fbffefb97c7ea0dd083e1974c0e44cd7e49396f454839
+pkg_source="https://curl.haxx.se/download/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum=ca2feeb8ef13368ce5d5e5849a5fd5e2dd4755fecf7d8f0cc94000a4206fb8e7
 pkg_deps=(
   core/cacerts
   core/glibc
@@ -32,21 +32,22 @@ do_prepare() {
 }
 
 do_build() {
-  ./configure --prefix="$pkg_prefix" \
-              --with-ca-bundle="$(pkg_path_for cacerts)/ssl/certs/cacert.pem" \
-              --with-ssl="$(pkg_path_for openssl)" \
-              --with-zlib="$(pkg_path_for zlib)" \
-              --with-nghttp2="$(pkg_path_for nghttp2)" \
-              --disable-manual \
-              --disable-ldap \
-              --disable-ldaps \
-              --disable-rtsp \
-              --enable-proxy \
-              --enable-optimize \
-              --disable-dependency-tracking \
-              --enable-ipv6 \
-              --without-libidn \
-              --without-gnutls \
-              --without-librtmp
+  ./configure \
+    --prefix="$pkg_prefix" \
+    --with-ca-bundle="$(pkg_path_for cacerts)/ssl/certs/cacert.pem" \
+    --with-ssl="$(pkg_path_for openssl)" \
+    --with-zlib="$(pkg_path_for zlib)" \
+    --with-nghttp2="$(pkg_path_for nghttp2)" \
+    --disable-manual \
+    --disable-ldap \
+    --disable-ldaps \
+    --disable-rtsp \
+    --enable-proxy \
+    --enable-optimize \
+    --disable-dependency-tracking \
+    --enable-ipv6 \
+    --without-libidn \
+    --without-gnutls \
+    --without-librtmp
   make
 }

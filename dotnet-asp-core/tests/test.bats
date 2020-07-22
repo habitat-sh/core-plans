@@ -11,6 +11,6 @@ source "${BATS_TEST_DIRNAME}/../plan.sh"
 }
 
 @test "ASP check" {
-  result="$(dotnet --info | grep Microsoft.AspNetCore.All| awk '{print $2}')"
+  result="$(dotnet --info | grep Microsoft.AspNetCore.App| awk '{print $2}')"
   [ "$result" = "${pkg_version}" ]
 }

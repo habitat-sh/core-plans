@@ -1,21 +1,14 @@
-#!/bin/sh
+#!/bin/bash
+#
+# Usage: test.sh <pkg_ident>
+#
+# Example: test.sh core/devicemapper/2.03.00/20200507192941
 
-TESTDIR="$(dirname "${0}")"
-PLANDIR="$(dirname "${TESTDIR}")"
-SKIPBUILD=${SKIPBUILD:-0}
+set -euo pipefail
+
+PKGIDENT="${1}"
+export PKGIDENT
 
 hab pkg install core/bats --binlink
-
-source "${PLANDIR}/plan.sh"
-
-if [ "${SKIPBUILD}" -eq 0 ]; then
-  set -e
-  pushd "${PLANDIR}" > /dev/null
-  build
-  source results/last_build.env
-  hab pkg install "results/${pkg_artifact}" --binlink --force
-  popd > /dev/null
-  set +e
-fi
-
-bats "${TESTDIR}/test.bats"
+hab pkg install "${PKGIDENT}"
+bats "$(dirname "${0}")/test.bats"

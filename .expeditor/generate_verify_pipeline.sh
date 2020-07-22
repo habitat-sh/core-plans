@@ -10,14 +10,17 @@
 
 set -euo pipefail
 
-# Ensure master is always up to date when generating our pipeline
-git fetch origin master --quiet
+default_base_branch='master'
+base_branch="${BUILDKITE_PULL_REQUEST_BASE_BRANCH:-$default_base_branch}"
 
-# Determine the files changed between this PR and master.
+# Ensure base branch is always up to date when generating our pipeline
+git fetch origin $base_branch --quiet
+
+# Determine the files changed between this PR and the base branch (usually master).
 # Group them by plan and use that as the unit of work in
 # downstream steps.
 plans_changed() {
-  git diff --name-only "${TEST_BRANCH:-HEAD}" "$(git merge-base "${TEST_BRANCH:-HEAD}" origin/master)" \
+  git diff --name-only "${TEST_BRANCH:-HEAD}" "$(git merge-base "${TEST_BRANCH:-HEAD}" origin/${base_branch})" \
   | cut -f1 -d/ \
   | sort \
   | uniq
@@ -64,12 +67,9 @@ for plan in ${plans[@]}; do
     emit_pipeline .expeditor/templates/verify_linux_pipeline.yml "$plan"
   fi
 
-  ######################################################
-  # "Windows pipelines are currently not implemented." #
-  ######################################################
-  # if [[ -f $plan/plan.ps1 ]]; then
-    # emit_pipeline .buildkite/templates/verify_windows_pipeline.yml "$plan"
-  # fi
+  if [[ -f $plan/plan.ps1 ]]; then
+    emit_pipeline .expeditor/templates/verify_windows_pipeline.yml "$plan"
+  fi
 
   # TODO(SM): Handle queuing based on .bldr.toml
   # example: postgres change _should_ also verify builds of postgresql9x

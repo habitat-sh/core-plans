@@ -1,0 +1,5 @@
+core-plans/gox
+core-plans/buildkite-agent
+core-plans/ansible
+core-plans/img
+core-plans/buildkite-cli

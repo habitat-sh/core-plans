@@ -32,12 +32,12 @@ InModuleScope -ModuleName DSCCore {
                 $? | Should be $true
             }
         }
-        Context 'Set-LcmRefreshMode' {
+        Context 'Set-LcmConfig' {
             Mock Invoke-CimMethod {}
             Mock New-ConfigurationData {}
             Mock Set-LcmMetaConfig {}
             It 'Runs with no errors' {
-                Set-LcmRefreshMode Push
+                Set-LcmConfig -RefreshMode Push -ConfigurationMode ApplyOnly
                 $? | Should be $true
             }
         }
@@ -46,7 +46,7 @@ InModuleScope -ModuleName DSCCore {
         Mock Enter-PSLock {Invoke-Command -ScriptBlock $ScriptBlock}
         Mock Enter-QuietProgress {Invoke-Command -ScriptBlock $block}
         Mock Wait-LCMReady {}
-        Mock Set-LcmRefreshMode {}
+        Mock Set-LcmConfig {}
         Mock Invoke-CimMethod {}
         Context "test_without_resource" {
             Mock New-ConfigurationData {}
@@ -67,7 +67,7 @@ InModuleScope -ModuleName DSCCore {
         Mock Enter-PSLock -ModuleName DSCCore {Invoke-Command -ScriptBlock $ScriptBlock}
         Mock Enter-QuietProgress -ModuleName DSCCore {Invoke-Command -ScriptBlock $block}
         Mock Wait-LCMReady -ModuleName DSCCore {}
-        Mock Set-LcmRefreshMode -ModuleName DSCCore {}
+        Mock Set-LcmConfig -ModuleName DSCCore {}
 
         Context "no mof file generated" {
             Mock Remove-Item {}
@@ -102,7 +102,6 @@ InModuleScope -ModuleName DSCCore {
     Describe "Invoke-DSCCommandFile" -tag Unit {
         Context "no config data passed" {
             Mock ConvertTo-Json {}
-            Mock ConvertFrom-Json {}
             $results = Invoke-DSCCommandFile -config "function test_dsc_function (`$OutputPath){@{FullName  = 'c:\temp\fake.mof';Directory = `$OutputPath}}" -func test_dsc_function
             # Clean up temp folder
             Remove-Item $results.directory -Recurse
@@ -126,17 +125,28 @@ InModuleScope -ModuleName DSCCore {
             $results = Invoke-DSCCommandFile -config "function test_dsc_function (`$OutputPath, `$ConfigurationData){@{Directory = `$OutputPath;ConfigurationData = `$ConfigurationData}}" -func test_dsc_function -ConfigData $cd
             Remove-Item $results.directory -Recurse
             It "should have initial configuration data of type ArrayList" {
-                $cd.AllNodes -is [System.Collections.ArrayList] | should be $true
-            }
-
-            It "should convert ConfigData to an object array that works with DSC" {
-                $results.ConfigurationData.AllNodes -is [PSObject[]] | should be $true
+                $cd.AllNodes -is [System.Collections.ArrayList] | Should be $true
             }
         }
     }
 }
 
 Describe "dsc-core" -tag Functional {
+    BeforeAll {
+        Invoke-Command -EnableNetworkAccess -computername localhost {
+            [DSCLocalConfigurationManager()]
+            configuration LCMConfig {
+                Node localhost {
+                    Settings {
+                        RefreshMode       = "Disabled"
+                        ConfigurationMode = "ApplyAndMonitor"
+                    }
+                }
+            }
+            LCMConfig -OutputPath c:\temp\config
+            Set-DscLocalConfigurationManager -Path c:\temp\config
+        }
+    }
     Context "Apply Configuration with file resource" {
         It "creates the directory" {
             Start-DscCore (Join-Path $PSScriptRoot test_config.ps1) test_with_resource
@@ -188,6 +198,14 @@ Describe "dsc-core" -tag Functional {
         It "runs without error" {
             Start-DscCore (Join-Path $PSScriptRoot test_config.ps1) test_cleanup
             $? | Should be $true
+        }
+
+        It "resets LCM settings" {
+            $conf = Invoke-Command -EnableNetworkAccess -computername localhost {
+                Get-DscLocalConfigurationManager
+            }
+            $conf.RefreshMode | Should be "Disabled"
+            $conf.ConfigurationMode | Should be "ApplyAndMonitor"
         }
     }
 }

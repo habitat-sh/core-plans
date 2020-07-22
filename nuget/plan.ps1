@@ -12,5 +12,5 @@ $pkg_bin_dirs=@("bin")
 function Invoke-Unpack { }
 
 function Invoke-Install {
-  Copy-Item "$HAB_CACHE_SRC_PATH/nuget.exe" "$pkg_prefix/bin" -Force
+    Copy-Item "$HAB_CACHE_SRC_PATH/nuget.exe" "$pkg_prefix/bin" -Force
 }

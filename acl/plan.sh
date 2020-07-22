@@ -12,13 +12,11 @@ pkg_deps=(
   core/attr
 )
 pkg_build_deps=(
-  core/coreutils
   core/diffutils
   core/patch
   core/make
   core/file
   core/gcc
-  core/gettext
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)

@@ -1,13 +1,18 @@
+# shellcheck disable=SC2034
 pkg_name=go
 pkg_origin=core
-pkg_version=1.12.8
+pkg_version=1.14.5
+# Rolled back recent change to core/go17 to facillitate a from-scratch
+# base-plan refresh.
+pkg_bootstrap_pkg="core/go17"
+pkg_bootstrap_version=1.7.5
 pkg_description="Go is an open source programming language that makes it easy to
   build simple, reliable, and efficient software."
 pkg_upstream_url=https://golang.org/
-pkg_license=('BSD')
+pkg_license=("BSD-3-Clause")
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source="https://storage.googleapis.com/golang/go${pkg_version}.src.tar.gz"
-pkg_shasum=11ad2e2e31ff63fcf8a2bdffbe9bfa2e1845653358daed593c8c2d03453c9898
+pkg_source="https://dl.google.com/go/go${pkg_version}.src.tar.gz"
+pkg_shasum=ca4c080c90735e56152ac52cd77ae57fe573d1debb1a58e03da9cc362440315c
 pkg_dirname=go
 pkg_deps=(
   core/glibc
@@ -20,7 +25,7 @@ pkg_build_deps=(
   core/bash
   core/patch
   core/gcc
-  core/go17
+  "${pkg_bootstrap_pkg}/${pkg_bootstrap_version}"
   core/perl
 )
 pkg_bin_dirs=(bin)
@@ -38,6 +43,7 @@ do_prepare() {
   build_line "Setting GOROOT=$GOROOT"
   export GOBIN="$GOROOT/bin"
   build_line "Setting GOBIN=$GOBIN"
+  # shellcheck disable=SC2154
   export GOROOT_FINAL="$pkg_prefix"
   build_line "Setting GOROOT_FINAL=$GOROOT_FINAL"
 
@@ -45,10 +51,8 @@ do_prepare() {
   build_line "Updating PATH=$PATH"
 
   # Building Go after 1.5 requires a previous version of Go to bootstrap with.
-  # This environment variable tells the build system to use our 1.7.x release
-  # as the bootstrapping Go.
   export GOROOT_BOOTSTRAP
-  GOROOT_BOOTSTRAP="$(pkg_path_for go17)"
+  GOROOT_BOOTSTRAP="$(pkg_path_for $pkg_bootstrap_pkg)"
   build_line "Setting GOROOT_BOOTSTRAP=$GOROOT_BOOTSTRAP"
 
   # Add `cacerts` to the SSL certificate lookup chain
@@ -69,35 +73,44 @@ do_prepare() {
 }
 
 do_build() {
-  pushd src > /dev/null
+  pushd src > /dev/null || return 1
     bash make.bash --no-clean
-  popd > /dev/null
+  popd > /dev/null || return 1
 }
 
 do_check() {
-  # The test suite requires several hardcoded commands to be present, so we'll
-  # add symlinks if they are not already present
-  local _clean_cmds=()
-  if [[ ! -r /bin/pwd ]]; then
-    ln -sv "$(pkg_path_for coreutils)/bin/pwd" /bin/pwd
-    _clean_cmds+=(/bin/pwd)
-  fi
-  if [[ ! -r /usr/bin/env ]]; then
-    ln -sv "$(pkg_path_for coreutils)/bin/env" /usr/bin/env
-    _clean_cmds+=(/usr/bin/env)
-  fi
-  if [[ ! -r /bin/hostname ]]; then
-    ln -sv "$(pkg_path_for inetutils)/bin/hostname" /bin/hostname
-    _clean_cmds+=(/bin/hostname)
-  fi
+  # The go test suite requires several hardcoded files to be present that might
+  # not be present in the build studio. Here we create symlinks to any missing
+  # files and then clean them up after the test has completed.
+  local _clean_links=()
+  declare -A _links
 
-  pushd src > /dev/null
-    env LD_LIBRARY_PATH="$(pkg_path_for gcc)/lib" bash run.bash --no-rebuild
-  popd > /dev/null
+  _links=(
+    ["/bin/pwd"]="$(pkg_path_for coreutils)/bin/pwd"
+    ["/bin/env"]="$(pkg_path_for coreutils)/bin/env"
+    ["/bin/hostname"]="$(pkg_path_for coreutils)/bin/hostname"
+    # cgo tests that make getaddrinfo() syscalls use the hardcoded paths
+    ["/etc/services"]="$(pkg_path_for iana-etc)/etc/services"
+    ["/etc/protocols"]="$(pkg_path_for iana-etc)/etc/protocols"
+  )
+
+  for target in "${!_links[@]}"; do
+    if [[ ! -r ${target} ]]; then
+      ln -sv "${_links[$target]}" "${target}"
+      _clean_links+=("${target}")
+    fi
+  done
+
+  # NOTE: misc/cgo/testsanitizers/cshared_test.go has a known failing test
+  # because it strips LD_LIBRARY_PATH and expects libgcc_s.so.1 to be present in
+  # the tests temporary directory.
+  pushd src > /dev/null || return 1
+    env LD_LIBRARY_PATH="$(pkg_path_for gcc)/lib" bash run.bash --no-rebuild -k
+  popd > /dev/null || return 1
 
   # Clean up any symlinks that were added to support the build's test suite.
-  for cmd in "${_clean_cmds[@]}"; do
-    rm -fv "${cmd}"
+  for sym in "${_clean_links[@]}"; do
+    rm -fv "${sym}"
   done
 }
 

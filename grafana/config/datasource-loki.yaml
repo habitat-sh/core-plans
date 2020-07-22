@@ -1,0 +1,11 @@
+apiVersion: 1
+
+datasources:
+  - name: Loki
+    type: loki
+    access: proxy
+    {{~#with bind.loki.first as |ds| }}
+    url: http://{{ds.sys.ip}}:{{ds.cfg.loki_ds_http}}
+    {{~/with}}
+    jsonData:
+      maxLines: 1000

@@ -1,12 +1,34 @@
 pkg_name=libgcrypt
 pkg_origin=core
-pkg_version=1.7.10
-pkg_license=('lgplv2+')
+pkg_version=1.8.5
+pkg_license=('LGPL-2.0-or-later')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source=ftp://ftp.gnupg.org/gcrypt/${pkg_name}/${pkg_name}-${pkg_version}.tar.bz2
-pkg_shasum=89f05a423dd66a25e5b38308097e2386e640d1cf835160d19a5c75350071d94c
-pkg_deps=(core/glibc core/libgpg-error)
-pkg_build_deps=(core/gcc core/coreutils core/sed core/bison core/flex core/grep core/bash core/gawk core/libtool core/diffutils core/findutils core/xz core/gettext core/gzip core/make core/patch core/texinfo core/util-linux)
+pkg_source="ftp://ftp.gnupg.org/gcrypt/${pkg_name}/${pkg_name}-${pkg_version}.tar.bz2"
+pkg_shasum=3b4a2a94cb637eff5bdebbcaf46f4d95c4f25206f459809339cdada0eb577ac3
+pkg_deps=(
+  core/glibc
+  core/libgpg-error
+)
+pkg_build_deps=(
+  core/gcc
+  core/coreutils
+  core/sed
+  core/bison
+  core/flex
+  core/grep
+  core/bash
+  core/gawk
+  core/libtool
+  core/diffutils
+  core/findutils
+  core/xz
+  core/gettext
+  core/gzip
+  core/make
+  core/patch
+  core/texinfo
+  core/util-linux
+)
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)

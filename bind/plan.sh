@@ -1,12 +1,12 @@
 pkg_name=bind
 pkg_origin=core
-pkg_version=9.14.2
+pkg_version=9.17.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Versatile, Classic, Complete Name Server Software"
 pkg_upstream_url="https://www.isc.org/downloads/bind/"
 pkg_license=("MPL-2.0")
-pkg_source="https://ftp.isc.org/isc/bind9/${pkg_version}/bind-${pkg_version}.tar.gz"
-pkg_shasum="0e4027573726502ec038db3973a086c02508671723a4845e21da1769a5c27f0c"
+pkg_source="https://ftp.isc.org/isc/bind9/${pkg_version}/bind-${pkg_version}.tar.xz"
+pkg_shasum=c8934a9deeaf91d880f824b6b73494720653a96fe5a1bc948651ad92ba4ecfda
 pkg_deps=(
   core/glibc
   core/libxml2
@@ -15,6 +15,7 @@ pkg_deps=(
   core/libcap
   core/busybox-static
   core/python
+  core/libuv
 )
 pkg_build_deps=(
   core/diffutils
@@ -22,6 +23,7 @@ pkg_build_deps=(
   core/gcc
   core/make
   core/perl
+  core/pkg-config
 )
 pkg_bin_dirs=(
   bin
@@ -50,7 +52,6 @@ do_build() {
   export PYTHONPATH
   ./configure \
     --prefix="${pkg_prefix}" \
-    --with-libxml2="$(pkg_path_for "core/libxml2")" \
     --with-openssl="$(pkg_path_for "core/openssl")" \
     --with-python="$(pkg_path_for core/python)/bin/python"
   make

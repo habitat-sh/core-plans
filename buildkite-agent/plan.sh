@@ -38,6 +38,10 @@ do_prepare() {
 do_build() {
   pushd "${parent_go_path}/agent" > /dev/null
   go install --tags extended
+  pushd "${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}" > /dev/null
+    go mod tidy
+    go mod vendor
+  popd > /dev/null
   go build -o buildkite-agent main.go
   local code=$?
   popd > /dev/null

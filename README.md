@@ -1,6 +1,6 @@
 # Habitat Plans
 
-[![Build Status](https://travis-ci.org/habitat-sh/core-plans.svg?branch=master)](https://travis-ci.org/habitat-sh/core-plans)
+[![Build status](https://badge.buildkite.com/3ed82c4ec1ea98900a129ea42236fbe9df1724e46ae7440999.svg)](https://buildkite.com/chef-oss/habitat-sh-core-plans-master-verify)
 [![Slack](http://slack.habitat.sh/badge.svg)](http://slack.habitat.sh/)
 [![GitHub issues](https://img.shields.io/github/issues/habitat-sh/core-plans.svg)](https://github.com/habitat-sh/core-plans/issues)
 

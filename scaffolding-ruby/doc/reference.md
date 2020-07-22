@@ -51,7 +51,7 @@ The following gems will checked for in the `Gemfile.lock` to conditionally injec
 * If the `sqlite3` gem is detected, then sqlite-related Habitat packages will be injected into your Plan's `pkg_deps` array.
 * If any of several PostgreSQL-related gems are detected, then PostgreSQL-related Habitat packages will be injected into your Plan's `pkg_deps` array. See the PostgreSQL Database Detection section for more details.
 * If the `nokogiri` gem is detected, then XML/XSLT-related Habitat packages will be injected into your Plan's `pkg_deps` array.
-* If the `execjs` gem is detected, then Node-related Habitat packages will be injected into your Plan's `pkg_deps` array.
+* If the `execjs` gem is detected, then Node-related Habitat packages will be injected into your Plan's `pkg_deps` array.  By default this will be the `core/node` package.  To override this, set `scaffolding_node_pkg` within your plan file.  For example to use node 10 add  `scaffolding_node_pkg=core/node10`
 * If the `webpacker` gem is detected, then Yarn-related Habitat packages will be injected into your Plan's `pkg_deps` array.
 
 Additional checks performed by this scaffolding are:
@@ -313,6 +313,15 @@ hab start acmecorp/my_app --bind elastic search:es.my_app
 ## App Type Detection
 
 Several popular Ruby-based frameworks are detected and supported with additional dependencies, configurations, etc. See below for details on the state of each app type.
+
+
+### Rails 6.0 Applications
+
+#### Detection
+
+Rails 6 app type will be detected if the app's `Gemfile.lock` contains a `railties` gem with a version greater than `6.0.0` but less than `6.1.0`.
+
+At the moment the default process bin, environment variables and config will mirror those of a [Rails 5.x App](#rails-5x-applications)
 
 ### Rails 5.x Applications
 

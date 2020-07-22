@@ -1,9 +1,9 @@
 pkg_name=kafka
 pkg_origin=core
-pkg_version=0.10.2.2
-pkg_source="http://archive.apache.org/dist/${pkg_name}/${pkg_version}/${pkg_name}_2.11-${pkg_version}.tgz"
-pkg_shasum="60f587ed8d1ee6e8e8057f13da6eee472f95c8d2ea691f6aab74edb842dc9950"
-pkg_dirname="${pkg_name}_2.11-${pkg_version}"
+pkg_version=2.5.0
+pkg_source="https://downloads.apache.org/${pkg_name}/${pkg_version}/${pkg_name}_2.13-${pkg_version}.tgz"
+pkg_shasum="112b00678428595ff871a96215e9fd2c36d042220c29b1e91275988e623c6f70"
+pkg_dirname="${pkg_name}_2.13-${pkg_version}"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="A distributed streaming platform"
 pkg_upstream_url="https://kafka.apache.org/"
@@ -12,7 +12,7 @@ pkg_bin_dirs=(bin)
 pkg_deps=(
   core/bash-static
   core/coreutils
-  core/corretto8
+  core/corretto11
 )
 pkg_binds=(
   [zookeeper]="port"

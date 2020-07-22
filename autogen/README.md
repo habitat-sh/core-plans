@@ -12,4 +12,12 @@ Binary package
 
 ## Usage
 
-*TODO: Add instructions for usage*
+This can be installed on your system with `hab pkg install` or added as a dependency for packages.
+
+```
+hab pkg install --binlink core/autogen
+```
+
+```
+pkg_deps=(core/autogen)
+```

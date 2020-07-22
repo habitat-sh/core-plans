@@ -1,15 +1,15 @@
 pkg_name=automake
 pkg_origin=core
-pkg_version=1.16
+pkg_version=1.16.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Automake is a tool for automatically generating Makefile.in files compliant \
 with the GNU Coding Standards.\
 "
 pkg_upstream_url="https://www.gnu.org/software/automake/"
-pkg_license=("GPL-2.0")
+pkg_license=("GPL-2.0-or-later")
 pkg_source="http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="f98f2d97b11851cbe7c2d4b4eaef498ae9d17a3c2ef1401609b7b4ca66655b8a"
+pkg_shasum="5d05bb38a23fd3312b10aea93840feec685bdf4a41146e78882848165d3ae921"
 pkg_deps=(
   core/perl
 )

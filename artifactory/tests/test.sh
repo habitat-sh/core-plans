@@ -6,6 +6,8 @@
 
 set -eou pipefail
 
+source "$(dirname "${0}")/../../bin/ci/test_helpers.sh"
+
 if [[ -z "${1:-}" ]]; then
   grep '^#/' < "${0}" | cut -c4-
   exit 1
@@ -23,12 +25,14 @@ hab pkg binlink core/busybox-static netstat
 hab pkg install core/curl --binlink
 hab pkg install core/jq-static --binlink
 hab pkg install "${TEST_PKG_IDENT}"
-hab sup run &
-sleep 5
-echo "Waiting for supervisor to start"
-hab svc load "${TEST_PKG_IDENT}"
-echo "Waiting for Artifactory to start"
-sleep 90
+
+ci_ensure_supervisor_running
+ci_load_service "${TEST_PKG_IDENT}"
+
+# Allow service start
+WAIT_SECONDS=90
+echo "Waiting ${WAIT_SECONDS} seconds for service to start..."
+sleep "${WAIT_SECONDS}"
 
 bats "${TESTDIR}/test.bats"
 

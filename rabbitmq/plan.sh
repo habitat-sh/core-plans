@@ -1,13 +1,13 @@
 pkg_name=rabbitmq
 pkg_distname="${pkg_name}-server"
 pkg_origin=core
-pkg_version=3.7.16
+pkg_version=3.8.3
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MPL')
 pkg_description="Open source multi-protocol messaging broker"
 pkg_upstream_url="https://www.rabbitmq.com"
 pkg_source="https://github.com/rabbitmq/rabbitmq-server/releases/download/v${pkg_version}/rabbitmq-server-${pkg_version}.tar.xz"
-pkg_shasum=7f7a8a587b6beba3b86e1a2a9bf60da4bd19b0aacfec025559bbbbf13fd1418b
+pkg_shasum=aedc8458701a80167b35958c10090d468c3de11984510b49ec02e777c51b1aba
 pkg_dirname="${pkg_distname}-${pkg_version}"
 pkg_deps=(
   core/coreutils

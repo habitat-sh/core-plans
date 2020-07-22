@@ -43,7 +43,7 @@ ci_ensure_supervisor_running() {
 # period has passed.
 ci_load_service() {
   service="$1"
-  timeout="${2:-5}"
+  timeout="${2:-10}"
 
   echo "--- :habicat: Loading service $service"
   hab svc load "$service"

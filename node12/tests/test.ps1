@@ -11,6 +11,6 @@ hab pkg install $PackageIdentifier
 
 $__dir=(Get-Item $PSScriptRoot)
 Invoke-Pester -EnableExit -Script @{
-    Path = "$__dir/test.pester.ps1";
-    Parameters = @{PackageIdentifier=$PackageIdentifier}
+    Path       = "$__dir/test.pester.ps1";
+    Parameters = @{PackageIdentifier =$PackageIdentifier}
 }

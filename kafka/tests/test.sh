@@ -22,6 +22,7 @@ hab pkg binlink core/busybox-static nc
 hab pkg binlink core/busybox-static netstat
 hab pkg binlink core/busybox-static ps
 hab pkg install "${TEST_PKG_IDENT}"
+hab pkg binlink core/corretto11
 
 ci_ensure_supervisor_running
 
@@ -34,12 +35,17 @@ ci_load_service "core/zookeeper"
 # wait for the service to start
 countdown=50
 hab svc status "${TEST_PKG_IDENT}" 2>/dev/null || hab svc load "${TEST_PKG_IDENT}" --bind zookeeper:zookeeper.default
-until ( (nc -z localhost 9092) && (grep -q "INFO Kafka version :" "${SUP_LOG}" ) ) \
+until ( (nc -z localhost 9092) && (grep -q "INFO Kafka version:" "${SUP_LOG}" ) ) \
   || (( countdown <= 0 )); do
   echo "Waiting for core/kafka service to start ${countdown}"
   sleep 2
   countdown=$((countdown-1))
 done
+
+# create kafka message file
+cat <<EOT > kafka_messages
+This is a test message.
+EOT
 
 # run the tests
 bats "$(dirname "${0}")/test.bats"
@@ -47,3 +53,6 @@ bats "$(dirname "${0}")/test.bats"
 # unload the services
 hab svc unload "${TEST_PKG_IDENT}" || true
 hab svc unload core/zookeeper || true
+
+# cleanup local message file
+rm kafka_messages
