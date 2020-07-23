@@ -65,10 +65,10 @@ function Start-DscCore {
             Enter-PSLock -Name $(Get-DscLock) {
                 $conf = Get-LcmMetaConfig
                 $currentRefreshMode = $conf.RefreshMode
+                $currentConfigurationMode = $conf.ConfigurationMode
                 try {
                     # Now that we have the lock, check once more just in case
-                    Wait-LCMReady
-                    Set-LcmRefreshMode "Push"
+                    Set-LcmConfig -RefreshMode "Push" -ConfigurationMode "ApplyOnly"
                     Write-Output "Applying DSC configuration for '$ConfigFunction' in $Path ..."
                     Invoke-CimMethod    -ComputerName localhost `
                         -Namespace "root/Microsoft/Windows/DesiredStateConfiguration" `
@@ -77,8 +77,7 @@ function Start-DscCore {
                         -Arguments @{ConfigurationData = $configurationData; Force = $true} `
                         -ErrorAction Stop | Out-Null
                 } finally {
-                    Wait-LCMReady
-                    Set-LcmRefreshMode $currentRefreshMode
+                    Set-LcmConfig -RefreshMode $currentRefreshMode -ConfigurationMode $currentConfigurationMode
                 }
             }
         } else {
@@ -189,27 +188,63 @@ function Enter-QuietProgress([ScriptBlock]$block) {
 }
 
 function Get-LcmMetaConfig {
-    Enter-QuietProgress {
-        $lcm = Invoke-CimMethod -ComputerName localhost `
-            -Namespace "root/Microsoft/Windows/DesiredStateConfiguration" `
-            -ClassName "MSFT_DSCLocalConfigurationManager" `
-            -MethodName "GetMetaConfiguration"
-        $lcm.MetaConfiguration
+    $currentErrorAction=$ErrorActionPreference
+    try{
+        $ErrorActionPreference = "Stop"
+        $times = 5
+        for($count = 1; $count -le $times; $count++) {
+            try {
+                $lcm = Invoke-CimMethod -ComputerName localhost `
+                    -Namespace "root/Microsoft/Windows/DesiredStateConfiguration" `
+                    -ClassName "MSFT_DSCLocalConfigurationManager" `
+                    -MethodName "GetMetaConfiguration"
+                $lcm.MetaConfiguration
+                break
+            }
+            catch {
+                if($count -eq $times) { throw $_ }
+                else {
+                    Write-Host "Error Occured calling GetMetaConfiguration. Retrying..."
+                    Start-Sleep -Seconds 5
+                }
+            }
+        }
+    }
+    finally{
+        $ErrorActionPreference = $currentErrorAction
     }
 }
 
 function Set-LcmMetaConfig($configData) {
-    Enter-QuietProgress {
-        Invoke-CimMethod -ComputerName localhost `
-            -Namespace "root/Microsoft/Windows/DesiredStateConfiguration" `
-            -ClassName "MSFT_DSCLocalConfigurationManager" `
-            -MethodName "SendMetaConfigurationApply" `
-            -Arguments @{ConfigurationData = $configData} `
-            -ErrorAction Stop | Out-Null
+    $currentErrorAction=$ErrorActionPreference
+    try{
+        $ErrorActionPreference = "Stop"
+        $times = 3
+        for($count = 1; $count -le $times; $count++) {
+            try {
+                Invoke-CimMethod -ComputerName localhost `
+                    -Namespace "root/Microsoft/Windows/DesiredStateConfiguration" `
+                    -ClassName "MSFT_DSCLocalConfigurationManager" `
+                    -MethodName "SendMetaConfigurationApply" `
+                    -Arguments @{ConfigurationData = $configData} `
+                    -ErrorAction Stop | Out-Null
+                break
+            }
+            catch {
+                if($count -eq $times) { throw $_ }
+                else {
+                    Write-Host "Error Occured calling SendMetaConfigurationApply. Retrying..."
+                    Wait-LCMReady
+                }
+            }
+        }
+    }
+    finally{
+        $ErrorActionPreference = $currentErrorAction
     }
 }
 
-function Set-LcmRefreshMode($mode) {
+function Set-LcmConfig($RefreshMode, $ConfigurationMode) {
     $conf = @"
     [DSCLocalConfigurationManager()]
     configuration LCMConfig
@@ -218,7 +253,8 @@ function Set-LcmRefreshMode($mode) {
         {
             Settings
             {
-                RefreshMode = "$mode"
+                RefreshMode = "$RefreshMode"
+                ConfigurationMode = "$ConfigurationMode"
             }
         }
     }

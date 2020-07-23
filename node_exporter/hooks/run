@@ -1,5 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 exec 2>&1
-
-exec node_exporter -web.listen-address ":{{cfg.listening_port}}"
+exec node_exporter \
+  --web.listen-address="{{cfg.web.listen_address}}:{{cfg.web.listen_port}}" \
+  --web.telemetry-path="{{cfg.web.telemetry_path}}" \
+  --web.max-requests={{cfg.web.max_requests}}

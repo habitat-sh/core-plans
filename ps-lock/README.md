@@ -42,14 +42,3 @@ Enter-PSLock -Name MSILock -Interval 1800 -Splay 30 {
     Start-Process "{{pkgPathFor "core/chef-dk"}}\chefdk\bin\chef-client.bat" -ArgumentList "-z" -Wait -NoNewWindow
 }
 ```
-
-### Problems using in a local Windows Studio
-
-The `PSModulePath` in a local Windows studio (one started with `hab studio enter -w`) will get assigned the wrong package path and thus simply calling `Enter-PSLock` will not automatically import this module.
-
-You can work around this by explicitly importing the module before using the command:
-
-```
-Import-Module "{{pkgPathFor "core/ps-lock"}}/Modules/PSLock"
-Enter-PSLock { <SOME_POWERSHELL_CODE>}
-```

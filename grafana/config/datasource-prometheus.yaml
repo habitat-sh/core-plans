@@ -1,0 +1,10 @@
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    {{~#with bind.prom.first as |ds| }}
+    url: http://{{ds.sys.ip}}:{{ds.cfg.prom_ds_http}}
+    {{~/with}}
+    isDefault: true

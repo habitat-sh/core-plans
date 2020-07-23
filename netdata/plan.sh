@@ -1,12 +1,12 @@
 pkg_name=netdata
 pkg_origin=core
-pkg_version=1.16.1
+pkg_version=1.22.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("GPL-3.0-or-later")
 pkg_description="netdata is a system for distributed real-time performance and health monitoring."
 pkg_upstream_url="https://github.com/netdata/netdata"
 pkg_source="https://github.com/netdata/${pkg_name}/archive/v${pkg_version}.tar.gz"
-pkg_shasum=94492108a6e24e8b39c011ae35ff6f50a848d816af396fdf2b44655cecd78672
+pkg_shasum=6efd785eab82f98892b4b4017cadfa4ce1688985915499bc75f2f888765a3446
 pkg_build_deps=(
   core/autoconf
   core/autogen
@@ -24,6 +24,7 @@ pkg_deps=(
   core/util-linux
   core/zlib
   core/coreutils
+  core/libuv
 )
 pkg_bin_dirs=(sbin)
 pkg_exports=(
@@ -51,8 +52,6 @@ do_install() {
   do_default_install || return $?
 
   pushd "${pkg_prefix}" > /dev/null
-
-  rm -r "./var"
 
   build_line "Fixing libexec interpreters"
   find ./libexec/netdata -type f -executable \

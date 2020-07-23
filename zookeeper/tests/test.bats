@@ -4,6 +4,6 @@
 
 expected_version="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 @test "zookeeper matches version ${expected_version}" {
-  result="$(echo status | nc 127.0.0.1 2181 | grep -oP "(?<=Zookeeper version: )([^-]*)")"
-  [ "$result" = "${expected_version}" ]
+  actual_version_array=($(cat "${SUP_LOG}" | grep --text -m 1 -oP "(?<=zookeeper.version=)([^-]*)" | tail -n 1))
+  diff <( echo "${actual_version_array[0]}") <(echo "${expected_version}")
 }

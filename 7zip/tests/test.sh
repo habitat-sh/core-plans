@@ -1,11 +1,10 @@
 #!/bin/sh
-
-set -euo pipefail
-
 #/ Usage: test.sh <pkg_ident>
 #/
 #/ Example: test.sh core/opa/0.11.0/20190531065119
 #/
+
+set -euo pipefail
 
 TESTDIR="$(dirname "${0}")"
 

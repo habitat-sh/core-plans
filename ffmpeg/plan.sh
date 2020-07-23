@@ -1,13 +1,12 @@
 pkg_name=ffmpeg
 pkg_origin=core
-pkg_version=4.1.4
-pkg_description="A complete, cross-platform solution to record, convert and \
-stream audio and video."
+pkg_version=4.2.2
+pkg_description="A complete, cross-platform solution to record, convert and stream audio and video."
 pkg_upstream_url=https://ffmpeg.org/
 pkg_license=('LGPL-2.1-or-later' 'GPL-2.0-or-later')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source=https://ffmpeg.org/releases/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=7570d3403e26b34873090a5904cb513b130425972cfcff8d9ea59df5e88846d1
+pkg_source="https://ffmpeg.org/releases/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum=83f9a9aa0acf8036daf47494d99a8c31154a18ebb6841d89878ba47783559bd0
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
@@ -41,7 +40,7 @@ pkg_deps=(
 )
 
 do_build() {
-  ./configure --prefix="$pkg_prefix" \
+  ./configure --prefix="${pkg_prefix}" \
     --disable-debug \
     --disable-static \
     --enable-avisynth \
@@ -68,9 +67,9 @@ do_check() {
   # scenario, to provide the build paths of the libraries _only_ in the context of the do_check.
   local ffmpeg_path="$HAB_CACHE_SRC_PATH/${pkg_dirname}"
 
-  export LD_LIBRARY_PATH="$LD_LIBRARY_PATH":"${ffmpeg_path}/libavutil":"${ffmpeg_path}/libavcodec":"${ffmpeg_path}/libswresample"
-  export LD_LIBRARY_PATH="$LD_LIBRARY_PATH":"${ffmpeg_path}/libavdevice":"${ffmpeg_path}/libavfilter":"${ffmpeg_path}/libavformat"
-  export LD_LIBRARY_PATH="$LD_LIBRARY_PATH":"${ffmpeg_path}/libavresample":"${ffmpeg_path}/libpostproc":"${ffmpeg_path}/libswscale"
+  export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}":"${ffmpeg_path}/libavutil":"${ffmpeg_path}/libavcodec":"${ffmpeg_path}/libswresample"
+  export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}":"${ffmpeg_path}/libavdevice":"${ffmpeg_path}/libavfilter":"${ffmpeg_path}/libavformat"
+  export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}":"${ffmpeg_path}/libavresample":"${ffmpeg_path}/libpostproc":"${ffmpeg_path}/libswscale"
 
   make check
 

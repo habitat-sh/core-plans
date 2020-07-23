@@ -120,7 +120,7 @@ $(
 
 $(
   case "$_app_type" in
-    (rails5|rails42|rails41)
+    (rails6|rails5|rails42|rails41)
       cat <<_RAILS_
 
 # Check that the 'SECRET_KEY_BASE' environment variable is non-empty
@@ -392,8 +392,9 @@ scaffolding_run_assets_precompile() {
 
   if _has_gem rake && _has_rakefile; then
     pushd "$scaffolding_app_prefix" > /dev/null
-    if _rake -P --trace | grep -q '^rake assets:precompile$'; then
-      build_line "Detected and running Rake 'assets:precompile'"
+    build_line "Detecting if there's a precompile rake task"
+    if [ "$(_rake --tasks assets:precompile | grep -c assets:precompile)" -ge 1 ]; then
+      build_line "...running 'rake assets:precompile'"
       export DATABASE_URL=${DATABASE_URL:-"postgresql://nobody@nowhere/fake_db_to_appease_rails_env"}
       _rake assets:precompile
     fi
@@ -491,7 +492,8 @@ _detect_gemfile() {
 }
 
 _detect_app_type() {
-  _detect_rails5_app \
+  _detect_rails6_app \
+    || _detect_rails5_app \
     || _detect_rails42_app \
     || _detect_rails41_app \
     || _detect_rails4_app \
@@ -654,7 +656,8 @@ _add_git() {
 _detect_execjs() {
   if _has_gem execjs; then
     build_line "Detected 'execjs' gem in Gemfile.lock, adding node packages"
-    pkg_deps=(core/node "${pkg_deps[@]}")
+    : "${scaffolding_node_pkg:="core/node"}"
+    pkg_deps=("${scaffolding_node_pkg}" "${pkg_deps[@]}")
     debug "Updating pkg_deps=(${pkg_deps[*]}) from Scaffolding detection"
   fi
 }
@@ -758,7 +761,7 @@ _detect_rails42_app() {
     return 0
   else
     return 1
-  fi
+fi
 }
 
 _detect_rails5_app() {
@@ -771,6 +774,17 @@ _detect_rails5_app() {
     return 1
   fi
 }
+_detect_rails6_app() {
+  if _has_gem railties && _compare_gem railties \
+      --greater-than-eq 6.0.0 --less-than 6.1.0; then
+    build_line "Detected Rails 6 app type"
+    _app_type="rails6"
+    return 0
+  else
+    return 1
+  fi
+}
+
 
 _detect_ruby_app() {
   build_line "Detected Ruby app type"

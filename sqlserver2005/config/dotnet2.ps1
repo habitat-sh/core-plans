@@ -1,13 +1,18 @@
+$source = "{{cfg.netfx3_source}}"
 Configuration DotNet
 {
     Node 'localhost' {
-        WindowsFeature dotnet2
-        {
-            Ensure = "Present"
-            Name = "NET-Framework-Features"
-            {{#if cfg.netfx3_source}}
-                Source = "{{cfg.netfx3_source}}"
-            {{/if}}
+        if($source -eq "") {
+            WindowsFeature dotnet2 {
+                Ensure = "Present"
+                Name   = "NET-Framework-Features"
+            }
+        } else {
+            WindowsFeature dotnet2 {
+                Ensure = "Present"
+                Name   = "NET-Framework-Features"
+                Source = $source
+            }
         }
     }
 }

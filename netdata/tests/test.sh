@@ -31,3 +31,5 @@ sleep "${WAIT_SECONDS}"
 
 bats "$(dirname "${0}")/test.bats"
 hab svc unload "${TEST_PKG_IDENT}" || true
+echo "Waiting ${WAIT_SECONDS} seconds for service to unload..."
+sleep "${WAIT_SECONDS}"

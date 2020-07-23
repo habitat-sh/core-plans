@@ -1,13 +1,13 @@
 pkg_name=ansible
 pkg_origin=core
-pkg_version=2.8.2
+pkg_version=2.9.7
 pkg_description="Ansible is a radically simple IT automation platform that makes your applications and systems easier to deploy."
 pkg_upstream_url="https://www.ansible.com/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("GPL-3.0-only")
 pkg_source="https://github.com/${pkg_name}/${pkg_name}/archive/v${pkg_version}.tar.gz"
 pkg_filename="${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=17239947c2bc13abcbb3fe9ce61c227e4b3a1018da84d58a82c33e41e677ddbc
+pkg_shasum=7b65a59b8f651186c1bbc6600970c18cfb7ab229962a2225c0b8fd1a95a770ab
 pkg_deps=(
   core/libffi
   core/python2
@@ -32,10 +32,14 @@ do_prepare() {
   mkdir -p "${pkg_prefix}/lib/python2.7/site-packages"
   mkdir -p "${pkg_prefix}/share"
   mkdir -p "${pkg_prefix}/etc"
+  # Fixes encoding error: Installed from requirements: MarkupSafe, jinja2, PyYAML, pycparser, cffi, enum34, ipaddress, cryptography
+  pip install -r requirements.txt
+  # Fixes version_helper issue converting between python 2to3
+  pip install packaging
 }
 
 do_build() {
-  python setup.py build
+  make
 }
 
 do_install() {

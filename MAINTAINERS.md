@@ -18,9 +18,7 @@ To become a maintainer, open a pull request to this list.
 * [Mike Fiedler](https://github.com/miketheman)
 * [Ian Henry](https://github.com/eeyun)
 * [Scott Macfarlane](https://github.com/smacfarlane)
-* [Fletcher Nichol](https://github.com/fnichol)
 * [Nell Shamrell-Harrington](https://github.com/nellshamrell)
-* [Jamie Winsor](https://github.com/reset)
 * [Salim Afiune](https://github.com/afiune)
 * [John Jelinek IV](https://github.com/johnjelinek)
 * [Robb Kidd](https://github.com/robbkidd)
@@ -28,7 +26,6 @@ To become a maintainer, open a pull request to this list.
 * [Paul Mooring](https://github.com/paulmooring)
 * [Josh Brand](https://github.com/joshbrand)
 * [Christopher P. Maher](https://github.com/defilan)
-* [Romain Sertelon](https://github.com/rsertelon)
 * [Tasha Drew](https://github.com/tashimi)
 * [Jon Bauman](https://github.com/baumanj)
 * [Graham Weldon](https://github.com/predominant)
@@ -37,7 +34,7 @@ To become a maintainer, open a pull request to this list.
 * [Ben Dang](https://github.com/bdangit)
 * [James Stocks](https://github.com/james-stocks)
 * [Gavin Didrichsen](https://github.com/gavindidrichsen)
-* [Scott Haiin](https://github.com/scotthain)
+* [Steven Marshall](https://github.com/MindNumbing)
 
 ## Alumni
 
@@ -45,3 +42,14 @@ To become a maintainer, open a pull request to this list.
 * [Nathan L Smith](https://github.com/smith)
 * [Joshua Timberman](https://github.com/jtimberman)
 * [Elliott Davis](https://github.com/elliott-davis)
+* [Jamie Winsor](https://github.com/reset)
+* [Fletcher Nichol](https://github.com/fnichol)
+* [Romain Sertelon](https://github.com/rsertelon)
+* [Scott Hain](https://github.com/scotthain)
+
+## Approvers
+
+* [Graham Weldon](https://github.com/predominant)
+* [Gavin Didrichsen](https://github.com/gavindidrichsen)
+
+This section has been added for the benefit of those who contribute heavily to the core-plan's and are eligible for 'fastrack' promotion.  See [fastrack policy document](https://github.com/habitat-sh/core-plans/blob/master/docs/dev/policy_documents/merging-and-promoting-conventions.md).  See also [here](https://github.com/chef/chef-oss-practices/blob/master/project-membership.md) for Chef's policy regarding project membership.

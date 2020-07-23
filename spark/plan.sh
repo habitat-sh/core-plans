@@ -13,6 +13,7 @@ pkg_deps=(
   core/bash
   core/openjdk11
   core/procps-ng
+  core/busybox-static
 )
 pkg_bin_dirs=(bin sbin)
 pkg_lib_dirs=(jars)
@@ -28,4 +29,8 @@ do_build() {
 
 do_install() {
   cp -r sbin bin jars "$pkg_prefix"
+
+  build_line "Fixing bin/env interpreters"
+  fix_interpreter "${pkg_prefix}/bin/*" core/busybox-static bin/env
+  fix_interpreter "${pkg_prefix}/sbin/*" core/busybox-static bin/env
 }

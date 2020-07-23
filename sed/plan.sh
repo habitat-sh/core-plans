@@ -1,3 +1,5 @@
+# Disable shellcheck that would require quotes around pkg_name
+# shellcheck disable=SC2209
 pkg_name=sed
 pkg_origin=core
 pkg_version=4.5
@@ -18,8 +20,6 @@ pkg_deps=(
   core/acl
 )
 pkg_build_deps=(
-  core/coreutils
-  core/diffutils
   core/patch
   core/make
   core/gcc

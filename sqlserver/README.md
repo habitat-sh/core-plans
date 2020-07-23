@@ -22,7 +22,7 @@ One can of course modify the build if they would like to include advanced featur
 
 ### The SQL Server Install
 
-The built package will include the full install media for Sql Server Express 2017 (~ 275MB). The first time the service is run, the `init` hook will run the SQL Server setup if it detects that the server has not been installed. All of the install options can be found in `config/config.ini`. All default data and log files will be created in the running service's data directory: `/hab/svc/sql-server-express-2017/data`.
+The built package will include the full install media for Sql Server Express 2017 (~ 275MB). The plan's `install` hook will run the SQL Server setup if it detects that the server has not been installed. All of the install options can be found in `config_install/config.ini`. All default data and log files will be created in the running service's data directory: `/hab/svc/sqlserver/data`.
 
 The install will create a named instance defined in `{{cfg.instance}}`. So if a Sql Server engine of the same version in the installer (Express 2017 by default) is already installed on the machine, this will add the configured named instance.
 
@@ -65,7 +65,7 @@ An ASP.Net connection string, for example, may be configured like:
 
 ## Sql Server and Containers
 
-It is stronly recomended that you enable the `INSTALL_HOOK` feature before exporting the package by setting the `HAB_FEAT_INSTALL_HOOK` environment variable to any value. This will allow the export process to invoke the `install` hook and install SQL Server during the image build so that a `docker run` will spawn a container with SQL Server installed and ready to run.
+The Docker export will invoke the `install` hook and install SQL Server during the image build so that a `docker run` will spawn a container with SQL Server installed and ready to run.
 
 Also note that it is better to use `NT AUTHORITY\SYSTEM` as the `svc_account` for SQL Server in a container environment rather than `NT AUTHORITY\Network Service` specified in the `default.toml` file. Prior to exporting the package, set the `HAB_SQLSERVER` environment variable as follows:
 
@@ -85,11 +85,7 @@ If you are running this plan with an Enterprise Sql Server SKU, use the `sqlserv
 
 For more information on update strategies, see [this documentation](https://www.habitat.sh/docs/using-habitat/#update-strategy).
 
-If you are running a standalone Sql Server instance and want to use an update strategy, you should use either "none" (which is the default update strategy) or "all-at-once".
-
-If you are running a Sql Server cluster, you will likely want to use the Rolling strategy.
-
-Note that this plan does not currently support updateing a Sql Server database engine in place. Update strategies for this plan are intended only to update hook scripts.
+Note that this plan does not currently support updating a Sql Server database engine in place. Update strategies for this plan are intended only to update hook scripts.
 
 ## Scaling
 

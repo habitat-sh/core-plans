@@ -2,9 +2,7 @@
 
 exec 2>&1
 
-exec grafana-server --homepath={{pkg.path}} \
+exec grafana-server \
+  --homepath={{pkg.path}} \
   --config={{pkg.svc_config_path}}/grafana.ini \
-  --pidfile={{pkg.svc_var_path}}/grafana-server.pid \
-  cfg:default.paths.data={{pkg.svc_var_path}} \
-  cfg:default.paths.logs={{pkg.svc_var_path}} \
-  cfg:default.paths.plugins={{pkg.svc_var_path}}/plugins
+  --pidfile={{pkg.svc_var_path}}/grafana-server.pid

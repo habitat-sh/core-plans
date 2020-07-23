@@ -4,7 +4,8 @@ exec 2>&1
 
 export ZOOBINDIR="{{pkg.path}}/bin/"
 export ZOOCFGDIR="{{pkg.svc_config_path}}"
-export JAVA_HOME="{{pkgPathFor "core/openjdk11"}}"
+export ZOO_LOG_DIR="{{pkg.svc_path}}/logs"
+export JAVA_HOME="{{pkgPathFor "core/corretto11"}}"
 
 {{pkg.path}}/bin/zkEnv.sh
 

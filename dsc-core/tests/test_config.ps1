@@ -2,28 +2,29 @@ Configuration test_with_resource
 {
     Node 'localhost'
     {
-        File test_directory
-        {
-            Type = 'Directory'
+        File test_directory {
+            Type            = 'Directory'
             DestinationPath = 'C:\test_directory'
-            Ensure = 'Present'
+            Ensure          = 'Present'
         }
     }
 }
 
 Configuration test_with_resource_config_data
 {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingConvertToSecureStringWithPlainText", "")]
+    param()
+
     Node 'localhost'
     {
         $password = ConvertTo-SecureString $node.Password -AsPlainText -Force
         $Credential = New-Object System.Management.Automation.PSCredential -ArgumentList ($node.Username, $password)
 
-        File test_directory
-        {
-            Type = 'Directory'
+        File test_directory {
+            Type            = 'Directory'
             DestinationPath = $node.DestinationPath
-            Ensure = 'Present'
-            Credential = $Credential
+            Ensure          = 'Present'
+            Credential      = $Credential
         }
     }
 }
@@ -40,17 +41,15 @@ Configuration test_cleanup
 {
     Node 'localhost'
     {
-        File test_directory
-        {
-            Type = 'Directory'
+        File test_directory {
+            Type            = 'Directory'
             DestinationPath = 'C:\test_directory'
-            Ensure = 'Absent'
+            Ensure          = 'Absent'
         }
-        File test_directory1
-        {
-            Type = 'Directory'
+        File test_directory1 {
+            Type            = 'Directory'
             DestinationPath = 'C:\test_directory1'
-            Ensure = 'Absent'
+            Ensure          = 'Absent'
         }
     }
 }

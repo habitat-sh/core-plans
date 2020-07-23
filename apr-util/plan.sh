@@ -1,10 +1,10 @@
 pkg_name=apr-util
 pkg_origin=core
 pkg_version=1.6.1
-pkg_license=('Apache-2.0')
+pkg_license=("Apache-2.0")
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Apache Portable Runtime util"
-pkg_upstream_url="https://apr.apache.org/"
+pkg_upstream_url=https://apr.apache.org/
 pkg_source="https://archive.apache.org/dist/apr/${pkg_name}-${pkg_version}.tar.bz2"
 pkg_shasum=d3e12f7b6ad12687572a3a39475545a072608f4ba03a6ce8a3778f607dd0035b
 pkg_deps=(

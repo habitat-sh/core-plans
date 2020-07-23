@@ -13,6 +13,6 @@ fi
 
 TEST_PKG_IDENT="${1}"
 export TEST_PKG_IDENT
-hab pkg install core/bats --binlink
+hab pkg install core/bats core/jq-static --binlink
 hab pkg install "${TEST_PKG_IDENT}"
 bats "$(dirname "${0}")/test.bats"

@@ -1,0 +1,4 @@
+.:{{cfg.port}} {
+    forward . 8.8.8.8:53
+    log
+}

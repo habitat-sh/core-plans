@@ -1,15 +1,17 @@
+# This comment line avoids shellcheck disabling checks for the entire file
+# shellcheck disable=SC2209
 pkg_name=grep
 pkg_origin=core
-pkg_version=3.1
+pkg_version=3.3
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Grep searches one or more input files for lines containing a match to a \
 specified pattern. By default, Grep outputs the matching lines.\
 "
 pkg_upstream_url="https://www.gnu.org/software/grep/"
-pkg_license=('gplv3+')
+pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="db625c7ab3bb3ee757b3926a5cfa8d9e1c3991ad24707a83dde8a5ef2bf7a07e"
+pkg_shasum="b960541c499619efd6afe1fa795402e4733c8e11ebf9fafccc0bb4bccdc5b514"
 pkg_deps=(
   core/glibc
   core/pcre
@@ -24,22 +26,9 @@ pkg_build_deps=(
 )
 pkg_bin_dirs=(bin)
 
-do_prepare() {
-  # Fix failing test `test-getopt-posix` which appears to have problems when
-  # working against Glibc 2.26.
-  #
-  # TODO fn: when glibc package is upgraded, see if this patch is still
-  # required (it may be fixed in the near future)
-  #
-  # Thanks to:
-  # https://www.redhat.com/archives/libvir-list/2017-September/msg01054.html
-  patch -p1 < "$PLAN_CONTEXT/fix-test-getopt-posix-with-glibc-2.26.patch"
-
-}
 do_check() {
   make check
 }
-
 
 # ----------------------------------------------------------------------------
 # **NOTICE:** What follows are implementation details required for building a

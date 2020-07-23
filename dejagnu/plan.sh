@@ -1,12 +1,12 @@
 pkg_name=dejagnu
 pkg_origin=core
-pkg_version=1.6.1
+pkg_version=1.6.2
 pkg_license=('GPL-3.0-or-later')
 pkg_upstream_url="https://www.gnu.org/software/dejagnu/"
 pkg_description="A framework for testing other programs."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="bf5b28bb797e0ace4cfc0766a996339c795d8223bef54158be7887046bc01692"
+pkg_shasum="0d0671e1b45189c5fc8ade4b3b01635fb9eeab45cf54f57db23e4c4c1a17d261"
 pkg_deps=(
   core/expect
   core/coreutils
