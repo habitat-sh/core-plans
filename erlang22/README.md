@@ -15,6 +15,6 @@ Binary package
 Simple example of invoking `erl`:
 
 ```
-hab pkg install core/erlang20
-hab pkg exec core/erlang20 erl
+hab pkg install core/erlang22
+hab pkg exec core/erlang22 erl
 ```
