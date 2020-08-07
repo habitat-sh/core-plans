@@ -14,13 +14,13 @@ default_base_branch='master'
 base_branch="${BUILDKITE_PULL_REQUEST_BASE_BRANCH:-$default_base_branch}"
 
 # Ensure base branch is always up to date when generating our pipeline
-git fetch origin $base_branch --quiet
+git fetch origin "$base_branch" --quiet
 
 # Determine the files changed between this PR and the base branch (usually master).
 # Group them by plan and use that as the unit of work in
 # downstream steps.
 plans_changed() {
-  git diff --name-only "${TEST_BRANCH:-HEAD}" "$(git merge-base "${TEST_BRANCH:-HEAD}" origin/${base_branch})" \
+  git diff --name-only "${TEST_BRANCH:-HEAD}" "$(git merge-base "${TEST_BRANCH:-HEAD}" "origin/${base_branch}")" \
   | cut -f1 -d/ \
   | sort \
   | uniq
