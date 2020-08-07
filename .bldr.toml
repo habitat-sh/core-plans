@@ -315,6 +315,8 @@ plan_path = "erlang19"
 plan_path = "erlang20"
 [erlang21]
 plan_path = "erlang21"
+[erlang22]
+plan_path = "erlang22"
 [etcd]
 plan_path = "etcd"
 [eudev]
