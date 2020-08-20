@@ -1,7 +1,7 @@
 # shellcheck disable=SC2034
 pkg_name=go
 pkg_origin=core
-pkg_version=1.14.5
+pkg_version=1.15
 # Rolled back recent change to core/go17 to facillitate a from-scratch
 # base-plan refresh.
 pkg_bootstrap_pkg="core/go17"
@@ -12,7 +12,7 @@ pkg_upstream_url=https://golang.org/
 pkg_license=("BSD-3-Clause")
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://dl.google.com/go/go${pkg_version}.src.tar.gz"
-pkg_shasum=ca4c080c90735e56152ac52cd77ae57fe573d1debb1a58e03da9cc362440315c
+pkg_shasum=69438f7ed4f532154ffaf878f3dfd83747e7a00b70b3556eddabf7aaee28ac3a
 pkg_dirname=go
 pkg_deps=(
   core/glibc
