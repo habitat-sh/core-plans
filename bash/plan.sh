@@ -1,23 +1,16 @@
 pkg_name=bash
-_distname="$pkg_name"
+_distname="${pkg_name}"
 pkg_origin=core
 _base_version=5.0
-pkg_version=${_base_version}.16
+pkg_version="${_base_version}.16"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_description="\
- Bash is the GNU Project's shell. Bash is the Bourne Again SHell. Bash is an \
-sh-compatible shell that incorporates useful features from the Korn shell \
-(ksh) and C shell (csh). It is intended to conform to the IEEE POSIX \
-P1003.2/ISO 9945.2 Shell and Tools standard. It offers functional \
-improvements over sh for both programming and interactive use. In addition, \
-most sh scripts can be run by Bash without modification.\
-"
-pkg_upstream_url="http://www.gnu.org/software/bash/bash.html"
-pkg_license=('GPL-3.0-or-later')
-_url_base="http://ftp.gnu.org/gnu/$_distname"
-pkg_source="$_url_base/${_distname}-${_base_version}.tar.gz"
-pkg_shasum="b4a80f2ac66170b2913efbfb9f2594f1f76c7b1afd11f799e22035d63077fb4d"
-pkg_dirname="${_distname}-$_base_version"
+pkg_description="Bash is the GNU Project's shell. Bash is the Bourne Again SHell."
+pkg_upstream_url=https://www.gnu.org/software/bash/bash.html
+pkg_license=("GPL-3.0-or-later")
+_url_base="https://ftp.gnu.org/gnu/${_distname}"
+pkg_source="${_url_base}/${_distname}-${_base_version}.tar.gz"
+pkg_shasum=b4a80f2ac66170b2913efbfb9f2594f1f76c7b1afd11f799e22035d63077fb4d
+pkg_dirname="${_distname}-${_base_version}"
 pkg_deps=(
   core/glibc
   core/ncurses
@@ -32,7 +25,10 @@ pkg_build_deps=(
   core/perl
 )
 pkg_bin_dirs=(bin)
-pkg_interpreters=(bin/bash bin/sh)
+pkg_interpreters=(
+  bin/bash
+  bin/sh
+)
 
 do_begin() {
   # The maintainer of Bash only releases these patches to fix serious issues,
@@ -43,7 +39,7 @@ do_begin() {
 
   # Source a file containing an array of patch URLs and an array of patch file
   # shasums
-  source "$PLAN_CONTEXT/bash-patches.sh"
+  source "${PLAN_CONTEXT}/bash-patches.sh"
 }
 
 do_download() {
@@ -71,14 +67,14 @@ do_prepare() {
 
   # Apply all patch files to the extracted source
   for p in "${_patch_files[@]}"; do
-    build_line "Applying patch $(basename "$p")"
-    patch -p0 -i "$HAB_CACHE_SRC_PATH/$(basename "$p")"
+    build_line "Applying patch $(basename "${p}")"
+    patch -p0 -i "${HAB_CACHE_SRC_PATH}/$(basename "${p}")"
   done
 }
 
 do_build() {
   ./configure \
-    --prefix="$pkg_prefix" \
+    --prefix="${pkg_prefix}" \
     --with-curses \
     --enable-readline \
     --without-bash-malloc \
@@ -109,7 +105,7 @@ do_install() {
   do_default_install
 
   # Add an `sh` which symlinks to `bash`
-  ln -sv bash "$pkg_prefix/bin/sh"
+  ln -sv bash "${pkg_prefix}/bin/sh"
 }
 
 
@@ -120,7 +116,7 @@ do_install() {
 # said that, it performs a vital bootstrapping process and cannot be removed or
 # significantly altered. Thank you!
 # ----------------------------------------------------------------------------
-if [[ "$STUDIO_TYPE" = "stage1" ]]; then
+if [[ "${STUDIO_TYPE}" = "stage1" ]]; then
   pkg_build_deps=(
     core/gcc
     core/coreutils
