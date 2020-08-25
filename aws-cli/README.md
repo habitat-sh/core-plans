@@ -8,17 +8,19 @@ The Habitat Maintainers humans@habitat.sh
 
 ## Type of Package
 
-[binary wrapper package](https://www.habitat.sh/docs/best-practices/#binary-wrapper-packages)
+Binary package
 
 ## Usage
 
-### Unix
+### Linux
+
 ```bash
 hab pkg install core/aws-cli
 hab pkg exec core/aws-cli aws --version
 ```
 
 ### Windows
+
 ```powershell
 hab pkg install core/aws-cli
 hab pkg exec core/aws-cli aws.cmd --version
