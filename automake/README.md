@@ -12,10 +12,11 @@ Binary package
 
 ## Usage
 
-Typically this is a build time dependency that can be added to your
-plan.sh:
+Typically this is a build time dependency that can be added to your `plan.sh`:
 
-    pkg_build_deps=(core/automake)
+```
+pkg_build_deps=(core/automake)
+```
 
 ## TODO
 
