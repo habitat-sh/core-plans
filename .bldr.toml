@@ -1545,6 +1545,8 @@ plan_path = "xextproto"
 plan_path = "xeyes"
 [xlib]
 plan_path = "xlib"
+[xmlsec1]
+plan_path = "xmlsec1"
 [xproto]
 plan_path = "xproto"
 [xtrans]
