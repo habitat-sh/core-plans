@@ -10,6 +10,7 @@ pkg_upstream_url=https://curl.haxx.se/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('curl')
 pkg_source="https://curl.haxx.se/download/${pkg_distname}-${pkg_version}.tar.gz"
+pkg_shasum=ca2feeb8ef13368ce5d5e5849a5fd5e2dd4755fecf7d8f0cc94000a4206fb8e7
 pkg_dirname="${pkg_distname}-${pkg_version}"
 pkg_deps=(
   core/cacerts
