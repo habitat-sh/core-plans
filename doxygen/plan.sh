@@ -5,7 +5,7 @@ pkg_license=('GPL-2.0')
 pkg_description="Generate documentation for several programming languages"
 pkg_upstream_url="http://www.doxygen.nl/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source="http://doxygen.nl/files/${pkg_name}-${pkg_version}.src.tar.gz"
+pkg_source="https://sourceforge.net/projects/doxygen/files/rel-${pkg_version}/${pkg_name}-${pkg_version}.src.tar.gz"
 pkg_shasum=2cba988af2d495541cbbe5541b3bee0ee11144dcb23a81eada19f5501fd8b599
 pkg_build_deps=(
   core/bison
