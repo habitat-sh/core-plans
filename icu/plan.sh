@@ -11,8 +11,9 @@ EOF
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Unicode-TOU")
 # shellcheck disable=SC2059
-pkg_source="http://download.icu-project.org/files/icu4c/${pkg_version}/icu4c-$(printf "%s" "$pkg_version" | tr . _)-src.tgz"
+pkg_source="https://github.com/unicode-org/icu/releases/download/release-${pkg_version//./-}/icu4c-${pkg_version//./_}-src.tgz"
 pkg_shasum=ff8c67cb65949b1e7808f2359f2b80f722697048e90e7cfc382ec1fe229e9581
+pkg_upstream_url="http://site.icu-project.org/"
 pkg_deps=(core/glibc core/gcc-libs)
 pkg_build_deps=(core/gcc core/make)
 pkg_bin_dirs=(bin)
