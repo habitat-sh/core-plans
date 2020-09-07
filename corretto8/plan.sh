@@ -35,11 +35,11 @@ do_install() {
   build_line "Setting rpath for all libraries to '${LD_RUN_PATH}'"
 
   find "${pkg_prefix}"/bin -type f -executable \
-    -exec sh -c 'file -i "$1" | grep -q "x-executable; charset=binary"' _ {} \; \
+    -exec sh -c 'file -i "$1" | grep -q "-executable; charset=binary"' _ {} \; \
     -exec patchelf --set-interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" --set-rpath "${LD_RUN_PATH}" {} \;
 
   find "${pkg_prefix}"/jre/bin -type f -executable \
-    -exec sh -c 'file -i "$1" | grep -q "x-executable; charset=binary"' _ {} \; \
+    -exec sh -c 'file -i "$1" | grep -q "-executable; charset=binary"' _ {} \; \
     -exec patchelf --set-interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" --set-rpath "${LD_RUN_PATH}" {} \;
 
   find "${pkg_prefix}/lib" -type f -name "*.so" \
