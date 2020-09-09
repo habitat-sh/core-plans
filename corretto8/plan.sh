@@ -8,7 +8,7 @@ pkg_license=("GPL-2.0-only")
 pkg_upstream_url=https://aws.amazon.com/corretto/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/corretto/corretto-8/archive/${pkg_version}.tar.gz"
-pkg_shasum=1db9c4bd89b9949c97bc5e690aedce2872bb716cf35c670a29cadeeb80d0cb18
+pkg_shasum=ea37690065a6676aa8f6afa3068bd57d6244a1ae032652f8b758b7479a961289
 pkg_filename="corretto-${pkg_version}_linux-x64_bin.tar.gz"
 pkg_dirname="amazon-corretto-${pkg_version}-linux-x64"
 
