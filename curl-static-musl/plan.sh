@@ -1,5 +1,3 @@
-source "$(dirname "${BASH_SOURCE[0]}")/../curl/plan.sh"
-
 pkg_name=curl-static-musl
 pkg_distname=curl
 pkg_origin=core

@@ -1,7 +1,7 @@
-source ../coreutils/plan.sh
-
 pkg_name=coreutils-static
+_distname=coreutils
 pkg_origin=core
+pkg_version=8.30
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Core Utilities are the basic file, shell and text manipulation \
@@ -10,18 +10,28 @@ expected to exist on every operating system.\
 "
 pkg_upstream_url="https://www.gnu.org/software/coreutils/"
 pkg_license=('GPL-3.0')
+pkg_source="http://ftp.gnu.org/gnu/$_distname/${_distname}-${pkg_version}.tar.xz"
+pkg_shasum="e831b3a86091496cdba720411f9748de81507798f6130adeaef872d206e1b057"
 pkg_dirname=${_distname}-${pkg_version}
 
-# Throw the run deps into build deps as this will be static
 pkg_build_deps=(
-  "${pkg_deps[@]}"
-  "${pkg_build_deps[@]}"
+  core/patch
+  core/make
+  core/gcc
+  core/m4
+  core/perl
+  core/diffutils
+  core/glibc
+  core/acl
+  core/attr
+  core/gmp
+  core/libcap
 )
-# Empty out the run deps array
-pkg_deps=()
+pkg_bin_dirs=(bin)
+pkg_interpreters=(bin/env)
 
 do_prepare() {
-  PLAN_CONTEXT=$PLAN_CONTEXT/../coreutils _patch_files
+  _patch_files
 }
 
 do_build() {
@@ -34,6 +44,15 @@ do_build() {
     --enable-single-binary \
     LDFLAGS="-static $LDFLAGS"
   make
+}
+
+do_check() {
+  make NON_ROOT_USERNAME=nobody check-root
+  make RUN_EXPENSIVE_TESTS=yes check
+}
+
+_patch_files() {
+  patch -p1 < "$PLAN_CONTEXT/skip-tests.patch"
 }
 
 # We will rely on tests from `coreutils`, so skip them here
