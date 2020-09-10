@@ -14,7 +14,3 @@ $pkg_lib_dirs=@("lib")
 function Invoke-Build {
     Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/*" "$pkg_prefix" -Recurse -Force
 }
-
-function Invoke-Check {
-    (& "$HAB_CACHE_SRC_PATH/$pkg_dirname/bin/java.exe" --version).StartsWith("openjdk version $pkg_version")
-}
