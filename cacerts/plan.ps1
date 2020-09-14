@@ -1,12 +1,14 @@
 $pkg_name="cacerts"
 $pkg_origin="core"
-$pkg_version="_set_from_downloaded_cacerts_file_"
+$pkg_description="\
+The Mozilla CA certificate store in PEM format (around 250KB uncompressed).
+"
+$pkg_upstream_url="https://curl.haxx.se/docs/caextract.html"
+$pkg_version="2020.06.24"
 $pkg_license=@('MPL-2.0')
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-$pkg_source="http://curl.haxx.se/ca/cacert.pem"
-$pkg_shasum="nopenopebucketofnope"
-
-function Invoke-Verify { }
+$pkg_source="https://curl.haxx.se/ca/cacert-2020-06-24.pem"
+$pkg_shasum="726889705b00f736200ed7999f7a50021b8735d53228d679c4e6665aa3b44987"
 function Invoke-Build { }
 
 function Invoke-Unpack {
