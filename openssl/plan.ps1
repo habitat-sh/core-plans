@@ -7,7 +7,7 @@ $pkg_upstream_url="https://www.openssl.org"
 $pkg_license=@("OpenSSL")
 $pkg_source="https://github.com/openssl/openssl/archive/OpenSSL_$_pkg_version_text.zip"
 $pkg_shasum="08741e9c71ded84ad54840e611bc86a2272fbbdb72b90556a3ec7e02b11f1dd9"
-$pkg_deps=@("core/visual-cpp-redist-2015")
+$pkg_deps=@("core/visual-cpp-redist-2015", "core/openssl-fips")
 $pkg_build_deps=@("core/visual-cpp-build-tools-2015", "core/perl", "core/nasm")
 $pkg_bin_dirs=@("bin")
 $pkg_include_dirs=@("include")
@@ -19,7 +19,8 @@ function Invoke-SetupEnvironment {
 
 function Invoke-Build {
     Set-Location "$pkg_name-OpenSSL_$_pkg_version_text"
-    perl Configure VC-WIN64A --prefix=$pkg_prefix
+    $FIPSDIR="$(Get-HabPackagePath openssl-fips)"
+    perl Configure VC-WIN64A --prefix=$pkg_prefix --with-fipsdir=$FIPSDIR fips
     ms\do_win64a
     nmake -f ms\ntdll.mak
     if($LASTEXITCODE -ne 0) { Write-Error "nmake failed!" }

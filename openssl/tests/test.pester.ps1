@@ -9,7 +9,7 @@ Describe "core/openssl" {
         $OutputVariable = (hab pkg exec $PackageIdentifier openssl version | Out-String).Trim()
         $OutputVariable -match "(?<=^OpenSSL )([^ ]*)"
         It "version matches $PackageVersion" {
-            $matches[0] | Should -BeExactly "$PackageVersion"
+            $matches[0] | Should -BeExactly "${PackageVersion}-fips"
         }
 
         $OutputVariable = ("a_byte_character" | hab pkg exec $PackageIdentifier openssl enc -base64| Out-String).Trim()
