@@ -47,6 +47,7 @@ function Invoke-Unpack {
     $components = @(
         "Microsoft.VisualStudio.Workload.MSBuildTools",
         "Microsoft.VisualStudio.Workload.VCTools",
+        "Microsoft.VisualStudio.Workload.WebBuildTools",
         "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
         "Microsoft.VisualStudio.Component.SQL.SSDTBuildSku",
         "Microsoft.VisualStudio.Component.VC.ATLMFC",
