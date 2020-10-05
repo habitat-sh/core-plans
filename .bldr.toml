@@ -28,6 +28,11 @@ plan_path = "atk"
 plan_path = "at-spi2-atk"
 [autogen]
 plan_path = "autogen"
+[aws-cli]
+plan_path = "aws-cli"
+build_targets = [
+  "x86_64-windows"
+]
 [azure-cli]
 plan_path = "azure-cli"
 [bash-completion]
@@ -63,10 +68,20 @@ plan_path = "boringssl"
 plan_path = "buildkite-agent"
 [buildkite-cli]
 plan_path = "buildkite-cli"
+[bzip2]
+plan_path = "bzip2"
+build_targets = [
+  "x86_64-windows"
+]
 [c-ares]
 plan_path = "c-ares"
 [cabal-install]
 plan_path = "cabal-install"
+[cacerts]
+plan_path = "cacerts"
+build_targets = [
+  "x86_64-windows"
+]
 [caddy]
 plan_path = "caddy"
 [cairo]
@@ -94,12 +109,22 @@ paths = [
 plan_path = "clingo"
 [clojure]
 plan_path = "clojure"
+[cmake]
+plan_path = "cmake"
+build_targets = [
+  "x86_64-windows"
+]
 [cockroach]
 plan_path = "cockroach"
 [composer]
 plan_path = "composer"
 [compositeproto]
 plan_path = "compositeproto"
+[concourse]
+plan_path = "concourse"
+build_targets = [
+  "x86_64-windows"
+]
 [concourse-fly]
 plan_path = "concourse-fly"
 [consul]
@@ -110,6 +135,21 @@ plan_path = "coredns"
 plan_path = "coreutils-static"
 paths = [
   "coreutils/*",
+]
+[corretto]
+plan_path = "corretto"
+build_targets = [
+  "x86_64-windows"
+]
+[corretto8]
+plan_path = "corretto8"
+build_targets = [
+  "x86_64-windows"
+]
+[corretto11]
+plan_path = "corretto11"
+build_targets = [
+  "x86_64-windows"
 ]
 [cpio]
 plan_path = "cpio"
@@ -157,6 +197,11 @@ plan_path = "direnv"
 plan_path = "dmake"
 [dnsmasq]
 plan_path = "dnsmasq"
+[docker]
+plan_path = "docker"
+build_targets = [
+  "x86_64-windows"
+]
 [docker-compose]
 plan_path = "docker-compose"
 [docutils]
@@ -295,6 +340,11 @@ paths = [
 plan_path = "giflib"
 [gifsicle]
 plan_path = "gifsicle"
+[git]
+plan_path = "git"
+build_targets = [
+  "x86_64-windows"
+]
 [github_changelog_generator]
 plan_path = "github_changelog_generator"
 [glib]
@@ -452,6 +502,11 @@ plan_path = "jfrog-cli"
 plan_path = "jo"
 [journalbeat]
 plan_path = "journalbeat"
+[jq-static]
+plan_path = "jq-static"
+build_targets = [
+  "x86_64-windows"
+]
 [jruby]
 plan_path = "jruby"
 [jruby1]
@@ -519,6 +574,11 @@ plan_path = "leproxy"
 plan_path = "leptonica"
 [leveldb]
 plan_path = "leveldb"
+[libarchive]
+plan_path = "libarchive"
+build_targets = [
+  "x86_64-windows"
+]
 [libatomic_ops]
 plan_path = "libatomic_ops"
 [libcap-ng]
@@ -584,6 +644,11 @@ paths = [
 plan_path = "libscrypt"
 [libsm]
 plan_path = "libsm"
+[libsodium]
+plan_path = "libsodium"
+build_targets = [
+  "x86_64-windows"
+]
 [libssh2]
 plan_path = "libssh2"
 [libtalloc]
@@ -669,6 +734,11 @@ plan_path = "man-db"
 plan_path = "man-pages"
 [mariadb]
 plan_path = "mariadb"
+[maven]
+plan_path = "maven"
+build_targets = [
+  "x86_64-windows"
+]
 [mawk]
 plan_path = "mawk"
 [mc]
@@ -726,6 +796,11 @@ plan_path = "netcat-openbsd"
 plan_path = "netdata"
 [nettle]
 plan_path = "nettle"
+[nginx]
+plan_path = "nginx"
+build_targets = [
+  "x86_64-windows"
+]
 [nginx-prometheus-exporter]
 plan_path = "nginx-prometheus-exporter"
 [ninja]
@@ -734,6 +809,31 @@ plan_path = "ninja"
 plan_path = "nload"
 [nmap]
 plan_path = "nmap"
+[node]
+plan_path = "node"
+build_targets = [
+  "x86_64-windows"
+]
+[node6]
+plan_path = "node6"
+build_targets = [
+  "x86_64-windows"
+]
+[node10]
+plan_path = "node10"
+build_targets = [
+  "x86_64-windows"
+]
+[node11]
+plan_path = "node11"
+build_targets = [
+  "x86_64-windows"
+]
+[node12]
+plan_path = "node12"
+build_targets = [
+  "x86_64-windows"
+]
 [node_exporter]
 plan_path = "node_exporter"
 [npth]
@@ -762,6 +862,11 @@ plan_path = "openjpeg"
 plan_path = "openldap"
 [openresty]
 plan_path = "openresty"
+[openssl]
+plan_path = "openssl"
+build_targets = [
+  "x86_64-windows"
+]
 [openssl11]
 plan_path = "openssl11"
 [openvpn]
@@ -782,6 +887,11 @@ plan_path = "pax-utils"
 plan_path = "percona-xtrabackup"
 [pester]
 plan_path = "pester"
+[perl]
+plan_path = "perl"
+build_targets = [
+  "x86_64-windows"
+]
 [php]
 plan_path = "php"
 [pixman]
@@ -798,6 +908,11 @@ plan_path = "ponysay"
 plan_path = "popt"
 [postfix]
 plan_path = "postfix"
+[postgresql-client]
+plan_path = "postgresql-client"
+build_targets = [
+  "x86_64-windows"
+]
 [postgresql93-client]
 plan_path = "postgresql93-client"
 paths = [
@@ -843,6 +958,11 @@ paths = [
 ]
 [prometheus-cpp]
 plan_path = "prometheus-cpp"
+[porotobuf]
+plan_path = "protobuf"
+build_targets = [
+  "x86_64-windows"
+]
 [protobuf-c]
 plan_path = "protobuf-c"
 [ps-lock]
@@ -851,6 +971,31 @@ plan_path = "ps-lock"
 plan_path = "psscriptanalyzer"
 [pv]
 plan_path = "pv"
+[python]
+plan_path = "python"
+build_targets = [
+  "x86_64-windows"
+]
+[python2]
+plan_path = "python2"
+build_targets = [
+  "x86_64-windows"
+]
+[python34]
+plan_path = "python34"
+build_targets = [
+  "x86_64-windows"
+]
+[python36]
+plan_path = "python36"
+build_targets = [
+  "x86_64-windows"
+]
+[python37]
+plan_path = "python37"
+build_targets = [
+  "x86_64-windows"
+]
 [qemu]
 plan_path = "qemu"
 [R]
@@ -859,6 +1004,11 @@ plan_path = "R"
 plan_path = "rabbitmq"
 [rabbitmqadmin]
 plan_path = "rabbitmqadmin"
+[raml2html]
+plan_path = "raml2html"
+build_targets = [
+  "x86_64-windows"
+]
 [randrproto]
 randrproto = "randrproto"
 [re2c]
@@ -1057,12 +1207,27 @@ plan_path = "wrk"
 plan_path = "xeyes"
 [xmlsec1]
 plan_path = "xmlsec1"
+[xz]
+plan_path = "xz"
+build_targets = [
+  "x86_64-windows"
+]
 [yaml-cpp]
 plan_path = "yaml-cpp"
 [yarn]
 plan_path = "yarn"
 [yasm]
 plan_path = "yasm"
+[zeromq]
+plan_path = "zeromq"
+build_targets = [
+  "x86_64-windows"
+]
+[zlib]
+plan_path = "zlib"
+build_targets = [
+  "x86_64-windows"
+]
 [zookeeper]
 plan_path = "zookeeper"
 [zsh]
