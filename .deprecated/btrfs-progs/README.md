@@ -4,17 +4,6 @@
 implementing advanced features while also focusing on fault tolerance,
 repair and easy administration.
 
-## Maintainers
+## Moved
 
-The Habitat Maintainers <humans@habitat.sh>
-
-## Type of Package
-
-This is a binary package.
-
-## Usage
-
-Add `core/btrfs-progs` to `pkg_deps` or `pkg_build_deps` as
-appropriate.
-
-[1]: https://btrfs.wiki.kernel.org/index.php/Main_Page
+This plan has been moved. For more information see [here](https://github.com/habitat-sh/core-plans#additional-plans)

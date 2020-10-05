@@ -8,17 +8,6 @@ Hugo renders a typical website of moderate size in a fraction of a second. A goo
 
 Hugo is designed to work well for any kind of website including blogs, tumbles, and docs.
 
-## Maintainers
+## Moved
 
-* The Habitat Maintainers: <humans@habitat.sh>
-
-## Type of Package
-
-Binary package
-
-## Usage
-
-```
-hab pkg install core/hugo
-hab pkg exec core/hugo hugo
-```
+This plan has been moved. For more information see [here](https://github.com/habitat-sh/core-plans#additional-plans)
