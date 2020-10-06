@@ -120,7 +120,7 @@ wix @mwrock
 # This list shall be alphabetical, for sanity purposes.
 
 alex @wduncanfraser
-artifactory-pro @defilan
+artifactory-pro 
 asciinema @jasonwbarnett
 benchmark @bdangit
 cabal-install @wduncanfraser
@@ -128,7 +128,7 @@ cerebro @predominant
 clojure @johnjelinek
 concourse @echohack
 concourse-fly @echohack
-consul @defilan @predominant
+consul  @predominant
 corretto @johnjelinek
 corretto8 @johnjelinek
 corretto11 @johnjelinek
@@ -137,7 +137,7 @@ cuda-libs @bdangit
 dcrpm @jasonwbarnett
 dep @afiune @predominant
 dotnet-47-dev-pack @mwrock
-dotnet-asp-core @defilan
+dotnet-asp-core 
 dotnet-core-lts @mwrock
 dotnet-core-sdk-lts @mwrock
 dotnet-core-sdk-preview @mwrock
@@ -166,12 +166,12 @@ json-c @jasonwbarnett
 kibana @joshbrand @predominant
 logstash @joshbrand @predominant
 libimagequant @predominant
-libtalloc @defilan
+libtalloc 
 mage @predominant
 metricbeat @echohack
 mssql @mwrock
 nano @predominant
-nmap @defilan
+nmap 
 nss-myhostname @robbkidd
 nuget @mwrock
 openjdk11 @irvingpop
@@ -189,8 +189,8 @@ sqitch @irvingpop
 sqitch_pg @irvingpop
 sqlserver @mwrock
 sqlserver-ha-ag @mwrock
-terraform @defilan @echohack @predominant
+terraform  @echohack @predominant
 tlog @jasonwbarnett
-vault @defilan @predominant
+vault  @predominant
 visual-build-tools-2017 @mwrock
 wrk @afiune @predominant

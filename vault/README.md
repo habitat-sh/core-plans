@@ -1,7 +1,7 @@
 # Habitat package: vault
 
 ## Maintainers
-* [Christopher P. Maher](https://github.com/defilan)
+
 
 ## Description
 [Vault](https://www.vaultproject.io/) secures, stores, and tightly controls access to tokens, passwords, certificates, API keys, and other secrets in modern computing. Vault handles leasing, key revocation, key rolling, and auditing.
