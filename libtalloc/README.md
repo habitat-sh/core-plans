@@ -1,7 +1,7 @@
 # Habitat package: libtalloc
 
 ## Maintainers
-* [Christopher P. Maher](https://github.com/defilan)
+
 
 ## Description
 

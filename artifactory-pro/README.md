@@ -4,7 +4,6 @@ Artifactory is an advanced Binary Repository Manager for use by build tools (lik
 
 ## Maintainers
 
-* [Christopher P. Maher](https://github.com/defilan)
 
 ## Type of Package
 

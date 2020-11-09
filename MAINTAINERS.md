@@ -24,7 +24,6 @@ To become a maintainer, open a pull request to this list.
 * [Thom May](https://github.com/thommay)
 * [Paul Mooring](https://github.com/paulmooring)
 * [Josh Brand](https://github.com/joshbrand)
-* [Christopher P. Maher](https://github.com/defilan)
 * [Tasha Drew](https://github.com/tashimi)
 * [Jon Bauman](https://github.com/baumanj)
 * [Graham Weldon](https://github.com/predominant)
@@ -45,7 +44,6 @@ To become a maintainer, open a pull request to this list.
 * [Fletcher Nichol](https://github.com/fnichol)
 * [Romain Sertelon](https://github.com/rsertelon)
 * [Scott Hain](https://github.com/scotthain)
-* [Scott Macfarlane](https://github.com/smacfarlane)
 
 ## Approvers
 
