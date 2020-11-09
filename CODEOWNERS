@@ -6,104 +6,104 @@ scaffolding-* @habitat-sh/scaffolding-maintainers
 #
 # All of these plans are critical for Builder's operation and build
 
-libarchive @smacfarlane
-libsodium @smacfarlane
+libarchive
+libsodium
 nginx @predominant
 postgresql @irvingpop @habitat-sh/habitat-core-plans-maintainers
-protobuf @smacfarlane @habitat-sh/habitat-core-plans-maintainers
-protobuf-rust @smacfarlane @habitat-sh/habitat-core-plans-maintainers
-zeromq @smacfarlane @habitat-sh/habitat-core-plans-maintainers
+protobuf  @habitat-sh/habitat-core-plans-maintainers
+protobuf-rust  @habitat-sh/habitat-core-plans-maintainers
+zeromq  @habitat-sh/habitat-core-plans-maintainers
 
 # # Base Plans
 # The following plans are collectively known as the "base" plans.
 # For more information see `docs/dev/guide_documents/base-plans.md` in this repository.
 
 # These packages should not be updated outside of a base plans refresh.
-linux-headers @smacfarlane
-glibc @smacfarlane
-zlib @smacfarlane
-file @smacfarlane
-binutils @smacfarlane
-m4 @smacfarlane
-gmp @smacfarlane
-mpfr @smacfarlane
-libmpc @smacfarlane
-gcc @smacfarlane
-gcc-libs @smacfarlane
-gdbm @smacfarlane
-patchelf @smacfarlane
-pkg-config @smacfarlane
-ncurses @smacfarlane
-attr @smacfarlane
-acl @smacfarlane
-libcap @smacfarlane
-sed @smacfarlane
-procps-ng @smacfarlane
-coreutils @smacfarlane
-bison @smacfarlane
-flex @smacfarlane
-pcre @smacfarlane
-grep @smacfarlane
-gawk @smacfarlane
-db @smacfarlane
-inetutils @smacfarlane
-diffutils @smacfarlane
-autoconf @smacfarlane
-automake @smacfarlane
-findutils @smacfarlane
-xz @smacfarlane
-gettext @smacfarlane
-make @smacfarlane
-patch @smacfarlane
-texinfo @smacfarlane
-util-linux @smacfarlane
-tcl @smacfarlane
-bzip2 @smacfarlane
-expect @smacfarlane
-less @smacfarlane
-perl @smacfarlane
-dejagnu @smacfarlane
-python-minimal @smacfarlane
+linux-headers
+glibc
+zlib
+file
+binutils
+m4
+gmp
+mpfr
+libmpc
+gcc
+gcc-libs
+gdbm
+patchelf
+pkg-config
+ncurses
+attr
+acl
+libcap
+sed
+procps-ng
+coreutils
+bison
+flex
+pcre
+grep
+gawk
+db
+inetutils
+diffutils
+autoconf
+automake
+findutils
+xz
+gettext
+make
+patch
+texinfo
+util-linux
+tcl
+bzip2
+expect
+less
+perl
+dejagnu
+python-minimal
 
 # These packages are generally safe to update in a normal builder workflow, but still
 # require additional care when updating. Updates to these plans should be coordinated
 # with the Habitat team when possible. See `docs/dev/guide_documents/base-plans.md` in this repository
 # for more information
 
-shadow @smacfarlane
-psmisc @smacfarlane
-readline @smacfarlane
-bash @smacfarlane
-bc @smacfarlane
-tar @smacfarlane
-libtool @smacfarlane
-expat @smacfarlane
-iana-etc @smacfarlane
-gzip @smacfarlane
-check @smacfarlane
-libidn @smacfarlane
-cacerts @smacfarlane
-openssl @echohack @smacfarlane
-libiconv @smacfarlane
-libunistring @smacfarlane
-libidn2 @smacfarlane
-wget @smacfarlane
-unzip @smacfarlane
-rq @smacfarlane
-linux-headers-musl @smacfarlane
-musl @smacfarlane
-busybox-static @smacfarlane
-zlib-musl @smacfarlane
-bzip2-musl @smacfarlane
-xz-musl @smacfarlane
-libsodium-musl @smacfarlane
-openssl-musl @smacfarlane
-libarchive-musl @smacfarlane
+shadow
+psmisc
+readline
+bash
+bc
+tar
+libtool
+expat
+iana-etc
+gzip
+check
+libidn
+cacerts
+openssl @echohack
+libiconv
+libunistring
+libidn2
+wget
+unzip
+rq
+linux-headers-musl
+musl
+busybox-static
+zlib-musl
+bzip2-musl
+xz-musl
+libsodium-musl
+openssl-musl
+libarchive-musl
 rust @habitat-sh/habitat-core-maintainers
-vim @smacfarlane
-libbsd @smacfarlane
-clens @smacfarlane
-mg @smacfarlane
+vim
+libbsd
+clens
+mg
 powershell @mwrock
 7zip @mwrock
 docker-credential-helper @mwrock
