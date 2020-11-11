@@ -16,7 +16,6 @@ To become a maintainer, open a pull request to this list.
 * [Tom Duffield](https://github.com/tduffield)
 * [Steven Danna](https://github.com/stevendanna)
 * [Mike Fiedler](https://github.com/miketheman)
-* [Ian Henry](https://github.com/eeyun)
 * [Nell Shamrell-Harrington](https://github.com/nellshamrell)
 * [Salim Afiune](https://github.com/afiune)
 * [John Jelinek IV](https://github.com/johnjelinek)
@@ -44,6 +43,7 @@ To become a maintainer, open a pull request to this list.
 * [Fletcher Nichol](https://github.com/fnichol)
 * [Romain Sertelon](https://github.com/rsertelon)
 * [Scott Hain](https://github.com/scotthain)
+* [Ian Henry](https://github.com/eeyun)
 
 ## Approvers
 
