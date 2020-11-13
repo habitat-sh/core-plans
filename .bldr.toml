@@ -1516,6 +1516,8 @@ plan_path = "vim"
 plan_path = "virtualenv"
 [visual-build-tools-2017]
 plan_path = "visual-build-tools-2017"
+[visual-build-tools-2019]
+plan_path = "visual-build-tools-2019"
 [vmtouch]
 plan_path = "vmtouch"
 [wal-e]
