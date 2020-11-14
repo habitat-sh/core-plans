@@ -7,7 +7,7 @@ Describe "The pwsh bin" {
     $expectedVersion = $PackageIdentifier.split("/")[2]
 
     It "pwsh matches version ${expectedVersion}" {
-        $output = hab pkg exec "${PackageIdentifier}" pwsh --version
+        $output = hab pkg exec "${PackageIdentifier}" pwsh -- --version
         $actualVersion = $output.split(" ")[1]
         $actualVersion | Should -BeExactly $expectedVersion
     }
