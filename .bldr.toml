@@ -261,6 +261,10 @@ path_plan = "dotnet-47-dev-pack"
 path_plan = "dotnet-471-dev-pack"
 [dotnet-472-dev-pack]
 plan_path = "dotnet-472-dev-pack"
+[dotnet-5-runtime]
+plan_path = "dotnet-5-runtime"
+[dotnet-5-sdk]
+plan_path = "dotnet-5-sdk"
 [dotnet-asp-core]
 path_plan = "dotnet-asp-core"
 [dotnet-core]
