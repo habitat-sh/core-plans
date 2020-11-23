@@ -440,7 +440,7 @@ _setup_funcs() {
 
 _setup_vars() {
   # The default Ruby package if one cannot be detected
-  _default_ruby_pkg="core/ruby"
+  _default_ruby_pkg="core/ruby27"
   # The absolute path to the `gemfile-parser` program
   _gemfile_parser="$(pkg_path_for scaffolding-ruby)/bin/gemfile-parser"
   # `$scaffolding_ruby_pkg` is empty by default

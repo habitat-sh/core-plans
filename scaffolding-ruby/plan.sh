@@ -5,7 +5,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_description="Habitat Plan Scaffolding for Ruby Applications"
 pkg_upstream_url="https://github.com/habitat-sh/core-plans/tree/master/scaffolding-ruby"
-pkg_deps=(core/bundler core/ruby core/tar core/busybox-static core/rq core/gcc core/make core/pkg-config)
+pkg_deps=(core/bundler core/ruby27 core/tar core/busybox-static core/rq core/gcc core/make core/pkg-config)
 pkg_build_deps=(core/coreutils core/sed)
 pkg_bin_dirs=(bin)
 
@@ -53,7 +53,7 @@ export GEM_HOME="$GEM_HOME"
 export GEM_PATH="$GEM_PATH"
 unset RUBYOPT GEMRC
 
-exec $(pkg_path_for ruby)/bin/ruby ${bin}.real \$@
+exec $(pkg_path_for ruby27)/bin/ruby ${bin}.real \$@
 EOF
   chmod -v 755 "$bin"
 }
