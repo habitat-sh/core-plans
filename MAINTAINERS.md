@@ -14,7 +14,6 @@ To become a maintainer, open a pull request to this list.
 ## Active Maintainers
 
 * [Tom Duffield](https://github.com/tduffield)
-* [Steven Danna](https://github.com/stevendanna)
 * [Mike Fiedler](https://github.com/miketheman)
 * [Nell Shamrell-Harrington](https://github.com/nellshamrell)
 * [Salim Afiune](https://github.com/afiune)
@@ -44,6 +43,7 @@ To become a maintainer, open a pull request to this list.
 * [Romain Sertelon](https://github.com/rsertelon)
 * [Scott Hain](https://github.com/scotthain)
 * [Ian Henry](https://github.com/eeyun)
+* [Steven Danna](https://github.com/stevendanna)
 
 ## Approvers
 
