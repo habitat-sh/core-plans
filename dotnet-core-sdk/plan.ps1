@@ -11,6 +11,10 @@ $pkg_source="https://download.visualstudio.microsoft.com/download/pr/28a2c4ff-61
 $pkg_shasum="abcd034b230365d9454459e271e118a851969d82516b1529ee0bfea07f7aae52"
 $pkg_bin_dirs=@("bin")
 
+function Invoke-SetupEnvironment {
+    Set-RuntimeEnv -IsPath "MSBuildSDKsPath" "$pkg_prefix\bin\sdk\3.1.100\Sdks"
+}
+
 function Invoke-Install {
     Copy-Item * "$pkg_prefix/bin" -Recurse -Force
 }
