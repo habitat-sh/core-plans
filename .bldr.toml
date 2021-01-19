@@ -1204,6 +1204,8 @@ plan_path = "postgresql11-client"
 paths = [
   "postgresql11/*",
 ]
+[postgresql12-client]
+plan_path = "postgresql12-client"
 [powershell]
 plan_path = "powershell"
 [procps-ng]
