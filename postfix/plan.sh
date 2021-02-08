@@ -1,12 +1,12 @@
 pkg_name=postfix
 pkg_origin=core
-pkg_version="3.3.2"
+pkg_version="3.5.9"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Postfix is a free and open-source mail transfer agent that routes and delivers electronic mail."
 pkg_upstream_url="http://www.postfix.org/"
 pkg_license=('IPL-1.0')
 pkg_source="http://cdn.postfix.johnriley.me/mirrors/${pkg_name}-release/official/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="3c93f31eee49a58e592c31e62a058701cadde11e8e066ea441da19fddad7b35b"
+pkg_shasum="51ced5a3165a415beba812b6c9ead0496b7172ac6c3beb654d2ccd9a1b00762b"
 pkg_build_deps=(
   core/make
   core/gcc
