@@ -25,3 +25,14 @@ security_options = "noanonymous"
 [smtp.tls]
 security_level = "may"
 loglevel = 1
+
+[ldap]
+bind = "no"
+bind_dn = ""
+bind_pw = ""
+server_host = ""
+search_base = ""
+domain = ""
+query_filter = "(mail=%s)"
+result_attribute = "mail"
+version = "3"

@@ -63,6 +63,13 @@ postfix-email() {
     hab pkg exec core/netcat nc localhost 25
 }
 
+echo "    * Use 'postfix-ldap youremail@yourdomain.com' to test ldap configuration"
+postfix-ldap() {
+    [ -z "$1" ] && { echo >&2 "Usage: postfix-ldap youremail@yourdomain.com"; return 1; }
+
+    hab pkg exec core/postfix postmap -c /hab/svc/postfix/config -q "$1" "ldap:/hab/svc/postfix/config/ldap-aliases.cf"
+}
+
 echo "    * Use 'postfix-test' to send a test message to root"
 postfix-test() {
     echo "Sending email to root@localhost"

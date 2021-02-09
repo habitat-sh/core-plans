@@ -21,6 +21,7 @@ pkg_deps=(
   core/db
   core/glibc
   core/libnsl
+  core/openldap
   core/openssl
   core/pcre
   core/zlib
@@ -41,6 +42,8 @@ do_build() {
       -I$(pkg_path_for core/openssl)/include
     -DUSE_SASL_AUTH -DUSE_CYRUS_SASL
       -I$(pkg_path_for core/cyrus-sasl)/include/sasl
+    -DHAS_LDAP -DUSE_LDAP_SASL
+      -I$(pkg_path_for core/openldap)/include
   )
   build_line "Setting POSTFIX_CCARGS=${POSTFIX_CCARGS[*]}"
 
@@ -55,6 +58,8 @@ do_build() {
       -L$(pkg_path_for core/openssl)/lib
     -lsasl2
       -L$(pkg_path_for core/cyrus-sasl)/lib
+    -lldap
+      -L$(pkg_path_for core/openldap)/lib
   )
   build_line "Setting POSTFIX_AUXLIBS=${POSTFIX_AUXLIBS[*]}"
 
