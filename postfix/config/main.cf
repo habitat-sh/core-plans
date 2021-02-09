@@ -13,7 +13,7 @@ mail_spool_directory = {{pkg.svc_data_path}}/spool
 queue_directory = {{pkg.svc_data_path}}/queue
 
 alias_database = hash:{{pkg.svc_config_path}}/aliases
-alias_maps = hash:{{pkg.svc_config_path}}/aliases, ldap:{{pkg.svc_config_path}}/ldap-aliases.cf
+alias_maps = hash:{{pkg.svc_config_path}}/aliases{{#if cfg.ldap.server_host ~}}, ldap:{{pkg.svc_config_path}}/ldap-aliases.cf{{/if}}
 
 
 disable_dns_lookups = yes

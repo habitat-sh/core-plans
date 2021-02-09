@@ -1,9 +1,19 @@
 bind = {{cfg.ldap.bind}}
-bind_dn = {{cfg.ldap.bind_dn}}
-bind_pw = {{cfg.ldap.bind_pw}}
-server_host = {{cfg.ldap.server_host}}
-search_base = {{cfg.ldap.search_base}}
-domain = {{cfg.ldap.domain}}
+{{#if cfg.ldap.bind_dn ~}}
+  bind_dn = {{cfg.ldap.bind_dn}}
+{{/if ~}}
+{{#if cfg.ldap.bind_pw ~}}
+  bind_pw = {{cfg.ldap.bind_pw}}
+{{/if ~}}
+{{#if cfg.ldap.server_host ~}}
+  server_host = {{cfg.ldap.server_host}}
+{{/if ~}}
+{{#if cfg.ldap.server_host ~}}
+  search_base = {{cfg.ldap.search_base}}
+{{/if ~}}
+{{#if cfg.ldap.domain ~}}
+  domain = {{cfg.ldap.domain}}
+{{/if ~}}
 query_filter = {{cfg.ldap.query_filter}}
 result_attribute = {{cfg.ldap.result_attribute}}
 version = {{cfg.ldap.version}}
