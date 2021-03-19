@@ -1,12 +1,12 @@
 pkg_name=aspcud
 pkg_origin=core
-pkg_version=1.9.4
+pkg_version=1.9.5
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("MIT")
 pkg_description="Aspcud is a solver for package dependencies"
 pkg_upstream_url=https://potassco.org/aspcud/
 pkg_source="https://github.com/potassco/${pkg_name}/archive/v${pkg_version}.tar.gz"
-pkg_shasum=3645f08b079e1cc80e24cd2d7ae5172a52476d84e3ec5e6a6c0034492a6ea885
+pkg_shasum=8c420a34e549d015d71059d9f1e1b06955429dd070d20b191e7374f26c7f1ecc
 pkg_deps=(
   core/clingo
   core/gcc-libs
