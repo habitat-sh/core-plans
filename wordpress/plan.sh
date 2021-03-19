@@ -3,11 +3,11 @@
 
 pkg_name=wordpress
 pkg_origin=core
-pkg_version="4.7.4"
+pkg_version="4.7.19"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://wordpress.org/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="c11ce7580f21dfbca70dd6f817d3376385be6d34cf4d86f233eae3acb5fd87fd"
+pkg_shasum="87808ef84082e491d21a46fefcd85d4e0cce5b3e54e465d5fd3e0fc89b2c5603"
 pkg_description="installs wordpress"
 pkg_upstream_url="https://wordpress.org/"
 
