@@ -1,12 +1,12 @@
 pkg_name=gdb
 pkg_origin=core
-pkg_version=8.3
+pkg_version=8.3.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0-or-later' 'GPL-3.0-or-later')
 pkg_description="GDB, the GNU Project debugger, allows you to see what is going on 'inside' another program while it executes -- or what another program was doing at the moment it crashed."
 pkg_upstream_url="https://www.gnu.org/software/gdb/"
 pkg_source="http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum=802f7ee309dcc547d65a68d61ebd6526762d26c3051f52caebe2189ac1ffd72e
+pkg_shasum=1e55b4d7cdca7b34be12f4ceae651623aa73b2fd640152313f9f66a7149757c4
 pkg_deps=(
   core/bdwgc
   core/expat
