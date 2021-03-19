@@ -1,12 +1,12 @@
 pkg_name=shield
 pkg_origin=core
-pkg_version="0.10.8"
+pkg_version="0.10.9"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_description="A standalone system that can perform backup and restore functions for a wide variety of pluggable data systems."
 pkg_upstream_url="https://github.com/starkandwayne/shield"
 pkg_source="https://github.com/starkandwayne/shield/archive/v${pkg_version}.tar.gz"
-pkg_shasum="1d9f5c80f86d6e1d8e0971959068154dd7f5299f307e06b38c33f63f81ee413a"
+pkg_shasum="02b6c80cd21fe206abc35a1f9f5aa60cb04800a2f702c02a271ef1c1fb5ac24b"
 
 pkg_deps=(core/bash core/glibc core/postgresql core/shield-proxy/${pkg_version})
 pkg_build_deps=(core/go core/git core/gcc core/make core/gox)
