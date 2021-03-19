@@ -1,10 +1,10 @@
 pkg_name=crate
 pkg_origin=core
-pkg_version="1.1.2"
+pkg_version="1.1.6"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://cdn.crate.io/downloads/releases/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="8f22b6531b3d1c8602a880779bbe09e5295ef0959a30aff0986575835aadc937"
+pkg_shasum="8a8b736e9d0ba24bc6d8f085a645298c4c75ced98567359842ed31ec4f2e9f46"
 pkg_build_deps=(core/gnupg)
 pkg_deps=(core/corretto8 core/curl core/busybox-static)
 pkg_bin_dirs=(crate/bin)
