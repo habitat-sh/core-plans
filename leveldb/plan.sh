@@ -2,11 +2,11 @@ pkg_name=leveldb
 pkg_origin=core
 pkg_description="LevelDB is a fast key-value storage library written at Google that provides an ordered mapping from string keys to string values."
 pkg_upstream_url="https://github.com/google/leveldb"
-pkg_version="1.20"
+pkg_version="1.23"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('BSD-3-Clause')
 pkg_source="https://github.com/google/leveldb/archive/v${pkg_version}.tar.gz"
-pkg_shasum="f5abe8b5b209c2f36560b75f32ce61412f39a2922f7045ae764a2c23335b6664"
+pkg_shasum="9ccc8706561591a540ce0165041beb1b0361338a11e135a9fcff18fd5984d7c7"
 pkg_deps=(
   core/snappy
   core/glibc
