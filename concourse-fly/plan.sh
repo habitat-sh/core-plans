@@ -1,6 +1,6 @@
 pkg_name=concourse-fly
 pkg_origin=core
-pkg_version="4.2.2"
+pkg_version="4.2.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_description="Concourse CLI for interacting with the ATC API"
