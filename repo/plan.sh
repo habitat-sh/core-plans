@@ -1,6 +1,6 @@
 pkg_origin=core
 pkg_name=repo
-pkg_version='1.12.33'
+pkg_version='1.13.11'
 pkg_description="Repo is a tool that [Google] built on top of Git. Repo helps
   [Google] manage the many Git repositories, does the uploads to [Google's]
   revision control system, and automates parts of the Android development
