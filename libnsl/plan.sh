@@ -1,12 +1,12 @@
 pkg_name=libnsl
 pkg_origin=core
-pkg_version="1.2.0"
+pkg_version="1.3.0"
 pkg_description="This library contains the public client interface for NIS(YP) and NIS+ in a IPv6 ready version"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("LGPL-2.1-or-later")
 pkg_upstream_url="https://github.com/thkukuk/libnsl"
 pkg_source="https://github.com/thkukuk/libnsl/archive/v${pkg_version}.tar.gz"
-pkg_shasum="a5a28ef17c4ca23a005a729257c959620b09f8c7f99d0edbfe2eb6b06bafd3f8"
+pkg_shasum="b7eb25b0e938c5e504eaef7888ced8aae3d70c749cecf532817379a0eb785560"
 pkg_deps=(
   core/glibc
 )
