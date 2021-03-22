@@ -1,6 +1,6 @@
 ---
 project:
-  alias: core-plans
+  alias: core-plans-refresh-2021q2
 
 github:
   delete_branch_on_merge: true
