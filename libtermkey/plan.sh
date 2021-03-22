@@ -1,10 +1,10 @@
 pkg_name=libtermkey
 pkg_origin=core
-pkg_version="0.20"
+pkg_version="0.22"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_source="http://www.leonerd.org.uk/code/$pkg_name/$pkg_name-${pkg_version}.tar.gz"
-pkg_shasum="6c0d87c94ab9915e76ecd313baec08dedf3bd56de83743d9aa923a081935d2f5"
+pkg_shasum="6945bd3c4aaa83da83d80a045c5563da4edd7d0374c62c0d35aec09eb3014600"
 pkg_deps=(
   core/glibc
   core/ncurses
