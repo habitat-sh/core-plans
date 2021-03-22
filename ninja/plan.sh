@@ -1,6 +1,6 @@
 pkg_name=ninja
 pkg_origin=core
-pkg_version=1.8.2
+pkg_version=1.10.2
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url=https://ninja-build.org/
 pkg_description="A small build system with a focus on speed"
