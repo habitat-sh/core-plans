@@ -990,6 +990,11 @@ plan_path = "node12"
 paths = [
   "node/*",
 ]
+[node14]
+plan_path = "node14"
+paths = [
+  "node/*",
+]
 [node_exporter]
 plan_path = "node_exporter"
 [npth]
