@@ -1,10 +1,10 @@
 pkg_name=mysql
 pkg_origin=core
-pkg_version=5.7.27
+pkg_version=5.7.32
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=('GPL-2.0')
 pkg_source=http://dev.mysql.com/get/Downloads/MySQL-5.7/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=f8b65872a358d6f5957de86715c0a3ef733b60451dad8d64a8fd1a92bf091bba
+pkg_shasum=bb87e1ecb8e5acc7d402395f3b775f7126c6945d947c0a624c61f6f56ed6bced
 pkg_upstream_url=https://www.mysql.com/
 pkg_description=$(cat << EOF
 Starts MySQL with a basic configuration. Configurable at run time:
