@@ -1,6 +1,6 @@
 pkg_name=ponysay
 pkg_origin=core
-pkg_version="3.0.3"
+pkg_version="3.0.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-3.0')
 pkg_source="https://github.com/erkin/$pkg_name/archive/$pkg_version.tar.gz"
