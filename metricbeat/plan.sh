@@ -1,6 +1,6 @@
 pkg_name=metricbeat
 pkg_origin=core
-pkg_version=7.2.0
+pkg_version=7.12.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_deps=(core/glibc)
