@@ -1,12 +1,12 @@
 pkg_origin=core
 pkg_name=ant
-pkg_version=1.10.7
+pkg_version=1.10.9
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_description="Ant is a Java based build tool."
 pkg_upstream_url=https://ant.apache.org/
 pkg_source="https://github.com/apache/ant/archive/rel/${pkg_version}.tar.gz"
-pkg_shasum=76847cb016937266872b5f83bd5a6dc3587b9df6a6545f57213f79358c16457a
+pkg_shasum=0f676da0507ca750f7cf77cbe7750a44213dc611a94e78a47870e79417e09776
 pkg_build_deps=(
   core/python2
 )
