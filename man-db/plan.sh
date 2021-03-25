@@ -1,12 +1,12 @@
 pkg_origin=core
 pkg_name=man-db
-pkg_version=2.7.5
+pkg_version=2.9.4
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0')
 pkg_description="man-db is an implementation of the standard Unix documentation system accessed using the man command."
 pkg_upstream_url=http://man-db.nongnu.org/
 pkg_source="http://git.savannah.gnu.org/cgit/man-db.git/snapshot/man-db-${pkg_version}.tar.gz"
-pkg_shasum=3a1af4b7f17193e45b5abdb12d935b70a7757dfe7e1a4196f6c00b500c6fca78
+pkg_shasum=069dce8dc428ebd71d677d96033cd259aad43b6a5a86c580dfaa209e015eb304
 pkg_deps=(
   core/gdbm
   core/glibc
