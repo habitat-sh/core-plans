@@ -1,12 +1,12 @@
 pkg_name=shared-mime-info
 pkg_origin=core
-pkg_version=1.9
+pkg_version=1.10
 pkg_description="The shared-mime-info package contains the core database of common types and the update-mime-database command used to extend it"
 pkg_upstream_url="https://www.freedesktop.org/wiki/Software/shared-mime-info/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0')
 pkg_source="http://freedesktop.org/~hadess/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum=5c0133ec4e228e41bdf52f726d271a2d821499c2ab97afd3aa3d6cf43efcdc83
+pkg_shasum=9d7f973cd10e3eb22b299e8bc63b6ddbb2c36854d5cb38789a266453129330d2
 pkg_deps=(
   core/glib
   core/glibc
