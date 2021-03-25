@@ -1,13 +1,13 @@
 pkg_name=graphviz
 pkg_origin=core
-pkg_version=2.44.0
+pkg_version=2.44.1
 pkg_license=("EPL-1.0")
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Graphviz - Graph Visualization Software"
 pkg_upstream_url=https://graphviz.gitlab.io/
 pkg_dirname="${pkg_name}-${pkg_version}"
 pkg_source="https://www2.graphviz.org/Packages/stable/portable_source/graphviz-${pkg_version}.tar.gz"
-pkg_shasum=9aabd13a8018b708ab3c822de2326c19d0a52ed59f50a6b0f9318c07e2a6d93b
+pkg_shasum=8e1b34763254935243ccdb83c6ce108f531876d7a5dfd443f255e6418b8ea313
 pkg_deps=(
   core/glibc
   core/libtool
