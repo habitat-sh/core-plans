@@ -1,12 +1,12 @@
 pkg_name=rpm
 pkg_origin=core
-pkg_version=4.14.2.1
+pkg_version=4.16.1.3
 pkg_license=("GPL-2.0" "LGPL-2.0")
 pkg_description="RPM Package Manager"
 pkg_upstream_url="http://www.rpm.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="http://ftp.rpm.org/releases/${pkg_name}-4.14.x/${pkg_name}-${pkg_version}.tar.bz2"
-pkg_shasum="1139c24b7372f89c0a697096bf9809be70ba55e006c23ff47305c1849d98acda"
+pkg_shasum="513dc7f972b6e7ccfc9fc7f9c01d5310cc56ee853892e4314fa2cad71478e21d"
 
 pkg_deps=(
   core/bzip2
