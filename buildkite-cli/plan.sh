@@ -1,6 +1,6 @@
 pkg_name=buildkite-cli
 pkg_origin=core
-pkg_version="0.4.1"
+pkg_version="0.5.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("MIT")
 pkg_description="A command line interface for Buildkite"
@@ -8,7 +8,7 @@ pkg_build_deps=(core/go core/coreutils core/gcc)
 pkg_deps=(core/glibc core/git core/buildkite-agent)
 pkg_source="https://github.com/buildkite/cli/archive/v${pkg_version}.tar.gz"
 pkg_filename="${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=ce5dd83ccea247c0cf97aff2c4c16e4b94a7abcda1686907b1013a303914fa92
+pkg_shasum=cbfeae7569aab1bbeda6819dc3403b33da72062ad144ae804644e4af4250d9ae
 pkg_upstream_url="https://buildkite.com"
 pkg_bin_dirs=(bin)
 
