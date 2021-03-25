@@ -1,13 +1,13 @@
 pkg_name=tomcat8
 pkg_description="An open source implementation of the Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies."
 pkg_origin=core
-pkg_version=8.5.9
+pkg_version=8.5.64
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_description="The Apache Tomcat software is an open source implementation of the Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies."
 pkg_upstream_url="http://tomcat.apache.org/"
 pkg_source=http://archive.apache.org/dist/tomcat/tomcat-8/v${pkg_version}/bin/apache-tomcat-${pkg_version}.tar.gz
-pkg_shasum=d72234baa373234aa9ed78e8331ac1ce47d2e07a262dafce35d17389825bc8b7
+pkg_shasum=f00d3cc3c6965d160165193e4e071cd3ba39cf69f8b5b8017d66a78e8a754333
 pkg_deps=(core/coreutils)
 pkg_exports=(
   [port]=server.port
