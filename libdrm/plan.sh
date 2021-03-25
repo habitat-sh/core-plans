@@ -1,12 +1,12 @@
 pkg_name=libdrm
 pkg_origin=core
-pkg_version=2.4.88
+pkg_version=2.4.104
 pkg_description="Direct Rendering Manager"
 pkg_upstream_url="https://dri.freedesktop.org/wiki/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
-pkg_source="https://dri.freedesktop.org/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=a8b458db6a73c717baee2e249d39511fb6f5c0f5f24dee2770935eddeda1a017
+pkg_source="https://dri.freedesktop.org/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz"
+pkg_shasum=d66ad8b5c2441015ac1333e40137bb803c3bde3612ff040286fcc12158ea1bcb
 pkg_deps=(
   core/libpciaccess
   core/glibc
