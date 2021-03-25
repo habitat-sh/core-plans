@@ -1,12 +1,12 @@
 pkg_name=percona-xtrabackup
 pkg_origin=core
-pkg_version=2.4.9
+pkg_version=2.4.18
 pkg_description="Percona xtrabackup utilities"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url="https://www.percona.com/software/mysql-database/percona-xtrabackup"
 pkg_license=('GPL-2.0')
 pkg_source="http://github.com/percona/percona-xtrabackup/archive/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="53e613e12dbd93277fb3004b66d8d2c12476e4febca2bcd2d0f2115dc18cb265"
+pkg_shasum="21f7dd9ad0f8a8249a7710ab5c76c31e9a4edb04d3ac716f6803cfc8f47b6fa3"
 pkg_dirname="percona-xtrabackup-percona-xtrabackup-${pkg_version}"
 pkg_build_deps=(
   core/m4
