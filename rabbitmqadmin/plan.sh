@@ -1,6 +1,6 @@
 pkg_name=rabbitmqadmin
 pkg_origin=core
-pkg_version=3.7.7
+pkg_version=3.8.14
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MPL')
 pkg_description="Open source multi-protocol messaging broker (Administration CLI)"
