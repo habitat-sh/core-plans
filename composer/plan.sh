@@ -1,13 +1,13 @@
 pkg_name=composer
 pkg_origin=core
-pkg_version=1.10.5
+pkg_version=1.10.20
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_upstream_url=https://getcomposer.org/
 pkg_description="Dependency Manager for PHP"
 pkg_source="https://getcomposer.org/download/${pkg_version}/${pkg_name}.phar"
 pkg_filename="${pkg_name}.phar"
-pkg_shasum=d5f3fddd0be28a5fc9bf2634a06f51bc9bd581fabda93fee7ca8ca781ae43129
+pkg_shasum=e70b1024c194e07db02275dd26ed511ce620ede45c1e237b3ef51d5f8171348d
 pkg_deps=(
   core/php
   core/git
