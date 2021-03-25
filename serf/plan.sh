@@ -1,13 +1,13 @@
 pkg_name=serf
 pkg_distname=$pkg_name
 pkg_origin=core
-pkg_version=1.3.8
+pkg_version=1.3.9
 pkg_description="A high performance C-based HTTP client library built upon the Apache Portable Runtime (APR) library."
 pkg_upstream_url=https://serf.apache.org/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source=https://archive.apache.org/dist/${pkg_distname}/${pkg_distname}-${pkg_version}.tar.bz2
-pkg_shasum=e0500be065dbbce490449837bb2ab624e46d64fc0b090474d9acaa87c82b2590
+pkg_shasum=549c2d21c577a8a9c0450facb5cca809f26591f048e466552240947bdf7a87cc
 pkg_deps=(
   core/apr
   core/apr-util
