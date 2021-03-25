@@ -1,12 +1,12 @@
 pkg_name=httpd
 pkg_origin=core
-pkg_version=2.4.39
+pkg_version=2.4.46
 pkg_description="The Apache HTTP Server"
 pkg_upstream_url="http://httpd.apache.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://archive.apache.org/dist/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=8b95fe249f3a6c50aad3ca125eef3e02d619116cde242e1bc3c266b7b5c37c30
+pkg_shasum=44b759ce932dc090c0e75c0210b4485ebf6983466fb8ca1b446c8168e1a1aec2
 pkg_deps=(
   core/apr
   core/apr-util
