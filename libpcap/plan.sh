@@ -1,12 +1,12 @@
 pkg_name=libpcap
 pkg_origin=core
-pkg_version=1.8.1
+pkg_version=1.10.0
 pkg_description="A portable C/C++ library for network traffic capture."
 pkg_upstream_url="http://www.tcpdump.org/"
 pkg_license=('BSD')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="http://www.tcpdump.org/release/libpcap-${pkg_version}.tar.gz"
-pkg_shasum=673dbc69fdc3f5a86fb5759ab19899039a8e5e6c631749e48dcd9c6f0c83541e
+pkg_shasum=8d12b42623eeefee872f123bd0dc85d535b00df4d42e865f993c40f7bfc92b1e
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/gcc core/make core/flex core/bison core/m4)
 pkg_include_dirs=(include)
