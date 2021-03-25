@@ -1,12 +1,12 @@
 pkg_name=jo
 pkg_origin=core
-pkg_version=1.1
+pkg_version=1.4
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0')
 pkg_description="jo, a small utility to create JSON objects."
 pkg_upstream_url="https://github.com/jpmens/jo"
 pkg_source="https://github.com/jpmens/${pkg_name}/releases/download/v${pkg_version}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=63ed4766c2e0fcb5391a14033930329369f437d7060a11d82874e57e278bda5f
+pkg_shasum=0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5
 pkg_build_deps=(core/linux-headers-musl core/musl core/make core/gcc core/diffutils)
 pkg_deps=()
 pkg_bin_dirs=(bin)
