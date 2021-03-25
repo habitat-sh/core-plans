@@ -1,13 +1,13 @@
 pkg_name=clang-tools-extra
 pkg_origin=core
-pkg_version=7.0.0
+pkg_version=7.1.0
 pkg_license=('NCSA')
 pkg_description="Clang Tools are standalone command line (and potentially GUI) tools designed for use by C++ developers who are already using and enjoying Clang as their compiler. These tools provide developer-oriented functionality such as fast syntax checking, automatic formatting, refactoring, etc."
 pkg_upstream_url="https://clang.llvm.org/docs/ClangTools.html#extra-clang-tools"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_filename="${pkg_name}-${pkg_version}.src.tar.xz"
 pkg_source="http://llvm.org/releases/${pkg_version}/${pkg_name}-${pkg_version}.src.tar.xz"
-pkg_shasum="937c5a8c8c43bc185e4805144744799e524059cac877a44d9063926cd7a19dbe"
+pkg_shasum="1ce0042c48ecea839ce67b87e9739cf18e7a5c2b3b9a36d177d00979609b6451"
 pkg_deps=(
   core/gcc-libs
   core/glibc
