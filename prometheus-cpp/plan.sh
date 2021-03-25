@@ -1,6 +1,6 @@
 pkg_name=prometheus-cpp
 pkg_origin=core
-pkg_version=0.6.0
+pkg_version=0.12.2
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url="https://github.com/jupp0r/prometheus-cpp"
 pkg_description="Prometheus Client Library for Modern C++"
