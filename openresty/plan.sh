@@ -1,12 +1,12 @@
 pkg_name=openresty
 pkg_origin=core
-pkg_version=1.17.8.2
+pkg_version=1.19.3.1
 pkg_description="Scalable Web Platform by Extending NGINX with Lua"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('BSD-2-Clause')
 pkg_source="https://openresty.org/download/${pkg_name}-${pkg_version}.tar.gz"
 pkg_upstream_url=http://openresty.org/
-pkg_shasum=2f321ab11cb228117c840168f37094ee97f8f0316eac413766305409c7e023a0
+pkg_shasum=f36fcd9c51f4f9eb8aaab8c7f9e21018d5ce97694315b19cacd6ccf53ab03d5d
 pkg_deps=(
   core/glibc
   core/gcc-libs
