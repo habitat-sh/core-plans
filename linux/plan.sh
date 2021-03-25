@@ -1,12 +1,12 @@
 pkg_name=linux
 pkg_origin=core
-pkg_version="4.16.7"
+pkg_version="4.20.17"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="The Linux kernel"
 pkg_upstream_url="https://www.kernel.org/"
 pkg_license=('gplv2')
 pkg_source="https://cdn.kernel.org/pub/linux/kernel/v4.x/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="d87abef6c5666329194a0005fa8331c0cc03b65383f195442dee8f5558af0139"
+pkg_shasum="d011245629b980d4c15febf080b54804aaf215167b514a3577feddb2495f8a3e"
 pkg_deps=(
   core/glibc
 )
