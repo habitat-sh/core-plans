@@ -1,6 +1,6 @@
 pkg_name=gnutls
 pkg_origin=core
-pkg_version=3.6.13
+pkg_version=3.6.15
 pkg_description="GnuTLS is a secure communications library implementing the SSL, TLS and DTLS protocols and technologies around them"
 pkg_upstream_url="https://www.gnutls.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
