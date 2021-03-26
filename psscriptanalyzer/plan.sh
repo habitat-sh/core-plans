@@ -1,12 +1,12 @@
 pkg_name="psscriptanalyzer"
 pkg_origin="core"
-pkg_version="1.18.3"
+pkg_version="1.19.1"
 pkg_license=('MIT')
 pkg_upstream_url="https://github.com/PowerShell/PSScriptAnalyzer"
 pkg_description="PSScriptAnalyzer is the ubiquitous linter for PowerShell"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/PowerShell/PSScriptAnalyzer/releases/download/$pkg_version/PSScriptAnalyzer.zip"
-pkg_shasum="8fcad735102fe3eaa9e090ec2ac09cfb7b1b2808ba00df1b2ff4c9a7383fc384"
+pkg_shasum="3e7e24b33602244e8fc54c3dd0d9675abf1727c881943326bff19e7957052976"
 pkg_deps=("core/powershell")
 
 do_build() {
