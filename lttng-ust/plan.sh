@@ -1,12 +1,12 @@
 pkg_origin=core
 pkg_name=lttng-ust
-pkg_version=2.8.1
+pkg_version=2.12.1
 pkg_description="LTTng is an open source tracing framework for Linux."
 pkg_upstream_url=http://lttng.org/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0' 'MIT')
 pkg_source=$pkg_upstream_url/files/$pkg_name/$pkg_name-$pkg_version.tar.bz2
-pkg_shasum=6e41349107e83e7b43c69ed358e48788ca2fd095bad61737b850e3f3d2c0508a
+pkg_shasum=cad26d7b831503088f9834b161e47f27f9f73640d0cdcef7f860cbd74a3afedf
 pkg_deps=(
   core/coreutils
   core/gcc-libs
