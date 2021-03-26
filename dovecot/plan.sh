@@ -1,12 +1,12 @@
 pkg_name=dovecot
 pkg_origin=core
-pkg_version=2.3.4
+pkg_version=2.3.14
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Secure IMAP server"
 pkg_upstream_url="https://dovecot.org"
 pkg_license=("LGPL-2.1" "MIT")
 pkg_source="https://dovecot.org/releases/${pkg_version%.*}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="d91b76eff8df6185c1799f1b279f780105bdeeea27e3286b42f4cab18efbef05"
+pkg_shasum="c8b3d7f3af1e558a3ff0f970309d4013a4d3ce136f8c02a53a3b05f345b9a34a"
 pkg_deps=(
   core/bzip2
   core/glibc
