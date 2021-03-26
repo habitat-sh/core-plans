@@ -1,6 +1,6 @@
 pkg_name=libgd
 pkg_origin=core
-pkg_version="2.2.4"
+pkg_version="2.3.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=($(cat << EOF
 In order to resolve any possible confusion regarding the authorship of
@@ -76,7 +76,7 @@ for their prior contributions.
 EOF
 ))
 pkg_source="https://github.com/$pkg_name/$pkg_name/releases/download/gd-$pkg_version/$pkg_name-$pkg_version.tar.xz"
-pkg_shasum="137f13a7eb93ce72e32ccd7cebdab6874f8cf7ddf31d3a455a68e016ecd9e4e6"
+pkg_shasum="18ed11e6c3d2126ff89b47c0d11cd9af482b97df502a6fe9f725224eb58020cf"
 pkg_deps=(
   core/fontconfig
   core/freetype
