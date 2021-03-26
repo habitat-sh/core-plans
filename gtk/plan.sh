@@ -1,13 +1,13 @@
 pkg_name=gtk
 pkg_origin=core
-pkg_version=3.22.22
+pkg_version=3.24.18
 pkg_description="GTK+, or the GIMP Toolkit, is a multi-platform toolkit for creating graphical user interfaces."
 pkg_upstream_url="https://www.gtk.org"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('LGPL-2.0')
 upstream_name="gtk+"
 pkg_source="https://download.gnome.org/sources/${upstream_name}/${pkg_version%.*}/${upstream_name}-${pkg_version}.tar.xz"
-pkg_shasum=862dc22c5e93cd800753e5e90dfdb3af0fc760a47f6ebd918ae19136d527c6cd
+pkg_shasum=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 pkg_dirname="${upstream_name}-${pkg_version}"
 pkg_deps=(
   core/at-spi2-core
