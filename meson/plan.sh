@@ -1,12 +1,12 @@
 pkg_name=meson
 pkg_origin=core
-pkg_version=0.46.1
+pkg_version=0.57.1
 pkg_description="The Meson Build System"
 pkg_upstream_url="http://mesonbuild.com/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://github.com/mesonbuild/${pkg_name}/archive/${pkg_version}.tar.gz"
-pkg_shasum=2d917692d2cc194e12295f00469fbdf3c045e85d0295e5e59ced69115920ffa0
+pkg_shasum=7b510b97a784b4ce858070762f4aff691ea3db63a94a3563e1bce249b35623b2
 pkg_deps=(
   core/python
   core/ninja
