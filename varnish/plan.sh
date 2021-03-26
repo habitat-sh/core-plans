@@ -5,10 +5,10 @@ pkg_description="Varnish Cache"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url="http://varnish-cache.org/"
 pkg_license=('bsd')
-pkg_version="5.1.2"
+pkg_version="5.2.1"
 pkg_source="https://varnish-cache.org/_downloads/${pkg_name}-${pkg_version}.tgz"
 
-pkg_shasum="39d858137e26948a7c85f07363f13f0778da61d234126e03a160a0cb9ba4fce3"
+pkg_shasum="b8452c9d78c16f78c8cfd1c1a1e696523bf64b7721c330150dcc0852459014b3"
 pkg_deps=(
   core/bash
   core/gcc
