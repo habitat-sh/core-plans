@@ -1,10 +1,10 @@
 pkg_name=unibilium
 pkg_origin=core
-pkg_version="1.2.0"
+pkg_version="1.2.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('LGPL-3.0')
 pkg_source="https://github.com/mauke/$pkg_name/archive/v$pkg_version.tar.gz"
-pkg_shasum="623af1099515e673abfd3cae5f2fa808a09ca55dda1c65a7b5c9424eb304ead8"
+pkg_shasum="fd42411ab25ac6bcaa02c05019e6717ac19848c43ac7337a6423d1c4bd3b0f42"
 pkg_deps=(core/glibc)
 pkg_build_deps=(
   core/gcc
