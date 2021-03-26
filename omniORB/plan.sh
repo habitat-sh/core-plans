@@ -1,6 +1,6 @@
 pkg_name=omniORB
 pkg_origin=core
-pkg_version='4.2.2'
+pkg_version='4.3.0'
 pkg_description="A CORBA object request broker for C++ and Python."
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=(
