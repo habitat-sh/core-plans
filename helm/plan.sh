@@ -1,7 +1,7 @@
 go_pkg="k8s.io/helm"
 pkg_name=helm
 pkg_origin=core
-pkg_version="3.2.4"
+pkg_version="3.5.3"
 pkg_description="The Kubernetes Package Manager"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
