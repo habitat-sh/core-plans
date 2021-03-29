@@ -1,8 +1,8 @@
 pkg_name=qemu
 pkg_origin=core
-pkg_version=2.11.1
+pkg_version=2.12.1
 pkg_source=http://wiki.qemu-project.org/download/${pkg_name}-${pkg_version}.tar.bz2
-pkg_shasum=d9df2213ceed32e91dab7bc9dd19c1af83f91ba72c7aeef7605dfaaf81732ccb
+pkg_shasum=4150809a52d821398dfd38c94b065513ef26b393fda9aba4bb6f09644cf1e5ca
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="QEMU is a generic and open source machine emulator and virtualizer."
 pkg_upstream_url="http://www.qemu.org"
