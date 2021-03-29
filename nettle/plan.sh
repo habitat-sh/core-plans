@@ -1,12 +1,12 @@
 pkg_name=nettle
 pkg_origin=core
-pkg_version=3.5.1
+pkg_version=3.7.2
 pkg_description="A low-level cryptographic library"
 pkg_upstream_url="https://www.lysator.liu.se/~nisse/nettle/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('LGPL-3.0-only' 'GPL-2.0-only' 'GPL-3.0-only')
 pkg_source="https://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=75cca1998761b02e16f2db56da52992aef622bf55a3b45ec538bc2eedadc9419
+pkg_shasum=8d2a604ef1cde4cd5fb77e422531ea25ad064679ff0adf956e78b3352e0ef162
 pkg_deps=(
   core/glibc
   core/gmp
