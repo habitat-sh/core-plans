@@ -6,7 +6,7 @@ pkg_description="Oniguruma is a modern and flexible regular expressions library"
 pkg_upstream_url="https://github.com/kkos/oniguruma"
 pkg_license=("BSD-2-Clause")
 pkg_source="https://github.com/kkos/oniguruma/archive/v${pkg_version}.tar.gz"
-pkg_shasum=bd0faeb887f748193282848d01ec2dad8943b5dfcb8dc03ed52dcc963549e819
+pkg_shasum=aec9f6902ad8b7bb53b2c55d04686ea75da89a06694836b0362cb206578dfe89
 pkg_deps=(
   core/glibc
   core/coreutils
