@@ -6,7 +6,7 @@ pkg_upstream_url=http://www.haskell.org/alex/
 pkg_description="Alex is a tool for generating lexical analysers in Haskell. It takes a description of tokens based on regular expressions and generates a Haskell module containing code for scanning text efficiently. It is similar to the tool lex or flex for C/C++."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://hackage.haskell.org/package/${pkg_name}-${pkg_version}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=27b8d441d0fb06c3fdb8756d112e9eb867bffa9e8be4e53ffe09652b577cca09
+pkg_shasum=91aa08c1d3312125fbf4284815189299bbb0be34421ab963b1f2ae06eccc5410
 pkg_bin_dirs=(bin)
 pkg_deps=(
   core/glibc
