@@ -1,6 +1,6 @@
 pkg_origin=core
 pkg_name=icu56
-pkg_version=68.2
+pkg_version=56.2
 pkg_description="$(cat << EOF
   ICU is a mature, widely used set of C/C++ and Java libraries providing
   Unicode and Globalization support for software applications. ICU is widely
