@@ -6,7 +6,7 @@ pkg_upstream_url=https://wiki.linuxfoundation.org/accessibility/atk/at-spi/at-sp
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("LGPL-2.0")
 pkg_source="https://download.gnome.org/sources/${pkg_name}/${pkg_version%.*}/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+pkg_shasum=4196a7d30a0051e52a67b8ce4283fe79ae5e4e14a725719934565adf1d333429
 pkg_deps=(
   core/dbus
   core/glib
