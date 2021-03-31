@@ -6,7 +6,7 @@ pkg_upstream_url=http://www.littlecms.com
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_source=http://downloads.sourceforge.net/sourceforge/lcms/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=2257531baedea1a47570e42b92634398afaef5ad5341562b497100048453dd45
+pkg_shasum=18663985e864100455ac3e507625c438c3710354d85e5cbb7cd4043e11fe10f5
 pkg_deps=(
   core/glibc
   core/jbigkit
