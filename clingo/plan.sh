@@ -6,7 +6,7 @@ pkg_version="5.4.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_source="https://github.com/potassco/clingo/archive/v${pkg_version}.tar.gz"
-pkg_shasum="1d9ac88cbcf36ea8ce5f4b88b3154166f52faeef561c85b9985392e3c88151bd"
+pkg_shasum=ac6606388abfe2482167ce8fd4eb0737ef6abeeb35a9d3ac3016c6f715bfee02
 pkg_build_deps=(
   core/cmake
   core/doxygen
