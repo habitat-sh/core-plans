@@ -6,7 +6,7 @@ pkg_license=('GPL-3.0-or-later')
 pkg_description="libpipeline is a C library for manipulating pipelines of subprocesses in a flexible and convenient way."
 pkg_upstream_url=http://libpipeline.nongnu.org/
 pkg_source="http://download.savannah.gnu.org/releases/libpipeline/libpipeline-${pkg_version}.tar.gz"
-pkg_shasum=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+pkg_shasum=5dbf08faf50fad853754293e57fd4e6c69bb8e486f176596d682c67e02a0adb0
 pkg_deps=(core/glibc)
 pkg_build_deps=(
   core/gcc
