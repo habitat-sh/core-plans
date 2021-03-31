@@ -4,7 +4,7 @@ pkg_version="3.2.10"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0')
 pkg_source="http://dev.gentoo.org/~blueness/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="8e2200711d18d4fae5ee783132aeaf69370d028cf72433bf006164e33e2e9e9e"
+pkg_shasum=87bb028d470fd1b85169349b44c55d5b733733dc2d50ddf1196e026725ead034
 pkg_deps=(
   core/glibc
   core/gperf
