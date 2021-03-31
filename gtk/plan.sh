@@ -7,7 +7,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('LGPL-2.0')
 upstream_name="gtk+"
 pkg_source="https://download.gnome.org/sources/${upstream_name}/${pkg_version%.*}/${upstream_name}-${pkg_version}.tar.xz"
-pkg_shasum=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+pkg_shasum=f5eaff7f4602e44a9ca7bfad5382d7a73e509a8f00b0bcab91c198d096172ad2
 pkg_dirname="${upstream_name}-${pkg_version}"
 pkg_deps=(
   core/at-spi2-core
