@@ -4,7 +4,7 @@ pkg_version="1.2.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('LGPL-3.0')
 pkg_source="https://github.com/mauke/$pkg_name/archive/v$pkg_version.tar.gz"
-pkg_shasum="fd42411ab25ac6bcaa02c05019e6717ac19848c43ac7337a6423d1c4bd3b0f42"
+pkg_shasum=6045b4f6adca7b1123284007675ca71f718f70942d3a93d8b9fa5bd442006ec1
 pkg_deps=(core/glibc)
 pkg_build_deps=(
   core/gcc
