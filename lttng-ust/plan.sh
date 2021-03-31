@@ -6,7 +6,7 @@ pkg_upstream_url=http://lttng.org/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0' 'MIT')
 pkg_source=$pkg_upstream_url/files/$pkg_name/$pkg_name-$pkg_version.tar.bz2
-pkg_shasum=cad26d7b831503088f9834b161e47f27f9f73640d0cdcef7f860cbd74a3afedf
+pkg_shasum=48a3948b168195123a749d22818809bd25127bb5f1a66458c3c012b210d2a051
 pkg_deps=(
   core/coreutils
   core/gcc-libs
