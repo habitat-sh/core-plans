@@ -6,7 +6,7 @@ pkg_license=("Apache-2.0")
 pkg_description="CoreDNS is a DNS server/forwarder, written in Go, that chains plugins."
 pkg_upstream_url=https://coredns.io/
 pkg_source="https://github.com/coredns/coredns/archive/v${pkg_version}.tar.gz"
-pkg_shasum=6b2eb758672fb72d2e04d41d4eea935a0d50f33fc3bdb03d6bf6e8cb8f71bcf7
+pkg_shasum=9fa12d1f0cc7678cd9973b4a1a27718a4d1e12d78f4a46681cea39f569c2a166
 pkg_deps=(
   core/glibc
   core/coreutils
