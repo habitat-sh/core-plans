@@ -6,7 +6,7 @@ pkg_license=('Apache-2.0')
 pkg_source="https://github.com/erlang/${pkg_name}/archive/${pkg_version}.tar.gz"
 pkg_description="rebar is an Erlang build tool that makes it easy to compile and test Erlang applications, port drivers and releases."
 pkg_upstream_url="https://github.com/rebar/rebar3"
-pkg_shasum=3a250aad4416a936bf236318d47f0650c2564a1ecb13627f512123af9e9fcd61
+pkg_shasum=8d78ed53209682899d777ee9443b26b39c9bf96c8b081fe94b3dd6693077cb9a
 pkg_deps=(
   core/erlang
   core/busybox-static
