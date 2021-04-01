@@ -6,7 +6,7 @@ pkg_description="xeyes"
 pkg_upstream_url="https://www.x.org/"
 pkg_license=('MIT')
 pkg_source="https://www.x.org/releases/individual/app/${pkg_name}-${pkg_version}.tar.bz2"
-pkg_shasum="4a675b34854da362bd8dff4f21ff92e0c19798b128ea0af24b7fc7c5ac2feea3"
+pkg_shasum=57bcec0d2d167af9e5d44d0dbd74c6d7c0f0591cd0608952b23c749fdd910553
 pkg_deps=(core/glibc
           core/xlib
           core/libxcb
