@@ -6,7 +6,7 @@ pkg_license=('BSD-2-Clause')
 pkg_source="https://github.com/protobuf-c/protobuf-c/releases/download/v${pkg_version}/protobuf-c-${pkg_version}.tar.gz"
 pkg_upstream_url=https://github.com/protobuf-c/protobuf-c
 pkg_description="Protocol Buffers implementation in C"
-pkg_shasum=03325278aca4c1781ed7c48c0e94320d3e57e8dcda54873a0bdaa463a091a1c1
+pkg_shasum=22956606ef50c60de1fabc13a78fbc50830a0447d780467d3c519f84ad527e78
 pkg_deps=(
   core/gcc-libs
   core/protobuf-cpp
