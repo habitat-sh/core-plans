@@ -6,7 +6,7 @@ pkg_license=("GPL-3.0-or-later")
 pkg_description="netdata is a system for distributed real-time performance and health monitoring."
 pkg_upstream_url="https://github.com/netdata/netdata"
 pkg_source="https://github.com/netdata/${pkg_name}/archive/v${pkg_version}.tar.gz"
-pkg_shasum=79bde2a7e6813ef026726c049a16a9c1114e71d3c2288f1e7f797e981c417d3e
+pkg_shasum=8e045ea153db99317a95232d1d7a76711bee46f4bc2666d22e268ff03011aa43
 pkg_build_deps=(
   core/autoconf
   core/autogen
