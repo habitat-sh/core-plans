@@ -6,7 +6,7 @@ pkg_upstream_url="https://github.com/ocaml/ocamlbuild"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('LGPL')
 pkg_source="https://github.com/ocaml/ocamlbuild/archive/${pkg_version}.tar.gz"
-pkg_shasum="c02adf52ec18d3e634baa546d22888e7aabbd7424b7e82d30104e697b1c88236"
+pkg_shasum=87b29ce96958096c0a1a8eeafeb6268077b2d11e1bf2b3de0f5ebc9cf8d42e78
 pkg_deps=(
   core/glibc
   core/ocaml
