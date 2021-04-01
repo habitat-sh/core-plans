@@ -7,7 +7,7 @@ pkg_upstream_url="http://llvm.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_filename="${pkg_name}-${pkg_version}.src.tar.xz"
 pkg_source="http://llvm.org/releases/${pkg_version}/${pkg_name}-${pkg_version}.src.tar.xz"
-pkg_shasum="213d331e4a3b4a5d9bf2030a48549419e827405533ea018ff0da8863e3b7d8c0"
+pkg_shasum=1bcc9b285074ded87b88faaedddb88e6b5d6c331dfcfb57d7f3393dd622b3764
 pkg_deps=(
   core/coreutils
   core/gcc-libs
