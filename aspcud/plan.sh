@@ -6,7 +6,7 @@ pkg_license=("MIT")
 pkg_description="Aspcud is a solver for package dependencies"
 pkg_upstream_url=https://potassco.org/aspcud/
 pkg_source="https://github.com/potassco/${pkg_name}/archive/v${pkg_version}.tar.gz"
-pkg_shasum=8c420a34e549d015d71059d9f1e1b06955429dd070d20b191e7374f26c7f1ecc
+pkg_shasum=9cd3a9490d377163d87b16fa1a10cc7254bc2dbb9f60e846961ac8233f3835cf
 pkg_deps=(
   core/clingo
   core/gcc-libs
