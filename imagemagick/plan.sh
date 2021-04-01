@@ -6,7 +6,7 @@ pkg_upstream_url="http://imagemagick.org/"
 pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/ImageMagick/ImageMagick/archive/refs/tags/${pkg_version}.tar.gz"
-pkg_shasum=2912cfffc03bd20bc32623b3bf4b68cee3d037d705eabbdd3463c36c8e4834a8
+pkg_shasum=ceef1e81f4ab8ebfe9e61c494b8355c1b32bbb262aa6ec12b737c607e3078a40
 pkg_deps=(
   core/glibc
   core/zlib
