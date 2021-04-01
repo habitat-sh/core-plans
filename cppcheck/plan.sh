@@ -7,7 +7,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("GPL-3.0")
 pkg_source="https://github.com/danmar/cppcheck/archive/${pkg_version}.tar.gz"
 pkg_filename="${pkg_version}.tar.gz"
-pkg_shasum=c6c907ff609767417bdaadfc5cc928705838500a9400812c814ecf3aa8ba55cc
+pkg_shasum=c4864d3e09359214efdd503b52e241f4f56ba7ce26f8c11939fd9dcfac1fd105
 pkg_deps=(
   core/glibc
   core/gcc-libs
