@@ -16,7 +16,7 @@ pkg_build_deps=(
     core/git
     core/go
 )
-pkg_shasum="daaa9f81fc12a70a980fa09a2b944d1059bbfa3ba052948cf71f5880027a9ad9"
+pkg_shasum=d1f3cee2261adc83df54fba2d62b045549d064ac14b7683031ec3897c2bdbd44
 
 do_prepare() {
   sed -e "s#\#\!/usr/bin/env bash#\#\!$(pkg_path_for bash)/bin/bash#" -i build/*.sh
