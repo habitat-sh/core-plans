@@ -7,7 +7,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("EPL-1.0")
 pkg_filename="${pkg_name}-${pkg_version}-standalone.zip"
 pkg_source="https://github.com/technomancy/${pkg_name}/releases/download/${pkg_version}/${pkg_filename}"
-pkg_shasum="35cf1186fab689a5287e995a72d6985524b5929475211107e03f75115b16fdb0"
+pkg_shasum=df490c98bfe8d667bc5d83b80238528877234c285d0d48f61a4c8743c2db1eea
 pkg_deps=(
   core/bash
   core/coreutils
