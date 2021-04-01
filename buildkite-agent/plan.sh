@@ -8,7 +8,7 @@ pkg_build_deps=(core/go core/coreutils core/gcc)
 pkg_deps=(core/glibc)
 pkg_source="https://github.com/buildkite/agent/archive/v${pkg_version}.zip"
 pkg_filename="${pkg_name}-${pkg_version}.zip"
-pkg_shasum=420b0a324d51b7769bd60fb89261a837046557540c71533376af51353f768ae6
+pkg_shasum=c34c19eef8438d4c527caa50a9c803fb1ab539655584062727daa9bf6fc6154e
 pkg_upstream_url="https://buildkite.com"
 pkg_bin_dirs=(bin)
 
