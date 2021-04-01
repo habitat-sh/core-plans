@@ -8,7 +8,7 @@ processes."
 pkg_license=('GPL-2.0-only' 'LGPL-2.1-or-later')
 pkg_source="https://github.com/systemd/${pkg_name}/archive/v${pkg_version}.tar.gz"
 pkg_upstream_url="https://github.com/systemd/systemd"
-pkg_shasum=357b69ef66d702793a5366f07e646952085b5ab5d40cd6033ce5e7348db2b34d
+pkg_shasum=77146f7b27334aa69ef6692bed92c3c893685150f481e7254b81d4ea0f66c640
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(
