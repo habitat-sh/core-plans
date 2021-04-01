@@ -11,7 +11,7 @@ EOF
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('custom')
 pkg_source="https://github.com/schweikert/${pkg_name}/archive/v${pkg_version}.tar.gz"
-pkg_shasum="9f854b65a52dc7b1749d6743e35d0a6268179d1a724267339fc9a066b2b72d11"
+pkg_shasum=538ef95e4c1cdb488339e91f21d4eb8542aec7ee8dcc9cdbce6eb680a1ddd090
 pkg_upstream_url="http://fping.org/"
 pkg_build_deps=(
   core/autoconf
