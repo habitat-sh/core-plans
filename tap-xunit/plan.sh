@@ -4,7 +4,7 @@ pkg_version=2.4.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("MIT")
 pkg_source="https://github.com/aghassemi/tap-xunit/archive/${pkg_version}.tar.gz"
-pkg_shasum=bfcea54ca9dafd11468666d40f04060eb26e51947d6b491f26cb16b74df4c005
+pkg_shasum=78556efa2fdb85335c3e34424ce25c44ef56d4012b2870219f27d271622d74e1
 pkg_deps=(
   core/coreutils
   core/node
