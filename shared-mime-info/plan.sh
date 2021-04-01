@@ -6,7 +6,7 @@ pkg_upstream_url="https://www.freedesktop.org/wiki/Software/shared-mime-info/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0')
 pkg_source="http://freedesktop.org/~hadess/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum=9d7f973cd10e3eb22b299e8bc63b6ddbb2c36854d5cb38789a266453129330d2
+pkg_shasum=c625a83b4838befc8cafcd54e3619946515d9e44d63d61c4adf7f5513ddfbebf
 pkg_deps=(
   core/glib
   core/glibc
