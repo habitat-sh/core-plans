@@ -6,7 +6,7 @@ pkg_upstream_url="https://www.gnutls.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('LGPL-2.1-or-later')
 pkg_source="ftp://ftp.gnutls.org/gcrypt/gnutls/v3.6/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum=32041df447d9f4644570cf573c9f60358e865637d69b7e59d1159b7240b52f38
+pkg_shasum=0ea8c3283de8d8335d7ae338ef27c53a916f15f382753b174c18b45ffd481558
 pkg_deps=(
   core/glibc
   core/gmp
