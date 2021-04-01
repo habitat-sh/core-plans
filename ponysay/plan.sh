@@ -4,7 +4,7 @@ pkg_version="3.0.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-3.0')
 pkg_source="https://github.com/erkin/$pkg_name/archive/$pkg_version.tar.gz"
-pkg_shasum=51ba9880385466e01231bfef0fcd1737ffe525352504cbf6e2781fb588967780
+pkg_shasum=c382d7f299fa63667d1a4469e1ffbf10b6813dcd29e861de6be55e56dc52b28a
 pkg_deps=(
   core/coreutils
   core/python
