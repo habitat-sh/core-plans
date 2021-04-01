@@ -6,7 +6,7 @@ pkg_license=("MIT-Expat")
 pkg_description="A clean C library for processing UTF-8 Unicode data"
 pkg_upstream_url=https://juliastrings.github.io/utf8proc/
 pkg_source="https://github.com/JuliaStrings/${pkg_name}/archive/v${pkg_version}.tar.gz"
-pkg_shasum=8ff440b288b57b1d91dcbcf984a4bcfc8e5cf8089eb936be95055a0d1b174f43
+pkg_shasum=4c06a9dc4017e8a2438ef80ee371d45868bda2237a98b26554de7a95406b283b
 pkg_deps=(core/glibc)
 pkg_build_deps=(
   core/make
