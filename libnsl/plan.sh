@@ -6,7 +6,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("LGPL-2.1-or-later")
 pkg_upstream_url="https://github.com/thkukuk/libnsl"
 pkg_source="https://github.com/thkukuk/libnsl/archive/v${pkg_version}.tar.gz"
-pkg_shasum="b7eb25b0e938c5e504eaef7888ced8aae3d70c749cecf532817379a0eb785560"
+pkg_shasum=8e88017f01dd428f50386186b0cd82ad06c9b2a47f9c5ea6b3023fc6e08a6b0f
 pkg_deps=(
   core/glibc
 )
