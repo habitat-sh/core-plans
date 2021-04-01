@@ -6,7 +6,7 @@ pkg_description="Java Foreign Function Interface"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/jnr/jffi/archive/${pkg_name}-${pkg_version}.tar.gz"
 pkg_dirname="${pkg_name}-${pkg_name}-${pkg_version}"
-pkg_shasum=c605ef3d27920e192b95985a1b6f5bae6833b83156ee02c30dbb31ac8d679be7
+pkg_shasum=3d2dceab0e1a1d7d555d698cf479476afeaf1d87204f6b61f01cf26451990ae5
 pkg_upstream_url="https://github.com/jnr/jffi"
 pkg_deps=(
   core/glibc
