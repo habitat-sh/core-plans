@@ -26,7 +26,7 @@ do_download() {
     # Provide the checksum so that file does not get downloaded with every build
     download_file "https://cdn.crate.io/downloads/releases/${pkg_name}-${pkg_version}.tar.gz.asc" \
 		  "${pkg_name}-${pkg_version}.tar.gz.asc" \
-		  "4e6007a35b99c0da75356cb6cd7aeafd7d380e1a5f5fa26b79a0dfa0a9898924"
+		  "fbf993a779467c722e548b4282efcfae65fd669c746d2fa228e70813a7f4b4a2"
 }
 
 do_verify() {
@@ -35,7 +35,7 @@ do_verify() {
 
     # Now verify the signature file
     verify_file "${pkg_name}-${pkg_version}.tar.gz.asc" \
-    		"4e6007a35b99c0da75356cb6cd7aeafd7d380e1a5f5fa26b79a0dfa0a9898924"
+    		"fbf993a779467c722e548b4282efcfae65fd669c746d2fa228e70813a7f4b4a2"
 
     # Now do the GPG-based verification
     build_line "Verifying crate-${pkg_version}.tar.gz signature"
