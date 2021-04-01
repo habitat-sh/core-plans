@@ -4,7 +4,7 @@ pkg_version=1.41.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_source="https://github.com/libuv/libuv/archive/v${pkg_version}.tar.gz"
-pkg_shasum=78a21275585c0551aa8ae324977c17f9ba4f11e258bc2aa71855d484ccc2b792
+pkg_shasum=6cfeb5f4bab271462b4a2cc77d4ecec847fdbdc26b72019c27ae21509e6f94fa
 pkg_deps=(core/glibc)
 pkg_build_deps=(
   core/autoconf
