@@ -6,7 +6,7 @@ pkg_license=('MIT')
 pkg_description="A YAML parser and emitter in C++"
 pkg_upstream_url="https://github.com/jbeder/yaml-cpp"
 pkg_source="https://github.com/jbeder/yaml-cpp/archive/yaml-cpp-${pkg_version}.tar.gz"
-pkg_shasum="7e4325fb4a539e0fdc25da54d14c35d9ad5c525f3ad59308582f4d7fbf720680"
+pkg_shasum=77ea1b90b3718aa0c324207cb29418f5bced2354c2e483a9523d98c3460af1ed
 pkg_dirname="yaml-cpp-yaml-cpp-${pkg_version}"
 pkg_deps=(
   core/gcc-libs
