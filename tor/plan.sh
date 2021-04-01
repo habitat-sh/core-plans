@@ -6,7 +6,7 @@ pkg_description="Free software and an open network that helps you defend against
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url="https://www.torproject.org/"
 pkg_source="https://www.torproject.org/dist/tor-${pkg_version}.tar.gz"
-pkg_shasum=3bb9ed37d2fce8df1252a43da207eafcb67748707b48a30ab028a77039fa81d7
+pkg_shasum=447fcaaa133e2ef22427e98098a60a9c495edf9ff3e0dd13f484b9ad0185f074
 pkg_deps=(
   core/glibc
   core/gcc-libs
