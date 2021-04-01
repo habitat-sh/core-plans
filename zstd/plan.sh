@@ -7,7 +7,7 @@ pkg_description="Zstandard is a real-time compression algorithm, providing high 
 "It offers a very wide range of compression / speed trade-off, while being backed by a very fast decoder"
 pkg_upstream_url=http://facebook.github.io/zstd/
 pkg_source="https://github.com/facebook/zstd/archive/v${pkg_version}.tar.gz"
-pkg_shasum='29ac74e19ea28659017361976240c4b5c5c24db3b89338731a6feb97c038d293'
+pkg_shasum=acf714d98e3db7b876e5b540cbf6dee298f60eb3c0723104f6d3f065cd60d6a8
 pkg_deps=(
   core/glibc
   core/grep
