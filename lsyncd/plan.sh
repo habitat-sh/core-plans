@@ -5,7 +5,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0')
 pkg_source="https://github.com/axkibe/$pkg_name/archive/release-$pkg_version.tar.gz"
 pkg_dirname="$pkg_name-release-$pkg_version"
-pkg_shasum="4423d107041a62f23d7d0eda195f990161983d6f6a09e2f1f42998c38570c65c"
+pkg_shasum=7bcd0f4ae126040bb078c482ff856c87e61c22472c23fa3071798dcb1dc388dd
 pkg_deps=(core/glibc)
 pkg_build_deps=(
   core/cmake
