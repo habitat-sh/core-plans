@@ -6,7 +6,7 @@ pkg_upstream_url=https://tmux.github.io/
 pkg_license=('MIT')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/tmux/tmux/releases/download/${pkg_version}/tmux-${pkg_version}.tar.gz"
-pkg_shasum=5555de5a540d3469421fbe9c14e4086504b2dac945c39651cf227196ecf905c7
+pkg_shasum=918f7220447bef33a1902d4faff05317afd9db4ae1c9971bef5c787ac6c88386
 pkg_deps=(
   core/glibc
   core/libevent
