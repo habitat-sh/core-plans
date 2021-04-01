@@ -10,4 +10,4 @@ pkg_upstream_url="http://llvm.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_filename="llvm-${pkg_version}.src.tar.xz"
 pkg_source="https://github.com/llvm/llvm-project/releases/download/llvmorg-${pkg_version}/llvm-${pkg_version}.src.tar.xz"
-pkg_shasum="512a9a8e0f7a2cf09dd26c8789582623d84bfa707275cbeecdb26c603d9c314e"
+pkg_shasum=1bcc9b285074ded87b88faaedddb88e6b5d6c331dfcfb57d7f3393dd622b3764
