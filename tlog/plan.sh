@@ -7,7 +7,7 @@ pkg_license=("GPL-2.0-or-later")
 pkg_source="https://github.com/Scribery/tlog/releases/download/v${pkg_version}/${pkg_name}-${pkg_version}.tar.gz"
 pkg_filename="${pkg_name}-${pkg_version}.tar.gz"
 pkg_upstream_url="https://github.com/Scribery/tlog"
-pkg_shasum="3f181107cb3149b1d6cd238031acd7c61d0bf2c79463fa7272f411ee25918b53"
+pkg_shasum=e22971bb2ee201b527a7e101ba02654262f09333ac802be3cebe93c6a5d397a6
 
 pkg_deps=(
   core/curl
