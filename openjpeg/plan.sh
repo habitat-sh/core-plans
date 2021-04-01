@@ -6,7 +6,7 @@ pkg_upstream_url=http://www.openjpeg.org/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('BSD-2-Clause')
 pkg_source="https://github.com/uclouvain/openjpeg/archive/v${pkg_version}.tar.gz"
-pkg_shasum=521b3f250fe0789aed78ab7855794d4be0629dfccf768273657efe1d0c4dafed
+pkg_shasum=8702ba68b442657f11aaeb2b338443ca8d5fb95b0d845757968a7be31ef7f16d
 pkg_deps=(
   core/lcms2
   core/libpng
