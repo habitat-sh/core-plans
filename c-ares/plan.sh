@@ -6,7 +6,7 @@ pkg_license=('MIT')
 pkg_upstream_url="https://c-ares.haxx.se/"
 pkg_description="A C library for asynchronous DNS requests"
 pkg_source="https://github.com/c-ares/c-ares/archive/cares-1_17_1.tar.gz"
-pkg_shasum=b263e31fe422251eb0fdc1c777fb5b2cb11a363d1270b52258615ea7c7006425
+pkg_shasum=61f7cf09605f5e38d4828f82d0e2ddb9de8e355ecfd6819b740691c644583b8f
 pkg_dirname="c-ares-cares-1_15_0"
 pkg_deps=(
   core/glibc
