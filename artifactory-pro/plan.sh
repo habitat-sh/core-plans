@@ -7,7 +7,7 @@ pkg_upstream_url=https://www.jfrog.com/artifactory/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("JFrog Artifactory EULA")
 pkg_source="https://dl.bintray.com/jfrog/${pkg_name}/org/artifactory/pro/jfrog-${pkg_name}/${pkg_version}/jfrog-${pkg_name}-${pkg_version}.zip"
-pkg_shasum=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+pkg_shasum=c5c864be94f9b41d4122cab3ff0a3b7698b89b72f74587a33d48024abe3b36e1
 pkg_deps=(
   core/bash
   core/openjdk11
