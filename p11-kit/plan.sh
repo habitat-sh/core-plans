@@ -6,7 +6,7 @@ pkg_upstream_url="https://p11-glue.github.io/p11-glue/p11-kit.html"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('BSD-3-Clause')
 pkg_source="https://github.com/p11-glue/p11-kit/releases/download/0.23.10/p11-kit-0.23.10.tar.gz"
-pkg_shasum="7643151183377529af4d2fdd61d68b61a3f7639b833820b48ef12179567476f7"
+pkg_shasum=f9212a3f225ef543e13fae9945527d66c0cbb67246320035dd94fab2bce5ae43
 pkg_deps=(
   core/libtasn1
   core/libffi
