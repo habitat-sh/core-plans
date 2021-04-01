@@ -6,7 +6,7 @@ pkg_license=("MIT")
 pkg_description="A fast JSON library for C."
 pkg_upstream_url="https://github.com/rsyslog/libfastjson"
 pkg_source="https://github.com/rsyslog/libfastjson/archive/v${pkg_version}.tar.gz"
-pkg_shasum=6e6e3702589ad229cb53547af0fecdd43ea9ac883ff09992c14b7ce2d2b27830
+pkg_shasum=881f954633aa76931e4c756ece0bda6fd8a673c6e66955a3db3b2bb9d6bbff72
 pkg_deps=(core/glibc)
 pkg_build_deps=(
   core/make
