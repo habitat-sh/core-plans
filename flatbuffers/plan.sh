@@ -10,7 +10,7 @@ pkg_description="$(cat << EOF
 EOF
 )"
 pkg_source="https://github.com/google/${pkg_name}/archive/v${pkg_version}.tar.gz"
-pkg_shasum="2bbef726f75f46daca9630d61fceb24a05b4236e3bf95c37633d6bc3ec339f35"
+pkg_shasum=62f2223fb9181d1d6338451375628975775f7522185266cd5296571ac152bc45
 pkg_upstream_url="http://google.github.io/flatbuffers/index.html"
 pkg_deps=(
   core/glibc
