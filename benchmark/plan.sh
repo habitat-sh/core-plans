@@ -7,7 +7,7 @@ pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/google/benchmark/archive/v${pkg_version}.tar.gz"
 pkg_filename="v${pkg_version}.tar.gz"
-pkg_shasum=0db8066b8476c5cc8393bfa95e4198b59d6bf3156e6c589872730be1083c16dd
+pkg_shasum=dccbdab796baa1043f04982147e67bb6e118fe610da2c65f88912d73987e700c
 pkg_deps=(
   core/gcc-libs
   core/glibc
