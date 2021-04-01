@@ -6,7 +6,7 @@ pkg_upstream_url=https://github.com/gperftools/gperftools
 pkg_license=('BSDv3')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/gperftools/gperftools/releases/download/${pkg_name}-${pkg_version}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=0f59a4dcdb3f64e9ff5ea760731089de5872ef70f506afc537d48995a090c2b1
+pkg_shasum=ea566e528605befb830671e359118c2da718f721c27225cbbc93858c7520fee3
 pkg_build_deps=(
   core/gcc
   core/make
