@@ -32,7 +32,7 @@ do_install() {
 
   # write our wrapper script
   bash_path=$(pkg_path_for core/bash)
-  for file in "${pkg_prefix}/bin/*.py"; do
+  for file in "${pkg_prefix}"/bin/*.py; do
     # Rename executable to ${file}.real"
     mv "${file}" "${file}.real"
     # Write wrapper script to replace ${file}
