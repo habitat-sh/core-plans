@@ -2,7 +2,7 @@ pkg_name=libgd
 pkg_origin=core
 pkg_version="2.2.4"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=("$(cat << EOF
+pkg_license=($(cat << EOF
 In order to resolve any possible confusion regarding the authorship of
 gd, the following copyright statement covers all of the authors who
 have required such a statement. If you are aware of any oversights in
@@ -74,7 +74,7 @@ Although their code does not appear in the current release, the
 authors also wish to thank Hutchison Avenue Software Corporation
 for their prior contributions.
 EOF
-)")
+))
 pkg_source="https://github.com/$pkg_name/$pkg_name/releases/download/gd-$pkg_version/$pkg_name-$pkg_version.tar.xz"
 pkg_shasum="137f13a7eb93ce72e32ccd7cebdab6874f8cf7ddf31d3a455a68e016ecd9e4e6"
 pkg_deps=(
