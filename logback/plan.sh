@@ -9,12 +9,12 @@ pkg_source=https://repo1.maven.org/maven2/ch/qos/logback
 pkg_lib_dirs=(lib)
 
 _target_sources=(
-  $pkg_source/${pkg_name}-core/${pkg_version}/${pkg_name}-core-${pkg_version}.jar
-  $pkg_source/${pkg_name}-core/${pkg_version}/${pkg_name}-core-${pkg_version}-sources.jar
-  $pkg_source/${pkg_name}-access/${pkg_version}/${pkg_name}-access-${pkg_version}.jar
-  $pkg_source/${pkg_name}-access/${pkg_version}/${pkg_name}-access-${pkg_version}-sources.jar
-  $pkg_source/${pkg_name}-classic/${pkg_version}/${pkg_name}-classic-${pkg_version}.jar
-  $pkg_source/${pkg_name}-classic/${pkg_version}/${pkg_name}-classic-${pkg_version}-sources.jar
+  "$pkg_source/${pkg_name}-core/${pkg_version}/${pkg_name}-core-${pkg_version}.jar"
+  "$pkg_source/${pkg_name}-core/${pkg_version}/${pkg_name}-core-${pkg_version}-sources.jar"
+  "$pkg_source/${pkg_name}-access/${pkg_version}/${pkg_name}-access-${pkg_version}.jar"
+  "$pkg_source/${pkg_name}-access/${pkg_version}/${pkg_name}-access-${pkg_version}-sources.jar"
+  "$pkg_source/${pkg_name}-classic/${pkg_version}/${pkg_name}-classic-${pkg_version}.jar"
+  "$pkg_source/${pkg_name}-classic/${pkg_version}/${pkg_name}-classic-${pkg_version}-sources.jar"
 )
 
 _target_shasums=(
@@ -49,6 +49,6 @@ do_build() {
 
 do_install() {
   for i in $(seq 0 $((${#_target_sources[@]} - 1))); do
-    cp "$HAB_CACHE_SRC_PATH/$(basename "${_target_sources[$i]}")" $pkg_prefix/lib
+    cp "$HAB_CACHE_SRC_PATH/$(basename "${_target_sources[$i]}")" "$pkg_prefix/lib"
   done; unset i
 }
