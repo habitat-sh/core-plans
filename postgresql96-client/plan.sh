@@ -130,4 +130,3 @@ do_install() {
        rm -rf "${target}"
     done
 }
-
