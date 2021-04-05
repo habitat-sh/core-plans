@@ -9,7 +9,7 @@ pkg_license=(
   'Docutils Public Domain Dedication'
 )
 pkg_source=https://downloads.sourceforge.net/project/${pkg_name}/${pkg_name}/${pkg_version}/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=f04d824f9c7a5e6fe4d5807d83607ada76248e300210bb97865c3018ae88f636
+pkg_shasum=7d4e999cca74a52611773a42912088078363a30912e8822f7a3d38043b767573
 pkg_description="Docutils is an open-source text processing system for processing plaintext documentation into useful formats, e.g.: HTML, LaTeX, man-pages, open-document, or XML."
 pkg_upstream_url="http://docutils.sourceforge.net"
 pkg_deps=(
