@@ -10,11 +10,16 @@ pkg_source="https://github.com/prometheus/prometheus/archive/v${pkg_version}.tar
 pkg_shasum=85f50c0cfb4db206a59d2c3301e02d685c3fe4b451b41ca943a4eb94935cf4d4
 prom_pkg_dir="${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}"
 prom_build_dir="${prom_pkg_dir}/src/${pkg_source}"
+pkg_deps=(
+  core/bash
+)
 pkg_build_deps=(
   core/go
   core/git
   core/gcc
   core/make
+  core/yarn
+  core/coreutils
 )
 pkg_exports=(
   [prom_ds_http]=listening_port
@@ -35,8 +40,13 @@ do_unpack() {
   popd || exit 1
 }
 
+do_before() {
+  ln -fs "$(pkg_path_for core/coreutils)/bin/env" "/usr/bin/env"
+}
+
 do_build() {
   pushd "${prom_pkg_dir}/src/github.com/prometheus/prometheus" || exit 1
+  fix_interpreter "./scripts/build_react_app.sh" "core/bash" "bash"
   USER="root" PREFIX="${pkg_prefix}/bin" make build
   popd || exit 1
 }
