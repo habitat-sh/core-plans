@@ -40,9 +40,9 @@ do_setup() {
   fi
 }
 
-do_prepare() {
+#do_prepare() {
   #patch -Np1 < "${PLAN_CONTEXT}/patches/001-fix-packed-not-aligned-error-on-GCC-8.patch"
-}
+#}
 
 do_build() {
   sed -i "s/#! \/usr\/bin\/env bash/#!\/bin\/bash/" ./autogen.sh
