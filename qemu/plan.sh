@@ -41,10 +41,6 @@ pkg_deps=(
   core/zlib
 )
 
-#do_prepare() {
-#  patch -p1 < "${PLAN_CONTEXT}/glibc-2.27.patch"
-#}
-
 do_build() {
   mkdir build
   pushd build
