@@ -51,3 +51,11 @@ do_prepare() {
     ln -sv "$(pkg_path_for core/file)/bin/file" /usr/bin/file
   fi
 }
+
+do_build() {
+  return 0
+}
+
+do_install() {
+  return 0
+}
