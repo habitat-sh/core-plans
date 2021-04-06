@@ -41,7 +41,7 @@ do_setup() {
 }
 
 do_prepare() {
-  patch -Np1 < "${PLAN_CONTEXT}/patches/001-fix-packed-not-aligned-error-on-GCC-8.patch"
+  #patch -Np1 < "${PLAN_CONTEXT}/patches/001-fix-packed-not-aligned-error-on-GCC-8.patch"
 }
 
 do_build() {
