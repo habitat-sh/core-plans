@@ -22,9 +22,6 @@ pkg_svc_user="root"
 do_download() {
   do_default_download
 
-  download_file "https://github.com/coreos/${pkg_name}/releases/download/${pkg_version}/${pkg_name}-${pkg_version}-linux-amd64.tar.gz.asc" \
-	        "${pkg_name}-${pkg_version}-linux-amd64.tar.gz.asc" \
-                "cc4bdd4f0a83efa46a34b590544ba7bb3ad494d07d43cf3f85933b660b97638a"
   download_file "https://coreos.com/dist/pubkeys/app-signing-pubkey.gpg" \
 	        "app-signing-pubkey.gpg" \
                 "b7a769456e62d10a042a4fad79f1fe595d8c392490a6ff611c759c0669d99a97"
@@ -33,8 +30,6 @@ do_download() {
 do_verify() {
   do_default_verify
 
-  verify_file "${pkg_name}-${pkg_version}-linux-amd64.tar.gz.asc" \
-              "cc4bdd4f0a83efa46a34b590544ba7bb3ad494d07d43cf3f85933b660b97638a"
   verify_file "app-signing-pubkey.gpg" \
 	      "b7a769456e62d10a042a4fad79f1fe595d8c392490a6ff611c759c0669d99a97"
 
