@@ -24,22 +24,21 @@ do_download() {
 
   download_file "https://coreos.com/dist/pubkeys/app-signing-pubkey.gpg" \
 	        "app-signing-pubkey.gpg" \
-                "b7a769456e62d10a042a4fad79f1fe595d8c392490a6ff611c759c0669d99a97"
+                "92ff168f819d50bb1bd73cbdb204ccc6c5845afa1d58d6ec8072b4d8e38fdb59"
 }
 
 do_verify() {
   do_default_verify
 
   verify_file "app-signing-pubkey.gpg" \
-	      "b7a769456e62d10a042a4fad79f1fe595d8c392490a6ff611c759c0669d99a97"
+	      "92ff168f819d50bb1bd73cbdb204ccc6c5845afa1d58d6ec8072b4d8e38fdb59"
 
   # GPG verification
   build_line "Verifying ${pkg_name}-${pkg_version}-linux-amd64.tar.gz signature"
   GNUPGHOME=$(mktemp -d -p "$HAB_CACHE_SRC_PATH")
   gpg --import --keyid-format LONG "${HAB_CACHE_SRC_PATH}/app-signing-pubkey.gpg"
   gpg --batch --verify \
-	"${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version}-linux-amd64.tar.gz.asc \
-        "${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version}-linux-amd64.tar.gz
+  "${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version}-linux-amd64.tar.gz
   rm -r "$GNUPGHOME"
   build_line "Signature verified for ${pkg_name}-${pkg_version}-linux-amd64.tar.gz"
 }
