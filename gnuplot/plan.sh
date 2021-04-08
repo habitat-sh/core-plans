@@ -51,9 +51,9 @@ pkg_build_deps=(
 )
 pkg_bin_dirs=(bin)
 
-do_prepare() {
-  patch -p1 -i "$PLAN_CONTEXT/patches/configure-using-pkgconfig.patch"
-}
+#do_prepare() {
+#  patch -p1 -i "$PLAN_CONTEXT/patches/configure-using-pkgconfig.patch"
+#}
 
 do_check() {
   make check
