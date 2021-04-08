@@ -1,12 +1,12 @@
 pkg_name=ipvsadm
 pkg_origin=core
-pkg_version=1.30
+pkg_version=1.31
 pkg_description="Ipvsadm is used to set up, maintain or inspect the virtual server table in the Linux kernel."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("GPL-3.0-or-later")
 pkg_source="https://mirrors.edge.kernel.org/pub/linux/utils/kernel/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz"
 pkg_upstream_url="http://www.linuxvirtualserver.org/software/ipvs.html"
-pkg_shasum=95573d70df473c9f63fc4ac496c044c69e3a6de7ccac119922210c0b44cd7a0c
+pkg_shasum=1a0a5e25b5a1226435d2fb76341656f83a710183aebb0d204db39c0ec3bedfdb
 pkg_deps=(
   core/glibc
   core/popt
