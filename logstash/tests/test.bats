@@ -1,6 +1,6 @@
 expected_version="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 @test "logstash binary matches version ${expected_version}" {
-  local actual_version="$(hab pkg exec "${TEST_PKG_IDENT}" logstash --version | awk '{print $2}')"
+  local actual_version="$(hab pkg exec "${TEST_PKG_IDENT}" logstash -- --version | awk '{print $2}')"
   diff <(echo "${actual_version}") <(echo "${expected_version}")
 }
 
