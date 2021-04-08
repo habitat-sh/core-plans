@@ -21,7 +21,7 @@ pkg_build_deps=(
   core/perl
   core/diffutils
 )
-pkg_bin_dirs=(sbin)
+pkg_bin_dirs=(bin)
 
 do_build() {
   ./configure \
