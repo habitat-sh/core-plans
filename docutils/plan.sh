@@ -27,6 +27,15 @@ do_build() {
   python setup.py install --prefix="$pkg_prefix"
 }
 
+do_setup_environment() {
+  push_runtime_env PYTHONPATH "$(pkg_path_for python2)/lib/python2.7/site-packages"
+  push_runtime_env PYTHONPATH "${pkg_prefix}/lib/python2.7/site-packages"
+}
+
+do_prepare() {
+  mkdir -p "${pkg_prefix}/lib/python2.7/site-packages"
+}
+
 do_install() {
   python install.py
 
