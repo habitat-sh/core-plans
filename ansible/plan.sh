@@ -10,7 +10,7 @@ pkg_filename="${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum=161c269d248576e0b56fe3386cbb0ee0beacab29f18607f971c2b3dc4fb62c4e
 pkg_deps=(
   core/libffi
-  core/python2
+  core/python
   core/sshpass
   core/openssl
 )
@@ -22,16 +22,18 @@ pkg_build_deps=(
 pkg_bin_dirs=(bin)
 
 do_setup_environment() {
-  push_runtime_env PYTHONPATH "$(pkg_path_for python2)/lib/python2.7/site-packages"
-  push_runtime_env PYTHONPATH "${pkg_prefix}/lib/python2.7/site-packages"
+  push_runtime_env PYTHONPATH "$(pkg_path_for python)/lib/python3.8/site-packages"
+  push_runtime_env PYTHONPATH "${pkg_prefix}/lib/python3.8/site-packages"
   push_runtime_env ANSIBLE_CONFIG "${pkg_prefix}/etc/ansible.cfg"
   push_buildtime_env LD_LIBRARY_PATH "$(pkg_path_for libffi)/lib"
 }
 
 do_prepare() {
-  mkdir -p "${pkg_prefix}/lib/python2.7/site-packages"
+  mkdir -p "${pkg_prefix}/lib/python3.8site-packages"
   mkdir -p "${pkg_prefix}/share"
   mkdir -p "${pkg_prefix}/etc"
+
+  pip install --upgrade pip
   # Fixes encoding error: Installed from requirements: MarkupSafe, jinja2, PyYAML, pycparser, cffi, enum34, ipaddress, cryptography
   pip install -r requirements.txt
   # Fixes version_helper issue converting between python 2to3
