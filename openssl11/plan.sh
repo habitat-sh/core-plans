@@ -39,14 +39,6 @@ pkg_pconfig_dirs=(lib/pkgconfig)
 _common_prepare() {
   do_default_prepare
 
-  # Set CA dir to `$pkg_prefix/ssl` by default and use the cacerts from the
-  # `cacerts` package. Note that `patch(1)` is making backups because
-  # we need an original for the test suite.
-  sed -e "s,@prefix@,$pkg_prefix,g" \
-      -e "s,@cacerts_prefix@,$(pkg_path_for cacerts),g" \
-      "$PLAN_CONTEXT/ca-dir.patch" \
-      | patch -p1 --backup
-
   # The openssl build process hard codes /bin/rm in many places.
   if [[ ! -f "/bin/rm" ]]; then
     hab pkg binlink core/coreutils rm --dest /bin
