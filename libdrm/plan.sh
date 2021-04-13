@@ -17,12 +17,21 @@ pkg_build_deps=(
   core/diffutils
   core/gcc
   core/libxslt
-  core/make
+  core/meson
   core/pkg-config
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
+
+do_build() {
+  meson build/
+  meson configure build/ -Dprefix="$pkg_prefix"
+}
+
+do_install() {
+  ninja -C build/ install
+}
 
 do_check() {
   make check
