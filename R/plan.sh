@@ -15,6 +15,7 @@ pkg_build_deps=(
   core/perl
   core/pkg-config
   core/texinfo
+  core/which
 )
 pkg_deps=(
   core/bzip2
