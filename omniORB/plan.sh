@@ -1,6 +1,6 @@
 pkg_name=omniORB
 pkg_origin=core
-pkg_version='4.3.0'
+pkg_version='4.2.4'
 pkg_description="A CORBA object request broker for C++ and Python."
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=(
@@ -9,7 +9,7 @@ pkg_license=(
   )
 pkg_upstream_url="http://omniorb.sourceforge.net"
 pkg_source="https://downloads.sourceforge.net/omniorb/${pkg_name}-${pkg_version}.tar.bz2"
-pkg_shasum="ddd909ce31014be2beebf67a5e9fabbf03b5bb0c26b8c53ab64d470d77348ece"
+pkg_shasum=28c01cd0df76c1e81524ca369dc9e6e75f57dc70f30688c99c67926e4bdc7a6f
 pkg_deps=(
   core/coreutils
   core/gcc-libs
