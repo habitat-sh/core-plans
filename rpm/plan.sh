@@ -19,6 +19,7 @@ pkg_deps=(
   core/openssl
   core/popt
   core/zlib
+  core/libgcrypt
 )
 
 pkg_build_deps=(
