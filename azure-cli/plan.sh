@@ -4,8 +4,8 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("MIT")
 pkg_description="The Azure command-line interface (CLI) is Microsoft's cross-platform command-line experience for managing Azure resources."
 pkg_upstream_url=https://docs.microsoft.com/en-us/cli/azure
-pkg_version=2.2.21
-pkg_shasum=a1e89e08395d5fca283a21d25b8cc03868f407ae129711ccf1087ddefad5acd5
+pkg_version=2.22.0
+pkg_shasum=44a47e6a3432dfb6c81045c571304c26109acaff7b63e3793d93fd4127b4f074
 pkg_source="https://github.com/Azure/azure-cli/archive/azure-cli-${pkg_version}.tar.gz"
 pkg_dirname="${pkg_name}-${pkg_name}-${pkg_version}"
 pkg_build_deps=(
@@ -32,7 +32,7 @@ do_prepare() {
 }
 
 do_build() {
-  for d in src/azure-cli src/azure-cli-telemetry src/azure-cli-core src/azure-cli-nspkg src/azure-cli-command_modules-nspkg ; do
+  for d in src/azure-cli src/azure-cli-telemetry src/azure-cli-core src/azure-cli-testsdk ; do
     pushd "$d" > /dev/null
     build_line "Building ${d}"
     python setup.py bdist_wheel -d "${HAB_CACHE_SRC_PATH}/${pkg_dirname}/_build"
