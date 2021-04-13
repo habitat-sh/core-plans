@@ -24,7 +24,7 @@ pkg_pconfig_dirs=(lib/pkgconfig)
 do_build() {
   mkdir build
   cd build
-  ../cmake-configure --prefix=$pkg_prefix
+  ../cmake-configure --prefix="$pkg_prefix"
   make
 }
 
