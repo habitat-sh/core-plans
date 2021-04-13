@@ -6,7 +6,7 @@ pkg_upstream_url="https://github.com/mozilla/sccache"
 pkg_description="sccache is ccache with cloud storage"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/mozilla/sccache/archive/v${pkg_version}.tar.gz"
-pkg_shasum=e3ddfa85233106c98b4382b1e4272c6843065418a4b89a237e8b1455857e68fe
+pkg_shasum=7dbe71012f9b0b57d8475de6b36a9a3b4802e44a135e886f32c5ad1b0eb506e0
 pkg_bin_dirs=(bin)
 pkg_deps=(
   core/glibc
