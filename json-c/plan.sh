@@ -11,6 +11,7 @@ pkg_build_deps=(
   core/autoconf
   core/busybox-static
   core/gcc
+  core/cmake
   core/make
 )
 pkg_deps=(
@@ -19,6 +20,18 @@ pkg_deps=(
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
+
+do_build() {
+  mkdir build
+  cd build
+  ../cmake-configure --prefix=$pkg_prefix
+  make
+}
+
+do_install() {
+  cd build
+  make install
+}
 
 do_check() {
   make check
