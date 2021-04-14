@@ -11,6 +11,7 @@ pkg_deps=(
   core/gcc-libs
   core/ncurses
   core/zlib
+  core/gnutls
 )
 pkg_build_deps=(
   core/gcc
@@ -39,7 +40,7 @@ do_prepare() {
 
 do_build() {
     cmake . -DCMAKE_INSTALL_PREFIX="${pkg_prefix}" \
-            -DCMAKE_PREFIX_PATH="$(pkg_path_for core/ncurses)" \
+            -DCMAKE_PREFIX_PATH="$(pkg_path_for core/ncurses);$(pkg_path_for core/gnutls)" \
             -DCMAKE_BUILD_TYPE=Release \
             -DWITH_READLINE=OFF
     make
