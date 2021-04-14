@@ -1,7 +1,7 @@
 pkg_name=bash-static
 _distname="bash"
 pkg_origin=core
-_base_version=5.0
+_base_version=5.1
 pkg_version="${_base_version}.16"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Bash is the GNU Project's shell. Bash is the Bourne Again SHell."
@@ -9,7 +9,7 @@ pkg_upstream_url=http://www.gnu.org/software/bash/bash.html
 pkg_license=("GPL-3.0-or-later")
 _url_base="https://ftp.gnu.org/gnu/${_distname}"
 pkg_source="${_url_base}/${_distname}-${_base_version}.tar.gz"
-pkg_shasum=b4a80f2ac66170b2913efbfb9f2594f1f76c7b1afd11f799e22035d63077fb4d
+pkg_shasum=cc012bc860406dcf42f64431bcd3d2fa7560c02915a601aba9cd597a39329baa
 pkg_dirname="${_distname}-${_base_version}"
 
 pkg_build_deps=(
