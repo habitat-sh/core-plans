@@ -21,8 +21,22 @@ pkg_build_deps=(
   core/diffutils
   core/gcc
   core/make
+  core/meson
+  core/ninja
   core/pkg-config
+  core/python
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_pconfig_dirs=(lib/pkgconfig)
+
+do_build() {
+  meson _build .
+  cd _build
+  ninja
+}
+
+do_install() {
+  cd _build
+  ninja install
+}
