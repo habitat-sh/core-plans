@@ -14,6 +14,10 @@ pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_bin_dirs=(bin)
 
+do_build() {
+  make
+}
+
 do_check() {
   make check
 }
