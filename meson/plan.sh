@@ -11,9 +11,6 @@ pkg_deps=(
   core/python
   core/ninja
 )
-pkg_build_deps=(
-  core/patch
-)
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 
@@ -34,7 +31,6 @@ do_setup_environment() {
 
 do_prepare() {
   mkdir -p "${pkg_prefix}/lib/${python_version}/site-packages"
-  patch -p0 < "$PLAN_CONTEXT/patches/000_fix_rpath.patch"
 }
 
 do_build() {
