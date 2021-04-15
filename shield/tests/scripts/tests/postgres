@@ -16,8 +16,8 @@ EOF
 echo "> Postgres - All Databases"
 echo ">> setting up test data"
 psql postgres <$ROOT/init.sql
-psql db1 -c 'SELECT * FROM t_vals ORDER BY ID ASC' >$TMP/db1.dat
-psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' >$TMP/db2.dat
+psql db1 -c 'SELECT * FROM t_vals ORDER BY ID ASC' >"$TMP"/db1.dat
+psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' >"$TMP"/db2.dat
 echo "   db1.t_vals contains:"
 sed -e 's/^/    /' <$TMP/db1.dat
 echo
@@ -49,7 +49,7 @@ EOF
 echo
 
 echo ">> running backup job"
-wait_for_task $(shield run $(shield job postgres-all-daily | jq -r '.uuid') | jq -r '.task_uuid')
+wait_for_task "$(shield run $(shield job postgres-all-daily | jq -r '.uuid') | jq -r '.task_uuid')"
 echo
 
 
@@ -77,35 +77,35 @@ echo "   contents of db2.t_keys:"
 psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' | sed -e 's/^/    /'
 echo
 
-psql db1 -c 'SELECT * FROM t_vals ORDER BY ID ASC' >$TMP/db1.post
-psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' >$TMP/db2.post
+psql db1 -c 'SELECT * FROM t_vals ORDER BY ID ASC' >"$TMP"/db1.post
+psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' >"$TMP"/db2.post
 
-if ! diff -u $TMP/db1.dat $TMP/db1.post &>/dev/null; then
+if ! diff -u "$TMP"/db1.dat "$TMP"/db1.post &>/dev/null; then
   echo "!! db1 was not properly restored!"
   echo
-  diff -u $TMP/db1.dat $TMP/db1.post || true
+  diff -u "$TMP"/db1.dat "$TMP"/db1.post || true
   echo
   rc=1
 fi
 
-if ! diff -u $TMP/db2.dat $TMP/db2.post &>/dev/null; then
+if ! diff -u "$TMP"/db2.dat "$TMP"/db2.post &>/dev/null; then
   echo "!! db2 was not properly restored!"
   echo
-  diff -u $TMP/db2.dat $TMP/db2.post || true
+  diff -u "$TMP"/db2.dat "$TMP"/db2.post || true
   echo
   rc=1
 fi
 
 echo "> Postgres - Single Databases"
 echo ">> setting up test data"
-psql postgres <$ROOT/init.sql
-psql db1 -c 'SELECT * FROM t_vals ORDER BY ID ASC' >$TMP/db1.dat
-psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' >$TMP/db2.dat
+psql postgres <"$ROOT"/init.sql
+psql db1 -c 'SELECT * FROM t_vals ORDER BY ID ASC' >"$TMP"/db1.dat
+psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' >"$TMP"/db2.dat
 echo "   db1.t_vals contains:"
-sed -e 's/^/    /' <$TMP/db1.dat
+sed -e 's/^/    /' <"$TMP"/db1.dat
 echo
 echo "   db2.t_keys contains:"
-sed -e 's/^/    /' <$TMP/db2.dat
+sed -e 's/^/    /' <"$TMP"/db2.dat
 echo
 
 echo ">> configuring SHIELD"
@@ -132,7 +132,7 @@ EOF
 echo
 
 echo ">> running backup job"
-wait_for_task $(shield run $(shield job postgres-single-daily | jq -r '.uuid') | jq -r '.task_uuid')
+wait_for_task "$(shield run $(shield job postgres-single-daily | jq -r '.uuid') | jq -r '.task_uuid')"
 echo
 
 echo ">> trashing the data"
@@ -159,18 +159,18 @@ echo "   contents of db2.t_keys:"
 psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' | sed -e 's/^/    /'
 echo
 
-psql db1 -c 'SELECT * FROM t_vals ORDER BY ID ASC' >$TMP/db1.post
-psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' >$TMP/db2.post
+psql db1 -c 'SELECT * FROM t_vals ORDER BY ID ASC' >"$TMP"/db1.post
+psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' >"$TMP"/db2.post
 
-if ! diff -u $TMP/db1.dat $TMP/db1.post &>/dev/null; then
+if ! diff -u "$TMP"/db1.dat "$TMP"/db1.post &>/dev/null; then
   echo "!! db1 was not properly restored!"
   echo
-  diff -u $TMP/db1.dat $TMP/db1.post || true
+  diff -u "$TMP"/db1.dat "$TMP"/db1.post || true
   echo
   rc=1
 fi
 
-if diff -u $TMP/db2.dat $TMP/db2.post &>/dev/null; then
+if diff -u "$TMP"/db2.dat "$TMP"/db2.post &>/dev/null; then
   echo "!! db2 should have been left alone, but was not..."
   echo "   (pre- and post- dumps are IDENTICAL, even though we didn't restore db2)"
   echo
