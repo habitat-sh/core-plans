@@ -1,12 +1,12 @@
 pkg_name=dnsmasq
 pkg_origin=core
-pkg_version=2.84
+pkg_version=2.85
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Provides network infrastructure for small networks"
 pkg_upstream_url="http://www.thekelleys.org.uk/dnsmasq/doc.html"
 pkg_license=("GPL-2.0-or-later")
 pkg_source="http://www.thekelleys.org.uk/dnsmasq/dnsmasq-${pkg_version}.tar.gz"
-pkg_shasum=4caf385376f34fae5c55244a1f870dcf6f90e037bb7c4487210933dc497f9c36
+pkg_shasum=f36b93ecac9397c15f461de9b1689ee5a2ed6b5135db0085916233053ff3f886
 pkg_deps=(
   core/glibc
 )
