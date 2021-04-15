@@ -18,10 +18,20 @@ pkg_build_deps=(
   core/diffutils
   core/gcc
   core/gettext
-  core/make
+  core/meson
+  core/ninja
   core/perl
   core/pkg-config
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_pconfig_dirs=(lib/pkgconfig)
+
+do_build() {
+  meson _build .
+  ninja -C _build
+}
+
+do_install() {
+  ninja -c _build install
+}
