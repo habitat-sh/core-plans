@@ -11,18 +11,18 @@ pkg_shasum=c4864d3e09359214efdd503b52e241f4f56ba7ce26f8c11939fd9dcfac1fd105
 pkg_deps=(
   core/glibc
   core/gcc-libs
-  core/pcre
 )
 pkg_build_deps=(
   core/pkg-config
   core/cmake
   core/ninja
   core/gcc
+  core/pcre
 )
 pkg_bin_dirs=(bin)
 
 do_setup_environment() {
-  export BUILDDIR="_build"
+  export BUILDDIR="build"
 }
 
 do_prepare() {
@@ -33,14 +33,17 @@ do_build() {
   _PCRE_PATH="$(pkg_path_for pcre)"
 
   pushd "${BUILDDIR}" || exit 1
+pwd
   cmake \
     -DCMAKE_INSTALL_PREFIX="${pkg_prefix}" \
     -DBUILD_TESTS="${DO_CHECK}" \
-    -DHAVE_RULES="yes" \
-    -DPCRE="${_PCRE_PATH}/lib" \
+    -DUSE_MATCHCOMPILER=ON \
+    -DPCRE_INCLUDE="yes" \
+    -DPCRE_LIBRARY="${_PCRE_PATH}/lib" \
     -G Ninja \
     ..
   ninja
+
   popd || exit 1
 }
 
