@@ -22,6 +22,8 @@ pkg_build_deps=(
   core/gcc
   core/gettext
   core/make
+  core/meson
+  core/ninja
   core/perl
   core/pkg-config
 )
@@ -34,6 +36,16 @@ do_prepare() {
     ln -sv "$(pkg_path_for file)/bin/file" /usr/bin/file
     _clean_file=true
   fi
+}
+
+do_build() {
+  mkdir build
+  meson ..
+  ninja
+}
+
+do_install() {
+  ninja install
 }
 
 do_end() {
