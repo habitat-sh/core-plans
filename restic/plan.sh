@@ -13,9 +13,9 @@ pkg_description="Fast, secure, efficient backup program"
 pkg_upstream_url="https://restic.net/"
 
 do_build() {
-  GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -mod=vendor -ldflags "-s -w" -tags selfupdate -o restic_linux_amd64 ./cmd/restic
+  go run build.go --goos linux --goarch amd64
 }
 
 do_install() {
-  cp -v restic_linux_amd64 "${pkg_prefix}/bin/restic"
+  cp -v restic "${pkg_prefix}/bin/restic"
 }
