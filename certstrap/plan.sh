@@ -34,6 +34,7 @@ do_download() {
 
 do_build() {
   pushd "${scaffolding_go_pkg_path:?}"
+    go mod vendor
     build_line "building certstrap"
     GOARCH=amd64 GOOS=linux go build -o bin/certstrap github.com/square/certstrap
   popd
