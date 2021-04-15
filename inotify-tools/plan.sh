@@ -5,11 +5,21 @@ pkg_description="inotify-tools is a C library and a set of command-line programs
 pkg_upstream_url=https://github.com/inotify-tools/inotify-tools/wiki
 pkg_license=("GPL-2.0")
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source="https://github.com/inotify-tools/inotify-tools/releases/download/${pkg_version}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5
+pkg_source="https://github.com/inotify-tools/inotify-tools/archive/refs/tags/${pkg_version}.tar.gz"
+pkg_shasum=58a3cde89e4a5111a87ac16b56b06a8f885460fca0aea51b69c856ce30a37a14
 pkg_deps=(core/glibc)
 pkg_build_deps=(
+  core/autoconf
+  core/automake
   core/gcc
+  core/libtool
   core/make
 )
 pkg_bin_dirs=(bin)
+
+do_build() {
+  ACLOCAL_PATH="${ACLOCAL_PATH}:$(pkg_path_for core/libtool)/share/aclocal"
+  export ACLOCAL_PATH
+  ./autogen.sh
+  do_default_build
+}
