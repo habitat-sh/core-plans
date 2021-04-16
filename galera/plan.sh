@@ -10,26 +10,30 @@ pkg_license=('GPL-2.0-only')
 pkg_lib_dirs=(lib)
 pkg_deps=(
   core/gcc-libs
-  core/openssl
   core/glibc
 )
 pkg_build_deps=(
-  core/scons
+  core/cmake
   core/python2
   core/gcc
   core/boost
   core/check
   core/patch
+  core/openssl
 )
 pkg_dirname="galera-release_${pkg_version}"
 
-do_prepare() {
-  # Patch the build script to include LD_RUN_PATH in its environment
-  patch -p0 < "$PLAN_CONTEXT"/patches/000-add-ld_run_path-to-scons-env.patch
+do_setup_environment() {
+  OPENSSL_ROOT_DIR=$(pkg_path_for core/openssl)
+  export OPENSSL_ROOT_DIR
+
+  Boost_INCLUDE_DIRS=$(pkg_path_for core/boost)
+  export Boost_INCLUDE_DIRS
 }
 
 do_build() {
-  scons strict_build_flags=0 tests=0
+  cmake .
+  make
 }
 
 do_install() {
