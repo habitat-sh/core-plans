@@ -20,5 +20,5 @@ do_build() {
 }
 
 do_install() {
-  install -vD "${HAB_CACHE_SRC_PATH}/telegraf/telegraf" "${pkg_prefix}/bin/telegraf"
+  install -vD "${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}/usr/bin/telegraf" "${pkg_prefix}/bin/telegraf"
 }
