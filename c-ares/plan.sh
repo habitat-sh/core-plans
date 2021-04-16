@@ -5,9 +5,9 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_upstream_url="https://c-ares.haxx.se/"
 pkg_description="A C library for asynchronous DNS requests"
-pkg_source="https://github.com/c-ares/c-ares/archive/cares-1_17_1.tar.gz"
+pkg_source="https://github.com/c-ares/c-ares/archive/cares-${pkg_version//\./_}.tar.gz"
 pkg_shasum=61f7cf09605f5e38d4828f82d0e2ddb9de8e355ecfd6819b740691c644583b8f
-pkg_dirname="c-ares-cares-1_15_0"
+pkg_dirname="c-ares-cares-${pkg_version//\./_}"
 pkg_deps=(
   core/glibc
   core/gcc-libs
