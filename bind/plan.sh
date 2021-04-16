@@ -10,6 +10,7 @@ pkg_shasum=00de7bad9291121f3b93e70a6959b540b002f742774823c358c7a416c2e2ed4b
 pkg_deps=(
   core/glibc
   core/libxml2
+  core/nghttp2
   core/openssl
   core/zlib
   core/libcap
