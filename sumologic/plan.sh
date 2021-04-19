@@ -1,6 +1,6 @@
 pkg_name=sumologic
 pkg_origin=core
-pkg_version="19.338.3"
+pkg_version="19.319-4"
 pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Sumo Logic’s powerful, scalable SaaS platform analyzes log data and metrics together in real time."
