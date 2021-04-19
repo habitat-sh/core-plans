@@ -53,9 +53,9 @@ do_check() {
 }
 
 do_install() {
-  cd "${BUILDDIR}/${GTEST_TARGET}" || exit
-  make install
-  cd ../.. || exit
+  #cd "${BUILDDIR}/${GTEST_TARGET}" || exit
+  #make install
+  #cd ../.. || exit
 
   install -Dm644 googlemock/LICENSE "${pkg_prefix}/share/licenses/license.txt"
 
