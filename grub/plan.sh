@@ -25,6 +25,7 @@ pkg_build_deps=(
   core/git
   core/m4
   core/make
+  core/pkg-config
   core/python
   core/qemu
   core/rsync
@@ -44,6 +45,8 @@ do_build() {
   sed -i "s/#! \/usr\/bin\/env bash/#!\/bin\/bash/" ./autogen.sh
 
   ./linguas.sh
+  ACLOCAL_PATH="${ACLOCAL_PATH}:$(pkg_path_for core/pkg-config)/share/aclocal"
+  export ACLOCAL_PATH
   ./autogen.sh
   ./configure \
   --prefix="${pkg_prefix}" \
