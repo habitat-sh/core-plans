@@ -29,3 +29,7 @@ do_prepare() {
 do_check() {
   make check
 }
+
+do_strip() {
+  return 0
+}
