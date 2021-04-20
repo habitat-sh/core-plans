@@ -5,7 +5,7 @@ pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Sumo Logic’s powerful, scalable SaaS platform analyzes log data and metrics together in real time."
 pkg_upstream_url="https://www.sumologic.com"
-pkg_source="https://collectors.sumologic.com/rest/download/tar"
+pkg_source="https://collectors.sumologic.com/rest/download/tar?version=${pkg_version}"
 pkg_shasum="21a1cc412cbf31939fa4d7de16a8c36fcfd25df025e8549418d89d561a3af0a0"
 pkg_dirname="sumocollector"
 pkg_filename="SumoCollector_unix_${pkg_version/./_}.tar.gz"
