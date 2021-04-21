@@ -462,6 +462,8 @@ plan_path = "gnupg-static"
 paths = [
   "gnupg/*",
 ]
+[gnupg2]
+plan_path = "gnupg2"
 [gnuplot]
 plan_path = "gnuplot"
 [gnutls]
