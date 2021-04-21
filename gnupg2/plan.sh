@@ -1,5 +1,5 @@
 pkg_distname=gnupg
-pkg_name=${pkg_distname}2
+pkg_name=gnupg2
 pkg_origin=core
 pkg_version=2.2.27
 pkg_license=('GPL-3.0-or-later')
