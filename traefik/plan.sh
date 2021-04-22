@@ -8,7 +8,7 @@ pkg_version="1.7.30"
 traefik_codename="maroilles"
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=("MIT")
-pkg_source="http://github.com/containous/traefik"
+pkg_source="http://github.com/traefik/traefik"
 pkg_build_deps=(
   core/node6
   core/sed
@@ -19,7 +19,7 @@ pkg_bin_dirs=(bin)
 pkg_svc_user="root"
 pkg_svc_group="root"
 pkg_scaffolding=core/scaffolding-go
-scaffolding_go_base_path=github.com/containous
+scaffolding_go_base_path=github.com/traefik
 scaffolding_go_build_deps=()
 
 pkg_exports=(
