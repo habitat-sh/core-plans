@@ -10,7 +10,7 @@ A complete, cross-platform solution to record, convert and stream audio and vide
 
 Binary package
 
-## Usage
+### Usage
 
 `ffmpeg -i video.mp4` will output information about `video.mp4`.
 
