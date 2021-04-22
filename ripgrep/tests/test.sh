@@ -18,4 +18,6 @@ if [ "${SKIPBUILD}" -eq 0 ]; then
   set +e
 fi
 
+pushd "${PLANDIR}" > /dev/null
 bats "${TESTDIR}/test.bats"
+popd > /dev/null
