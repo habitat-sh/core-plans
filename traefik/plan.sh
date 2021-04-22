@@ -4,11 +4,11 @@ pkg_upstream_url="https://traefik.io"
 pkg_origin=core
 # note: to have the version match the codename, please update both values when
 #       updating this for a new release
-pkg_version="1.7.7"
+pkg_version="1.7.30"
 traefik_codename="maroilles"
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=("MIT")
-pkg_source="http://github.com/containous/traefik"
+pkg_source="http://github.com/traefik/traefik"
 pkg_build_deps=(
   core/node6
   core/sed
@@ -19,7 +19,7 @@ pkg_bin_dirs=(bin)
 pkg_svc_user="root"
 pkg_svc_group="root"
 pkg_scaffolding=core/scaffolding-go
-scaffolding_go_base_path=github.com/containous
+scaffolding_go_base_path=github.com/traefik
 scaffolding_go_build_deps=()
 
 pkg_exports=(
@@ -32,15 +32,15 @@ do_prepare() {
   export PATH="${scaffolding_go_gopath:?}/bin:${PATH}"
   export VERSION="v${pkg_version}"
   export CODENAME="${traefik_codename}"
-  go get github.com/jteeuwen/go-bindata
-  go install github.com/jteeuwen/go-bindata/...
+  go get github.com/containous/go-bindata
+  go install github.com/containous/go-bindata/...
 }
 
 do_download() {
   # `-d`: don't let go build it, we'll have to build this ourselves
-  go get -d github.com/containous/traefik
+  go get -d github.com/traefik/traefik
 
-  pushd "${scaffolding_go_gopath:?}/src/github.com/containous/traefik"
+  pushd "${scaffolding_go_gopath:?}/src/github.com/traefik/traefik"
     git reset --hard "v${pkg_version}"
   popd
 }
@@ -53,7 +53,7 @@ do_build() {
   # pkg_deps, but this is too brittle.
   PATH=$(pkg_path_for core/node6)/bin:${PATH}
   export PATH
-  pushd "${scaffolding_go_gopath:?}/src/github.com/containous/traefik"
+  pushd "${scaffolding_go_gopath:?}/src/github.com/traefik/traefik"
     pushd webui
       yarn install
 
@@ -76,5 +76,5 @@ do_build() {
 }
 
 do_install() {
-  cp "${scaffolding_go_gopath:?}/src/github.com/containous/traefik/dist/traefik" "${pkg_prefix}/bin"
+  cp "${scaffolding_go_gopath:?}/src/github.com/traefik/traefik/dist/traefik" "${pkg_prefix}/bin"
 }
