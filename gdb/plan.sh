@@ -10,6 +10,7 @@ pkg_shasum=1e55b4d7cdca7b34be12f4ceae651623aa73b2fd640152313f9f66a7149757c4
 pkg_deps=(
   core/bdwgc
   core/expat
+  core/gcc
   core/glibc
   core/guile
   core/ncurses
@@ -23,7 +24,6 @@ pkg_build_deps=(
   core/dejagnu
   core/diffutils
   core/expect
-  core/gcc
   core/make
   core/patch
   core/pkg-config
