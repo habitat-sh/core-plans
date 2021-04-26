@@ -1,13 +1,13 @@
 pkg_origin=core
 pkg_name=lynx
-pkg_version=2.8.8
+pkg_version=2.8.9rel.1
 pkg_description="Lynx is the text web browser."
 pkg_upstream_url=http://lynx.browser.org/
 pkg_license=("GPL-2.0")
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source="http://invisible-mirror.net/archives/$pkg_name/tarballs/$pkg_name${pkg_version}rel.2.tar.gz"
-pkg_shasum=234c9dc77d4c4594ad6216d7df4d49eae3019a3880e602f39721b35b97fbc408
-pkg_dirname="$pkg_name${pkg_version//./-}"
+pkg_source="http://invisible-mirror.net/archives/$pkg_name/tarballs/$pkg_name${pkg_version}.tar.gz"
+pkg_shasum=a46e4167b8f02c066d2fe2eafcc5603367be0e3fe2e59e9fc4eb016f306afc8e
+pkg_dirname="$pkg_name${pkg_version}"
 pkg_deps=(
   core/glibc
   core/ncurses
@@ -15,14 +15,8 @@ pkg_deps=(
 pkg_build_deps=(
   core/gcc
   core/make
-  core/patch
 )
 pkg_bin_dirs=(bin)
-
-do_prepare() {
-  # http://lists.gnu.org/archive/html/bug-ncurses/2017-03/msg00009.html
-  patch -p1 < "${PLAN_CONTEXT}/ncurses.patch"
-}
 
 do_check() {
   make test
