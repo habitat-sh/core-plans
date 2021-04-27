@@ -34,8 +34,8 @@ do_clean() {
 }
 
 do_build() {
-  cd $REPO_PATH
-  mkdir $REPO_PATH/bin
+  cd "$REPO_PATH"
+  mkdir "$REPO_PATH"/bin
   . ./set_goenv.sh
   export GOPATH=/hab/cache/src/mongo-tools-r${pkg_version}/:/hab/cache/src/mongo-tools-r${pkg_version}/vendor
   for i in mongodump mongoexport mongofiles mongoimport mongorestore mongostat mongotop; do
@@ -46,6 +46,6 @@ do_build() {
 
 do_install() {
   mkdir -p "${pkg_prefix}/bin"
-  cd $REPO_PATH
+  cd "$REPO_PATH"
   cp /bin/* "${pkg_prefix}/bin"
 }
