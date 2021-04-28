@@ -7,7 +7,7 @@ pkg_description="Continuous Archiving for Postgres"
 pkg_upstream_url="https://github.com/wal-e/wal-e"
 pkg_source=https://github.com/wal-e/wal-e/archive/v${pkg_version}.tar.gz
 pkg_shasum=f5f8750ca8999802302b1c127a7d90b3b0f24ad376205fc9bf574abbcf365046
-pkg_deps=(core/envdir core/lzop core/pv core/python)
+pkg_deps=(core/envdir core/lzop core/pv core/python core/gcc)
 pkg_bin_dirs=(bin)
 
 do_download() {
