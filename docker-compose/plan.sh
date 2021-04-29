@@ -8,7 +8,8 @@ pkg_upstream_url="https://docs.docker.com/compose/install/"
 pkg_build_deps=(
 )
 pkg_deps=(
-  core/python
+  core/python39
+  core/rust
 )
 pkg_bin_dirs=(bin)
 
