@@ -60,8 +60,6 @@ do_prepare() {
 
   # https://patchwork.freedesktop.org/patch/214086/
   patch -p0 < "$PLAN_CONTEXT"/patches/000-llvm7-support.patch
-  # https://patchwork.freedesktop.org/patch/186737/
-  patch -p0 < "$PLAN_CONTEXT"/patches/001-llvm-enable-new-fast-math-flags.patch
 }
 
 do_build() {
