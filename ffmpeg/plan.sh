@@ -37,6 +37,7 @@ pkg_deps=(
   core/openjpeg
   core/xz
   core/zlib
+  core/avisynthplus
 )
 
 do_build() {
