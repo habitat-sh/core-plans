@@ -1283,6 +1283,10 @@ plan_path = "ruby30"
 paths = [
   "ruby/*"
 ]
+build_targets = [
+  "x86_64-linux",
+  "x86_64-linux-kernel2"
+]
 [runit]
 plan_path = "runit"
 [rust]
