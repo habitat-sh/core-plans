@@ -16,6 +16,9 @@ pkg_build_deps=(
     core/git
     core/go
 )
+pkg_deps=(
+    core/gcc
+)
 pkg_shasum=d1f3cee2261adc83df54fba2d62b045549d064ac14b7683031ec3897c2bdbd44
 
 do_prepare() {
@@ -29,5 +32,5 @@ do_build() {
 
 do_install() {
   build_line "copying binary: $pwd"
-  make build BIN="${pkg_prefix}/bin/opa" CGO_ENABLED=0 BUILD_COMMIT="" VERSION="${pkg_version}"
+  make build BIN="${pkg_prefix}/bin/opa" BUILD_COMMIT="" VERSION="${pkg_version}"
 }
