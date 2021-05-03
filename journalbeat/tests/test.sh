@@ -19,6 +19,10 @@ hab pkg binlink core/busybox-static ps
 hab pkg binlink core/busybox-static wc
 hab pkg install "${TEST_PKG_IDENT}"
 
+
+hab sup term
+hab sup run &
+sleep 5
 hab svc load "${TEST_PKG_IDENT}"
 
 # Allow service start
