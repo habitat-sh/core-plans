@@ -1,6 +1,6 @@
 pkg_name=journalbeat
 pkg_origin=core
-pkg_version=7.2.0
+pkg_version=7.11.2
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_deps=(
@@ -23,7 +23,8 @@ do_download() {
   SYSTEMD_INCLUDE_PATH=$(pkg_path_for core/systemd)/include
   GOPATH="$(dirname "${HAB_CACHE_SRC_PATH}")"
   export GOPATH
-  CGO_CFLAGS="-I${SYSTEMD_INCLUDE_PATH}" go get github.com/elastic/beats/journalbeat
+  rm -rf "${GOPATH}/src/github.com/elastic/beats"
+  git clone https://github.com/elastic/beats "${GOPATH}"/src/github.com/elastic/beats
   pushd "${HAB_CACHE_SRC_PATH}/github.com/elastic/beats/journalbeat" > /dev/null
   git checkout "v${pkg_version}"
   popd > /dev/null
@@ -32,7 +33,7 @@ do_download() {
 do_build() {
   SYSTEMD_INCLUDE_PATH=$(pkg_path_for core/systemd)/include
   pushd "${HAB_CACHE_SRC_PATH}/github.com/elastic/beats/journalbeat" > /dev/null
-  CGO_CFLAGS="-I${SYSTEMD_INCLUDE_PATH}" go build github.com/elastic/beats/journalbeat
+  CGO_CFLAGS="-I${SYSTEMD_INCLUDE_PATH}" make
   popd > /dev/null
 }
 
