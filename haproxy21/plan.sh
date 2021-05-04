@@ -11,12 +11,15 @@ pkg_source="https://www.haproxy.org/download/2.1/src/${pkg_distname}-${pkg_versi
 pkg_shasum=acebbf932f2703ee287d6e945bd845cde8c9db9a13f7cbb2a99671499c558056
 pkg_dirname="${pkg_distname}-${pkg_version}"
 pkg_upstream_url="https://www.haproxy.org/"
+pkg_deps=(
+  core/gcc-libs
+  core/zlib
+  core/pcre
+  core/openssl
+)
 pkg_build_deps=(
   core/coreutils
   core/gcc
-  core/pcre
   core/make
-  core/openssl
-  core/zlib
   core/diffutils
 )
