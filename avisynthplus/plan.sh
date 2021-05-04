@@ -2,6 +2,7 @@ pkg_name=avisynthplus
 pkg_origin=core
 pkg_version="3.7.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="AviSynth is a powerful tool for video post-production"
 pkg_license="GNU General Public License GPLv2"
 pkg_build_deps=(core/git)
 pkg_upstream_url="https://github.com/AviSynth/AviSynthPlus.git"
@@ -25,7 +26,7 @@ do_clean() {
 }
 
 do_build() {
- return 0 
+ return 0
 }
 
 do_check() {
