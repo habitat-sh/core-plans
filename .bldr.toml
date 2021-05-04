@@ -38,6 +38,8 @@ plan_path = "autoconf"
 plan_path = "autogen"
 [automake]
 plan_path = "automake"
+[avisynthplus]
+plan_path = "avisynthplus"
 [aws-cli]
 plan_path = "aws-cli"
 [azure-cli]
