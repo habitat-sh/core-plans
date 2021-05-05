@@ -53,6 +53,7 @@ do_build() {
 
 do_check() {
   pushd "${prom_pkg_dir}/src/github.com/prometheus/prometheus" || exit 1
+  export CI=true
   make test
   popd || exit 1
 }
