@@ -9,7 +9,7 @@ pkg_source="https://download.gnome.org/sources/${pkg_name}/${pkg_version%.*}/${p
 pkg_shasum=fb76247e369402be23f1f5c65d38a9639c1164d934e40f6a9cf3c9e96b652788
 pkg_deps=(
   core/glib
-  core/glibc
+  core/gobject-introspection
   core/libffi
   core/libiconv
   core/pcre
@@ -28,10 +28,11 @@ pkg_include_dirs=(include)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_build() {
-  meson _build .
+  meson _build --prefix=${pkg_prefix} \
+    --buildtype release
   ninja -C _build
 }
 
 do_install() {
-  ninja -c _build install
+  ninja -C _build install
 }
