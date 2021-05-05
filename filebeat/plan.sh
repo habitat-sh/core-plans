@@ -22,7 +22,8 @@ pkg_upstream_url="https://www.elastic.co/products/beats/filebeat"
 do_download() {
   GOPATH="$(dirname "${HAB_CACHE_SRC_PATH}")"
   export GOPATH
-  go get github.com/elastic/beats/filebeat
+  rm -rf "${GOPATH}/src/github.com/elastic/beats"
+  git clone https://github.com/elastic/beats "${GOPATH}"/src/github.com/elastic/beats
   pushd "${HAB_CACHE_SRC_PATH}/github.com/elastic/beats/filebeat" > /dev/null
   git checkout "v${pkg_version}"
   popd > /dev/null
