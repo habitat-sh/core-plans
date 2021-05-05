@@ -11,6 +11,7 @@ pkg_deps=(
   core/coreutils
   core/gcc-libs
   core/glibc
+  core/numactl
   core/python2
   core/userspace-rcu
 )
