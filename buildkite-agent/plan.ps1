@@ -1,6 +1,6 @@
 $pkg_name="buildkite-agent"
 $pkg_origin="core"
-$pkg_version="3.9.1"
+$pkg_version="3.29.0"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_license=@("MIT")
 $pkg_description="The Buildkite Agent is an open-source toolkit written in Golang for securely running build jobs on any device or network."
