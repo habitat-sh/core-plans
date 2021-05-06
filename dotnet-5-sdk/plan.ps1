@@ -1,6 +1,6 @@
 $pkg_name="dotnet-5-sdk"
 $pkg_origin="core"
-$pkg_version="5.0.100"
+$pkg_version="5.0.202"
 $pkg_license=('MIT')
 $pkg_upstream_url="https://dotnet.microsoft.com/"
 $pkg_description=".NET is a free, cross-platform, open-source developer platform for building many different types of applications."
