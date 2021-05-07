@@ -2,7 +2,7 @@
 
 $pkg_name="node6"
 $pkg_origin="core"
-$pkg_version="6.14.3"
+$pkg_version="6.17.1"
 $pkg_description="Node.jsÃƒâ€šÃ‚Â® is a JavaScript runtime built on Chrome's V8 JavaScript engine."
 $pkg_source="https://nodejs.org/dist/v$pkg_version/node-v$pkg_version-x64.msi"
-$pkg_shasum="f67a3f3e24c25859c429fbd576d6d89301c74b5fff70533f4bcc97351df6dc02"
+$pkg_shasum="e3a3816d7184eb90162b0fc7b0f2b7f6f2ba5c11c4c6d8dc1bd8b7da40a7c514"
