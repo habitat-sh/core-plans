@@ -57,9 +57,8 @@ do_prepare() {
   export PATH="$PATH:$GOPATH/bin"
 
   git config --global url."git://github.com/".insteadOf "https://github.com/"
-  go get github.com/tools/godep
-  cd "${SHIELD_SRC_PATH}" || exit
-  make restore-deps
+  go get github.com/kardianos/govendor
+  go install github.com/kardianos/govendor
 }
 
 do_build() {
