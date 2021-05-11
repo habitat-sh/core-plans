@@ -1,12 +1,12 @@
 $pkg_name="python34"
-$pkg_version="3.4.3"
+$pkg_version="3.4.4"
 $pkg_origin="core"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_license=@('Python-2.0')
 $pkg_description="Python is a programming language that lets you work quickly and integrate systems more effectively."
 $pkg_upstream_url="https://www.python.org"
 $pkg_source="https://www.python.org/ftp/python/$pkg_version/python-$pkg_version.amd64.msi"
-$pkg_shasum="0e134f3263bb37bcabc98638ed54ba553922e71f7c4004e6962a531066a77e00"
+$pkg_shasum="ace645d104bddd4f4ffbf453bedddaf2496e3609af3fa47173680d2f321d3709"
 $pkg_build_deps=@("core/lessmsi")
 $pkg_bin_dirs=@("bin", "bin/Scripts")
 
