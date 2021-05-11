@@ -1,12 +1,12 @@
 $pkg_name="openssl"
 $pkg_origin="core"
-$pkg_version="1.0.2t"
+$pkg_version="1.1.1k"
 $_pkg_version_text=($pkg_version).Replace(".", "_")
 $pkg_description="OpenSSL is an open source project that provides a robust, commercial-grade, and full-featured toolkit for the Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols. It is also a general-purpose cryptography library."
 $pkg_upstream_url="https://www.openssl.org"
 $pkg_license=@("OpenSSL")
 $pkg_source="https://github.com/openssl/openssl/archive/OpenSSL_$_pkg_version_text.zip"
-$pkg_shasum="08741e9c71ded84ad54840e611bc86a2272fbbdb72b90556a3ec7e02b11f1dd9"
+$pkg_shasum="86eff4eaf8221d0988961e311d28a6cdb201b73e739163822f9a9e49b4cb7ca5"
 $pkg_deps=@("core/visual-cpp-redist-2015")
 $pkg_build_deps=@("core/visual-cpp-build-tools-2015", "core/perl", "core/nasm")
 $pkg_bin_dirs=@("bin")
