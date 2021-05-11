@@ -23,7 +23,7 @@ echo
 
 echo "CONFIGURING SHIELD AT ${SHIELD_ENDPOINT}"
 echo "> Targeting backend at ${SHIELD_ENDPOINT}"
-shield create-backend test-shield https://${SHIELD_ENDPOINT}
+shield create-backend test-shield https://"${SHIELD_ENDPOINT}"
 shield backend
 
 echo "> Creating daily-schedule Schedule"
