@@ -9,6 +9,3 @@ $pkg_license=@("GPLv2+CE")
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_source="https://corretto.aws/downloads/resources/${pkg_version}/amazon-corretto-${pkg_version}-windows-x64-jdk.zip"
 $pkg_shasum="2c51cddecaf5f6cf2e37ecbae168d4c759cf56cfbda80dab3f3c032ac5a38b1d"
-
-
-
