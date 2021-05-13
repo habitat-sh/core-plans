@@ -7,7 +7,7 @@ $pkg_description="Inno Setup Unpacker"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_filename="innounp$($pkg_version.Replace('.','')).rar"
 $pkg_source="https://sourceforge.net/projects/innounp/files/innounp/innounp%20$pkg_version/$pkg_filename"
-$pkg_shasum="9b469f2f7ed69451782cb0618b028d0e2f74105218d2e7f79620bfbf0a522f4a"
+$pkg_shasum="1d8837540ccc15d98245a1c73fd08f404b2a7bdfe7dc9bed2fdece818ff6df67"
 $pkg_build_deps = @("core/7zip")
 $pkg_bin_dirs=@("bin")
 
