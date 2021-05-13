@@ -996,6 +996,8 @@ plan_path = "npth"
 plan_path = "nspr"
 [nss]
 plan_path = "nss"
+[nuget]
+plan_path = "nuget"
 [numactl]
 plan_path = "numactl"
 [ocaml]
