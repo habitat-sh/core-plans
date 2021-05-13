@@ -1,33 +1,33 @@
 $pkg_name="visual-build-tools-2019"
 $pkg_origin="core"
-$pkg_version="16.8.1"
+$pkg_version="16.9"
 $pkg_description="Standalone compiler, libraries and scripts"
 $pkg_upstream_url="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019"
 $pkg_license=@("Microsoft Software License")
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-$pkg_source="https://download.visualstudio.microsoft.com/download/pr/44fbb1ed-c06e-41c9-bc39-3d7f2083d61b/d3ffaa4ec21a06d29b773e544c0c613df65b270ad30c036b623188a8b12dd745/vs_BuildTools.exe"
-$pkg_shasum="d3ffaa4ec21a06d29b773e544c0c613df65b270ad30c036b623188a8b12dd745"
+$pkg_source="https://download.visualstudio.microsoft.com/download/pr/9665567e-f580-4acd-85f2-bc94a1db745f/930a6ef592ea72e47b57565fce5bf93ffdbcc76c8d146bc02db97bd039e8d532/vs_BuildTools.exe"
+$pkg_shasum="930a6ef592ea72e47b57565fce5bf93ffdbcc76c8d146bc02db97bd039e8d532"
 $pkg_build_deps=@("core/7zip")
 
 $pkg_bin_dirs=@(
-    "Contents\VC\Tools\MSVC\14.28.29333\bin\HostX64\x64",
-    "Contents\VC\Redist\MSVC\14.28.29325\x64\Microsoft.VC142.CRT",
+    "Contents\VC\Tools\MSVC\14.28.29910\bin\HostX64\x64",
+    "Contents\VC\Redist\MSVC\14.28.29910\x64\Microsoft.VC142.CRT",
     "Contents\MSBuild\Current\Bin\amd64"
 )
 $pkg_lib_dirs=@(
-    "Contents\VC\Tools\MSVC\14.28.29333\atlmfc\lib\x64",
-    "Contents\VC\Tools\MSVC\14.28.29333\lib\x64"
+    "Contents\VC\Tools\MSVC\14.28.29910\atlmfc\lib\x64",
+    "Contents\VC\Tools\MSVC\14.28.29910\lib\x64"
 )
 $pkg_include_dirs=@(
-    "Contents\VC\Tools\MSVC\14.28.29333\atlmfc\include",
-    "Contents\VC\Tools\MSVC\14.28.29333\include"
+    "Contents\VC\Tools\MSVC\14.28.29910\atlmfc\include",
+    "Contents\VC\Tools\MSVC\14.28.29910\include"
 )
 
 function Invoke-SetupEnvironment {
     Set-RuntimeEnv "DisableRegistryUse" "true"
     Set-RuntimeEnv "UseEnv" "true"
-    Set-RuntimeEnv "VCToolsVersion" "14.28.29325"
-    Set-RuntimeEnv -IsPath "VCToolsInstallDir_160" "$pkg_prefix\Contents\VC\Redist\MSVC\14.28.29325"
+    Set-RuntimeEnv "VCToolsVersion" "14.28.29910"
+    Set-RuntimeEnv -IsPath "VCToolsInstallDir_160" "$pkg_prefix\Contents\VC\Redist\MSVC\14.28.29910"
 }
 
 function Invoke-Unpack {
