@@ -17,6 +17,6 @@ hab pkg install $PackageIdentifier
 $__dir=(Get-Item $PSScriptRoot)
 $test_result = Invoke-Pester -PassThru -Script @{
     Path       = "$__dir/test.pester.ps1";
-    Parameters = @{PackageIdentifier=$PackageIdentifier}
+    Parameters = @{PackageIdentifier = $PackageIdentifier}
 }
 Exit $test_result.FailedCount
