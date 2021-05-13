@@ -601,8 +601,6 @@ plan_path = "imagemagick"
 plan_path = "img"
 [inetutils]
 plan_path = "inetutils"
-[innounp]
-plan_path = "innounp"
 [inotify-tools]
 plan_path = "inotify-tools"
 [inputproto]
