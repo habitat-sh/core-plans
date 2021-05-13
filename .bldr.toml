@@ -1066,6 +1066,8 @@ build_targets = [
   "x86_64-linux",
   "x86_64-linux-kernel2"
 ]
+[nuget]
+plan_path = "nuget"
 [numactl]
 plan_path = "numactl"
 [ocaml]
