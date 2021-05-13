@@ -9,7 +9,7 @@ $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_filename=$pkg_name + ($_base_version).Replace(".", "") + "-binaries.zip"
 $_release_name=$pkg_name + ($pkg_version).Replace(".", "") + "rtm"
 $pkg_source="https://github.com/wixtoolset/wix3/releases/download/${_release_name}/${pkg_filename}"
-$pkg_shasum="9685c25985fa48741e1a3ca0b164b2c71260703fea6a3f1c8e5408856345fc16"
+$pkg_shasum="2c1888d5d1dba377fc7fa14444cf556963747ff9a0a289a3599cf09da03b9e2e"
 $pkg_bin_dirs=@("bin")
 
 function Invoke-Unpack {
