@@ -7,7 +7,7 @@ $pkg_description="CI that scales with your project"
 $pkg_upstream_url="https://concourse.ci"
 $pkg_source="https://github.com/${pkg_name}/${pkg_name}/releases/download/v${pkg_version}/${pkg_name}_windows_amd64.exe"
 $pkg_filename="${pkg_name}.exe"
-$pkg_shasum="f9f541c66e0ba6cbdb087197353aed50c851ec4abbdffeead4aac66d66d3a574"
+$pkg_shasum="314b33c363126fcc81133f9678a0f671a3c449d86310015322425f037a5653c1"
 
 $pkg_bin_dirs=@("bin")
 
