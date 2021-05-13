@@ -6,7 +6,7 @@ $pkg_description="Protocol buffers are a language-neutral, platform-neutral exte
 $pkg_upstream_url="https://developers.google.com/protocol-buffers/"
 $pkg_license=("BSD")
 $pkg_source="https://github.com/google/${pkg_name}/releases/download/v${pkg_version}/${pkg_name}-all-${pkg_version}.zip"
-$pkg_shasum="4c3899cbc84d5e3341ef884fb72950c3e444ad2a2806aee1bc7f83b2dda80956"
+$pkg_shasum="69f6bca818bf76e5cb00443223d15361998a8999bac71485a7524910f9711028"
 $pkg_deps=@(
     "core/zlib"
 )
