@@ -22,6 +22,7 @@ do_download() {
   go get -d $go_pkg 2>&1 | grep -q "no Go files"
 
   pushd "$scaffolding_go_pkg_path" || exit 1
+  git fetch --all --tags
   git reset --hard v$pkg_version
   popd || exit 1
 }
