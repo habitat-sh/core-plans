@@ -1,6 +1,7 @@
 $pkg_name="aws-cli"
 $pkg_origin="core"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+$pkg_version="1.19.0"
 $pkg_license=('Apache-2.0')
 $pkg_description="The AWS Command Line Interface (CLI) is a unified tool to \
   manage your AWS services. With just one tool to download and configure, you \
@@ -12,13 +13,6 @@ $pkg_deps=@(
 )
 $pkg_bin_dirs=@("Scripts")
 
-function pkg_version {
-    python -m pip search --disable-pip-version-check awscli | ForEach-Object{ if( $_ -match "^awscli \((.+)\)") { $matches[1]; } }
-}
-
-function Invoke-Before {
-    Set-PkgVersion
-}
 
 function Invoke-Prepare {
     python -m pip install virtualenv
