@@ -1,7 +1,7 @@
 $pkg_name="aws-cli"
 $pkg_origin="core"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-$pkg_version="1.19.0"
+$pkg_version="1.19.73"
 $pkg_license=('Apache-2.0')
 $pkg_description="The AWS Command Line Interface (CLI) is a unified tool to \
   manage your AWS services. With just one tool to download and configure, you \
@@ -22,6 +22,6 @@ function Invoke-Prepare {
 
 function Invoke-Install {
     python -m pip install "awscli==$pkg_version"
-    # Write out versions of all pip packages to package
+	 # Write out versions of all pip packages to package
     python -m pip freeze > "$pkg_prefix/requirements.txt"
 }
