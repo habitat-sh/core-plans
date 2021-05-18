@@ -16,5 +16,5 @@ function Invoke-Build {
 }
 
 function Invoke-Check {
-    (& "$pkg_prefix/bin/java.exe" --version).StartsWith("openjdk version $pkg_version")
+    (& "$pkg_prefix/bin/java.exe" -version).StartsWith("openjdk version $pkg_version")
 }
