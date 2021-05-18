@@ -21,7 +21,7 @@ function Invoke-Unpack {
 
 function Invoke-Build {
     $getPipScript = "$HAB_CACHE_SRC_PATH/$pkg_dirname/get-pip.py"
-    Invoke-WebRequest https://bootstrap.pypa.io/get-pip.py -OutFile $getPipScript
+    Invoke-WebRequest https://bootstrap.pypa.io/pip/3.4/get-pip.py -OutFile $getPipScript
     ."$HAB_CACHE_SRC_PATH/$pkg_dirname/python-$pkg_version.amd64/SourceDir/python.exe" $getPipScript --no-warn-script-location
 }
 
