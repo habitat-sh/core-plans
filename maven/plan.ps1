@@ -20,5 +20,5 @@ function Invoke-Build {
     Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/*" "$pkg_prefix" -Recurse -Force
 }
 function Invoke-Check{
-    (& "$HAB_CACHE_SRC_PATH/$pkg_dirname/bin/mvn.cmd" -v).StartsWith("Apache Maven $pkg_version")
+    (& "$HAB_CACHE_SRC_PATH/$pkg_dirname/$pkg_dirname/bin/mvn.cmd" -v).StartsWith("Apache Maven $pkg_version")
 }
