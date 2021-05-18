@@ -31,9 +31,9 @@ function Invoke-Build {
 }
 
 function Invoke-Install {
-    Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\libzmq-$pkg_version\cmake-build\bin\Release\libzmq-v140-mt-4_3_1.dll" "$pkg_prefix\bin\" -Force
-    Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\libzmq-$pkg_version\cmake-build\bin\Release\libzmq-v140-mt-4_3_1.dll" "$pkg_prefix\bin\zmq.dll" -Force
+    Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\libzmq-$pkg_version\cmake-build\bin\Release\libzmq-v140-mt-4_3_4.dll" "$pkg_prefix\bin\" -Force
+    Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\libzmq-$pkg_version\cmake-build\bin\Release\libzmq-v140-mt-4_3_4.dll" "$pkg_prefix\bin\zmq.dll" -Force
     Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\libzmq-$pkg_version\cmake-build\lib\Release\*.lib" "$pkg_prefix\lib\" -Force
-    Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\libzmq-$pkg_version\cmake-build\lib\Release\libzmq-v140-mt-4_3_1.lib" "$pkg_prefix\lib\zmq.lib" -Force
+    Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\libzmq-$pkg_version\cmake-build\lib\Release\libzmq-v140-mt-4_3_4.lib" "$pkg_prefix\lib\zmq.lib" -Force
     Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\libzmq-$pkg_version\include\*" "$pkg_prefix\include\" -Force
 }
