@@ -1,7 +1,7 @@
 . ../python/plan.ps1
 
 $pkg_name="python37"
-$pkg_version="3.7.3"
+$pkg_version="3.7.9"
 $pkg_origin="core"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_license=@('Python-2.0')
