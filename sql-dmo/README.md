@@ -2,6 +2,8 @@
 
 SQL Server Distributed Management Objects from the Microsoft SQL Server 2005 Backward Compatibility package. This package is used by applications that need to access SQL Server 2005's management object APIs.
 
+<This package is no longer supported>
+
 ## Maintainers
 
 The Habitat Maintainers humans@habitat.sh
