@@ -30,7 +30,7 @@ function Invoke-Unpack {
 }
 
 function Invoke-Install {
-    foreach ($dir in @("bin","lib","mingw","perl")) {
+    foreach ($dir in @("bin","lib","mingw")) {
         Copy-Item $dir "$pkg_prefix" -Recurse -Force
     }
 }
