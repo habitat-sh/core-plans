@@ -5,7 +5,7 @@ param (
 
 if (-Not (Get-Module -ListAvailable -Name Pester)) {
     hab pkg install core/pester
-    Import-Module "$(hab pkg path core/pester)\module\pester.psd1"
+	Import-Module "$(hab pkg path core/pester)\module\pester.psd1"
 }
 
 hab pkg install $PackageIdentifier
@@ -13,6 +13,6 @@ hab pkg install $PackageIdentifier
 $__dir=(Get-Item $PSScriptRoot)
 $test_result = Invoke-Pester -PassThru -Script @{
     Path       = "$__dir/test.pester.ps1";
-    Parameters = @{PackageIdentifier =$PackageIdentifier}
+	Parameters = @{PackageIdentifier =$PackageIdentifier}
 }
 Exit $test_result.FailedCount
