@@ -17,15 +17,14 @@ function Invoke-SetupEnvironment {
 
 function Invoke-Build {
     $Env:CCTYPE   = "MSVC140"
-    $Env:INST_TOP = "$pkg_prefix"
     Set-Location perl5-$pkg_version\win32
+    (Get-Content Makefile).Replace("`$(INST_DRV)\perl", $pkg_prefix) | Set-Content Makefile
     nmake
     if($LASTEXITCODE -ne 0) { Write-Error "nmake failed!" }
 }
 
 function Invoke-Install {
     $Env:CCTYPE   = "MSVC140"
-    $Env:INST_TOP = "$pkg_prefix"
     Set-Location perl5-$pkg_version\win32
     nmake install
     if($LASTEXITCODE -ne 0) { Write-Error "nmake failed!" }
@@ -34,5 +33,5 @@ function Invoke-Install {
 function Invoke-Check {
     $Env:CCTYPE="MSVC140"
     Set-Location perl5-$pkg_version\win32
-    dmake test
+    nmake test
 }
