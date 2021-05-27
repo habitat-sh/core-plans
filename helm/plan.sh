@@ -24,6 +24,7 @@ do_download() {
   pushd "$scaffolding_go_pkg_path" || exit 1
   git fetch --all --tags
   git reset --hard v$pkg_version
+  go mod tidy
   popd || exit 1
 }
 
