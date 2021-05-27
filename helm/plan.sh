@@ -1,7 +1,7 @@
 go_pkg="k8s.io/helm"
 pkg_name=helm
 pkg_origin=core
-pkg_version="3.2.4"
+pkg_version="3.5.3"
 pkg_description="The Kubernetes Package Manager"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
@@ -22,7 +22,9 @@ do_download() {
   go get -d $go_pkg 2>&1 | grep -q "no Go files"
 
   pushd "$scaffolding_go_pkg_path" || exit 1
+  git fetch --all --tags
   git reset --hard v$pkg_version
+  go mod tidy
   popd || exit 1
 }
 
