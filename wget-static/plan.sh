@@ -22,15 +22,15 @@ pkg_build_deps=(
   core/gcc
   core/gettext
   core/grep
-  core/make
   core/patch
   core/perl
   core/pkg-config
   core/sed
   core/cacerts
   core/glibc
+  core/libiconv
   core/libidn2
-  core/openssl
+  core/openssl-musl
   core/pcre
   core/zlib
 )
