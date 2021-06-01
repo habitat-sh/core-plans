@@ -1,7 +1,7 @@
 pkg_name=wget-static
 _distname="wget"
 pkg_origin=core
-pkg_version=1.19.5
+pkg_version=1.21
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_dirname=${_distname}-${pkg_version}
 pkg_description="\
@@ -11,7 +11,7 @@ FTP and FTPS the most widely-used Internet protocols.\
 pkg_upstream_url="https://www.gnu.org/software/wget/"
 pkg_license=('GPL-3.0+')
 pkg_source="https://ftp.gnu.org/gnu/${_distname}/${_distname}-${pkg_version}.tar.gz"
-pkg_shasum="b39212abe1a73f2b28f4c6cb223c738559caac91d6e416a6d91d4b9d55c9faee"
+pkg_shasum="b3bc1a9bd0c19836c9709c318d41c19c11215a07514f49f89b40b9d50ab49325"
 
 pkg_build_deps=(
   core/linux-headers-musl
@@ -22,15 +22,15 @@ pkg_build_deps=(
   core/gcc
   core/gettext
   core/grep
-  core/make
   core/patch
   core/perl
   core/pkg-config
   core/sed
   core/cacerts
   core/glibc
+  core/libiconv
   core/libidn2
-  core/openssl
+  core/openssl-musl
   core/pcre
   core/zlib
 )
