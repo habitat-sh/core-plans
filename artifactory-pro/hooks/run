@@ -4,7 +4,6 @@ exec 2>&1
 
 echo "Starting Artifactory Pro"
 
-export JAVA_HOME={{pkgPathFor "core/jre8"}}
-export ARTIFACTORY_HOME={{pkg.svc_var_path}}
+export JFROG_HOME={{pkg.svc_var_path}}
 
-exec {{pkg.svc_var_path}}/bin/artifactory.sh
+exec {{pkg.svc_var_path}}/artifactory/app/bin/artifactory.sh
