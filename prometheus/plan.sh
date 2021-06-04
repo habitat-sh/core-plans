@@ -2,19 +2,24 @@ pkg_name=prometheus
 pkg_description="Prometheus monitoring"
 pkg_upstream_url=http://prometheus.io
 pkg_origin=core
-pkg_version=2.13.1
+pkg_version=2.25.2
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_bin_dirs=(bin)
 pkg_source="https://github.com/prometheus/prometheus/archive/v${pkg_version}.tar.gz"
-pkg_shasum=5624c16728679362cfa46b76ec1d247018106989f2260d35583c42c49c5142b5
+pkg_shasum=7c8a9c9756790d1c4eb436bb6ebda49e2f671a6319c06a1c63d5df9eff7da0e2
 prom_pkg_dir="${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}"
 prom_build_dir="${prom_pkg_dir}/src/${pkg_source}"
+pkg_deps=(
+  core/bash
+)
 pkg_build_deps=(
   core/go
   core/git
   core/gcc
   core/make
+  core/yarn
+  core/coreutils
 )
 pkg_exports=(
   [prom_ds_http]=listening_port
@@ -35,14 +40,20 @@ do_unpack() {
   popd || exit 1
 }
 
+do_before() {
+  ln -fs "$(pkg_path_for core/coreutils)/bin/env" "/usr/bin/env"
+}
+
 do_build() {
   pushd "${prom_pkg_dir}/src/github.com/prometheus/prometheus" || exit 1
+  fix_interpreter "./scripts/build_react_app.sh" "core/bash" "bash"
   USER="root" PREFIX="${pkg_prefix}/bin" make build
   popd || exit 1
 }
 
 do_check() {
   pushd "${prom_pkg_dir}/src/github.com/prometheus/prometheus" || exit 1
+  export CI=true
   make test
   popd || exit 1
 }
