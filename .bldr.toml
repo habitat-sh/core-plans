@@ -1539,6 +1539,8 @@ paths = [
 plan_path = "which"
 [windows-10-sdk]
 plan_path = "windows-10-sdk"
+[wix]
+plan_path = "wix"
 [wordpress]
 plan_path = "wordpress"
 [wordpress-proxy]
