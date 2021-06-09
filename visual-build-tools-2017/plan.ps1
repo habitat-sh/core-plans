@@ -28,7 +28,17 @@ function Invoke-SetupEnvironment {
 }
 
 function Invoke-Unpack {
-    $installArgs = "--quiet --layout $HAB_CACHE_SRC_PATH/$pkg_dirname --lang en-US"
+    # This suffers the same issue that the visual-build-tools-2019/plan.ps1 setup does;
+    # I believe that previous versions of this file vs_buildtools.exe --layout would work
+    # but it unfortunately doesn't anymore. As such we're following what
+    # visual-build-tools-2019/plan.ps1 does. Take a look at the Invoke-Unpack function there
+    # for a better explanation.
+    7z x "$HAB_CACHE_SRC_PATH/$pkg_filename" -o"$HAB_CACHE_SRC_PATH/$pkg_dirname"
+    $opcInstaller = (Get-Content "$HAB_CACHE_SRC_PATH\$pkg_dirname\vs_bootstrapper_d15\vs_setup_bootstrapper.config")[0].Split("=")[-1]
+    Invoke-WebRequest $opcInstaller -Outfile "$HAB_CACHE_SRC_PATH/$pkg_dirname/vs_installer.opc"
+    7z x "$HAB_CACHE_SRC_PATH/$pkg_dirname/vs_installer.opc" -o"$HAB_CACHE_SRC_PATH/$pkg_dirname"
+
+    $installArgs =  "layout --quiet --layout $HAB_CACHE_SRC_PATH/$pkg_dirname --lang en-US --in $HAB_CACHE_SRC_PATH/$pkg_dirname/vs_bootstrapper_d15/vs_setup_bootstrapper.json"
     $components = @(
         "Microsoft.VisualStudio.Workload.MSBuildTools",
         "Microsoft.VisualStudio.Workload.VCTools",
@@ -39,7 +49,10 @@ function Invoke-Unpack {
     foreach ($component in $components) {
         $installArgs += " --add $component"
     }
-    Start-Process "$HAB_CACHE_SRC_PATH/$pkg_filename" -Wait -ArgumentList $installArgs
+    
+    $setup = "$HAB_CACHE_SRC_PATH/$pkg_dirname/Contents/resources/app/layout/setup.exe"
+    Write-Host "Launching $setup with args: $installArgs"
+    & $setup $installArgs.Split(" ")
     Push-Location "$HAB_CACHE_SRC_PATH/$pkg_dirname"
     try {
         Get-ChildItem "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Include *.vsix -Exclude @('*x86*', '*.arm.*') -Recurse | ForEach-Object {
