@@ -1,6 +1,6 @@
 $pkg_name="visual-build-tools-2017"
 $pkg_origin="core"
-$pkg_version="15"
+$pkg_version="15.9.28307.1525"
 $pkg_description="Standalone compiler, libraries and scripts"
 $pkg_upstream_url="https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017"
 $pkg_license=@("Microsoft Software License")
