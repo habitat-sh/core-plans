@@ -11,14 +11,23 @@ pkg_deps=(core/glibc)
 pkg_build_deps=(core/go core/coreutils core/gcc core/make core/git)
 pkg_bin_dirs=(bin)
 
+do_setup_environment() {
+  build_line "Setting GOPATH=${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
+  export GOPATH="${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
+  export GO111MODULE=off
+  export REPO_PATH="$HAB_CACHE_SRC_PATH/$pkg_dirname/src/github.com/mongodb/mongo-tools"
+}
+
+do_before() {
+  rm -rf "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+}
+
 do_download() {
-  REPO_PATH="$HAB_CACHE_SRC_PATH/$pkg_dirname/src/github.com/mongodb/mongo-tools"
-  rm -rf "$REPO_PATH"
   git clone "$pkg_source" "$REPO_PATH"
-  pushd "$REPO_PATH" || return 1
-  git checkout "tags/r${pkg_version}"
-  git submodule update --init --recursive
-  popd || return 1
+  pushd "$REPO_PATH" || exit 1
+    git checkout "tags/r${pkg_version}"
+    git submodule update --init --recursive
+  popd || exit 1
 }
 
 do_verify() {
@@ -34,18 +43,15 @@ do_clean() {
 }
 
 do_build() {
-  cd "$REPO_PATH"
-  mkdir "$REPO_PATH"/bin
-  . ./set_goenv.sh
-  export GOPATH=/hab/cache/src/mongo-tools-r${pkg_version}/:/hab/cache/src/mongo-tools-r${pkg_version}/vendor
-  for i in mongodump mongoexport mongofiles mongoimport mongorestore mongostat mongotop; do
-    go build -o bin/$i $i/main/$i.go
-  done
-
+  pushd "$REPO_PATH" || exit 1
+    mkdir $GOPATH/bin
+    . ./set_goenv.sh
+    for i in mongodump mongoexport mongofiles mongoimport mongorestore mongostat mongotop; do
+      go build -o $GOPATH/bin/$i $i/main/$i.go
+    done
+  popd || exit 1
 }
 
 do_install() {
-  mkdir -p "${pkg_prefix}/bin"
-  cd "$REPO_PATH"
-  cp /bin/* "${pkg_prefix}/bin"
+  cp $GOPATH/bin/* ${pkg_prefix}/bin
 }
