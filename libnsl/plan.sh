@@ -16,6 +16,7 @@ pkg_build_deps=(
   core/diffutils
   core/gcc
   core/gettext
+  core/libtirpc
   core/libtool
   core/make
   core/pkg-config
