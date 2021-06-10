@@ -1,0 +1,13 @@
+diff --git a/foulkon/glide.sh b/foulkon/glide.sh
+index cc2a89fe..8fbd22ab 100644
+--- a/foulkon/glide.sh
++++ b/foulkon/glide.sh
+@@ -116,7 +116,7 @@ getFile() {
+ 
+ 
+ downloadFile() {
+-	get TAG https://glide.sh/version
++	TAG=v0.13.3
+ 	echo "TAG=$TAG"
+ 	GLIDE_DIST="glide-$TAG-$OS-$ARCH.tar.gz"
+ 	echo "GLIDE_DIST=$GLIDE_DIST"
