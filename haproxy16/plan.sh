@@ -16,6 +16,6 @@ pkg_build_deps=(
   core/gcc
   core/pcre
   core/make
-  core/openssl
+  core/openssl/1.0.2t
   core/zlib
 )
