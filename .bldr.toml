@@ -1524,6 +1524,8 @@ plan_path = "virtualenv"
 plan_path = "visual-build-tools-2017"
 [visual-build-tools-2019]
 plan_path = "visual-build-tools-2019"
+[visual-cpp-redist-2013]
+plan_path = "visual-cpp-redist-2013"
 [vmtouch]
 plan_path = "vmtouch"
 [wal-e]
