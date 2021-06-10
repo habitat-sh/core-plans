@@ -19,6 +19,7 @@ pkg_build_deps=(
   core/libtirpc
   core/libtool
   core/make
+  core/patch
   core/pkg-config
 )
 pkg_include_dirs=(include)
@@ -30,5 +31,6 @@ do_prepare() {
   export ACLOCAL_PATH
 
   autoreconf --force --install
+  patch < "$PLAN_CONTEXT/autogen.patch"
   ./autogen.sh
 }
