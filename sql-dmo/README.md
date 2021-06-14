@@ -1,5 +1,7 @@
 # sql-dmo
 
+## As of 2021-06-09, this package is no longer supported or updated. Microsoft SQL Server 2005 Backward Compatibility package is no longer maintained by Microsoft.
+
 SQL Server Distributed Management Objects from the Microsoft SQL Server 2005 Backward Compatibility package. This package is used by applications that need to access SQL Server 2005's management object APIs.
 
 ## Maintainers
