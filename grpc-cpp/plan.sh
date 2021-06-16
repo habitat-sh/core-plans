@@ -17,7 +17,6 @@ pkg_deps=(
 )
 pkg_build_deps=(
     core/make
-    core/go
     core/git
     core/gcc
     core/cmake
