@@ -24,6 +24,8 @@ plan_path = "artifactory-pro"
 plan_path = "asciinema"
 [aspcud]
 plan_path = "aspcud"
+[aspnet-mvc1]
+plan_path = "aspnet-mvc1"
 [at-spi2-core]
 plan_path = "at-spi2-core"
 [atk]
