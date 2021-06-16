@@ -1,7 +1,7 @@
 pkg_name=grpc-cpp
 pkg_distname=grpc
 pkg_origin=core
-pkg_version="1.25.0"
+pkg_version="1.38.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_source="https://github.com/grpc/grpc.git"
@@ -17,7 +17,6 @@ pkg_deps=(
 )
 pkg_build_deps=(
     core/make
-    core/go
     core/git
     core/gcc
     core/cmake
@@ -89,7 +88,6 @@ do_build() {
     -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
     -DgRPC_ZLIB_PROVIDER="package" \
     -DZLIB_ROOT="${ZLIB_PATH}" \
-    -DgRPC_CARES_PROVIDER="package" \
     -DgRPC_PROTOBUF_PROVIDER="package" \
     -DProtobuf_INCLUDE_DIR="${PROTOBUF_PATH}/include" \
     -DProtobuf_LIBRARY="${PROTOBUF_PATH}/lib/libprotobuf.so" \
