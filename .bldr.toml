@@ -704,6 +704,8 @@ plan_path = "leptonica"
 plan_path = "less"
 [leveldb]
 plan_path = "leveldb"
+[lgpo]
+plan_path = "lgpo"
 [libaio]
 plan_path = "libaio"
 [libarchive]
