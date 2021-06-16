@@ -10,3 +10,7 @@ pkg_shasum=4a593dc5cceb2492a9669f5f5d69d0e517de457a11036788ea4591f33c5297fb
 pkg_deps=(core/glibc core/ncurses)
 pkg_build_deps=(core/coreutils core/gcc core/make)
 pkg_bin_dirs=(bin)
+
+do_setup_environment() {
+  export LDFLAGS="$LDFLAGS -Wl,--copy-dt-needed-entries"
+}
