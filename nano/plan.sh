@@ -14,7 +14,11 @@ pkg_build_deps=(
 )
 pkg_bin_dirs=(bin)
 
-do_build() {
-  do_default_build
+do_setup_environment() {
+  export LDFLAGS="$LDFLAGS -Wl,--copy-dt-needed-entries"
+}
+
+do_install() {
+  do_default_install
   install -v -Dm644 COPYING "${pkg_prefix}/share/COPYING"
 }
