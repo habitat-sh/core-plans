@@ -89,7 +89,6 @@ do_build() {
     -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
     -DgRPC_ZLIB_PROVIDER="package" \
     -DZLIB_ROOT="${ZLIB_PATH}" \
-    -DgRPC_CARES_PROVIDER="package" \
     -DgRPC_PROTOBUF_PROVIDER="package" \
     -DProtobuf_INCLUDE_DIR="${PROTOBUF_PATH}/include" \
     -DProtobuf_LIBRARY="${PROTOBUF_PATH}/lib/libprotobuf.so" \
