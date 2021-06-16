@@ -29,13 +29,15 @@ do_setup_environment() {
   export GO111MODULE=off
 }
 
-do_before() { }
+do_before() {
+  return 0
+}
 
 do_build() {
   pushd "${prom_pkg_dir}/src/github.com/prometheus/prometheus" || exit 1
     # prometheus 1.x didn't use go modules, but the prometheus builder
     # github.com/prometheus/promu does, we have to set GO111MODULE=on
-    # in the Makefile for the go get command 
+    # in the Makefile for the go get command
     patch < "$PLAN_CONTEXT/makefile.patch"
   popd || exit 1
 }
