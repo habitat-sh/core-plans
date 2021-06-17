@@ -24,7 +24,6 @@ pkg_build_deps=(
   core/gettext
   core/libtool
   core/patch
-  core/make
   core/perl
   core/pkg-config
   core/xz
@@ -35,6 +34,10 @@ pkg_bin_dirs=(bin sbin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
+do_prepare() {
+  export LDFLAGS="$LDFLAGS -Wl,--copy-dt-needed-entries"
+}
+
 do_check() {
-	make check
+  make check
 }
