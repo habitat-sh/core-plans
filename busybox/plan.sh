@@ -1,7 +1,7 @@
 pkg_name=busybox
 _distname="$pkg_name"
 pkg_origin=core
-pkg_version=1.31.0
+pkg_version=1.33.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 BusyBox is the Swiss Army Knife of embedded Linux. BusyBox combines tiny \
@@ -12,7 +12,7 @@ fileutils, shellutils, etc.\
 pkg_upstream_url="https://www.busybox.net/"
 pkg_license=('GPL-2.0-only')
 pkg_source="http://www.busybox.net/downloads/${_distname}-${pkg_version}.tar.bz2"
-pkg_shasum="0e4925392fd9f3743cc517e031b68b012b24a63b0cf6c1ff03cce7bb3846cc99"
+pkg_shasum="12cec6bd2b16d8a9446dd16130f2b92982f1819f6e1c5f5887b6db03f5660d28"
 pkg_deps=(
   core/glibc
 )
@@ -73,13 +73,18 @@ _create_config() {
   # then compare core-plans/busybox/config to core-plans/busybox/config.new
   # and resolve any differences
   build_line "Customizing busybox configuration..."
-  sed --unbuffered \
-    -e "s,@pkg_prefix@,$pkg_prefix,g" \
-    -e "s,@pkg_svc_var@,$pkg_svc_var_path,g" \
-    -e "s,@cflags@,$CFLAGS,g" \
-    -e "s,@ldflags@,$LDFLAGS,g" \
-    -e "s,@osname@,Habitat,g" \
-    -e "s,@bash_is_ash@,y,g" \
-    "$PLAN_CONTEXT"/config \
-    > .config
+  make defconfig
+  sed --in-place=.bak \
+    -e "s,CONFIG_PID_FILE_PATH=\"/var/run\",CONFIG_PID_FILE_PATH=\"$pkg_svc_var_path\",g" \
+    -e "s,CONFIG_BUSYBOX_EXEC_PATH=\"/proc/self/exe\",CONFIG_BUSYBOX_EXEC_PATH=\"$pkg_prefix/bin/busybox\",g" \
+    -e "s,CONFIG_EXTRA_CFLAGS=\"\",CONFIG_EXTRA_CFLAGS=\"$CFLAGS\",g" \
+    -e "s,CONFIG_EXTRA_LDFLAGS=\"\",CONFIG_EXTRA_LDFLAGS=\"$LDFLAGS\",g" \
+    -e "s,CONFIG_PREFIX=\"./_install\",CONFIG_PREFIX=\"$pkg_prefix\",g" \
+    -e "s,CONFIG_UNAME_OSNAME=\"GNU/Linux\",CONFIG_UNAME_OSNAME=\"Habitat\",g" \
+    -e "s,# CONFIG_NOLOGIN_DEPENDENCIES is not set,CONFIG_NOLOGIN_DEPENDENCIES=y,g" \
+    -e "s,# CONFIG_FEATURE_DC_LIBM is not set,CONFIG_FEATURE_DC_LIBM=y,g" \
+    -e "s,# CONFIG_BASH_IS_ASH is not set,CONFIG_BASH_IS_ASH=y,g" \
+    -e "s,# CONFIG_BASH_IS_ASH is not set,CONFIG_BASH_IS_ASH=y,g" \
+    -e "s,CONFIG_BASH_IS_NONE=y,# CONFIG_BASH_IS_NONE is not set,g" \
+    .config
 }
