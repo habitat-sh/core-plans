@@ -19,16 +19,22 @@ pkg_build_deps=(
 )
 pkg_bin_dirs=(bin)
 
-do_download() {
+do_setup_environment() {
   GIT_SSL_CAINFO="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
   export GIT_SSL_CAINFO
-
   REPO_PATH="$HAB_CACHE_SRC_PATH/$pkg_dirname"
+  export GO111MODULE=off
+}
+
+do_before() {
   rm -rf "$REPO_PATH"
+}
+
+do_download() {
   git clone "$pkg_source" "$REPO_PATH"
   pushd "$REPO_PATH" || return 1
-  git checkout "tags/v${pkg_version}"
-  git submodule update --init --recursive
+    git checkout "tags/v${pkg_version}"
+    git submodule update --init --recursive
   popd || return 1
 }
 
