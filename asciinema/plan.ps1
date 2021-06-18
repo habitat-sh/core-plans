@@ -4,18 +4,25 @@ $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_license=('GPL-3.0-or-later')
 $pkg_description="Terminal session recorder"
 $pkg_upstream_url="https://github.com/asciinema/asciinema"
+$pkg_version = '2.0.1'
 $pkg_deps=@(
     "core/python"
 )
 $pkg_bin_dirs=@("Scripts")
 
-function pkg_version {
-    python -m pip search --disable-pip-version-check $pkg_name | ForEach-Object{ if( $_ -match "^$pkg_name \((.+)\)") { $matches[1]; } }
-}
+# We currently cannot use the latest version '2.0.2', since it requires
+# the fcntl package, which is unavailable on Windows. Once we can use the
+# latest version again, the below code can be uncommented and the above
+# $pkg_version = '2.0.1' can be removed
+# 
+# function pkg_version {
+#     $output = (Invoke-WebRequest -UseBasicParsing -Uri "https://pypi.org/rss/project/$($pkg_name)/releases.xml").Content
+#     return ([xml]$output).rss.channel['item'].title
+# }
 
-function Invoke-Before {
-    Set-PkgVersion
-}
+# function Invoke-Before {
+#     Set-PkgVersion
+# }
 
 function Invoke-Prepare {
     python -m pip install virtualenv
