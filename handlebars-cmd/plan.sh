@@ -20,6 +20,14 @@ do_build() {
 
 do_install() {
   # Use handlebars-cmd branch with a recent version of handlebars.
-  npm install -g "DavidBabel/$pkg_name#bc510fc" --prefix="$pkg_prefix" --progress=false
-  fix_interpreter "$pkg_prefix/bin/handlebars" core/coreutils bin/env
+  # This is a silly problem & fix; if there is a .git folder/file in the source
+  # directory during compilation npm will throw 'fatal: not a git repository'
+  # error (This occurs in the refresh environment). This can be avoided by
+  # being in any other directory since we're using --global and --prefix
+  # regardless
+  pushd $pkg_prefix
+    # Use handlebars-cmd branch with a recent version of handlebars.
+    npm install --global "DavidBabel/$pkg_name#c6176f1" --prefix="$pkg_prefix" --progress=false
+    fix_interpreter "$pkg_prefix/bin/handlebars" core/coreutils bin/env
+  popd
 }
