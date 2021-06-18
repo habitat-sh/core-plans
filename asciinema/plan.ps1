@@ -14,7 +14,7 @@ $pkg_bin_dirs=@("Scripts")
 # the fcntl package, which is unavailable on Windows. Once we can use the
 # latest version again, the below code can be uncommented and the above
 # $pkg_version = '2.0.1' can be removed
-# 
+
 # function pkg_version {
 #     $output = (Invoke-WebRequest -UseBasicParsing -Uri "https://pypi.org/rss/project/$($pkg_name)/releases.xml").Content
 #     return ([xml]$output).rss.channel['item'].title
