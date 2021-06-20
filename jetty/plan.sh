@@ -1,10 +1,10 @@
 pkg_name=jetty
 pkg_origin=core
-pkg_version=9.1.5
-jetty_release=v20140505
+pkg_version=9.4.38
+jetty_release=v20210224
 pkg_source=https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/${pkg_version}.${jetty_release}/jetty-distribution-${pkg_version}.${jetty_release}.tar.gz
 pkg_upstream_url=https://eclipse.org/jetty
-pkg_shasum=3fbce5530d8d9a66f43034782b0f249df3d98e3e97ef849e7f740eab612b963f
+pkg_shasum=579f6496ecf1d2a77cac8a12a0606b37e5098eca95f0c4de74235ddb898eff09
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Jetty webserver and Java container"
 pkg_license=('Apache-2.0')
