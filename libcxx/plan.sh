@@ -1,13 +1,13 @@
 pkg_name=libcxx
 pkg_origin=core
-pkg_version=5.0.1
+pkg_version=5.0.2
 pkg_license=('NCSA')
 pkg_description="A new implementation of the C++ standard library, targeting C++11"
 pkg_upstream_url=http://libcxx.llvm.org/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_filename=${pkg_name}-${pkg_version}.src.tar.xz
 pkg_source=http://llvm.org/releases/${pkg_version}/${pkg_name}-${pkg_version}.src.tar.xz
-pkg_shasum=fa8f99dd2bde109daa3276d529851a3bce5718d46ce1c5d0806f46caa3e57c00
+pkg_shasum=6edf88e913175536e1182058753fff2365e388e017a9ec7427feb9929c52e298
 pkg_build_deps=(
   core/clang
   core/cmake
