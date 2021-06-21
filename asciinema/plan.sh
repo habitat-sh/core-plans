@@ -8,8 +8,7 @@ pkg_build_deps=(core/gawk)
 pkg_deps=(core/python)
 pkg_bin_dirs=(bin)
 pkg_version() {
-  export LC_ALL=en_US LANG=en_US
-  pip search --disable-pip-version-check "${pkg_name}" | grep "^${pkg_name} (" | awk -F'[()]' '{print $2}'
+  python -c "import xml.etree.ElementTree as ET, requests; r = requests.get('https://pypi.org/rss/project/asciinema/releases.xml'); xml = ET.fromstring(r.text); print(xml.find('channel/item/title').text)"
 }
 
 do_before() {
