@@ -22,7 +22,7 @@ do_unpack() {
 }
 
 do_prepare() {
-  pyvenv "$pkg_prefix"
+  python -m venv "$pkg_prefix"
   source "$pkg_prefix/bin/activate"
 }
 
