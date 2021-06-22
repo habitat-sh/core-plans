@@ -23,6 +23,10 @@ pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_bin_dirs=(bin)
 
+do_setup_environment() {
+  export LDFLAGS="$LDFLAGS -Wl,--copy-dt-needed-entries"
+}
+
 do_build() {
   mkdir build
   cmake -H./ \
