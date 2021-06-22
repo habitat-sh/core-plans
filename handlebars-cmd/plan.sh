@@ -25,7 +25,7 @@ do_install() {
   # error (This occurs in the refresh environment). This can be avoided by
   # being in any other directory since we're using --global and --prefix
   # regardless
-  pushd $pkg_prefix
+  pushd "$pkg_prefix"
     # Use handlebars-cmd branch with a recent version of handlebars.
     npm install --global "DavidBabel/$pkg_name#c6176f1" --prefix="$pkg_prefix" --progress=false
     fix_interpreter "$pkg_prefix/bin/handlebars" core/coreutils bin/env
