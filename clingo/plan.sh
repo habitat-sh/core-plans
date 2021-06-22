@@ -2,11 +2,11 @@ pkg_name=clingo
 pkg_origin=core
 pkg_description="A grounder and solver for logic programs."
 pkg_upstream_url="https://potassco.org/clingo"
-pkg_version="5.3.0"
+pkg_version="5.4.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_source="https://github.com/potassco/clingo/archive/v${pkg_version}.tar.gz"
-pkg_shasum="b0d406d2809352caef7fccf69e8864d55e81ee84f4888b0744894977f703f976"
+pkg_shasum=ac6606388abfe2482167ce8fd4eb0737ef6abeeb35a9d3ac3016c6f715bfee02
 pkg_build_deps=(
   core/cmake
   core/doxygen
@@ -22,6 +22,10 @@ pkg_deps=(
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_bin_dirs=(bin)
+
+do_setup_environment() {
+  export LDFLAGS="$LDFLAGS -Wl,--copy-dt-needed-entries"
+}
 
 do_build() {
   mkdir build
