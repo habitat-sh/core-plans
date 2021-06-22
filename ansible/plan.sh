@@ -29,9 +29,13 @@ do_setup_environment() {
 }
 
 do_prepare() {
-  mkdir -p "${pkg_prefix}/lib/python3.8site-packages"
-  mkdir -p "${pkg_prefix}/share"
-  mkdir -p "${pkg_prefix}/etc"
+  python -m venv "$pkg_prefix"
+  # shellcheck source=/dev/null
+  source "$pkg_prefix/bin/activate"
+
+  mkdir -p "${pkg_prefix}/lib/python3.9site-packages" \
+           "${pkg_prefix}/share" \
+           "${pkg_prefix}/etc"
 
   pip install --upgrade pip
   # Fixes encoding error: Installed from requirements: MarkupSafe, jinja2, PyYAML, pycparser, cffi, enum34, ipaddress, cryptography
