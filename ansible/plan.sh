@@ -18,6 +18,8 @@ pkg_build_deps=(
   core/gcc
   core/libyaml
   core/make
+  core/coreutils
+  core/busybox-static
 )
 pkg_bin_dirs=(bin)
 
