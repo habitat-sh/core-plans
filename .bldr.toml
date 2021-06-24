@@ -1324,6 +1324,8 @@ plan_path = "relx"
 plan_path = "renderproto"
 [repo]
 plan_path = "repo"
+[reportviewer2010]
+plan_path = "reportviewer2010"
 [restic]
 plan_path = "restic"
 [rethinkdb]
