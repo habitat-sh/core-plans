@@ -4,9 +4,9 @@ pkg_description="Production-Grade Container Scheduling and Management"
 pkg_upstream_url=https://github.com/kubernetes/kubernetes
 pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_version=1.11.2
+pkg_version=1.20.5
 pkg_source=https://github.com/kubernetes/kubernetes/archive/v${pkg_version}.tar.gz
-pkg_shasum=43f42c64426247d909010bf77f18c72ab1f36104a67e9c878cf897ee9f0ab6a6
+pkg_shasum=3edf9c2384a4449efec7eab28b22530982bb44222c6f3d45d9921638cab2fe4c
 
 pkg_bin_dirs=(bin)
 
