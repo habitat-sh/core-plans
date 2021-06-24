@@ -1,12 +1,12 @@
 pkg_name=npth
 pkg_origin=core
-pkg_version=1.2
+pkg_version=1.6
 pkg_license=('LGPL-3.0-or-later')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=ftp://ftp.gnupg.org/gcrypt/"${pkg_name}"/"${pkg_name}"-"${pkg_version}".tar.bz2
 pkg_upstream_url="https://gnupg.org/software/npth/index.html"
 pkg_description="nPth is a library to provide the GNU Pth API and thus a non-preemptive threads implementation."
-pkg_shasum=6ddbdddb2cf49a4723f9d1ad6563c480d6760dcb63cb7726b8fc3bc2e1b6c08a
+pkg_shasum=1393abd9adcf0762d34798dc34fdcf4d0d22a8410721e76f1e3afcd1daa4e2d1
 pkg_deps=(core/glibc)
 pkg_build_deps=(
   core/gcc
