@@ -1,12 +1,12 @@
 pkg_name=libpciaccess
 pkg_origin=core
-pkg_version=0.14
+pkg_version=0.16
 pkg_description="Direct Rendering Manager"
 pkg_upstream_url="https://dri.freedesktop.org/wiki/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_source="https://www.x.org/archive/individual/lib/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=8d86e64893917be3dfb1c5e837888d1275399c818783474002203d751312b03c
+pkg_shasum=84413553994aef0070cf420050aa5c0a51b1956b404920e21b81e96db6a61a27
 pkg_deps=(
   core/glibc
 )
