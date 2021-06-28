@@ -1,11 +1,11 @@
 pkg_name=jfrog-cli
 pkg_description="jfrog CLI"
 pkg_origin=core
-pkg_version=1.7.1
+pkg_version=1.43.2
 pkg_license=('apachev2')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://jfrog.bintray.com/jfrog-cli-go/${pkg_version}/jfrog-cli-linux-amd64/jfrog
-pkg_shasum=172afbfe482c48bea347318bd27ad4ac3d2f2d6a152aa51e1ca94629faff7e6c
+pkg_shasum=cb53b4e733cc67614ea2b2e06c87503b76c157fbc6860fdde40f7b6a80f5891f
 pkg_deps=(core/glibc core/busybox-static core/cacerts)
 pkg_build_deps=(core/coreutils)
 pkg_bin_dirs=(bin)
