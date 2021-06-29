@@ -1,10 +1,10 @@
 pkg_name=eudev
 pkg_origin=core
-pkg_version="3.2.7"
+pkg_version="3.2.10"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0')
 pkg_source="http://dev.gentoo.org/~blueness/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="3004614bd253c1f98558460215027aaf60d7592c70be27fd384ec01db87bf062"
+pkg_shasum=87bb028d470fd1b85169349b44c55d5b733733dc2d50ddf1196e026725ead034
 pkg_deps=(
   core/glibc
   core/gperf
