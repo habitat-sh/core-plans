@@ -1,12 +1,12 @@
 pkg_name=libunwind
 pkg_origin=core
-pkg_version=1.2.1
+pkg_version=1.4.0
 pkg_description="A C programming interface to determine the call-chain of a program."
 pkg_upstream_url="http://www.nongnu.org/libunwind/"
 pkg_license=('MIT')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="http://download.savannah.gnu.org/releases/libunwind/libunwind-${pkg_version}.tar.gz"
-pkg_shasum=3f3ecb90e28cbe53fba7a4a27ccce7aad188d3210bb1964a923a731a27a75acb
+pkg_shasum=df59c931bd4d7ebfd83ee481c943edf015138089b8e50abed8d9c57ba9338435
 pkg_deps=(
   core/glibc
   core/gcc-libs
