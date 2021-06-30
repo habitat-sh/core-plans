@@ -1,6 +1,6 @@
 pkg_origin=core
 pkg_name=repo
-pkg_version='1.12.33'
+pkg_version='1.13.11'
 pkg_description="Repo is a tool that [Google] built on top of Git. Repo helps
   [Google] manage the many Git repositories, does the uploads to [Google's]
   revision control system, and automates parts of the Android development
@@ -9,7 +9,7 @@ pkg_upstream_url="https://code.google.com/p/git-repo/"
 pkg_license=('Apache 2.0')
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_source="https://gerrit.googlesource.com/git-repo"
-pkg_shasum=d560e02daaf1bb800f806964962a95557ede6150d14e02e73ef1794c9aa98e60
+pkg_shasum=b5caa4be6496419057c5e1b1cdff1e4bdd3c1845eec87bd89ecb2e463a3ee62c
 pkg_filename="$pkg_name"
 pkg_deps=(
   core/cacerts
