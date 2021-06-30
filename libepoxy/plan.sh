@@ -1,12 +1,12 @@
 pkg_name=libepoxy
 pkg_origin=core
-pkg_version=1.4.3
+pkg_version=1.5.5
 pkg_description="Epoxy is a library for handling OpenGL function pointer management for you"
 pkg_upstream_url="https://github.com/anholt/libepoxy"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_source="https://github.com/anholt/${pkg_name}/releases/download/${pkg_version}/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum=0b808a06c9685a62fca34b680abb8bc7fb2fda074478e329b063c1f872b826f6
+pkg_shasum=261663db21bcc1cc232b07ea683252ee6992982276536924271535875f5b0556
 pkg_deps=(
   core/glibc
   core/libdrm # not linked to bins/libs
