@@ -1,12 +1,12 @@
 pkg_name=xeyes
 pkg_origin=core
-pkg_version=1.1.1
+pkg_version=1.1.2
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="xeyes"
 pkg_upstream_url="https://www.x.org/"
 pkg_license=('MIT')
 pkg_source="https://www.x.org/releases/individual/app/${pkg_name}-${pkg_version}.tar.bz2"
-pkg_shasum="975e98680cd59e1f9439016386609546ed08c284d0f05a95276f96aca6e8a521"
+pkg_shasum=57bcec0d2d167af9e5d44d0dbd74c6d7c0f0591cd0608952b23c749fdd910553
 pkg_deps=(core/glibc
           core/xlib
           core/libxcb
