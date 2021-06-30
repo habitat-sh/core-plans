@@ -1,10 +1,10 @@
 pkg_name=tap-xunit
 pkg_origin=core
-pkg_version=2.3.0
+pkg_version=2.4.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("MIT")
 pkg_source="https://github.com/aghassemi/tap-xunit/archive/${pkg_version}.tar.gz"
-pkg_shasum=2ab6d5bbe47cc01cc12bbb8df6e3c0f1f24b8b9b17c52cad246a291f7468612f
+pkg_shasum=78556efa2fdb85335c3e34424ce25c44ef56d4012b2870219f27d271622d74e1
 pkg_deps=(
   core/coreutils
   core/node
