@@ -3,7 +3,7 @@ source ../gnupg/plan.sh
 pkg_name=gnupg-static
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_version=1.4.20
+pkg_version=1.4.23
 pkg_license=('GPL-3.0-or-later')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="GnuPG is a complete and free implementation of the OpenPGP standard as defined by RFC4880 (also known as PGP). \
