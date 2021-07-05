@@ -10,6 +10,7 @@ fi
 pkg_ident="$1"
 
 hab pkg install core/bats
+hab pkg install "${pkg_ident}"
 
 tests_path="$(dirname "$0")"
 
