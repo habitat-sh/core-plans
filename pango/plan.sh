@@ -1,10 +1,10 @@
 pkg_name=pango
 pkg_origin=core
-pkg_version="1.40.13"
+pkg_version="1.48.4"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('LGPL')
 pkg_source="https://download.gnome.org/sources/${pkg_name}/${pkg_version%.*}/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="f84e98db1078772ff4935b40a1629ff82ef0dfdd08d2cbcc0130c8c437857196"
+pkg_shasum="418913fb062071a075846244989d4a67aa5c80bf0eae8ee4555a092fd566a37a"
 pkg_upstream_url="http://www.pango.org"
 pkg_description="Pango is a library for laying out and rendering of text, with an emphasis on internationalization."
 pkg_deps=(
@@ -50,4 +50,12 @@ do_prepare() {
   then
     ln -sv "$(pkg_path_for core/file)/bin/file" /usr/bin/file
   fi
+}
+
+do_build() {
+  return 0
+}
+
+do_install() {
+  return 0
 }
