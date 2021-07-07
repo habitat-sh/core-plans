@@ -16,10 +16,16 @@ pkg_build_deps=(
   core/make
   core/gcc
   core/diffutils
+  core/patch
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
+
+do_prepare() {
+  # thanks to https://www.linuxquestions.org/questions/showthread.php?p=6222340
+  patch -i "${PLAN_CONTEXT}"/patches/000-binutils-wide.patch src/mpers.sh
+}
 
 do_check() {
   make check
