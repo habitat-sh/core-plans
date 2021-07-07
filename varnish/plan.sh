@@ -57,7 +57,7 @@ do_prepare() {
   ./autogen.sh
 
   # configure is mangled, for some reason
-  patch < $PLAN_CONTEXT/patches/000-configure.patch
+  patch < "$PLAN_CONTEXT"/patches/000-configure.patch
 }
 
 do_end() {
