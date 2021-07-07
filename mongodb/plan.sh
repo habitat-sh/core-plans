@@ -16,6 +16,9 @@ pkg_deps=(
   core/openssl
 )
 pkg_build_deps=(
+  core/patch
+  core/coreutils
+  core/binutils
   core/gcc
   core/glibc
   core/python2
@@ -37,21 +40,9 @@ do_prepare() {
   export CC
   export CXX
 
-  # create variables for our include and library pathes in a scons friendly format
-  # shellcheck disable=SC2001
-  INCPATH="$(echo "${CFLAGS}" | sed -e "s@-I@@g")"
-  # shellcheck disable=SC2001
-  INCPATH="$(echo "${INCPATH}" | sed -e "s@ @', '@g")"
-  # shellcheck disable=SC2001
-  LIBPATH="$(echo "${LDFLAGS}" | sed -e "s@-L@@g")"
-  # shellcheck disable=SC2001
-  LIBPATH="$(echo "${LIBPATH}" | sed -e "s@ @', '@g")"
-  export LIBPATH
-  export INCPATH
-
-  # because scons dislikes saving our variables, we will save our
-  # variables within the construct ourselves
-  sed -i "891s@**envDict@ENV = os.environ, CPPPATH = ['$INCPATH'], LIBPATH = ['$LIBPATH'], CFLAGS = os.environ['CFLAGS'], CXXFLAGS = os.environ['CXXFLAGS'], LINKFLAGS = os.environ['LDFLAGS'], CC = os.environ['CC'], CXX = os.environ['CXX'], PATH = os.environ['PATH'], **envDict@g" SConstruct
+  # Revert https://github.com/mongodb/mongo/commit/64d7779bdbc5b8e491a0916c92c55d162cbe8745
+  # This allows us to pass in our (already sanitized) PATH/ENV
+  patch SConstruct < "${PLAN_CONTEXT}"/patches/000-propagate-shell-environment.patch
 }
 
 do_build() {
@@ -59,11 +50,11 @@ do_build() {
   # When it supports Python 3.x, this line will be unnecessary
   pip install typing pyyaml cheetah3
 
-  scons core --disable-warnings-as-errors --prefix="${pkg_prefix}" --ssl -j"$(nproc)"
+  scons CC="${CC}" CXX="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" CPPPATH="${CFLAGS}" LINKFLAGS="${LDFLAGS}" LIBPATH="${LDFLAGS}" core --propagate-shell-environment --disable-warnings-as-errors --prefix="${pkg_prefix}" --ssl -j"$(nproc)"
 }
 
 do_install() {
-  scons install --disable-warnings-as-errors --prefix="${pkg_prefix}" --ssl
+  scons CC="${CC}" CXX="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" CPPPATH="${CFLAGS}" LINKFLAGS="${LDFLAGS}" LIBPATH="${LDFLAGS}" install --propagate-shell-environment --disable-warnings-as-errors --prefix="${pkg_prefix}" --ssl
   patchelf --set-rpath "${LD_RUN_PATH}" "${pkg_prefix}/bin/mongod"
   patchelf --set-rpath "${LD_RUN_PATH}" "${pkg_prefix}/bin/mongo"
   patchelf --set-rpath "${LD_RUN_PATH}" "${pkg_prefix}/bin/mongoperf"
