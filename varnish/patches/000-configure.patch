@@ -1,0 +1,45 @@
+diff --git a/varnish/configure b/varnish/configure
+index b654b6d..4e97827 100755
+--- a/varnish/configure
++++ b/varnish/configure
+@@ -13746,8 +13746,7 @@ for as_dir in $PATH
+ do
+   IFS=$as_save_IFS
+   case $as_dir in #(((
+-    ''
+- as_dir=./ ;;
++    '') as_dir=./ ;;
+     */) ;;
+     *) as_dir=$as_dir/ ;;
+   esac
+@@ -14516,7 +14515,7 @@ ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+-)
++
+
+ ac_ext=c
+ ac_cpp='$CPP $CPPFLAGS'
+@@ -15352,9 +15351,7 @@ for as_dir in $PATH
+ do
+   IFS=$as_save_IFS
+   case $as_dir in #(((
+-    ''
+-fi
+- as_dir=./ ;;
++    '') as_dir=./ ;;
+     */) ;;
+     *) as_dir=$as_dir/ ;;
+   esac
+@@ -15383,7 +15380,9 @@ fi
+   test -n "$RST2MAN" && break
+ done
+ test -n "$RST2MAN" || RST2MAN="no"
+-)
++
++fi
++
+ if test "x$RST2MAN" = "xno"; then
+   as_fn_error $? "rst2man is needed to build Varnish, please install python-docutils." "$LINENO" 5
+ fi
