@@ -10,12 +10,16 @@ pkg_source=https://cache.ruby-lang.org/pub/ruby/2.6/ruby-${pkg_version}.tar.gz
 pkg_upstream_url=https://www.ruby-lang.org/en/
 pkg_shasum=364b143def360bac1b74eb56ed60b1a0dca6439b00157ae11ff77d5cd2e92291
 pkg_deps=(core/glibc core/ncurses core/zlib core/openssl core/libyaml core/libffi core/readline core/nss-myhostname)
-pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed)
+pkg_build_deps=(core/cacerts core/coreutils core/diffutils core/patch core/make core/gcc core/sed)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_bin_dirs=(bin)
 pkg_interpreters=(bin/ruby)
 pkg_dirname="ruby-$pkg_version"
+
+do_setup_environment() {
+  export SSL_CERT_FILE="$(pkg_path_for cacerts)/ssl/cert.pem"
+}
 
 do_prepare() {
   export CFLAGS="${CFLAGS} -O3 -g -pipe"
