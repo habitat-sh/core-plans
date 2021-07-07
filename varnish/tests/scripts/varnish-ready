@@ -5,6 +5,6 @@ set -e
 STATUS=$(curl -s -o /dev/null -w '%{http_code}' "${VARNISH_HOST}")
 
 
-if [ $STATUS -eq 200 ]; then
+if [ "$STATUS" -eq 200 ]; then
    echo "Got 200! All done!"
 fi
