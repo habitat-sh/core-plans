@@ -20,7 +20,6 @@ pkg_build_deps=(
   core/glibc
   core/python2
   core/scons/2.5.1
-  core/openssl
   core/patchelf
 )
 pkg_bin_dirs=(bin)
