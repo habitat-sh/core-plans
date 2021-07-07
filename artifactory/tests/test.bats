@@ -7,6 +7,6 @@ load helpers
 }
 
 @test "API is functional" {
-  result="$(curl -s http://0.0.0.0:8081/artifactory/api/repositories | jq -r '.[].key')"
-  [ "${result}" = "example-repo-local" ]
+  result="$(curl -s http://0.0.0.0:8081/artifactory/api/repositories | jq -r '.errors[0].message')"
+  [ "${result}" = "Authentication is required" ]
 }
