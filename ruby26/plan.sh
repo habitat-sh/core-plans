@@ -18,7 +18,8 @@ pkg_interpreters=(bin/ruby)
 pkg_dirname="ruby-$pkg_version"
 
 do_setup_environment() {
-  export SSL_CERT_FILE="$(pkg_path_for cacerts)/ssl/cert.pem"
+  SSL_CERT_FILE="$(pkg_path_for cacerts)/ssl/cert.pem"
+  export SSL_CERT_FILE
 }
 
 do_prepare() {
