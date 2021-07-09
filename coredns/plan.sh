@@ -1,12 +1,12 @@
 pkg_name=coredns
 pkg_origin=core
-pkg_version=1.7.0
+pkg_version=1.8.3
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_description="CoreDNS is a DNS server/forwarder, written in Go, that chains plugins."
 pkg_upstream_url=https://coredns.io/
 pkg_source="https://github.com/coredns/coredns/archive/v${pkg_version}.tar.gz"
-pkg_shasum=7e436e9d0c0b84af863685e05d701b84247bb0f12b6dbf05ea87e165c1398b2b
+pkg_shasum=9fa12d1f0cc7678cd9973b4a1a27718a4d1e12d78f4a46681cea39f569c2a166
 pkg_deps=(
   core/glibc
   core/coreutils
