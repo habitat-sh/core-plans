@@ -1,13 +1,13 @@
 pkg_origin=core
 pkg_name=leiningen
-pkg_version="2.8.1"
+pkg_version="2.9.5"
 pkg_description="Automate Clojure projects without setting your hair on fire."
 pkg_upstream_url="https://leiningen.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("EPL-1.0")
 pkg_filename="${pkg_name}-${pkg_version}-standalone.zip"
 pkg_source="https://github.com/technomancy/${pkg_name}/releases/download/${pkg_version}/${pkg_filename}"
-pkg_shasum="fc49bbc7ff25ef42ad9c0a8b5f3d0641702abc9a9a8e847bc845bca4c09a7c58"
+pkg_shasum=df490c98bfe8d667bc5d83b80238528877234c285d0d48f61a4c8743c2db1eea
 pkg_deps=(
   core/bash
   core/coreutils
@@ -22,7 +22,7 @@ do_download() {
 
 do_verify() {
   do_default_verify
-  verify_file "lein" "9108095b5f377bdfb630a5c65bd963ea288b11ab08e868473cbd7763eaa96472"
+  verify_file "lein" "3601d55c4b5ac5c654e4ebd0d75abf7ad683f48cba8a7af1a8730b6590187b8a"
 }
 
 do_unpack() {
