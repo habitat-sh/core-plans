@@ -1,12 +1,12 @@
 $pkg_name="zeromq"
 $pkg_origin="core"
-$pkg_version="4.3.1"
+$pkg_version="4.3.4"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_description="ZeroMQ core engine in C++, implements ZMTP/3.1"
 $pkg_upstream_url="http://zeromq.org"
 $pkg_license=("LGPL-3.0-only")
 $pkg_source="https://github.com/zeromq/libzmq/archive/v$pkg_version.zip"
-$pkg_shasum="7bd60654ad122cff5c217a83442c1e1748a86b08e53cd96f6242404cb571ede8"
+$pkg_shasum="805e3feab885c027edad3d09c4ac1a7e9bba9a05eac98f36127520e7af875010"
 $pkg_deps=("core/libsodium")
 $pkg_build_deps=("core/visual-cpp-build-tools-2015", "core/cmake")
 $pkg_bin_dirs=("bin")
@@ -31,9 +31,9 @@ function Invoke-Build {
 }
 
 function Invoke-Install {
-    Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\libzmq-$pkg_version\cmake-build\bin\Release\libzmq-v140-mt-4_3_1.dll" "$pkg_prefix\bin\" -Force
-    Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\libzmq-$pkg_version\cmake-build\bin\Release\libzmq-v140-mt-4_3_1.dll" "$pkg_prefix\bin\zmq.dll" -Force
+    Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\libzmq-$pkg_version\cmake-build\bin\Release\libzmq-v140-mt-4_3_4.dll" "$pkg_prefix\bin\" -Force
+    Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\libzmq-$pkg_version\cmake-build\bin\Release\libzmq-v140-mt-4_3_4.dll" "$pkg_prefix\bin\zmq.dll" -Force
     Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\libzmq-$pkg_version\cmake-build\lib\Release\*.lib" "$pkg_prefix\lib\" -Force
-    Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\libzmq-$pkg_version\cmake-build\lib\Release\libzmq-v140-mt-4_3_1.lib" "$pkg_prefix\lib\zmq.lib" -Force
+    Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\libzmq-$pkg_version\cmake-build\lib\Release\libzmq-v140-mt-4_3_4.lib" "$pkg_prefix\lib\zmq.lib" -Force
     Copy-Item "$HAB_CACHE_SRC_PATH\$pkg_name-$pkg_version\libzmq-$pkg_version\include\*" "$pkg_prefix\include\" -Force
 }
