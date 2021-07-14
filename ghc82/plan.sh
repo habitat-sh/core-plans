@@ -28,7 +28,7 @@ do_build() {
   LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:$(pkg_path_for gmp)/lib:$(pkg_path_for ncurses)/lib:$(pkg_path_for libffi)/lib"
   export LD_LIBRARY_PATH
 
-  libffi_include=$(find "$(pkg_path_for libffi)/lib/" -name "libffi-*.*.*")
+  libffi_include=$(find "$(pkg_path_for libffi)/lib/" -name "libffi-*.*")
 
   if [ -z "${libffi_include}" ]; then
     echo "libffi_include not found, exiting"
