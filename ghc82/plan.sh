@@ -12,7 +12,7 @@ pkg_source="http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-
 pkg_shasum="bb8ec3634aa132d09faa270bbd604b82dfa61f04855655af6f9d14a9eedc05fc"
 pkg_dirname="ghc-${pkg_version}"
 
-pkg_include_dirs=(lib/ghc-${pkg_version}/include)
+pkg_include_dirs=(lib/ghc-"${pkg_version}"/include)
 
 pkg_build_deps=(
   core/binutils
