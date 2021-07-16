@@ -6,7 +6,6 @@ pkg_description="A monitoring framework that aims to be simple, malleable, and s
 pkg_upstream_url="https://sensuapp.org"
 pkg_license=('MIT')
 pkg_bin_dirs=(bin)
-pkg_lib_dirs=(lib)
 pkg_svc_user=root
 pkg_svc_group=${pkg_svc_user}
 pkg_build_deps=(
