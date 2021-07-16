@@ -1,6 +1,6 @@
 pkg_name=sensu
 pkg_origin=core
-pkg_version=1.6.2
+pkg_version=1.9.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="A monitoring framework that aims to be simple, malleable, and scalable."
 pkg_upstream_url="https://sensuapp.org"
