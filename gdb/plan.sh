@@ -12,7 +12,6 @@ pkg_deps=(
   core/expat
   core/gcc
   core/glibc
-  core/guile
   core/ncurses
   core/python
   core/readline
@@ -25,7 +24,6 @@ pkg_build_deps=(
   core/diffutils
   core/expect
   core/make
-  core/patch
   core/pkg-config
   core/texinfo
 )
@@ -58,7 +56,6 @@ do_build() {
     --with-system-zlib \
     --with-lzma \
     --with-expat \
-    --with-guile \
     --without-babeltrace \
     --with-system-gdbinit="${pkg_svc_config_path}/gdb/gdbinit" \
     --with-python=python3
