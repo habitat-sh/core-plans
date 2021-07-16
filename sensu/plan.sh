@@ -40,11 +40,14 @@ do_prepare() {
 
   export GEM_HOME=${pkg_prefix}/vendor/bundle
   export GEM_PATH=${_bundler_dir}:${GEM_HOME}
+  build_line "Setting GEM_HOME=${GEM_HOME}"
+  build_line "Setting GEM_PATH=${GEM_PATH}"
 
   # Bundler/gem seems to set the rpath for compiled extensions using LD_RUN_PATH.
   # Dynamic linking fails if this is not set
   LD_RUN_PATH="$(pkg_path_for gcc-libs)/lib:$(pkg_path_for libffi)/lib:$(pkg_path_for openssl)/lib:${LD_RUN_PATH}"
   export LD_RUN_PATH
+  build_line "Setting LD_RUN_PATH=${LD_RUN_PATH}"
 }
 
 do_build() {
