@@ -2,7 +2,7 @@
     # Ensure that `pkg_version` from the plan (embedded in the package
     # identifier) matches the output from `runc --version`.
     version="$(echo ${PKGIDENT} | cut -d/ -f3)"
-    result="$(hab pkg exec "${PKGIDENT}" runc --version | head -n1)"
+    result="$(hab pkg exec "${PKGIDENT}" runc -- --version | head -n1)"
     [ "$result" = "runc version ${version}" ]
 }
 
