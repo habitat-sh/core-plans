@@ -47,6 +47,10 @@ do_prepare() {
   LD_RUN_PATH="$(pkg_path_for gcc-libs)/lib:$(pkg_path_for libffi)/lib:$(pkg_path_for openssl)/lib:${LD_RUN_PATH}"
   export LD_RUN_PATH
   build_line "Setting LD_RUN_PATH=${LD_RUN_PATH}"
+
+  BUNDLE_PATH="${pkg_prefix}/vendor/bundle"
+  export BUNDLE_PATH
+  build_line "Setting BUNDLE_PATH=${BUNDLE_PATH}"
 }
 
 do_build() {
@@ -56,7 +60,7 @@ do_build() {
 do_install() {
   pushd "${pkg_prefix}"
     cp "${PLAN_CONTEXT}"/Gemfile .
-    bundle install --jobs 2 --retry 5 --path ./vendor/bundle
+    bundle install --jobs 2 --retry 5
     bundle binstubs --all
     fix_interpreter "$pkg_prefix/bin/*" core/coreutils bin/env
   popd
