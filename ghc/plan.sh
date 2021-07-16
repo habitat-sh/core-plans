@@ -52,17 +52,10 @@ do_prepare() {
 }
 
 do_build() {
-  libffi_include=$(find "$(pkg_path_for libffi)/lib/" -name "libffi-*.*.*")
-
-  if [ -z "${libffi_include}" ]; then
-    echo "libffi_include not found, exiting"
-    exit 1
-  fi
-
   ./configure \
     --prefix="${pkg_prefix}" \
     --with-system-libffi \
-    --with-ffi-includes="${libffi_include}/include" \
+    --with-ffi-includes="$(pkg_path_for libffi)/include" \
     --with-ffi-libraries="$(pkg_path_for libffi)/lib" \
     --with-curses-includes="$(pkg_path_for ncurses)/include" \
     --with-curses-libraries="$(pkg_path_for ncurses)/lib" \
