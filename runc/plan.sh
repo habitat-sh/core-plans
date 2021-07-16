@@ -20,7 +20,9 @@ pkg_build_deps=(core/pkg-config
 # `pkg_version` has no connection at all to the code that is
 # ultimately built.
 do_download() {
-    mkdir -p "$scaffolding_go_pkg_path"
+    if [ -d "$scaffolding_go_pkg_path" ]; then
+        rm -rf "$scaffolding_go_pkg_path"
+    fi
     git clone \
         --branch "v${pkg_version}" \
         --single-branch \
