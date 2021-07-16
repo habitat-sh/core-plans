@@ -38,7 +38,7 @@ do_prepare() {
   local _bundler_dir
   _bundler_dir=$(pkg_path_for bundler)
 
-  export GEM_HOME=${pkg_path}/vendor/bundle
+  export GEM_HOME=${pkg_prefix}/vendor/bundle
   export GEM_PATH=${_bundler_dir}:${GEM_HOME}
 
   # Bundler/gem seems to set the rpath for compiled extensions using LD_RUN_PATH.
