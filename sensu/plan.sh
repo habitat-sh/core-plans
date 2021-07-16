@@ -56,7 +56,8 @@ do_build() {
 do_install() {
   pushd "${pkg_prefix}"
     cp "${PLAN_CONTEXT}"/Gemfile .
-    bundle install --jobs 2 --retry 5 --path ./vendor/bundle --binstubs
+    bundle install --jobs 2 --retry 5 --path ./vendor/bundle
+    bundle binstubs --all
     fix_interpreter "$pkg_prefix/bin/*" core/coreutils bin/env
   popd
 }
