@@ -31,7 +31,6 @@ pkg_exposes=(port)
 
 do_unpack() {
   mkdir -p "${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
-  cp -f ./Gemfile "${HAB_CACHE_SRC_PATH}/${pkg_dirname}/Gemfile"
 }
 
 do_prepare() {
@@ -51,14 +50,13 @@ do_prepare() {
 }
 
 do_build() {
-  pushd "${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
-  bundle install --jobs 2 --retry 5 --path ./vendor/bundle --binstubs
-  popd
+  return 0
 }
 
 do_install() {
-  pushd "${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
-  cp -R . "$pkg_prefix/"
-  fix_interpreter "$pkg_prefix/bin/*" core/coreutils bin/env
+  pushd "${pkg_prefix}"
+    cp "${PLAN_CONTEXT}"/Gemfile .
+    bundle install --jobs 2 --retry 5 --path ./vendor/bundle --binstubs
+    fix_interpreter "$pkg_prefix/bin/*" core/coreutils bin/env
   popd
 }
