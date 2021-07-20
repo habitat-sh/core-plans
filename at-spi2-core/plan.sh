@@ -14,6 +14,7 @@ pkg_deps=(
   core/libffi
   core/libiconv
   core/pcre
+  core/util-linux
   core/zlib
 )
 pkg_build_deps=(
@@ -39,13 +40,12 @@ do_prepare() {
 }
 
 do_build() {
-  mkdir build
-  meson ..
-  ninja
+  meson _build -Dprefix="$pkg_prefix"
+  ninja -C _build
 }
 
 do_install() {
-  ninja install
+  ninja -C _build install
 }
 
 do_end() {
