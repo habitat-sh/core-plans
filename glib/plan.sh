@@ -35,6 +35,7 @@ pkg_build_deps=(
   core/meson
   core/perl
   core/pkg-config
+  core/patchelf
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
@@ -56,4 +57,10 @@ do_install() {
 
 do_after() {
   fix_interpreter "$pkg_prefix/bin/*" core/coreutils bin/env
+
+  # https://github.com/mesonbuild/meson/issues/6541
+  # Is meson stripping rpath here?
+  find "$pkg_prefix"/bin -type f -executable \
+    -exec sh -c 'file -i "$1" | grep -q "x-executable; charset=binary"' _ {}  \; \
+    -exec patchelf --force-rpath --set-rpath "${LD_RUN_PATH}" {} \;
 }
