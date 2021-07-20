@@ -8,7 +8,9 @@ pkg_license=('Apache-2.0')
 pkg_source="https://github.com/mesonbuild/${pkg_name}/archive/${pkg_version}.tar.gz"
 pkg_shasum=0c043c9b5350e9087cd4f6becf6c0d10b1d618ca3f919e0dcca2cdf342360d5d
 pkg_deps=(
-  core/python
+  # https://github.com/mesonbuild/meson/issues/7999
+  # Doesn't seem to work against 3.9
+  core/python37
   core/ninja
 )
 pkg_bin_dirs=(bin)
@@ -21,7 +23,7 @@ do_setup_environment() {
   #   tell us where we should put OUR site-packages.
 
   # We haven't set up our build time PATH at this point, so we need to figure out where python is
-  python="$(pkg_path_for core/python)/bin/python"
+  python="$(pkg_path_for core/python37)/bin/python"
   python_version="$($python -c 'import sys; print("python{}.{}".format(sys.version_info.major,sys.version_info.minor))')"
 
   push_runtime_env PYTHONPATH "$($python -c 'import site; print(":".join(site.getsitepackages()))')"
