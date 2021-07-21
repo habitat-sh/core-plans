@@ -18,21 +18,26 @@ pkg_deps=(
   core/glibc
 )
 pkg_include_dirs=(include)
-pkg_lib_dirs=(lib)
-pkg_pconfig_dirs=(lib/pkgconfig)
+pkg_lib_dirs=(lib64)
+pkg_pconfig_dirs=(lib64/pkgconfig)
+
+do_clean() {
+  rm -rf "${HAB_CACHE_SRC_PATH}"/json-c-build
+}
 
 do_build() {
-  mkdir build
-  cd build
-  ../cmake-configure --prefix="$pkg_prefix"
-  make
+  mkdir "${HAB_CACHE_SRC_PATH}"/json-c-build
+  cd "${HAB_CACHE_SRC_PATH}"/json-c-build
+  cmake -DCMAKE_INSTALL_PREFIX="${pkg_prefix}" "${HAB_CACHE_SRC_PATH}"/"${pkg_dirname}"
 }
 
 do_install() {
-  cd build
+  cd "${HAB_CACHE_SRC_PATH}"/json-c-build
   make install
 }
 
 do_check() {
-  make check
+  cd "${HAB_CACHE_SRC_PATH}"/json-c-build
+  make
+  make test
 }
