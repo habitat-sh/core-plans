@@ -79,7 +79,7 @@ do_build() {
     -DLLVM_ENABLE_RTTI=ON \
     -DLLVM_ENABLE_FFI=ON \
     -DLLVM_INSTALL_UTILS=ON \
-    -DFFI_INCLUDE_DIR="${_LIBFFI_PATH}/lib/libffi-3.2.1/include" \
+    -DFFI_INCLUDE_DIR="${_LIBFFI_PATH}/include" \
     -DFFI_LIBRARY_DIR="${_LIBFFI_PATH}/lib" \
     -DLLVM_BUILD_TESTS="${DO_CHECK}" \
     -G "Ninja" \
