@@ -38,6 +38,7 @@ pkg_deps=(
   core/xz
   core/zlib
   core/avisynthplus
+  core/libidn2
 )
 
 do_build() {
