@@ -36,6 +36,7 @@ pkg_build_deps=(
   core/ninja
   core/pkg-config
   core/patch
+  core/patchelf
 )
 
 do_prepare() {
@@ -48,6 +49,10 @@ do_prepare() {
   export LC_ALL=en_US.utf8
   # Systemd needs itself in rpath
   export LD_RUN_PATH="${LD_RUN_PATH}:${pkg_prefix}/lib:${pkg_prefix}/lib/systemd"
+  build_line "Setting LD_RUN_PATH=${LD_RUN_PATH}"
+  LD_LIBRARY_PATH="${LD_RUN_PATH}"
+  export LD_LIBRARY_PATH
+  build_line "Setting LD_LIBRARY_PATH=${LD_LIBRARY_PATH}"
 
   # https://github.com/systemd/systemd/commit/442bc2afee6c5f731c7b3e76ccab7301703a45a7
   # Bug with 247
@@ -74,6 +79,22 @@ do_build() {
 
 do_install() {
   ninja -C build install
+}
+
+do_after() {
+  unset LD_LIBRARY_PATH
+
+  # https://github.com/mesonbuild/meson/issues/6541
+  # Is meson stripping rpath here?
+  find "$pkg_prefix"/bin -type f -executable \
+    -exec sh -c 'file -i "$1" | grep -q "x-executable; charset=binary"' _ {} \; \
+    -exec patchelf --force-rpath --set-rpath "${LD_RUN_PATH}" {} \;
+
+  for lib in "${pkg_lib_dirs[@]}"; do
+    find "${pkg_prefix}/${lib}" -type f -executable \
+      -exec sh -c 'file -i "$1" | grep -q "x-pie-executable; charset=binary"' _ {} \; -print \
+      -exec patchelf --force-rpath --set-rpath "${LD_RUN_PATH}" {} \;
+  done
 }
 
 do_end() {
