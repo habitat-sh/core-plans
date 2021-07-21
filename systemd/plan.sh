@@ -65,7 +65,6 @@ do_build() {
     "--prefix=${pkg_prefix}"
     "-Dman=false"
     "-Dhtml=false"
-    "-Dpython=false"
     "-Drootprefix=${pkg_prefix}"
     "-Drootlibdir=${pkg_prefix}/lib"
     "-Ddbuspolicydir=${pkg_prefix}/etc/dbus-1/system.d"
