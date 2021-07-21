@@ -63,4 +63,10 @@ do_after() {
   find "$pkg_prefix"/bin -type f -executable \
     -exec sh -c 'file -i "$1" | grep -q "x-executable; charset=binary"' _ {}  \; \
     -exec patchelf --force-rpath --set-rpath "${LD_RUN_PATH}" {} \;
+
+  for lib in "${pkg_lib_dirs[@]}"; do
+    find "${pkg_prefix}/${lib}" -type f -executable \
+      -exec sh -c 'file -i "$1" | grep -q "x-sharedlib; charset=binary"' _ {} \; \
+      -exec patchelf --force-rpath --set-rpath "${LD_RUN_PATH}" {} \;
+  done
 }
