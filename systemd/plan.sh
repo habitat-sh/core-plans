@@ -41,6 +41,7 @@ pkg_build_deps=(
 do_prepare() {
   if [[ ! -f /usr/bin/env ]]; then
     ln -s "$(pkg_path_for core/coreutils)/bin/env" /usr/bin/env
+    _clean_file=true
   fi
 
   export LANG=en_US.utf8
@@ -73,4 +74,10 @@ do_build() {
 
 do_install() {
   ninja -C build install
+}
+
+do_end() {
+  if [[ -n "${_clean_file}" ]]; then
+    rm -f /usr/bin/env
+  fi
 }
