@@ -35,6 +35,7 @@ pkg_build_deps=(
   core/meson
   core/ninja
   core/pkg-config
+  core/patch
 )
 
 do_prepare() {
@@ -46,6 +47,10 @@ do_prepare() {
   export LC_ALL=en_US.utf8
   # Systemd needs itself in rpath
   export LD_RUN_PATH="${LD_RUN_PATH}:${pkg_prefix}/lib:${pkg_prefix}/lib/systemd"
+
+  # https://github.com/systemd/systemd/commit/442bc2afee6c5f731c7b3e76ccab7301703a45a7
+  # Bug with 247
+  patch -p1 < "${PLAN_CONTEXT}"/patches/0001-meson-set-cxx-variable-before-using-it.patch
 }
 
 do_build() {

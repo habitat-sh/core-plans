@@ -1,0 +1,34 @@
+From a92e45545978c230f8cc5018b6a9e50219247bfe Mon Sep 17 00:00:00 2001
+From: Luca Boccassi <luca.boccassi@microsoft.com>
+Date: Thu, 3 Dec 2020 16:17:43 +0000
+Subject: [PATCH] meson: set cxx variable before using it
+
+In some cases it is not defined. Eg in a yocto build:
+
+src/systemd/meson.build:61:15: ERROR: Unknown variable cxx.
+
+(cherry picked from commit 442bc2afee6c5f731c7b3e76ccab7301703a45a7)
+(cherry picked from commit 4ef70ecefce071f2c2461984b347cdbafcce6f06)
+
+Upstream-Status: Backport
+
+Signed-off-by: Luca Boccassi <luca.boccassi@microsoft.com>
+---
+ src/systemd/meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/systemd/meson.build b/src/systemd/meson.build
+index c9c484b411..3d328e5fd3 100644
+--- a/src/systemd/meson.build
++++ b/src/systemd/meson.build
+@@ -54,7 +54,7 @@ if cc.has_argument('-std=iso9899:2017')
+         opts += [['c', '-std=iso9899:2017']]
+ endif
+ 
+-if add_languages('cpp', required : false)
++if cxx_cmd != ''
+         opts += [['c++'],
+                  ['c++', '-std=c++98'],
+                  ['c++', '-std=c++11']]
+-- 
+2.27.0
