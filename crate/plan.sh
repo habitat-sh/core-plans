@@ -40,7 +40,7 @@ do_verify() {
     # Now do the GPG-based verification
     build_line "Verifying crate-${pkg_version}.tar.gz signature"
     GNUPGHOME=$(mktemp -d -p "$HAB_CACHE_SRC_PATH")
-    gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 90C23FC6585BC0717F8FBFC37FAAE51A06F6EAEB
+    gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 90C23FC6585BC0717F8FBFC37FAAE51A06F6EAEB
     gpg --batch --verify "${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version}.tar.gz.asc \
 	"${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version}.tar.gz
     rm -r "$GNUPGHOME"
