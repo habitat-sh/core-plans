@@ -30,13 +30,17 @@ pkg_bin_dirs=(bin sbin)
 pkg_lib_dirs=(lib/man-db)
 
 do_prepare() {
-  export CFLAGS="${CFLAGS} -O2 -fstack-protector-strong -Wformat -Werror=format-security "
+  CFLAGS="${CFLAGS} -O2 -fstack-protector-strong -Wformat -Werror=format-security "
+  export CFLAGS
   build_line "Setting CFLAGS=$CFLAGS"
-  export CXXFLAGS="${CXXFLAGS} -O2 -fstack-protector-strong -Wformat -Werror=format-security "
+  CXXFLAGS="${CXXFLAGS} -O2 -fstack-protector-strong -Wformat -Werror=format-security "
+  export CXXFLAGS
   build_line "Setting CXXFLAGS=$CXXFLAGS"
-  export CPPFLAGS="${CPPFLAGS} -Wdate-time"
+  CPPFLAGS="${CPPFLAGS} -Wdate-time"
+  export CPPFLAGS
   build_line "Setting CPPFLAGS=$CPPFLAGS"
-  export LDFLAGS="${LDFLAGS} -Wl,-Bsymbolic-functions -Wl,-z,relro"
+  LDFLAGS="${LDFLAGS} -Wl,-Bsymbolic-functions -Wl,-z,relro"
+  export LDFLAGS
   build_line "Setting LDFLAGS=$LDFLAGS"
 
   # /var/cache/man is hard-coded in a few places. We should replace this with
