@@ -48,7 +48,8 @@ do_build() {
           -DCMAKE_PREFIX_PATH="$(pkg_path_for core/ncurses);$(pkg_path_for core/gnutls)" \
           -DCMAKE_BUILD_TYPE=Release \
           -DWITH_READLINE=OFF \
-          -DWITH_SSL=system
+          -DWITH_SSL=system \
+          -DPLUGIN_ROCKSDB=NO
   make
 }
 
