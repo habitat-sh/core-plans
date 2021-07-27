@@ -12,6 +12,7 @@ pkg_deps=(
   core/ncurses
   core/zlib
   core/gnutls
+  core/openssl
 )
 pkg_build_deps=(
   core/gcc
@@ -29,26 +30,30 @@ pkg_exposes=(port)
 pkg_svc_user="hab"
 
 do_prepare() {
-    if [ -f CMakeCache.txt ]; then
-      rm CMakeCache.txt
-    fi
+  if [ -f CMakeCache.txt ]; then
+    rm CMakeCache.txt
+  fi
 
-    sed -i 's/^.*abi_check.*$/#/' CMakeLists.txt
-    sed -i "s@data/test@\${INSTALL_MYSQLTESTDIR}@g" sql/CMakeLists.txt
-    export CXXFLAGS="$CFLAGS"
+  sed -i 's/^.*abi_check.*$/#/' CMakeLists.txt
+  sed -i "s@data/test@\${INSTALL_MYSQLTESTDIR}@g" sql/CMakeLists.txt
+  export CXXFLAGS="$CFLAGS"
+
+  OPENSSL_ROOT_DIR="$(pkg_path_for openssl)"
+  export OPENSSL_ROOT_DIR
 }
 
 do_build() {
-    cmake . -DCMAKE_INSTALL_PREFIX="${pkg_prefix}" \
-            -DCMAKE_PREFIX_PATH="$(pkg_path_for core/ncurses);$(pkg_path_for core/gnutls)" \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DWITH_READLINE=OFF
-    make
+  cmake . -DCMAKE_INSTALL_PREFIX="${pkg_prefix}" \
+          -DCMAKE_PREFIX_PATH="$(pkg_path_for core/ncurses);$(pkg_path_for core/gnutls)" \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DWITH_READLINE=OFF \
+          -DWITH_SSL=system
+  make
 }
 
 do_install() {
-    make install
-    rm -rf "${pkg_prefix}/mysql-test"
-    rm -rf "${pkg_prefix}/bin/mysql_client_test"
-    rm -rf "${pkg_prefix}/bin/mysql_test"
+  make install
+  rm -rf "${pkg_prefix}/mysql-test"
+  rm -rf "${pkg_prefix}/bin/mysql_client_test"
+  rm -rf "${pkg_prefix}/bin/mysql_test"
 }
