@@ -14,13 +14,17 @@ pkg_deps=(
   core/gzip
   core/libiconv
   core/libpipeline
+  core/libtool
 )
 pkg_build_deps=(
+  core/autoconf
+  core/automake
   core/coreutils
   core/diffutils
   core/flex
   core/gcc
   core/gettext
+  core/git
   core/libpipeline
   core/make
   core/m4
@@ -51,6 +55,8 @@ do_prepare() {
   # The file that gets generated here gets written to
   # $pkg_prefix/etc/man_db.conf.
   sed -i -e "s#/var/#$pkg_svc_var_path/#g" "$CACHE_PATH/src/man_db.conf.in"
+
+  ./bootstrap
 }
 
 do_build() {
