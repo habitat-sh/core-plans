@@ -65,7 +65,7 @@ do_prepare() {
 
   npm config set progress=false
 
-  local node_version=$(pcregrep -oM 'node10/\K([^/]+)' <<<"${pkg_deps_resolved[@]}")
+  node_version=$(pcregrep -oM 'node10/\K([^/]+)' <<<"${pkg_deps_resolved[@]}")
   sed -i -e "s,\"node\": \"10.23.1\",\"node\": \"${node_version}\",g" package.json
 
   LD_RUN_PATH="${LD_RUN_PATH}:$(tr -d -- '-L' <<<$LDFLAGS| tr ' ' ':')"
