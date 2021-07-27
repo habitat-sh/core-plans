@@ -36,7 +36,8 @@ do_prepare() {
 
   sed -i 's/^.*abi_check.*$/#/' CMakeLists.txt
   sed -i "s@data/test@\${INSTALL_MYSQLTESTDIR}@g" sql/CMakeLists.txt
-  export CXXFLAGS="$CFLAGS"
+  CXXFLAGS="$CFLAGS"
+  export CXXFLAGS
 
   OPENSSL_ROOT_DIR="$(pkg_path_for openssl)"
   export OPENSSL_ROOT_DIR
