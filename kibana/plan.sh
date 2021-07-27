@@ -90,7 +90,7 @@ do_build () {
   patch -p1 < "${PLAN_CONTEXT}/patches/000-extract-node.patch"
   patchelf --set-interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" \
     --set-rpath "${LD_RUN_PATH}" \
-    .node_binaries/10.24.0/linux-x64/bin/node
+    .node_binaries/*/linux-x64/bin/node
 
   yarn build --no-oss --skip-os-packages --skip-archives --release
 }
