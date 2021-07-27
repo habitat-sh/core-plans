@@ -68,7 +68,7 @@ do_prepare() {
   node_version=$(pcregrep -oM 'node10/\K([^/]+)' <<<"${pkg_deps_resolved[@]}")
   sed -i -e "s,\"node\": \"10.23.1\",\"node\": \"${node_version}\",g" package.json
 
-  LD_RUN_PATH="${LD_RUN_PATH}:$(tr -d -- '-L' <<<$LDFLAGS| tr ' ' ':')"
+  LD_RUN_PATH="${LD_RUN_PATH}:$(tr -d -- '-L' <<<"${LDFLAGS}" | tr ' ' ':')"
   export LD_RUN_PATH
   build_line "Setting LD_RUN_PATH=${LD_RUN_PATH}"
 }
