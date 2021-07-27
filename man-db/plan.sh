@@ -38,6 +38,15 @@ do_prepare() {
   build_line "Setting CPPFLAGS=$CPPFLAGS"
   export LDFLAGS="${LDFLAGS} -Wl,-Bsymbolic-functions -Wl,-z,relro"
   build_line "Setting LDFLAGS=$LDFLAGS"
+
+  # /var/cache/man is hard-coded in a few places. We should replace this with
+  # /hab/svc/man-db/var/cache/man. Since man-db isn't run as a service, this
+  # directory won't actually exist unless created manually, but it will keep us out
+  # of the filesystem and in the /hab directory.
+  #
+  # The file that gets generated here gets written to
+  # $pkg_prefix/etc/man_db.conf.
+  sed -i -e "s#/var/#$pkg_svc_var_path/#g" "$CACHE_PATH/src/man_db.conf.in"
 }
 
 do_build() {
@@ -54,17 +63,6 @@ do_build() {
     --with-systemdtmpfilesdir="${pkg_svc_config_path}/tmpfiles.d"
 
   make
-}
-
-do_prepare() {
-  # /var/cache/man is hard-coded in a few places. We should replace this with
-  # /hab/svc/man-db/var/cache/man. Since man-db isn't run as a service, this
-  # directory won't actually exist unless created manually, but it will keep us out
-  # of the filesystem and in the /hab directory.
-  #
-  # The file that gets generated here gets written to
-  # $pkg_prefix/etc/man_db.conf.
-  sed -i -e "s#/var/#$pkg_svc_var_path/#g" "$CACHE_PATH/src/man_db.conf.in"
 }
 
 do_check() {
