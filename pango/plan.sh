@@ -32,13 +32,16 @@ pkg_deps=(
   core/zlib
 )
 pkg_build_deps=(
+  core/cmake
   core/coreutils
   core/diffutils
   core/file
   core/gcc
-  core/make
+  core/git
+  core/meson
   core/perl
   core/pkg-config
+  core/util-linux
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
@@ -53,9 +56,10 @@ do_prepare() {
 }
 
 do_build() {
-  return 0
+  meson _build -Dprefix="$pkg_prefix"
+  ninja -C _build
 }
 
 do_install() {
-  return 0
+  ninja -C _build install
 }
