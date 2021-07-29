@@ -68,3 +68,7 @@ do_end() {
     rm -fv /usr/bin/file
   fi
 }
+
+do_after_failure() {
+  do_end
+}
