@@ -32,6 +32,10 @@ do_before() {
   export SHIELD_SRC_PATH
 }
 
+do_clean() {
+  rm -rf "${SHIELD_SRC_PATH}"
+}
+
 do_unpack() {
   mkdir -p "${SHIELD_SRC_PATH}"
   tar xf "${pkg_filename}" -C "${SHIELD_SRC_PATH}" --strip-components 1
