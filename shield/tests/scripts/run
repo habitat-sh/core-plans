@@ -53,9 +53,12 @@ shield create-store --raw <<EOF
 }
 EOF
 echo "> Finding UUIDs"
-export SCHEDULE_UUID=$( shield schedule daily-schedule --raw | jq -r '.uuid')
-export RETENTION_UUID=$(shield policy   short-term     --raw | jq -r '.uuid')
-export STORE_UUID=$(    shield store    s3-store       --raw | jq -r '.uuid')
+SCHEDULE_UUID=$(shield schedule daily-schedule --raw | jq -r '.uuid')
+export SCHEDULE_UUID
+RETENTION_UUID=$(shield policy   short-term     --raw | jq -r '.uuid')
+export RETENTION_UUID
+STORE_UUID=$(    shield store    s3-store       --raw | jq -r '.uuid')
+export STORE_UUID
 echo "  - SCHEDULE  = $SCHEDULE_UUID"
 echo "  - RETENTION = $RETENTION_UUID"
 echo "  - STORE     = $STORE_UUID"
@@ -66,12 +69,12 @@ failed=0
 rm -f $TMP/FAILURE $TMP/SUCCESS
 for run in /scripts/tests/*; do
   job=${run##*/}
-  if ! $run $*; then
+  if ! $run "$@"; then
     failed=$(( failed + 1 ))
     echo "- $job failed" >>$TMP/FAILURE
   else
     echo
-    echo "$job succeeded" | tr a-z A-Z
+    echo "$job succeeded" | tr '[:lower:]' '[:upper:]'
     echo "- $job OK" >>$TMP/SUCCESS
     echo
   fi
@@ -81,7 +84,7 @@ echo
 echo
 echo "CLEANING UP AWS AWS_BUCKET '$AWS_BUCKET'"
 echo "> Removing all files in AWS bucket '$AWS_BUCKET/$BUCKET_PREFIX'"
-aws s3 rm --recursive s3://$AWS_BUCKET/$BUCKET_PREFIX
+aws s3 rm --recursive s3://"$AWS_BUCKET"/"$BUCKET_PREFIX"
 
 echo
 echo "DONE"
