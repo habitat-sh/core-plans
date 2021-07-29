@@ -41,6 +41,8 @@ do_prepare() {
   mv "${HAB_CACHE_SRC_PATH}/shield/"* "${SHIELD_SRC_PATH}"
 
   export PATH="$PATH:$GOPATH/bin"
+  GO111MODULE="off"
+  export GO111MODULE
 
   git config --global url."git://github.com/".insteadOf "https://github.com/"
   go get github.com/tools/godep
