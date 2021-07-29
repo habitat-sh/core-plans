@@ -15,14 +15,14 @@ EOF
 
 echo "> Postgres - All Databases"
 echo ">> setting up test data"
-psql postgres <$ROOT/init.sql
+psql postgres <"$ROOT"/init.sql
 psql db1 -c 'SELECT * FROM t_vals ORDER BY ID ASC' >"$TMP"/db1.dat
 psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' >"$TMP"/db2.dat
 echo "   db1.t_vals contains:"
-sed -e 's/^/    /' <$TMP/db1.dat
+sed -e 's/^/    /' <"$TMP"/db1.dat
 echo
 echo "   db2.t_keys contains:"
-sed -e 's/^/    /' <$TMP/db2.dat
+sed -e 's/^/    /' <"$TMP"/db2.dat
 echo
 
 echo ">> configuring SHIELD"
@@ -49,7 +49,9 @@ EOF
 echo
 
 echo ">> running backup job"
-wait_for_task "$(shield run $(shield job postgres-all-daily | jq -r '.uuid') | jq -r '.task_uuid')"
+backup_all_uuid=$(shield job postgres-all-daily | jq -r '.uuid')
+backup_all_task=$(shield run "${uuid}" | jq -r '.task_uuid')
+wait_for_task "${backup_all_task}"
 echo
 
 
@@ -66,7 +68,10 @@ psql db1 -c '\l' | sed -e 's/^/    /';
 echo
 
 echo ">> restoring from backups"
-wait_for_task $(shield restore $(shield archives -t $(shield target postgres-all | jq -r '.uuid') | jq -r '.[0].uuid') | jq -r '.task_uuid')
+target_uuid=$(shield target postgres-all | jq -r '.uuid')
+archives_uuid=$(shield archives -t "${target_uuid}" | jq -r '.[0].uuid')
+backup_all_restore_task=$(shield restore "${archives_uuid}" | jq -r '.task_uuid')
+wait_for_task "${backup_all_restore_task}"
 echo
 
 echo ">> verifying data, post-restore"
@@ -132,7 +137,9 @@ EOF
 echo
 
 echo ">> running backup job"
-wait_for_task "$(shield run $(shield job postgres-single-daily | jq -r '.uuid') | jq -r '.task_uuid')"
+backup_single_uuid=$(shield job postgres-single-daily | jq -r '.uuid')
+backup_single_task_uuid="$(shield run "${backup_single_uuid}" | jq -r '.task_uuid')"
+wait_for_task "${backup_single_task_uuid}"
 echo
 
 echo ">> trashing the data"
@@ -148,7 +155,10 @@ psql db2 -c 'SELECT * FROM t_keys ORDER BY ID ASC' | sed -e 's/^/    /';
 echo
 
 echo ">> restoring from backups"
-wait_for_task $(shield restore $(shield archives -t $(shield target postgres-single | jq -r '.uuid') | jq -r '.[0].uuid') | jq -r '.task_uuid')
+postgres_single_uuid=$(shield target postgres-single | jq -r '.uuid')
+postgres_single_archive_uuid=$(shield archives -t "${postgres_single_uuid}" | jq -r '.[0].uuid')
+postgres_single_restore_task=$(shield restore "${postgres_single_archive_uuid}" | jq -r '.task_uuid')
+wait_for_task "${postgres_single_restore_task}"
 echo
 
 echo ">> verifying data, post-restore"
