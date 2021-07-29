@@ -53,6 +53,9 @@ do_prepare() {
     _clean_file=true
   fi
 
+  ACLOCAL_PATH="$ACLOCAL_PATH:$(pkg_path_for pkg-config)/share/aclocal"
+  export ACLOCAL_PATH
+
   autoupdate
   ./autogen.sh
 
