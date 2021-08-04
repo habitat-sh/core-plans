@@ -8,6 +8,10 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://downloads.haskell.org/~cabal/cabal-install-${pkg_version}/cabal-install-${pkg_version}.tar.gz"
 pkg_shasum="a432a7853afe96c0fd80f434bd80274601331d8c46b628cd19a0d8e96212aaf1"
 
+pkg_filename="Cabal-v${pkg_version}.tar.gz"
+pkg_dirname="cabal-Cabal-v${pkg_version}"
+pkg_source="https://github.com/haskell/cabal/archive/refs/tags/${pkg_filename}"
+pkg_shasum="11394a247dc8d8f236ced27eb7dce7907bd2e2ff98f73b60d6f84011d158bdb2"
 pkg_bin_dirs=(bin)
 
 pkg_deps=(
@@ -20,20 +24,28 @@ pkg_deps=(
 
 pkg_build_deps=(
   core/curl
-  core/ghc86
+  core/ghc
   core/sed
   core/which
+  core/python
+  core/coreutils
+  core/patch
 )
 
-do_clean() {
-  do_default_clean
+do_before() {
+  if [[ ! -r /usr/bin/env ]]; then
+    ln -sv "$(pkg_path_for coreutils)/bin/env" /usr/bin/env
+    _clean_file=true
+  fi
+}
 
-  # Strip any previous cabal config
-  rm -rf /root/.cabal
+do_prepare() {
+  patch -p1 < "${PLAN_CONTEXT}"/patches/000-ghc-8-10-4.patch
 }
 
 do_build() {
-  EXTRA_CONFIGURE_OPTS="--extra-include-dirs=$(pkg_path_for zlib)/include --extra-lib-dirs=$(pkg_path_for zlib)/lib" ./bootstrap.sh --sandbox
+  ./bootstrap/bootstrap.py \
+    --deps ./bootstrap/linux-8.10.4.json
 }
 
 do_check() {
@@ -44,4 +56,10 @@ do_check() {
 
 do_install() {
   cp -f .cabal-sandbox/bin/cabal "$pkg_prefix/bin"
+}
+
+do_end() {
+  if [[ -n "${_clean_file}" ]]; then
+    rm -fv /usr/bin/env
+  fi
 }
