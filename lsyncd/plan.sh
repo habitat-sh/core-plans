@@ -12,10 +12,15 @@ pkg_build_deps=(
   core/gcc
   core/lua
   core/make
+  core/patch
 )
 pkg_bin_dirs=(bin)
 pkg_description="Lsyncd watches a local directory trees event monitor interface (inotify or fsevents)"
 pkg_upstream_url="https://axkibe.github.io/lsyncd/"
+
+do_prepare() {
+  patch -p1 < "${PLAN_CONTEXT}"/patches/000-lua-static.patch
+}
 
 do_build() {
   cmake \
