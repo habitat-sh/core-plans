@@ -38,7 +38,7 @@ do_clean() {
 
 do_unpack() {
   mkdir -p "${SHIELD_SRC_PATH}"
-  tar xf "${pkg_filename}" -C "${SHIELD_SRC_PATH}" --strip-components 1
+  tar xf "${HAB_CACHE_SRC_PATH}"/"${pkg_filename}" -C "${SHIELD_SRC_PATH}" --strip-components 1
 }
 
 do_prepare() {
