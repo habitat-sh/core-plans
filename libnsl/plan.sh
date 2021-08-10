@@ -10,6 +10,7 @@ pkg_shasum=8e88017f01dd428f50386186b0cd82ad06c9b2a47f9c5ea6b3023fc6e08a6b0f
 pkg_deps=(
   core/glibc
   core/krb5
+  core/libtirpc
 )
 pkg_build_deps=(
   core/autoconf
@@ -17,7 +18,6 @@ pkg_build_deps=(
   core/diffutils
   core/gcc
   core/gettext
-  core/libtirpc
   core/libtool
   core/make
   core/patch
