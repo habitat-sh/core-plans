@@ -20,6 +20,7 @@ pkg_deps=(
   core/xlib # not linked to bins/libs
 )
 pkg_build_deps=(
+  core/coreutils
   core/damageproto
   core/fixesproto
   core/gcc
@@ -29,12 +30,19 @@ pkg_build_deps=(
   core/ninja
   core/pkg-config
   core/python
-  core/xextproto
+  core/xextproto 
   core/xproto
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
+
+do_prepare() {
+  if [[ ! -r /usr/bin/env ]]; then
+    ln -sv "$(pkg_path_for coreutils)/bin/env" /usr/bin/env
+    _clean_env=true
+  fi
+}
 
 do_build() {
   mkdir _build
@@ -49,4 +57,11 @@ do_install() {
   pushd _build > /dev/null
     ninja install
   popd > /dev/null
+}
+
+do_end() {
+  # Clean up the `env` link, if we set it up.
+  if [[ -n "$_clean_env" ]]; then
+    rm -fv /usr/bin/env
+  fi
 }
