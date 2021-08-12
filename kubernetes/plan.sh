@@ -1,12 +1,11 @@
 pkg_name=kubernetes
 pkg_origin=core
+pkg_version=1.20.5
 pkg_description="Production-Grade Container Scheduling and Management"
-pkg_upstream_url=https://github.com/kubernetes/kubernetes
 pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_version=1.20.5
-pkg_source=https://github.com/kubernetes/kubernetes/archive/v${pkg_version}.tar.gz
-pkg_shasum=d237e3c986288366f5f27e0142028c65fe6b1663484b5ea2a669427ed3c6d97c
+pkg_source="https://github.com/kubernetes/${pkg_name}"
+pkg_upstream_url=https://kubernetes.io/
 
 pkg_bin_dirs=(bin)
 
@@ -26,19 +25,52 @@ pkg_deps=(
   core/coreutils
 )
 
-do_prepare() {
-  # The `/usr/bin/env` path is used as the interpreter in cache_go_dirs.sh
-  # https://github.com/kubernetes/kubernetes/blob/b5f61ac129019d314e473584c1491b7ca62144c7/hack/make-rules/helpers/cache_go_dirs.sh
+do_before(){
+  GOPATH="${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
+  export GOPATH
+  SRC_PATH="${GOPATH}/src/k8s.io/${pkg_name}"
+  export SRC_PATH
 
-  fix_interpreter "$(find hack -name '*.sh')" core/coreutils bin/env
+  if [[ ! -r /usr/bin/env ]]; then
+    ln -sv "$(pkg_path_for coreutils)/bin/env" /usr/bin/env
+    _clean_env=true
+  fi
+}
+
+do_download() {
+  if [ ! -d "${SRC_PATH}" ]; then
+    git clone "${pkg_source}" "${SRC_PATH}"
+  fi
+
+  pushd "${SRC_PATH}" &>/dev/null || exit 1
+    git checkout "v${pkg_version}"
+  popd > /dev/null || exit 1
+}
+
+do_clean() {
+  pushd "${SRC_PATH}" &>/dev/null || exit 1
+    make clean
+  popd &>/dev/null || exit 1
+}
+
+do_verify() {
+  return 0
+}
+
+do_unpack() {
+  return 0
 }
 
 do_build() {
-  make
-  return $?
+  make all
 }
 
 do_install() {
-  cp _output/bin/* "${pkg_prefix}/bin"
-  return $?
+  cp _output/bin/* "${pkg_prefix}"/bin
+}
+
+do_end() {
+  if [[ -n "$_clean_env" ]]; then
+    rm -fv /usr/bin/env
+  fi
 }
