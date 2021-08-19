@@ -16,5 +16,10 @@ function Invoke-Build {
 }
 
 function Invoke-Check {
-    (& "$HAB_CACHE_SRC_PATH/$pkg_dirname/jdk1.8.0_292/bin/java.exe" -version 2>&1 | Out-String).StartsWith("openjdk version `"1.8.0_292`"")
+    try {
+        (& "$HAB_CACHE_SRC_PATH/$pkg_dirname/jdk1.8.0_292/bin/java.exe" -version  2>&1)
+        $false
+    } catch {
+        ($_ | Out-String).StartsWith("openjdk version `"1.8.0_292`"")
+    }
 }
