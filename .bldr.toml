@@ -249,6 +249,8 @@ plan_path = "docker"
 plan_path = "docker17"
 [docker-compose]
 plan_path = "docker-compose"
+[docker-credential-helper]
+plan_path = "docker-credential-helper"
 [docutils]
 plan_path = "docutils"
 [dosfstools]
