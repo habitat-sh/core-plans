@@ -16,12 +16,13 @@ required_variables=(
 )
 
 plan_path="$1"
+source "${plan_path}"/plan.sh
 
 retval=0
 
 echo "--- :open_book: [$plan_path] Checking for default variables"
 for var in "${required_variables[@]}"; do
-  if ! grep -Eq "^$var" "$plan_path/plan.sh"; then
+  if [ -z "${!var}" ]; then
     echo "    Unable to find '$var' in $*"
     retval=1
   fi
