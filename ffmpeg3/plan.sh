@@ -9,5 +9,9 @@ pkg_dirname="ffmpeg-$pkg_version"
 
 pkg_deps=(
   "${pkg_deps[@]}"
-  core/libidn2
+  core/patch
 )
+
+do_prepare() {
+  patch -p1 < "${PLAN_CONTEXT}"/patches/000-libopenjpeg-2-4.patch
+}
