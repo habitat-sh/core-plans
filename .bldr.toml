@@ -702,6 +702,8 @@ plan_path = "leproxy"
 plan_path = "leptonica"
 [less]
 plan_path = "less"
+[lessmsi]
+plan_path = "lessmsi"
 [leveldb]
 plan_path = "leveldb"
 [lgpo]
