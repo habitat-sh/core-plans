@@ -31,6 +31,11 @@ function Invoke-SetupEnvironment {
 }
 
 function Invoke-Unpack {
+    # This suffers the same issue that the visual-build-tools-2019/plan.ps1 setup does;
+    # I believe that previous versions of this file vs_buildtools.exe --layout would work
+    # but it unfortunately doesn't anymore. As such we're following what
+    # visual-build-tools-2019/plan.ps1 does. Take a look at the Invoke-Unpack function there
+    # for a better explanation.
     7z x "$HAB_CACHE_SRC_PATH/$pkg_filename" -o"$HAB_CACHE_SRC_PATH/$pkg_dirname"
     $opcInstaller = (Get-Content "$HAB_CACHE_SRC_PATH\$pkg_dirname\vs_bootstrapper_d15\vs_setup_bootstrapper.config")[0].Split("=")[-1]
     Invoke-WebRequest $opcInstaller -Outfile "$HAB_CACHE_SRC_PATH/$pkg_dirname/vs_installer.opc"
