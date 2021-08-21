@@ -1,12 +1,12 @@
 $pkg_name="visual-build-tools-2019"
 $pkg_origin="core"
-$pkg_version="16.9"
+$pkg_version="16.10.4"
 $pkg_description="Standalone compiler, libraries and scripts"
 $pkg_upstream_url="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019"
 $pkg_license=@("Microsoft Software License")
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-$pkg_source="https://download.visualstudio.microsoft.com/download/pr/9665567e-f580-4acd-85f2-bc94a1db745f/930a6ef592ea72e47b57565fce5bf93ffdbcc76c8d146bc02db97bd039e8d532/vs_BuildTools.exe"
-$pkg_shasum="930a6ef592ea72e47b57565fce5bf93ffdbcc76c8d146bc02db97bd039e8d532"
+$pkg_source="https://download.visualstudio.microsoft.com/download/pr/acfc792d-506b-4868-9924-aeedc61ae654/1778d923fd40c62c29f85cf4ef63a0c855a61c13b1dd68419bcda2cff38c984f/vs_BuildTools.exe"
+$pkg_shasum="1778d923fd40c62c29f85cf4ef63a0c855a61c13b1dd68419bcda2cff38c984f"
 $pkg_build_deps=@("core/7zip")
 
 $pkg_bin_dirs=@(
