@@ -31,7 +31,8 @@ do_build() {
     --enable-cap \
     --enable-pcre \
     --enable-etcdir="${pkg_prefix}/etc" \
-    --enable-zsh-secure-free
+    --enable-zsh-secure-free \
+    --with-tcsetpgrp
   make
 }
 
