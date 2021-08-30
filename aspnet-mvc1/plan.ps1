@@ -13,7 +13,7 @@ $pkg_build_deps=@("core/lessmsi")
 function Invoke-Unpack {
     lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_filename").Path
     mkdir "$HAB_CACHE_SRC_PATH/$pkg_dirname"
-    Move-Item "AspNetMVC1/SourceDir/PFiles/Microsoft ASP.NET/ASP.NET MVC 1.0" "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+    Copy-Item "AspNetMVC1/SourceDir/PFiles/Microsoft ASP.NET/ASP.NET MVC 1.0" "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Recurse
 
     Remove-Item -Recurse -Force .\AspNetMVC1
 }

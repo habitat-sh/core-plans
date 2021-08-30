@@ -1,12 +1,12 @@
 pkg_name=mercurial
 pkg_origin=core
-pkg_version=3.9.1
+pkg_version=3.9.2
 pkg_description="A free, distributed source control management tool."
 pkg_upstream_url="https://www.mercurial-scm.org/"
 pkg_license=('GPL-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://www.mercurial-scm.org/release/mercurial-${pkg_version}.tar.gz
-pkg_shasum=625e4fc7e85ec2278c2828bdc547fce74091b3bbe4d9eeeba2d61af51195df74
+pkg_shasum=69046a427c05e83097bf0145a1e37975ae0b6ba4430456e2beca3d2fd96583cf
 pkg_deps=(core/glibc core/python2 core/cacerts)
 pkg_build_deps=(core/gcc core/make core/python2 core/coreutils core/diffutils core/which)
 pkg_lib_dirs=(lib)
