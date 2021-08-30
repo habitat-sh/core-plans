@@ -13,13 +13,16 @@ pkg_bin_dirs=(bin)
 
 do_setup_environment() {
   build_line "Setting GOPATH=${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
-  export GOPATH="${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
-  export GO111MODULE=off
-  export REPO_PATH="$HAB_CACHE_SRC_PATH/$pkg_dirname/src/github.com/mongodb/mongo-tools"
+  GOPATH="${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
+  export GOPATH
+  GO111MODULE=off
+  export GO111MODULE
+  REPO_PATH="$HAB_CACHE_SRC_PATH/$pkg_dirname/src/github.com/mongodb/mongo-tools"
+  export REPO_PATH
 }
 
 do_before() {
-  rm -rf "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+  rm -rf "${GOPATH:?}"
 }
 
 do_download() {
@@ -44,14 +47,14 @@ do_clean() {
 
 do_build() {
   pushd "$REPO_PATH" || exit 1
-    mkdir $GOPATH/bin
+    mkdir "${GOPATH}"/bin
     . ./set_goenv.sh
     for i in mongodump mongoexport mongofiles mongoimport mongorestore mongostat mongotop; do
-      go build -o $GOPATH/bin/$i $i/main/$i.go
+      go build -o "${GOPATH}"/bin/$i $i/main/$i.go
     done
   popd || exit 1
 }
 
 do_install() {
-  cp $GOPATH/bin/* ${pkg_prefix}/bin
+  cp "${GOPATH}"/bin/* "${pkg_prefix}"/bin
 }
