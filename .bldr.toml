@@ -24,6 +24,8 @@ plan_path = "artifactory-pro"
 plan_path = "asciinema"
 [aspcud]
 plan_path = "aspcud"
+[aspnet-mvc1]
+plan_path = "aspnet-mvc1"
 [at-spi2-core]
 plan_path = "at-spi2-core"
 [atk]
@@ -702,6 +704,8 @@ plan_path = "leptonica"
 plan_path = "less"
 [leveldb]
 plan_path = "leveldb"
+[lgpo]
+plan_path = "lgpo"
 [libaio]
 plan_path = "libaio"
 [libarchive]
@@ -1320,6 +1324,8 @@ plan_path = "relx"
 plan_path = "renderproto"
 [repo]
 plan_path = "repo"
+[reportviewer2010]
+plan_path = "reportviewer2010"
 [restic]
 plan_path = "restic"
 [rethinkdb]
@@ -1524,6 +1530,8 @@ plan_path = "virtualenv"
 plan_path = "visual-build-tools-2017"
 [visual-build-tools-2019]
 plan_path = "visual-build-tools-2019"
+[visual-cpp-redist-2013]
+plan_path = "visual-cpp-redist-2013"
 [vmtouch]
 plan_path = "vmtouch"
 [wal-e]

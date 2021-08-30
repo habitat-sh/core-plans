@@ -13,7 +13,11 @@ $pkg_deps=@(
 $pkg_bin_dirs=@("Scripts")
 
 function pkg_version {
-    python -m pip search --disable-pip-version-check awscli | ForEach-Object{ if( $_ -match "^awscli \((.+)\)") { $matches[1]; } }
+    # Replaced 'pip search' with an Invoke-WebRequest to the RSS XML for the awscli package
+    # since PyPl XMLRPC has been permanantly disabled (see https://status.python.org/). By taking
+    # the first element in the list, we always ensure we have the latest version
+    $output = (Invoke-WebRequest -UseBasicParsing -Uri 'https://pypi.org/rss/project/awscli/releases.xml').Content
+    return ([xml]$output).rss.channel['item'].title
 }
 
 function Invoke-Before {
