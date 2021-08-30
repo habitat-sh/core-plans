@@ -1,10 +1,10 @@
 pkg_name=ponysay
 pkg_origin=core
-pkg_version="3.0.2"
+pkg_version="3.0.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-3.0')
 pkg_source="https://github.com/erkin/$pkg_name/archive/$pkg_version.tar.gz"
-pkg_shasum=69e98a7966353de2f232cbdaccd8ef7dbc5d0bcede9bf7280a676793e8625b0d
+pkg_shasum=c382d7f299fa63667d1a4469e1ffbf10b6813dcd29e861de6be55e56dc52b28a
 pkg_deps=(
   core/coreutils
   core/python
