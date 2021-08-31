@@ -11,6 +11,7 @@ pkg_build_deps=(
   core/gcc
   core/make
   core/libtool
+  core/patchelf
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
@@ -18,12 +19,19 @@ pkg_lib_dirs=(lib)
 pkg_upstream_url=https://github.com/google/snappy
 pkg_description="A fast compressor/decompressor http://google.github.io/snappy/"
 
+do_prepare() {
+  __gcc_LD_RUN_PATH="$(pkg_path_for gcc)/LD_RUN_PATH"
+  LD_RUN_PATH="${LD_RUN_PATH}:$(cat "${__gcc_LD_RUN_PATH}")"
+  export LD_RUN_PATH
+}
+
 do_build () {
   libtoolize --force
   mkdir build
-  cd build
-  cmake ../
-  make
+  pushd build &>/dev/null || exit 1
+    cmake ../
+    make
+  popd &>/dev/null || exit 1
 }
 
 do_install() {
@@ -31,5 +39,7 @@ do_install() {
 }
 
 do_check () {
-  make check
+  patchelf --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" \
+    --set-rpath "${LD_RUN_PATH}" "${SRC_PATH}/build/snappy_unittest"
+  build/snappy_unittest
 }
