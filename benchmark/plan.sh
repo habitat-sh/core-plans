@@ -43,17 +43,25 @@ do_build() {
   GTEST_DIR="$(pkg_path_for core/googletest)"
 
   pushd "${BUILD_DIR}" || exit 1
+  # https://github.com/google/benchmark/issues/979
+  #  cmake \
+  #    -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+  #    -DBENCHMARK_ENABLE_TESTING="${DO_CHECK}" \
+  #    -DBENCHMARK_ENABLE_GTEST_TESTS="${DO_CHECK}" \
+  #    -DGTEST_LIBRARY="${GTEST_DIR}/lib64/libgtest.a" \
+  #    -DGTEST_MAIN_LIBRARY="${GTEST_DIR}/lib64/libgtest_main.a" \
+  #    -DGTEST_INCLUDE_DIR="${GTEST_DIR}/include" \
+  #    -DCMAKE_BUILD_TYPE="RELEASE" \
+  #    ..
 
-  cmake \
-    -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-    -DBENCHMARK_ENABLE_TESTING="${DO_CHECK}" \
-    -DBENCHMARK_ENABLE_GTEST_TESTS="${DO_CHECK}" \
-    -DGTEST_LIBRARY="${GTEST_DIR}/lib64/libgtest.a" \
-    -DGTEST_MAIN_LIBRARY="${GTEST_DIR}/lib64/libgtest_main.a" \
-    -DGTEST_INCLUDE_DIR="${GTEST_DIR}/include" \
-    -DCMAKE_BUILD_TYPE="RELEASE" \
-    ..
-  make -j"$(nproc --ignore=1)"
+    cmake \
+      -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+      -DBENCHMARK_ENABLE_TESTING="${DO_CHECK}" \
+      -DBENCHMARK_ENABLE_GTEST_TESTS="false" \
+      -DCMAKE_BUILD_TYPE="RELEASE" \
+      ..
+
+    make -j"$(nproc --ignore=1)"
   popd || exit 1
 }
 
