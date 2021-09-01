@@ -1,12 +1,12 @@
 pkg_name=linux
 pkg_origin=core
-pkg_version="4.16.7"
+pkg_version="4.20.17"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="The Linux kernel"
 pkg_upstream_url="https://www.kernel.org/"
 pkg_license=('gplv2')
 pkg_source="https://cdn.kernel.org/pub/linux/kernel/v4.x/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="d87abef6c5666329194a0005fa8331c0cc03b65383f195442dee8f5558af0139"
+pkg_shasum="d011245629b980d4c15febf080b54804aaf215167b514a3577feddb2495f8a3e"
 pkg_deps=(
   core/glibc
 )
@@ -21,6 +21,7 @@ pkg_build_deps=(
   core/make
   core/perl
   core/openssl
+  core/patch
 )
 
 do_begin() {
@@ -33,30 +34,37 @@ do_begin() {
 do_prepare() {
   make mrproper
   cp "${PLAN_CONTEXT}/config/config.x86_64" "${HAB_CACHE_SRC_PATH}/${pkg_dirname}/.config"
-}
 
-do_build() {
+  HOSTLDFLAGS="${LD_FLAGS}"
+  export HOSTLDFLAGS
+
+  HOST_EXTRACFLAGS="-w ${CFLAGS}"
+  export HOST_EXTRACFLAGS
+
   # Some software in tools/scripts requires external libraries to compile.
   #  The resulting binaries are not packaged so their dependencies are listed
   #  as build dependencies. To allow them to build successfully and run
   #  temporarily set LD_LIBRARY_PATH to all of the pkg_build_deps lib directories.
-
   set_ld_library_path
+
+  # http://lkml.iu.edu/hypermail/linux/kernel/2011.0/03431.html
+  patch -p1 < "${PLAN_CONTEXT}"/patches/000-generate-clang-non-section-symbols-in-orc-generation.patch
+  # https://lore.kernel.org/patchwork/patch/1369985/
+  patch -p1 < "${PLAN_CONTEXT}"/patches/001-build-thunk-only-if-config-preemption.patch
 
   # These line numbers can change between kernel versions, but changes will only break
   #  builds that have CONFIG_ options set that require building scripts/ or tools/
 
   # Let the inline test build (CONFIG_STACK_VALIDATION) know where libelf lives
-  sed -i "969s|-xc|$LDFLAGS -xc|" Makefile
+  sed -i "961s|-xc|$LDFLAGS -xc|" Makefile
 
   # Override the defaults for building scripts and tools.
   #  scripts/sign-file and tools/objtool need openssl and elfutils.
-  sed -i "367s|$| $LDFLAGS|" Makefile
-  sed -i "87s|\$(hostc_flags)|\$(hostc_flags) \$(HOSTLDFLAGS)|" scripts/Makefile.host
-  sed -i "50s|\$(LDFLAGS)|\$(LDFLAGS) \$(HOSTLDFLAGS)|" tools/objtool/Makefile
+  sed -i "373s|$| $LDFLAGS|" Makefile
+}
 
-  HOST_EXTRACFLAGS="${CFLAGS}" make -j "$(nproc)" bzImage modules
-
+do_build() {
+  make -w -j "$(nproc)" bzImage modules
   unset LD_LIBRARY_PATH
 }
 
