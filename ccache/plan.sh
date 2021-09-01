@@ -9,7 +9,7 @@ pkg_upstream_url=https://ccache.samba.org/
 pkg_source="https://www.samba.org/ftp/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
 pkg_shasum=a3f2b91a2353b65a863c5901251efe48060ecdebec46b5eaec8ea8e092b9e871
 pkg_deps=(core/glibc core/zlib)
-pkg_build_deps=(core/gcc core/make core/diffutils core/which)
+pkg_build_deps=(core/gcc core/make core/diffutils core/which core/perl)
 pkg_bin_dirs=(bin)
 
 do_check() {
