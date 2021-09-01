@@ -19,7 +19,7 @@ do_build() {
 
 do_install() {
   mkdir "$pkg_prefix/module"
-  cp -rf * "$pkg_prefix"/module
+  cp -rf "${SRC_PATH}"/* "$pkg_prefix"/module
 }
 
 do_check() {
