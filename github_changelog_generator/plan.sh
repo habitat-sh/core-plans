@@ -1,13 +1,13 @@
 pkg_name=github_changelog_generator
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_version=1.14.3
+pkg_version=1.16.1
 pkg_origin=core
 pkg_license=('MIT')
 pkg_description="Changelog generation has never been so easy. Fully automate changelog generation -\
   this gem generate change log file based on tags, issues and merged pull requests from Github \
   issue tracker."
-pkg_upstream_url="https://github.com/skywinder/github-changelog-generator/blob/master/github_changelog_generator.gemspec"
-pkg_deps=(core/ruby core/git core/cacerts core/busybox-static)
+pkg_upstream_url="https://github.com/github-changelog-generator/github-changelog-generator/blob/master/github_changelog_generator.gemspec"
+pkg_deps=(core/ruby core/git core/cacerts core/busybox-static core/gcc)
 pkg_build_deps=()
 pkg_bin_dirs=(bin)
 
