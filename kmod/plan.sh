@@ -1,10 +1,10 @@
 pkg_name=kmod
 pkg_origin=core
-pkg_version="24"
+pkg_version="28"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('LGPL-2.1')
 pkg_source="https://www.kernel.org/pub/linux/utils/kernel/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="610b8d1df172acc39a4fdf1eaa47a57b04873c82f32152e7a62e29b6ff9cb397"
+pkg_shasum="3969fc0f13daa98084256337081c442f8749310089e48aa695c9b4dfe1b3a26c"
 pkg_deps=(core/glibc core/xz core/zlib)
 pkg_build_deps=(core/make core/gcc core/pkg-config core/file core/sed core/diffutils)
 pkg_lib_dirs=(lib)

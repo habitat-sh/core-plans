@@ -1,12 +1,12 @@
 pkg_name="powershell"
 pkg_origin="core"
-pkg_version="7.0.1"
+pkg_version="7.1.3"
 pkg_license=("MIT")
 pkg_upstream_url="https://msdn.microsoft.com/powershell"
 pkg_description="PowerShell is a cross-platform (Windows, Linux, and macOS) automation and configuration tool/framework that works well with your existing tools and is optimized for dealing with structured data (e.g. JSON, CSV, XML, etc.), REST APIs, and object models. It includes a command-line shell, an associated scripting language and a framework for processing cmdlets."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/PowerShell/PowerShell/releases/download/v$pkg_version/PowerShell-$pkg_version-linux-x64.tar.gz"
-pkg_shasum="7843e7b4dbad39fcfb9433e715564fe186baa8bf6f3a4fcdc981dc3160f4bf77"
+pkg_shasum=9f853fb8f7c7719005bd1054fa13ca4d925c519b893f439dd2574e84503e6a85
 pkg_filename="powershell-$pkg_version-linux-x64.tar.gz"
 pkg_bin_dirs=("bin")
 pkg_deps=("core/icu" "core/openssl" "core/glibc" "core/gcc-libs")

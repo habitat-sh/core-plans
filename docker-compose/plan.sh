@@ -1,6 +1,6 @@
 pkg_name=docker-compose
 pkg_origin=core
-pkg_version=1.23.2
+pkg_version=1.28.5
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_description="Define and run multi-container applications with Docker"
@@ -8,7 +8,8 @@ pkg_upstream_url="https://docs.docker.com/compose/install/"
 pkg_build_deps=(
 )
 pkg_deps=(
-  core/python
+  core/python39
+  core/rust
 )
 pkg_bin_dirs=(bin)
 

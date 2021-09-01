@@ -1,12 +1,12 @@
 pkg_name=nats-top
 pkg_origin=core
-pkg_version=0.3.2
+pkg_version=0.4.0
 pkg_description="Top like program monitor for NATS."
 pkg_upstream_url=https://github.com/nats-io/nats-top
 pkg_license=('MIT')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://github.com/nats-io/nats-top/archive/v${pkg_version}.tar.gz
-pkg_shasum=98d0df8ebd3c0e0b4c6edc4f084520f643224d8a5d0519023c67c4d05db458b8
+pkg_shasum=62e544bf83afb51764edc255dfa421d81da43450266ebec37a7a21925c38b5c7
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/go core/coreutils core/gcc core/make)
 pkg_bin_dirs=(bin)

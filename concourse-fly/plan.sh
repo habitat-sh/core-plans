@@ -1,6 +1,6 @@
 pkg_name=concourse-fly
 pkg_origin=core
-pkg_version="4.2.2"
+pkg_version="4.2.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_description="Concourse CLI for interacting with the ATC API"
@@ -19,16 +19,22 @@ pkg_build_deps=(
 )
 pkg_bin_dirs=(bin)
 
-do_download() {
+do_setup_environment() {
   GIT_SSL_CAINFO="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
   export GIT_SSL_CAINFO
-
   REPO_PATH="$HAB_CACHE_SRC_PATH/$pkg_dirname"
+  export GO111MODULE=off
+}
+
+do_before() {
   rm -rf "$REPO_PATH"
+}
+
+do_download() {
   git clone "$pkg_source" "$REPO_PATH"
   pushd "$REPO_PATH" || return 1
-  git checkout "tags/v${pkg_version}"
-  git submodule update --init --recursive
+    git checkout "tags/v${pkg_version}"
+    git submodule update --init --recursive
   popd || return 1
 }
 

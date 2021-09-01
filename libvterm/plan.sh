@@ -1,10 +1,10 @@
 pkg_name=libvterm
 pkg_origin=core
-pkg_version="0+bzr681"
+pkg_version="0+bzr726"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_source="http://www.leonerd.org.uk/code/$pkg_name/$pkg_name-${pkg_version}.tar.gz"
-pkg_shasum="abea46d1b0b831dec2af5d582319635cece63d260f8298d9ccce7c1c2e62a6e8"
+pkg_shasum="6344eca01c02e2270348b79e033c1e0957028dbcd76bc784e8106bea9ec3029d"
 pkg_deps=(core/glibc)
 pkg_build_deps=(
   core/gcc
