@@ -23,7 +23,7 @@ do_install() {
 }
 
 do_check() {
-  version=$(pwsh --command "Import-Module $HAB_CACHE_SRC_PATH/PSScriptAnalyzer.psd1; (Get-Command Invoke-ScriptAnalyzer).Version -join ''")
+  version=$(pwsh --command "Import-Module ${SRC_PATH}/PSScriptAnalyzer.psd1; (Get-Command Invoke-ScriptAnalyzer).Version -join ''")
   if [ "$version" != "$pkg_version" ]; then
     build_line "Check failed to confirm PSScriptAnalyzer version as $pkg_version got $version"
     return 1
