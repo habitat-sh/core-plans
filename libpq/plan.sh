@@ -1,13 +1,13 @@
 pkg_name=libpq
 pkg_origin=core
-pkg_version=9.6.8
+pkg_version=9.6.21
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="LibPQ is the client side library for PostgreSQL, a powerful, open source object-relational database system."
 pkg_upstream_url="https://www.postgresql.org/"
 pkg_license=('PostgreSQL')
 pkg_source="https://ftp.postgresql.org/pub/source/v${pkg_version}/postgresql-${pkg_version}.tar.bz2"
 pkg_dirname="postgresql-${pkg_version}"
-pkg_shasum="eafdb3b912e9ec34bdd28b651d00226a6253ba65036cb9a41cad2d9e82e3eb70"
+pkg_shasum="930feaef28885c97ec40c26ab6221903751eeb625de92b22602706d7d47d1634"
 
 pkg_deps=(
   core/glibc

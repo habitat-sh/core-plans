@@ -1,14 +1,14 @@
 pkg_name=libressl
 pkg_distname=$pkg_name
 pkg_origin=core
-pkg_version=2.4.4
+pkg_version=2.9.2
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Version of the TLS/crypto stack forked from OpenSSL"
 pkg_license=('OpenSSL')
 pkg_upstream_url=http://www.libressl.org/
 pkg_dirname="${pkg_distname}-${pkg_version}"
 pkg_source=http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/${pkg_dirname}.tar.gz
-pkg_shasum=6fcfaf6934733ea1dcb2f6a4d459d9600e2f488793e51c2daf49b70518eebfd1
+pkg_shasum=c4c78167fae325b47aebd8beb54b6041d6f6a56b3743f4bd5d79b15642f9d5d4
 pkg_deps=(core/glibc)
 pkg_build_deps=(
   core/diffutils

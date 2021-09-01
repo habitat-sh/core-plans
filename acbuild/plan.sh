@@ -21,6 +21,8 @@ pkg_bin_dirs=(bin)
 do_prepare() {
   do_default_prepare
 
+  export GO111MODULE=auto
+
   build_line "Modifying 'build' file"
   sed -e "s#\#\!/usr/bin/env#\#\!$(pkg_path_for core/coreutils)/bin/env#" -i build
   sed -e "s#VERSION=\$(cd \"\${DIR}\" && git describe --dirty)#VERSION=${pkg_version}#" -i build

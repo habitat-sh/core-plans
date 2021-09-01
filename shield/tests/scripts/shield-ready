@@ -3,8 +3,8 @@
 set -e
 
 echo "Curling shield endpoint:"
-curl -L -k https://${SHIELD_ENDPOINT}/v1/ping
+curl -L -k https://"${SHIELD_ENDPOINT}"/v1/ping
 echo
 echo "Curling shield-agent endpoint"
-curl http://${AGENT_ENDPOINT}:5444
+curl http://"${AGENT_ENDPOINT}":5444
 echo

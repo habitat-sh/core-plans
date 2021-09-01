@@ -1,0 +1,13 @@
+diff --git a/src/dev/build/build_distributables.js b/src/dev/build/build_distributables.js
+index 3471845..f9a7325 100644
+--- a/src/dev/build/build_distributables.js
++++ b/src/dev/build/build_distributables.js
+@@ -98,7 +98,7 @@ export async function buildDistributables(options) {
+   await run(VerifyEnvTask);
+   await run(CleanTask);
+   await run(downloadFreshNode ? DownloadNodeBuildsTask : VerifyExistingNodeBuildsTask);
+-  await run(ExtractNodeBuildsTask);
++  // await run(ExtractNodeBuildsTask);
+ 
+   /**
+    * run platform-generic build tasks

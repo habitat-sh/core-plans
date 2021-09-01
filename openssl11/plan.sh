@@ -1,8 +1,8 @@
 pkg_name=openssl11
 _distname=openssl
 pkg_origin=core
-_version=1.1.0
-_revision=l
+_version=1.1.1
+_revision=j
 pkg_version="${_version}${_revision}"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
@@ -14,7 +14,7 @@ library.\
 pkg_upstream_url="https://www.openssl.org"
 pkg_license=('OpenSSL')
 pkg_source="https://www.openssl.org/source/old/${_version}/${_distname}-${pkg_version}.tar.gz"
-pkg_shasum="74a2f756c64fd7386a29184dc0344f4831192d61dc2481a93a4c5dd727f41148"
+pkg_shasum="aaf2fcb575cdf6491b98ab4829abf78a3dec8402b8b81efc8f23c00d443981bf"
 pkg_dirname="${_distname}-${pkg_version}"
 pkg_deps=(
   core/glibc
@@ -38,14 +38,6 @@ pkg_pconfig_dirs=(lib/pkgconfig)
 
 _common_prepare() {
   do_default_prepare
-
-  # Set CA dir to `$pkg_prefix/ssl` by default and use the cacerts from the
-  # `cacerts` package. Note that `patch(1)` is making backups because
-  # we need an original for the test suite.
-  sed -e "s,@prefix@,$pkg_prefix,g" \
-      -e "s,@cacerts_prefix@,$(pkg_path_for cacerts),g" \
-      "$PLAN_CONTEXT/ca-dir.patch" \
-      | patch -p1 --backup
 
   # The openssl build process hard codes /bin/rm in many places.
   if [[ ! -f "/bin/rm" ]]; then

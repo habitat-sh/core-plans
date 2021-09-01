@@ -22,6 +22,7 @@ pkg_exposes=(port http_port)
 do_begin() {
   export GOPATH="/hab/cache"
   parent_go_path="${GOPATH}/src/github.com/nats-io"
+  export GO111MODULE=off
 }
 
 do_clean() {

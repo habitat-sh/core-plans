@@ -5,10 +5,10 @@ pkg_description="Varnish Cache"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url="http://varnish-cache.org/"
 pkg_license=('bsd')
-pkg_version="5.1.2"
+pkg_version="5.2.1"
 pkg_source="https://varnish-cache.org/_downloads/${pkg_name}-${pkg_version}.tgz"
 
-pkg_shasum="39d858137e26948a7c85f07363f13f0778da61d234126e03a160a0cb9ba4fce3"
+pkg_shasum="b8452c9d78c16f78c8cfd1c1a1e696523bf64b7721c330150dcc0852459014b3"
 pkg_deps=(
   core/bash
   core/gcc
@@ -28,6 +28,8 @@ pkg_build_deps=(
   core/python2
   core/readline
   core/m4
+  core/patch
+  core/file
 )
 
 pkg_bin_dirs=(
@@ -40,22 +42,33 @@ pkg_exports=(
   [port]=frontend.port
 )
 
-do_begin() {
-  return 0
+do_setup_environment() {
+  export LDFLAGS="$LDFLAGS -Wl,--copy-dt-needed-entries"
+  export CURSES_LIB="-lcurses"
 }
 
 do_prepare() {
-  return 0
+  if [[ ! -r /usr/bin/file ]]; then
+    ln -sv "$(pkg_path_for file)/bin/file" /usr/bin/file
+    _clean_file=true
+  fi
+
+  ACLOCAL_PATH="$ACLOCAL_PATH:$(pkg_path_for pkg-config)/share/aclocal"
+  export ACLOCAL_PATH
+
+  autoupdate
+  ./autogen.sh
+
+  # configure is mangled, for some reason
+  patch < "$PLAN_CONTEXT"/patches/000-configure.patch
 }
 
-do_build() {
-  # TODO: if we don't copy this aclocal will fail. need to figure out how to fix this
-  cp "$(pkg_path_for core/pkg-config)/share/aclocal/pkg.m4" "$(pkg_path_for core/automake)/share/aclocal/"
-  sh autogen.sh
-  sh configure --prefix="$pkg_prefix"
-  make
+do_end() {
+  if [[ -n "${_clean_file}" ]]; then
+    rm -fv /usr/bin/file
+  fi
 }
 
-do_check() {
-  return 0
+do_after_failure() {
+  do_end
 }

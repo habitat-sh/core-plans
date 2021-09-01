@@ -2,7 +2,7 @@ pkg_name=certstrap
 pkg_description="A simple certificate manager written in Go, to bootstrap your own certificate authority and public key infrastructure. Adapted from etcd-ca."
 pkg_upstream_url="https://github.com/square/certstrap"
 pkg_origin=core
-pkg_version="v1.1.1"
+pkg_version="v1.2.0"
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=("Apache-2.0")
 pkg_source="https://github.com/square/certstrap"
@@ -34,6 +34,7 @@ do_download() {
 
 do_build() {
   pushd "${scaffolding_go_pkg_path:?}"
+    go mod vendor
     build_line "building certstrap"
     GOARCH=amd64 GOOS=linux go build -o bin/certstrap github.com/square/certstrap
   popd
