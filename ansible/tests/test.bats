@@ -1,7 +1,7 @@
 TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Version matches" {
-  result="$(hab pkg exec ${TEST_PKG_IDENT} ansible -- --version | head -1 | awk '{print $2}')"
+  result="$(hab pkg exec ${TEST_PKG_IDENT} ansible -- --version | head -1 | tr -d '[]' | awk '{print $3}')"
   [ "$result" = "${TEST_PKG_VERSION}" ]
 }
 
