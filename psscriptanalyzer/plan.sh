@@ -10,7 +10,7 @@ pkg_shasum=151a4e6df2bc5a66192ee5db4af4132e17159860861191646cffd38d06ce71a2
 pkg_deps=("core/powershell")
 
 do_unpack() {
-  unzip -o "${pkg_filename}" -d "${SRC_PATH}"
+  unzip -o "${HAB_CACHE_SRC_PATH}/${pkg_filename}" -d "${SRC_PATH}"
 }
 
 do_build() {
