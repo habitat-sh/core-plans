@@ -1,10 +1,10 @@
 pkg_name=grub
 pkg_origin=core
-pkg_version=2.02
+pkg_version=2.04
 pkg_source=ftp://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="GNU GRUB is a Multiboot boot loader."
-pkg_shasum="810b3798d316394f94096ec2797909dbf23c858e48f7b3830826b8daa06b7b0f"
+pkg_shasum="e5292496995ad42dabe843a0192cf2a2c502e7ffcc7479398232b10a472df77d"
 pkg_upstream_url=https://www.gnu.org/software/grub/
 pkg_license=('GPL-3.0')
 pkg_bin_dirs=(bin sbin)
@@ -25,6 +25,7 @@ pkg_build_deps=(
   core/git
   core/m4
   core/make
+  core/pkg-config
   core/python
   core/qemu
   core/rsync
@@ -40,14 +41,12 @@ do_setup() {
   fi
 }
 
-do_prepare() {
-  patch -Np1 < "${PLAN_CONTEXT}/patches/001-fix-packed-not-aligned-error-on-GCC-8.patch"
-}
-
 do_build() {
   sed -i "s/#! \/usr\/bin\/env bash/#!\/bin\/bash/" ./autogen.sh
 
   ./linguas.sh
+  ACLOCAL_PATH="${ACLOCAL_PATH}:$(pkg_path_for core/pkg-config)/share/aclocal"
+  export ACLOCAL_PATH
   ./autogen.sh
   ./configure \
   --prefix="${pkg_prefix}" \
