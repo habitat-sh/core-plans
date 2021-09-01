@@ -25,14 +25,14 @@ pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_build() {
-  meson build/
-  meson configure build/ -Dprefix="$pkg_prefix"
+  meson build
+  meson configure build -Dprefix="$pkg_prefix"
 }
 
 do_install() {
-  ninja -C build/ install
+  ninja -C build install
 }
 
 do_check() {
-  make check
+  meson test -C build
 }
