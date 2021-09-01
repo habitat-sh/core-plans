@@ -74,29 +74,32 @@ do_build() {
   _CURL_PATH="$(pkg_path_for core/curl)"
 
   pushd "${BUILDDIR}" || exit 1
-  cmake \
-    -DCMAKE_INSTALL_PREFIX="${pkg_prefix}" \
-    -DCMAKE_FIND_ROOT_PATH="${CMAKE_FIND_ROOT_PATH}" \
-    -DENABLE_COMPRESSION="OFF" \
-    -DENABLE_TESTING="${DO_CHECK}" \
-    -DGoogleBenchmark_LIBRARY="${_BENCHMARK_PATH}/lib/libbenchmark.a" \
-    -DGoogleBenchmark_INCLUDE_DIR="${_BENCHMARK_PATH}/include" \
-    -DCURL_LIBRARY="${_CURL_PATH}/lib/libcurl.so" \
-    -DCURL_INCLUDE_DIR="${_CURL_PATH}/include" \
-    -G Ninja \
-    ..
-  ninja
+    cmake \
+      -DCMAKE_INSTALL_PREFIX="${pkg_prefix}" \
+      -DCMAKE_FIND_ROOT_PATH="${CMAKE_FIND_ROOT_PATH}" \
+      -DENABLE_COMPRESSION="OFF" \
+      -DENABLE_TESTING="${DO_CHECK}" \
+      -DGoogleBenchmark_LIBRARY="${_BENCHMARK_PATH}/lib/libbenchmark.a" \
+      -DGoogleBenchmark_INCLUDE_DIR="${_BENCHMARK_PATH}/include" \
+      -DCURL_LIBRARY="${_CURL_PATH}/lib/libcurl.so" \
+      -DCURL_INCLUDE_DIR="${_CURL_PATH}/include" \
+      -G Ninja \
+      ..
+    ninja
   popd || exit 1
 }
 
 do_check() {
   pushd "${BUILDDIR}" || exit 1
-  LD_LIBRARY_PATH="$(pkg_path_for core/glibc)/lib:$(pkg_path_for core/gcc)/lib" ctest -V
+    LD_LIBRARY_PATH="$(pkg_path_for core/glibc)/lib:$(pkg_path_for core/gcc)/lib:$(pkg_path_for core/curl)/lib:${LD_RUN_PATH}"
+    export LD_LIBRARY_PATH
+    ctest -V
+    unset LD_LIBRARY_PATH
   popd || exit 1
 }
 
 do_install() {
   pushd "${BUILDDIR}" || exit 1
-  ninja install
+    ninja install
   popd || exit 1
 }
