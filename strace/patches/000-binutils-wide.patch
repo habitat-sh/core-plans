@@ -1,0 +1,24 @@
+From 6d092c52d00b99780f6eee546af04fc6b944cdd6 Mon Sep 17 00:00:00 2001
+From: Martin Liska <mliska@suse.cz>
+Date: Wed, 3 Feb 2021 11:54:26 +0100
+Subject: [PATCH] readelf --debug-dump=info --wide output changes in 2.36
+
+As seen here https://sourceware.org/bugzilla/show_bug.cgi?id=27309
+the output format is changed. Not using --wide mode fixes the problem.
+---
+ mpers.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/mpers.sh b/mpers.sh
+index b28ef703b8..942da08077 100755
+--- a/mpers.sh
++++ b/mpers.sh
+@@ -46,7 +46,7 @@ for m_type; do
+ 		continue
+ 	sed -i -e '/DEF_MPERS_TYPE/d' "${f_c}"
+ 	$CC $CFLAGS $CC_ARCH_FLAG "${f_c}" -o "${f_o}"
+-	$READELF --wide --debug-dump=info "${f_o}" > "${f_d1}"
++	$READELF --debug-dump=info "${f_o}" > "${f_d1}"
+ 	sed -r -n '
+ 		/^[[:space:]]*<1>/,/^[[:space:]]*<1><[^>]+>: Abbrev Number: 0/!d
+ 		/^[[:space:]]*<[^>]*><[^>]*>: Abbrev Number: 0/d
