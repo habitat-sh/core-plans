@@ -31,6 +31,6 @@ do_build() {
 }
 
 do_check() {
-  fix_interpreter "tests/TESTonce" core/coreutils bin/env
+  fix_interpreter "tests/TESTrun" core/coreutils bin/env
   make check
 }
