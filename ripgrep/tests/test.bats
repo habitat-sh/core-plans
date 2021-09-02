@@ -16,7 +16,7 @@ source "${BATS_TEST_DIRNAME}/../plan.sh"
 }
 
 @test "Usage test with params" {
-  result=$(rg "ripgrep" | rg "raw speed")
+  result=$(rg "ripgrep" /src | rg "raw speed")
   [ $? -eq 0 ]
   lines=$(echo "${result}" | wc -l)
   [ $lines -eq 3 ]
