@@ -1,12 +1,12 @@
 pkg_name=subversion
 pkg_origin=core
-pkg_version=1.13.0
+pkg_version=1.14.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_description="Enterprise-class centralized version control for the masses"
 pkg_upstream_url=https://subversion.apache.org/
 pkg_source="https://archive.apache.org/dist/${pkg_name}/${pkg_name}-${pkg_version}.tar.bz2"
-pkg_shasum=bc50ce2c3faa7b1ae9103c432017df98dfd989c4239f9f8270bb3a314ed9e5bd
+pkg_shasum=2c5da93c255d2e5569fa91d92457fdb65396b0666fad4fd59b22e154d986e1a9
 pkg_deps=(
   core/gcc-libs
   core/serf
