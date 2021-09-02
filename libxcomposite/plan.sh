@@ -1,13 +1,13 @@
 pkg_name=libxcomposite
 pkg_origin=core
-pkg_version=0.4.4
+pkg_version=0.4.5
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="X11 C Bindings for Composite extension"
 pkg_upstream_url="https://www.x.org/"
 pkg_license=('MIT')
 pkg_dirname="libXcomposite-${pkg_version}"
 pkg_source="https://www.x.org/releases/individual/lib/${pkg_dirname}.tar.bz2"
-pkg_shasum="ede250cd207d8bee4a338265c3007d7a68d5aca791b6ac41af18e9a2aeb34178"
+pkg_shasum="b3218a2c15bab8035d16810df5b8251ffc7132ff3aa70651a1fba0bfe9634e8f"
 pkg_deps=(
   core/glibc
   core/libxau
