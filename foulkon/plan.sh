@@ -10,6 +10,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_bin_dirs=(bin)
 pkg_build_deps=(
+  core/patch
   # core/which # let's just ignore those errors. works fine without.
 )
 pkg_deps=(
@@ -50,7 +51,13 @@ do_download() {
 do_build() {
   pushd "$scaffolding_go_pkg_path"
     build_line "make deps generate"
-    make deps generate
+    # glide.sh is gone - install glide using the github repository and don't call 'make deps'
+    wget -O glide.sh https://raw.githubusercontent.com/Masterminds/glide.sh/master/get
+    patch <"$PLAN_CONTEXT/glide.patch"
+    bash <glide.sh
+    glide install
+    make generate
+    #make deps generate
 
     # Note: We don't do 'make bin', because it's only these two we need
     #       (It's not worth installing env, and fixing up paths etc...)

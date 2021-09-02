@@ -1,12 +1,12 @@
 pkg_name=harfbuzz
 pkg_origin=core
-pkg_version=1.3.4
+pkg_version=1.9.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_upstream_url="https://www.freedesktop.org/wiki/Software/HarfBuzz/"
 pkg_description="HarfBuzz is an OpenType text shaping engine"
 pkg_source=http://www.freedesktop.org/software/harfbuzz/release/${pkg_name}-${pkg_version}.tar.bz2
-pkg_shasum="718aa6fcadef1a6548315b8cfe42cc27e926256302c337f42df3a443843f6a2b"
+pkg_shasum="11eca62bf0ac549b8d6be55f4e130946399939cdfe7a562fdaee711190248b00"
 pkg_deps=(
   core/bzip2
   core/cairo

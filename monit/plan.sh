@@ -1,12 +1,12 @@
 pkg_name=monit
 pkg_origin=core
-pkg_version="5.25.2"
+pkg_version="5.27.2"
 pkg_upstream_url="https://mmonit.com/monit"
 pkg_description="Monit. Barking at daemons"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('AGPL-3.0')
 pkg_source="https://mmonit.com/monit/dist/monit-${pkg_version}.tar.gz"
-pkg_shasum="aa0ce6361d1155e43e30a86dcff00b2003d434f221c360981ced830275abc64a"
+pkg_shasum="d8809c78d5dc1ed7a7ba32a5a55c5114855132cc4da4805f8d3aaf8cf46eaa4c"
 pkg_deps=(
   core/bash
   core/glibc

@@ -10,13 +10,14 @@ wait_for_task() {
   local task=$1
   echo "   - task $task"
   while true; do
-    local status=$(shield task $task 2>/dev/null | jq -r '.status // "not-found"')
+    local status
+    status=$(shield task "$task" 2>/dev/null | jq -r '.status // "not-found"')
     case $status in
       (pending|running) sleep 0.1 ;;
       ("done")          echo "   - completed successfully (status=done)."
         break     ;;
       (*)               echo "   - failure / anomaly detected (status=$status)."
-        command shield task $task
+        command shield task "$task"
         rc=1
         break     ;;
     esac
