@@ -1,6 +1,6 @@
 pkg_name=drupal
 pkg_origin=core
-pkg_version="8.3.2"
+pkg_version="8.9.13"
 pkg_license=('gplv2+')
 pkg_deps=(core/mysql-client core/drush core/nginx core/php)
 pkg_binds=(
