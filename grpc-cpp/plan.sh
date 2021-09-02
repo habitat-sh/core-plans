@@ -17,7 +17,6 @@ pkg_deps=(
 )
 pkg_build_deps=(
     core/make
-    core/go
     core/git
     core/gcc
     core/cmake
@@ -89,7 +88,6 @@ do_build() {
     -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
     -DgRPC_ZLIB_PROVIDER="package" \
     -DZLIB_ROOT="${ZLIB_PATH}" \
-    -DgRPC_CARES_PROVIDER="package" \
     -DgRPC_PROTOBUF_PROVIDER="package" \
     -DProtobuf_INCLUDE_DIR="${PROTOBUF_PATH}/include" \
     -DProtobuf_LIBRARY="${PROTOBUF_PATH}/lib/libprotobuf.so" \
@@ -122,8 +120,6 @@ do_check() {
   sed -e "s#/usr/bin/env python.*#${fulltestdir_path}/bin/python2#" -i tools/run_tests/python_utils/antagonist.py
   sed -e "s#/usr/bin/env python.*#${fulltestdir_path}/bin/python2#" -i tools/run_tests/start_port_server.py
   sed -e "s#/usr/bin/env python.*#${fulltestdir_path}/bin/python2#" -i test/core/http/test_server.py
-  sed -e "s#/usr/bin/env python.*#${fulltestdir_path}/bin/python2#" -i test/core/bad_client/gen_build_yaml.py
-  sed -e "s#/usr/bin/env python.*#${fulltestdir_path}/bin/python2#" -i test/core/bad_ssl/gen_build_yaml.py
   sed -e "s#/usr/bin/env python.*#${fulltestdir_path}/bin/python2#" -i test/core/end2end/fuzzers/generate_client_examples_of_bad_closing_streams.py
   sed -e "s#/usr/bin/env python.*#${fulltestdir_path}/bin/python2#" -i test/cpp/naming/resolver_component_tests_runner.py
   sed -e "s#/usr/bin/env python.*#${fulltestdir_path}/bin/python2#" -i test/cpp/naming/utils/tcp_connect.py
@@ -151,7 +147,7 @@ do_check() {
     GTEST_FILTER="-BM_*" python tools/run_tests/run_tests.py \
     --language c++ \
     --compiler cmake \
-    --allow_flakes --auto_set_flakes \
+    --allow_flakes \
     --quiet_success
   else
     build_line "No IPV6 Support"
@@ -205,7 +201,7 @@ do_check() {
     GTEST_FILTER="-BM_*:AddressSortingTest.TestPrefersIpv6Loopback*:AddressSortingTest.TestSorterKnowsIpv6Loopback*:ServerRequestCallTest.*:CancelDuringAresQuery.*:ResolverComponentTest.*" python tools/run_tests/run_tests.py \
       --language c++ \
       --compiler cmake \
-      --allow_flakes --auto_set_flakes \
+      --allow_flakes \
       --quiet_success
   fi
 }
