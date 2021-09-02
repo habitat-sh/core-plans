@@ -19,4 +19,3 @@ if [ "${SKIPBUILD}" -eq 0 ]; then
 fi
 
 bats "${TESTDIR}/test.bats"
-
