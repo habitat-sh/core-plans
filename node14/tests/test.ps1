@@ -9,8 +9,7 @@ Import-Module "$(hab pkg path core/pester)\module\pester.psd1" -Force
 hab pkg install $PackageIdentifier
 
 $__dir=(Get-Item $PSScriptRoot)
-$test_result = Invoke-Pester -PassThru -Script @{
+Invoke-Pester -EnableExit -Script @{
     Path       = "$__dir/test.pester.ps1";
     Parameters = @{PackageIdentifier =$PackageIdentifier}
 }
-Exit $test_result.FailedCount

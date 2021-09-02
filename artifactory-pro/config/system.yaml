@@ -1,0 +1,29 @@
+## JFROG ARTIFACTORY SYSTEM CONFIGURATION FILE
+configVersion: 1
+
+## NOTE: JFROG_HOME is a place holder for the JFrog root directory containing the deployed product, the home directory for all JFrog products.
+## Replace JFROG_HOME with the real path! For example, in RPM install, JFROG_HOME=/opt/jfrog
+
+## NOTE: Sensitive information such as passwords and join key are encrypted on first read.
+## NOTE: The provided commented key and value is the default.
+
+## SHARED CONFIGURATIONS
+## A shared section for keys across all services in this config
+shared:
+  ## Java 11 distribution to use
+  javaHome: "{{pkgPathFor "core/openjdk11"}}"
+
+  ## Extra Java options to pass to the JVM. These values add to or override the defaults.
+  extraJavaOpts: "-Xms{{cfg.jvm.min_heap}} -Xmx{{cfg.jvm.max_heap}}"
+
+  ## Database Configuration
+  database:
+    ## One of mysql, oracle, mssql, postgresql, mariadb
+    ## Default Embedded derby
+
+    type: {{cfg.database.type}}
+    url: "{{cfg.database.url}}"
+    driver: {{cfg.database.driver}}
+
+artifactory:
+  port: {{cfg.port}}
