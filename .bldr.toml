@@ -123,6 +123,8 @@ plan_path = "check"
 plan_path = "chrony"
 [clang]
 plan_path = "clang"
+[clang-tools-extra]
+plan_path = "clang-tools-extra"
 [clang7]
 plan_path = "clang7"
 paths = [
