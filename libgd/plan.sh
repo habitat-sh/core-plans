@@ -91,6 +91,8 @@ pkg_build_deps=(
   core/gcc
   core/make
   core/pkg-config
+  core/bzip2
+  core/jbigkit
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
@@ -107,6 +109,9 @@ do_prepare() {
 }
 
 do_check() {
+  LD_LIBRARY_PATH="${LD_RUN_PATH}:$(pkg_path_for bzip2)/lib:$(pkg_path_for jbigkit)/lib"
+  export LD_LIBRARY_PATH
+  # Failure: https://github.com/libgd/libgd/issues/367
   make check
 }
 
