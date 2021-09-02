@@ -30,7 +30,7 @@ pkg_build_deps=(
   core/ninja
   core/pkg-config
   core/python
-  core/xextproto 
+  core/xextproto
   core/xproto
 )
 pkg_include_dirs=(include)
