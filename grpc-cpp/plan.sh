@@ -120,8 +120,6 @@ do_check() {
   sed -e "s#/usr/bin/env python.*#${fulltestdir_path}/bin/python2#" -i tools/run_tests/python_utils/antagonist.py
   sed -e "s#/usr/bin/env python.*#${fulltestdir_path}/bin/python2#" -i tools/run_tests/start_port_server.py
   sed -e "s#/usr/bin/env python.*#${fulltestdir_path}/bin/python2#" -i test/core/http/test_server.py
-  sed -e "s#/usr/bin/env python.*#${fulltestdir_path}/bin/python2#" -i test/core/bad_client/gen_build_yaml.py
-  sed -e "s#/usr/bin/env python.*#${fulltestdir_path}/bin/python2#" -i test/core/bad_ssl/gen_build_yaml.py
   sed -e "s#/usr/bin/env python.*#${fulltestdir_path}/bin/python2#" -i test/core/end2end/fuzzers/generate_client_examples_of_bad_closing_streams.py
   sed -e "s#/usr/bin/env python.*#${fulltestdir_path}/bin/python2#" -i test/cpp/naming/resolver_component_tests_runner.py
   sed -e "s#/usr/bin/env python.*#${fulltestdir_path}/bin/python2#" -i test/cpp/naming/utils/tcp_connect.py
@@ -149,7 +147,7 @@ do_check() {
     GTEST_FILTER="-BM_*" python tools/run_tests/run_tests.py \
     --language c++ \
     --compiler cmake \
-    --allow_flakes --auto_set_flakes \
+    --allow_flakes \
     --quiet_success
   else
     build_line "No IPV6 Support"
@@ -203,7 +201,7 @@ do_check() {
     GTEST_FILTER="-BM_*:AddressSortingTest.TestPrefersIpv6Loopback*:AddressSortingTest.TestSorterKnowsIpv6Loopback*:ServerRequestCallTest.*:CancelDuringAresQuery.*:ResolverComponentTest.*" python tools/run_tests/run_tests.py \
       --language c++ \
       --compiler cmake \
-      --allow_flakes --auto_set_flakes \
+      --allow_flakes \
       --quiet_success
   fi
 }
