@@ -123,6 +123,8 @@ plan_path = "check"
 plan_path = "chrony"
 [clang]
 plan_path = "clang"
+[clang-tools-extra]
+plan_path = "clang-tools-extra"
 [clang7]
 plan_path = "clang7"
 paths = [
@@ -229,6 +231,8 @@ plan_path = "docker"
 plan_path = "docker17"
 [docker-compose]
 plan_path = "docker-compose"
+[docker-credential-helper]
+plan_path = "docker-credential-helper"
 [docutils]
 plan_path = "docutils"
 [dosfstools]
@@ -664,6 +668,8 @@ plan_path = "leproxy"
 plan_path = "leptonica"
 [less]
 plan_path = "less"
+[lessmsi]
+plan_path = "lessmsi"
 [leveldb]
 plan_path = "leveldb"
 [lgpo]
@@ -992,6 +998,8 @@ plan_path = "npth"
 plan_path = "nspr"
 [nss]
 plan_path = "nss"
+[nuget]
+plan_path = "nuget"
 [numactl]
 plan_path = "numactl"
 [ocaml]
@@ -1430,6 +1438,8 @@ paths = [
 ]
 [windows-10-sdk]
 plan_path = "windows-10-sdk"
+[wix]
+plan_path = "wix"
 [wordpress]
 plan_path = "wordpress"
 [wordpress-proxy]

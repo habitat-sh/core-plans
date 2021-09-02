@@ -1,6 +1,6 @@
 $pkg_name="raml2html"
 $pkg_origin="core"
-$pkg_version="6.3.0"
+$pkg_version="6.7.0"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_license=@('MIT')
 $pkg_deps=@('core/node')

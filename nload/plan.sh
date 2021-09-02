@@ -12,5 +12,7 @@ pkg_deps=(core/glibc core/gcc-libs core/ncurses)
 pkg_bin_dirs=(bin)
 
 do_prepare() {
+  autoupdate
+  export LDFLAGS="$LDFLAGS -Wl,--copy-dt-needed-entries"
   ./run_autotools
 }

@@ -1,8 +1,8 @@
 pkg_name=libgd
 pkg_origin=core
-pkg_version="2.2.4"
+pkg_version="2.3.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_license=($(cat << EOF
+pkg_license=("$(cat << EOF
 In order to resolve any possible confusion regarding the authorship of
 gd, the following copyright statement covers all of the authors who
 have required such a statement. If you are aware of any oversights in
@@ -74,9 +74,9 @@ Although their code does not appear in the current release, the
 authors also wish to thank Hutchison Avenue Software Corporation
 for their prior contributions.
 EOF
-))
+)")
 pkg_source="https://github.com/$pkg_name/$pkg_name/releases/download/gd-$pkg_version/$pkg_name-$pkg_version.tar.xz"
-pkg_shasum="137f13a7eb93ce72e32ccd7cebdab6874f8cf7ddf31d3a455a68e016ecd9e4e6"
+pkg_shasum=478a047084e0d89b83616e4c2cf3c9438175fb0cc55d8c8967f06e0427f7d7fb
 pkg_deps=(
   core/fontconfig
   core/freetype
@@ -91,6 +91,8 @@ pkg_build_deps=(
   core/gcc
   core/make
   core/pkg-config
+  core/bzip2
+  core/jbigkit
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
@@ -107,6 +109,9 @@ do_prepare() {
 }
 
 do_check() {
+  LD_LIBRARY_PATH="${LD_RUN_PATH}:$(pkg_path_for bzip2)/lib:$(pkg_path_for jbigkit)/lib"
+  export LD_LIBRARY_PATH
+  # Failure: https://github.com/libgd/libgd/issues/367
   make check
 }
 
