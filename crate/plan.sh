@@ -1,10 +1,10 @@
 pkg_name=crate
 pkg_origin=core
-pkg_version="1.1.2"
+pkg_version="1.1.6"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://cdn.crate.io/downloads/releases/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="8f22b6531b3d1c8602a880779bbe09e5295ef0959a30aff0986575835aadc937"
+pkg_shasum=8a8b736e9d0ba24bc6d8f085a645298c4c75ced98567359842ed31ec4f2e9f46
 pkg_build_deps=(core/gnupg)
 pkg_deps=(core/corretto8 core/curl core/busybox-static)
 pkg_bin_dirs=(crate/bin)
@@ -26,7 +26,7 @@ do_download() {
     # Provide the checksum so that file does not get downloaded with every build
     download_file "https://cdn.crate.io/downloads/releases/${pkg_name}-${pkg_version}.tar.gz.asc" \
 		  "${pkg_name}-${pkg_version}.tar.gz.asc" \
-		  "4e6007a35b99c0da75356cb6cd7aeafd7d380e1a5f5fa26b79a0dfa0a9898924"
+		  "fbf993a779467c722e548b4282efcfae65fd669c746d2fa228e70813a7f4b4a2"
 }
 
 do_verify() {
@@ -35,12 +35,12 @@ do_verify() {
 
     # Now verify the signature file
     verify_file "${pkg_name}-${pkg_version}.tar.gz.asc" \
-    		"4e6007a35b99c0da75356cb6cd7aeafd7d380e1a5f5fa26b79a0dfa0a9898924"
+    		"fbf993a779467c722e548b4282efcfae65fd669c746d2fa228e70813a7f4b4a2"
 
     # Now do the GPG-based verification
     build_line "Verifying crate-${pkg_version}.tar.gz signature"
     GNUPGHOME=$(mktemp -d -p "$HAB_CACHE_SRC_PATH")
-    gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 90C23FC6585BC0717F8FBFC37FAAE51A06F6EAEB
+    gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 90C23FC6585BC0717F8FBFC37FAAE51A06F6EAEB
     gpg --batch --verify "${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version}.tar.gz.asc \
 	"${HAB_CACHE_SRC_PATH}"/${pkg_name}-${pkg_version}.tar.gz
     rm -r "$GNUPGHOME"
