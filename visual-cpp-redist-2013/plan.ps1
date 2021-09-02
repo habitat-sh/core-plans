@@ -13,7 +13,15 @@ $pkg_bin_dirs=@("bin")
 function Invoke-Unpack {
     dark -x "$HAB_CACHE_SRC_PATH/$pkg_dirname" "$HAB_CACHE_SRC_PATH/$pkg_filename"
     lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_dirname/AttachedContainer\packages\vcRuntimeMinimum_amd64\vc_runtimeMinimum_x64.msi").Path
-    Move-Item "vc_runtimeMinimum_x64/SourceDir/system64" "$HAB_CACHE_SRC_PATH/$pkg_dirname/bin"
+
+    if (!(Test-Path "$HAB_CACHE_SRC_PATH/$pkg_dirname/bin")) {
+        Write-Output "Creating bin directory: $HAB_CACHE_SRC_PATH/$pkg_dirname/bin"
+        New-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/bin" -ItemType Directory | Out-Null
+    }
+    Get-ChildItem "vc_runtimeMinimum_x64/SourceDir/system64" | ForEach-Object {
+        Move-Item -Path $_.FullName -Destination "$HAB_CACHE_SRC_PATH/$pkg_dirname/bin/$($_.Name)"
+    }
+
     Remove-Item vc_runtimeMinimum_x64 -Recurse -Force
 }
 

@@ -1,12 +1,12 @@
 pkg_name=valgrind
 pkg_origin=core
-pkg_version=3.12.0
+pkg_version=3.17.0
 pkg_description="An instrumentation framework for building dynamic analysis tools"
 pkg_upstream_url="http://www.valgrind.org/"
 pkg_license=('GPL-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source="http://www.valgrind.org/downloads/valgrind-${pkg_version}.tar.bz2"
-pkg_shasum=67ca4395b2527247780f36148b084f5743a68ab0c850cb43e4a5b4b012cf76a1
+pkg_source="https://sourceware.org/pub/valgrind/valgrind-${pkg_version}.tar.bz2"
+pkg_shasum=ad3aec668e813e40f238995f60796d9590eee64a16dff88421430630e69285a2
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/gcc core/make core/which core/diffutils core/perl)
 pkg_include_dirs=(include)
