@@ -1,12 +1,12 @@
 pkg_name=ghc
 pkg_origin=core
-pkg_version=8.8.1
+pkg_version=8.10.4
 pkg_license=('BSD-3-Clause')
 pkg_upstream_url="https://www.haskell.org/ghc/"
 pkg_description="The Glasgow Haskell Compiler"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-src.tar.xz"
-pkg_shasum="908a83d9b814da74585de9d39687189e6260ec3848131f9d9236cab8a123721a"
+pkg_shasum="52af871b4e08550257d720c2944ac85727d0b948407cef1bebfe7508c224910e"
 
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
@@ -52,17 +52,10 @@ do_prepare() {
 }
 
 do_build() {
-  libffi_include=$(find "$(pkg_path_for libffi)/lib/" -name "libffi-*.*.*")
-
-  if [ -z "${libffi_include}" ]; then
-    echo "libffi_include not found, exiting"
-    exit 1
-  fi
-
   ./configure \
     --prefix="${pkg_prefix}" \
     --with-system-libffi \
-    --with-ffi-includes="${libffi_include}/include" \
+    --with-ffi-includes="$(pkg_path_for libffi)/include" \
     --with-ffi-libraries="$(pkg_path_for libffi)/lib" \
     --with-curses-includes="$(pkg_path_for ncurses)/include" \
     --with-curses-libraries="$(pkg_path_for ncurses)/lib" \

@@ -1,14 +1,16 @@
 pkg_name=libnsl
 pkg_origin=core
-pkg_version="1.2.0"
+pkg_version="1.3.0"
 pkg_description="This library contains the public client interface for NIS(YP) and NIS+ in a IPv6 ready version"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("LGPL-2.1-or-later")
 pkg_upstream_url="https://github.com/thkukuk/libnsl"
 pkg_source="https://github.com/thkukuk/libnsl/archive/v${pkg_version}.tar.gz"
-pkg_shasum="a5a28ef17c4ca23a005a729257c959620b09f8c7f99d0edbfe2eb6b06bafd3f8"
+pkg_shasum=8e88017f01dd428f50386186b0cd82ad06c9b2a47f9c5ea6b3023fc6e08a6b0f
 pkg_deps=(
   core/glibc
+  core/krb5
+  core/libtirpc
 )
 pkg_build_deps=(
   core/autoconf
@@ -18,6 +20,7 @@ pkg_build_deps=(
   core/gettext
   core/libtool
   core/make
+  core/patch
   core/pkg-config
 )
 pkg_include_dirs=(include)
@@ -29,5 +32,6 @@ do_prepare() {
   export ACLOCAL_PATH
 
   autoreconf --force --install
+  patch < "$PLAN_CONTEXT/autogen.patch"
   ./autogen.sh
 }

@@ -1,13 +1,13 @@
 pkg_name=benchmark
 pkg_origin=core
-pkg_version=1.4.1
+pkg_version=1.5.2
 pkg_description="Google's microbenchmark support library"
 pkg_upstream_url=https://github.com/google/benchmark
 pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/google/benchmark/archive/v${pkg_version}.tar.gz"
 pkg_filename="v${pkg_version}.tar.gz"
-pkg_shasum=f8e525db3c42efc9c7f3bc5176a8fa893a9a9920bbd08cef30fb56a51854d60d
+pkg_shasum=dccbdab796baa1043f04982147e67bb6e118fe610da2c65f88912d73987e700c
 pkg_deps=(
   core/gcc-libs
   core/glibc
@@ -43,17 +43,25 @@ do_build() {
   GTEST_DIR="$(pkg_path_for core/googletest)"
 
   pushd "${BUILD_DIR}" || exit 1
+  # https://github.com/google/benchmark/issues/979
+  #  cmake \
+  #    -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+  #    -DBENCHMARK_ENABLE_TESTING="${DO_CHECK}" \
+  #    -DBENCHMARK_ENABLE_GTEST_TESTS="${DO_CHECK}" \
+  #    -DGTEST_LIBRARY="${GTEST_DIR}/lib64/libgtest.a" \
+  #    -DGTEST_MAIN_LIBRARY="${GTEST_DIR}/lib64/libgtest_main.a" \
+  #    -DGTEST_INCLUDE_DIR="${GTEST_DIR}/include" \
+  #    -DCMAKE_BUILD_TYPE="RELEASE" \
+  #    ..
 
-  cmake \
-    -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-    -DBENCHMARK_ENABLE_TESTING="${DO_CHECK}" \
-    -DBENCHMARK_ENABLE_GTEST_TESTS="${DO_CHECK}" \
-    -DGTEST_LIBRARY="${GTEST_DIR}/lib64/libgtest.a" \
-    -DGTEST_MAIN_LIBRARY="${GTEST_DIR}/lib64/libgtest_main.a" \
-    -DGTEST_INCLUDE_DIR="${GTEST_DIR}/include" \
-    -DCMAKE_BUILD_TYPE="RELEASE" \
-    ..
-  make -j"$(nproc --ignore=1)"
+    cmake \
+      -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+      -DBENCHMARK_ENABLE_TESTING="${DO_CHECK}" \
+      -DBENCHMARK_ENABLE_GTEST_TESTS="false" \
+      -DCMAKE_BUILD_TYPE="RELEASE" \
+      ..
+
+    make -j"$(nproc --ignore=1)"
   popd || exit 1
 }
 

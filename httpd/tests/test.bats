@@ -6,7 +6,7 @@ TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 }
 
 @test "Help command" {
-  run hab pkg exec ${TEST_PKG_IDENT} httpd -h
+  run hab pkg exec ${TEST_PKG_IDENT} -- httpd -h
   # httpd help command exits with status 1, for some reason
   [ $status -eq 1 ]
 }

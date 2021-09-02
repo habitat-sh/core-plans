@@ -6,7 +6,7 @@ param (
 Describe "core/cacerts" {
     Context "installation" {
         It "has a valid cert.pem that contains a valid Mozilla certificate" {
-            Get-Content "C:/hab/pkgs/$PackageIdentifier/ssl/cert.pem" | Out-String | Should -Match "Certificate data from Mozilla"
+            Get-Content "$(hab pkg path $PackageIdentifier)/ssl/cert.pem" | Out-String | Should -Match "Certificate data from Mozilla"
         }
     }
 }

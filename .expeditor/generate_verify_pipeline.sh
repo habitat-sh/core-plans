@@ -10,7 +10,7 @@
 
 set -euo pipefail
 
-default_base_branch='master'
+default_base_branch='main'
 base_branch="${BUILDKITE_PULL_REQUEST_BASE_BRANCH:-$default_base_branch}"
 
 # Ensure base branch is always up to date when generating our pipeline

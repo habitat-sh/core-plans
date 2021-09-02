@@ -1,21 +1,23 @@
 #!/bin/sh
+#/ Usage: test.sh <pkg_ident>
+#/
+#/ Example: test.sh core/opa/0.11.0/20190531065119
+#/
+
+set -euo pipefail
 
 TESTDIR="$(dirname "${0}")"
-PLANDIR="$(dirname "${TESTDIR}")"
-SKIPBUILD=${SKIPBUILD:-0}
 
-hab pkg install core/bats --binlink
-
-source "${PLANDIR}/plan.sh"
-
-if [ "${SKIPBUILD}" -eq 0 ]; then
-  set -e
-  pushd "${PLANDIR}" > /dev/null
-  build
-  source results/last_build.env
-  hab pkg install "results/${pkg_artifact}" --binlink --force
-  popd > /dev/null
-  set +e
+if [[ -z "${1:-}" ]]; then
+  grep '^#/' < "${0}" | cut -c4-
+  exit 1
 fi
 
+TEST_PKG_IDENT="$1"
+
+hab pkg install core/bats --binlink
+hab pkg install "${TEST_PKG_IDENT}"
+hab pkg binlink "${TEST_PKG_IDENT}" rg
+
+export TEST_PKG_IDENT
 bats "${TESTDIR}/test.bats"

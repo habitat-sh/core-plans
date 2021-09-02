@@ -1,12 +1,12 @@
 pkg_name=postfix
 pkg_origin=core
-pkg_version="3.3.2"
+pkg_version="3.5.9"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Postfix is a free and open-source mail transfer agent that routes and delivers electronic mail."
 pkg_upstream_url="http://www.postfix.org/"
 pkg_license=('IPL-1.0')
 pkg_source="http://cdn.postfix.johnriley.me/mirrors/${pkg_name}-release/official/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="3c93f31eee49a58e592c31e62a058701cadde11e8e066ea441da19fddad7b35b"
+pkg_shasum="51ced5a3165a415beba812b6c9ead0496b7172ac6c3beb654d2ccd9a1b00762b"
 pkg_build_deps=(
   core/make
   core/gcc
@@ -34,27 +34,27 @@ pkg_svc_user=root
 do_build() {
   POSTFIX_CCARGS=(
     -DHAS_DB
-      -I$(pkg_path_for db)/include
+      -"I$(pkg_path_for db)/include"
     -DHAS_NIS
-      -I$(pkg_path_for core/libnsl)/include
+      -"I$(pkg_path_for core/libnsl)/include"
     -DUSE_TLS
-      -I$(pkg_path_for core/openssl)/include
+      -"I$(pkg_path_for core/openssl)/include"
     -DUSE_SASL_AUTH -DUSE_CYRUS_SASL
-      -I$(pkg_path_for core/cyrus-sasl)/include/sasl
+      -"I$(pkg_path_for core/cyrus-sasl)/include/sasl"
   )
   build_line "Setting POSTFIX_CCARGS=${POSTFIX_CCARGS[*]}"
 
   POSTFIX_AUXLIBS=(
     -ldb
-      -L$(pkg_path_for core/db)/lib
+      -"L$(pkg_path_for core/db)/lib"
     -lnsl
-      -L$(pkg_path_for core/libnsl)/lib
+      -"L$(pkg_path_for core/libnsl)/lib"
     -lresolv
-      -L$(pkg_path_for core/glibc)/lib
+      -"L$(pkg_path_for core/glibc)/lib"
     -lssl -lcrypto
-      -L$(pkg_path_for core/openssl)/lib
+      -"L$(pkg_path_for core/openssl)/lib"
     -lsasl2
-      -L$(pkg_path_for core/cyrus-sasl)/lib
+      -"L$(pkg_path_for core/cyrus-sasl)/lib"
   )
   build_line "Setting POSTFIX_AUXLIBS=${POSTFIX_AUXLIBS[*]}"
 
