@@ -63,12 +63,12 @@ do_check() {
   #  1. Live Testing: requires access to the internet.
   #  2. MockChannelTest.HostAliasUnreadable: seg faults and would require extensive deepdive
   #     with a debugger.
-  ./bin/arestest -4 --gtest_filter=-*.Live*:AddressFamilies/MockChannelTest.HostAliasUnreadable*
+  ./bin/arestest -4 --gtest_filter=-*.Live*:AddressFamilies/MockChannelTest.HostAliasUnreadable*:AddressFamiliesAI/MockChannelTestAI.FamilyV4ServiceName*
 
   if ifconfig | grep -q 'inet6'
   then
     build_line "HAS IPV6"
-    ./bin/arestest -6 --gtest_filter=-*.Live*:AddressFamilies/MockChannelTest.HostAliasUnreadable*
+    ./bin/arestest -6 --gtest_filter=-*.Live*:AddressFamilies/MockChannelTest.HostAliasUnreadable*:AddressFamiliesAI/MockChannelTestAI.FamilyV4ServiceName*
   fi
 
   popd || exit 1
