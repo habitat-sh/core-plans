@@ -11,13 +11,12 @@ source "${PLANDIR}/plan.sh"
 if [ "${SKIPBUILD}" -eq 0 ]; then
   set -e
   pushd "${PLANDIR}" > /dev/null
-  build
-  source results/last_build.env
-  hab pkg install "results/${pkg_artifact}" --binlink --force
+    build
+    source results/last_build.env
+    hab pkg install "results/${pkg_artifact}" --binlink --force
   popd > /dev/null
   set +e
 fi
 
-pushd "${PLANDIR}" > /dev/null
 bats "${TESTDIR}/test.bats"
-popd > /dev/null
+
