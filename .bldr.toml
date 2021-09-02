@@ -874,6 +874,8 @@ plan_path = "man-db"
 plan_path = "man-pages"
 [mariadb]
 plan_path = "mariadb"
+[maven]
+plan_path = "maven"
 [mawk]
 plan_path = "mawk"
 [mc]
