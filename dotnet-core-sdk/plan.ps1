@@ -12,7 +12,7 @@ $pkg_shasum="ca60e96b0f68e84424d4c76b3864abe9a4e675ee9fddca09fdf2989a5fadc0b4"
 $pkg_bin_dirs=@("bin")
 
 function Invoke-SetupEnvironment {
-    Set-RuntimeEnv -IsPath "MSBuildSDKsPath" "$pkg_prefix\bin\sdk\3.1.100\Sdks"
+    Set-RuntimeEnv -IsPath "MSBuildSDKsPath" "$pkg_prefix\bin\sdk\$pkg_version\Sdks"
 }
 
 function Invoke-Install {
