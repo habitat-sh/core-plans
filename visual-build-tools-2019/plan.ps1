@@ -10,24 +10,24 @@ $pkg_shasum="1778d923fd40c62c29f85cf4ef63a0c855a61c13b1dd68419bcda2cff38c984f"
 $pkg_build_deps=@("core/7zip")
 
 $pkg_bin_dirs=@(
-    "Contents\VC\Tools\MSVC\14.28.29910\bin\HostX64\x64",
-    "Contents\VC\Redist\MSVC\14.28.29910\x64\Microsoft.VC142.CRT",
+    "Contents\VC\Tools\MSVC\14.29.30133\bin\HostX64\x64",
+    "Contents\VC\Redist\MSVC\14.29.30133\x64\Microsoft.VC142.CRT",
     "Contents\MSBuild\Current\Bin\amd64"
 )
 $pkg_lib_dirs=@(
-    "Contents\VC\Tools\MSVC\14.28.29910\atlmfc\lib\x64",
-    "Contents\VC\Tools\MSVC\14.28.29910\lib\x64"
+    "Contents\VC\Tools\MSVC\14.29.30133\atlmfc\lib\x64",
+    "Contents\VC\Tools\MSVC\14.29.30133\lib\x64"
 )
 $pkg_include_dirs=@(
-    "Contents\VC\Tools\MSVC\14.28.29910\atlmfc\include",
-    "Contents\VC\Tools\MSVC\14.28.29910\include"
+    "Contents\VC\Tools\MSVC\14.29.30133\atlmfc\include",
+    "Contents\VC\Tools\MSVC\14.29.30133\include"
 )
 
 function Invoke-SetupEnvironment {
     Set-RuntimeEnv "DisableRegistryUse" "true"
     Set-RuntimeEnv "UseEnv" "true"
-    Set-RuntimeEnv "VCToolsVersion" "14.28.29910"
-    Set-RuntimeEnv -IsPath "VCToolsInstallDir_160" "$pkg_prefix\Contents\VC\Redist\MSVC\14.28.29910"
+    Set-RuntimeEnv "VCToolsVersion" "14.29.30133"
+    Set-RuntimeEnv -IsPath "VCToolsInstallDir_160" "$pkg_prefix\Contents\VC\Redist\MSVC\14.29.30133"
 }
 
 function Invoke-Unpack {
