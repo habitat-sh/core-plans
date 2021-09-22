@@ -1,12 +1,12 @@
 pkg_name=libwebp
-pkg_version=0.5.1
+pkg_version=0.6.1
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('WebM') # Custom BSD3-like license, see: https://www.webmproject.org/license/software/
 pkg_description="WebP codec: library to encode and decode images in WebP format."
 pkg_upstream_url=https://developers.google.com/speed/webp
 pkg_source=https://storage.googleapis.com/downloads.webmproject.org/releases/webp/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=6ad66c6fcd60a023de20b6856b03da8c7d347269d76b1fd9c3287e8b5e8813df
+pkg_shasum=06503c782d9f151baa325591c3579c68ed700ffc62d4f5a32feead0ff017d8ab
 pkg_deps=(
   core/giflib
   core/glibc

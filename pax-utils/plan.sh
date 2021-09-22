@@ -1,5 +1,5 @@
 pkg_name=pax-utils
-pkg_version=1.2.6
+pkg_version=1.3.2
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL')
@@ -7,7 +7,7 @@ pkg_description="ELF related utils for ELF 32/64 binaries that can check files
   for security relevant properties"
 pkg_upstream_url='http://hardened.gentoo.org/pax-utils.xml'
 pkg_source="http://distfiles.gentoo.org/distfiles/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="9742d2a31d53a4e0f6df0d3721ab6f7cf8b0404c95fee3b00e678c1ff6db7f21"
+pkg_shasum="02eba0c305ad349ad6ff1f30edae793061ce95680fd5bdee0e14caf731dee1e7"
 pkg_deps=(
   core/bash
   core/glibc

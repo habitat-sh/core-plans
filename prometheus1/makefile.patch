@@ -1,0 +1,12 @@
+diff --git a/prometheus1/Makefile b/prometheus1/Makefile
+index 41317fcb..73e04989 100644
+--- a/prometheus1/Makefile
++++ b/prometheus1/Makefile
+@@ -86,6 +86,7 @@ promu:
+ 	@echo ">> fetching promu"
+ 	@GOOS=$(shell uname -s | tr A-Z a-z) \
+ 	GOARCH=$(subst x86_64,amd64,$(patsubst i%86,386,$(shell uname -m))) \
++	GO111MODULE=on \
+ 	$(GO) get -u github.com/prometheus/promu
+ 
+ $(FIRST_GOPATH)/bin/staticcheck:

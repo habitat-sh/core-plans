@@ -1,13 +1,13 @@
 pkg_name=llvm
 pkg_origin=core
-pkg_version=7.0.1
+pkg_version=7.1.0
 pkg_license=('NCSA')
 pkg_description="Next-gen compiler infrastructure"
 pkg_upstream_url="http://llvm.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_filename="${pkg_name}-${pkg_version}.src.tar.xz"
 pkg_source="http://llvm.org/releases/${pkg_version}/${pkg_name}-${pkg_version}.src.tar.xz"
-pkg_shasum="a38dfc4db47102ec79dcc2aa61e93722c5f6f06f0a961073bd84b78fb949419b"
+pkg_shasum=1bcc9b285074ded87b88faaedddb88e6b5d6c331dfcfb57d7f3393dd622b3764
 pkg_deps=(
   core/coreutils
   core/gcc-libs
@@ -79,7 +79,7 @@ do_build() {
     -DLLVM_ENABLE_RTTI=ON \
     -DLLVM_ENABLE_FFI=ON \
     -DLLVM_INSTALL_UTILS=ON \
-    -DFFI_INCLUDE_DIR="${_LIBFFI_PATH}/lib/libffi-3.2.1/include" \
+    -DFFI_INCLUDE_DIR="${_LIBFFI_PATH}/include" \
     -DFFI_LIBRARY_DIR="${_LIBFFI_PATH}/lib" \
     -DLLVM_BUILD_TESTS="${DO_CHECK}" \
     -G "Ninja" \
