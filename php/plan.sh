@@ -56,6 +56,7 @@ do_build() {
     --with-zip \
     --with-zlib \
     --with-bz2="$(pkg_path_for bzip2)" \
+    --with-gettext="$(pkg_path_for glibc)" \
     --enable-bcmath \
     --enable-exif \
     --enable-mbstring \
