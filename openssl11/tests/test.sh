@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #/ Usage: test.sh <pkg_ident>
 #/
 #/ Example: test.sh origin/package/1.2.3/20181108151533
