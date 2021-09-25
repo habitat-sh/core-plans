@@ -41,6 +41,7 @@ _common_prepare() {
   # Set CA dir to `$pkg_prefix/ssl` by default and use the cacerts from the
   # `cacerts` package. Note that `patch(1)` is making backups because
   # we need an original for the test suite.
+  # DO NOT REMOVE
   sed -e "s,@cacerts_prefix@,$(pkg_path_for cacerts),g" \
       "$PLAN_CONTEXT/ca-dir.patch" \
       | patch -p1 --backup
