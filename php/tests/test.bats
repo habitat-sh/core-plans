@@ -9,3 +9,8 @@ TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
   run hab pkg exec ${TEST_PKG_IDENT} php "${BATS_TEST_DIRNAME}/libzip_support.php"
   [ $status -eq 0 ]
 }
+
+@test "gettext support" {
+  run hab pkg exec ${TEST_PKG_IDENT} php "${BATS_TEST_DIRNAME}/gettext_support.php"
+  [ $status -eq 0 ]
+}
