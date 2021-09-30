@@ -19,7 +19,7 @@ function Invoke-SetupEnvironment {
 
 function Invoke-Build {
     Set-Location "$pkg_name-OpenSSL_$_pkg_version_text"
-    perl Configure VC-WIN64A --prefix=$pkg_prefix
+    perl Configure VC-WIN64A --prefix=$pkg_prefix --openssldir=$pkg_prefix\SSL
     nmake
     if($LASTEXITCODE -ne 0) { Write-Error "nmake failed!" }
 }
