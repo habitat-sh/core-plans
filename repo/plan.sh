@@ -25,7 +25,7 @@ pkg_bin_dirs=(bin)
 
 
 do_download() {
-  GIT_SSL_CAINFO="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+  GIT_SSL_CAINFO="$(pkg_path_for core/cacerts)/ssl/cert.pem"
   export GIT_SSL_CAINFO
 
   git clone "$pkg_source"
