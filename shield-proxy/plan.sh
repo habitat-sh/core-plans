@@ -6,7 +6,7 @@ pkg_license=('Apache-2.0')
 pkg_version=0.10.9
 pkg_svc_user=root
 pkg_svc_group="${pkg_svc_user}"
-pkg_upstream_url=""
+pkg_upstream_url="https://github.com/habitat-sh/core-plans/tree/main/shield-proxy"
 pkg_deps=(
   core/nginx
   core/openssl
