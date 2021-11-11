@@ -1,10 +1,10 @@
 pkg_name=libgcrypt
 pkg_origin=core
-pkg_version=1.9.2
+pkg_version=1.9.4
 pkg_license=('LGPL-2.0-or-later')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="ftp://ftp.gnupg.org/gcrypt/${pkg_name}/${pkg_name}-${pkg_version}.tar.bz2"
-pkg_shasum=b2c10d091513b271e47177274607b1ffba3d95b188bbfa8797f948aec9053c5a
+pkg_shasum=ea849c83a72454e3ed4267697e8ca03390aee972ab421e7df69dfe42b65caaf7
 pkg_deps=(
   core/glibc
   core/libgpg-error
