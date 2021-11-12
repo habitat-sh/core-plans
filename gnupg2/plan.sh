@@ -1,13 +1,13 @@
 pkg_distname=gnupg
 pkg_name=gnupg2
 pkg_origin=core
-pkg_version=2.2.27
+pkg_version=2.2.32
 pkg_license=('GPL-3.0-or-later')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="GnuPG is a complete and free implementation of the OpenPGP standard as defined by RFC4880 (also known as PGP)"
 pkg_upstream_url="https://gnupg.org/"
 pkg_source=https://gnupg.org/ftp/gcrypt/${pkg_distname}/${pkg_distname}-${pkg_version}.tar.bz2
-pkg_shasum=34e60009014ea16402069136e0a5f63d9b65f90096244975db5cea74b3d02399
+pkg_shasum=b2571b35f82c63e7d278aa6a1add0d73453dc14d3f0854be490c844fca7e0614
 pkg_deps=(core/glibc core/zlib core/bzip2 core/readline core/libgpg-error core/libgcrypt core/libassuan core/libksba core/npth)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed core/findutils)
 pkg_bin_dirs=(bin)
