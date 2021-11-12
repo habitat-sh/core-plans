@@ -2,7 +2,7 @@ pkg_name=openssl11
 _distname=openssl
 pkg_origin=core
 _version=1.1.1
-_revision=j
+_revision=k
 pkg_version="${_version}${_revision}"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
@@ -14,7 +14,7 @@ library.\
 pkg_upstream_url="https://www.openssl.org"
 pkg_license=('OpenSSL')
 pkg_source="https://www.openssl.org/source/old/${_version}/${_distname}-${pkg_version}.tar.gz"
-pkg_shasum="aaf2fcb575cdf6491b98ab4829abf78a3dec8402b8b81efc8f23c00d443981bf"
+pkg_shasum="892a0875b9872acd04a9fde79b1f943075d5ea162415de3047c327df33fbaee5"
 pkg_dirname="${_distname}-${pkg_version}"
 pkg_deps=(
   core/glibc
