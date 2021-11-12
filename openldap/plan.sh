@@ -1,13 +1,13 @@
 pkg_origin=core
 pkg_name=openldap
-pkg_version=2.4.58
+pkg_version=2.6.0
 pkg_description="Community developed LDAP software"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("OLDAP-2.8")
 pkg_upstream_url=http://www.openldap.org/
 pkg_source=https://www.openldap.org/software/download/OpenLDAP/${pkg_name}-release/${pkg_name}-${pkg_version}.tgz
-pkg_shasum=57b59254be15d0bf6a9ab3d514c1c05777b02123291533134a87c94468f8f47b
-pkg_deps=(core/glibc core/libtool core/db core/openssl core/cyrus-sasl)
+pkg_shasum=b71c580eac573e9aba15d95f33dd4dd08f2ed4f0d7fc09e08ad4be7ed1e41a4f
+pkg_deps=(core/glibc core/libtool core/db core/openssl11 core/cyrus-sasl)
 pkg_build_deps=(core/gcc core/make core/groff)
 pkg_bin_dirs=(bin sbin libexec)
 pkg_include_dirs=(include)
