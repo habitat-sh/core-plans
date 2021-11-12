@@ -1,13 +1,13 @@
 pkg_name=tomcat7
 pkg_description="An open source implementation of the Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies."
 pkg_origin=core
-pkg_version=7.0.108
+pkg_version=7.0.109
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_description="The Apache Tomcat software is an open source implementation of the Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies."
 pkg_upstream_url="http://tomcat.apache.org/"
 pkg_source=http://archive.apache.org/dist/tomcat/tomcat-7/v${pkg_version}/bin/apache-tomcat-${pkg_version}.tar.gz
-pkg_shasum=6dbf37fe4362cf1bc68959ad83ffea8daddd49c89ea273238765778eb229aa6a
+pkg_shasum=ebfeb051e6da24bce583a4105439bfdafefdc7c5bdd642db2ab07e056211cb31
 pkg_deps=(core/coreutils)
 pkg_exports=(
   [port]=server.port
