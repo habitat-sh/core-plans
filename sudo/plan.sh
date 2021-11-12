@@ -1,12 +1,12 @@
 pkg_name=sudo
 pkg_origin=core
-pkg_version=1.8.31
+pkg_version=1.9.8p2
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Execute a command as another user"
 pkg_upstream_url=https://www.sudo.ws/
 pkg_license=('ISC')
 pkg_source="https://www.sudo.ws/dist/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=7ea8d97a3cee4c844e0887ea7a1bd80eb54cc98fd77966776cb1a80653ad454f
+pkg_shasum=9e3b8b8da7def43b6e60c257abe80467205670fd0f7c081de1423c414b680f2d
 pkg_build_deps=(
   core/diffutils
   core/file

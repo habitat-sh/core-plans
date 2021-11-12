@@ -1,8 +1,8 @@
 pkg_name=socat
 pkg_origin=core
-pkg_version=1.7.4.1
+pkg_version=1.7.4.2
 pkg_source=http://www.dest-unreach.org/${pkg_name}/download/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=0c7e635070af1b9037fd96869fc45eacf9845cb54547681de9d885044538736d
+pkg_shasum=a38f507dea8aaa8f260f54ebc1de1a71e5adca416219f603cda3e3002960173c
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Multipurpose relay for bidirectional data transfer between two independent data channels"
 pkg_upstream_url=http://www.dest-unreach.org/socat/
