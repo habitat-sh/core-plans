@@ -1,12 +1,12 @@
 pkg_name=nats-streaming-server
 pkg_origin=core
-pkg_version=0.21.1
+pkg_version=0.23.1
 pkg_description="NATS Streaming is an extremely performant, lightweight reliable streaming platform built on NATS."
 pkg_upstream_url=https://github.com/nats-io/nats-streaming-server
 pkg_license=('MIT')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://github.com/nats-io/nats-streaming-server/archive/v${pkg_version}.tar.gz
-pkg_shasum=69dc0d80d4e494f63b8110cfbd779c3c58f4e4af2c27eb87b8cc8599e43859c9
+pkg_shasum=bf25c099239f1d43a316d63d79f552dbd86f1b23bcb8e647d11d07d231be5dfd
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/go core/coreutils core/gcc core/make)
 pkg_bin_dirs=(bin)
