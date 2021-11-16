@@ -1,12 +1,12 @@
 pkg_name=libzip
 pkg_origin=core
-pkg_version=1.7.3
+pkg_version=1.8.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="A C library for reading, creating, and modifying zip archives"
 pkg_upstream_url="https://libzip.org/"
 pkg_license=('BSD-3-Clause')
 pkg_source="${pkg_upstream_url}/download/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=0e2276c550c5a310d4ebf3a2c3dfc43fb3b4602a072ff625842ad4f3238cb9cc
+pkg_shasum=30ee55868c0a698d3c600492f2bea4eb62c53849bcf696d21af5eb65f3f3839e
 pkg_deps=(
   core/bzip2-musl
   core/openssl
