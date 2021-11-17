@@ -29,7 +29,6 @@ do_build() {
   patch -p0 -i "${PLAN_CONTEXT}/stdio.patch"
   export ACLOCAL_PATH=$(pkg_path_for libtool)/share/aclocal
   ./autogen.sh
-  ./configure
   do_default_build
 }
 
