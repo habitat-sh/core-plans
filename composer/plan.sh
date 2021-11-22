@@ -1,6 +1,6 @@
 pkg_name=composer
 pkg_origin=core
-pkg_version=2.1.9
+pkg_version=2.1.12
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_upstream_url=https://getcomposer.org/
