@@ -1,6 +1,6 @@
 pkg_name=libidn
 pkg_origin=core
-pkg_version=1.36
+pkg_version=1.38
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 GNU Libidn is a fully documented implementation of the Stringprep, Punycode \
@@ -9,7 +9,7 @@ and IDNA 2003 specifications.\
 pkg_upstream_url="https://www.gnu.org/software/libidn/"
 pkg_license=('LGPL-2.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="14b67108344d81ba844631640df77c9071d9fb0659b080326ff5424e86b14038"
+pkg_shasum="de00b840f757cd3bb14dd9a20d5936473235ddcba06d4bc2da804654b8bbf0f6"
 pkg_deps=(
   core/glibc
 )
