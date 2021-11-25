@@ -1,6 +1,6 @@
 pkg_name=meson
 pkg_origin=core
-pkg_version=0.57.1
+pkg_version=0.60.1
 pkg_description="The Meson Build System"
 pkg_upstream_url="http://mesonbuild.com/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
