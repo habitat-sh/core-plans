@@ -1,12 +1,13 @@
 pkg_name=libunwind
 pkg_origin=core
-pkg_version=1.4.0
+pkg_version=1.6.0
 pkg_description="A C programming interface to determine the call-chain of a program."
+# additional package info at https://github.com/libunwind/libunwind
 pkg_upstream_url="http://www.nongnu.org/libunwind/"
 pkg_license=('MIT')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source="http://download.savannah.gnu.org/releases/libunwind/libunwind-${pkg_version}.tar.gz"
-pkg_shasum=df59c931bd4d7ebfd83ee481c943edf015138089b8e50abed8d9c57ba9338435
+pkg_source=https://github.com/libunwind/libunwind/archive/refs/tags/v${pkg_version}.tar.gz
+pkg_shasum=205f41997c4e17d8e25966601c924e4ad93e6a3576bf59b6baa3eadababa6a5f
 pkg_deps=(
   core/glibc
   core/gcc-libs
@@ -17,19 +18,21 @@ pkg_build_deps=(
   core/diffutils
   core/file
   core/coreutils
+	core/autoconf
+	core/automake
+	core/libtool
 )
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_prepare() {
-  _file_path="$(pkg_path_for file)/bin/file"
-  sed -e "s#/usr/bin/file#${_file_path}#g" -i configure
+	ACLOCAL_PATH="${ACLOCAL_PATH}:$(pkg_path_for core/libtool)/share/aclocal"
+	export ACLOCAL_PATH
+}
 
-  # /bin/ls is required for some of the tests
-  if [[ ! -r /bin/ls ]]; then
-    ln -sv "$(pkg_path_for coreutils)/bin/ls" /bin/ls
-    _clean_ls=true
-  fi
+do_build() {
+	autoreconf -i
+	do_default_build
 }
 
 do_check() {
