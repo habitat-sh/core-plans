@@ -1,10 +1,11 @@
 pkg_name=libcerf
 pkg_origin=core
-pkg_version="1.13"
+pkg_version="1.17"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
-pkg_source="https://jugit.fz-juelich.de/mlz/$pkg_name/uploads/924b8d245ad3461107ec630734dfc781/$pkg_name-$pkg_version.tgz"
-pkg_shasum="011303e59ac63b280d3d8b10c66b07eb02140fcb75954d13ec26bf830e0ea2f9"
+pkg_source="https://jugit.fz-juelich.de/mlz/$pkg_name/-/archive/v$pkg_version/$pkg_name-v$pkg_version.tar.gz"
+pkg_shasum="b1916b292cb37f2d0d0b699fbcf0fe260cca97ec7266ea20ff0c5cd8ef2eaab4"
+pkg_dirname=${pkg_name}-v${pkg_version}
 pkg_deps=(
   core/bzip2
   core/expat
