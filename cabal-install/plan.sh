@@ -1,6 +1,6 @@
 pkg_name=cabal-install
 pkg_origin=core
-pkg_version=3.0.0.0
+pkg_version=3.6.2.0
 pkg_license=('BSD-3-Clause')
 pkg_upstream_url="https://www.haskell.org/cabal/"
 pkg_description="Command-line interface for Cabal and Hackage"

@@ -1,6 +1,6 @@
 pkg_origin=core
 pkg_name=docutils
-pkg_version='0.16'
+pkg_version=0.18.1
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=(
   'GPL-3.0'
@@ -9,7 +9,7 @@ pkg_license=(
   'Docutils Public Domain Dedication'
 )
 pkg_source=https://downloads.sourceforge.net/project/${pkg_name}/${pkg_name}/${pkg_version}/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=7d4e999cca74a52611773a42912088078363a30912e8822f7a3d38043b767573
+pkg_shasum=679987caf361a7539d76e584cbeddc311e3aee937877c87346f31debc63e9d06
 pkg_description="Docutils is an open-source text processing system for processing plaintext documentation into useful formats, e.g.: HTML, LaTeX, man-pages, open-document, or XML."
 pkg_upstream_url="http://docutils.sourceforge.net"
 pkg_deps=(

@@ -1,6 +1,6 @@
 pkg_name=docker-compose
 pkg_origin=core
-pkg_version=1.28.5
+pkg_version=1.29.2
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_description="Define and run multi-container applications with Docker"
