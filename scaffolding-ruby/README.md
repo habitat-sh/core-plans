@@ -10,6 +10,8 @@ Ruby Scaffolding is a Habitat package which helps you build your Ruby-based **we
 
 If you receive this error when running a build with this scaffolding:
 
+# Small note before visiting this, a correction has been added, but this may be required in some extreme cases. 
+# Please attempt running the scaffolding without this, and only use this as a last resort. 
 ```bash
 The latest bundler is 1.15.4, but you are currently running 1.15.1.
 To update, run `gem install bundler`

@@ -450,8 +450,9 @@ _setup_vars() {
     jdbc-postgresql jruby-pg rjack-jdbc-postgres
     tgbyte-activerecord-jdbcpostgresql-adapter)
   # The version of Bundler in use
-  _bundler_version="$("$(pkg_path_for bundler)/bin/bundle" --version \
-    | awk '/^Bundler version/ {print $NF}')"
+  # The previous awk had an issue where the version could be different than the directory it was installed in.
+  # This will take the version from the file path, and use that to build the "bundler version".
+  _bundler_version="$(echo $_bundler_version | cut -d'/' -f6"
   # The install prefix path for the app
   app_prefix="app"
   #

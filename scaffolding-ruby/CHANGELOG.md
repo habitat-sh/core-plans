@@ -2,6 +2,13 @@
 
 [Full history](https://github.com/habitat-sh/core-plans/commits/master/scaffolding-ruby)
 
+# 0.8.12 (12-06-2021)
+
+- Revisited the fix proposed in 0.8.10. Parsing bundler this way led to issues where the path would be in a different location
+  than the version. This could mean that your bundler path would be something like /hab/pkgs/core/2.2.14, with the --version
+  output showing 2.2.22. This would lead the script to attempt running "/hab/pkgs/core/2.2.14/longnumber/bin/bundle-2.2.22.gem",
+  which did not exist on the machine this was found on. This new method should allow for consistency throughout. 
+
 # 0.8.11 (05-29-2019)
 
 - Replace dependency on `core/postgresql` with `core/postgresql-client`. [\#2595](https://github.com/habitat-sh/core-plans/issues/2595)
