@@ -1,6 +1,6 @@
 pkg_name=mono5
 pkg_origin=core
-pkg_version="5.10.1.47"
+pkg_version="5.20.1.34"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Microsoft-Patent-Promise-for-Mono')
 pkg_description="Mono 5.x open source ECMA CLI, C# and .NET implementation."
@@ -8,7 +8,7 @@ pkg_upstream_url="https://www.mono-project.com"
 pkg_dirname="mono-${pkg_version}"
 pkg_filename="${pkg_dirname}.tar.bz2"
 pkg_source="https://download.mono-project.com/sources/mono/${pkg_filename}"
-pkg_shasum="90c237b5288f95f6fdab4ace1e36ab64a6369e2c9fddd462d604fd788e2545da"
+pkg_shasum="cd91d44cf62515796ba90dfdc274bb33471c25a2f1a262689a3bdc0a672b7c8b"
 pkg_deps=(
   core/gcc-libs
   core/glibc
@@ -36,4 +36,11 @@ pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_prepare() {
   export with_gnu_ld="yes"
+}
+
+do_build() {
+  ./configure \
+    --prefix="$pkg_prefix" \
+    --enable-minimal=aot
+    make
 }
