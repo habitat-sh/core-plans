@@ -1,13 +1,13 @@
 pkg_name=benchmark
 pkg_origin=core
-pkg_version=1.5.2
+pkg_version=1.6.0
 pkg_description="Google's microbenchmark support library"
 pkg_upstream_url=https://github.com/google/benchmark
 pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/google/benchmark/archive/v${pkg_version}.tar.gz"
 pkg_filename="v${pkg_version}.tar.gz"
-pkg_shasum=dccbdab796baa1043f04982147e67bb6e118fe610da2c65f88912d73987e700c
+pkg_shasum=1f71c72ce08d2c1310011ea6436b31e39ccab8c2db94186d26657d41747c85d6
 pkg_deps=(
   core/gcc-libs
   core/glibc
