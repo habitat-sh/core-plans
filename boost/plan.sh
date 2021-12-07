@@ -2,12 +2,12 @@ pkg_name=boost
 pkg_origin=core
 pkg_description='Boost provides free peer-reviewed portable C++ source libraries.'
 pkg_upstream_url='http://www.boost.org/'
-pkg_version=1.75.0
+pkg_version=1.77.0
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=('Boost Software License')
-pkg_source=http://downloads.sourceforge.net/project/boost/boost/${pkg_version}/boost_1_75_0.tar.gz
-pkg_shasum=aeb26f80e80945e82ee93e5939baebdca47b9dee80a07d3144be1e1a6a66dd6a
-pkg_dirname=boost_1_75_0
+pkg_source=http://downloads.sourceforge.net/project/boost/boost/${pkg_version}/boost_1_77_0.tar.gz
+pkg_shasum=5347464af5b14ac54bb945dc68f1dd7c56f0dad7262816b956138fc53bcc0131
+pkg_dirname=boost_1_77_0
 
 pkg_deps=(
   core/glibc
