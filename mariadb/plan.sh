@@ -1,12 +1,12 @@
 pkg_name=mariadb
 pkg_origin=core
-pkg_version=10.6.3
+pkg_version=10.6.5
 pkg_description="An open source monitoring software for networks and applications"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url="https://mariadb.org/"
 pkg_license=('GPL-2.0')
 pkg_source="http://ftp.hosteurope.de/mirror/archive.mariadb.org//${pkg_name}-${pkg_version}/source/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="5bc125606af5ec1fda80f594c1ddfacef8b305c158ecf8b1ca7a3f01cd0b18db"
+pkg_shasum=e0be040428d9a42a8bb4bd221b567ff2522cd6fa8906386273da4f03c5c20a8f
 pkg_deps=(
   core/gcc-libs
   core/ncurses
