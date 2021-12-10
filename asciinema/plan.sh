@@ -1,5 +1,5 @@
 pkg_name=asciinema
-pkg_version=2.0.2
+pkg_version=2.1.0
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("GPL-3.0-or-later")
