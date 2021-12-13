@@ -1,12 +1,12 @@
 pkg_name=msodbcsql17
 pkg_origin=core
-pkg_version=17.7.2.1-1
+pkg_version=17.8.1.1-1
 pkg_license=("Microsoft Software License")
 pkg_upstream_url="https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-2017"
 pkg_description="ODBC driver for SQL server"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://packages.microsoft.com/ubuntu/18.04/prod/pool/main/m/${pkg_name}/${pkg_name}_${pkg_version}_amd64.deb"
-pkg_shasum="dfcb958f3625dca439bee14c2f5f91aba53bf137ab1f53c3945fd0952bf8dfd0"
+pkg_shasum="73bfd1fb1b70dac76e68e59f5635d9383e3bce223ccbd73b43246cdef4a5b626"
 
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
