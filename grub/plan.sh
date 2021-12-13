@@ -1,10 +1,10 @@
 pkg_name=grub
 pkg_origin=core
-pkg_version=2.04
+pkg_version=2.06
 pkg_source=ftp://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.xz
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="GNU GRUB is a Multiboot boot loader."
-pkg_shasum="e5292496995ad42dabe843a0192cf2a2c502e7ffcc7479398232b10a472df77d"
+pkg_shasum="b79ea44af91b93d17cd3fe80bdae6ed43770678a9a5ae192ccea803ebb657ee1"
 pkg_upstream_url=https://www.gnu.org/software/grub/
 pkg_license=('GPL-3.0')
 pkg_bin_dirs=(bin sbin)
