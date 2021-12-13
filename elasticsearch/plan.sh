@@ -6,7 +6,7 @@ pkg_description="Open Source, Distributed, RESTful Search Engine"
 pkg_upstream_url="https://elastic.co"
 pkg_license=('Revised BSD')
 pkg_source="https://artifacts.elastic.co/downloads/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=476392f234b125c5d63eaf04b0b339ade877c26d795d5b838cb96fbf06f40535
+pkg_shasum=ad4ecba186172eda803df6dcbc3ee8b92bd72b118464f5aefca35b9b357e6cc2
 pkg_build_deps=(
   core/patchelf
 )
