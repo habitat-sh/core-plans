@@ -1,6 +1,6 @@
 pkg_name=kubernetes
 pkg_origin=core
-pkg_version=1.20.5
+pkg_version=1.23.0
 pkg_description="Production-Grade Container Scheduling and Management"
 pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
