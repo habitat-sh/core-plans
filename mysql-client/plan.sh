@@ -1,10 +1,10 @@
 pkg_name=mysql-client
 pkg_origin=core
-pkg_version=5.7.32
+pkg_version=5.7.35
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_license=('GPL-2.0')
 pkg_source=http://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-${pkg_version}.tar.gz
-pkg_shasum=1f4b59b43f82de4ccf4ba9cfce087318a192012a752aee8f66ca16f73bb082c9
+pkg_shasum=3b4d3d503a32e3779a386126d79586804b199b455d646c36e58cb50ea75230e9
 pkg_upstream_url=https://www.mysql.com/
 pkg_description="MySQL Client Tools"
 pkg_deps=(
