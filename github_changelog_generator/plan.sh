@@ -1,6 +1,6 @@
 pkg_name=github_changelog_generator
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_version=1.16.1
+pkg_version=1.16.4
 pkg_origin=core
 pkg_license=('MIT')
 pkg_description="Changelog generation has never been so easy. Fully automate changelog generation -\
