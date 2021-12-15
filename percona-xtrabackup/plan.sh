@@ -27,7 +27,7 @@ pkg_deps=(
   core/libgcrypt
   core/libgpg-error
   core/nghttp2
-  core/openssl11
+  core/openssl
   core/zlib
 )
 pkg_bin_dirs=(bin)
@@ -52,7 +52,10 @@ do_build() {
     -DCURL_LIBRARY="$(pkg_path_for core/curl)/lib/libcurl.so" -DCURL_INCLUDE_DIR="$(pkg_path_for core/curl)/include" \
     -DLIBEV_INCLUDE_DIRS="$(pkg_path_for core/libev)/include"	-DGCRYPT_LIB="$(pkg_path_for core/libgcrypt)/lib/libgcrypt.so" \
     -DGCRYPT_INCLUDE_DIR="$(pkg_path_for core/libgcrypt)/include" -DGPG_ERROR_LIB="$(pkg_path_for core/libgpg-error)/lib/libgpg-error.so" \
-    -DLIBEV_LIB="$(pkg_path_for core/libev)/lib/libev.so" -DZLIB_LIBRARY="$(pkg_path_for core/zlib)/lib/libz.so" -DWITH_SSL="$(pkg_path_for core/openssl11)"
+    -DLIBEV_LIB="$(pkg_path_for core/libev)/lib/libev.so" -DZLIB_LIBRARY="$(pkg_path_for core/zlib)/lib/libz.so" \
+    -DOPENSSL_INCLUDE_DIR="$(pkg_path_for core/openssl)/include" \
+    -DOPENSSL_LIBRARY="$(pkg_path_for core/openssl)/lib/libssl.so" \
+    -DCRYPTO_LIBRARY="$(pkg_path_for core/openssl)/lib/libcrypto.so"
   make
 }
 
