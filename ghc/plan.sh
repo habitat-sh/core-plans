@@ -46,9 +46,6 @@ do_prepare() {
   LIBRARY_PATH="${LIBRARY_PATH}:${LD_RUN_PATH}"
   export LIBRARY_PATH
   build_line "Updating LIBRARY_PATH=$LIBRARY_PATH"
-
-  #cp mk/build.mk.sample mk/build.mk
-  #sed -i '1iBuildFlavour = perf' mk/build.mk
 }
 
 do_build() {
