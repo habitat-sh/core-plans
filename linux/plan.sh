@@ -1,12 +1,12 @@
 pkg_name=linux
 pkg_origin=core
-pkg_version="4.20.17"
+pkg_version=4.19.221
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="The Linux kernel"
 pkg_upstream_url="https://www.kernel.org/"
 pkg_license=('gplv2')
 pkg_source="https://cdn.kernel.org/pub/linux/kernel/v4.x/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="d011245629b980d4c15febf080b54804aaf215167b514a3577feddb2495f8a3e"
+pkg_shasum=a349d49f5f656a7337f7d3c41cf63b744c147bc7423ed7adbc6f14eb5764e1f9
 pkg_deps=(
   core/glibc
 )
@@ -48,15 +48,15 @@ do_prepare() {
   set_ld_library_path
 
   # http://lkml.iu.edu/hypermail/linux/kernel/2011.0/03431.html
-  patch -p1 < "${PLAN_CONTEXT}"/patches/000-generate-clang-non-section-symbols-in-orc-generation.patch
+  #patch -p1 < "${PLAN_CONTEXT}"/patches/000-generate-clang-non-section-symbols-in-orc-generation.patch
   # https://lore.kernel.org/patchwork/patch/1369985/
-  patch -p1 < "${PLAN_CONTEXT}"/patches/001-build-thunk-only-if-config-preemption.patch
+  #patch -p1 < "${PLAN_CONTEXT}"/patches/001-build-thunk-only-if-config-preemption.patch
 
   # These line numbers can change between kernel versions, but changes will only break
   #  builds that have CONFIG_ options set that require building scripts/ or tools/
 
   # Let the inline test build (CONFIG_STACK_VALIDATION) know where libelf lives
-  sed -i "961s|-xc|$LDFLAGS -xc|" Makefile
+  sed -i "975s|-xc|$LDFLAGS -xc|" Makefile
 
   # Override the defaults for building scripts and tools.
   #  scripts/sign-file and tools/objtool need openssl and elfutils.
