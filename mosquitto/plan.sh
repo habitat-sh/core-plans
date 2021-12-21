@@ -1,12 +1,12 @@
 pkg_name=mosquitto
 pkg_origin=core
-pkg_version="1.6.14"
+pkg_version="1.6.15"
 pkg_upstream_url="https://mosquitto.org"
 pkg_description="An Open Source MQTT v3.1/v3.1.1 Broker"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('EPL-1.0' 'Eclipse Distribution License - v 1.0')
 pkg_source="http://mosquitto.org/files/source/mosquitto-${pkg_version}.tar.gz"
-pkg_shasum="5ea7e342bfbd212a0addb915036be168040dea945e5de5fe739c43c5ff3823e4"
+pkg_shasum="5ff2271512f745bf1a451072cd3768a5daed71e90c5179fae12b049d6c02aa0f"
 pkg_deps=(
   core/bash
   core/c-ares

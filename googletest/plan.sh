@@ -1,6 +1,6 @@
 pkg_name=googletest
 pkg_origin=core
-pkg_version=1.10.0
+pkg_version=1.11.0
 pkg_description="$(cat << EOF
 Google C++ Testing Framework helps you write better C++ tests.
 EOF
@@ -8,7 +8,7 @@ EOF
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('bsd-3-clause')
 pkg_source="https://github.com/google/${pkg_name}/archive/release-${pkg_version}.tar.gz"
-pkg_shasum=9dc9157a9a1551ec7a7e43daea9a694a0bb5fb8bec81235d8a1e6ef64c716dcb
+pkg_shasum=b4870bf121ff7795ba20d20bcdd8627b8e088f2d1dab299a031c1034eddc93d5
 pkg_upstream_url="https://github.com/google/googletest"
 pkg_dirname="${pkg_name}-release-${pkg_version}"
 pkg_deps=(

@@ -1,13 +1,13 @@
 pkg_name=tlog
 pkg_origin=core
-pkg_version=11
+pkg_version=12
 pkg_description="Tlog is a terminal I/O recording and playback package suitable for implementing centralized user session recording."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("GPL-2.0-or-later")
 pkg_source="https://github.com/Scribery/tlog/releases/download/v${pkg_version}/${pkg_name}-${pkg_version}.tar.gz"
 pkg_filename="${pkg_name}-${pkg_version}.tar.gz"
 pkg_upstream_url="https://github.com/Scribery/tlog"
-pkg_shasum=e22971bb2ee201b527a7e101ba02654262f09333ac802be3cebe93c6a5d397a6
+pkg_shasum=d1e9b40f5933267b5e9e949e496e45ebf667f7641be62824f9d5130d3f743969
 
 pkg_deps=(
   core/curl

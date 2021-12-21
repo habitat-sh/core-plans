@@ -1,12 +1,12 @@
 pkg_origin=core
 pkg_name=rebar3
-pkg_version=3.14.4
+pkg_version=3.17.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://github.com/erlang/${pkg_name}/archive/${pkg_version}.tar.gz"
 pkg_description="rebar is an Erlang build tool that makes it easy to compile and test Erlang applications, port drivers and releases."
 pkg_upstream_url="https://github.com/rebar/rebar3"
-pkg_shasum=8d78ed53209682899d777ee9443b26b39c9bf96c8b081fe94b3dd6693077cb9a
+pkg_shasum=4c7f33a342bcab498f9bf53cc0ee5b698d9598b8fa9ef6a14bcdf44d21945c27
 pkg_deps=(
   core/erlang
   core/busybox-static

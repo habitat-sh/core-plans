@@ -1,11 +1,11 @@
 pkg_name=rabbitmqadmin
 pkg_origin=core
-pkg_version=3.8.9
+pkg_version=3.9.8
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MPL')
 pkg_description="Open source multi-protocol messaging broker (Administration CLI)"
 pkg_upstream_url="https://www.rabbitmq.com"
-pkg_source=https://raw.githubusercontent.com/rabbitmq/rabbitmq-management/v${pkg_version}/bin/rabbitmqadmin
+pkg_source=https://raw.githubusercontent.com/rabbitmq/rabbitmq-server/v${pkg_version}/deps/rabbitmq_management/bin/rabbitmqadmin
 pkg_shasum=c18706fda8de9e547cc882c14ddefe61f32835f7ca219229f7078fca3d17f459
 pkg_deps=(
   core/python2

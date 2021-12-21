@@ -1,5 +1,5 @@
 pkg_name=libcxxabi
-pkg_version=5.0.1
+pkg_version=5.0.2
 pkg_origin=core
 pkg_license=('NCSA')
 pkg_description="A new implementation of the C++ standard library, targeting C++11"
@@ -7,7 +7,7 @@ pkg_upstream_url=http://libcxxabi.llvm.org/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_filename=${pkg_name}-${pkg_version}.src.tar.xz
 pkg_source=http://llvm.org/releases/${pkg_version}/${pkg_name}-${pkg_version}.src.tar.xz
-pkg_shasum=5a25152cb7f21e3c223ad36a1022faeb8a5ac27c9e75936a5ae2d3ac48f6e854
+pkg_shasum=1bbf9bf2c92a4d627dd7bb7a15166acecae924b19898dc0573244f9d533a978a
 pkg_build_deps=(
   core/clang
   core/cmake
@@ -34,7 +34,7 @@ do_download() {
   build_line "Downloading libcxx source"
   download_file http://llvm.org/releases/${pkg_version}/libcxx-${pkg_version}.src.tar.xz \
     libcxx-${pkg_version}.src.tar.xz \
-    5a25152cb7f21e3c223ad36a1022faeb8a5ac27c9e75936a5ae2d3ac48f6e854
+    6edf88e913175536e1182058753fff2365e388e017a9ec7427feb9929c52e298
 }
 
 do_unpack() {

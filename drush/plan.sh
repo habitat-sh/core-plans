@@ -1,6 +1,6 @@
 pkg_name=drush
 pkg_origin=core
-pkg_version="8"
+pkg_version="8.4.8"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('gplv2+')
 pkg_deps=(core/bash core/coreutils core/php core/which)

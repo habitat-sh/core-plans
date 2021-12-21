@@ -1,13 +1,13 @@
 pkg_origin=core
 pkg_name=zstd
-pkg_version=1.4.9
+pkg_version=1.5.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('BSD-3-Clause')
 pkg_description="Zstandard is a real-time compression algorithm, providing high compression ratios. "\
 "It offers a very wide range of compression / speed trade-off, while being backed by a very fast decoder"
 pkg_upstream_url=http://facebook.github.io/zstd/
 pkg_source="https://github.com/facebook/zstd/archive/v${pkg_version}.tar.gz"
-pkg_shasum=acf714d98e3db7b876e5b540cbf6dee298f60eb3c0723104f6d3f065cd60d6a8
+pkg_shasum=0d9ade222c64e912d6957b11c923e214e2e010a18f39bec102f572e693ba2867
 pkg_deps=(
   core/glibc
   core/grep

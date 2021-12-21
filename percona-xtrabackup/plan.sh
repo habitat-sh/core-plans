@@ -1,12 +1,12 @@
 pkg_name=percona-xtrabackup
 pkg_origin=core
-pkg_version=2.4.18
+pkg_version=2.4.24
 pkg_description="Percona xtrabackup utilities"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url="https://www.percona.com/software/mysql-database/percona-xtrabackup"
 pkg_license=('GPL-2.0')
 pkg_source="http://github.com/percona/percona-xtrabackup/archive/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="21f7dd9ad0f8a8249a7710ab5c76c31e9a4edb04d3ac716f6803cfc8f47b6fa3"
+pkg_shasum="b4981d7dc2d69e95f521d8150aed39dd240da224039f7adc16db4598e52b5a81"
 pkg_dirname="percona-xtrabackup-percona-xtrabackup-${pkg_version}"
 pkg_build_deps=(
   core/m4
@@ -52,7 +52,10 @@ do_build() {
     -DCURL_LIBRARY="$(pkg_path_for core/curl)/lib/libcurl.so" -DCURL_INCLUDE_DIR="$(pkg_path_for core/curl)/include" \
     -DLIBEV_INCLUDE_DIRS="$(pkg_path_for core/libev)/include"	-DGCRYPT_LIB="$(pkg_path_for core/libgcrypt)/lib/libgcrypt.so" \
     -DGCRYPT_INCLUDE_DIR="$(pkg_path_for core/libgcrypt)/include" -DGPG_ERROR_LIB="$(pkg_path_for core/libgpg-error)/lib/libgpg-error.so" \
-    -DLIBEV_LIB="$(pkg_path_for core/libev)/lib/libev.so" -DZLIB_LIBRARY="$(pkg_path_for core/zlib)/lib/libz.so"
+    -DLIBEV_LIB="$(pkg_path_for core/libev)/lib/libev.so" -DZLIB_LIBRARY="$(pkg_path_for core/zlib)/lib/libz.so" \
+    -DOPENSSL_INCLUDE_DIR="$(pkg_path_for core/openssl)/include" \
+    -DOPENSSL_LIBRARY="$(pkg_path_for core/openssl)/lib/libssl.so" \
+    -DCRYPTO_LIBRARY="$(pkg_path_for core/openssl)/lib/libcrypto.so"
   make
 }
 

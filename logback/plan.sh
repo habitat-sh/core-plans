@@ -1,6 +1,6 @@
 pkg_origin=core
 pkg_name=logback
-pkg_version=1.2.3
+pkg_version=1.2.9
 pkg_description="The reliable, generic, fast and flexible logging framework for Java."
 pkg_upstream_url=http://logback.qos.ch
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
@@ -18,12 +18,12 @@ _target_sources=(
 )
 
 _target_shasums=(
-  5946d837fe6f960c02a53eda7a6926ecc3c758bbdd69aa453ee429f858217f22
-  1f69b6b638ec551d26b10feeade5a2b77abe347f9759da95022f0da9a63a9971
-  0a4fc8753abe266ea7245e6d9653d6275dc1137cad6ecd1b2612204033d89687
-  930137eac280cd70a34622c8cacc9f120040dc78b3f191af63ee9b7b311559fb
-  fb53f8539e7fcb8f093a56e138112056ec1dc809ebb020b59d8a36a5ebac37e0
-  480cb5e99519271c9256716d4be1a27054047435ff72078d9deae5c6a19f63eb
+	4a9ef7ed809b1fbc6992bf87d404087c247e7a9766e25bb84377b58ed5c9eb58
+	44f11cf8dddba832ccc7658ebf19e3945249474e809ddc57265a799c63e1db22
+	4db03561790664b823181cf8db78260c675464741372459ecba4fadf6d5538d2
+	35ae608caaf74643935e0014dfccb7430870a157d039346c57d5c3afeefadc2a
+	ad745cc243805800d1ebbf5b7deba03b37c95885e6bce71335a73f7d6d0f14ee
+	18b073d37c800b18d6721d023156575105adf25e26dfa0e5218237f4ca64301b
 )
 
 do_download() {
