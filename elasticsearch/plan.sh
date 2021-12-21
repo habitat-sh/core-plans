@@ -1,6 +1,6 @@
 pkg_name=elasticsearch
 pkg_origin=core
-pkg_version=6.8.21
+pkg_version=6.8.22
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Open Source, Distributed, RESTful Search Engine"
 pkg_upstream_url="https://elastic.co"
