@@ -1,6 +1,6 @@
 pkg_origin=core
 pkg_name=logstash
-pkg_version=6.8.15
+pkg_version=6.8.22
 pkg_description="Logstash is an open source, server-side data processing pipeline that ingests data from a multitude of sources simultaneously, transforms it, and then sends it to your favorite 'stash.'"
 pkg_upstream_url=https://github.com/elastic/logstash
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
