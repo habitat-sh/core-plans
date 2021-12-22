@@ -3,8 +3,8 @@ pkg_name=snappy
 pkg_version=1.1.9
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('BSD-3-Clause')
-pkg_source=https://github.com/google/snappy/archive/${pkg_version}.tar.gz
-pkg_shasum=75c1fbb3d618dd3a0483bff0e26d0a92b495bbe5059c8b4f1c962b478b6e06e7
+pkg_source=https://github.com/google/snappy
+pkg_shasum=noshasum
 pkg_deps=(core/glibc)
 pkg_build_deps=(
   core/cmake
@@ -20,9 +20,25 @@ pkg_lib_dirs=(lib)
 pkg_upstream_url=https://github.com/google/snappy
 pkg_description="A fast compressor/decompressor http://google.github.io/snappy/"
 
+do_download() {
+  return 0
+}
+
+do_verify() {
+  return 0
+}
+
+do_unpack() {
+  REPO_PATH="$HAB_CACHE_SRC_PATH/$pkg_dirname"
+  git clone "$pkg_source" "$REPO_PATH"
+  pushd "$REPO_PATH" || exit 1
+  git checkout "tags/${pkg_version}"
+  git submodule init
+  git submodule update
+  popd || exit 1
+}
+
 do_prepare() {
-  git clone https://github.com/google/benchmark.git "$HAB_CACHE_SRC_PATH/$pkg_dirname/third_party/benchmark"
-  git clone https://github.com/google/googletest.git "$HAB_CACHE_SRC_PATH/$pkg_dirname/third_party/googletest"
   __gcc_LD_RUN_PATH="$(pkg_path_for gcc)/LD_RUN_PATH"
   LD_RUN_PATH="${LD_RUN_PATH}:$(cat "${__gcc_LD_RUN_PATH}")"
   export LD_RUN_PATH
