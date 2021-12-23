@@ -2,12 +2,12 @@ pkg_name=prometheus
 pkg_description="Prometheus monitoring"
 pkg_upstream_url=http://prometheus.io
 pkg_origin=core
-pkg_version=2.25.2
+pkg_version=2.31.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_bin_dirs=(bin)
 pkg_source="https://github.com/prometheus/prometheus/archive/v${pkg_version}.tar.gz"
-pkg_shasum=85f50c0cfb4db206a59d2c3301e02d685c3fe4b451b41ca943a4eb94935cf4d4
+pkg_shasum=869a8be315721115be628f766ec3ff71aa50f1a027cee776ea54d7ba070a5026
 prom_pkg_dir="${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}"
 prom_build_dir="${prom_pkg_dir}/src/${pkg_source}"
 pkg_deps=(
@@ -20,6 +20,8 @@ pkg_build_deps=(
   core/make
   core/yarn
   core/coreutils
+  core/which
+  core/node16
 )
 pkg_exports=(
   [prom_ds_http]=listening_port
