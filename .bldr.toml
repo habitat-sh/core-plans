@@ -1144,6 +1144,8 @@ paths = [
 ]
 [postgresql12-client]
 plan_path = "postgresql12-client"
+[postgresql13-client]
+plan_path = "postgresql13-client"
 [powershell]
 plan_path = "powershell"
 [procps-ng]
