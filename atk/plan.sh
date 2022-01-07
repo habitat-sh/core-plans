@@ -32,10 +32,10 @@ pkg_include_dirs=(include)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_build() {
-  meson --prefix="$pkg_prefix" _build .
-  ninja -C _build
+  meson build --prefix="$pkg_prefix"
+  ninja -C build
 }
 
 do_install() {
-  ninja -C _build install
+  ninja -C build install
 }
