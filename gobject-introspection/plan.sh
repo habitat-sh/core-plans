@@ -11,6 +11,26 @@ pkg_deps=(
   core/glibc
   core/gcc-libs
   core/coreutils
+  core/pcre
+  core/zlib
+  core/glib
+  core/elfutils
+  core/cairo
+  core/libffi
+  core/bash-completion
+  core/pixman
+  core/fontconfig
+  core/freetype
+  core/libpng
+  core/expat
+  core/libxcb
+  core/libxau
+  core/xproto
+  core/libxdmcp
+  core/libxml2
+  core/libxslt
+  core/libtool
+  core/libxfixes
 )
 pkg_build_deps=(
   core/gcc
@@ -20,7 +40,8 @@ pkg_build_deps=(
   core/ninja
   core/bison
   core/flex
-  core/git
+  core/util-linux
+  core/virtualenv
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
@@ -28,6 +49,13 @@ pkg_include_dirs=(include)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 do_prepare() {
+  virtualenv "$pkg_prefix"
+  source "${pkg_prefix}/bin/activate"
+
+  pip install mako
+  pip install markdown
+  pip install wheel
+
   build_line "Setting link for /usr/bin/env to 'coreutils'"
   if [ ! -f /usr/bin/env ]; then
     ln -s "$(pkg_interpreter_for core/coreutils bin/env)" /usr/bin/env
