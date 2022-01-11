@@ -355,6 +355,8 @@ plan_path = "fping"
 plan_path = "freetds"
 [freetype]
 plan_path = "freetype"
+[fribidi]
+plan_path = "fribidi"
 [galera]
 plan_path = "galera"
 [gamin]
