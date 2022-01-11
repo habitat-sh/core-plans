@@ -36,7 +36,7 @@ pkg_build_deps=(
   core/pkg-config
   core/cacerts
   core/curl
-  duddela_tryhabitat/fribidi
+  core/fribidi
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
