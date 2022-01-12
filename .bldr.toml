@@ -465,7 +465,7 @@ plan_path = "go17"
 [goaccess]
 plan_path = "goaccess"
 [gobject-introspection]
-lan_path = "gobject-introspection"
+plan_path = "gobject-introspection"
 [gocd-server]
 plan_path = "gocd-server"
 [googlemock]

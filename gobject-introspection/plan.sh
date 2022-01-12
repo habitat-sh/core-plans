@@ -8,19 +8,40 @@ pkg_license=("LGPL-2.0-or-later")
 pkg_source="https://download.gnome.org/sources/${pkg_name}/${pkg_version%.*}/${pkg_name}-${pkg_version}.tar.xz"
 pkg_shasum=902b4906e3102d17aa2fcb6dad1c19971c70f2a82a159ddc4a94df73a3cafc4a
 pkg_deps=(
-  core/glibc
-  core/gcc-libs
-  core/coreutils
+core/glibc
+core/gcc-libs
+core/coreutils
+core/pcre
+core/zlib
+core/glib
+core/elfutils
+core/cairo
+core/libffi
+core/bash-completion
+core/pixman
+core/fontconfig
+core/freetype
+core/libpng
+core/libxcb
+core/bzip2
+core/expat
+core/libxau
+core/libxdmcp
+core/libxext
 )
 pkg_build_deps=(
-  core/gcc
-  core/cmake
-  core/pkg-config
-  core/meson
-  core/ninja
-  core/bison
-  core/flex
-  core/git
+core/gcc
+core/cmake
+core/pkg-config
+core/meson
+core/ninja
+core/bison
+core/flex
+core/util-linux
+core/xextproto
+core/xproto
+core/diffutils
+core/file
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
