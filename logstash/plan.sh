@@ -1,12 +1,12 @@
 pkg_origin=core
 pkg_name=logstash
-pkg_version=6.8.22
+pkg_version=6.8.23
 pkg_description="Logstash is an open source, server-side data processing pipeline that ingests data from a multitude of sources simultaneously, transforms it, and then sends it to your favorite 'stash.'"
 pkg_upstream_url=https://github.com/elastic/logstash
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=(Apache-2.0)
 pkg_source=https://artifacts.elastic.co/downloads/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=b6447fc35752c232728380a11e54e7db180b71f1a68d7f00a2f27e69c01ef380
+pkg_shasum=b056a1080262f4b6b0b7ae503d72f711f8a4b0592e83d078a592b917678e1d53
 pkg_deps=(core/bash
   core/corretto8
   core/coreutils
