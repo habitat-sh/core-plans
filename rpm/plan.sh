@@ -30,21 +30,23 @@ pkg_build_deps=(
 	core/gettext
 	core/libtool
 	core/pkg-config
+	core/lua
 )
 
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
-#do_build() {
-#	autoreconf -i
-#	./configure --prefix=${pkg_prefix} \
-#		--with-lua-version=5.4 \
-#		--enable-sqlite=no
-#	make
-#}
-
 do_build() {
+	export LUA_LIBS="$LDFLAGS -llua -lm"
+	export LUA_CFLAGS="$CFLAGS"
+	ACLOCAL_PATH="${ACLOCAL_PATH}:$(pkg_path_for core/pkg-config)/share/aclocal"
+	ACLOCAL_PATH="${ACLOCAL_PATH}:$(pkg_path_for core/automake)/share/aclocal"
+	ACLOCAL_PATH="${ACLOCAL_PATH}:$(pkg_path_for core/libtool)/share/aclocal"
+	ACLOCAL_PATH="$ACLOCAL_PATH:$(pkg_path_for core/autoconf)/share/autoconf"
+	ACLOCAL_PATH="$ACLOCAL_PATH:$HAB_CACHE_SRC_PATH/$pkg_dirname/m4"
+	export ACLOCAL_PATH
 	./autogen.sh --noconfigure
+	./configure --prefix=${pkg_prefix} --enable-sqlite=no
 	make
 }
