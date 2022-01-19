@@ -1,12 +1,12 @@
 pkg_name=rpm
 pkg_origin=core
-pkg_version=4.16.1.3
+pkg_version=4.17.0
 pkg_license=("GPL-2.0" "LGPL-2.0")
 pkg_description="RPM Package Manager"
 pkg_upstream_url="http://www.rpm.org/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source="http://ftp.rpm.org/releases/${pkg_name}-4.16.x/${pkg_name}-${pkg_version}.tar.bz2"
-pkg_shasum="513dc7f972b6e7ccfc9fc7f9c01d5310cc56ee853892e4314fa2cad71478e21d"
+pkg_source=https://ftp.osuosl.org/pub/rpm/releases/rpm-4.17.x/rpm-${pkg_version}.tar.bz2
+pkg_shasum=2e0d220b24749b17810ed181ac1ed005a56bbb6bc8ac429c21f314068dc65e6a
 
 pkg_deps=(
   core/bzip2
@@ -25,6 +25,12 @@ pkg_deps=(
 pkg_build_deps=(
   core/gcc
   core/make
+	core/autoconf
+	core/automake
+	core/gettext
+	core/libtool
+	core/pkg-config
+	core/lua
 )
 
 pkg_bin_dirs=(bin)
@@ -32,9 +38,15 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 
 do_build() {
-  ./configure --prefix="${pkg_prefix}" \
-              --with-external-db       \
-              --without-lua
-
-  make
+	export LUA_LIBS="$LDFLAGS -llua -lm"
+	export LUA_CFLAGS="$CFLAGS"
+	ACLOCAL_PATH="${ACLOCAL_PATH}:$(pkg_path_for core/pkg-config)/share/aclocal"
+	ACLOCAL_PATH="${ACLOCAL_PATH}:$(pkg_path_for core/automake)/share/aclocal"
+	ACLOCAL_PATH="${ACLOCAL_PATH}:$(pkg_path_for core/libtool)/share/aclocal"
+	ACLOCAL_PATH="$ACLOCAL_PATH:$(pkg_path_for core/autoconf)/share/autoconf"
+	ACLOCAL_PATH="$ACLOCAL_PATH:$HAB_CACHE_SRC_PATH/$pkg_dirname/m4"
+	export ACLOCAL_PATH
+	./autogen.sh --noconfigure
+	./configure --prefix=${pkg_prefix} --enable-sqlite=no
+	make
 }
