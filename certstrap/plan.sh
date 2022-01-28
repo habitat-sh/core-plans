@@ -23,8 +23,9 @@ do_prepare() {
 
 do_download() {
   # `-d`: don't let go build it, we'll have to build this ourselves
-  build_line "go get -d github.com/square/certstrap"
-  go get -d github.com/square/certstrap
+  rm -rf ${scaffolding_go_pkg_path}
+  build_line "clone https://github.com/square/certstrap"
+  git clone https://github.com/square/certstrap ${scaffolding_go_pkg_path}
 
   pushd "${scaffolding_go_pkg_path:?}"
     build_line "checking out $pkg_version"
