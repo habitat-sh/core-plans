@@ -18,10 +18,12 @@ pkg_build_deps=(
   core/make
   core/gcc
   core/re2c
+  core/patch
 )
 pkg_bin_dirs=(bin)
 
 do_build() {
+  patch -p0 < "$PLAN_CONTEXT/non-const-MINSIGSTKSZ-fix.patch"
   mkdir build
   cmake -H./ \
     -Bbuild \
