@@ -13,6 +13,7 @@ pkg_build_deps=(
   core/sed
   core/gawk
   core/m4
+  core/patch
 )
 pkg_deps=(
   # postfix deps
@@ -30,6 +31,10 @@ pkg_deps=(
 )
 pkg_bin_dirs=(bin sbin)
 pkg_svc_user=root
+
+do_prepare() {
+  patch -p1 < "${PLAN_CONTEXT}/postfix-glibc-2.34.patch"
+}
 
 do_build() {
   POSTFIX_CCARGS=(
