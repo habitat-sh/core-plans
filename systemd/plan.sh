@@ -58,6 +58,7 @@ do_prepare() {
   # https://github.com/systemd/systemd/commit/442bc2afee6c5f731c7b3e76ccab7301703a45a7
   # Bug with 247
 #  patch -p1 < "${PLAN_CONTEXT}"/patches/0001-meson-set-cxx-variable-before-using-it.patch
+  patch -p0 < "${PLAN_CONTEXT}/patches/build_fix_meson.patch"
 }
 
 do_build() {

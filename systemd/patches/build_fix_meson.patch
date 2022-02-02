@@ -1,0 +1,11 @@
+--- meson.build	2021-07-07 17:41:29.000000000 +0000
++++ meson_fix.build	2022-02-02 07:37:35.140000000 +0000
+@@ -35,7 +35,7 @@
+ 
+ want_ossfuzz = get_option('oss-fuzz')
+ want_libfuzzer = get_option('llvm-fuzz')
+-if want_ossfuzz + want_libfuzzer > 1
++if want_ossfuzz and want_libfuzzer
+         error('only one of oss-fuzz or llvm-fuzz can be specified')
+ endif
+ 
