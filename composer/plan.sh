@@ -7,7 +7,7 @@ pkg_upstream_url=https://getcomposer.org/
 pkg_description="Dependency Manager for PHP"
 pkg_source="https://getcomposer.org/download/${pkg_version}/${pkg_name}.phar"
 pkg_filename="${pkg_name}.phar"
-pkg_shasum=4d00b70e146c17d663ad2f9a21ebb4c9d52b021b1ac15f648b4d371c04d648ba
+pkg_shasum=ae3ec292dd04b4e468aea1e5db4d085f169d8a803aabeb99707f69e9454bf218
 pkg_deps=(
   core/php
   core/git
