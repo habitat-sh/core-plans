@@ -26,6 +26,7 @@ pkg_build_deps=(
   core/make
   core/pkg-config
   core/texinfo
+  core/patch
 )
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
@@ -35,6 +36,7 @@ do_prepare() {
   export CXXFLAGS="${CXXFLAGS} -O2 -fstack-protector-strong -Wformat -Werror=format-security "
   export CPPFLAGS="${CPPFLAGS} -Wdate-time"
   export LDFLAGS="${LDFLAGS} -Wl,-Bsymbolic-functions -Wl,-z,relro"
+  patch -p0 < "${PLAN_CONTEXT}/config.h-fix.patch"
 }
 
 do_build() {
