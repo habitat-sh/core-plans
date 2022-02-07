@@ -1,6 +1,6 @@
 $pkg_name="rust"
 $pkg_origin="core"
-$pkg_version="1.56.1"
+$pkg_version="1.58.1"
 $pkg_description="Safe, concurrent, practical language"
 $pkg_upstream_url="https://www.rust-lang.org/"
 $pkg_license=@("Apache-2.0", "MIT")
