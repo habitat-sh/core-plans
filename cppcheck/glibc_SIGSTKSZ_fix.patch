@@ -1,0 +1,15 @@
+--- cli/cppcheckexecutor.cpp	2019-12-21 10:51:10.000000000 +0000
++++ cli/cppcheckexecutor_SIGSTKSZ.cpp	2022-02-08 10:36:41.872137546 +0000
+@@ -293,7 +293,12 @@
+ #endif
+ }
+ 
++
++#ifdef __USE_DYNAMIC_STACK_SIZE
++static const size_t MYSTACKSIZE = 16*1024+32768; // wild guess about a reasonable buffer
++#else
+ static const size_t MYSTACKSIZE = 16*1024+SIGSTKSZ; // wild guess about a reasonable buffer
++#endif
+ static char mytstack[MYSTACKSIZE]= {0}; // alternative stack for signal handler
+ static bool bStackBelowHeap=false; // lame attempt to locate heap vs. stack address space. See CppCheckExecutor::check_wrapper()
+ 
