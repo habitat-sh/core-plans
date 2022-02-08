@@ -16,6 +16,8 @@ pkg_deps=(
   core/openssl
   core/systemd
   core/zlib
+  core/lz4
+  core/xz
 )
 
 pkg_build_deps=(
