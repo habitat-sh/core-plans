@@ -1,6 +1,6 @@
 pkg_name=lsyncd
 pkg_origin=core
-pkg_version=2.2.3
+pkg_version=2.2.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0')
 pkg_source="https://github.com/axkibe/$pkg_name/archive/release-$pkg_version.tar.gz"
