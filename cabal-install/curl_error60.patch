@@ -1,0 +1,13 @@
+--- cabal-install/bootstrap.sh	2022-02-14 19:19:00.227902945 +0000
++++ cabal-install/bootstrap_withpatch.sh	2022-02-14 19:18:43.811724725 +0000
+@@ -323,8 +323,8 @@
+   URL_PKGDESC=${HACKAGE_URL}/${PKG}-${VER}/${PKG}.cabal
+   if which ${CURL} > /dev/null
+   then
+-    ${CURL} -L --fail -C - -O ${URL_PKG} || die "Failed to download ${PKG}."
+-    ${CURL} -L --fail -C - -O ${URL_PKGDESC} \
++    ${CURL} -k -L --fail -C - -O ${URL_PKG} || die "Failed to download ${PKG}."
++    ${CURL} -k -L --fail -C - -O ${URL_PKGDESC} \
+         || die "Failed to download '${PKG}.cabal'."
+   elif which ${WGET} > /dev/null
+   then
