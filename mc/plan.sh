@@ -1,6 +1,6 @@
 pkg_name=mc
 pkg_origin=core
-pkg_version=4.8.26
+pkg_version=4.8.27
 pkg_description="Midnight Commander."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-3.0')
