@@ -1,6 +1,6 @@
 pkg_name=netcat-openbsd
 pkg_origin=core
-pkg_version=1.217
+pkg_version=1.218
 pkg_description="TCP/IP swiss army knife, OpenBSD variant"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url=https://tracker.debian.org/pkg/netcat
