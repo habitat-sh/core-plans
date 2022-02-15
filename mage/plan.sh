@@ -1,6 +1,6 @@
 pkg_name=mage
 pkg_origin=core
-pkg_version=1.11.0
+pkg_version=1.12.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_description="Mage is a make/rake-like build tool using Go. You write plain-old go functions, and Mage automatically uses them as Makefile-like runnable targets."
