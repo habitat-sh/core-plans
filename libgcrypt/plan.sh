@@ -1,6 +1,6 @@
 pkg_name=libgcrypt
 pkg_origin=core
-pkg_version=1.9.2
+pkg_version=1.10.0
 pkg_license=('LGPL-2.0-or-later')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="ftp://ftp.gnupg.org/gcrypt/${pkg_name}/${pkg_name}-${pkg_version}.tar.bz2"
