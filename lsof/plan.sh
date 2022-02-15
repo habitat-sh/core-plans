@@ -1,9 +1,9 @@
 pkg_name="lsof"
 pkg_origin="core"
-pkg_version="4.91"
+pkg_version="4.94.0"
 pkg_license=('lsof')
 pkg_source="https://www.mirrorservice.org/sites/lsof.itap.purdue.edu/pub/tools/unix/lsof/lsof_${pkg_version}.tar.bz2"
-pkg_shasum="c9da946a525fbf82ff80090b6d1879c38df090556f3fe0e6d782cb44172450a3"
+pkg_shasum="ff4ac555966b587f06338475c8fcc0f41402b4c8e970e730f6f83b62be8b5c0d"
 pkg_upstream_url="https://people.freebsd.org/~abe/"
 pkg_description="lsof - list open files"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
