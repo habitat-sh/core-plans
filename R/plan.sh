@@ -1,6 +1,6 @@
 pkg_name=R
 pkg_origin=core
-pkg_version="3.5.0"
+pkg_version="3.6.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0-or-later')
 pkg_source="https://cran.r-project.org/src/base/R-3/${pkg_name}-${pkg_version}.tar.gz"
