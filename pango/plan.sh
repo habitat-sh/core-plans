@@ -1,6 +1,6 @@
 pkg_name=pango
 pkg_origin=core
-pkg_version="1.40.13"
+pkg_version="1.50.4"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('LGPL')
 pkg_source="https://download.gnome.org/sources/${pkg_name}/${pkg_version%.*}/${pkg_name}-${pkg_version}.tar.xz"
