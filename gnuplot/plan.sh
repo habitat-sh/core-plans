@@ -1,6 +1,6 @@
 pkg_name=gnuplot
 pkg_origin=core
-pkg_version="5.2.6"
+pkg_version="5.4.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url="http://www.gnuplot.info"
 pkg_description="Gnuplot is a portable command-line driven graphing
