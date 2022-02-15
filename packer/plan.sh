@@ -1,6 +1,6 @@
 pkg_name=packer
 pkg_origin=core
-pkg_version=1.7.0
+pkg_version=1.7.10
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MPL2')
 pkg_source="https://releases.hashicorp.com/${pkg_name}/${pkg_version}/${pkg_name}_${pkg_version}_linux_amd64.zip"
