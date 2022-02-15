@@ -1,6 +1,6 @@
 pkg_origin=core
 pkg_name=lttng-ust
-pkg_version=2.12.1
+pkg_version=2.13.1
 pkg_description="LTTng is an open source tracing framework for Linux."
 pkg_upstream_url=http://lttng.org/
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
