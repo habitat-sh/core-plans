@@ -1,7 +1,7 @@
 pkg_name=jfrog-cli
 pkg_description="jfrog CLI"
 pkg_origin=core
-pkg_version=1.43.2
+pkg_version=1.53.1
 pkg_license=('apachev2')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://jfrog.bintray.com/jfrog-cli-go/${pkg_version}/jfrog-cli-linux-amd64/jfrog
