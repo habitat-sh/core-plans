@@ -1,6 +1,6 @@
 pkg_name=valgrind
 pkg_origin=core
-pkg_version=3.17.0
+pkg_version=3.18.1
 pkg_description="An instrumentation framework for building dynamic analysis tools"
 pkg_upstream_url="http://www.valgrind.org/"
 pkg_license=('GPL-2.0')
