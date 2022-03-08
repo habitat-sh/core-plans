@@ -1,6 +1,6 @@
 pkg_name=filebeat
 pkg_origin=core
-pkg_version=7.12.0
+pkg_version=8.0.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
 pkg_deps=(core/glibc)
@@ -23,9 +23,12 @@ do_download() {
   GOPATH="$(dirname "${HAB_CACHE_SRC_PATH}")"
   export GOPATH
   rm -rf "${GOPATH}/src/github.com/elastic/beats"
-  git clone https://github.com/elastic/beats "${GOPATH}"/src/github.com/elastic/beats
+  git clone \
+    --depth 1 \
+    --branch "v${pkg_version}" \
+    "https://github.com/elastic/beats" \
+    "${GOPATH}/src/github.com/elastic/beats"
   pushd "${HAB_CACHE_SRC_PATH}/github.com/elastic/beats/filebeat" > /dev/null
-  git checkout "v${pkg_version}"
   popd > /dev/null
 }
 
