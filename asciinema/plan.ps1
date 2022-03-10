@@ -4,7 +4,7 @@ $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_license=('GPL-3.0-or-later')
 $pkg_description="Terminal session recorder"
 $pkg_upstream_url="https://github.com/asciinema/asciinema"
-$pkg_version = '2.0.1'
+$pkg_version = '2.1.0'
 $pkg_deps=@(
     "core/python"
 )
