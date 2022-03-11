@@ -1,11 +1,11 @@
 $pkg_name="perl"
 $pkg_origin="core"
-$pkg_version="5.33.9"
+$pkg_version="5.34.0"
 $pkg_description="Perl 5 is a highly capable, feature-rich programming language with over 29 years of development."
 $pkg_upstream_url="http://www.perl.org/"
 $pkg_license=@("GPL-1.0-or-later", "Artistic-1.0-Perl")
 $pkg_source="https://github.com/Perl/perl5/archive/v$pkg_version.zip"
-$pkg_shasum="d897bf5a4db8dd038394bb65507710d83287c320130f65050e718a57e4d0d924"
+$pkg_shasum="e46b8bd5be3c6dd13fdc2238928ecdff28db7f5cb8a409e239bb725e967159b5"
 $pkg_deps=@("core/visual-cpp-redist-2015")
 $pkg_build_deps=@("core/visual-cpp-build-tools-2015")
 $pkg_bin_dirs=@("bin")
