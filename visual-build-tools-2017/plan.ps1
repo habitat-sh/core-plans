@@ -1,12 +1,13 @@
 $pkg_name="visual-build-tools-2017"
 $pkg_origin="core"
-$pkg_version="15.9.21"
+$pkg_version="15.9.45"
 $pkg_description="Standalone compiler, libraries and scripts"
 $pkg_upstream_url="https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2017"
 $pkg_license=@("Microsoft Software License")
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-$pkg_source="https://download.visualstudio.microsoft.com/download/pr/67f7bfaa-2635-43d9-ba82-26564f458881/bb057808eeff7d02561cab636b32397e298c3e770ed278602c46d119fa2e4ee8/vs_BuildTools.exe"
-$pkg_shasum="bb057808eeff7d02561cab636b32397e298c3e770ed278602c46d119fa2e4ee8"
+$pkg_source="
+https://download.visualstudio.microsoft.com/download/pr/4dfffe3f-2a7e-4dea-922b-62d4beca5e36/e10c2bfb0e7b0358c24bd0df951f3d81897f309a0642a199b93f248db303263c/vs_BuildTools.exe"
+$pkg_shasum="e10c2bfb0e7b0358c24bd0df951f3d81897f309a0642a199b93f248db303263c"
 $pkg_build_deps=@("core/7zip")
 
 $pkg_bin_dirs=@(
