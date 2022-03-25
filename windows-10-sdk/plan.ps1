@@ -1,12 +1,12 @@
 $pkg_name="windows-10-sdk"
 $pkg_origin="core"
-$pkg_version="10.0.19041"
+$pkg_version="10.0.22000"
 $pkg_description="The Windows 10 SDK for Windows 10, version 2004 (servicing release 10.0.19041.685) provides the latest headers, libraries, metadata, and tools for building Windows 10 apps"
 $pkg_upstream_url="https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk"
 $pkg_license=@("Microsoft Software License")
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-$pkg_source="https://download.microsoft.com/download/4/d/2/4d2b7011-606a-467e-99b4-99550bf24ffc/windowssdk/winsdksetup.exe"
-$pkg_shasum="42d2774274d1135fc598c180c2acbf2321eb4192f59e511e6ac7772870bf6de1"
+$pkg_source="https://download.microsoft.com/download/d/8/f/d8ff148b-450c-40b3-aeed-2a3944e66bbd/windowssdk/winsdksetup.exe"
+$pkg_shasum="4d73ddc82caa1cbe82dffdc24b7cef368919e077bad984357d447568feab1f5f"
 $pkg_build_deps=@("core/lessmsi")
 
 $pkg_bin_dirs=@(
