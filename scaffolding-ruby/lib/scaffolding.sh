@@ -878,13 +878,14 @@ _bundle_install() {
   path="$1"
   shift
 
+  _bundle config set --local --shebang "$(pkg_path_for "$_ruby_pkg")/bin/ruby"
+  _bundle config set --local path "$path"
+  _bundle config set --local deployment 'true'
+  _bundle config set --local without "development:test"
+
   _bundle install ${*:-} \
     --jobs "$(nproc)" \
-    --without development:test \
-    --path "$path" \
-    --shebang="$(pkg_path_for "$_ruby_pkg")/bin/ruby" \
-    --no-clean \
-    --deployment
+    --no-clean
 }
 
 _compare_gem() {
