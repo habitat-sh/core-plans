@@ -1,13 +1,13 @@
 pkg_name=libtalloc
 pkg_origin=core
-pkg_version="2.3.2"
+pkg_version="2.3.3"
 pkg_upstream_url=https://talloc.samba.org
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Talloc is a hierarchical, reference counted memory pool system with destructors. It is the core memory allocator used in Samba."
 pkg_license=("GPL-3.0")
 pkg_source="https://www.samba.org/ftp/talloc/talloc-${pkg_version}.tar.gz"
 pkg_dirname="talloc-${pkg_version}"
-pkg_shasum="27a03ef99e384d779124df755deb229cd1761f945eca6d200e8cfd9bf5297bd7"
+pkg_shasum="6be95b2368bd0af1c4cd7a88146eb6ceea18e46c3ffc9330bf6262b40d1d8aaa"
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
 pkg_pconfig_dirs=(lib/pkgconfig)

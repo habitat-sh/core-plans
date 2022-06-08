@@ -1,12 +1,12 @@
 pkg_name=libtasn1
 pkg_origin=core
-pkg_version="4.16.0"
+pkg_version="4.18.0"
 pkg_description="ASN.1 implementation"
 pkg_upstream_url="https://www.gnu.org/software/libtasn1/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('LGPL-2.1-or-later')
 pkg_source="https://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="0e0fb0903839117cb6e3b56e68222771bebf22ad7fc2295a0ed7d576e8d4329d"
+pkg_shasum="4365c154953563d64c67a024b607d1ee75c6db76e0d0f65709ea80a334cd1898"
 pkg_deps=(
   core/glibc
 )

@@ -1,12 +1,12 @@
 pkg_name=mssql
 pkg_origin=core
-pkg_version=14.0.3381.3-2
+pkg_version=14.0.3421.10-2
 pkg_license=('MICROSOFT PRE-RELEASE SOFTWARE LICENSE')
 pkg_upstream_url=https://www.microsoft.com/en-us/sql-server/sql-server-vnext-including-Linux
 pkg_description="Microsoft SQL Server for Linux"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://packages.microsoft.com/ubuntu/16.04/mssql-server-2017/pool/main/m/mssql-server/mssql-server_${pkg_version}_amd64.deb"
-pkg_shasum=382bd7af2fc58248e317cfb0d2853850ecfc34af191340bdd82d1c35fb3f0509
+pkg_shasum=f9717419f7e7093da4f9ebcaac8a58e30cc8ba5dd0607115c134d1f58600cb5f
 pkg_filename="mssql-server_${pkg_version}_amd64.deb"
 pkg_svc_user="root"
 pkg_svc_group="root"

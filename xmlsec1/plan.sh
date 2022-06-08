@@ -1,10 +1,10 @@
 pkg_name=xmlsec1
 pkg_origin=core
-pkg_version=1.2.31
+pkg_version=1.2.33
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("MIT")
 pkg_source="http://www.aleksey.com/xmlsec/download/xmlsec1-${pkg_version}.tar.gz"
-pkg_shasum=9b10bc52cc31e4f76162e3975e50db26b71ab49c571d810b311ca626be5a0b26
+pkg_shasum=26041d35a20a245ed5a2fb9ee075f10825664d274220cb5190340fa87a4d0931
 pkg_deps=(
   core/glibc
   core/zlib

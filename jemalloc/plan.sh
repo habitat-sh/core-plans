@@ -2,11 +2,11 @@ pkg_name=jemalloc
 pkg_description="malloc implementation emphasizing fragmentation avoidance"
 pkg_upstream_url="http://jemalloc.net/"
 pkg_origin=core
-pkg_version=4.4.0
+pkg_version=4.5.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('BSD-2-Clause')
 pkg_source=https://github.com/jemalloc/jemalloc/releases/download/$pkg_version/${pkg_name}-${pkg_version}.tar.bz2
-pkg_shasum=a7aea63e9718d2f1adf81d87e3df3cb1b58deb86fc77bad5d702c4c59687b033
+pkg_shasum=9409d85664b4f135b77518b0b118c549009dc10f6cba14557d170476611f6780
 pkg_dirname=${pkg_name}-${pkg_version}
 pkg_deps=(core/glibc)
 

@@ -1,10 +1,10 @@
 pkg_name=sassc
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_version=3.6.1
+pkg_version=3.6.2
 pkg_source="https://github.com/sass/${pkg_name}/archive/${pkg_version}.tar.gz"
-pkg_shasum=8cee391c49a102b4464f86fc40c4ceac3a2ada52a89c4c933d8348e3e4542a60
-libsass_shasum=18d6e866ba2430cccae2551f384aca253a84592c692ce7146550f1d4f273b7d7
+pkg_shasum=608dc9002b45a91d11ed59e352469ecc05e4f58fc1259fc9a9f5b8f0f8348a03
+libsass_shasum=0ecd2405f869901d70e7b1960259aac3f21a33c59a820a0a579a16f8f8dc43b9
 pkg_license=('MIT')
 pkg_description='libsass command line driver'
 pkg_upstream_url=https://github.com/sass/sassc

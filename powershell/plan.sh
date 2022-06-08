@@ -1,12 +1,12 @@
 pkg_name="powershell"
 pkg_origin="core"
-pkg_version="7.1.3"
+pkg_version="7.2.0"
 pkg_license=("MIT")
 pkg_upstream_url="https://msdn.microsoft.com/powershell"
 pkg_description="PowerShell is a cross-platform (Windows, Linux, and macOS) automation and configuration tool/framework that works well with your existing tools and is optimized for dealing with structured data (e.g. JSON, CSV, XML, etc.), REST APIs, and object models. It includes a command-line shell, an associated scripting language and a framework for processing cmdlets."
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/PowerShell/PowerShell/releases/download/v$pkg_version/PowerShell-$pkg_version-linux-x64.tar.gz"
-pkg_shasum="9f853fb8f7c7719005bd1054fa13ca4d925c519b893f439dd2574e84503e6a85"
+pkg_shasum="15b67d0571d9891a10e541a1462c906084ab148614dd83c6bbddf90046a815a8"
 pkg_filename="powershell-$pkg_version-linux-x64.tar.gz"
 pkg_bin_dirs=("bin")
 pkg_deps=("core/icu" "core/openssl" "core/glibc" "core/gcc-libs")
@@ -36,8 +36,6 @@ do_install() {
 
   # The linux powersheel distribution symlinks libssl and libcrypto to /lib64
   # We will replace those with symlinks to the openssl hab package
-  rm "$pkg_prefix"/bin/libssl.so.1.0.0
-  rm "$pkg_prefix"/bin/libcrypto.so.1.0.0
   ln -s "$(pkg_path_for openssl)/lib/libssl.so.1.0.0" "$pkg_prefix"/bin/libssl.so.1.0.0
   ln -s "$(pkg_path_for openssl)/lib/libcrypto.so.1.0.0" "$pkg_prefix"/bin/libcrypto.so.1.0.0
 }

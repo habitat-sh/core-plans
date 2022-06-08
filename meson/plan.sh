@@ -1,12 +1,12 @@
 pkg_name=meson
 pkg_origin=core
-pkg_version=0.57.1
+pkg_version=0.60.2
 pkg_description="The Meson Build System"
 pkg_upstream_url="http://mesonbuild.com/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://github.com/mesonbuild/${pkg_name}/archive/${pkg_version}.tar.gz"
-pkg_shasum=0c043c9b5350e9087cd4f6becf6c0d10b1d618ca3f919e0dcca2cdf342360d5d
+pkg_shasum=fc7c2f315b5b63fee0414b0b94b5a7d0e9c71c8c9bb8487314eb5a9a33984b8d
 pkg_deps=(
   # https://github.com/mesonbuild/meson/issues/7999
   # Doesn't seem to work against 3.9

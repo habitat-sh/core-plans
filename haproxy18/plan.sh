@@ -1,4 +1,4 @@
-source "$(dirname "${BASH_SOURCE[0]}")/../haproxy19/plan.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../haproxy/plan.sh"
 
 pkg_name=haproxy18
 pkg_origin=core
@@ -22,3 +22,14 @@ pkg_build_deps=(
   core/gcc
   core/make
 )
+do_build() {
+  make \
+    USE_PCRE=1 \
+    USE_PCRE_JIT=1 \
+    TARGET=linux2628 \
+    USE_OPENSSL=1 \
+    USE_ZLIB=1 \
+    USE_GETADDRINFO=1 \
+    ADDINC="${CFLAGS}" \
+    ADDLIB="${LDFLAGS}"
+}

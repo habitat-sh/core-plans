@@ -1,14 +1,14 @@
 pkg_name=ruby25
 pkg_origin=core
-pkg_version=2.5.8
+pkg_version=2.5.9
 pkg_description="A dynamic, open source programming language with a focus on \
   simplicity and productivity. It has an elegant syntax that is natural to \
   read and easy to write."
 pkg_license=("Ruby")
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source=https://cache.ruby-lang.org/pub/ruby/ruby-${pkg_version}.tar.gz
+pkg_source=https://cache.ruby-lang.org/pub/ruby/2.5/ruby-${pkg_version}.tar.gz
 pkg_upstream_url=https://www.ruby-lang.org/en/
-pkg_shasum=6c0bdf07876c69811a9e7dc237c43d40b1cb6369f68e0e17953d7279b524ad9a
+pkg_shasum=f5894e05f532b748c3347894a5efa42066fd11cc8d261d4d9788ff71da00be68
 pkg_deps=(core/glibc core/ncurses core/zlib core/openssl core/libyaml core/libffi core/readline core/nss-myhostname)
 pkg_build_deps=(core/cacerts core/coreutils core/diffutils core/patch core/make core/gcc core/sed)
 pkg_lib_dirs=(lib)

@@ -1,12 +1,12 @@
 pkg_name=bind
 pkg_origin=core
-pkg_version=9.17.11
+pkg_version=9.17.20
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Versatile, Classic, Complete Name Server Software"
 pkg_upstream_url="https://www.isc.org/downloads/bind/"
 pkg_license=("MPL-2.0")
 pkg_source="https://ftp.isc.org/isc/bind9/${pkg_version}/bind-${pkg_version}.tar.xz"
-pkg_shasum=00de7bad9291121f3b93e70a6959b540b002f742774823c358c7a416c2e2ed4b
+pkg_shasum=93a961f6b4072af260c5d900299eb660defec035f9a000c864ea5b78869a4d35
 pkg_deps=(
   core/glibc
   core/libxml2

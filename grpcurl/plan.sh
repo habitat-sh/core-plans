@@ -1,7 +1,7 @@
 gopkg="github.com/fullstorydev/grpcurl"
 pkg_name=grpcurl
 pkg_origin=core
-pkg_version="1.8.0"
+pkg_version="1.8.5"
 pkg_description="Like cURL, but for gRPC: Command-line tool for interacting with gRPC servers"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/fullstorydev/grpcurl/archive/v${pkg_version}.tar.gz"
@@ -12,7 +12,7 @@ pkg_build_deps=(
     core/git
     core/go
 )
-pkg_shasum="3688ef37e8d821d6a89c68856d9ae68527e7a65b9c64ae380b37b37f1cdeff22"
+pkg_shasum="1a9612560b2da18d50f0a46e9f2f5a7e5a13c4bb1ccef15ba65cb0c37335342b"
 
 do_build() {
     return 0

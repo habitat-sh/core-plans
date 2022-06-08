@@ -1,6 +1,6 @@
 pkg_name=systemd
 pkg_origin=core
-pkg_version=247
+pkg_version=249
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="systemd is an init system used in Linux distributions to \
 bootstrap the user space. Subsequently to booting, it is used to manage system \
@@ -8,7 +8,7 @@ processes."
 pkg_license=('GPL-2.0-only' 'LGPL-2.1-or-later')
 pkg_source="https://github.com/systemd/${pkg_name}/archive/v${pkg_version}.tar.gz"
 pkg_upstream_url="https://github.com/systemd/systemd"
-pkg_shasum=77146f7b27334aa69ef6692bed92c3c893685150f481e7254b81d4ea0f66c640
+pkg_shasum=174091ce5f2c02123f76d546622b14078097af105870086d18d55c1c2667d855
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(
@@ -53,10 +53,12 @@ do_prepare() {
   LD_LIBRARY_PATH="${LD_RUN_PATH}"
   export LD_LIBRARY_PATH
   build_line "Setting LD_LIBRARY_PATH=${LD_LIBRARY_PATH}"
+  pip install jinja2
 
   # https://github.com/systemd/systemd/commit/442bc2afee6c5f731c7b3e76ccab7301703a45a7
   # Bug with 247
-  patch -p1 < "${PLAN_CONTEXT}"/patches/0001-meson-set-cxx-variable-before-using-it.patch
+#  patch -p1 < "${PLAN_CONTEXT}"/patches/0001-meson-set-cxx-variable-before-using-it.patch
+  patch -p0 < "${PLAN_CONTEXT}/patches/build_fix_meson.patch"
 }
 
 do_build() {

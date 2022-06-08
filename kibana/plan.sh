@@ -1,5 +1,5 @@
 pkg_name=kibana
-pkg_version=6.8.14
+pkg_version=6.8.20
 pkg_origin=core
 pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"

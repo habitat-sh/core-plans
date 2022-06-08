@@ -18,6 +18,7 @@ pkg_build_deps=(
   core/ninja
   core/gcc
   core/pcre
+  core/patch
 )
 pkg_bin_dirs=(bin)
 
@@ -27,6 +28,7 @@ do_setup_environment() {
 
 do_prepare() {
   mkdir -p "${BUILDDIR}"
+  patch -p0 < "${PLAN_CONTEXT}/glibc_SIGSTKSZ_fix.patch"
 }
 
 do_build() {

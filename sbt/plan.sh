@@ -1,12 +1,12 @@
 pkg_origin=core
 pkg_name=sbt
-pkg_version=1.4.9
+pkg_version=1.5.6
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="A build tool for Scala, Java, and more"
 pkg_upstream_url="https://www.scala-sbt.org"
 pkg_license=("Apache-2.0")
 pkg_source="https://github.com/sbt/sbt/releases/download/v${pkg_version}/sbt-${pkg_version}.tgz"
-pkg_shasum=95468119f7641499367330a60a4b8a6211e6ea7f8bde7d647c67b19dd8fddb6e
+pkg_shasum=3c2d2774992fe27348759302b59862dd7469fdd4655d7c75c87bcaf1b0302068
 pkg_deps=(
   core/coreutils
   core/openjdk11

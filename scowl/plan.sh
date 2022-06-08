@@ -249,12 +249,12 @@
 
 pkg_name=scowl
 pkg_origin=core
-pkg_version=2017.08.24
+pkg_version=2020.12.07
 pkg_description="Spell Checking Oriented Word Lists (SCOWL)"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('MIT')
 pkg_source=http://downloads.sourceforge.net/wordlist/${pkg_name}-${pkg_version}.tar.gz
-pkg_shasum=ba84da9f5af06dbfded82236372545c06fd8162c3d48d11410bdfcf27ef3b0cd
+pkg_shasum=5587667caa20c4891390c2d42dbb4d5c4c3f41bee77af1457ece3ba23fb859cc
 pkg_upstream_url=http://wordlist.aspell.net/
 
 do_build() {

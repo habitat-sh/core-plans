@@ -1,12 +1,12 @@
 pkg_name=ghc
 pkg_origin=core
-pkg_version=8.10.4
+pkg_version=8.10.7
 pkg_license=('BSD-3-Clause')
 pkg_upstream_url="https://www.haskell.org/ghc/"
 pkg_description="The Glasgow Haskell Compiler"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="http://downloads.haskell.org/~ghc/${pkg_version}/ghc-${pkg_version}-src.tar.xz"
-pkg_shasum="52af871b4e08550257d720c2944ac85727d0b948407cef1bebfe7508c224910e"
+pkg_shasum=e3eef6229ce9908dfe1ea41436befb0455fefb1932559e860ad4c606b0d03c9d
 
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
@@ -46,9 +46,6 @@ do_prepare() {
   LIBRARY_PATH="${LIBRARY_PATH}:${LD_RUN_PATH}"
   export LIBRARY_PATH
   build_line "Updating LIBRARY_PATH=$LIBRARY_PATH"
-
-  cp mk/build.mk.sample mk/build.mk
-  sed -i '1iBuildFlavour = perf' mk/build.mk
 }
 
 do_build() {
@@ -62,5 +59,6 @@ do_build() {
     --with-gmp-includes="$(pkg_path_for gmp)/include" \
     --with-gmp-libraries="$(pkg_path_for gmp)/lib"
 
-  make -j"$(nproc)"
+  #make -j"$(nproc)"
+  make
 }

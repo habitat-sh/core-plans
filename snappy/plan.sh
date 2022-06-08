@@ -1,10 +1,10 @@
 pkg_origin=core
 pkg_name=snappy
-pkg_version=1.1.8
+pkg_version=1.1.9
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('BSD-3-Clause')
-pkg_source=https://github.com/google/snappy/archive/${pkg_version}.tar.gz
-pkg_shasum=16b677f07832a612b0836178db7f374e414f94657c138e6993cbfc5dcc58651f
+pkg_source=https://github.com/google/snappy
+pkg_shasum=noshasum
 pkg_deps=(core/glibc)
 pkg_build_deps=(
   core/cmake
@@ -12,12 +12,31 @@ pkg_build_deps=(
   core/make
   core/libtool
   core/patchelf
+  core/git
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_upstream_url=https://github.com/google/snappy
 pkg_description="A fast compressor/decompressor http://google.github.io/snappy/"
+
+do_download() {
+  return 0
+}
+
+do_verify() {
+  return 0
+}
+
+do_unpack() {
+  REPO_PATH="$HAB_CACHE_SRC_PATH/$pkg_dirname"
+  git clone "$pkg_source" "$REPO_PATH"
+  pushd "$REPO_PATH" || exit 1
+  git checkout "tags/${pkg_version}"
+  git submodule init
+  git submodule update
+  popd || exit 1
+}
 
 do_prepare() {
   __gcc_LD_RUN_PATH="$(pkg_path_for gcc)/LD_RUN_PATH"

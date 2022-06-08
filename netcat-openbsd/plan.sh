@@ -1,12 +1,12 @@
 pkg_name=netcat-openbsd
 pkg_origin=core
-pkg_version=1.217
+pkg_version=1.218
 pkg_description="TCP/IP swiss army knife, OpenBSD variant"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_upstream_url=https://tracker.debian.org/pkg/netcat
 pkg_license=('BSD-3-Clause')
 pkg_source=http://ftp.debian.org/debian/pool/main/n/${pkg_name}/${pkg_name}_${pkg_version}.orig.tar.gz
-pkg_shasum=fcb551d9987fd51d020c62b6d81df0c2bb17ce1887bbc3fda4d28313791cc0f5
+pkg_shasum=a28a5d39abaf481747b1e78b4b50e96d0cdab0ffef289cba156dc11941c64857
 pkg_deps=(core/glibc core/libbsd)
 pkg_build_deps=(
   core/gcc
@@ -21,7 +21,7 @@ do_download() {
 
   # Download patches to apply on top of the BSD code
   build_line "Downloading patches series file..."
-  local patch_base_url=https://sources.debian.net/data/main/n/${pkg_name}/${pkg_version}-3/debian/patches
+  local patch_base_url=https://sources.debian.net/data/main/n/${pkg_name}/${pkg_version}-4/debian/patches
 
   download_file $patch_base_url/series series
 

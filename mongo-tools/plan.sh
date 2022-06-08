@@ -1,6 +1,6 @@
 pkg_name=mongo-tools
 pkg_origin=core
-pkg_version=3.6.23
+pkg_version=3.7.9
 pkg_description="MongoDB Tools"
 pkg_upstream_url=https://github.com/mongodb/mongo-tools
 pkg_license=('MIT')
@@ -48,7 +48,7 @@ do_clean() {
 do_build() {
   pushd "$REPO_PATH" || exit 1
     mkdir "${GOPATH}"/bin
-    . ./set_goenv.sh
+    . ./set_gopath.sh
     for i in mongodump mongoexport mongofiles mongoimport mongorestore mongostat mongotop; do
       go build -o "${GOPATH}"/bin/$i $i/main/$i.go
     done
