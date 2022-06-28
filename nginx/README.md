@@ -1,10 +1,12 @@
-# Nginx
+[![Build Status](https://dev.azure.com/chefcorp-partnerengineering/Chef%20Base%20Plans/_apis/build/status/chef-base-plans.nginx?branchName=master)](https://dev.azure.com/chefcorp-partnerengineering/Chef%20Base%20Plans/_build/latest?definitionId=117&branchName=master)
 
-Nginx is an HTTP and reverse proxy server, a mail proxy server, and a generic TCP/UDP proxy server.
+# nginx
+
+Nginx is an HTTP and reverse proxy server, a mail proxy server, and a generic TCP/UDP proxy server.  See [documentation](https://docs.nginx.com)
 
 ## Maintainers
 
-* The Habitat Maintainers <humans@habitat.sh>
+* The Core Planners: <chef-core-planners@chef.io>
 
 ## Type of Package
 
@@ -12,7 +14,7 @@ Service package
 
 ## Usage
 
-This plan builds nginx and is usable standalone. However, the intention is that a configuration plan should be create to wrap this plan, allowing customization of the service and configuration.
+This plan builds nginx and is usable standalone. However, the intention is that a configuration plan should be created to wrap this plan, allowing customization of the service and configuration.
 
 Examples of this are detailed below.
 
@@ -20,25 +22,33 @@ Examples of this are detailed below.
 
 Consuming an Nginx service depends on what ports are exposed. Configuration plans wrapping `core/nginx` may expose more than a single port, however this core plan exposes a single http port:
 
-```
-han start <origin>/<app> --bind webserver:nginx.default
+```bash
+hab start <origin>/<app> --bind webserver:nginx.default
 ```
 
 The app being started should be configured to read a `port` binding from the webserver.
+
+For more information see [Binds and Exports](https://www.habitat.sh/docs/developing-packages/#runtime-binds-and-exports)
 
 ## Topologies
 
 Nginx is designed as a standalone service.
 
+For more information see [Topologies](https://www.habitat.sh/docs/using-habitat/topologies/)
+
 ## Update Strategies
 
 An at-once update strategy is recommended. However this can be changed / altered as you wrap the plan to customize its functionality.
+
+For more information see [Update Strategy](https://www.habitat.sh/docs/using-habitat/using-updates/)
 
 ### Configuration Updates
 
 It is highly recommended that this plan not be used directly as a service to run your webserver.
 
 Use this plan as a dependency of your plan, providing your own configuration and settings.
+
+For more information see [Running Chef Habitat Packages](https://www.habitat.sh/docs/using-habitat/using-packages/)
 
 ## Monitoring
 
@@ -56,14 +66,14 @@ A configuration plan is a Habitat plan that has a dependency on another plan, an
 
 Create a new plan:
 
-```
+```bash
 hab plan init my-webserver
 cd my-webserver
 ```
 
 At minimum, the `plan.sh` should contain the following:
 
-```
+```bash
 pkg_name=my-webserver
 pkg_origin=myorigin
 pkg_version="0.1.0"
@@ -84,7 +94,7 @@ do_install() {
 
 The `default.toml` should contain the following:
 
-```
+```toml
 worker_processes = "auto"
 port = 80
 
@@ -98,7 +108,7 @@ You can download the `mime.types` file from the [Nginx repository][mime-types].
 
 The `nginx.conf` file should contain at least the following:
 
-```
+```nginx
 daemon off;
 pid {{pkg.svc_var_path}}/pid;
 worker_processes {{cfg.worker_processes}};
@@ -133,7 +143,7 @@ The important pieces here are the `temp_path` overrides that will allow Nginx to
 
 Once you have created the above files, you can enter a habitat studio and build the plan:
 
-```
+```bash
 hab studio enter
 
 [1][default:/src:0]# build

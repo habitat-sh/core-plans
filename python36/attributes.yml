@@ -1,0 +1,24 @@
+plan_name : "python36"
+
+allow_list :
+  - "python3"
+  - "pip3"
+  - "easy_install-3.6"
+  - "pip"
+  - "python3.6"
+  - "pip3.6"
+  - "python"
+  - "python3.6m"
+
+block_list :
+  - "python-config"
+  - "2to3-3.6"
+  - "pydoc3"
+  - "pydoc3.6"
+  - "pyvenv-3.6"
+  - "python3-config"
+  - "pydoc"
+  - "pyvenv"
+  - "python3.6m-config"
+  - "2to3"
+  - "python3.6-config" 

@@ -1,0 +1,18 @@
+# Stub pipeline file which is static across all 
+# chef-base-plans repositories.
+
+name: 0.0$(Rev:.r)
+
+# Configure the resources, in this case it is the plan-builder repo which
+# contains the main pipeline file to run
+# https://docs.microsoft.com/en-us/azure/devops/pipelines/process/templates?view=azure-devops
+resources:
+  repositories:
+    - repository: plan_builder
+      type: github
+      endpoint: chef-base-plans
+      name: chef-base-plans/plan-builder
+
+# Execute the stages from the main pipeline template
+stages:
+  - template: azure-pipelines.yml@plan_builder

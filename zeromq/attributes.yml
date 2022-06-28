@@ -1,0 +1,3 @@
+plan_name: 'zeromq'
+library_filename: 'libzmq.so'
+pkgconfig_filename: 'libzmq.pc'

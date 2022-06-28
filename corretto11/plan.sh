@@ -1,0 +1,63 @@
+pkg_name=corretto11
+pkg_origin=core
+pkg_version=11.0.13.8.1
+pkg_description=('Corretto is a build of the Open Java Development Kit (OpenJDK) with long-term support from Amazon.')
+pkg_license=("GPL-2.0-only")
+pkg_upstream_url=https://aws.amazon.com/corretto/
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_source=https://corretto.aws/downloads/resources/${pkg_version}/amazon-corretto-${pkg_version}-linux-x64.tar.gz
+pkg_shasum=99a3a60556db2ad3fd04b1b5ef9e31f035cf1ff3d88286c548b4b58971986452
+pkg_dirname="amazon-corretto-${pkg_version}-linux-x64"
+pkg_filename="corretto-${pkg_version}_linux-x64_bin.tar.gz"
+pkg_deps=(
+  core/alsa-lib
+  core/freetype
+  core/gcc-libs
+  core/glibc
+  core/libxext
+  core/libxi
+  core/libxrender
+  core/libxtst
+  core/xlib
+  core/zlib
+)
+pkg_build_deps=(
+  core/patchelf
+  core/rsync
+)
+pkg_bin_dirs=(bin)
+pkg_lib_dirs=(lib)
+pkg_include_dirs=(include)
+
+source_dir="${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
+
+do_setup_environment() {
+ set_runtime_env JAVA_HOME "${pkg_prefix}"
+}
+
+do_build() {
+  return 0
+}
+
+do_install() {
+  pushd "${pkg_prefix}" || exit 1
+  rsync -avz "${source_dir}/" .
+
+  export LD_RUN_PATH="${LD_RUN_PATH}:${pkg_prefix}/lib/jli:${pkg_prefix}/lib/server:${pkg_prefix}/lib"
+
+  build_line "Setting interpreter for all executables to '$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2'"
+  build_line "Setting rpath for all libraries to '${LD_RUN_PATH}'"
+
+  find "${pkg_prefix}"/bin -type f -executable \
+    -exec sh -c 'file -i "$1" | grep -q "-executable; charset=binary"' _ {} \; \
+    -exec patchelf --set-interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" --set-rpath "${LD_RUN_PATH}" {} \;
+
+  find "${pkg_prefix}/lib" -type f -name "*.so" \
+    -exec patchelf --set-rpath "${LD_RUN_PATH}" {} \;
+
+  popd || exit 1
+}
+
+do_strip() {
+  return 0
+}
