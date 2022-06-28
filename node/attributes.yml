@@ -1,0 +1,3 @@
+plan_name: 'node'
+# See npm version at https://nodejs.org/en/download/releases/
+expected_npm_version: "6.14.15"

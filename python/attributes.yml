@@ -1,0 +1,20 @@
+plan_name : "python"
+
+allow_list :
+  - "python"
+  - "python3"
+  - "python3.10"
+  - "pip"
+  - "pip3"
+  - "pip3.10"
+
+
+block_list :
+  - "python-config"
+  - "python3-config"
+  - "python3.10-config"
+  - "2to3"
+  - "2to3-3.10"
+  - "pydoc"
+  - "pydoc3"
+  - "pydoc3.10"

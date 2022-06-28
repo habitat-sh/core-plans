@@ -1,0 +1,2 @@
+plan_name: 'rust'
+command_relative_path: 'bin/rustc'

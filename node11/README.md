@@ -1,15 +1,81 @@
-# node10
+[![Build Status](https://dev.azure.com/chefcorp-partnerengineering/Chef%20Base%20Plans/_apis/build/status/chef-base-plans.node11?repoName=chef-base-plans&branchName=master)](https://dev.azure.com/chefcorp-partnerengineering/Chef%20Base%20Plans/_build/latest?definitionId=231&repoName=chef-base-plans&branchName=master)
 
-Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.
+# node11
+
+Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.  See [documentation](https://nodejs.org/en/)
 
 ## Maintainers
 
-* The Habitat Maintainers: <humans@habitat.sh>
+* The Core Planners: <chef-core-planners@chef.io>
 
 ## Type of Package
 
 Binary package
 
-## Usage
+### Use as Dependency
 
-*TODO: Add instructions for usage*
+Binary packages can be set as runtime or build time dependencies. See [Defining your dependencies](https://www.habitat.sh/docs/developing-packages/developing-packages/#sts=Define%20Your%20Dependencies) for more information.
+
+To add core/node11 as a dependency, you can add one of the following to your plan file.
+
+##### Buildtime Dependency
+
+> pkg_build_deps=(core/node11)
+
+##### Runtime dependency
+
+> pkg_deps=(core/node11)
+
+### Use as Tool
+
+#### Installation
+
+To install this plan, you should run the following commands to first install, and then link the binaries this plan creates.
+
+``hab pkg install core/node11 --binlink``
+
+will add the following binaries to the PATH:
+
+* /bin/node
+* /bin/npm
+* /bin/npx
+
+For example:
+
+```bash
+# hab pkg install core/node11 --binlink
+» Installing core/node11
+☁ Determining latest version of core/node11 in the 'stable' channel
+↓ Downloading core/node11/11.15.0/20200812144127
+☛ Verifying core/node11/11.15.0/20200812144127
+✓ Installed core/node11/11.15.0/20200812144127
+★ Install of core/node11/11.15.0/20200812144127 complete with 7 new packages installed.
+» Binlinking npm from core/node11/11.15.0/20200812144127 into /bin
+★ Binlinked npm from core/node11/11.15.0/20200812144127 to /bin/npm
+» Binlinking node from core/node11/11.15.0/20200812144127 into /bin
+★ Binlinked node from core/node11/11.15.0/20200812144127 to /bin/node
+» Binlinking npx from core/node11/11.15.0/20200812144127 into /bin
+★ Binlinked npx from core/node11/11.15.0/20200812144127 to /bin/npx
+```
+
+#### Using an example binary
+
+You can now use the binary as normal.  For example:
+
+``/bin/node --help`` or ``node --help``
+
+```bash
+$ node --help
+Usage: node [options] [ script.js ] [arguments]
+       node inspect [options] [ script.js | host:port ] [arguments]
+
+Options:
+  -                                script read from stdin (default if no file name
+                                   is provided, interactive mode if a tty)
+  --                               indicate the end of node options
+  --abort-on-uncaught-exception    aborting instead of exiting causes a core file
+                                   to be generated for analysis
+  -c, --check                      syntax check script without executing
+...
+...
+```

@@ -1,13 +1,93 @@
-# Concourse
-The concourse plan _only_ provides users access to the standalone [concourse binary](https://concourse.ci/binaries.html). It is provided with the intention that any user's who need to run concourse will write their own plan that depends on this package and provide their own runtime management.
+[![Build Status](https://dev.azure.com/chefcorp-partnerengineering/Chef%20Base%20Plans/_apis/build/status/chef-base-plans.concourse?branchName=master)](https://dev.azure.com/chefcorp-partnerengineering/Chef%20Base%20Plans/_build/latest?definitionId=201&branchName=master)
+
+# concourse
+
+Concourse is a pipeline-based continuous thing-doer.  This habitat plan _only_ provides users access to the standalone binaries.  As a result, anyone using this habitat package will need to write their own plan that depends on this package and provide their own runtime management.  See the [Additional Steps](#additional-steps) section for an example setup.
+
+Refer also to the [documentation](https://concourse-ci.org/docs.html)
+
+## Maintainers
+
+* The Core Planners: <chef-core-planners@chef.io>
+
+## Type of Package
+
+Binary package
+
+### Use as Dependency
+
+Binary packages can be set as runtime or build time dependencies. See [Defining your dependencies](https://www.habitat.sh/docs/developing-packages/developing-packages/#sts=Define%20Your%20Dependencies) for more information.
+
+To add core/concourse as a dependency, you can add one of the following to your plan file.
+
+##### Buildtime Dependency
+
+> pkg_build_deps=(core/concourse)
+
+##### Runtime dependency
+
+> pkg_deps=(core/concourse)
+
+### Use as Tool
+
+#### Installation
+
+To install this plan, you should run the following commands to first install, and then link the binaries this plan creates.
+
+``hab pkg install core/concourse --binlink``
+
+will add the following binary to the PATH:
+
+* /bin/concourse
+
+For example:
+
+```bash
+$ hab pkg install core/concourse --binlink
+» Installing core/concourse
+☁ Determining latest version of core/concourse in the 'stable' channel
+→ Found newer installed version (core/concourse/4.2.2/20200818102606) than remote version (core/concourse/4.2.2/20200404015818)
+→ Using core/concourse/4.2.2/20200818102606
+★ Install of core/concourse/4.2.2/20200818102606 complete with 0 new packages installed.
+» Binlinking concourse from core/concourse/4.2.2/20200818102606 into /bin
+★ Binlinked concourse from core/concourse/4.2.2/20200818102606 to /bin/concourse
+```
+
+#### Using an example binary
+
+You can now use the binary as normal.  For example:
+
+``/bin/concourse --help`` or ``concourse --help``
+
+```bash
+$ concourse --help
+Usage:
+  concourse [OPTIONS] <command>
+
+Application Options:
+  -v, --version  Print the version of Concourse and exit [$CONCOURSE_VERSION]
+
+Help Options:
+  -h, --help     Show this help message
+
+Available commands:
+  land-worker    Safely drain a worker's assignments for temporary downtime.
+  migrate
+  quickstart     Run both 'web' and 'worker' together, auto-wired. Not recommended for production.
+  retire-worker  Safely remove a worker from the cluster permanently.
+  web            Run the web UI and build scheduler.
+  worker         Run and register a worker.
+```
+
+#### Additional Steps
 
 Concourse is a complex piece of software with multiple ways in which it can be configured to run. As such we provide this package to enable you to wrap and automate your preferred deployment style.
 
-## Examples
 Below we have provided an example configuration for deploying Concourse.
 
 **concourse-web/plan.sh**
-```
+
+```bash
 pkg_name=concourse-web
 pkg_origin=eeyun
 pkg_version="0.1.0"
@@ -34,8 +114,8 @@ do_install(){
 ```
 
 **concourse-web/default.toml**
-```
 
+```toml
 [concourse]
 username = "concourse"
 password = "changeme"
@@ -49,8 +129,10 @@ username = "concourse"
 password = "changeme"
 dbname = "concourse"
 ```
+
 **concourse-web/hooks/run**
-```
+
+```bash
 #!/bin/bash -xe
 #
 exec 2>&1
@@ -73,8 +155,10 @@ concourse web \
     --tsa-host-key {{pkg.svc_files_path}}/tsa_host_key \
     --tsa-authorized-keys {{pkg.svc_files_path}}/authorized_worker_keys
 ```
+
 **concourse-web/config/config.sh**
-```
+
+```bash
 #!/bin/bash
 
 export CONCOURSE_BASIC_AUTH_USERNAME="{{cfg.concourse.username}}"
