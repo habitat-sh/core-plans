@@ -7,7 +7,7 @@
 # Each pipeline will be unique, in that it generates a known set of steps for each Plan that was changed
 # as part of the PR. The steps are defined in verify_linux_pipeline.yml (for Linux) and
 # verify_windows_pipeline.yml (for Windows).
-
+git config --global --add safe.directory /workdir
 set -euo pipefail
 
 default_base_branch='main'
@@ -15,6 +15,7 @@ base_branch="${BUILDKITE_PULL_REQUEST_BASE_BRANCH:-$default_base_branch}"
 
 # Ensure base branch is always up to date when generating our pipeline
 git fetch origin "$base_branch" --quiet
+
 
 # Determine the files changed between this PR and the base branch (usually master).
 # Group them by plan and use that as the unit of work in
