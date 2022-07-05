@@ -15,6 +15,7 @@ base_branch="${BUILDKITE_PULL_REQUEST_BASE_BRANCH:-$default_base_branch}"
 
 # Ensure base branch is always up to date when generating our pipeline
 git fetch origin "$base_branch" --quiet
+git config --global --add safe.directory /workdir
 
 # Determine the files changed between this PR and the base branch (usually master).
 # Group them by plan and use that as the unit of work in
