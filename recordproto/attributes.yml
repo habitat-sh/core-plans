@@ -1,0 +1,3 @@
+plan_name: 'recordproto'
+library_filename: 'recordproto.h'
+pkgconfig_filename: 'recordproto.pc'
