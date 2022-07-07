@@ -39,7 +39,7 @@ do_begin() {
 
   # Source a file containing an array of patch URLs and an array of patch file
   # shasums
-  source "${PLAN_CONTEXT}/readline-patches.sh"
+  source "${PLAN_CONTEXT}/../readline-patches.sh"
 }
 
 do_download() {
@@ -80,7 +80,7 @@ do_prepare() {
   # Thanks to:
   # https://github.com/NixOS/nixpkgs/blob/release-15.09/pkgs/development/libraries/readline/link-against-ncurses.patch
   build_line "Applying patch link-against-ncurses.patch"
-  patch -p1 -i "$PLAN_CONTEXT/link-against-ncurses.patch"
+  patch -p1 -i "${PLAN_CONTEXT}/../link-against-ncurses.patch"
 }
 
 do_install() {
