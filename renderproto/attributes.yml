@@ -1,0 +1,3 @@
+plan_name: 'renderproto'
+library_filename: 'renderproto.h'
+pkgconfig_filename: 'renderproto.pc'
