@@ -25,7 +25,7 @@ do_prepare() {
   # Allow dots in usernames.
   #
   # Thanks to: http://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/sys-apps/shadow/files/shadow-4.1.3-dots-in-usernames.patch
-  patch -p1 -i "$PLAN_CONTEXT/dots-in-usernames.patch"
+  patch -p1 -i "$PLAN_CONTEXT/../dots-in-usernames.patch"
 
   # Disable the installation of the `groups` program as Coreutils provides a
   # better version.
