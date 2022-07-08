@@ -16,7 +16,7 @@ pkg_deps=(
 pkg_scaffolding=core/scaffolding-base
 
 do_install() {
-  install -D -m 0644 "$PLAN_CONTEXT/lib/scaffolding.sh" "$pkg_prefix/lib/scaffolding.sh"
-  install -D -m 0644 "$PLAN_CONTEXT/lib/gopath_mode.sh" "$pkg_prefix/lib/gopath_mode.sh"
-  install -D -m 0644 "$PLAN_CONTEXT/lib/go_module.sh" "$pkg_prefix/lib/go_module.sh"
+  install -D -m 0644 "$PLAN_CONTEXT/../lib/scaffolding.sh" "$pkg_prefix/lib/scaffolding.sh"
+  install -D -m 0644 "$PLAN_CONTEXT/../lib/gopath_mode.sh" "$pkg_prefix/lib/gopath_mode.sh"
+  install -D -m 0644 "$PLAN_CONTEXT/../lib/go_module.sh" "$pkg_prefix/lib/go_module.sh"
 }
