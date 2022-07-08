@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #/ Usage: test.sh <pkg_ident>
 #/
 #/ Example: test.sh core/attr/2.4.48/20181108151533
