@@ -5,3 +5,4 @@ summary: InSpec controls for testing Habitat Core Plan automake
 version: 0.1.0
 license: Apache-2.0
 inspec_version: '>= 4.18.108'
+
