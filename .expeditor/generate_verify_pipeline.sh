@@ -33,10 +33,14 @@ plans_changed() {
 # for each core-plan.
 emit_pipeline() {
   local pipeline_template
-  local plan
+  local plan=$2
 
   pipeline_template="$1"
-  plan="$2"
+	if [[ -f $plan/plan.sh ]];then
+		plan="$2"
+	elif [[ -f $plan/habitat/plan.sh ]];then
+		plan="$2/habitat"
+	fi
 
   sed "s|@@plan@@|$plan|" "$pipeline_template"
 }
