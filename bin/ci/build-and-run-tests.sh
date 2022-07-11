@@ -2,6 +2,10 @@
 
 set -eou pipefail
 
+# nimit: Fix for git error due to CVE-2022-24765
+# https://github.blog/2022-04-12-git-security-vulnerability-announced
+git config --global --add safe.directory /workdir
+
 # Don't attempt to build the following plans. They have resource requirements
 # or build times that exceed the currently available resources on our CI
 # infrastructure.
