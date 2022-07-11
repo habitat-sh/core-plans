@@ -64,7 +64,7 @@ for plan in ${plans[@]}; do
     emit_pipeline .expeditor/templates/verify_shared_pipeline.yml "$plan"
   fi
 
-  if [[ -f $plan/plan.sh ]]; then
+  if [[ -f $plan/plan.sh ]] || [[ -f $plan/habitat/plan.sh ]]; then
     emit_pipeline .expeditor/templates/verify_linux_pipeline.yml "$plan"
   fi
 
