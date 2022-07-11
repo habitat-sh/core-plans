@@ -29,7 +29,7 @@ PLAN_BLACKLIST=(
  mysql
  opendistro-for-elasticsearch
 )
-plan="$(basename "$1")"
+plan="$(dirname "$1")"
 
 HAB_ORIGIN=ci
 export HAB_ORIGIN
