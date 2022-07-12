@@ -1,5 +1,5 @@
 #!/bin/bash
-
+git config --global --add safe.directory /workdir
 set -eou pipefail
 
 # Don't attempt to build the following plans. They have resource requirements
