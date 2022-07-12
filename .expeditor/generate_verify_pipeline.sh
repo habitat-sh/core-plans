@@ -37,9 +37,9 @@ emit_pipeline() {
 
   pipeline_template="$1"
 	if [[ -f $plan/plan.sh ]];then
-		plan="$plan"
+		plan="${plan}"
 	elif [[ -f $plan/habitat/plan.sh ]];then
-		plan="$plan/habitat"
+		plan="${plan}/habitat"
 	fi
 
   sed "s|@@plan@@|$plan|" "$pipeline_template"
