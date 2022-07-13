@@ -7,10 +7,10 @@ control 'core-plans-terraform-exists' do
   impact 1.0
   title 'Ensure terraform exists'
   desc '
-  Verify terraform by ensuring bin/terraform 
+  Verify terraform by ensuring bin/terraform
   (1) exists and
   (2) is executable'
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
