@@ -1,0 +1,3 @@
+plan_name: 'xlib'
+library_filename: 'Xlib.so'
+pkgconfig_filename: 'x11.pc'
