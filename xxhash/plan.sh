@@ -2,6 +2,7 @@ pkg_name=xxhash
 pkg_origin=core
 pkg_version="0.8.1"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
+pkg_description="Extremely fast non-cryptographic hash algorithm"
 pkg_license=('BSD 2-Clause License' 'GPL V2')
 pkg_deps=(core/glibc)
 pkg_build_deps=(core/make core/gcc core/git)
