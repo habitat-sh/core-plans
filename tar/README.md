@@ -72,4 +72,4 @@ Examples:
 #### Notes
 
 ##### Known issues
-* Running DO_CHECK may show one test (`listed04.at`) failing on some computers - particularly on OSX laptops. Ref: https://github.com/habitat-sh/core-plans/issues/1636 
+* Running DO_CHECK may show one test (`listed04.at`) failing on some computers - particularly on OSX laptops. Ref: https://github.com/habitat-sh/core-plans/issues/1636
