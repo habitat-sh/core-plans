@@ -61,11 +61,11 @@ control 'core-plans-tcl-binaries' do
       it { should be_executable }
     end
   end
-  
+
   #describe command("#{File.join(hab_pkg_path, 'bin', "sqlite3_analyzer")} --version") do
   #  its('stdout') { should_not be_empty }
   #  its('stdout') { should match /[0-9]+\.[0-9]+\.[0-9]+/ }
   #  #its('stderr') { should be_empty }
   #  its('exit_status') { should eq 0 }
   #end
-end 
+end
