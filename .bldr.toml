@@ -1405,6 +1405,8 @@ plan_path = "tcl"
 plan_path = "tcpdump"
 [telegraf]
 plan_path = "telegraf"
+[terraform]
+plan_path = "terraform"
 [tesseract]
 plan_path = "tesseract"
 [texinfo]
