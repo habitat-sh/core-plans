@@ -1,0 +1,3 @@
+plan_name: 'xcb-proto'
+library_filename: 'xcb-proto.so'
+pkgconfig_filename: 'xcb-proto.pc'
