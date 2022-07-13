@@ -10,7 +10,7 @@ control 'core-plans-texinfo' do
   desc '
   There are several binaries in the texinfo package.  We check that the binary is executable and version commands succeed
   '
-  
+
   texinfo_pkg_ident = command("#{hab_path} pkg path #{plan_ident}")
   describe texinfo_pkg_ident do
     its('stdout') { should_not be_empty }
