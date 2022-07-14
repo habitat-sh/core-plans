@@ -1296,6 +1296,11 @@ plan_path = "ruby26"
 paths = [
   "ruby/*"
 ]
+[ruby27]
+plan_path = "ruby27"
+paths = [
+  "ruby/*"
+]
 [ruby30]
 plan_path = "ruby30"
 paths = [
