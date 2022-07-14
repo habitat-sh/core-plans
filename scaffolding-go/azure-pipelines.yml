@@ -1,4 +1,4 @@
-# Stub pipeline file which is static across all 
+# Stub pipeline file which is static across all
 # chef-base-plans repositories.
 
 name: 0.0$(Rev:.r)

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #/ Usage: test.sh <pkg_ident>
 
 set -euo pipefail
