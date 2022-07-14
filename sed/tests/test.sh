@@ -1,3 +1,5 @@
+#!/bin/bash
+
 @test "Help command" {
   run hab pkg exec $TEST_PKG_IDENT sed --help
   [ $status -eq 0 ]
