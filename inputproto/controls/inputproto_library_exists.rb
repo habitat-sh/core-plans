@@ -33,6 +33,7 @@ control 'core-plans-inputproto-library-exists' do
         it { should be_readable }
       end
   end
+  
 
   # (3) its pkgconfig metadata contains the expected version
   plan_pkg_ident = ((plan_installation_directory.stdout.strip).match /(?<=pkgs\/)(.*)/)[1]
