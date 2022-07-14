@@ -1,6 +1,5 @@
-TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
-
 @test "Version matches" {
-  result="$(vim --version | head -n3 | tail -n1)"
-  [ "$result" = "Compiled by Habitat, vim release ${TEST_PKG_VERSION}" ]
+	expected_version="$(echo $TEST_PKG_IDENT | cut -d/ -f 3)"
+	result="$(vim  --version | sed '3!d' | awk '{print $6}')"
+	[ "$result" = "${expected_version}" ]
 }
