@@ -35,5 +35,3 @@ control 'core-plans-ruby27-exists' do
     end
   end
 end
-
-
