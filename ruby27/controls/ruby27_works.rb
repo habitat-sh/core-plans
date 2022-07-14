@@ -49,10 +49,10 @@ control 'core-plans-ruby27-works' do
     #   command_output_pattern: /rubygems_update \[options\]/,
     # },
   }
-  
+
   # Use the following to pull out a subset of the above and test progressiveluy
   subset = full_suite.select { |key, value| key.to_s.match(/^.*$/) }
-  
+
   # over-ride the defaults below with (command_suffix:, io:, etc)
   subset.each do |binary_name, value|
     # set default values if each binary doesn't define an over-ride

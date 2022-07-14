@@ -7,10 +7,10 @@ control 'core-plans-ruby27-exists' do
   impact 1.0
   title 'Ensure ruby27 exists'
   desc '
-  Verify ruby27 by ensuring bin/ruby27 
+  Verify ruby27 by ensuring bin/ruby27
   (1) exists and
   (2) is executable'
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
@@ -35,3 +35,5 @@ control 'core-plans-ruby27-exists' do
     end
   end
 end
+
+

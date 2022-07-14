@@ -49,7 +49,7 @@ TODO: ADD THE OUTPUT HERE
 
 ##### Additional Steps
 
-TODO: ADD OR DELETE THIS SECTION AS NEEDED 
+TODO: ADD OR DELETE THIS SECTION AS NEEDED
 
 To use core/ruby27 as a stand alone binary, you must configure ...
 
