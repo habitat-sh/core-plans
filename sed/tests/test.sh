@@ -1,15 +1,18 @@
 #!/bin/bash
 
-@test "Help command" {
-  run hab pkg exec "${TEST_PKG_IDENT}" sed --help
-  [ $status -eq 0 ]
-}
+set -euo pipefail
 
-substitute_command() {
-  echo 'catdogcat' | hab pkg exec "${TEST_PKG_IDENT}" sed s/dog/cat/g
-}
-@test "Basic text substitution" {
-  run substitute_command
-  [ "$status" -eq 0 ]
-  [ "$output" = 'catcatcat' ]
-}
+TESTDIR="$(dirname "${0}")"
+
+if [ -z "${1:-}" ]; then
+  echo "Usage: $0 FULLY_QUALIFIED_PACKAGE_IDENT"
+  exit 1
+fi
+
+TEST_PKG_IDENT="$1"
+
+hab pkg install core/bats --binlink
+hab pkg install "$TEST_PKG_IDENT"
+
+export TEST_PKG_IDENT
+bats "${TESTDIR}/test.bats"
