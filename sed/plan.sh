@@ -35,7 +35,7 @@ do_prepare() {
   #
   # Thanks to:
   # https://www.redhat.com/archives/libvir-list/2017-September/msg01054.html
-  patch -p1 < "$PLAN_CONTEXT/../fix-test-getopt-posix-with-glibc-2.26.patch"
+  patch -p1 < "$PLAN_CONTEXT/fix-test-getopt-posix-with-glibc-2.26.patch"
 
   # Fix a failing test
   #
