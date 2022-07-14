@@ -8,16 +8,16 @@ control 'core-plans-iptables-works' do
   title 'Ensure iptables works as expected'
   desc '
   Verify iptables by ensuring that
-  (1) its installation directory exists 
+  (1) its installation directory exists
   (2) its binaries return expected output either version or help usage
   '
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
   end
-  
+
   plan_pkg_version = plan_installation_directory.stdout.split("/")[5]
   full_suite = {
     "ip6tables" => {},
@@ -43,10 +43,10 @@ control 'core-plans-iptables-works' do
       command_output_pattern: /iptables\s+v#{plan_pkg_version}\s+\(legacy\)/,
     },
   }
-  
+
   # Use the following to pull out a subset of the above and test progressiveluy
   subset = full_suite.select { |key, value| key.to_s.match(/^.*$/) }
-  
+
   # over-ride the defaults below with (command_suffix:, io:, etc)
   subset.each do |binary_name, value|
     # set default values if each binary doesn't define an over-ride

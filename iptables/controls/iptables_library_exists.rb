@@ -7,23 +7,23 @@ control 'core-plans-iptables-library-exists' do
   impact 1.0
   title 'Ensure iptables library exists'
   desc '
-  Verify iptables library by ensuring that 
-  (1) its installation directory exists; 
-  (2) its libraries exist; 
+  Verify iptables library by ensuring that
+  (1) its installation directory exists;
+  (2) its libraries exist;
   (3) each pkgconfig metadata contains the expected version
   '
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
   end
 
-  # (2) its libraries exist; 
+  # (2) its libraries exist;
   [
     "libip4tc.so",
-    "libip6tc.so",  
-    "libipq.so",  
+    "libip6tc.so",
+    "libipq.so",
     "libxtables.so",
   ]. each do |library_filename|
     library_full_path = File.join(plan_installation_directory.stdout.strip, 'lib', library_filename)
@@ -38,8 +38,8 @@ control 'core-plans-iptables-library-exists' do
   [
     "libip4tc.pc",
     "libip6tc.pc",
-    "libipq.pc",  
-    "libiptc.pc",  
+    "libipq.pc",
+    "libiptc.pc",
     "xtables.pc",
   ]. each do |pkgconfig_filename|
     pkgconfig_full_path = File.join(plan_installation_directory.stdout.strip, 'lib', 'pkgconfig', pkgconfig_filename)
