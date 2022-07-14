@@ -7,10 +7,10 @@ control 'core-plans-runc-exists' do
   impact 1.0
   title 'Ensure runc exists'
   desc '
-  Verify runc by ensuring bin/runc 
+  Verify runc by ensuring bin/runc
   (1) exists and
   (2) is executable'
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
