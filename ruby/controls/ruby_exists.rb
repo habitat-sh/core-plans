@@ -34,4 +34,3 @@ control 'core-plans-ruby-exists' do
     end
   end
 end
-
