@@ -7,10 +7,10 @@ control 'core-plans-rsync-exists' do
   impact 1.0
   title 'Ensure rsync exists'
   desc '
-  Verify rsync by ensuring bin/rsync 
+  Verify rsync by ensuring bin/rsync
   (1) exists and
   (2) is executable'
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
