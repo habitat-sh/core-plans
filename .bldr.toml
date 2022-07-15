@@ -77,6 +77,10 @@ plan_path = "bind"
 plan_path = "binutils"
 [bison]
 plan_path = "bison"
+[bundler]
+plan_path = "bundler"
+[busybox]
+plan_path = "busybox"
 [boost]
 plan_path = "boost"
 [boost159]
