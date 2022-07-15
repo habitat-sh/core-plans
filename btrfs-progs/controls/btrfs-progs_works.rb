@@ -36,7 +36,7 @@ control 'core-plans-btrfs-progs-works' do
     command_suffix: "--help",
   },
   "btrfs-image" => {
-    pattern: /usage: btrfs-image \[options\] source target/, 
+    pattern: /usage: btrfs-image \[options\] source target/,
     command_suffix: "--help",
   },
   "btrfs-map-logical" => {
