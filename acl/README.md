@@ -55,7 +55,7 @@ $ hab pkg install core/acl --binlink
 ★ Binlinked chacl from core/acl/2.2.53/20200605142503 to /bin/chacl
 » Binlinking setfacl from core/acl/2.2.53/20200605142503 into /bin
 ★ Binlinked setfacl from core/acl/2.2.53/20200605142503 to /bin/setfacl
-$ 
+$
 ```
 
 #### Using an example binary

@@ -4,6 +4,8 @@ plan_path = "7zip"
 plan_path = "acbuild"
 [acl]
 plan_path = "acl"
+[alsa-lib]
+plan_path = "alsa-lib"
 [alex]
 plan_path = "alex"
 [ant]
