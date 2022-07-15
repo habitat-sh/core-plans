@@ -12,5 +12,5 @@ export PKGIDENT
 hab pkg install core/bats --binlink
 hab pkg install core/binutils # for strings
 hab pkg install core/file # for file
-hab pkg install "${PKGIDENT}"
+hab pkg install "${PKGIDENT}" --binlink
 bats "$(dirname "${0}")/test.bats"
