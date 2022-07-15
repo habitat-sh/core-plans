@@ -20,6 +20,6 @@
     # include these, but will instead include references to indicate
     # seccomp is not supported.
     result="$(hab pkg exec core/binutils strings /hab/pkgs/${PKGIDENT}/bin/runc)"
-    [[ "$result" =~ "github.com/opencontainers/runc/vendor/github.com/seccomp/libseccomp-golang" ]]
+    [[ "$result" =~ "github.com/seccomp/libseccomp-golang" ]]
     ! [[ "$result" =~ "github.com/opencontainers/runc/libcontainer/seccomp/seccomp_unsupported.go" ]]
 }
