@@ -216,6 +216,10 @@ plan_path = "dejagnu"
 [delmo]
 plan_path = "delmo"
 [dgraph]
+[dep]
+plan_path = "dep"
+[devicemapper]
+plan_path= "devicemapper"
 plan_path = "dgraph"
 [dgraph-ratel]
 plan_path = "dgraph-ratel"

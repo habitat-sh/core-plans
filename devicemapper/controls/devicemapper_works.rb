@@ -117,5 +117,5 @@ control 'core-plans-devicemapper-works' do
       its("stdout") { should match command_output_pattern }
     end
   end
-  
+
 end
