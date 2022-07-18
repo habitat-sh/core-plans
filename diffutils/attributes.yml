@@ -1,0 +1,3 @@
+plan_name: 'diffutils'
+command_relative_path: 'bin/diff'
+hab_path: '/tmp/hab'
