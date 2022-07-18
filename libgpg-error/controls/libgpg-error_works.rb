@@ -8,16 +8,16 @@ control 'core-plans-libgpg-error-works' do
   title 'Ensure libgpg-error works as expected'
   desc '
   Verify libgpg-error by ensuring that
-  (1) its installation directory exists 
+  (1) its installation directory exists
   (2) its binaries return the expected output, i.e., version or help usage
   '
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
   end
-  
+
   plan_pkg_version = plan_installation_directory.stdout.split("/")[5]
   full_suite = {
     "gpg-error" => {
