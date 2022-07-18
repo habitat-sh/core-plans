@@ -75,16 +75,16 @@ building artifact
 ...
 '/hab/cache/artifacts/core-dex-2.24.0-20200826103442-x86_64-linux.hart' -> '/src/dex/results/core-dex-2.24.0-20200826103442-x86_64-linux.hart'
    dex: hab-plan-build cleanup
-   dex: 
+   dex:
    dex: Source Path: /hab/cache/src/dex-2.24.0
    dex: Installed Path: /hab/pkgs/core/dex/2.24.0/20200826103442
    dex: Artifact: /src/dex/results/core-dex-2.24.0-20200826103442-x86_64-linux.hart
    dex: Build Report: /src/dex/results/last_build.env
    dex: SHA256 Checksum: 86d51165eadc82d9bd29a59dad5f2289830f99b78eb8b4b5bc0754977170c3fd
    dex: Blake2b Checksum: 6cbd551048d0e73aa21d7636b2d697740fa14da449242b6a1c5e7bf291afed0b
-   dex: 
+   dex:
    dex: I love it when a plan.sh comes together.
-   dex: 
+   dex:
    dex: Build time: 0m33s
 
 # install dex
