@@ -1301,6 +1301,11 @@ plan_path = "ruby30"
 paths = [
   "ruby/*"
 ]
+[ruby31]
+plan_path = "ruby31"
+paths = [
+  "ruby/*"
+]
 build_targets = [
   "x86_64-linux",
   "x86_64-linux-kernel2"

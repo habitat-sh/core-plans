@@ -18,6 +18,8 @@ pkg_bin_dirs=(bin)
 pkg_interpreters=(bin/ruby)
 pkg_dirname="ruby-$pkg_version"
 
+git update-index --chmod=+x ./tests/test.sh
+
 do_prepare() {
   export CFLAGS="${CFLAGS} -O3 -g -pipe"
   build_line "Setting CFLAGS='$CFLAGS'"
