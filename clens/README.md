@@ -53,7 +53,7 @@ To view the library files you must first search for them with habitat.
 > /hab/pkgs/core/clens/0.7.0/20200306015737
 
 ```bash
-ls /hab/pkgs/core/clens/0.7.0/20200306015737 
+ls /hab/pkgs/core/clens/0.7.0/20200306015737
 ```
 > include/
 >
