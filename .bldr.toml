@@ -287,6 +287,8 @@ plan_path = "elasticsearch"
 plan_path = "elasticsearch5"
 [elfutils]
 plan_path = "elfutils"
+[elixir]
+plan_path = "elixir"
 [envconsul]
 plan_path = "envconsul"
 [envdir]

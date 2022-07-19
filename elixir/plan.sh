@@ -24,14 +24,14 @@ pkg_lib_dirs=(lib)
 do_prepare() {
   localedef -i en_US -f UTF-8 en_US.UTF-8
   # ensure locale is also set for buildtime; otherwise compilation will throw a warning
-  export LC_ALL=en_US.UTF-8 
+  export LC_ALL=en_US.UTF-8
   export LANG=en_US.UTF-8
 }
 
 do_setup_environment() {
   # ensure locale is also set for runtime environment; otherwise
-  # stderr will be populated with 'warning: the VM is running with 
-  # native name encoding of latin1 which may cause Elixir to malfunction...se 
+  # stderr will be populated with 'warning: the VM is running with
+  # native name encoding of latin1 which may cause Elixir to malfunction...se
   # ensure your locale is set to UTF-8 (which can be verified by running "locale" in your shell'
   push_runtime_env LC_ALL "en_US.UTF-8"
   push_runtime_env LANG "en_US.UTF-8"
