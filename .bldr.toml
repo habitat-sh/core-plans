@@ -765,6 +765,8 @@ plan_path = "libpciaccss"
 plan_path = "libpipeline"
 [libpng]
 plan_path = "libpng"
+[libpthread-stubs]
+plan_path = "libpthread-stubs"
 [libpq]
 plan_path = "libpq"
 [libressl]
@@ -776,6 +778,8 @@ paths = [
 ]
 [libscrypt]
 plan_path = "libscrypt"
+[libseccomp]
+plan_path = "libseccomp"
 [libsm]
 plan_path = "libsm"
 [libsodium]

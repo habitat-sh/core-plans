@@ -1,0 +1,3 @@
+plan_name: 'libseccomp'
+library_filename: 'libseccomp.so'
+pkgconfig_filename: 'libseccomp.pc'
