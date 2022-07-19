@@ -35,7 +35,7 @@ do_prepare() {
   # the latest glibc.
   # Thanks to Arch Linux for pulling these together
   # https://git.archlinux.org/svntogit/packages.git/tree/trunk?h=packages/findutils
-    
+
   # The Makefiles were generated with aclocal-1.14, and the above patches
   # force it to want to regenerate. The following four lines can be removed
   # if findutils releases a new version that no longer requries the patches
