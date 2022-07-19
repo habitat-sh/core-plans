@@ -809,6 +809,8 @@ plan_path = "libuv"
 plan_path = "libvterm"
 [libwebp]
 plan_path = "libwebp"
+[libxau]
+plan_path = "libxau"
 [libxcomposite]
 plan_path = "libxcomposite"
 [libxcursor]
