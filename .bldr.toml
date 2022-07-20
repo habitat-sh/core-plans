@@ -484,6 +484,8 @@ plan_path = "gox"
 plan_path = "gperf"
 [gperftools]
 plan_path = "gperftools"
+[gpgme]
+plan_path = "gpgme"
 [gradle]
 plan_path = "gradle"
 [gradle4]

@@ -41,7 +41,7 @@ hab pkg install core/gpgme
 → Found newer installed version (core/gpgme/1.6.0/20200903102354) than remote version (core/gpgme/1.6.0/20200416080552)
 → Using core/gpgme/1.6.0/20200903102354
 ★ Install of core/gpgme/1.6.0/20200903102354 complete with 0 new packages installed.
-[23][default:/hab/pkgs/core/gpgme/1.6.0/20200903102354:0]# 
+[23][default:/hab/pkgs/core/gpgme/1.6.0/20200903102354:0]#
 ```
 
 #### Viewing library files
