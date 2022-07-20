@@ -815,6 +815,8 @@ plan_path = "libxcomposite"
 plan_path = "libxcursor"
 [libxdamage]
 plan_path = "libxdamage"
+[libxi]
+plan_path = "libxi"
 [libxml2]
 plan_path = "libxml2"
 [libxmu]

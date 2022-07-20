@@ -1,0 +1,3 @@
+plan_name: 'libxi'
+library_filename: 'libXi.so'
+pkgconfig_filename: 'xi.pc'
