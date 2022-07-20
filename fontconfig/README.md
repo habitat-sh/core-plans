@@ -52,7 +52,7 @@ $ hab pkg install core/fontconfig --binlink
 » Installing core/fontconfig
 ☁ Determining latest version of core/fontconfig in the 'stable' channel
 ↓ Downloading core/fontconfig/2.11.95/20200319210705
-    705.94 KB / 705.94 KB | [=====] 100.00 % 11.85 MB/s 
+    705.94 KB / 705.94 KB | [=====] 100.00 % 11.85 MB/s
 ☛ Verifying core/fontconfig/2.11.95/20200319210705
 → Using core/acl/2.2.53/20200305230628
 → Using core/attr/2.4.48/20200305230504
@@ -103,7 +103,7 @@ You can now use the binary as normal.  For example:
 
 ```bash
 $ fc-list --help
-usage: fc-list [-vqVh] [-f FORMAT] [--verbose] [--format=FORMAT] [--quiet] [--version] [--help] [pattern] {element ...} 
+usage: fc-list [-vqVh] [-f FORMAT] [--verbose] [--format=FORMAT] [--quiet] [--version] [--help] [pattern] {element ...}
 List fonts matching [pattern]
 
   -v, --verbose        display entire font pattern verbosely
