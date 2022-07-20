@@ -10,9 +10,9 @@ control 'core-plans-gdal-exists' do
   Verify gdal by ensuring all binaries
   (1) exist
   (2) are executable'
- 
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
- 
+
   [ "gdal-config",
     "gdal_contour",
     "gdal_grid",

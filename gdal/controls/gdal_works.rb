@@ -11,14 +11,14 @@ control 'core-plans-gdal-works' do
   (1) binary installation directory exists
   (2) all binaries (with some exceptions) return the expected version
   '
- 
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
     #its('stderr') { should be_empty }
   end
- 
+
   plan_pkg_version = plan_installation_directory.stdout.split("/")[5]
 
   # All return GDAL <version>
