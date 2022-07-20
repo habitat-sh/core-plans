@@ -38,7 +38,7 @@ To install this plan, you should run the following commands to first install, an
 
 > ☁ Determining latest version of core/gcc in the 'stable' channel
 
-> ☛ Verifying core/gcc/9.1.0/20200305180723 
+> ☛ Verifying core/gcc/9.1.0/20200305180723
 
 > ✓ Installed core/gcc/9.1.0/20200305180723
 
