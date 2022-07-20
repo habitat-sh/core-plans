@@ -1,0 +1,3 @@
+plan_name: 'libxrender'
+library_filename: 'libXrender.so'
+pkgconfig_filename: 'xrender.pc'

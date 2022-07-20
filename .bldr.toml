@@ -821,10 +821,14 @@ plan_path = "libxml2"
 plan_path = "libxmu"
 [libxrandr]
 plan_path = "libxrandr"
+[libxrender]
+plan_path = "libxrender"
 [libxscrnsaver]
 plan_path = "libxscrnsaver"
 [libxshmfence]
 plan_path = "libxshmfence"
+[libxslt]
+plan_path = "libxslt"
 [libxt]
 plan_path = "libxt"
 [libyajl2]
