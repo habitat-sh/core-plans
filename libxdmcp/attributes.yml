@@ -1,0 +1,3 @@
+plan_name: 'libxdmcp'
+library_filename: 'libXdmcp.so'
+pkgconfig_filename: 'xdmcp.pc'
