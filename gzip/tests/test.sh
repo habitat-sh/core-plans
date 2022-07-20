@@ -15,4 +15,4 @@ TEST_PKG_IDENT="${1}"
 export TEST_PKG_IDENT
 hab pkg install core/bats --binlink
 hab pkg install "${TEST_PKG_IDENT}"
-bats "$(dirname "${0}")/test.bats" 
+bats "$(dirname "${0}")/test.bats"

@@ -39,7 +39,7 @@ To install this plan, you should run the following commands to first install, an
 > ☛ Verifying core/gzip/1.10/20200306002325
 >
 > ...
-> 
+>
 > ✓ Installed core/gzip/1.10/20200306002325
 >
 > ★ Install of core/gzip/1.10/20200306002325 complete with 1 new packages installed.
