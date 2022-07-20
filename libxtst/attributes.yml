@@ -1,0 +1,3 @@
+plan_name: 'libxtst'
+library_filename: 'libXtst.so'
+pkgconfig_filename: 'xtst.pc'
