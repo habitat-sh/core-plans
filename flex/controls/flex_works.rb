@@ -11,7 +11,7 @@ control 'core-plans-flex-works' do
   (1) its installation directory exists
   (2) it returns the expected version
   '
- 
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
