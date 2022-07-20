@@ -12,7 +12,7 @@ control 'core-plans-gecode-library-exists' do
   (2) the library exists;
   (3) one of its executables returns the expected version
   '
- 
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
