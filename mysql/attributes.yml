@@ -1,0 +1,2 @@
+mysql_path: '/bin/mysql'
+mysql_local_connection_string: '--defaults-extra-file=/hab/svc/mysql/config/client.cnf'

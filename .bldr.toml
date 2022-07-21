@@ -927,6 +927,8 @@ plan_path = "msodbcsql17"
 plan_path = "mssql"
 [musl]
 plan_path = "musl"
+[mysql]
+plan_path = "mysql"
 [mysql-client]
 plan_path = "mysql-client"
 [nano]
