@@ -1,0 +1,3 @@
+plan_name: 'minio'
+
+listening_port: '9000'

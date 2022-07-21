@@ -1,0 +1,3 @@
+plan_name: 'memcached'
+command_relative_path: 'bin/memcached'
+listening_port: '11211'
