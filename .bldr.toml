@@ -573,6 +573,8 @@ plan_path = "hspec-discover"
 plan_path = "htop"
 [httpd]
 plan_path = "httpd"
+[hugo]
+plan_path = "hugo"
 [hwloc]
 plan_path = "hwloc"
 [iana-etc]
