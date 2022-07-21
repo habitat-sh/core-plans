@@ -1,0 +1,5 @@
+#!/bin/bash
+
+exec 2>&1
+
+exec {{pkg.path}}/sbin/sshd -D -f {{pkg.svc_config_path}}/sshd_config
