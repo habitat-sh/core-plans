@@ -1,0 +1,5 @@
+plan_name : "mpfr"
+plan_dirs :
+    - "include"
+    - "share"
+    - "lib"
