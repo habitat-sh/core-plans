@@ -1,0 +1,2 @@
+plan_name: 'nss-myhostname'
+library_filename: 'libnss_myhostname.so.2'
