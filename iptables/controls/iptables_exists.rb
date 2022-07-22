@@ -10,7 +10,7 @@ control 'core-plans-iptables-exists' do
   Verify iptables by ensuring its binaries
   (1) exist and
   (2) are executable
-  ' 
+  '
 
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do

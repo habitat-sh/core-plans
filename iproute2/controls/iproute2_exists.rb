@@ -7,10 +7,10 @@ control 'core-plans-iproute2-exists' do
   impact 1.0
   title 'Ensure iproute2 exists'
   desc '
-  Verify iproute2 by ensuring bin/iproute2 
+  Verify iproute2 by ensuring bin/iproute2
   (1) exists and
   (2) is executable'
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
