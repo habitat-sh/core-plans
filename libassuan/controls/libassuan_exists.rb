@@ -7,10 +7,10 @@ control 'core-plans-libassuan-exists' do
   impact 1.0
   title 'Ensure libassuan exists'
   desc '
-  Verify libassuan by ensuring bin/libassuan-config 
+  Verify libassuan by ensuring bin/libassuan-config
   (1) exists and
   (2) is executable'
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
