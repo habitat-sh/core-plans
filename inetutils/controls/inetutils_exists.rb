@@ -8,7 +8,7 @@ control 'core-plans-inetutils-exists' do
   impact 1.0
   title 'Ensure inetutils exists'
   desc '
-  Verify inetutils by ensuring all binaries 
+  Verify inetutils by ensuring all binaries
   (1) exist
   (2) are executable'
   
