@@ -1,3 +1,0 @@
-plan_name: 'libxau'
-library_filename: 'libXau.so'
-pkgconfig_filename: 'xau.pc'

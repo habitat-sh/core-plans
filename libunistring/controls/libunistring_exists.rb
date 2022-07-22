@@ -11,7 +11,7 @@ control 'core-plans-libunistring' do
   To test that the libraries that libunistring export are in the correct file path, we first find the file path for the package.
   Using this file path we then check for the existance of the directories at the expected location.
     $ ls -al $PKG_PATH/include
-      . .. unicase.h unictype.h unilbrk.h ... 
+      . .. unicase.h unictype.h unilbrk.h ...
   '
 
   hab_pkg_path = command("hab pkg path #{plan_ident}")
