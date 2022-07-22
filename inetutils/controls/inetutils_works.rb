@@ -19,7 +19,7 @@ control 'core-plans-inetutils-works' do
     its('stdout') { should_not be_empty }
     #its('stderr') { should be_empty }
   end
- 
+
   plan_pkg_version = plan_installation_directory.stdout.split("/")[5]
   [ "dnsdomainname",
     "ftp",
