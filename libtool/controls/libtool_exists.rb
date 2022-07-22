@@ -11,7 +11,7 @@ control 'core-plans-libtool-exists' do
   Verify libtool by ensuring libtool and libtoolize
   (1) exist and
   (2) are executable'
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }

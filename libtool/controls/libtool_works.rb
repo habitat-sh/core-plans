@@ -14,7 +14,7 @@ control 'core-plans-libtool-works' do
   (4) libtool --config should contain all the above file and directory patterns
   (5a) all file patterns should exist on the system
   (5b) all directories should exist on the system'
-  
+
   # (1) installation directory should exist
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
@@ -22,7 +22,7 @@ control 'core-plans-libtool-works' do
     its('stdout') { should_not be_empty }
     #its('stderr') { should be_empty }
   end
-  
+
   # (2) binaries should return correct version
   plan_pkg_version = plan_installation_directory.stdout.split("/")[5]
   [
@@ -56,7 +56,7 @@ control 'core-plans-libtool-works' do
     /lt_truncate_bin="(?<dd_binary_fullpath>[^\s]+)\s+bs.*"/
   ]
   directories = /LTCFLAGS="(?<ltcflags_include_directories>.+)"/
-  
+
   # (4) libtool --config should contain all the above file and directory patterns
   all_patterns = files + [directories]
   all_patterns.each do |pattern|
@@ -72,7 +72,7 @@ control 'core-plans-libtool-works' do
       it { should exist }
     end
   end
-  
+
   # (5b) all directories should exist on the system
   # ltcflags_directories = (libtool_config_output.stdout.match directories)[1]
   # ltcflags_directories.split(" ").each do|item|
