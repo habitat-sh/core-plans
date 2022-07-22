@@ -7,13 +7,13 @@ control 'core-plans-inputproto-library-exists' do
   impact 1.0
   title 'Ensure inputproto library exists'
   desc '
-  Verify inputproto library by ensuring that 
-  (1) its installation directory exists; 
+  Verify inputproto library by ensuring that
+  (1) its installation directory exists;
   (2) verify all header files exist
   (3) its pkgconfig metadata contains the expected version
   '
-  
-  # (1) its installation directory exists; 
+
+  # (1) its installation directory exists;
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
@@ -33,7 +33,7 @@ control 'core-plans-inputproto-library-exists' do
         it { should be_readable }
       end
   end
-  
+
 
   # (3) its pkgconfig metadata contains the expected version
   plan_pkg_ident = ((plan_installation_directory.stdout.strip).match /(?<=pkgs\/)(.*)/)[1]
