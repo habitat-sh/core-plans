@@ -9,9 +9,8 @@ control 'core-plans-libedit' do
   title 'Ensure libedit libraries exist as expected'
   desc '
   To test libedit libraries exists we check for the path of the installed package.
-  Then we check that the library exists in the expected location.  
+  Then we check that the library exists in the expected location.
     $ ls -al $PKG_PATH/include
-       
   '
 
   hab_pkg_path = command("hab pkg path #{plan_ident}")

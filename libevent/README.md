@@ -48,4 +48,4 @@ To install this plan, you should run the following commands to first install, an
 
 > » Binlinking event_rpcgen.py from core/libevent into /bin
 
-> ★ Binlinked event_rpcgen.py from core/libevent/2.0.22/20200319193514 to /bin/event_rpcgen.py 
+> ★ Binlinked event_rpcgen.py from core/libevent/2.0.22/20200319193514 to /bin/event_rpcgen.py
