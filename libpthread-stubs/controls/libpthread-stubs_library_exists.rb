@@ -7,13 +7,13 @@ control 'core-plans-libpthread-stubs-library-exists' do
   impact 1.0
   title 'Ensure libpthread-stubs library exists'
   desc '
-  Verify libpthread-stubs library by ensuring that 
-  (1) its installation directory exists; 
+  Verify libpthread-stubs library by ensuring that
+  (1) its installation directory exists;
   (2) its pkgconfig metadata contains the expected version.  Note that this is
       the only file associated with this library.  See https://gitlab.freedesktop.org/xorg/lib/pthread-stubs
       for more information.
   '
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
