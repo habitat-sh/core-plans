@@ -51,7 +51,7 @@ To view the library files you must first search for them with habitat.
 > /hab/pkgs/core/libmpc/1.1.0/20200305180541/
 
 ```bash
-ls /hab/pkgs/core/libmpc/1.1.0/20200305180541/ 
+ls /hab/pkgs/core/libmpc/1.1.0/20200305180541/
 ```
 > include/
 >

@@ -1,5 +1,0 @@
-plan_name : "libmpc"
-plan_dirs :
-    - "include"
-    - "share"
-    - "lib"
