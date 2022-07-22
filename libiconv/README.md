@@ -38,7 +38,7 @@ To install this plan, you should run the following commands to install it.
 
 > → Using core/libiconv/1.14/20200306010416
 
-> ★ Install of core/libiconv/1.14/20200306010416 complete with 0 new packages installed. 
+> ★ Install of core/libiconv/1.14/20200306010416 complete with 0 new packages installed.
 
 #### Viewing library files
 
