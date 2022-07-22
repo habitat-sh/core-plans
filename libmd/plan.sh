@@ -11,6 +11,7 @@ pkg_include_dirs=(include)
 pkg_lib_dirs=(lib)
 pkg_pconfig_dirs=(lib/pkgconfig)
 pkg_description="BSD Mesage Digest library (mirror)"
+pkg_upstream_url="https://libbsd.freedesktop.org"
 
 do_begin() {
   do_default_begin
