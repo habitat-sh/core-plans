@@ -62,7 +62,7 @@ You can now use the binary as normal.  For example, to enter the less applicatio
 
 ``/bin/less --help`` or ``less --help``
 
-or to print the same to stdout 
+or to print the same to stdout
 
 ``echo "$(less --help)"``
 

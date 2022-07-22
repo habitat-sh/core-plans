@@ -8,7 +8,7 @@ control 'core-plans-less-exists' do
   title 'Ensure less exists'
   desc '
   Verify less by ensuring bin/less exists'
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
