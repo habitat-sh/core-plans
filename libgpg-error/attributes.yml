@@ -1,3 +1,0 @@
-plan_name: 'libgpg-error'
-library_filename: 'libgpg-error.so'
-pkgconfig_filename: 'gpg-error.pc'

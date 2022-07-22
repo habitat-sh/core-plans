@@ -7,10 +7,10 @@ control 'core-plans-libgpg-error-exists' do
   impact 1.0
   title 'Ensure libgpg-error exists'
   desc '
-  Verify libgpg-error by ensuring bin/gpg-error 
+  Verify libgpg-error by ensuring bin/gpg-error
   (1) exists and
   (2) is executable'
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
