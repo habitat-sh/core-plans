@@ -8,7 +8,7 @@ control 'core-plans-mg-exists' do
   title 'Ensure mg exists'
   desc '
   Verify mg by ensuring bin/mg exists'
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
