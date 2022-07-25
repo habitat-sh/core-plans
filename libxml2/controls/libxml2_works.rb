@@ -66,5 +66,4 @@ control 'core-plans-libxml2' do
     #its('stderr') { should match /\/bin\/xmllint: using libxml version [0-9]+/ }
     its('exit_status') { should eq 0 }
   end
-
 end
