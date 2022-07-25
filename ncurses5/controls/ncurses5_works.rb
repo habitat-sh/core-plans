@@ -13,12 +13,12 @@ control 'core-plans-ncurses' do
   Using this directory we then run checks to ensure the binary exists.
   Then we test that the version of the binary we expect to be installed exists or another similar simple test
     $ $PKG_PATH/bin/captoinfo -V
-      ncurses 6.1.20180127 
+      ncurses 6.1.20180127
   '
 
   hab_pkg_path = command("hab pkg path #{plan_ident}")
   describe hab_pkg_path do
-    its('stdout') { should_not be_empty } 
+    its('stdout') { should_not be_empty }
     #its('stderr') { should be_empty }
     its('exit_status') { should eq 0 }
   end

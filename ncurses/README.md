@@ -35,7 +35,7 @@ To install this plan, you should run the following commands to first install, an
 `hab pkg install core/ncurses`
 
 > » Installing core/ncurses
-> 
+>
 > ☁ Determining latest version of core/ncurses in the 'stable' channel
 >
 > ☛ Verifying core/ncurses/6.1/20200305230210
