@@ -1,3 +1,0 @@
-plan_name: 'libxcb'
-library_filename: 'libxcb.so'
-pkgconfig_filename: 'xcb.pc'
