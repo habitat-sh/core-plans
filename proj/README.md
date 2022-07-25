@@ -44,13 +44,13 @@ To install this plan, you should run the following commands to first install, an
 >
 > ✓ Installed core/proj/4.9.3/20200319195031
 >
-> ★ Install of core/proj/4.9.3/20200319195031 complete with 1 new packages installed. 
+> ★ Install of core/proj/4.9.3/20200319195031 complete with 1 new packages installed.
 
 `hab pkg binlink core/proj`
 
 > » Binlinking nad2bin from core/proj into /bin
 >
-> ★ Binlinked nad2bin from core/proj/4.9.3/20200319195031 to /bin/nad2bin 
+> ★ Binlinked nad2bin from core/proj/4.9.3/20200319195031 to /bin/nad2bin
 
 #### Using an example binary
 You can now use the binary as normal:
