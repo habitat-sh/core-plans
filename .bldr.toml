@@ -154,6 +154,8 @@ plan_path = "consul"
 plan_path = "coredns"
 [coreutils]
 plan_path = "coreutils"
+[cpanminus]
+plan_path = "cpanminus"
 [coreutils-static]
 plan_path = "coreutils-static"
 paths = [
