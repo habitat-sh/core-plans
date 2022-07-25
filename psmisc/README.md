@@ -76,7 +76,7 @@ You can now use the binary as normal.  For example:
 ``/bin/pstree --help`` or ``pstree --help``
 
 ```bash
-$ pstree --help 
+$ pstree --help
 pstree: unrecognized option '--help'
 Usage: pstree [-acglpsStu] [ -h | -H PID ] [ -n | -N type ]
               [ -A | -G | -U ] [ PID | USER ]
