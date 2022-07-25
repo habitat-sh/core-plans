@@ -39,7 +39,7 @@ To install this plan, you should run the following commands to install it.
 > ☁ Determining latest version of core/musl in the 'stable' channel
 >
 > ☛ Verifying core/musl/1.1.19/20200306011400
-> 
+>
 > ✓ Installed core/musl/1.1.19/20200306011400
 >
 > ★ Install of core/musl/1.1.19/20200306011400 complete with 1 new packages installed.
@@ -65,4 +65,4 @@ ls /hab/pkgs/core/musl/1.1.19/20200306011400
 
 #### Notes
 
-core/musl does binlink musl-gcc, however this binary can not be tested. 
+core/musl does binlink musl-gcc, however this binary can not be tested.
