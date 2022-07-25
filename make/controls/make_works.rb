@@ -8,18 +8,18 @@ control 'core-plans-make-works' do
   title 'Ensure make works as expected'
   desc '
   Verify make by ensuring that
-  (1) its installation directory exists 
+  (1) its installation directory exists
   (2) it returns the expected version
   (3) it runs successfully against a sample Makefile
   '
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
     #its('stderr') { should be_empty }
   end
-  
+
   command_relative_path = input('command_relative_path', value: 'bin/make')
   command_full_path = File.join(plan_installation_directory.stdout.strip, command_relative_path)
   plan_pkg_version = plan_installation_directory.stdout.split("/")[5]
@@ -29,7 +29,7 @@ control 'core-plans-make-works' do
     its('stdout') { should match /GNU Make #{plan_pkg_version}/ }
     #its('stderr') { should be_empty }
   end
-  
+
   #describe command("#{command_full_path} --directory /hab/svc/make/config/fixtures/ ci-test") do
   #  its('exit_status') { should eq 0 }
   #  its('stdout') { should_not be_empty }

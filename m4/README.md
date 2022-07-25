@@ -37,7 +37,7 @@ To install this plan, you should run the following commands to first install, an
 > ☁ Determining latest version of core/m4 in the 'stable' channel
 >
 > ☛ Verifying core/m4/1.4.18/20200305175605
-> 
+>
 > ✓ Installed core/m4/1.4.18/20200305175605
 >
 > ★ Install of core/m4/1.4.18/20200305175605 complete with 1 new packages installed.
