@@ -15,5 +15,5 @@ pkg_lib_dirs=(lib)
 pkg_bin_dirs=(bin)
 
 do_build() {
-  perl Makefile.PL --bootstrap=${pkg_prefix} --no-manpages
+  perl Makefile.PL --bootstrap="${pkg_prefix}" --no-manpages
 }

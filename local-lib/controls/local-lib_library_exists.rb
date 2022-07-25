@@ -7,11 +7,11 @@ control 'core-plans-local-lib-library-exists' do
   impact 1.0
   title 'Ensure local-lib library exists'
   desc '
-  Verify local-lib library by ensuring that 
-  (1) its installation directory exists; 
+  Verify local-lib library by ensuring that
+  (1) its installation directory exists;
   (2) the ./local/lib.pm exists and contains the expected version
   '
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
