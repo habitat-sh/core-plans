@@ -38,7 +38,7 @@ control 'core-plans-pcre' do
     #its('stderr') { should be_empty }
     its('exit_status') { should eq 0 }
   end
- 
+
   pcregrep_exists = command("ls -al #{File.join(target_dir, "pcregrep")}")
   describe pcregrep_exists do
     its('stdout') { should match /pcregrep/ }
@@ -66,5 +66,4 @@ control 'core-plans-pcre' do
     #its('stderr') { should be_empty }
     its('exit_status') { should eq 0 }
   end
-
 end

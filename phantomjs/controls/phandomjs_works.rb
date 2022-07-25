@@ -13,7 +13,7 @@ control 'core-plans-phantomjs' do
   Using this directory we then run checks to ensure the binary exists.
   Then we test that the version of the binary we expect to be installed exists.
     $ $PKG_PATH/bin/phantomjs --version
-      2.1.1 
+      2.1.1
   '
 
   hab_pkg_path = command("hab pkg path #{plan_ident}")
