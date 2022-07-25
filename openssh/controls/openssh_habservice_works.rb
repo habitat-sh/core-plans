@@ -7,14 +7,14 @@ control 'core-plans-openssh-habservice-works' do
   impact 1.0
   title 'Ensure openssh habitat service works as expected'
   desc '
-  Verify openssh habitat service by ensuring that 
-  (1) the default.openssh habitat service is "up"; 
-  (2) the openssh process is LISTENing on the expected port.  Note the 
+  Verify openssh habitat service by ensuring that
+  (1) the default.openssh habitat service is "up";
+  (2) the openssh process is LISTENing on the expected port.  Note the
   regex that detects the LISTENing <program> works in both a habitat studio environment
   and a docker one.  In studio the program is displayed as "1234/sshd";
   whereas in docker as "-".
   '
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }

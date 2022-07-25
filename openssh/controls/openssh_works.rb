@@ -8,22 +8,22 @@ control 'core-plans-openssh-works' do
   title 'Ensure openssh works as expected'
   desc '
   Verify openssh by ensuring that
-  (1) the installation directory exists 
+  (1) the installation directory exists
   (2) sbin/sshd returns the expected version
   (3) all other binaries return expected output except for "ssh-pkcs11-helper",
       which is not included in the verifications below: ssh-pkcs11-helper
-      does not return any output and, as the man page explains:  it "is 
-      not intended to be invoked by the user, but from ssh-agent" 
+      does not return any output and, as the man page explains:  it "is
+      not intended to be invoked by the user, but from ssh-agent"
       (https://man7.org/linux/man-pages/man8/ssh-pkcs11-helper.8.html)
   '
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
     its('stderr') { should be_empty }
   end
-  
+
   # sbin/sshd returns expected version
   plan_pkg_version = plan_installation_directory.stdout.split("/")[5]
   command_full_path = File.join(plan_installation_directory.stdout.strip, "sbin", "sshd")

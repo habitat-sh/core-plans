@@ -8,17 +8,17 @@ control 'core-plans-openjdk11-works' do
   title 'Ensure openjdk11 works as expected'
   desc '
   Verify openjdk11 by ensuring that
-  (1) its installation directory exists 
-  (2) all binaries, with exception of jconsole, return 
+  (1) its installation directory exists
+  (2) all binaries, with exception of jconsole, return
       expected output: jconsole needs a jvm to connect to.
   '
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
   end
-  
+
   plan_pkg_version = plan_installation_directory.stdout.split("/")[5]
   fullsuite = {
     "jaotc" => {
@@ -94,8 +94,8 @@ control 'core-plans-openjdk11-works' do
       command_output_pattern: /use: serialver \[-classpath classpath\]/,
     },
     "unpack200" => {},
-  } 
-  
+  }
+
   # Use the following to pull out a subset of the above and test progressively
   subset = fullsuite.select { |key, value| key.to_s.match(/^.*$/) }
 
@@ -103,9 +103,9 @@ control 'core-plans-openjdk11-works' do
   subset.each do |binary_name, value|
     # set default values if each binary doesn't define an over-ride
     command_suffix = value.has_key?(:command_suffix) ? "#{value[:command_suffix]} 2>&1" : "-help 2>&1"
-    command_output_pattern = value[:command_output_pattern] || /usage:(\s+|.*)#{binary_name}/i 
+    command_output_pattern = value[:command_output_pattern] || /usage:(\s+|.*)#{binary_name}/i
     exit_pattern = value[:exit_pattern] || /^[0]$/ # use /^[^0]{1}\d*$/ for non-zero exit status
-  
+
     # verify output
     command_full_path = File.join(plan_installation_directory.stdout.strip, "bin", binary_name)
     describe bash("#{command_full_path} #{command_suffix}") do

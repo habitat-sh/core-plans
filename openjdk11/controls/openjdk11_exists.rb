@@ -10,7 +10,7 @@ control 'core-plans-openjdk11-exists' do
   Verify openjdk11 by ensuring all binaries
   (1) exist and
   (2) are executable'
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }

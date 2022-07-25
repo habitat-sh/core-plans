@@ -7,10 +7,10 @@ control 'core-plans-openssh-exists' do
   impact 1.0
   title 'Ensure openssh exists'
   desc '
-  Verify openssh by ensuring all binaries (bin, sbin, and libexec) 
+  Verify openssh by ensuring all binaries (bin, sbin, and libexec)
   (1) exist
   (2) are executable'
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
