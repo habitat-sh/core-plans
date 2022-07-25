@@ -8,6 +8,7 @@ pkg_dirname=${pkg_name}-${pkg_version}-linux-x86_64
 pkg_shasum=86dd9a4bf4aee45f1a84c9f61cf1947c1d6dce9b9e8d2a907105da7852460d2f
 pkg_description="Scriptable Headless Browser"
 pkg_upstream_url="https://bitbucket.org/ariya/phantomjs"
+pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 
 # Ensure we depend on all the libraries that the prebuilt phantomjs
 # links against here:
