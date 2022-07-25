@@ -14,7 +14,7 @@ control 'core-plans-libsodium' do
     $ ls -al $PKG_PATH/include
       . .. mpfr.h mpf2mpfr.h
   '
-  
+
   hab_pkg_path = command("hab pkg path #{plan_ident}")
   describe hab_pkg_path do
     its('stdout') { should_not be_empty }
@@ -29,5 +29,4 @@ control 'core-plans-libsodium' do
       its('exit_status') { should eq 0 }
     end
   end
-
 end

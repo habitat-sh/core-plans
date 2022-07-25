@@ -7,14 +7,14 @@ control 'core-plans-minio-habservice-works' do
   impact 1.0
   title 'Ensure minio habitat service works as expected'
   desc '
-  Verify minio habitat service by ensuring that 
-  (1) the default.minio habitat service is "up"; 
-  (2) the minio process is LISTENing on the expected port.  Note the 
+  Verify minio habitat service by ensuring that
+  (1) the default.minio habitat service is "up";
+  (2) the minio process is LISTENing on the expected port.  Note the
   regex that detects the LISTENing <program> works in both a habitat studio environment
   and a docker one.  In studio the program is displayed as "1234/minio";
   whereas in docker as "-".
   '
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
