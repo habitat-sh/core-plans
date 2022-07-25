@@ -34,11 +34,11 @@ To install this plan, you should run the following commands to first install, an
 
 `hab pkg install core/PKG`
 
-> 
+>
 
 `hab pkg binlink core/PKG`
 
-> 
+>
 
 #### Using an example binary
 You can now use the binary as normal:

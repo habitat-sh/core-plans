@@ -1,2 +1,0 @@
-plan_name: 'openssl-fips'
-command_relative_path: 'bin/fips_standalone_sha1'

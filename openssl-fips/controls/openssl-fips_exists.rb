@@ -8,7 +8,7 @@ control 'core-plans-openssl-fips-exists' do
   title 'Ensure openssl-fips exists'
   desc '
   Verify openssl-fips by ensuring bin/fips_standalone_sha1 exists'
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
