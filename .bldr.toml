@@ -709,6 +709,8 @@ plan_path = "libarchive-musl"
 paths = [
   "libarchive/*",
 ]
+[libassuan]
+plan_path = "libassuan"
 [libatomic_ops]
 plan_path = "libatomic_ops"
 [libbsd]
