@@ -1057,6 +1057,8 @@ plan_path = "oniguruma"
 plan_path = "opa"
 [opam]
 plan_path = "opam"
+[openjdk11]
+plan_path = "openjdk11"
 [openjpeg]
 plan_path = "openjpeg"
 [openldap]
