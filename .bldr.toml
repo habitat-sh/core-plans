@@ -700,6 +700,8 @@ plan_path = "lessmsi"
 plan_path = "leveldb"
 [lgpo]
 plan_path = "lgpo"
+[libaio]
+plan_path = "libaio"
 [libarchive]
 plan_path = "libarchive"
 [libarchive-musl]
