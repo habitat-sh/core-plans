@@ -219,6 +219,8 @@ plan_path = "dcrpm"
 plan_path = "dd-agent"
 [dejagnu]
 plan_path = "dejagnu"
+[dex]
+plan_path = "dex"
 [delmo]
 plan_path = "delmo"
 [dgraph]
