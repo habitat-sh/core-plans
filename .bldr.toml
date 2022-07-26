@@ -870,6 +870,8 @@ plan_path = "llvm7"
 paths = [
   "llvm/*"
 ]
+[local-lib]
+plan-path = "local-lib"
 [logback]
 plan_path = "logback"
 [logstash]
