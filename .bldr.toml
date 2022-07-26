@@ -77,6 +77,10 @@ plan_path = "bind"
 plan_path = "binutils"
 [bison]
 plan_path = "bison"
+[bundler]
+plan_path = "bundler"
+[busybox]
+plan_path = "busybox"
 [boost]
 plan_path = "boost"
 [boost159]
@@ -154,6 +158,8 @@ plan_path = "consul"
 plan_path = "coredns"
 [coreutils]
 plan_path = "coreutils"
+[cpanminus]
+plan_path = "cpanminus"
 [coreutils-static]
 plan_path = "coreutils-static"
 paths = [
@@ -380,6 +386,8 @@ plan_path = "gdb"
 plan_path = "gdbm"
 [gdk-pixbuf]
 plan_path = "gdk-pixbuf"
+[gecode]
+plan_path = "gecode"
 [geos]
 plan_path = "geos"
 [gettext]
@@ -591,8 +599,14 @@ plan_path = "img"
 plan_path = "inetutils"
 [inotify-tools]
 plan_path = "inotify-tools"
+[inputproto]
+plan_path = "inputproto"
 [intltool]
 plan_path = "intltool"
+[iproute2]
+plan_path = "iproute2"
+[iptables]
+plan_path = "iptables"
 [ipvsadm]
 plan_path = "ipvsadm"
 [jbigkit]
@@ -631,6 +645,8 @@ plan_path = "kafka2"
 paths = [
   "kafka/*",
 ]
+[kbproto]
+plan_path = "kbproto"
 [kibana]
 plan_path = "kibana"
 [kmod]
@@ -684,6 +700,8 @@ plan_path = "lessmsi"
 plan_path = "leveldb"
 [lgpo]
 plan_path = "lgpo"
+[libaio]
+plan_path = "libaio"
 [libarchive]
 plan_path = "libarchive"
 [libarchive-musl]
@@ -691,6 +709,8 @@ plan_path = "libarchive-musl"
 paths = [
   "libarchive/*",
 ]
+[libassuan]
+plan_path = "libassuan"
 [libatomic_ops]
 plan_path = "libatomic_ops"
 [libbsd]
@@ -749,6 +769,8 @@ plan_path = "libjpeg-turbo"
 plan_path = "libksba"
 [libmaxminddb]
 plan_path = "libmaxminddb"
+[libmd]
+plan_path = "libmd"
 [libmpc]
 plan_path = "libmpc"
 [libnl]
@@ -765,6 +787,8 @@ plan_path = "libpciaccss"
 plan_path = "libpipeline"
 [libpng]
 plan_path = "libpng"
+[libpthread-stubs]
+plan_path = "libpthread-stubs"
 [libpq]
 plan_path = "libpq"
 [libressl]
@@ -776,6 +800,8 @@ paths = [
 ]
 [libscrypt]
 plan_path = "libscrypt"
+[libseccomp]
+plan_path = "libseccomp"
 [libsm]
 plan_path = "libsm"
 [libsodium]
@@ -809,6 +835,8 @@ plan_path = "libuv"
 plan_path = "libvterm"
 [libwebp]
 plan_path = "libwebp"
+[libxau]
+plan_path = "libxau"
 [libxcb]
 plan_path = "libxcb"
 [libxcomposite]
@@ -850,6 +878,8 @@ plan_path = "llvm7"
 paths = [
   "llvm/*"
 ]
+[local-lib]
+plan-path = "local-lib"
 [logback]
 plan_path = "logback"
 [logstash]
@@ -931,6 +961,8 @@ plan_path = "msodbcsql17"
 plan_path = "mssql"
 [musl]
 plan_path = "musl"
+[mysql]
+plan_path = "mysql"
 [mysql-client]
 plan_path = "mysql-client"
 [nano]
@@ -1017,6 +1049,8 @@ plan_path = "npth"
 plan_path = "nspr"
 [nss]
 plan_path = "nss"
+[nss-myhostname]
+plan_path = "nss-myhostname"
 [nuget]
 plan_path = "nuget"
 [numactl]
@@ -1033,6 +1067,8 @@ plan_path = "oniguruma"
 plan_path = "opa"
 [opam]
 plan_path = "opam"
+[openjdk11]
+plan_path = "openjdk11"
 [openjpeg]
 plan_path = "openjpeg"
 [openldap]
@@ -1154,6 +1190,8 @@ paths = [
 ]
 [postgresql12-client]
 plan_path = "postgresql12-client"
+[postgresql13]
+plan_path = "postgresql13"
 [postgresql13-client]
 plan_path = "postgresql13-client"
 [powershell]
@@ -1304,6 +1342,11 @@ paths = [
 ]
 [ruby30]
 plan_path = "ruby30"
+paths = [
+  "ruby/*"
+]
+[ruby31]
+plan_path = "ruby31"
 paths = [
   "ruby/*"
 ]
