@@ -1,0 +1,9 @@
+#!/bin/sh
+
+exec 2>&1
+
+set -e
+
+mysqld_safe --defaults-file={{pkg.svc_config_path}}/my.cnf \
+            --datadir={{pkg.svc_data_path}} \
+            --user={{pkg.svc_user}}
