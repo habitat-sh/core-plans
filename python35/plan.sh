@@ -82,7 +82,7 @@ do_prepare() {
 
 do_build() {
   # Copy the pems from 3.9.5 to Lib/test for testing
-  cp ${HAB_CACHE_SRC_PATH}/${pkg_3_9_5_dirname}/Lib/test/*.pem Lib/test
+  cp "${HAB_CACHE_SRC_PATH}"/${pkg_3_9_5_dirname}/Lib/test/*.pem Lib/test
 
   ./configure --prefix="$pkg_prefix" \
               --enable-loadable-sqlite-extensions \
