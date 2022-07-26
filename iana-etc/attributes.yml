@@ -1,0 +1,5 @@
+plan_name : "iana-etc"
+base_dir : "etc"
+plan_files :
+    - "protocols"
+    - "services"
