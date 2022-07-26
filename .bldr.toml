@@ -79,6 +79,10 @@ plan_path = "bind"
 plan_path = "binutils"
 [bison]
 plan_path = "bison"
+[btrfs-progs]
+plan_path = "btrfs-progs"
+[buildah]
+plan_path = "buildah"
 [bundler]
 plan_path = "bundler"
 [busybox]
