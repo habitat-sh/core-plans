@@ -347,6 +347,8 @@ plan_path = "filebeat"
 plan_path = "findutils"
 [fish]
 plan_path = "fish"
+[fixesproto]
+plan_path = "fixesproto"
 [flatbuffers]
 plan_path = "flatbuffers"
 [flex]
