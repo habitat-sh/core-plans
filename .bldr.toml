@@ -226,6 +226,10 @@ plan_path = "dex"
 [delmo]
 plan_path = "delmo"
 [dgraph]
+[dep]
+plan_path = "dep"
+[devicemapper]
+plan_path= "devicemapper"
 plan_path = "dgraph"
 [dgraph-ratel]
 plan_path = "dgraph-ratel"
