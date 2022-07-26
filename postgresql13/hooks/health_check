@@ -1,0 +1,3 @@
+#!/bin/sh
+{{pkg.svc_path}}/hooks/health-check
+exit $?

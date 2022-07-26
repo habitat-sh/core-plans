@@ -1,0 +1,13 @@
+diff --git a/src/posix-io.c b/src/posix-io.c
+index e712ef2..2a3a81f 100644 (file)
+--- a/src/posix-io.c
++++ b/src/posix-io.c
+@@ -570,7 +570,7 @@ _gpgme_io_spawn (const char *path, char *const argv[], unsigned int flags,
+               if (fd_list[i].fd > fd)
+                 fd = fd_list[i].fd;
+             fd++;
+-#if defined(__sun) || defined(__FreeBSD__)
++#if defined(__sun) || defined(__FreeBSD__) || defined(__GLIBC__)
+             closefrom (fd);
+             max_fds = fd;
+ #else /*!__sun */

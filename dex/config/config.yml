@@ -1,0 +1,22 @@
+logger:
+  level: {{cfg.log.level}}
+  format: {{cfg.log.format}}
+
+issuer: https://{{cfg.service.fqdn}}/dex
+
+storage:
+  type: sqlite3
+  config:
+    file: {{pkg.svc_var_path}}/dex.db
+
+frontend:
+  dir: {{pkg.svc_static_path}}/web
+  theme: coreos
+
+web:
+  http: {{cfg.service.host}}:{{cfg.service.port}}
+
+connectors:
+- type: mockCallback
+  id: mock
+  name: Example
