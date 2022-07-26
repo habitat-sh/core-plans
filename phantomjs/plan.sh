@@ -56,7 +56,7 @@ do_strip() {
 }
 
 do_install() {
-  cp -vR * "${pkg_prefix}"
+  cp -vR ./* "${pkg_prefix}"
 
   build_line "Setting interpreter for '${pkg_prefix}/bin/phantomjs' '$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2'"
   build_line "Setting rpath for '${pkg_prefix}/bin/phantomjs' to '$LD_RUN_PATH'"
