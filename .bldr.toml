@@ -1180,6 +1180,8 @@ paths = [
 ]
 [postgresql12-client]
 plan_path = "postgresql12-client"
+[postgresql13]
+plan_path = "postgresql13"
 [postgresql13-client]
 plan_path = "postgresql13-client"
 [powershell]
