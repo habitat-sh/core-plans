@@ -599,6 +599,8 @@ plan_path = "img"
 plan_path = "inetutils"
 [inotify-tools]
 plan_path = "inotify-tools"
+[inputproto]
+plan_path = "inputproto"
 [intltool]
 plan_path = "intltool"
 [ipvsadm]
@@ -639,6 +641,8 @@ plan_path = "kafka2"
 paths = [
   "kafka/*",
 ]
+[kbproto]
+plan_path = "kbproto"
 [kibana]
 plan_path = "kibana"
 [kmod]
