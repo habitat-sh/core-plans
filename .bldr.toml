@@ -837,12 +837,16 @@ plan_path = "libvterm"
 plan_path = "libwebp"
 [libxau]
 plan_path = "libxau"
+[libxcb]
+plan_path = "libxcb"
 [libxcomposite]
 plan_path = "libxcomposite"
 [libxcursor]
 plan_path = "libxcursor"
 [libxdamage]
 plan_path = "libxdamage"
+[libxdmcp]
+plan_path = "libxdmcp"
 [libxml2]
 plan_path = "libxml2"
 [libxmu]
