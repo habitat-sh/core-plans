@@ -883,8 +883,12 @@ plan_path = "libxshmfence"
 plan_path = "libxslt"
 [libxt]
 plan_path = "libxt"
+[libxtst]
+plan_path = "libxtst"
 [libyajl2]
 plan_path = "libyajl2"
+[libyaml]
+plan_path = "libyaml"
 [libzip]
 plan_path = "libzip"
 [linux]
