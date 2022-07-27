@@ -871,6 +871,8 @@ plan_path = "libxdmcp"
 plan_path = "libxext"
 [libxfixes]
 plan_path = "libxfixes"
+[libxi]
+plan_path = "libxi"
 [libxml2]
 plan_path = "libxml2"
 [libxmu]
