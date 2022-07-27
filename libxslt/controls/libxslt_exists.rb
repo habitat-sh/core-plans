@@ -7,10 +7,10 @@ control 'core-plans-libxslt-exists' do
   impact 1.0
   title 'Ensure libxslt exists'
   desc '
-  Verify libxslt by ensuring bin/xslt-config 
+  Verify libxslt by ensuring bin/xslt-config
   (1) exists and
   (2) its binaries are executable'
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
