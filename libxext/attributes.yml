@@ -1,3 +1,0 @@
-plan_name: 'libxext'
-library_filename: 'libXext.so'
-pkgconfig_filename: 'xext.pc'

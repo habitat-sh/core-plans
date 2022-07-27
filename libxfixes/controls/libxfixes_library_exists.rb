@@ -7,12 +7,12 @@ control 'core-plans-libxfixes-library-exists' do
   impact 1.0
   title 'Ensure libxfixes library exists'
   desc '
-  Verify libxfixes library by ensuring that 
-  (1) its installation directory exists; 
-  (2) the library exists; 
+  Verify libxfixes library by ensuring that
+  (1) its installation directory exists;
+  (2) the library exists;
   (3) its pkgconfig metadata contains the expected version
   '
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }

@@ -1,3 +1,0 @@
-plan_name: 'libxfixes'
-library_filename: 'libXfixes.so'
-pkgconfig_filename: 'xfixes.pc'
