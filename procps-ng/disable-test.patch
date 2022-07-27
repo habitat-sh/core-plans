@@ -1,0 +1,14 @@
+diff -ru procps-ng-3.3.12.orig/testsuite/ps.test/ps_output.exp procps-ng-3.3.12/testsuite/ps.test/ps_output.exp
+--- procps-ng-3.3.12.orig/testsuite/ps.test/ps_output.exp	2018-03-22 14:45:04.313321296 +0000
++++ procps-ng-3.3.12/testsuite/ps.test/ps_output.exp	2018-03-22 14:46:11.196206443 +0000
+@@ -22,10 +22,7 @@
+ set ps_class "\[A-Z?-\]\\s*"
+
+ set flag_match {
+-    "%cpu,pcpu,%mem,pmem"   "%CPU\\s+%CPU\\s+%MEM\\s+%MEM\\s+\(\\d+\.\\d+\\s*\){4}$"
+-    "blocked,sig_block,sigmask,caught,sigcatch,sig_catch" "\(BLOCKED\\s+\){3}\(CAUGHT\\s+\){2}CATCHED\\s+\(<?\[0-9a-f\]+\\s*\){6}$"
+     "bsdstart,start,lstart" "\\s*START\\s+STARTED\\s+STARTED\\s+\(\\s*\(\[A-Z\]\[a-z\]{2} \\d+|\\d+:\\d{2}\)\\s+\(\[A-Z\]\[a-z\]{2} \\d+|\\d+:\\d{2}:\\d{2}\)\\s+\[A-Z\]\[a-z\]{2} \[A-Z\]\[a-z\]{2}\\s+\\d+ \\d{2}:\\d{2}:\\d{2} \\d{4}\\s*\)+$"
+-    "bsdtime,cputime,etime,etimes" "\\s*TIME\\s+TIME\\s+ELAPSED\\s+ELAPSED\\s*\(\\s*\\d+:\\d{2}\\s+\\d{2}:\\d{2}:\\d{2}\\s+\(\\d{2}:\)?\\d{2}:\\d{2}\\s+\\d+\\s*\)$"
+     "user,ruser,group,rgroup,uid,ruid,gid,rgid" "\\s*USER\\s+RUSER\\s+GROUP\\s+RGROUP\\s+UID\\s+RUID\\s+GID\\s+RGID\\s+\(\(\\s*\[A-Za-z0-9_+-\]+\\s+\){4}\(\\d+\\s+\){4}\\s*\)+$"
+ }
+ 
