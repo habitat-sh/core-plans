@@ -867,6 +867,10 @@ plan_path = "libxcursor"
 plan_path = "libxdamage"
 [libxdmcp]
 plan_path = "libxdmcp"
+[libxext]
+plan_path = "libxext"
+[libxfixes]
+plan_path = "libxfixes"
 [libxml2]
 plan_path = "libxml2"
 [libxmu]
