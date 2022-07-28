@@ -1,0 +1,3 @@
+plan_name: 'alsa-lib'
+library_filename: 'libasound.so'
+pkgconfig_filename: 'alsa.pc'
