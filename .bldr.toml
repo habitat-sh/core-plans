@@ -1390,6 +1390,8 @@ build_targets = [
   "x86_64-linux",
   "x86_64-linux-kernel2"
 ]
+[runc]
+plan_path = "runc"
 [runit]
 plan_path = "runit"
 [rust]
