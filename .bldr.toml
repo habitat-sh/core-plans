@@ -1366,6 +1366,11 @@ plan_path = "rpm"
 plan_path = "rpm2cpio"
 [rq]
 plan_path = "rq"
+[ruby]
+plan_path = "ruby"
+paths = [
+  "ruby/*"
+]
 [ruby25]
 plan_path = "ruby25"
 paths = [
