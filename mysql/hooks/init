@@ -1,0 +1,14 @@
+#!/bin/sh
+
+exec 2>&1
+
+set -e
+
+if [ ! -d {{pkg.svc_data_path}}/mysql ]; then
+  mysqld --defaults-file={{pkg.svc_path}}/config/my.cnf \
+         --explicit-defaults-for-timestamp \
+         --datadir={{pkg.svc_data_path}} \
+         --init-file={{pkg.svc_config_path}}/init.sql \
+         --initialize \
+         --user={{pkg.svc_user}}
+fi

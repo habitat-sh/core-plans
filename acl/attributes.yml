@@ -1,0 +1,2 @@
+plan_name: 'acl'
+command_relative_path: 'bin/getfacl'
