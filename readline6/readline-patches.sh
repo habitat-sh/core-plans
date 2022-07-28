@@ -4,14 +4,14 @@ _patch_url_base="${_url_base}/${_distname}-${_base_version}-patches/${_distname}
 
 # All official patch file URLs
 _patch_files=(
-  ${_patch_url_base}-001
-  ${_patch_url_base}-002
-  ${_patch_url_base}-003
-  ${_patch_url_base}-004
-  ${_patch_url_base}-005
-  ${_patch_url_base}-006
-  ${_patch_url_base}-007
-  ${_patch_url_base}-008
+  "${_patch_url_base}-001"
+  "${_patch_url_base}-002"
+  "${_patch_url_base}-003"
+  "${_patch_url_base}-004"
+  "${_patch_url_base}-005"
+  "${_patch_url_base}-006"
+  "${_patch_url_base}-007"
+  "${_patch_url_base}-008"
 )
 
 # All official patch file shasums
