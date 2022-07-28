@@ -1,0 +1,11 @@
+--- texinfo-6.8/gnulib/lib/libc-config.h	2021-03-11 18:57:54.000000000 +0000
++++ texinfo-6.8_fix/gnulib/lib/libc-config.h	2021-12-06 10:33:10.984158323 +0000
+@@ -71,7 +71,7 @@
+ # endif
+ #endif
+ 
+-#ifndef __attribute_maybe_unused__
++#ifndef __attribute_nonnull___
+ /* <sys/cdefs.h> either does not exist, or is too old for Gnulib.
+    Prepare to include <cdefs.h>, which is Gnulib's version of a
+    more-recent glibc <sys/cdefs.h>.  */
