@@ -1559,6 +1559,8 @@ plan_path = "wget-static"
 paths = [
   "wget/*",
 ]
+[which]
+plan_path = "which"
 [windows-10-sdk]
 plan_path = "windows-10-sdk"
 [wix]
