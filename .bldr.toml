@@ -1528,6 +1528,8 @@ plan_path = "userspace-rcu"
 plan_path = "utf8proc"
 [util-linux]
 plan_path = "util-linux"
+[util-macros]
+plan_path = "util-macros"
 [valgrind]
 plan_path = "valgrind"
 [varnish]
