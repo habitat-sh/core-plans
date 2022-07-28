@@ -1584,6 +1584,8 @@ plan_path = "yarn"
 plan_path = "yasm"
 [zeromq]
 plan_path = "zeromq"
+[zip]
+plan_path = "zip"
 [zlib]
 plan_path = "zlib"
 [zlib-musl]
