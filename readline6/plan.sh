@@ -39,7 +39,7 @@ do_begin() {
 
   # Source a file containing an array of patch URLs and an array of patch file
   # shasums
-  source "${PLAN_CONTEXT}/../readline-patches.sh"
+  source "${PLAN_CONTEXT}/readline-patches.sh"
 }
 
 do_download() {
