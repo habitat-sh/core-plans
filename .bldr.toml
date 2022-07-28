@@ -1414,6 +1414,8 @@ plan_path = "sbt"
 plan_path = "scaffolding-base"
 [scaffolding-go17]
 plan_path = "scaffolding-go17"
+[scaffolding-go]
+plan_path = "scaffolding-go"
 [scaffolding-gradle]
 plan_path = "scaffolding-gradle"
 [scaffolding-node]
