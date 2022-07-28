@@ -1456,6 +1456,10 @@ plan_path = "snappy"
 plan_path = "socat"
 [spark]
 plan_path = "spark"
+[sqitch]
+plan_path = "sqitch"
+[sqitch_pg]
+plan_path = "sqitch_pg"
 [sqlite]
 plan_path = "sqlite"
 [sqlserver]

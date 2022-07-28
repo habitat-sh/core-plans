@@ -1,0 +1,3 @@
+plan_name: 'sqitch_pg'
+library_filename: 'Pg.pm'
+info_filename: 'perllocal.pod'
