@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #/ Usage: test.sh <pkg_ident>
 #/
 #/ Example: test.sh core/curl-static-musl/7.65.1/20190703171140

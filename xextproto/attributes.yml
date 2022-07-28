@@ -1,0 +1,3 @@
+plan_name: 'xextproto'
+library_filename: 'lbxproto.h'
+pkgconfig_filename: 'xextproto.pc'
