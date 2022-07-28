@@ -1565,6 +1565,8 @@ plan_path = "wordpress"
 plan_path = "wordpress-proxy"
 [wrk]
 plan_path = "wrk"
+[xextproto]
+plan_path = "xextproto"
 [xeyes]
 plan_path = "xeyes"
 [xlib]
