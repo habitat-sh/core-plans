@@ -1569,6 +1569,10 @@ plan_path = "wrk"
 plan_path = "xeyes"
 [xmlsec1]
 plan_path = "xmlsec1"
+[xtrans]
+plan_path = "xtrans"
+[xxhash]
+plan_path = "xxhash"
 [xz]
 plan_path = "xz"
 [xz-musl]
