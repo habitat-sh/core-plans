@@ -33,14 +33,10 @@ plans_changed() {
 # for each core-plan.
 emit_pipeline() {
   local pipeline_template
-  local plan=$2
+  local plan
 
   pipeline_template="$1"
-	if [[ -f $plan/plan.sh ]];then
-		plan="${plan}"
-	elif [[ -f $plan/habitat/plan.sh ]];then
-		plan="${plan}/habitat"
-	fi
+  plan="$2"
 
   sed "s|@@plan@@|$plan|" "$pipeline_template"
 }
@@ -68,7 +64,7 @@ for plan in ${plans[@]}; do
     emit_pipeline .expeditor/templates/verify_shared_pipeline.yml "$plan"
   fi
 
-  if [[ -f $plan/plan.sh ]] || [[ -f $plan/habitat/plan.sh ]]; then
+  if [[ -f $plan/plan.sh ]]; then
     emit_pipeline .expeditor/templates/verify_linux_pipeline.yml "$plan"
   fi
 

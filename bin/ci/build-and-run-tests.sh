@@ -1,10 +1,6 @@
 #!/bin/bash
-
-set -eou pipefail
-
-# nimit: Fix for git error due to CVE-2022-24765
-# https://github.blog/2022-04-12-git-security-vulnerability-announced
 git config --global --add safe.directory /workdir
+set -eou pipefail
 
 # Don't attempt to build the following plans. They have resource requirements
 # or build times that exceed the currently available resources on our CI
@@ -29,7 +25,7 @@ PLAN_BLACKLIST=(
  mysql
  opendistro-for-elasticsearch
 )
-plan="$(dirname "$1")"
+plan="$(basename "$1")"
 
 HAB_ORIGIN=ci
 export HAB_ORIGIN
