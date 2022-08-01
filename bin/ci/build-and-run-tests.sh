@@ -1,8 +1,10 @@
 #!/bin/bash
-git config --global --add safe.directory /workdir
+
 set -eou pipefail
 curl https://raw.githubusercontent.com/habitat-sh/habitat/main/components/hab/install.sh | sudo bash
 /bin/hab pkg binlink core/hab
+
+git config --global --add safe.directory /workdir
 
 # Don't attempt to build the following plans. They have resource requirements
 # or build times that exceed the currently available resources on our CI

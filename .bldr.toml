@@ -1362,6 +1362,8 @@ plan_path = "rkt"
 plan_path = "rlwrap"
 [rngd]
 plan_path = "rngd"
+[rpcsvc-proto]
+plan_path = "rpcsvc-proto"
 [rpm]
 plan_path = "rpm"
 [rpm2cpio]
