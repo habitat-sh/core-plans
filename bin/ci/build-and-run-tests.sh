@@ -1,6 +1,6 @@
 #!/bin/bash
-
 set -eou pipefail
+
 curl https://raw.githubusercontent.com/habitat-sh/habitat/main/components/hab/install.sh | sudo bash
 /bin/hab pkg binlink core/hab
 

@@ -1346,6 +1346,8 @@ paths = [
 ]
 [relx]
 plan_path = "relx"
+[renderproto]
+plan_path = "renderproto"
 [repo]
 plan_path = "repo"
 [reportviewer2010]
