@@ -1250,6 +1250,8 @@ paths = [
 ]
 [rebar3]
 plan_path = "rebar3"
+[recordproto]
+plan_path = "recordproto"
 [redis]
 plan_path = "redis"
 [redis3]
