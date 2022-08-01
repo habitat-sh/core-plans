@@ -1,0 +1,7 @@
+name: {plan}
+title: Habitat Core Plan {plan}
+maintainer: "The Core Planners <chef-core-planners@chef.io>"
+summary: InSpec controls for testing Habitat Core Plan {plan}
+version: 0.1.0
+license: Apache-2.0
+inspec_version: '>= 4.18.108'
