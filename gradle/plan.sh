@@ -1,8 +1,8 @@
 pkg_name=gradle
 pkg_origin=core
-pkg_version=5.6.4
+pkg_version=6.0.1
 pkg_source="https://services.gradle.org/distributions/${pkg_name}-${pkg_version}-bin.zip"
-pkg_shasum=1f3067073041bc44554d0efe5d402a33bc3d3c93cc39ab684f308586d732a80d
+pkg_shasum=d364b7098b9f2e58579a3603dc0a12a1991353ac58ed339316e6762b21efba44
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="A powerful build system for the JVM"
 pkg_upstream_url=http://gradle.org
