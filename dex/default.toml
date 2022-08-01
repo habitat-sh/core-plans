@@ -1,0 +1,8 @@
+[log]
+level = "INFO"
+format = "text" # can also be "json"
+
+[service]
+fqdn = "localhost"
+host = "0.0.0.0"
+port = 5556
