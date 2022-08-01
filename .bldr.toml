@@ -1418,6 +1418,8 @@ build_targets = [
   "x86_64-linux-kernel2",
   "x86_64-windows"
 ]
+[rsync]
+plan_path = "rsync"
 [sassc]
 plan_path = "sassc"
 [sbt]
