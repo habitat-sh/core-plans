@@ -8,12 +8,12 @@ control 'core-plans-rust-exists' do
   title 'Ensure rust exists'
   desc '
   Verify rust by ensuring bin/rustc exists'
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
-    #its('stderr') { should be_empty }
+    # its('stderr') { should be_empty }
   end
 
   command_relative_path = input('command_relative_path', value: 'bin/rustc')

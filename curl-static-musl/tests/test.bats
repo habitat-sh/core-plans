@@ -1,5 +1,13 @@
 TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
+# TODO: how to check binary is linked with musl libc?
+
+@test "is binary statically linked" {
+	result="$(hab pkg exec core/file file /hab/pkgs/${TEST_PKG_IDENT}/bin/curl)"
+	echo "res : $result"
+	[[ "$result" == *"statically linked"* ]]
+}
+
 @test "Version matches" {
   result="$(hab pkg exec ${TEST_PKG_IDENT} curl -- --version | head -1 | awk '{print $2}')"
   [ "$result" = "${TEST_PKG_VERSION}" ]

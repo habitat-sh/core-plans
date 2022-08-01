@@ -1,0 +1,3 @@
+plan_name: 'util-macros'
+library_filename: 'xorg-macros.m4'
+pkgconfig_filename: 'xorg-macros.pc'
