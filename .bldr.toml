@@ -1,5 +1,9 @@
 [7zip]
 plan_path = "7zip"
+build_targets = [
+  "x86_64-linux",
+  "x86_64-windows"
+]
 [acbuild]
 plan_path = "acbuild"
 [acl]
