@@ -6,12 +6,12 @@ $env:HAB_LICENSE = "accept-no-persist"
 Set-Location "$PSScriptRoot\..\..\"
 
 hab origin key generate $env:HAB_ORIGIN
-hab pkg build $plan/x86_64-windows
+hab pkg build $plan
 
-. x86_64-windows/results/last_build.ps1
+. /results/last_build.ps1
 
-if(Test-Path "$plan\x86_64-windows\tests\test.ps1") {
-    hab studio run "$plan\x86_64-windows\tests\test.ps1 $pkg_ident; exit `$LASTEXITCODE"
+if(Test-Path "$plan\tests\test.ps1") {
+    hab studio run "$plan\tests\test.ps1 $pkg_ident; exit `$LASTEXITCODE"
 } else {
     Write-Warning "$plan has no Windows tests to run. This is currently permitted but please consider adding some tests."
 }
