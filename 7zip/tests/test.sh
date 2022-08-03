@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #/ Usage: test.sh <pkg_ident>
 #/
 #/ Example: test.sh core/opa/0.11.0/20190531065119
