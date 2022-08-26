@@ -1,0 +1,11 @@
+diff -ru binutils-2.29.1.orig/ld/ldmain.c binutils-2.29.1/ld/ldmain.c
+--- binutils-2.29.1.orig/ld/ldmain.c	2017-10-19 12:40:00.640806973 +0000
++++ binutils-2.29.1/ld/ldmain.c	2017-10-19 12:46:06.810802806 +0000
+@@ -312,6 +312,7 @@
+   ldexp_init ();
+   ldemul_before_parse ();
+   lang_has_input_file = FALSE;
++  input_flags.add_DT_NEEDED_for_dynamic = TRUE;
+   parse_args (argc, argv);
+ 
+   if (config.hash_table_size != 0)
