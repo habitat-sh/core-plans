@@ -1,3 +1,0 @@
-pubkey_authentication = 'yes'
-password_authentication = 'yes'
-port=2222

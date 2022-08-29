@@ -1,9 +1,0 @@
-port = 3306
-bind = "127.0.0.1"
-language = "english"
-root_password = ""
-app_username = false
-app_password = false
-password_column_name = "authentication_string"
-binlog-format = "ROW"
-server_id = 1
