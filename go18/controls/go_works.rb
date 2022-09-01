@@ -8,11 +8,11 @@ control 'core-plans-go-works' do
   title 'Ensure go works as expected'
   desc '
   Verify go by ensuring that
-  (1) its installation directory exists 
+  (1) its installation directory exists
   (2) its binaries return return expected output.  Note that
       go returns the expected version and runs a script.
   '
-  
+ 
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its("exit_status") { should eq 0 }
@@ -33,7 +33,7 @@ control 'core-plans-go-works' do
     # set default values if each binary_name doesn't define an over-ride
     command_suffix = value.has_key?(:command_suffix) ? "#{value[:command_suffix]} 2>\&1" : "-help 2>\&1"
 
-    # set default @command_under_test only adding a Tempfile if 'script' is defined
+   # set default @command_under_test only adding a Tempfile if 'script' is defined
     command_full_path = File.join(plan_installation_directory.stdout.strip, "bin", binary_name)
     describe command("#{command_full_path} #{command_suffix}") do
       its("exit_status") { should eq 0 }

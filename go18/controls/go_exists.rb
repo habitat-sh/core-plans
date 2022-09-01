@@ -7,10 +7,10 @@ control 'core-plans-go-exists' do
   impact 1.0
   title 'Ensure go exists'
   desc '
-  Verify go by ensuring bin/go 
+  Verify go by ensuring bin/go
   (1) exists and
   (2) is executable'
-  
+ 
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
