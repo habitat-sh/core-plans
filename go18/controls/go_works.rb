@@ -12,7 +12,7 @@ control 'core-plans-go-works' do
   (2) its binaries return return expected output.  Note that
       go returns the expected version and runs a script.
   '
- 
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its("exit_status") { should eq 0 }
