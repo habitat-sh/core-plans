@@ -1,5 +1,5 @@
 # shellcheck disable=SC2034
-pkg_name=go
+pkg_name=go18
 pkg_origin=core
 pkg_version=1.18.3
 # Rolled back recent change to core/go17 to facillitate a from-scratch
