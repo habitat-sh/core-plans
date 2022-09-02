@@ -1,13 +1,13 @@
-title 'Tests to confirm go exists'
+title 'Tests to confirm go18 exists'
 
 plan_origin = ENV['HAB_ORIGIN']
-plan_name = input('plan_name', value: 'go')
+plan_name = input('plan_name', value: 'go18')
 
-control 'core-plans-go-exists' do
+control 'core-plans-go18-exists' do
   impact 1.0
-  title 'Ensure go exists'
+  title 'Ensure go18 exists'
   desc '
-  Verify go by ensuring bin/go
+  Verify go18 by ensuring bin/go
   (1) exists and
   (2) is executable'
 

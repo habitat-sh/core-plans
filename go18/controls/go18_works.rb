@@ -1,13 +1,13 @@
-title 'Tests to confirm go works as expected'
+title 'Tests to confirm go18 works as expected'
 
 plan_origin = ENV['HAB_ORIGIN']
-plan_name = input('plan_name', value: 'go')
+plan_name = input('plan_name', value: 'go18')
 
-control 'core-plans-go-works' do
+control 'core-plans-go18-works' do
   impact 1.0
-  title 'Ensure go works as expected'
+  title 'Ensure go18 works as expected'
   desc '
-  Verify go by ensuring that
+  Verify go18 by ensuring that
   (1) its installation directory exists
   (2) its binaries return return expected output.  Note that
       go returns the expected version and runs a script.
