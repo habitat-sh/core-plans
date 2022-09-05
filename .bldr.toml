@@ -488,6 +488,8 @@ build_targets = [
 plan_path = "go14"
 [go17]
 plan_path = "go17"
+[go18]
+plan_path = "go18"
 [goaccess]
 plan_path = "goaccess"
 [gobject-introspection]
