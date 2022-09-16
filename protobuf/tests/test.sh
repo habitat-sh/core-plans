@@ -4,8 +4,10 @@
 #/ Example: test.sh core/php/7.2.8/20181108151533
 #/
 
+# shellcheck disable=SC3040
 set -euo pipefail
 
+# shellcheck disable=SC3010
 if [[ -z "${1:-}" ]]; then
   grep '^#/' < "${0}" | cut -c4-
 	exit 1
