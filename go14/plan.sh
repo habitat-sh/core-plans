@@ -127,7 +127,7 @@ do_install() {
 
 do_strip() {
   # Strip manually since `strip` will not process Go's static libraries.
-  for f in $pkg_prefix/bin/* $pkg_prefix/pkg/tool/linux_$GOARCH/*; do
+  for f in "$pkg_prefix"/bin/* "$pkg_prefix"/pkg/tool/linux_$GOARCH/*; do
     strip -s "$f"
   done
 }
