@@ -22,6 +22,8 @@ function Invoke-Unpack {
 }
 
 function Invoke-Install {
+    mkdir "$pkg_prefix/usr/bin" -Force
     Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/bin/*" "$pkg_prefix/bin"
+    Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/usr/bin/*" "$pkg_prefix/usr/bin"
     Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/mingw64" "$pkg_prefix/" -Recurse
 }
