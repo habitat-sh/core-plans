@@ -14,7 +14,6 @@ pkg_build_deps=(
   core/pkg-config
   core/gcc
   core/make
-  core/openssl
 )
 pkg_deps=(
   core/bash
@@ -24,6 +23,7 @@ pkg_deps=(
   core/python
   core/util-linux
   core/zlib
+  core/openssl
   core/coreutils
   core/libuv
 )
