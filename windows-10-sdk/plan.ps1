@@ -5,23 +5,23 @@ $pkg_description="The Windows 10 SDK for Windows 10, version 2004 (servicing rel
 $pkg_upstream_url="https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk"
 $pkg_license=@("Microsoft Software License")
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-$pkg_source="https://download.microsoft.com/download/d/8/f/d8ff148b-450c-40b3-aeed-2a3944e66bbd/windowssdk/winsdksetup.exe"
-$pkg_shasum="4d73ddc82caa1cbe82dffdc24b7cef368919e077bad984357d447568feab1f5f"
+$pkg_source="https://download.microsoft.com/download/1/0/e/10e6da02-01f7-40d4-8942-b98b53b36cf9/windowssdk/winsdksetup.exe"
+$pkg_shasum="521b6410d3fdd92adbcfe941fc24746ea340288b3767fe39026bc70907ae0322"
 $pkg_build_deps=@("core/lessmsi")
 
 $pkg_bin_dirs=@(
     "Windows Kits\10\bin\x64",
-    "Windows Kits\10\bin\10.0.19041.0\x64"
+    "Windows Kits\10\bin\$pkg_version.0\x64"
 )
 $pkg_lib_dirs=@(
-    "Windows Kits\10\Lib\10.0.19041.0\um\x64",
-    "Windows Kits\10\Lib\10.0.19041.0\ucrt\x64"
+    "Windows Kits\10\Lib\$pkg_version.0\um\x64",
+    "Windows Kits\10\Lib\$pkg_version.0\ucrt\x64"
 )
 $pkg_include_dirs=@(
-    "Windows Kits\10\Include\10.0.19041.0\shared",
-    "Windows Kits\10\Include\10.0.19041.0\ucrt",
-    "Windows Kits\10\Include\10.0.19041.0\um",
-    "Windows Kits\10\Include\10.0.19041.0\winrt"
+    "Windows Kits\10\Include\$pkg_version.0\shared",
+    "Windows Kits\10\Include\$pkg_version.0\ucrt",
+    "Windows Kits\10\Include\$pkg_version.0\um",
+    "Windows Kits\10\Include\$pkg_version.0\winrt"
 )
 
 function Invoke-SetupEnvironment {
