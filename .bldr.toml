@@ -1538,6 +1538,8 @@ plan_path = "tomcat-native"
 plan_path = "tomcat7"
 [tomcat8]
 plan_path = "tomcat8"
+[toml-cli]
+plan_path = "toml-cli"
 [tor]
 plan_path = "tor"
 [traefik]

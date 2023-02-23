@@ -17,6 +17,5 @@ do_build() {
 }
 
 do_install() {
-	cp toml $pkg_prefix/bin
+	cp toml "$pkg_prefix"/bin
 }
-
