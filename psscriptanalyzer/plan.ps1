@@ -5,10 +5,20 @@ $pkg_license=@('MIT')
 $pkg_upstream_url="https://github.com/PowerShell/PSScriptAnalyzer"
 $pkg_description="PSScriptAnalyzer is the ubiquitous linter for PowerShell"
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-$pkg_source="https://github.com/PowerShell/PSScriptAnalyzer/archive/refs/tags/$pkg_version.zip"
-$pkg_shasum="4f192475e82598e5868a107846a44fb12f4bd0849e2dcc22b6c1200be5974f6f"
+$pkg_source="https://github.com/PowerShell/PSScriptAnalyzer/releases/download/$pkg_version/PSScriptAnalyzer.$pkg_version.nupkg"
+$pkg_shasum="52b442c513d327129be228ab031a38a91c26f01187b179e9068d918a2c38a466"
+
+function Invoke-Unpack {
+    Expand-Archive -Path "$HAB_CACHE_SRC_PATH/$pkg_filename" -DestinationPath "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+}
 
 function Invoke-Install {
     mkdir "$pkg_prefix/module"
     Copy-Item * "$pkg_prefix/module" -Recurse -Force
+}
+
+function Invoke-Check() {
+    Import-Module "$HAB_CACHE_SRC_PATH/$pkg_dirname/PSScriptAnalyzer.psd1" | Out-Null
+    $version = (Get-Command Invoke-ScriptAnalyzer).Version
+    $version -eq $pkg_prefix
 }
