@@ -14,6 +14,6 @@ fi
 TEST_PKG_IDENT="${1}"
 export TEST_PKG_IDENT
 hab pkg install core/bats --binlink
-hab pkg install "${TEST_PKG_IDENT}"
+hab pkg install "${TEST_PKG_IDENT}" --binlink
 export LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 bats "$(dirname "${0}")/test.bats"
