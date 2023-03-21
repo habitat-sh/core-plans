@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #/ Usage: test.sh <pkg_ident>
 #/
 #/ Example: test.sh core/php/7.2.8/20181108151533
