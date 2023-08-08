@@ -61,11 +61,11 @@ $ openssl --help
 ...
 ...
 Standard commands
-asn1parse         ca                ciphers           cms               
-crl               crl2pkcs7         dgst              dh                
-dhparam           dsa               dsaparam          ec                
-ecparam           enc               engine            errstr            
-gendh             gendsa            genpkey           genrsa            
+asn1parse         ca                ciphers           cms
+crl               crl2pkcs7         dgst              dh
+dhparam           dsa               dsaparam          ec
+ecparam           enc               engine            errstr
+gendh             gendsa            genpkey           genrsa
 ...
 ...
 ```
