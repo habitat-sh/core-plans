@@ -8,7 +8,7 @@ control 'core-plans-openssl-exists' do
   title 'Ensure openssl exists'
   desc '
   Verify openssl by ensuring bin/openssl exists'
-  
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
