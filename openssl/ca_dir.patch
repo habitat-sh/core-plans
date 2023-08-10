@@ -1,8 +1,7 @@
-diff --git a/apps/CA.pl.in b/apps/CA.pl.in
-index 3bf4c99f31..0856fbcfac 100644
---- a/apps/CA.pl.in
-+++ b/apps/CA.pl.in
-@@ -53,7 +53,7 @@ $VERIFY="$openssl verify";
+diff -Naur a/apps/CA.pl.in b/apps/CA.pl.in
+--- a/apps/CA.pl.in	2023-08-07 11:00:58.705235628 +0000
++++ b/apps/CA.pl.in	2023-08-07 11:02:16.329199659 +0000
+@@ -53,7 +53,7 @@
  $X509="$openssl x509";
  $PKCS12="$openssl pkcs12";
  
@@ -11,39 +10,49 @@ index 3bf4c99f31..0856fbcfac 100644
  $CAKEY="cakey.pem";
  $CAREQ="careq.pem";
  $CACERT="cacert.pem";
-diff --git a/apps/openssl.cnf b/apps/openssl.cnf
-index 1eb86c4012..3602149fc7 100644
---- a/apps/openssl.cnf
-+++ b/apps/openssl.cnf
-@@ -39,7 +39,7 @@ default_ca	= CA_default		# The default ca section
+diff -Naur a/apps/CA.sh b/apps/CA.sh
+--- a/apps/CA.sh	2023-08-07 11:00:58.705235628 +0000
++++ b/apps/CA.sh	2023-08-07 11:04:48.713125975 +0000
+@@ -68,7 +68,7 @@
+ X509="$OPENSSL x509"
+ PKCS12="openssl pkcs12"
+ 
+-if [ -z "$CATOP" ] ; then CATOP=./demoCA ; fi
++if [ -z "$CATOP" ] ; then CATOP=@cacerts_prefix@/ssl/certs ; fi
+ CAKEY=./cakey.pem
+ CAREQ=./careq.pem
+ CACERT=./cacert.pem
+diff -Naur a/apps/openssl.cnf b/apps/openssl.cnf
+--- a/apps/openssl.cnf	2023-08-07 11:00:58.705235628 +0000
++++ b/apps/openssl.cnf	2023-08-07 11:03:38.573158885 +0000
+@@ -39,7 +39,7 @@
  ####################################################################
  [ CA_default ]
  
 -dir		= ./demoCA		# Where everything is kept
-+dir		= @cacerts_prefix@/ssl		# Where everything is kept
++dir		= @cacerts_prefix@/ssl/certs	# Where everything is kept
  certs		= $dir/certs		# Where the issued certs are kept
  crl_dir		= $dir/crl		# Where the issued crl are kept
  database	= $dir/index.txt	# database index file.
-@@ -47,7 +47,7 @@ database	= $dir/index.txt	# database index file.
- 					# several ctificates with same subject.
- new_certs_dir	= $dir/newcerts		# default place for new certs.
+@@ -327,7 +327,7 @@
+ [ tsa_config1 ]
  
--certificate	= $dir/cacert.pem 	# The CA certificate
-+certificate	= $certs/cacert.pem 	# The CA certificate
- serial		= $dir/serial 		# The current serial number
- crlnumber	= $dir/crlnumber	# the current crl number
- 					# must be commented out to leave a V1 CRL
-diff --git a/crypto/cryptlib.h b/crypto/cryptlib.h
-index 2f9eced4ae..a7376debe9 100644
---- a/crypto/cryptlib.h
-+++ b/crypto/cryptlib.h
-@@ -81,8 +81,8 @@ extern "C" {
+ # These are used by the TSA reply generation only.
+-dir		= ./demoCA		# TSA root directory
++dir		= @cacerts_prefix@/ssl/certs	# TSA root directory
+ serial		= $dir/tsaserial	# The current serial number (mandatory)
+ crypto_device	= builtin		# OpenSSL engine to use for signing
+ signer_cert	= $dir/tsacert.pem 	# The TSA signing certificate
+diff -Naur a/crypto/cryptlib.h b/crypto/cryptlib.h
+--- a/crypto/cryptlib.h	2023-08-07 11:05:16.113114744 +0000
++++ b/crypto/cryptlib.h	2023-08-07 11:09:19.456992707 +0000
+@@ -81,8 +81,8 @@
  
  # ifndef OPENSSL_SYS_VMS
  #  define X509_CERT_AREA          OPENSSLDIR
 -#  define X509_CERT_DIR           OPENSSLDIR "/certs"
 -#  define X509_CERT_FILE          OPENSSLDIR "/cert.pem"
-+#  define X509_CERT_DIR           "@cacerts_prefix@/ssl"
++#  define X509_CERT_DIR           "@cacerts_prefix@/ssl/certs"
 +#  define X509_CERT_FILE          "@cacerts_prefix@/ssl/cert.pem"
  #  define X509_PRIVATE_DIR        OPENSSLDIR "/private"
  # else
