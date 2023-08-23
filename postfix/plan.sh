@@ -34,6 +34,7 @@ pkg_svc_user=root
 
 do_prepare() {
   patch -p1 < "${PLAN_CONTEXT}/postfix-glibc-2.34.patch"
+  patch -p1 < "${PLAN_CONTEXT}/fix-aws-kernel-version.patch"
 }
 
 do_build() {
