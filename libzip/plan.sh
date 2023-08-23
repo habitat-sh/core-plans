@@ -5,7 +5,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="A C library for reading, creating, and modifying zip archives"
 pkg_upstream_url="https://libzip.org/"
 pkg_license=('BSD-3-Clause')
-pkg_source="${pkg_upstream_url}/download/${pkg_name}-${pkg_version}.tar.gz"
+pkg_source="https://github.com/nih-at/libzip/releases/download/v${pkg_version}/libzip-${pkg_version}.tar.gz"
 pkg_shasum=30ee55868c0a698d3c600492f2bea4eb62c53849bcf696d21af5eb65f3f3839e
 pkg_deps=(
   core/bzip2-musl
