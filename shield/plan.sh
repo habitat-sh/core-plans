@@ -8,8 +8,19 @@ pkg_upstream_url="https://github.com/starkandwayne/shield"
 pkg_source="https://github.com/starkandwayne/shield/archive/v${pkg_version}.tar.gz"
 pkg_shasum=dbea689596bc496e2f16f8a4bf2aaade8fb693b3934f11b5b7e956573ebbc599
 
-pkg_deps=(core/bash core/glibc core/postgresql core/shield-proxy/"${pkg_version}")
-pkg_build_deps=(core/go core/git core/gcc core/make core/gox)
+pkg_deps=(
+	core/bash
+	core/glibc
+	core/postgresql
+	core/shield-proxy/"${pkg_version}"
+)
+pkg_build_deps=(
+	core/go
+	core/git
+	core/gcc
+	core/make
+	core/gox
+)
 
 pkg_bin_dirs=(bin)
 
@@ -38,20 +49,19 @@ do_clean() {
 
 do_unpack() {
   mkdir -p "${SHIELD_SRC_PATH}"
-  tar xf "${HAB_CACHE_SRC_PATH}"/"${pkg_filename}" -C "${SHIELD_SRC_PATH}" --strip-components 1
+  tar xf "${HAB_CACHE_SRC_PATH}/${pkg_filename}" --strip-components=1 -C "${SHIELD_SRC_PATH}"
 }
 
 do_prepare() {
+  VERSION="${pkg_version}"
+  export VERSION
   GOPATH="${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
   export GOPATH
   PATH="$PATH:$GOPATH/bin"
   export PATH
-  VERSION="${pkg_version}"
-  export VERSION
   GO111MODULE="off"
   export GO111MODULE
 
-  git config --global url."git://github.com/".insteadOf "https://github.com/"
   pushd "${SHIELD_SRC_PATH}" &>/dev/null || exit 1
     go get github.com/kardianos/govendor
     go install github.com/kardianos/govendor
