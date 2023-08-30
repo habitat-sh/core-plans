@@ -48,7 +48,7 @@ do_prepare() {
 do_build() {
   # This is currently necessary because MongoDB still uses Python 2.x
   # When it supports Python 3.x, this line will be unnecessary
-  pip install typing pyyaml==5.3.1 cheetah3
+  pip install typing==3.10.0.0 pyyaml==5.3.1 cheetah3==3.2.6
 
   scons CC="${CC}" CXX="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" CPPPATH="${CFLAGS}" LINKFLAGS="${LDFLAGS}" LIBPATH="${LDFLAGS}" core --propagate-shell-environment --disable-warnings-as-errors --prefix="${pkg_prefix}" --ssl -j"$(nproc)"
 }
