@@ -34,12 +34,12 @@ pkg_exports=(
 )
 pkg_exposes=(port)
 
+pkg_svc_user="root"
+pkg_svc_group="$pkg_svc_user"
+
 pkg_binds_optional=(
   [daemon]="port provisioning_key"
 )
-
-pkg_svc_user="root"
-pkg_svc_group="$pkg_svc_user"
 
 do_before() {
   SHIELD_SRC_PATH="${HAB_CACHE_SRC_PATH}/${pkg_dirname}/src/github.com/starkandwayne/shield"
@@ -65,9 +65,10 @@ do_prepare() {
   GO111MODULE=off
   export GO111MODULE
 
-  git config --global url."git://github.com/".insteadOf "https://github.com/"
+  pushd "${SHIELD_SRC_PATH}" || exit
   go get github.com/kardianos/govendor
   go install github.com/kardianos/govendor
+  popd
 }
 
 do_build() {
