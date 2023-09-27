@@ -1,10 +1,10 @@
 pkg_name=minio
 pkg_origin=core
-pkg_version=2021-11-03T03-36-36Z
+pkg_version=2023-09-23T03-47-50Z
 pkg_description="Minio is a high performance distributed object storage server, designed for large-scale private cloud infrastructure."
 pkg_upstream_url="https://minio.io"
 pkg_source="https://dl.minio.io/server/minio/release/linux-amd64/archive/minio.RELEASE.${pkg_version}"
-pkg_shasum=17745acc86cc338f6c41fe27df143cc065c945b3bb24dec21b153b4ac9f0811a
+pkg_shasum=cdb692133cec30d6b446a1f564c7e1932e572c157b39a7d2ea676275e6c5b883
 pkg_license=('Apache-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_bin_dirs=(bin)

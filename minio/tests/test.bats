@@ -1,7 +1,7 @@
 TEST_PKG_VERSION="$(echo "${TEST_PKG_IDENT}" | cut -d/ -f3)"
 
 @test "Version matches, via help output" {
-  result=$(hab pkg exec ${TEST_PKG_IDENT} minio --help | tail -1 | tr -d ' ' | sed 's/:/-/g')
+  result=$(hab pkg exec ${TEST_PKG_IDENT} minio -- --help | tail -1 | tr -d ' ' | sed 's/.*\.//' )
   [ "$?" -eq 0 ]
   [ "$result" = "${TEST_PKG_VERSION}" ]
 }
