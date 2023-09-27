@@ -229,11 +229,11 @@ plan_path = "dejagnu"
 plan_path = "dex"
 [delmo]
 plan_path = "delmo"
-[dgraph]
 [dep]
 plan_path = "dep"
 [devicemapper]
-plan_path= "devicemapper"
+plan_path = "devicemapper"
+[dgraph]
 plan_path = "dgraph"
 [dgraph-ratel]
 plan_path = "dgraph-ratel"
@@ -361,6 +361,8 @@ plan_path = "file"
 plan_path = "filebeat"
 [findutils]
 plan_path = "findutils"
+[firejail]
+plan_path = "firejail"
 [fish]
 plan_path = "fish"
 [fixesproto]
