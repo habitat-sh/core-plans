@@ -1528,6 +1528,8 @@ plan_path = "tcpdump"
 plan_path = "telegraf"
 [terraform]
 plan_path = "terraform"
+[terraform1]
+plan_path = "terraform1"
 [tesseract]
 plan_path = "tesseract"
 [texinfo]
