@@ -21,7 +21,8 @@ do_build() {
               --localstatedir="${pkg_svc_path}/var" \
               --datadir="${pkg_svc_data_path}" \
               --with-privsep-user=hab \
-              --with-privsep-path="${pkg_prefix}/var/empty"
+              --with-privsep-path="${pkg_prefix}/var/empty" \
+	      --without-zlib-version-check
   make
 }
 
