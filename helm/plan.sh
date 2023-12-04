@@ -1,45 +1,35 @@
-go_pkg="k8s.io/helm"
 pkg_name=helm
 pkg_origin=core
-pkg_version=3.7.1
+pkg_version="3.7.1"
 pkg_description="The Kubernetes Package Manager"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("Apache-2.0")
-pkg_source="https://$go_pkg"
+pkg_source="https://github.com/helm/helm/archive/refs/tags/v${pkg_version}.tar.gz"
+pkg_shasum="5243dd0e07840404a7d19ca0917b2202ee3a5ad70a081cfa455ffd705a8d3624"
 pkg_upstream_url="https://helm.sh"
-pkg_scaffolding="core/scaffolding-go"
+
 pkg_bin_dirs=(bin)
+
 pkg_build_deps=(
   core/coreutils
-  core/git
+  core/go
+  core/cacerts
+  core/gcc
 )
 
-do_download() {
-  # `-d`: don't let go build it, we'll have to build this ourselves
-  # also, don't have `go get` bail when not finding a package in that directory
-  build_line "go get -d $go_pkg"
+do_prepare() {
+  # replace /usr/bin/env with hab pkg install path 
+  binpath="$(pkg_path_for core/coreutils)/bin/env"
+  sed -i 's/\/usr\/bin\/env/${binpath}/g' Makefile
 
-  go get -d $go_pkg 2>&1 | grep -q "no Go files"
-
-  pushd "$scaffolding_go_pkg_path" || exit 1
-  git fetch --all --tags
-  git reset --hard v$pkg_version
-  go mod tidy
-  popd || exit 1
+  # update cacerts
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
 }
 
 do_build() {
-  # For some reason one of the commands in the Makefile launches env with an
-  # absolute path so we need to ensure it can find it there.
-  env_path="$(command -v env)"
-  build_line "ln -fs $env_path /usr/bin/env"
-  ln -fs "$env_path" /usr/bin/env
-
-  pushd "$scaffolding_go_pkg_path" || exit 1
-  do_default_build
-  popd || exit 1
+  make
 }
 
 do_install() {
-  install -m0755 "$scaffolding_go_pkg_path/bin/helm" "$pkg_prefix/bin"
+  install -m0755 "${CACHE_PATH}/bin/helm" "$pkg_prefix/bin"
 }
