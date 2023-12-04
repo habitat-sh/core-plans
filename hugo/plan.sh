@@ -8,6 +8,7 @@ pkg_build_deps=(
   core/gcc
   core/git
   core/go
+  core/cacerts
 )
 pkg_deps=(
   core/gcc-libs
@@ -16,6 +17,10 @@ pkg_deps=(
 pkg_bin_dirs=(bin)
 pkg_repository="https://github.com/gohugoio/hugo.git"
 pkg_upstream_url="https://gohugo.io"
+
+do_prepare() {
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+}
 
 do_build() {
   local hugo_dir="${HAB_CACHE_SRC_PATH}/hugo-${pkg_version}"
