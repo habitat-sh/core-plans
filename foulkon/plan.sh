@@ -10,6 +10,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_bin_dirs=(bin)
 pkg_build_deps=(
+  core/cacerts
   core/patch
   # core/which # let's just ignore those errors. works fine without.
 )
@@ -34,6 +35,7 @@ do_prepare() {
   build_line "mkdir -p \$GOPATH/bin; export PATH=\$GOPATH/bin:\$PATH"
   mkdir -p "$GOPATH/bin"
   export PATH=$GOPATH/bin:$PATH
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
 }
 
 do_download() {
