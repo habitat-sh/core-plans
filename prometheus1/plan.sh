@@ -19,6 +19,7 @@ pkg_build_deps=(
   core/gcc
   core/make
   core/patch
+  core/cacerts
 )
 
 do_setup_environment() {
@@ -27,6 +28,7 @@ do_setup_environment() {
 
   # prometheus 1.x didn't use go modules
   export GO111MODULE=off
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
 }
 
 do_before() {
