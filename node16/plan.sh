@@ -10,7 +10,7 @@ pkg_shasum=34b23965457fb08a8c62f81e8faf74ea60587cda6fa898e5d030211f5f374cb6
 pkg_deps=(
   core/glibc
   core/gcc-libs
-  core/python
+  core/python39
   core/bash
 )
 pkg_build_deps=(
@@ -27,7 +27,7 @@ pkg_dirname="node-v${pkg_version}"
 
 do_prepare() {
   # ./configure has a shebang of #!/usr/bin/env python. Fix it.
-  sed -e "s#/usr/bin/env python#$(pkg_path_for python)/bin/python#" -i configure
+  sed -e "s#/usr/bin/env python#$(pkg_path_for python39)/bin/python#" -i configure
 }
 
 do_build() {
@@ -48,7 +48,7 @@ do_install() {
     sed -e "s#\#\!/usr/bin/env node#\#\!${pkg_prefix}/bin/node#" -i "$target"
     sed -e "s#\#\!/usr/bin/env sh#\#\!$(pkg_path_for bash)/bin/sh#" -i "$target"
     sed -e "s#\#\!/usr/bin/env bash#\#\!$(pkg_path_for bash)/bin/bash#" -i "$target"
-    sed -e "s#\#\!/usr/bin/env python#\#\!$(pkg_path_for python)/bin/python#" -i "$target"
+    sed -e "s#\#\!/usr/bin/env python#\#\!$(pkg_path_for python39)/bin/python#" -i "$target"
   done
 
   # This script has a hardcoded bare `node` command
