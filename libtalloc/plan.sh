@@ -13,7 +13,7 @@ pkg_include_dirs=(include)
 pkg_pconfig_dirs=(lib/pkgconfig)
 
 pkg_deps=(
-  core/python
+  core/python39
   core/glibc
 )
 
