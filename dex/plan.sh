@@ -12,7 +12,7 @@ pkg_exports=(
   [host]=service.host
 )
 pkg_deps=(core/glibc)
-pkg_build_deps=(core/go core/git core/gcc)
+pkg_build_deps=(core/go core/git core/gcc core/cacerts)
 pkg_bin_dirs=(bin)
 
 do_before() {
@@ -22,6 +22,7 @@ do_before() {
 
 do_prepare() {
   export GO_LDFLAGS="-w -X $gopkg/version.Version=v$pkg_version"
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
 }
 
 do_download() {
