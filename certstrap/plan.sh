@@ -13,6 +13,14 @@ pkg_scaffolding=core/scaffolding-go
 scaffolding_go_base_path=github.com/square
 scaffolding_go_build_deps=()
 
+pkg_build_deps=(
+  core/cacerts
+)
+
+do_setup_environment() {
+  push_buildtime_env SSL_CERT_FILE "$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+}
+
 do_prepare() {
   build_line "adding \$GOPATH/bin to \$PATH"
   export PATH=${scaffolding_go_gopath:?}/bin:$PATH
