@@ -13,6 +13,7 @@ pkg_build_deps=(
   core/node6
   core/sed
   core/yarn
+  core/cacerts
 )
 pkg_deps=()
 pkg_bin_dirs=(bin)
@@ -27,6 +28,10 @@ pkg_exports=(
   [web_host]=web.host
   [web_enabled]=web.enable
 )
+
+do_setup_environment() {
+  push_buildtime_env SSL_CERT_FILE "$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+}
 
 do_prepare() {
   export PATH="${scaffolding_go_gopath:?}/bin:${PATH}"
