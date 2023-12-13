@@ -14,7 +14,7 @@ pkg_deps=(
   core/gcc-libs
 )
 pkg_build_deps=(
-  core/rust
+  core/rust-nightly
 )
 
 do_build() {
