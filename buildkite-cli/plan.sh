@@ -4,7 +4,7 @@ pkg_version="0.5.0"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("MIT")
 pkg_description="A command line interface for Buildkite"
-pkg_build_deps=(core/go core/coreutils core/gcc)
+pkg_build_deps=(core/go core/coreutils core/gcc core/cacerts)
 pkg_deps=(core/glibc core/git core/buildkite-agent)
 pkg_source="https://github.com/buildkite/cli/archive/v${pkg_version}.tar.gz"
 pkg_filename="${pkg_name}-${pkg_version}.tar.gz"
@@ -31,6 +31,7 @@ do_unpack() {
 }
 
 do_prepare() {
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
   mkdir -p "${parent_go_path}"
   ln -s "${PWD}" "${parent_go_path}/cli"
   return $?
