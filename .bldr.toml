@@ -206,6 +206,8 @@ plan_path = "curator"
 plan_path = "curator4"
 [curl]
 plan_path = "curl"
+[curl8]
+plan_path= "curl8"
 [curl-static-musl]
 plan_path = "curl-static-musl"
 paths = [
