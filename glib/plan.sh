@@ -1,6 +1,6 @@
 pkg_origin=core
 pkg_name=glib
-pkg_version="2.70.2"
+pkg_version="2.70.5"
 pkg_description="$(cat << EOF
   GLib is a general-purpose utility library, which provides many useful data
   types, macros, type conversions, string utilities, file utilities, a
@@ -12,7 +12,7 @@ pkg_source="https://download.gnome.org/sources/${pkg_name}/${pkg_version%.*}/${p
 pkg_license=('LGPL-2.0')
 pkg_maintainer='The Habitat Maintainers <humans@habitat.sh>'
 pkg_upstream_url="https://developer.gnome.org/glib/"
-pkg_shasum="0551459c85cd3da3d58ddc9016fd28be5af503f5e1615a71ba5b512ac945806f"
+pkg_shasum="f70bf76ebcc84e0705722f038be8e2f9a58d17e1a700810c635fcc18b8974b7e"
 pkg_deps=(
   core/coreutils
   core/elfutils
@@ -21,7 +21,6 @@ pkg_deps=(
   core/libffi
   core/libiconv
   core/pcre
-  core/python
   core/util-linux
   core/zlib
 )
