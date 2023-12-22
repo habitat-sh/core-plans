@@ -37,6 +37,7 @@ pkg_build_deps=(
   core/cacerts
   core/curl
   core/fribidi
+  core/python
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
