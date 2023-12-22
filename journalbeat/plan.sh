@@ -12,12 +12,17 @@ pkg_build_deps=(
   core/git
   core/mage
   core/gcc
+  core/cacerts
 )
 pkg_bin_dirs=(bin)
 pkg_svc_user=root
 pkg_svc_group=root
 pkg_description="Journalbeat is a lightweight journald log shipper for Elasticsearch."
 pkg_upstream_url="https://github.com/elastic/beats/tree/master/journalbeat"
+
+do_before() {
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+}
 
 do_download() {
   SYSTEMD_INCLUDE_PATH=$(pkg_path_for core/systemd)/include
