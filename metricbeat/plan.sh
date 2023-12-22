@@ -9,12 +9,17 @@ pkg_build_deps=(
   core/git
   core/mage
   core/gcc
+  core/cacerts
 )
 pkg_bin_dirs=(bin)
 pkg_svc_user=root
 pkg_svc_group=root
 pkg_description="Metricbeat is a lightweight shipper for metrics with Elasticsearch."
 pkg_upstream_url="https://elastic.co/products/beats/metricbeat"
+
+do_prepare() {
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+}
 
 do_download() {
   SYSTEMD_INCLUDE_PATH=$(pkg_path_for core/systemd)/include
