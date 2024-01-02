@@ -16,6 +16,7 @@ pkg_build_deps=(
   core/python2
   core/sed
   core/tar
+  core/cacerts
 )
 pkg_deps=(
   core/python2
@@ -37,6 +38,10 @@ do_begin() {
   export DD_HOME="${pkg_prefix}/dd-agent"
   export DD_START_AGENT=0
   export DD_API_KEY="{{cfg.dd_api_key}}"
+}
+
+do_prepare() {
+	export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
 }
 
 do_build() {
