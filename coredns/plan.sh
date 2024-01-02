@@ -15,6 +15,7 @@ pkg_build_deps=(
   core/make
   core/go
   core/git
+  core/cacerts
 )
 pkg_bin_dirs=(bin)
 pkg_svc_run="coredns -conf ${pkg_svc_config_path}/Corefile"
@@ -24,6 +25,10 @@ pkg_exports=(
 pkg_exposes=(port)
 pkg_svc_user="root"
 pkg_svc_group="${pkg_svc_user}"
+
+do_prepare() {
+	export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+}
 
 do_build() {
   fix_interpreter ".presubmit/*" core/coreutils bin/env
