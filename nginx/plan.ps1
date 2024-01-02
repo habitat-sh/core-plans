@@ -19,7 +19,14 @@ function Invoke-Install {
     } | ForEach-Object {
         Copy-Item $_.FullName $pkg_prefix
     }
-mkdir "$pkg_prefix\hooks"
+}
+
+function Invoke-BuildConfig {
+   
+	mkdir "$pkg_prefix\hooks"
+	mkdir "$pkg_prefix\config"
+	Copy-Item "$PLAN_CONTEXT/default.toml" "$pkg_prefix"
+	Copy-Item "$PLAN_CONTEXT/config\*" "$pkg_prefix\config" -Force
 
 @"
 Set-Location {{pkg.svc_path}}
