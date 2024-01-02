@@ -2,9 +2,9 @@ pkg_name=kafka2
 pkg_root_name="kafka"
 pkg_origin=core
 pkg_version=2.8.1
-pkg_source="https://downloads.apache.org/${pkg_root_name}/${pkg_version}/${pkg_root_name}_2.13-${pkg_version}.tgz"
-pkg_shasum="4888b03e3b27dd94f2d830ce3bae9d7d98b0ccee3a5d30c919ccb60e0fa1f139"
-pkg_dirname="${pkg_root_name}_2.13-${pkg_version}"
+pkg_source="https://archive.apache.org/dist/kafka/${pkg_version}/kafka-${pkg_version}-src.tgz"
+pkg_shasum="ce7aa880c083391bc556af4e9a70d864f62e147983980562580f25bad106bdb7"
+pkg_dirname="kafka-${pkg_version}-src"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="A distributed streaming platform"
 pkg_upstream_url="https://kafka.apache.org/"
@@ -24,5 +24,5 @@ do_build() {
 }
 
 do_install() {
-  cp -R libs bin "${pkg_prefix}"
+  cp -R bin "${pkg_prefix}"
 }
