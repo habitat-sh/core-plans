@@ -6,7 +6,7 @@ pkg_license=('Apache-2.0')
 pkg_upstream_url=https://github.com/grafana/loki
 pkg_source="https://github.com/grafana/loki/archive/v${pkg_version}.tar.gz"
 pkg_filename="v${pkg_version}.tar.gz"
-pkg_shasum="abc77e76833f0851126f1fa21ac787a7ade1df31a4c6eed6020b708847177056"
+pkg_shasum="ff8741c6ebdc76dd37bc9e0a27e115eee235153eb3f25b0a6ea8eccd06dad308"
 loki_pkg_dir="${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}"
 loki_build_dir="${loki_pkg_dir}/src/${pkg_source}"
 pkg_build_deps=(
@@ -15,6 +15,7 @@ pkg_build_deps=(
   core/gcc
   core/make
   core/busybox-static
+  core/cacerts
 )
 pkg_deps=(
   core/systemd
@@ -28,6 +29,7 @@ pkg_binds=(
 
 do_setup_environment() {
   export GOPATH="${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
 }
 
 do_unpack() {
