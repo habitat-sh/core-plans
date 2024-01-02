@@ -16,6 +16,7 @@ pkg_build_deps=(
   core/jemalloc
   core/m4
   core/patch
+  core/cacerts
 )
 pkg_deps=(
   core/openssl
@@ -39,6 +40,8 @@ pkg_binds_optional=(
 )
 
 do_prepare() {
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+
   if [[ ! -r /usr/bin/env ]]; then
     ln -sv "$(pkg_path_for coreutils)/bin/env" /usr/bin/env
     _clean_env=true
