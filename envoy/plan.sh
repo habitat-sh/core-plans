@@ -12,11 +12,13 @@ pkg_build_deps=(
   core/patchelf
   core/coreutils
   core/go
+  core/cacerts
 )
 pkg_deps=(core/glibc)
 pkg_bin_dirs=(bin)
 
 do_download() {
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
   curl "https://raw.githubusercontent.com/moby/moby/master/contrib/download-frozen-image-v2.sh" -o "${HAB_CACHE_SRC_PATH}/download-frozen-image-v2.sh"
   sed -e "s#\#\!/usr/bin/env bash#\#\!/bin/bash#" -i "${HAB_CACHE_SRC_PATH}/download-frozen-image-v2.sh"
   chmod +x "${HAB_CACHE_SRC_PATH}/download-frozen-image-v2.sh"
