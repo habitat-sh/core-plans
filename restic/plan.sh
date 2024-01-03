@@ -1,12 +1,12 @@
 pkg_name=restic
 pkg_origin=core
-pkg_version="0.12.1"
+pkg_version="0.16.2"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("BSD-2-Clause")
 pkg_source="https://github.com/restic/${pkg_name}/releases/download/v${pkg_version}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="a9c88d5288ce04a6cc78afcda7590d3124966dab3daa9908de9b3e492e2925fb"
+pkg_shasum="88165b5b89b6064df37a9964d660f40ac62db51d6536e459db9aaea6f2b2fc11"
 pkg_build_deps=(
-  core/go
+  core/go20
   core/cacerts
 )
 pkg_bin_dirs=(bin)
