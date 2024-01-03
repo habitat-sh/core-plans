@@ -7,10 +7,16 @@ pkg_source="https://github.com/restic/${pkg_name}/releases/download/v${pkg_versi
 pkg_shasum="a9c88d5288ce04a6cc78afcda7590d3124966dab3daa9908de9b3e492e2925fb"
 pkg_build_deps=(
   core/go
+  core/cacerts
 )
 pkg_bin_dirs=(bin)
 pkg_description="Fast, secure, efficient backup program"
 pkg_upstream_url="https://restic.net/"
+
+do_prepare() {
+  set_buildtime_env "SSL_CERT_FILE" "$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+}
 
 do_build() {
   go run build.go --goos linux --goarch amd64

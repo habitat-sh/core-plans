@@ -9,13 +9,14 @@ pkg_source="https://github.com/vmware/govmomi"
 pkg_bin_dirs=(bin)
 
 pkg_deps=(core/glibc)
-pkg_build_deps=(core/go core/git core/gcc)
+pkg_build_deps=(core/go core/git core/gcc core/cacerts)
 
 
 do_before() {
   GOPATH="${HAB_CACHE_SRC_PATH}/govc-${pkg_version}"
   go_pkg="${pkg_source#https://}"
   export GOPATH
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
 }
 
 do_verify() {

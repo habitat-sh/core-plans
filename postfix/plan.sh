@@ -1,12 +1,12 @@
 pkg_name=postfix
 pkg_origin=core
-pkg_version="3.6.3"
+pkg_version="3.6.12"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Postfix is a free and open-source mail transfer agent that routes and delivers electronic mail."
 pkg_upstream_url="http://www.postfix.org/"
 pkg_license=('IPL-1.0')
-pkg_source="http://cdn.postfix.johnriley.me/mirrors/${pkg_name}-release/official/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="0f1241d456a0158e0c418abf62c52c2ff83f8f1dcf2fbdd4c40765b67789b1bc"
+pkg_source="https://ghostarchive.org/postfix/postfix-release/official/postfix-${pkg_version}.tar.gz"
+pkg_shasum="411c29e089e9c8fe93db60c8f36adfe9c62a54f087bb47afdf08b20c6c072f69"
 pkg_build_deps=(
   core/make
   core/gcc
@@ -14,6 +14,7 @@ pkg_build_deps=(
   core/gawk
   core/m4
   core/patch
+  core/cacerts
 )
 pkg_deps=(
   # postfix deps
@@ -33,8 +34,7 @@ pkg_bin_dirs=(bin sbin)
 pkg_svc_user=root
 
 do_prepare() {
-  patch -p1 < "${PLAN_CONTEXT}/postfix-glibc-2.34.patch"
-  patch -p1 < "${PLAN_CONTEXT}/fix-aws-kernel-version.patch"
+	export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
 }
 
 do_build() {

@@ -13,6 +13,7 @@ pkg_build_deps=(
   core/git
   core/make
   core/gcc
+  core/cacerts
 )
 pkg_exports=(
   [metric-http-port]=web.listen_port
@@ -26,6 +27,7 @@ do_begin() {
 }
 
 do_prepare() {
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
   mkdir -p "${parent_go_path}"
   ln -s "${PWD}" "${parent_go_path}/${pkg_name}"
   return $?

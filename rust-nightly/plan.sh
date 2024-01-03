@@ -18,11 +18,11 @@ pkg_deps=(
   core/gcc
   core/cacerts
   core/busybox-static
+  core/coreutils
 )
 pkg_build_deps=(
   core/patchelf
   core/findutils
-  core/coreutils
   core/sed
 )
 pkg_bin_dirs=(bin)
@@ -87,15 +87,17 @@ do_build() {
 }
 
 do_install() {
-  ./install.sh --prefix="$pkg_prefix" --disable-ldconfig
+	fix_interpreter install.sh core/coreutils bin/env
+	./install.sh --prefix="$pkg_prefix" --disable-ldconfig
 
-  # Update the dynamic linker & set `RUNPATH` for all ELF binaries under `bin/`
-  for b in rustc cargo rustdoc; do
-    patchelf \
-      --interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" \
-      --set-rpath "$LD_RUN_PATH" \
-      "$pkg_prefix/bin/$b"
-  done; unset b
+	# Update the dynamic linker & set `RUNPATH` for all ELF binaries under `bin/`
+	for b in rustc cargo rustdoc;
+  do
+		patchelf \
+			--interpreter "$(pkg_path_for glibc)/lib/ld-linux-x86-64.so.2" \
+			--set-rpath "$LD_RUN_PATH" \
+			"$pkg_prefix/bin/$b"
+	done; unset b
 
   # Going to want to write a cargo wrapper
   #    SSL_CERT_FILE=$(pkg_path_for cacerts)/ssl/cert.pem \
@@ -112,6 +114,7 @@ do_install() {
     dir="$(basename "${_target_sources[$i]/%.tar.gz/}")"
     pushd "$HAB_CACHE_SRC_PATH/$pkg_dirname/$dir" > /dev/null
       build_line "Installing $dir target for Rust"
+      fix_interpreter install.sh core/coreutils bin/env
       ./install.sh --prefix="$("$pkg_prefix/bin/rustc" --print sysroot)"
     popd > /dev/null
   done; unset i

@@ -9,6 +9,7 @@ pkg_build_deps=(
   core/git
   core/mage
   core/gcc
+  core/cacerts
 )
 pkg_bin_dirs=(bin)
 pkg_binds_optional=(
@@ -20,6 +21,7 @@ pkg_description="Lightweight shipper for logfiles"
 pkg_upstream_url="https://www.elastic.co/products/beats/filebeat"
 
 do_download() {
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
   GOPATH="$(dirname "${HAB_CACHE_SRC_PATH}")"
   export GOPATH
   rm -rf "${GOPATH}/src/github.com/elastic/beats"

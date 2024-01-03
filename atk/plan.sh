@@ -21,6 +21,7 @@ pkg_build_deps=(
   core/make
   core/perl
   core/pkg-config
+  core/python
 )
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)

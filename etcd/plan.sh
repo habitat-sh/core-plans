@@ -13,6 +13,7 @@ pkg_build_deps=(
 	core/coreutils
 	core/go
 	core/git
+	core/cacerts
 )
 pkg_bin_dirs=(/usr/bin)
 pkg_exports=(
@@ -29,6 +30,8 @@ do_prepare() {
 		ln -sv "$(pkg_path_for coreutils)/bin/env" /usr/bin/env
 		_clean_env=true
 	fi
+
+	export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
 }
 
 do_build() {

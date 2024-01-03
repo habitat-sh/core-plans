@@ -22,6 +22,7 @@ pkg_build_deps=(
   core/coreutils
   core/which
   core/node16
+  core/cacerts
 )
 pkg_exports=(
   [prom_ds_http]=listening_port
@@ -34,6 +35,7 @@ pkg_binds_optional=(
 do_setup_environment() {
   build_line "Setting GOPATH=${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
   export GOPATH="${HAB_CACHE_SRC_PATH}/${pkg_dirname}"
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
 }
 
 do_unpack() {
