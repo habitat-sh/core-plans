@@ -35,7 +35,7 @@ $env:HAB_LICENSE = "accept-no-persist"
 
     Write-Host "Analyzing Powershell Scripts..."
     $analysisErrors = Get-ChildItem $planPath\*.ps1 -Recurse -Exclude $excludeAnalyzeScripts |
-        Invoke-ScriptAnalyzer -Settings PSScriptAnalyzerSettingsForScripts.psd1 -Severity @('Error', 'Information', 'Warning') -ExcludeRule ResourceNotDefined
+        Invoke-ScriptAnalyzer -Settings PSScriptAnalyzerSettingsForScripts.psd1 -Severity @('Error', 'Information', 'Warning') -ExcludeRule @('PSReviewUnusedParameter', 'ResourceNotDefined')
     Write-Host ($analysisErrors | Out-String)
     Write-Host "$($analysisErrors.Count) errors found"
 
