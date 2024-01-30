@@ -36,6 +36,14 @@ _target_shasums=(
     "c9ad24df044fc221d3032732ba6cb5604718e75e11d18b9e9d02c963955d4620"
 )
 
+do_prepare() {
+	# The `/usr/bin/env` path is hardcoded, so we'll add a symlink if needed.
+	if [[ ! -r /usr/bin/env ]]; then
+		ln -sv "$(pkg_path_for coreutils)/bin/env" /usr/bin/env
+		_clean_env=true
+	fi
+}
+
 do_download() {
   do_default_download
 
@@ -126,6 +134,12 @@ do_strip() {
   return 0
 }
 
+do_end() {
+	# Clean up the `env` link, if we set it up.
+	if [[ -n "$_clean_env" ]]; then
+		rm -fv /usr/bin/env
+	fi
+}
 
 # ----------------------------------------------------------------------------
 # **NOTICE:** What follows are implementation details required for building a
