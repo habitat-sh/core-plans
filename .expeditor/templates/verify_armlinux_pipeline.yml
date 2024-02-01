@@ -1,0 +1,35 @@
+  - label: "[@@plan@@] :linux: :habicat: Shellcheck"
+    command:
+      - bin/ci/shellcheck.sh @@plan@@
+    expeditor:
+      executor:
+        docker:
+          host_os: linux-arm
+
+  - label: "[@@plan@@] :linux: :habicat: Check for default variables"
+    command:
+      - bin/ci/check-default-variables.sh @@plan@@
+    expeditor:
+      executor:
+        docker:
+          host_os: linux-arm
+
+  - label: "[@@plan@@] :linux: :habicat: Build with DO_CHECK=true"
+    command:
+      - bin/ci/verify-pr-build.sh @@plan@@
+    expeditor:
+      executor:
+        docker:
+          host_os: linux-arm
+          privileged: true
+    timeout_in_minutes: 60
+
+  - label: "[@@plan@@] :linux: :habicat: Build and run tests"
+    command:
+      - bin/ci/build-and-run-tests.sh @@plan@@
+    expeditor:
+      executor:
+        docker:
+          host_os: linux-arm
+          privileged: true
+    timeout_in_minutes: 60
