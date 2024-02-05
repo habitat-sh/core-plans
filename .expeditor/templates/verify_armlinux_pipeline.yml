@@ -3,25 +3,27 @@
       - bin/ci/shellcheck.sh @@plan@@
     expeditor:
       executor:
-        docker:
-          host_os: linux-arm
+        arm-linux:
+       	      single-use: true
+	            privileged: true
 
   - label: "[@@plan@@] :linux: :habicat: Check for default variables"
     command:
       - bin/ci/check-default-variables.sh @@plan@@
     expeditor:
       executor:
-        docker:
-          host_os: linux-arm
-
+        arm-linux:
+              single-use: true
+              privileged: true
+         
   - label: "[@@plan@@] :linux: :habicat: Build with DO_CHECK=true"
     command:
       - bin/ci/verify-pr-build.sh @@plan@@
     expeditor:
       executor:
-        docker:
-          host_os: linux-arm
-          privileged: true
+        arm-linux:
+              sinfle-use: true
+              privileged: true
     timeout_in_minutes: 60
 
   - label: "[@@plan@@] :linux: :habicat: Build and run tests"
@@ -29,7 +31,7 @@
       - bin/ci/build-and-run-tests.sh @@plan@@
     expeditor:
       executor:
-        docker:
-          host_os: linux-arm
-          privileged: true
+        arm-linux:
+              single-use: true
+              privileged: true
     timeout_in_minutes: 60
