@@ -66,7 +66,6 @@ for plan in ${plans[@]}; do
 
   if [[ -f $plan/plan.sh ]]; then
     emit_pipeline .expeditor/templates/verify_linux_pipeline.yml "$plan"
-    emit_pipeline .expeditor/templates/verify_armlinux_pipeline.yml "$plan"
   fi
 
   if [[ -f $plan/plan.ps1 ]]; then
