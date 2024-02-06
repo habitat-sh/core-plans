@@ -3,21 +3,21 @@
       - bin/ci/shellcheck.sh @@plan@@
     expeditor:
       executor:
-        docker:
+        docker-linux-arm64:
 
   - label: "[@@plan@@] :linux: :habicat: Check for default variables"
     command:
       - bin/ci/check-default-variables.sh @@plan@@
     expeditor:
       executor:
-        docker:
+        docker-linux-arm64:
 
   - label: "[@@plan@@] :linux: :habicat: Build with DO_CHECK=true"
     command:
       - bin/ci/verify-pr-build.sh @@plan@@
     expeditor:
       executor:
-        docker:
+        docker-linux-arm64:
           privileged: true
     timeout_in_minutes: 60
 
@@ -26,6 +26,6 @@
       - bin/ci/build-and-run-tests.sh @@plan@@
     expeditor:
       executor:
-        docker:
+        docker-linux-arm64:
           privileged: true
     timeout_in_minutes: 60
