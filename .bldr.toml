@@ -1135,6 +1135,8 @@ plan_path = "openssl-musl"
 paths = [
   "openssl/*",
 ]
+[openssl3]
+plan_path = "openssl3"
 [openssl11]
 plan_path = "openssl11"
 [openvpn]
