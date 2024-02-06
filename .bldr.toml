@@ -1136,7 +1136,9 @@ paths = [
   "openssl/*",
 ]
 [openssl3]
-plan_path = "openssl3"
+pkg_targets = [
+  "arm-linux",
+]
 [openssl11]
 plan_path = "openssl11"
 [openvpn]
