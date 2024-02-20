@@ -4,7 +4,7 @@ pkg_version="3.33.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=("MIT")
 pkg_description="The Buildkite Agent is an open-source toolkit written in Golang for securely running build jobs on any device or network."
-pkg_build_deps=(core/go core/coreutils core/gcc)
+pkg_build_deps=(core/go core/coreutils core/gcc core/cacerts)
 pkg_deps=(core/glibc)
 pkg_source="https://github.com/buildkite/agent/archive/v${pkg_version}.zip"
 pkg_filename="${pkg_name}-${pkg_version}.zip"
@@ -30,6 +30,7 @@ do_unpack() {
 }
 
 do_prepare() {
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
   mkdir -p "${parent_go_path}"
   ln -s "${PWD}" "${parent_go_path}/agent"
   return $?

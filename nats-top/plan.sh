@@ -8,7 +8,13 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://github.com/nats-io/nats-top/archive/v${pkg_version}.tar.gz
 pkg_shasum=62e544bf83afb51764edc255dfa421d81da43450266ebec37a7a21925c38b5c7
 pkg_deps=(core/glibc)
-pkg_build_deps=(core/go core/coreutils core/gcc core/make)
+pkg_build_deps=(
+  core/go
+  core/coreutils
+  core/gcc
+  core/make
+  core/cacerts
+)
 pkg_bin_dirs=(bin)
 pkg_svc_run="${pkg_name}"
 
@@ -25,6 +31,7 @@ do_clean() {
 }
 
 do_prepare() {
+  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
   mkdir -p "${parent_go_path}"
   ln -s "${PWD}" "${parent_go_path}/${pkg_name}"
   return $?

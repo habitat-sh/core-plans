@@ -1,7 +1,7 @@
 pkg_name="openssl"
 _distname="$pkg_name"
 pkg_origin="core"
-pkg_version="1.0.2zf"
+pkg_version="1.0.2zi"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 OpenSSL is an open source project that provides a robust, commercial-grade, \
@@ -12,7 +12,7 @@ library.\
 pkg_upstream_url="https://www.openssl.org"
 pkg_license=('OpenSSL')
 pkg_source="https://s3.amazonaws.com/chef-releng/${_distname}/${_distname}-${pkg_version}.tar.gz"
-pkg_shasum="85d2242b7d11a33d5f239f1f34a1ff7eb37431a554b7df99c52c646b70b14b2e"
+pkg_shasum="80b6c07995fc92456e31c61cf1b2a18f75e314063189bb183af6ae66d0261d84"
 pkg_dirname="${_distname}-${pkg_version}"
 pkg_deps=(
 	core/glibc

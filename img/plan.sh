@@ -18,6 +18,7 @@ pkg_build_deps=(
   core/dep
   core/make
   core/gcc
+  core/cacerts
 )
 
 export GOPATH="${HAB_CACHE_SRC_PATH}/go"
@@ -28,6 +29,10 @@ export pkg_cache_path="${workspace_src}/${base_path}/${pkg_name}"
 do_before() {
   rm -rf "${pkg_cache_path}"
   mkdir -p "${pkg_cache_path}"
+}
+
+do_setup_environment() {
+  push_buildtime_env SSL_CERT_FILE "$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
 }
 
 do_download() {

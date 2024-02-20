@@ -1,7 +1,7 @@
 source ../gcc/plan.sh
 
 pkg_name=gcc-libs
-pkg_version=9.4.0
+pkg_version=9.5.0
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="Runtime libraries shipped by GCC."

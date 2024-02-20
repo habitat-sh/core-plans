@@ -1,6 +1,6 @@
 pkg_name=python
 pkg_distname=Python
-pkg_version=3.9.10
+pkg_version=3.12.0
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Python-2.0')
@@ -9,12 +9,12 @@ pkg_description="Python is a programming language that lets you work quickly \
 pkg_upstream_url="https://www.python.org"
 pkg_dirname="${pkg_distname}-${pkg_version}"
 pkg_source="https://www.python.org/ftp/python/${pkg_version}/${pkg_dirname}.tgz"
-pkg_shasum=1aa9c0702edbae8f6a2c95f70a49da8420aaa76b7889d3419c186bfc8c0e571e
+pkg_shasum=51412956d24a1ef7c97f1cb5f70e185c13e3de1f50d131c0aac6338080687afb
 
 pkg_bin_dirs=(bin)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
-pkg_interpreters=(bin/python bin/python3 bin/python3.9)
+pkg_interpreters=(bin/python bin/python3 bin/python3.12)
 
 pkg_deps=(
   core/bzip2
@@ -24,11 +24,12 @@ pkg_deps=(
   core/glibc
   core/libffi
   core/ncurses
-  core/openssl
+  core/openssl11
   core/readline
   core/sqlite
   core/xz
   core/zlib
+  core/util-linux
 )
 
 pkg_build_deps=(

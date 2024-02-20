@@ -1,6 +1,6 @@
 pkg_name=glibc
 pkg_origin=core
-pkg_version=2.34
+pkg_version="2.35"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU C Library project provides the core libraries for the GNU system and \
@@ -13,7 +13,7 @@ dlopen, pthread_create, crypt, login, exit and more.\
 pkg_upstream_url="https://www.gnu.org/software/libc"
 pkg_license=('GPL-2.0-or-later' 'LGPL-2.1-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum=44d26a1fe20b8853a48f470ead01e4279e869ac149b195dda4e44a195d981ab2
+pkg_shasum="5123732f6b67ccd319305efd399971d58592122bcc2a6518a1bd2510dd0cf52e"
 pkg_deps=(
   core/linux-headers
 )
@@ -72,7 +72,7 @@ do_prepare() {
 
 	# This is patch to fix compile error with linker diagnostics featue in v2.34
 	# It can be removed in future upgrades as feature matures.
-	sed -i '/SYSCONFDIR/d' elf/dl-diagnostics.c
+	sed -i 's/SYSCONFDIR/PREFIX "\/etc"/' elf/dl-diagnostics.c
 
   # Don't use the system's `/etc/ld.so.cache` and `/etc/ld.so.preload`, but
   # rather the version under `$pkg_prefix/etc`.

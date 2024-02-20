@@ -2,7 +2,7 @@ pkg_name=aws-cli
 pkg_origin=core
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
-pkg_version=1.21.11
+pkg_version=1.31.4
 pkg_description="The AWS Command Line Interface (CLI) is a unified tool to \
   manage your AWS services. With just one tool to download and configure, you \
   can control multiple AWS services from the command line and automate them \

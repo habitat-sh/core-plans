@@ -6,8 +6,8 @@ pkg_license=('GPL')
 pkg_description="ELF related utils for ELF 32/64 binaries that can check files
   for security relevant properties"
 pkg_upstream_url='http://hardened.gentoo.org/pax-utils.xml'
-pkg_source="http://distfiles.gentoo.org/distfiles/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="eeca7fbd98bc66bead4a77000c2025d9f17ea8201b84245882406ce00b9b6b14"
+pkg_source="https://github.com/gentoo/pax-utils/archive/refs/tags/v${pkg_version}.tar.gz"
+pkg_shasum="5b83b440fb18995f622569fdebd48f060999d61c861c71db96db788f3f569c88"
 pkg_deps=(
   core/bash
   core/glibc
@@ -22,9 +22,6 @@ pkg_build_deps=(
 pkg_bin_dirs=(bin)
 
 do_build() {
-  ./configure --prefix="$pkg_prefix" \
-              --with-caps \
-              --without-python
   make
 }
 
@@ -33,6 +30,9 @@ do_check() {
 }
 
 do_install() {
-  do_default_install
+  install -m755 scanelf "${pkg_prefix}/bin"
+  install -m755 dumpelf "${pkg_prefix}/bin"
+  install -m755 pspax "${pkg_prefix}/bin"
+  install -m755 scanmacho "${pkg_prefix}/bin"
   fix_interpreter "$pkg_prefix/bin/*" core/bash bin/bash
 }

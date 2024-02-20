@@ -5,14 +5,19 @@ pkg_version="1.8.5"
 pkg_description="Like cURL, but for gRPC: Command-line tool for interacting with gRPC servers"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://github.com/fullstorydev/grpcurl/archive/v${pkg_version}.tar.gz"
+pkg_shasum="1a9612560b2da18d50f0a46e9f2f5a7e5a13c4bb1ccef15ba65cb0c37335342b"
 pkg_upstream_url="https://$gopkg"
 pkg_license=('MIT')
 pkg_bin_dirs=(bin)
 pkg_build_deps=(
     core/git
     core/go
+    core/cacerts
 )
-pkg_shasum="1a9612560b2da18d50f0a46e9f2f5a7e5a13c4bb1ccef15ba65cb0c37335342b"
+
+do_prepare() {
+    export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+}
 
 do_build() {
     return 0
