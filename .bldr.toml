@@ -1091,6 +1091,8 @@ paths = [
 ]
 [node16]
 plan_path = "node16"
+[node18]
+plan_path = "node18"
 [node_exporter]
 plan_path = "node_exporter"
 [npth]
