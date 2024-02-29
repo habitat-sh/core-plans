@@ -19,7 +19,7 @@ control 'core-plans-node-works' do
   end
 
   expected_node_version = plan_installation_directory.stdout.split("/")[5]
-  expected_npm_version = input('expected_npm_version', value: '8.1.2')
+  expected_npm_version = input('expected_npm_version', value: '10.2.4')
   {
     "node" => { pattern: "v#{expected_node_version}" },
     "npm" => { pattern: "#{expected_npm_version}" },
