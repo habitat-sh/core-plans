@@ -22,7 +22,7 @@ function Invoke-Install {
 }
 
 function Invoke-BuildConfig {
-   
+
 	mkdir "$pkg_prefix\hooks"
 	mkdir "$pkg_prefix\config"
 	Copy-Item "$PLAN_CONTEXT/default.toml" "$pkg_prefix"
