@@ -21,6 +21,7 @@ function Invoke-Install {
     }
 }
 
+
 function Invoke-BuildConfig {
     mkdir "$pkg_prefix\hooks"
     mkdir "$pkg_prefix\config"
