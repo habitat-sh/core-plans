@@ -15,9 +15,9 @@ function Invoke-Install {
     $source = "$HAB_CACHE_SRC_PATH/$pkg_name-$pkg_version/$pkg_name-$pkg_version"
     Copy-Item "$source/$pkg_name.exe" "$pkg_prefix\bin"
     Get-ChildItem $source | Where-Object {
-	$_.PSIsContainer  -and $_.GetFiles().Count
+        $_.PSIsContainer  -and $_.GetFiles().Count
     } | ForEach-Object {
-	Copy-Item $_.FullName $pkg_prefix
+        Copy-Item $_.FullName $pkg_prefix
     }
 }
 
@@ -28,7 +28,7 @@ function Invoke-BuildConfig {
     Copy-Item "$PLAN_CONTEXT/default.toml" "$pkg_prefix"
     Copy-Item "$PLAN_CONTEXT/config\*" "$pkg_prefix\config" -Force
 
-@"
+    @"
 Set-Location {{pkg.svc_path}}
 mkdir temp -ErrorAction SilentlyContinue
 if(Test-Path conf) { Remove-Item conf -Recurse -Force }
