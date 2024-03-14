@@ -21,14 +21,14 @@ function Invoke-Install {
     }
 }
 
-function Invoke-BuildConfig {
-   
-	mkdir "$pkg_prefix\hooks"
-	mkdir "$pkg_prefix\config"
-	Copy-Item "$PLAN_CONTEXT/default.toml" "$pkg_prefix"
-	Copy-Item "$PLAN_CONTEXT/config\*" "$pkg_prefix\config" -Force
 
-@"
+function Invoke-BuildConfig {
+    mkdir "$pkg_prefix\hooks"
+    mkdir "$pkg_prefix\config"
+    Copy-Item "$PLAN_CONTEXT/default.toml" "$pkg_prefix"
+    Copy-Item "$PLAN_CONTEXT/config\*" "$pkg_prefix\config" -Force
+
+    @"
 Set-Location {{pkg.svc_path}}
 mkdir temp -ErrorAction SilentlyContinue
 if(Test-Path conf) { Remove-Item conf -Recurse -Force }

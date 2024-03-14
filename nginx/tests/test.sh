@@ -3,12 +3,11 @@
 #/
 #/ Example: test.sh core/php/7.2.8/20181108151533
 #/
+set -eu
 
-set -euo pipefail
+. "$(dirname "${0}")/../../bin/ci/test_helpers.sh"
 
-source "$(dirname "${0}")/../../bin/ci/test_helpers.sh"
-
-if [[ -z "${1:-}" ]]; then
+if [ -z "${1:-}" ]; then
   grep '^#/' < "${0}" | cut -c4-
 	exit 1
 fi
