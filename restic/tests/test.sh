@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 TESTDIR="$(dirname "${0}")"
 PLANDIR="$(dirname "${TESTDIR}")"
