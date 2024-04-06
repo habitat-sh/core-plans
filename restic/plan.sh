@@ -15,7 +15,8 @@ pkg_upstream_url="https://restic.net/"
 
 do_prepare() {
   set_buildtime_env "SSL_CERT_FILE" "$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
-  export SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+  SSL_CERT_FILE="$(pkg_path_for core/cacerts)/ssl/certs/cacert.pem"
+  export SSL_CERT_FILE
 }
 
 do_build() {
