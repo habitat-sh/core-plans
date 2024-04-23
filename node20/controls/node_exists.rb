@@ -1,4 +1,4 @@
-title 'Tests to confirm node14 exists'
+title 'Tests to confirm node20 exists'
 
 plan_origin = ENV['HAB_ORIGIN']
 plan_name = input('plan_name', value: 'node20')

@@ -1,4 +1,4 @@
-title 'Tests to confirm node14 works as expected'
+title 'Tests to confirm node20 works as expected'
 
 plan_origin = ENV['HAB_ORIGIN']
 plan_name = input('plan_name', value: 'node20')
@@ -19,7 +19,7 @@ control 'core-plans-node-works' do
   end
 
   expected_node_version = plan_installation_directory.stdout.split("/")[5]
-  expected_npm_version = input('expected_npm_version', value: '10.2.4')
+  expected_npm_version = input('expected_npm_version', value: '10.5.0')
   {
     "node" => { pattern: "v#{expected_node_version}" },
     "npm" => { pattern: "#{expected_npm_version}" },
