@@ -1,6 +1,6 @@
 pkg_name=rust
 pkg_origin=core
-pkg_version=1.75.0
+pkg_version=1.79.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Rust is a systems programming language that runs blazingly fast, prevents \
@@ -10,7 +10,7 @@ pkg_upstream_url="https://www.rust-lang.org/"
 pkg_license=('Apache-2.0' 'MIT')
 _url_base="https://static.rust-lang.org/dist"
 pkg_source="$_url_base/${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu.tar.gz"
-pkg_shasum="473978b6f8ff216389f9e89315211c6b683cf95a966196e7914b46e8cf0d74f6"
+pkg_shasum="628efa8ef0658a7c4199883ee132281f19931448d3cfee4ecfd768898fe74c18"
 pkg_dirname="${pkg_name}-${pkg_version}-x86_64-unknown-linux-gnu"
 pkg_deps=(
   core/glibc
@@ -33,7 +33,7 @@ _target_sources=(
 )
 
 _target_shasums=(
-    "c9ad24df044fc221d3032732ba6cb5604718e75e11d18b9e9d02c963955d4620"
+    "8ee9728f1f615ca07aeec963f85cd4ad6941b932fffce6c434dd012b9e094eeb"
 )
 
 do_prepare() {
@@ -91,8 +91,11 @@ do_install() {
   done; unset b
 
   # Set `RUNPATH` for all shared libraries under `lib/`
-  find "$pkg_prefix/lib" -name "*.so" -print0 \
-    | xargs -0 -I '%' patchelf \
+  find "$pkg_prefix/lib" -name "*so*" -a -type f -print0 \
+    | xargs -0 file \
+    | grep "ELF.*shared object" \
+    | cut -d: -f1 \
+    | xargs -I '%' patchelf \
       --set-rpath "$LD_RUN_PATH" \
       %
 
