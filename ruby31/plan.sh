@@ -10,7 +10,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source=https://cache.ruby-lang.org/pub/ruby/${pkg_major}/ruby-${pkg_version}.tar.gz
 pkg_upstream_url=https://www.ruby-lang.org/en/
 pkg_shasum=0d0dafb859e76763432571a3109d1537d976266be3083445651dc68deed25c22
-pkg_deps=(core/glibc core/ncurses core/zlib core/openssl core/libyaml core/libffi core/readline core/nss-myhostname)
+pkg_deps=(core/glibc core/ncurses core/zlib core/openssl core/libyaml core/libffi core/libarchive core/readline core/nss-myhostname)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed)
 pkg_lib_dirs=(lib)
 pkg_include_dirs=(include)
@@ -43,4 +43,6 @@ do_check() {
 do_install() {
   do_default_install
   gem install rb-readline --no-document
+  gem install ffi -v "1.16.3" --no-document
+  gem install ffi-libarchive -v "1.1.14" --no-document
 }
