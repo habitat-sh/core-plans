@@ -269,10 +269,14 @@ path_plan = "dotnet-47-dev-pack"
 path_plan = "dotnet-471-dev-pack"
 [dotnet-472-dev-pack]
 plan_path = "dotnet-472-dev-pack"
+[dotnet-481-dev-pack]
+plan_path = "dotnet-481-dev-pack"
 [dotnet-5-runtime]
 plan_path = "dotnet-5-runtime"
 [dotnet-5-sdk]
 plan_path = "dotnet-5-sdk"
+[dotnet-8-sdk-x64]
+plan_path = "dotnet-8-sdk-x64"
 [dotnet-asp-core]
 path_plan = "dotnet-asp-core"
 [dotnet-core]
@@ -1167,6 +1171,8 @@ plan_path = "patchelf"
 plan_path = "pax-utils"
 [pcre]
 plan_path = "pcre"
+[perl]
+plan_path = "perl"
 [percona-xtrabackup]
 plan_path = "percona-xtrabackup"
 [pester]
@@ -1601,6 +1607,8 @@ plan_path = "virtualenv"
 plan_path = "visual-build-tools-2017"
 [visual-build-tools-2019]
 plan_path = "visual-build-tools-2019"
+[visual-build-tools-2022-x64]
+plan_path = "visual-build-tools-2022-x64"
 [visual-cpp-redist-2013]
 plan_path = "visual-cpp-redist-2013"
 [vmtouch]
@@ -1618,6 +1626,8 @@ paths = [
 plan_path = "which"
 [windows-10-sdk]
 plan_path = "windows-10-sdk"
+[windows-11-sdk]
+plan_path = "windows-11-sdk"
 [wix]
 plan_path = "wix"
 [wordpress]
