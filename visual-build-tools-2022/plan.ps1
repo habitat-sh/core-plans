@@ -1,4 +1,4 @@
-$pkg_name="visual-build-tools-2022-x64"
+$pkg_name="visual-build-tools-2022"
 $pkg_origin="core"
 $pkg_version="17.11.0"
 $pkg_description="Standalone compiler, libraries and scripts"
