@@ -29,7 +29,7 @@ function Invoke-SetupEnvironment {
     Set-RuntimeEnv "UseEnv" "true"
     Set-RuntimeEnv "VCToolsVersion" "14.41.34120"
     Set-RuntimeEnv "VisualStudioVersion" "17.0"
-    Set-RuntimeEnv -IsPath "VCToolsInstallDir_170" "$pkg_prefix\Contents\VC\Redist\MSVC\14.41.34120"
+    Set-RuntimeEnv -IsPath "VCToolsInstallDir_170" "$pkg_prefix\Contents\VC\Redist\MSVC\14.40.33807"
 }
 
 function Invoke-Unpack {
