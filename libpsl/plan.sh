@@ -1,10 +1,10 @@
 pkg_name="libpsl"
 pkg_version="0.21.1"
+pkg_origin="core"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="The libpsl package provides a library for accessing and resolving information from the Public Suffix List (PSL). \
 The PSL is a set of domain names beyond the standard suffixes, such as .com. "
 pkg_upstream_url="http://xmlsoft.org/"
-pkg_origin="core"
 # https://github.com/rockdaboot/libpsl/tree/libpsl-0.21.0#license
 pkg_license=('MIT' 'BSD-3-Clause')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
