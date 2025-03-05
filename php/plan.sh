@@ -26,6 +26,8 @@ pkg_deps=(
   core/gcc-libs
   core/oniguruma
   core/sqlite
+  core/libpsl
+  core/nghttp2
 )
 pkg_build_deps=(
   core/autoconf

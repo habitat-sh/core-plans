@@ -103,8 +103,11 @@ do_install() {
   #    SSL_CERT_FILE=$(pkg_path_for cacerts)/ssl/cert.pem \
 
     # Set `RUNPATH` for all shared libraries under `lib/`
-  find "$pkg_prefix/lib" -name "*.so" -print0 \
-    | xargs -0 -I '%' patchelf \
+  find "$pkg_prefix/lib" -name "*so*" -a -type f -print0 \
+    | xargs -0 file \
+    | grep "ELF.*shared object" \
+    | cut -d: -f1 \
+    | xargs -I '%' patchelf \
       --set-rpath "$LD_RUN_PATH" \
       %
 
