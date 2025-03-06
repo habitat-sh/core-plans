@@ -16,6 +16,7 @@ pkg_build_deps=(
   core/cmake
   core/gcc
   core/git
+  core/patch
 )
 pkg_lib_dirs=(lib64)
 pkg_include_dirs=(include)
@@ -32,6 +33,10 @@ do_verify() {
 
 do_unpack() {
   return 0
+}
+
+do_prepare() {
+    patch -p1 < "$PLAN_CONTEXT/cmakelists.patch"
 }
 
 do_clean() {
