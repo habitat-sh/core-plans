@@ -34,7 +34,7 @@ do_build() {
   cabal v1-update
 
   # Install dependencies
-  cabal v1-install --only-dependencies --enable-tests
+  cabal v1-install --only-dependencies
 
   # Configure and Build
   cabal v1-configure --prefix="$pkg_prefix" \

@@ -1,10 +1,10 @@
 pkg_name=R
 pkg_origin=core
-pkg_version="3.6.3"
+pkg_version="4.4.3"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-2.0-or-later')
-pkg_source="https://cran.r-project.org/src/base/R-3/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="89302990d8e8add536e12125ec591d6951022cf8475861b3690bc8bf1cefaa8f"
+pkg_source="https://cran.r-project.org/src/base/R-4/${pkg_name}-${pkg_version}.tar.gz"
+pkg_shasum="0d93d224442dea253c2b086f088db6d0d3cfd9b592cd5496e8cb2143e90fc9e8"
 pkg_upstream_url="https://www.r-project.org"
 pkg_description="R is a free software environment for statistical computing and graphics."
 pkg_build_deps=(
@@ -48,6 +48,7 @@ do_build() {
     ./configure --prefix="${pkg_prefix}" \
 		 --with-x=no \
                 --disable-java \
+                --with-pcre1  \
 	         --enable-memory-profiling
     make
 }
