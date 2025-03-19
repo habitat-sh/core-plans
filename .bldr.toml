@@ -277,6 +277,8 @@ plan_path = "dotnet-5-runtime"
 plan_path = "dotnet-5-sdk"
 [dotnet-8-sdk]
 plan_path = "dotnet-8-sdk"
+[dotnet-9-sdk]
+plan_path = "dotnet-9-sdk"
 [dotnet-asp-core]
 path_plan = "dotnet-asp-core"
 [dotnet-core]
