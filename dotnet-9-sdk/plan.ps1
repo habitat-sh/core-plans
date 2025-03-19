@@ -10,7 +10,7 @@ $pkg_shasum="0CCCD1758FAFE95930D6F783EF60EFAC4891BC4574791F9CEEE04ABC876CB0D6"
 $pkg_bin_dirs=@("bin")
 
 function Invoke-SetupEnvironment {
-    Set-RuntimeEnv -IsPath "MSBuildSDKsPath" "$pkg_prefix\sdk\$pkg_version\Sdks"
+    Set-RuntimeEnv -IsPath "MSBuildSDKsPath" "$pkg_prefix\bin\sdk\$pkg_version\Sdks"
 }
 
 function Invoke-Install {
@@ -18,6 +18,7 @@ function Invoke-Install {
 }
 
 function Invoke-Check() {
+    $env:MSBuildSDKsPath = (Resolve-Path "sdk\$pkg_version\Sdks").Path
     mkdir dotnet-new
     Push-Location dotnet-new
     ../dotnet.exe new web
@@ -25,6 +26,8 @@ function Invoke-Check() {
         Pop-Location
         Write-Error "dotnet app was not generated"
     }
+    ../dotnet.exe restore
+    if($LASTEXITCODE -ne 0) { Write-Error "dotnet restore failed!" }
     Pop-Location
     Remove-Item -Recurse -Force dotnet-new
 }
