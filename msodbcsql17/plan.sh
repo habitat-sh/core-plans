@@ -36,7 +36,7 @@ do_build() {
   build_line "Fixing rpath for lib:"
 
   find . -type f -executable \
-    -exec sh -c 'file -i "$1" | grep -q "x-pie-executable; charset=binary"' _ {} \; \
+    -exec sh -c 'file -i "$1" | grep -q "x-\(pie-executable\|sharedlib\); charset=binary"' _ {} \; \
     -print \
     -exec patchelf --set-rpath "${LD_RUN_PATH}" {} \;
 }
