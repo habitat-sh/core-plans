@@ -1,0 +1,11 @@
+diff -Naur a/http.h b/http.h
+--- a/http.h	2025-07-17 10:58:40.049296926 +0000
++++ b/http.h	2025-07-17 10:58:54.583313446 +0000
+@@ -51,7 +51,6 @@
+ */
+ #if !defined(CURLOPT_USE_SSL) && defined(CURLOPT_FTP_SSL)
+ #define CURLOPT_USE_SSL CURLOPT_FTP_SSL
+-#define CURLUSESSL_TRY CURLFTPSSL_TRY
+ #endif
+ 
+ struct slot_results {
