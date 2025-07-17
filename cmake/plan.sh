@@ -29,6 +29,8 @@ pkg_bin_dirs=(bin)
 do_prepare() {
   # This disables two tests that will always fail in a Habitat build environment
   patch -p0 < "$PLAN_CONTEXT"/patches/001-disable-failing-bundleutlities-tests.patch
+  # fix for compatibility issue with curl v8.14.1 (a known issue in curl lib, until fixed use patch)
+  patch -p1 < "$PLAN_CONTEXT"/patches/compatibility_curl_8.14.1.patch
 }
 
 do_build() {
