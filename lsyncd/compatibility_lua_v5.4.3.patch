@@ -1,0 +1,19 @@
+diff -Naur a/lsyncd.c b/lsyncd.c
+--- a/lsyncd.c	2025-07-17 19:10:27.163764821 +0000
++++ b/lsyncd.c	2025-07-17 19:11:10.308975182 +0000
+@@ -1135,13 +1135,13 @@
+ 		{
+ 			int tlen;
+ 			int it;
+-			lua_checkstack( L, lua_gettop( L ) + lua_objlen( L, i ) + 1 );
++			lua_checkstack( L, lua_gettop( L ) + lua_rawlen( L, i ) + 1 );
+ 
+ 			// moves table to top of stack
+ 			lua_pushvalue( L, i );
+ 			lua_remove( L, i );
+ 			argc--;
+-			tlen = lua_objlen( L, -1 );
++			tlen = lua_rawlen( L, -1 );
+ 
+ 			for( it = 1; it <= tlen; it++ )
+ 			{
