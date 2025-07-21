@@ -8,7 +8,7 @@ control 'core-plans-cmake-exists' do
   title 'Ensure cmake exists'
   desc '
   Verify cmake by ensuring bin/cmake exists'
- 
+
   plan_installation_directory = command("hab pkg path #{plan_origin}/#{plan_name}")
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
