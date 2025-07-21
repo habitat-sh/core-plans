@@ -7,7 +7,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('custom')
 pkg_source="https://developer.nvidia.com/compute/${pkg_name}/9.2/Prod2/local_installers/${pkg_name}_${pkg_version}_${_driverver}_linux"
 pkg_filename="${pkg_name}_${pkg_version}_${_driverver}_linux.run"
-pkg_shasum="8daa1733f6948a15fab7da43cc47b7099e25f78644133bb33e8405ab92d6e72b"
+pkg_shasum="f5454ec2cfdf6e02979ed2b1ebc18480d5dded2ef2279e9ce68a505056da8611"
 pkg_upstream_url="https://developer.nvidia.com/cuda-zone"
 
 ## NOTE: Much of this plan copies what Archlinux did to repackage cuda.
