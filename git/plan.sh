@@ -25,6 +25,7 @@ pkg_deps=(
 pkg_build_deps=(
   core/make
   core/gcc
+  core/patch
 )
 pkg_lib_dirs=(lib)
 pkg_bin_dirs=(bin)
@@ -33,4 +34,5 @@ do_prepare() {
   local perl_path
   perl_path="$(pkg_path_for perl)/bin/perl"
   sed -e "s#/usr/bin/perl#$perl_path#g" -i Makefile
+  patch -p1 < "$PLAN_CONTEXT"/compatibility_curlv8.14.1.patch
 }

@@ -1,0 +1,12 @@
+diff -Naur a/Source/cmCurl.cxx b/Source/cmCurl.cxx
+--- a/Source/cmCurl.cxx	2025-07-17 08:24:54.147283062 +0000
++++ b/Source/cmCurl.cxx	2025-07-17 08:26:47.458413774 +0000
+@@ -62,7 +62,7 @@
+                                  const std::string& netrc_file)
+ {
+   std::string e;
+-  CURL_NETRC_OPTION curl_netrc_level = CURL_NETRC_LAST;
++  long curl_netrc_level = CURL_NETRC_LAST;
+   ::CURLcode res;
+ 
+   if (!netrc_level.empty()) {
