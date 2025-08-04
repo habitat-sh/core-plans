@@ -9,7 +9,7 @@ pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="GnuPG is a complete and free implementation of the OpenPGP standard as defined by RFC4880 (also known as PGP). \
   This is a statically compiled version of GnuPG."
 pkg_upstream_url="https://gnupg.org/"
-pkg_source=ftp://ftp.gnupg.org/gcrypt/${pkg_distname}/${pkg_distname}-${pkg_version}.tar.bz2
+pkg_source="https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-${pkg_version}.tar.bz2"
 pkg_distname=gnupg
 pkg_dirname=${pkg_distname}-${pkg_version}
 
