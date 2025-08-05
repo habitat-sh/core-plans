@@ -5,9 +5,9 @@ pkg_description="LuaJIT is a Just-In-Time (JIT) compiler for the Lua programming
 pkg_upstream_url=http://luajit.org/
 pkg_license=("MIT")
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
-pkg_source="http://luajit.org/download/LuaJIT-${pkg_version}.tar.gz"
+pkg_source="https://github.com/LuaJIT/LuaJIT/archive/refs/tags/v${pkg_version}.tar.gz"
 pkg_dirname="LuaJIT-${pkg_version}"
-pkg_shasum=874b1f8297c697821f561f9b73b57ffd419ed8f4278c82e05b48806d30c1e979
+pkg_shasum="8bb29d84f06eb23c7ea4aa4794dbb248ede9fcb23b6989cbef81dc79352afc97"
 pkg_deps=(
   core/glibc
   core/gcc-libs

@@ -1,13 +1,13 @@
 pkg_name=gnupg
 pkg_distname=$pkg_name
 pkg_origin=core
-pkg_version=1.4.23
+pkg_version="1.4.23"
 pkg_license=('GPL-3.0-or-later')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="GnuPG is a complete and free implementation of the OpenPGP standard as defined by RFC4880 (also known as PGP)"
 pkg_upstream_url="https://gnupg.org/"
-pkg_source=ftp://ftp.gnupg.org/gcrypt/${pkg_distname}/${pkg_distname}-${pkg_version}.tar.bz2
-pkg_shasum=c9462f17e651b6507848c08c430c791287cd75491f8b5a8b50c6ed46b12678ba
+pkg_source="https://gnupg.org/ftp/gcrypt/gnupg/gnupg-${pkg_version}.tar.bz2"
+pkg_shasum="c9462f17e651b6507848c08c430c791287cd75491f8b5a8b50c6ed46b12678ba"
 pkg_deps=(core/glibc core/zlib core/bzip2 core/readline)
 pkg_build_deps=(core/coreutils core/diffutils core/patch core/make core/gcc core/sed core/findutils)
 pkg_bin_dirs=(bin)
