@@ -22,7 +22,8 @@ do_download() {
 
 do_verify() {
   do_default_verify
-  verify_file "lein" "28a1a62668c5f427b413a8677e376affaa995f023b1fcd06e2d4c98ac1df5f3e"
+  #verify_file "lein" "28a1a62668c5f427b413a8677e376affaa995f023b1fcd06e2d4c98ac1df5f3e"
+  verify_file "lein" "9952cba539cc6454c3b7385ebce57577087bf2b9001c3ab5c55d668d0aeff6e9"
 }
 
 do_unpack() {
