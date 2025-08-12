@@ -20,12 +20,13 @@ do_build() {
 }
 
 do_install() {
-	install -D ${CACHE_PATH}/bin/lein "${pkg_prefix}/bin/lein"
+	install -D "${CACHE_PATH}/bin/lein" "${pkg_prefix}/bin/lein"
 	sed -e "s#\#\!/usr/bin/env bash#\#\!$(pkg_path_for bash)/bin/bash#" -i "${pkg_prefix}/bin/lein"
 
 	mkdir -p "${pkg_prefix}/share/java"
 	download_file https://github.com/technomancy/leiningen/releases/download/${pkg_version}/leiningen-${pkg_version}-standalone.jar leiningen-$pkg_version-standalone.jar
-	mv ${HAB_CACHE_SRC_PATH}/leiningen-$pkg_version-standalone.jar ${pkg_prefix}/share/java
+	mv "${HAB_CACHE_SRC_PATH}/leiningen-$pkg_version-standalone.jar" "${pkg_prefix}/share/java"
 	#set java path
-	export PATH=$PATH:$(pkg_path_for corretto8)/bin
+	PATH="$PATH:$(pkg_path_for corretto8)/bin"
+	export PATH
 }
