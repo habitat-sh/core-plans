@@ -20,7 +20,7 @@ if [[ "${CI:-}" == "true" ]]; then
   pip3 install pre-commit
 
 else
-  echo "Not in CI! Skipping installation of pre-commit. Please install it manually if needed."
+  echo "Not in CI! Skipping installation of pre-commit. Please install it manually if executing this on your workstation"
 fi
 
 # Show installed version

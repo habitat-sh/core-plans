@@ -11,7 +11,6 @@ pkg_deps=(
   core/bash
   core/coreutils
   core/corretto8
-  core/clojure
 )
 pkg_bin_dirs=(bin)
 
