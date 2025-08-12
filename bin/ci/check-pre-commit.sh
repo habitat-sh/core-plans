@@ -6,7 +6,7 @@ plan_path="$(basename "$1")"
 
 echo "--- :python: Install pre-commit"
 if [[ "${CI:-}" == "true" ]]; then
-  sudo apt-get update
+  #sudo apt-get update
   sudo apt-get install -y python3-pip
   pip3 install --user pre-commit
 else
