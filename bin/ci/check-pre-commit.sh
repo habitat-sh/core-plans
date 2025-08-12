@@ -1,21 +1,30 @@
 #!/usr/bin/env bash
-
 set -eu
 
 plan_path="$(basename "$1")"
 
 echo "--- :python: Install pre-commit"
+
 if [[ "${CI:-}" == "true" ]]; then
-  # # for  Ubuntu 20.04 (Focal Fossa) and later we have to add the PostgreSQL repository
-  # # to install the pre-commit package
-  # sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt focal-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-  # wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-  sudo apt-get update
-  sudo apt-get install python3-pip
-  pip3 install pre-commit
+  # Remove problematic PostgreSQL apt repo if present
+  if grep -R "apt.postgresql.org.*focal-pgdg" /etc/apt/sources.list /etc/apt/sources.list.d/ >/dev/null 2>&1; then
+    echo "Removing broken PostgreSQL PGDG repo for focal..."
+    sed -i '/apt.postgresql.org.*focal-pgdg/d' /etc/apt/sources.list || true
+    find /etc/apt/sources.list.d/ -type f -exec sed -i '/apt.postgresql.org.*focal-pgdg/d' {} \; || true
+  fi
+
+  # Update package lists and install Python pip
+  apt-get update
+  DEBIAN_FRONTEND=noninteractive apt-get install -y python3-pip
+
+  # Install pre-commit using pip
+  pip3 install --no-cache-dir pre-commit
+
 else
-  echo "Not in CI! Skipping installation of pre-commit. Please install it manually if executing this on your workstation"
+  echo "Not in CI! Skipping installation of pre-commit. Please install it manually if needed."
 fi
+
+# Show installed version
 pre-commit --version
 
 echo "--- :git: [${plan_path}] Running checks provided by pre-commit hooks"
