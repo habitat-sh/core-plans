@@ -1,4 +1,5 @@
 #!/bin/sh
+# shellcheck disable=SC3040
 set -euo pipefail
 
 #/ Usage: test.sh <pkg_ident>
@@ -8,7 +9,7 @@ set -euo pipefail
 
 TESTDIR="$(dirname "${0}")"
 
-if [[ -z "${1:-}" ]]; then
+if [ -z "${1:-}" ]; then
   grep '^#/' < "${0}" | cut -c4-
   exit 1
 fi
