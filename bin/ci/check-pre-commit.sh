@@ -6,13 +6,12 @@ plan_path="$(basename "$1")"
 
 echo "--- :python: Install pre-commit"
 if [[ "${CI:-}" == "true" ]]; then
-  # Temporarily disable problematic third-party repos to avoid apt errors
-  sudo mv /etc/apt/sources.list.d/helm-stable-debian.list /tmp/ 2>/dev/null || true
-  sudo mv /etc/apt/sources.list.d/pgdg.list /tmp/ 2>/dev/null || true
-
-  # Switch to old-releases mirror (since focal is now ESM/archived)
-  sudo sed -i 's|http://archive.ubuntu.com/ubuntu/|http://old-releases.ubuntu.com/ubuntu/|g' /etc/apt/sources.list
-  sudo sed -i 's|http://security.ubuntu.com/ubuntu|http://old-releases.ubuntu.com/ubuntu|g' /etc/apt/sources.list
+  # Remove PostgreSQL apt repo if present (focal-pgdg is broken)
+  if grep -R "apt.postgresql.org.*focal-pgdg" /etc/apt/sources.list /etc/apt/sources.list.d/ >/dev/null 2>&1; then
+    echo "Removing broken PostgreSQL PGDG repo for focal..."
+    sudo sed -i '/apt.postgresql.org.*focal-pgdg/d' /etc/apt/sources.list || true
+    sudo find /etc/apt/sources.list.d/ -type f -exec sed -i '/apt.postgresql.org.*focal-pgdg/d' {} \; || true
+  fi
   apt-get clean -y
   apt-get update -y
   apt-get install -y python3-pip
