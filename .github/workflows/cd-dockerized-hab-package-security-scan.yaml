@@ -86,7 +86,8 @@ jobs:
           # Find the installed package path. 'hab pkg path' returns the path to the latest installed version.
           PKG_PATH=$(hab pkg path ${{ inputs.hab_package }})
           grype dir:$PKG_PATH --name ${{ inputs.hab_package }} 
-          OUTPUT_FILE="grype-results-" + $(echo "${{ inputs.hab_package }}" | tr '/' '-') + ".txt"
+          OUTPUT_FILE="grype-results-${{ inputs.hab_package }}.txt"
+          OUTPUT_FILE="${OUTPUT_FILE//\//-}"
           echo $OUTPUT_FILE
           grype dir:$PKG_PATH --name ${{ inputs.hab_package }} > $OUTPUT_FILE
         # grype dir:$PKG_PATH --name ${{ inputs.hab_package }} --version 1.0.0 > grype-results.json
