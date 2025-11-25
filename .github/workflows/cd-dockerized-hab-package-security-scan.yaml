@@ -81,13 +81,13 @@ jobs:
 
       - name: Run Grype Scan on Habitat Package
         timeout-minutes: 120 # Sets a 2-hour timeout for this specific step
-        continue-on-error: true
         if: runner.os != 'Windows'
         run: |
           # Find the installed package path. 'hab pkg path' returns the path to the latest installed version.
           PKG_PATH=$(hab pkg path ${{ inputs.hab_package }})
           grype dir:$PKG_PATH --name ${{ inputs.hab_package }} 
-          OUTPUT_FILE="grype-results-${{ inputs.hab_package}}.replace('/', '_') }}.txt"
+          OUTPUT_FILE="grype-results-" + $(echo "${{ inputs.hab_package }}" | tr '/' '-') + ".txt"
+          echo $OUTPUT_FILE
           grype dir:$PKG_PATH --name ${{ inputs.hab_package }} > $OUTPUT_FILE
         # grype dir:$PKG_PATH --name ${{ inputs.hab_package }} --version 1.0.0 > grype-results.json
         # -o json
