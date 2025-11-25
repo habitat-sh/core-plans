@@ -86,15 +86,16 @@ jobs:
         run: |
           # Find the installed package path. 'hab pkg path' returns the path to the latest installed version.
           PKG_PATH=$(hab pkg path ${{ inputs.hab_package }})
-          echo "Scanning package at: $PKG_PATH"
-          grype --version
+          grype dir:$PKG_PATH --name ${{ inputs.hab_package }} 
           grype dir:$PKG_PATH --name ${{ inputs.hab_package }} > grype-results.txt
         # grype dir:$PKG_PATH --name ${{ inputs.hab_package }} --version 1.0.0 > grype-results.json
         # -o json
-
+        # grype --version
+        # echo "Scanning package at: $PKG_PATH"
+          
       - name: Upload Grype Scan Results
         if: runner.os != 'Windows'
         uses: actions/upload-artifact@v4
         with:
-          name: grype-results-${{ matrix.os }}
+          name: grype-results-${{ matrix.os }}-${{ inputs.hab_package }}
           path: grype-results.txt
