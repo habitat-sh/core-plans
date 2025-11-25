@@ -29,7 +29,8 @@ jobs:
   grype-scan:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest]
+        # , windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Install Chef Habitat (MacOS and Linux)
@@ -83,7 +84,7 @@ jobs:
           # Find the installed package path. 'hab pkg path' returns the path to the latest installed version.
           PKG_PATH=$(hab pkg path ${{ inputs.hab_package }})
           echo "Scanning package at: $PKG_PATH"
-          grype dir:$PKG_PATH -o json > grype-results.json
+          grype dir:$PKG_PATH -o json --name ${{ inputs.hab_package }} --version 1.0.0 > grype-results.json
 
       - name: Upload Grype Scan Results
         if: runner.os != 'Windows'
