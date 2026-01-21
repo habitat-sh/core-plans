@@ -1,7 +1,7 @@
 # shellcheck disable=SC2034
 pkg_name=go25
 pkg_origin=core
-pkg_version=1.25.3
+pkg_version=1.25.6
 pkg_bootstrap_pkg="core/go23"
 pkg_description="Go is an open source programming language that makes it easy to
   build simple, reliable, and efficient software."
@@ -9,7 +9,7 @@ pkg_upstream_url=https://golang.org/
 pkg_license=("BSD-3-Clause")
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://dl.google.com/go/go${pkg_version}.src.tar.gz"
-pkg_shasum="a81a4ba593d0015e10c51e267de3ff07c7ac914dfca037d9517d029517097795"
+pkg_shasum="58cbf771e44d76de6f56d19e33b77d745a1e489340922875e46585b975c2b059"
 pkg_dirname=go
 pkg_deps=(
   core/glibc
