@@ -2,7 +2,7 @@ name: raml2html
 title: Habitat Core Plan raml2html
 maintainer: humans@habitat.sh
 summary: InSpec controls for testing Habitat Core Plan raml2html
-copyright: humans@habitat.sh
+copyright: Copyright (c) 2015-2025 Progress Software Corporation and/or its subsidiaries or affiliates. All Rights Reserved.
 copyright_email: humans@habitat.sh
 version: 0.1.0
 license: Apache-2.0
