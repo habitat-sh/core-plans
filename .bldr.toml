@@ -516,6 +516,8 @@ plan_path = "go23"
 plan_path = "go24"
 [go25]
 plan_path = "go25"
+[go26]
+plan_path = "go26"
 [goaccess]
 plan_path = "goaccess"
 [gobject-introspection]
