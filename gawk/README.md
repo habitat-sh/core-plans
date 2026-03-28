@@ -60,3 +60,6 @@ Short options:          GNU long options: (extensions)
 ...
 ...
 ```
+
+# Copyright
+See [COPYRIGHT.md](./../COPYRIGHT.md).
