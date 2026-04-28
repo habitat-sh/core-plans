@@ -1,12 +1,12 @@
 $pkg_name="go26"
 $pkg_origin="core"
-$pkg_version="1.26.1"
+$pkg_version="1.26.2"
 $pkg_description="Go is an open source programming language that makes it easy to build simple, reliable, and efficient software."
 $pkg_upstream_url="https://golang.org/"
 $pkg_license=@("BSD-3-Clause")
 $pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 $pkg_source="https://dl.google.com/go/go$pkg_version.windows-amd64.msi"
-$pkg_shasum="9b1ffb28d6e934bf7683b09b01e1843e9b4baab89c119a81de59b851bd01bf73"
+$pkg_shasum="84826eca833548bb2beabe7429052eaaec18faa902fde723898d906b42e59a73"
 $pkg_build_deps=@("core/lessmsi")
 $pkg_dirname="go26"
 $pkg_bin_dirs=@("bin")
