@@ -1,5 +1,5 @@
 pkg_name=git
-pkg_version=2.33.1
+pkg_version=2.53.0
 pkg_origin=core
 pkg_description="Git is a free and open source distributed version control
   system designed to handle everything from small to very large projects with
@@ -9,7 +9,7 @@ pkg_license=('GPL-2.0')
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_source="https://www.kernel.org/pub/software/scm/git/${pkg_name}-${pkg_version}.tar.gz"
 pkg_filename="${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum=02047f8dc8934d57ff5e02aadd8a2fe8e0bcf94a7158da375e48086cc46fce1d
+pkg_shasum=429dc0f5fe5f14109930cdbbb588c5d6ef5b8528910f0d738040744bebdc6275
 pkg_deps=(
   core/cacerts
   core/curl
@@ -34,5 +34,5 @@ do_prepare() {
   local perl_path
   perl_path="$(pkg_path_for perl)/bin/perl"
   sed -e "s#/usr/bin/perl#$perl_path#g" -i Makefile
-  patch -p1 < "$PLAN_CONTEXT"/compatibility_curlv8.14.1.patch
+  #patch -p1 < "$PLAN_CONTEXT"/compatibility_curlv8.14.1.patch
 }
