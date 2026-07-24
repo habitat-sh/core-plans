@@ -12,6 +12,14 @@ if [[ "${CI:-}" == "true" ]]; then
     sudo sed -i '/apt.postgresql.org.*focal-pgdg/d' /etc/apt/sources.list || true
     sudo find /etc/apt/sources.list.d/ -type f -exec sed -i '/apt.postgresql.org.*focal-pgdg/d' {} \; || true
   fi
+  # Remove deprecated Helm repository
+  if grep -R "baltocdn.com/helm/stable/debian" \
+      /etc/apt/sources.list /etc/apt/sources.list.d/ >/dev/null 2>&1; then
+    echo "Removing deprecated Helm repository..."
+    sudo sed -i '\|baltocdn.com/helm/stable/debian|d' /etc/apt/sources.list 2>/dev/null || true
+    sudo find /etc/apt/sources.list.d -type f \
+      -exec sed -i '\|baltocdn.com/helm/stable/debian|d' {} \; 2>/dev/null || true
+  fi
   apt-get clean -y
   apt-get update -y
   apt-get install -y python3-pip
