@@ -1623,6 +1623,8 @@ plan_path = "visual-build-tools-2017"
 plan_path = "visual-build-tools-2019"
 [visual-build-tools-2022]
 plan_path = "visual-build-tools-2022"
+[visual-build-tools-2026]
+plan_path = "visual-build-tools-2026"
 [visual-cpp-redist-2013]
 plan_path = "visual-cpp-redist-2013"
 [visual-cpp-redist-2022]
