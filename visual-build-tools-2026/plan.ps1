@@ -1,5 +1,3 @@
-$env:HAB_BLDR_CHANNEL = "base-2025"
-$env:HAB_ORIGIN = "core"
 $pkg_name="visual-build-tools-2026"
 $pkg_origin="core"
 $pkg_version="18.6.0"
