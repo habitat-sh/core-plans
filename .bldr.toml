@@ -1451,6 +1451,11 @@ build_targets = [
   "x86_64-linux",
   "x86_64-linux-kernel2"
 ]
+[ruby33]
+plan_path = "ruby33"
+paths = [
+  "ruby/*"
+]
 [runc]
 plan_path = "runc"
 [runit]
