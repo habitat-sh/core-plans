@@ -2,7 +2,7 @@
 # shellcheck disable=SC2209
 pkg_name=sed
 pkg_origin=core
-pkg_version=4.8
+pkg_version=4.10
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 sed (stream editor) is a non-interactive command-line text editor. sed is \
@@ -14,7 +14,7 @@ substituting multiple occurrences of a string within a file.\
 pkg_upstream_url="https://www.gnu.org/software/sed/"
 pkg_license=('gplv3')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="f79b0cfea71b37a8eeec8490db6c5f7ae7719c35587f21edb0617f370eeff633"
+pkg_shasum="b8e72182b2ec96a3574e2998c47b7aaa64cc20ce000d8e9ac313cc07cecf28c7"
 pkg_deps=(
   core/glibc
   core/acl
