@@ -1,7 +1,7 @@
 pkg_name=gcc
 _distname=$pkg_name
 pkg_origin=core
-pkg_version=9.5.0
+pkg_version=16.2.0
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Compiler Collection (GCC) is a compiler system produced by the GNU \
@@ -12,7 +12,7 @@ systems.\
 pkg_upstream_url="https://gcc.gnu.org/"
 pkg_license=('GPL-3.0-or-later' 'GCC Runtime Library Exception')
 pkg_source="http://ftp.gnu.org/gnu/$_distname/${_distname}-${pkg_version}/${_distname}-${pkg_version}.tar.xz"
-pkg_shasum=27769f64ef1d4cd5e2be8682c0c93f9887983e6cfd1a927ce5a0a2915a95cf8f
+pkg_shasum=e6738e29597f733270731aa90600f37ffdc045079dfc27ec7e8192cc81085c3e
 pkg_deps=(
   core/glibc
   core/zlib
