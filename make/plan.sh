@@ -2,7 +2,7 @@
 # shellcheck disable=SC2209
 pkg_name=make
 pkg_origin=core
-pkg_version=4.3
+pkg_version=4.4.1
 pkg_description="\
 Make is a tool which controls the generation of executables and other \
 non-source files of a program from the program's source files.\
@@ -11,7 +11,7 @@ pkg_upstream_url="https://www.gnu.org/software/make/"
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="e05fdde47c5f7ca45cb697e973894ff4f5d79e13b750ed57d7b66d8defc78e19"
+pkg_shasum="dd16fb1d67bfab79a72f5e8390735c49e3e8e70b4945a15ab1f81ddb78658fb3"
 pkg_deps=(
   core/glibc
 )
