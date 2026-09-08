@@ -1,6 +1,6 @@
 pkg_name=diffutils
 pkg_origin=core
-pkg_version=3.8
+pkg_version=3.12
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 GNU Diffutils is a package of several programs related to finding differences \
@@ -9,7 +9,7 @@ between files.\
 pkg_upstream_url="https://www.gnu.org/software/diffutils"
 pkg_license=('GPL-3.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.xz"
-pkg_shasum="a6bdd7d1b31266d11c4f4de6c1b748d4607ab0231af5188fc2533d0ae2438fec"
+pkg_shasum="7c8b7f9fc8609141fdea9cece85249d308624391ff61dedaf528fcb337727dfd"
 pkg_deps=(
   core/glibc
 )
