@@ -1,7 +1,7 @@
 pkg_name=zlib
 _distname="$pkg_name"
 pkg_origin=core
-pkg_version=1.3
+pkg_version=1.3.2
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 Compression library implementing the deflate compression method found in gzip \
@@ -10,7 +10,7 @@ and PKZIP.\
 pkg_upstream_url="http://www.zlib.net/"
 pkg_license=('zlib')
 pkg_source="https://zlib.net/fossils/zlib-${pkg_version}.tar.gz"
-pkg_shasum="ff0ba4c292013dbc27530b3a81e1f9a813cd39de01ca5e0f8bf355702efa593e"
+pkg_shasum="bb329a0a2cd0274d05519d61c667c062e06990d72e125ee2dfa8de64f0119d16"
 pkg_dirname="${_distname}-${pkg_version}"
 pkg_deps=(
   core/glibc
