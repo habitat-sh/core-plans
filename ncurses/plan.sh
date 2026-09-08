@@ -1,6 +1,6 @@
 pkg_name=ncurses
 pkg_origin=core
-pkg_version=6.2
+pkg_version=6.6
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 ncurses (new curses) is a programming library providing an application \
@@ -10,7 +10,7 @@ user interfaces in a terminal-independent manner.\
 pkg_upstream_url="https://www.gnu.org/software/ncurses/"
 pkg_license=('ncurses')
 pkg_source="http://ftp.gnu.org/gnu/${pkg_name}/${pkg_name}-${pkg_version}.tar.gz"
-pkg_shasum="30306e0c76e0f9f1f0de987cf1c82a5c21e1ce6568b9227f7da5b71cbea86c9d"
+pkg_shasum="355b4cbbed880b0381a04c46617b7656e362585d52e9cf84a67e2009b749ff11"
 pkg_deps=(
   core/glibc
 )
