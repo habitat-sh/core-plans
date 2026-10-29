@@ -1,0 +1,11 @@
+diff --git a/src/crypto/x509/root_linux.go b/src/crypto/x509/root_linux.go
+index aa1785e..33e06c9 100644
+--- a/src/crypto/x509/root_linux.go
++++ b/src/crypto/x509/root_linux.go
+@@ -10,5 +10,6 @@ var certFiles = []string{
+ 	"/etc/pki/tls/certs/ca-bundle.crt",                  // Fedora/RHEL 6
+ 	"/etc/ssl/ca-bundle.pem",                            // OpenSUSE
+ 	"/etc/pki/tls/cacert.pem",                           // OpenELEC
++	"@cacerts@", // Bldr Package
+ 	"/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem", // CentOS/RHEL 7
+ }
